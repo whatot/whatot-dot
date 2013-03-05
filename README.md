@@ -4,7 +4,10 @@ whatot-vimrc
 my vunble vimrc
 
 
-##1.Install
+##1.此vimrc,暂时只支持linux,其余系统未测试
+多余的注释与无效行将会去除或修改.
+
+##2.Install
 
 
 ```bash
