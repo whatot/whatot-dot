@@ -22,8 +22,11 @@ git clone https://github.com/whatot/whatot-vimrc.git
 cp whatot-vimrc/.vimrc ~/.vimrc
 vim +BundleInstall +qa
 
-'这个mru.vim是lilydjwg的修改版本,但还是有些许问题
+#这个mru.vim是lilydjwg的修改版本,但还是有些许问题
 cp mru.vim ~/.vim/bundle/mru.vim/plugin/mru.vim
 cp whatot-vimrc/filenametags ~/.vim/
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 ```
+
+##3.usage
+注释非常详细,但还是不全,还需整理
