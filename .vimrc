@@ -46,7 +46,7 @@ Bundle 'CmdlineComplete'
 Bundle 'snipMate'
 "[default]Tab,TextMate's snippets features in Vim,代码段补全
 Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet'
 "输入时提示
 Bundle 'nvie/vim-flake8'
 "<F7> flake8
@@ -882,6 +882,7 @@ let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
   " <CR>: close popup and save indent.
   inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
   " <TAB>: completion. NO USE with snipmate
+  let g:neosnippet#enable_snipmate_compatibility = 1
   "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
   " <C-h>, <BS>: close popup and delete backword char.
   inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
