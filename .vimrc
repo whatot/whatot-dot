@@ -56,6 +56,7 @@ Bundle 'rkulla/pydiction'
 "Bundle 'osyo-manga/neocomplcache-clang_complete'
 "Bundle 'mbbill/code_complete'
 Bundle 'scrooloose/syntastic'
+Bundle 'plasticboy/vim-markdown'
 
 "Bundle 'mileszs/ack.vim'
 "perl moudle App::Ack的一个后端,能99%代替grep, 需要下载ack-grep
