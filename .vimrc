@@ -99,19 +99,9 @@ Bundle 'a.vim'
 " <Leader>is 切换至光标所在处(单词所指)文件的配对文件(如光标所在处为foo.h，则切换至foo.c/foo.cpp...)
 " <Leader>ihn 在多个匹配文件间循环切换
 
-"Bundle 'kien/ctrlp.vim'
-"[own]C-p模糊查询 file,buffer,mru,tag..
-Bundle 'lookupfile'
-"文件内容查找
-"映射LookupFile为,lk
-"nmap <silent> <leader>lk :LUTags<cr>
-"映射LUBufs为,ll
-"nmap <silent> <leader>ll :LUBufs<cr>
-"映射LUWalk为,lw
-"nmap <silent> <leader>lw :LUWalk<cr>
+Bundle 'kien/ctrlp.vim'
+"[own]<C-W><C-U> or <C-W>u 模糊查询 file,buffer,mru,tag..
 
-Bundle 'genutils'
-"provides many useful utility functions for buffers, windows and other misc things
 "Bundle 'OmniTags'
 ""维护 tags file
 "Bundle 'wesleyche/Trinity'
@@ -121,9 +111,9 @@ Bundle 'genutils'
 ""source explore,,与上面相同
 "Bundle 'minibufexpl.vim'
 ""编辑多个文件，标签显示
-"Bundle 'L9'
+Bundle 'L9'
 ""L9 provides some utility functions and commands for programming in Vim
-"Bundle 'FuzzyFinder'
+Bundle 'FuzzyFinder'
 ""quickly reach the buffer/file/command/bookmark/tag you want
 Bundle 'FavEx'
 "经常编辑的文件添加到收藏夹，文件打开后，
@@ -418,6 +408,52 @@ set tags+=~/.vim/systags
 " ###################################################
 
 
+"FuzzyFinder vimrc example:
+let g:fuf_modesDisable = []
+let g:fuf_mrufile_maxItem = 400
+let g:fuf_mrucmd_maxItem = 400
+nnoremap <silent> sj     :FufBuffer<CR>
+nnoremap <silent> sk     :FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> sK     :FufFileWithFullCwd<CR>
+nnoremap <silent> s<C-k> :FufFile<CR>
+nnoremap <silent> sl     :FufCoverageFileChange<CR>
+nnoremap <silent> sL     :FufCoverageFileChange<CR>
+nnoremap <silent> s<C-l> :FufCoverageFileRegister<CR>
+nnoremap <silent> sd     :FufDirWithCurrentBufferDir<CR>
+nnoremap <silent> sD     :FufDirWithFullCwd<CR>
+nnoremap <silent> s<C-d> :FufDir<CR>
+nnoremap <silent> sn     :FufMruFile<CR>
+nnoremap <silent> sN     :FufMruFileInCwd<CR>
+nnoremap <silent> sm     :FufMruCmd<CR>
+nnoremap <silent> su     :FufBookmarkFile<CR>
+nnoremap <silent> s<C-u> :FufBookmarkFileAdd<CR>
+vnoremap <silent> s<C-u> :FufBookmarkFileAddAsSelectedText<CR>
+nnoremap <silent> si     :FufBookmarkDir<CR>
+nnoremap <silent> s<C-i> :FufBookmarkDirAdd<CR>
+nnoremap <silent> st     :FufTag<CR>
+nnoremap <silent> sT     :FufTag!<CR>
+nnoremap <silent> s<C-]> :FufTagWithCursorWord!<CR>
+nnoremap <silent> s,     :FufBufferTag<CR>
+nnoremap <silent> s<     :FufBufferTag!<CR>
+vnoremap <silent> s,     :FufBufferTagWithSelectedText!<CR>
+vnoremap <silent> s<     :FufBufferTagWithSelectedText<CR>
+nnoremap <silent> s}     :FufBufferTagWithCursorWord!<CR>
+nnoremap <silent> s.     :FufBufferTagAll<CR>
+nnoremap <silent> s>     :FufBufferTagAll!<CR>
+vnoremap <silent> s.     :FufBufferTagAllWithSelectedText!<CR>
+vnoremap <silent> s>     :FufBufferTagAllWithSelectedText<CR>
+nnoremap <silent> s]     :FufBufferTagAllWithCursorWord!<CR>
+nnoremap <silent> sg     :FufTaggedFile<CR>
+nnoremap <silent> sG     :FufTaggedFile!<CR>
+nnoremap <silent> so     :FufJumpList<CR>
+nnoremap <silent> sp     :FufChangeList<CR>
+nnoremap <silent> sq     :FufQuickfix<CR>
+nnoremap <silent> sy     :FufLine<CR>
+nnoremap <silent> sh     :FufHelp<CR>
+nnoremap <silent> se     :FufEditDataFile<CR>
+nnoremap <silent> sr     :FufRenewCache<CR>
+
+
 
 nnoremap <Space> za
 nmap ' <C-W>
@@ -704,58 +740,17 @@ set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令�
 " <C-\>snippt补全
 
 
-" ###### lookupfile ######
-"  script to generate filenametags
-"  #!/bin/sh
-"  # generate tag file for lookupfile plugin, use absolute path
-"  echo -e "!_TAG_FILE_SORTED\t2\t/2=foldcase/" > filenametags
-"  find `pwd` \( -name .repo -o -name .git -o -name .svn -o -name .gitignore \) -prune -o -not -iregex '.*\.\(jar\|gif\|jpg\|png\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\).*' -type f -printf "%f\t%p\t0\n" | sort -f >> ./filenametags
-
-let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
-let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
-"let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
-let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
-let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
-if filereadable("./filenametags")                "设置tag文件的名字
-  let g:LookupFile_TagExpr ='"./filenametags"'
-endif
-
-" lookup file with ignore case
-function! LookupFile_IgnoreCaseFunc(pattern)
-    let _tags = &tags
-    try
-        let &tags = eval(g:LookupFile_TagExpr)
-        let newpattern = '\c' . a:pattern
-        let tags = taglist(newpattern)
-    catch
-        echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        return ""
-    finally
-        let &tags = _tags
-    endtry
-
-    " Show the matches for what is typed so far.
-    let files = map(tags, 'v:val["filename"]')
-    return files
-endfunction
-
-let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc'
-
-"映射LookupFile为,lk
-map <silent> <leader>lk :LUTags<cr>
-"映射LUBufs为,ll
-map <silent> <leader>ll :LUBufs<cr>
-"映射LUWalk为,lw
-map <silent> <leader>lw :LUWalk<cr>
-
-
 " ctrlp
+noremap <C-W><C-U> :CtrlPMRU<CR>
+nnoremap <C-W>u :CtrlPMRU<CR>
 "let g:ctrlp_user_command = 'find %s -type f'
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"let g:ctrlp_working_path_mode = 'ra'
-"let g:ctrlp_mruf_include = '\.py$\|\.c$|\.cpp$|\.h$'
-
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
 
 
 " grep.vim
@@ -980,7 +975,7 @@ let MRU_Max_Menu_Entries = 15
 " syntax/python.vim
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 let python_highlight_all = 1
-let g:pydiction_location = '/home/mirage/.vim/bundle/Pydiction/complete-dict' 
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict' 
 
 
 "NERD_commenter.vim "可以使用cvim.zip, 但是这个觉到习惯一些
