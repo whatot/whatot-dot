@@ -571,7 +571,7 @@ set background=dark
 " 图形与终端
 if has("gui_running")
   " 有些终端不能改变大小
-  set columns=86
+  set columns=82
   set lines=33
   set cursorline
   exe 'colorscheme' colorscheme
@@ -648,7 +648,9 @@ let g:NERDTreeWinSize = 23
 
 
 " Tagbar options
-let g:tagbar_width = 30
+let g:tagbar_width = 35
+let g:tagbar_expand = 1  "向外拓展
+
 
 
 " Doxygen
