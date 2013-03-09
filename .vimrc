@@ -457,7 +457,7 @@ nnoremap <silent> sr     :FufRenewCache<CR>
 
 nnoremap <Space> za
 nmap ' <C-W>
-nmap 'm :MarksBrowser<CR>
+nmap 'm :marks<CR>
 nmap gb :setl fenc=gb18030<CR>
 
 
