@@ -7,7 +7,7 @@ my vunble vimrc
 
 2. Install
 
-`bash
+```bash
 if [ -f "~/.vimrc"  ]; then
   cp ~/.vimrc .vimrc-bakup
 fi
@@ -23,7 +23,7 @@ vim +BundleInstall +qa
 #cp mru.vim ~/.vim/bundle/mru.vim/plugin/mru.vim
 cp whatot-vimrc/filenametags ~/.vim/
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
-`
+```
 
 3. usage
 注释非常详细,但还是不全,还需整理
