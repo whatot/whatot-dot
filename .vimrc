@@ -692,6 +692,7 @@ let g:NERDTreeWinSize = 25
 let g:tagbar_width = 35
 let g:tagbar_expand = 1  "向外拓展
 
+<<<<<<< HEAD
 
 " syntastic
 let g:syntastic_check_on_open = 1
@@ -701,6 +702,8 @@ let g:syntastic_check_on_open = 1
 " let g:syntastic_loc_list_height = 5
 " let g:syntastic_enable_highlighting = 0
 " let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
+=======
+>>>>>>> 726e27f8b1f000ee43bf2af8ba03d1610b3ee5b1
 
 
 " Doxygen
@@ -990,7 +993,11 @@ au BufRead,BufNewFile * setfiletype txt
 " syntax/python.vim
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 let python_highlight_all = 1
+<<<<<<< HEAD
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+=======
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict' 
+>>>>>>> 726e27f8b1f000ee43bf2af8ba03d1610b3ee5b1
 
 
 "NERD_commenter.vim "可以使用cvim.zip, 但是这个觉到习惯一些
