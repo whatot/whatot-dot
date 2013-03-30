@@ -57,6 +57,10 @@ Bundle 'rkulla/pydiction'
 "Bundle 'mbbill/code_complete'
 Bundle 'scrooloose/syntastic'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'vim-scripts/haskell.vim'
+"Bundle 'lukerandall/haskellmode-vim'
+Bundle 'ujihisa/neco-ghc'
+"Bundle 'eagletmt/ghcmod-vim'
 
 "Bundle 'mileszs/ack.vim'
 "perl moudle App::Ack的一个后端,能99%代替grep, 需要下载ack-grep
@@ -596,7 +600,23 @@ endif
 " ###################################################
 
 " fencview.vim 对打开的文件的编码自动识别
-let g:fencview_autodetect = 1
+" let g:fencview_autodetect = 1
+
+
+" haskell 设置
+" au Bufenter *.hs compiler ghc
+" :let g:haddock_browser="/usr/bin/firefox"
+" :let g:ghc="/usr/bin/ghc"
+setlocal omnifunc=necoghc#omnifunc
+
+" For Haskell
+:let hs_highlight_delimiters=1            " 高亮定界符
+:let hs_highlight_boolean=1               " 把True和False识别为关键字
+:let hs_highlight_types=1                 " 把基本类型的名字识别为关键字
+:let hs_highlight_more_types=1            " 把更多常用类型识别为关键字
+:let hs_highlight_debug=1                 " 高亮调试函数的名字
+:let hs_allow_hash_operator=1             " 阻止把#高亮为错误
+
 
 
 " ###### Bundle 'altercation/vim-colors-solarized' ######
@@ -612,7 +632,7 @@ set background=dark
 " 图形与终端
 if has("gui_running")
   " 有些终端不能改变大小
-  set columns=82
+  set columns=85
   set lines=33
   set cursorline
   exe 'colorscheme' colorscheme
