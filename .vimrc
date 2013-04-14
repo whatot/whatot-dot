@@ -408,6 +408,10 @@ set tags+=~/.vim/systags
 "au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 
+autocmd FileType c set tabstop=8 shiftwidth=8
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+
+
 " ###################################################
 " map
 " ###################################################
@@ -610,12 +614,12 @@ endif
 setlocal omnifunc=necoghc#omnifunc
 
 " For Haskell
-:let hs_highlight_delimiters=1            " 高亮定界符
-:let hs_highlight_boolean=1               " 把True和False识别为关键字
-:let hs_highlight_types=1                 " 把基本类型的名字识别为关键字
-:let hs_highlight_more_types=1            " 把更多常用类型识别为关键字
-:let hs_highlight_debug=1                 " 高亮调试函数的名字
-:let hs_allow_hash_operator=1             " 阻止把#高亮为错误
+" :let hs_highlight_delimiters=1            " 高亮定界符
+" :let hs_highlight_boolean=1               " 把True和False识别为关键字
+" :let hs_highlight_types=1                 " 把基本类型的名字识别为关键字
+" :let hs_highlight_more_types=1            " 把更多常用类型识别为关键字
+" :let hs_highlight_debug=1                 " 高亮调试函数的名字
+" :let hs_allow_hash_operator=1             " 阻止把#高亮为错误
 
 
 
@@ -1008,7 +1012,6 @@ au BufRead,BufNewFile * setfiletype txt
 
 
 " syntax/python.vim
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 let python_highlight_all = 1
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 
