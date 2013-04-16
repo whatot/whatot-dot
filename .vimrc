@@ -538,7 +538,7 @@ inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
 " :source session-file
 
 set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
-nmap <F3> :mksession ~/.vim/sessions/
+nmap <F3> :mksession! ~/.vim/sessions/
 nmap <C-F3> :so ~/.vim/sessions/
 
 " ###################################################
