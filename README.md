@@ -13,6 +13,7 @@ if [ -f "~/.vimrc"  ]; then
 fi
 
 mkdir -p ~/.vim/bundle/
+mkdir -p ~/.vim/sessions/
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 git clone https://github.com/whatot/whatot-vimrc.git
 

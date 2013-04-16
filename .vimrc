@@ -408,7 +408,7 @@ set tags+=~/.vim/systags
 "au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 
-autocmd FileType c set tabstop=8 shiftwidth=8
+autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
 
@@ -533,6 +533,13 @@ vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " 补全最长项
 inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
 
+" session
+" :mksession
+" :source session-file
+
+set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
+nmap <F3> :mksession ~/.vim/sessions/
+nmap <C-F3> :so ~/.vim/sessions/
 
 " ###################################################
 "  mapleader
