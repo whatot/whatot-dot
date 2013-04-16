@@ -491,7 +491,7 @@ nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
 nnoremap <silent> wt :TagbarToggle<CR>
 noremap <silent> <F11> :BufExplorer<CR>
 noremap <silent> <m-F11> :BufExplorerHorizontalSplit<CR>
-" noremap <silent> <c-F11> :BufExplorerVerticalSplit<CR>
+noremap <silent> <c-F11> :BufExplorerVerticalSplit<CR>
 
 
 " FuzzyFinder
