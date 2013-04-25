@@ -61,6 +61,7 @@ Bundle 'vim-scripts/haskell.vim'
 "Bundle 'lukerandall/haskellmode-vim'
 Bundle 'ujihisa/neco-ghc'
 "Bundle 'eagletmt/ghcmod-vim'
+Bundle 'nginx.vim'
 
 "Bundle 'mileszs/ack.vim'
 "perl moudle App::Ack的一个后端,能99%代替grep, 需要下载ack-grep
@@ -173,7 +174,7 @@ Bundle 'txt.vim'
 "类似emacs删除环
 "Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
-Bundle 'DoxygenToolkit.vim'
+" Bundle 'DoxygenToolkit.vim'
 "doxygen风格快速注释
 "Bundle 'tczengming/headerGatesAdd.vim'
 " C/C++防止头文件重复包含
