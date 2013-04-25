@@ -41,50 +41,24 @@ Bundle 'autoload_cscope.vim'
 "自动载入cscope.out databases
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
+"Bundle 'Valloric/YouCompleteMe'
+"autocomplete
 "Bundle 'xptemplate'
 "[default]C-\,Code snippets engine for Vim, with snippets library.
 Bundle 'snipMate'
 "[default]Tab,TextMate's snippets features in Vim,代码段补全
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neosnippet'
-"输入时提示
 Bundle 'nvie/vim-flake8'
 "<F7> flake8
 Bundle 'rkulla/pydiction'
-"Bundle 'Rip-Rip/clang_complete'
-"clang补全,与omnicppcomplete冲突
-"Bundle 'osyo-manga/neocomplcache-clang_complete'
-"Bundle 'mbbill/code_complete'
 Bundle 'scrooloose/syntastic'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'vim-scripts/haskell.vim'
-"Bundle 'lukerandall/haskellmode-vim'
 Bundle 'ujihisa/neco-ghc'
-"Bundle 'eagletmt/ghcmod-vim'
-" Bundle 'nginx.vim'
-
-"Bundle 'mileszs/ack.vim'
-"perl moudle App::Ack的一个后端,能99%代替grep, 需要下载ack-grep
 
 Bundle 'bash-support.vim'
-"Bundle 'slimv.vim'
-""Slimv is a SWANK client for Vim,similarly to SLIME for Emacs
-"Bundle 'adah1972/tellenc.git'
-"查看文件编码
-"Bundle 'translate.vim'
-""looks up a word in dictionary file using egrep
 Bundle 'bufexplorer.zip'
-"[default],be,浏览buffers
 
-" 快速导航文件
-"Bundle 'wincent/Command-T'
-"类似TextMate中的Command-T,Go to File
-"Bundle 'autopreview'
-"autopreview查看函数原型
-"Bundle 'mbbill/echofunc'
-"mbbill/echofunc查看函数定义
 Bundle 'grep.vim'
-"在目录中查找包含指定文件内容
 Bundle 'a.vim'
 "在.c/.cpp与.h间快速切换
 " >>>头/源文件切换命令
@@ -107,79 +81,31 @@ Bundle 'a.vim'
 Bundle 'kien/ctrlp.vim'
 "[own]<C-W><C-U> or <C-W>u 模糊查询 file,buffer,mru,tag..
 
-"Bundle 'OmniTags'
-""维护 tags file
-"Bundle 'wesleyche/Trinity'
-""管理Source Explorer, Taglist and NERD Tree
-"Bundle 'wesleyche/SrcExpl'
-"Bundle 'SrcExpl'
-""source explore,,与上面相同
-"Bundle 'minibufexpl.vim'
-""编辑多个文件，标签显示
 Bundle 'L9'
-""L9 provides some utility functions and commands for programming in Vim
 Bundle 'FuzzyFinder'
-""quickly reach the buffer/file/command/bookmark/tag you want
-Bundle 'FavEx'
-"经常编辑的文件添加到收藏夹，文件打开后，
-"[default]:FF or \ff新增文件到收藏夹，:FD or \fd新增目录到收藏夹
-"Bundle 'utl.vim'
-"在文本文件中，实现极其强大的链接功能
-
 
 " 代码注释
 Bundle 'The-NERD-Commenter'
 "[default],cc;,cu注释与取消注释快速切换
-"Bundle 'mattn/zencoding-vim'
-""web前端
-Bundle 'FencView.vim'
-""编码自动识别
-"Bundle 'CRefVim'
-""提供标准C函数与语法的快速引用
 Bundle 'c.vim'
-"Bundle 'CCTree'
-"CCTree , in real-time inside Vim using a Cscope database
-"Bundle 'OmniCppComplete'
-""omnifunc cppcomplete function for C and C++ files
-"Bundle 'Tabular'
-"Bundle 'godlygeek/tabular'
-""用来对齐文本,与上面相同
-"Bundle 'sketch.vim'
-""Line drawing/painting using the mouse
 
-" 智能文件管理
 Bundle 'scrooloose/nerdtree'
 "[own]wf浏览目录
-"Bundle 'The-NERD-tree'
-""与上面相同
 "Bundle 'tpope/vim-fugitive'
 ""Git wrapper
-"Bundle 'tpope/vim-rails'
 Bundle 'LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
 
-"under linux need exec 'dos2unix ~/.vim/bundle/QFixToggle/plugin/qfixtoggle.vim'
-"Bundle 'QFixToggle'
-"切换|quickfix|窗口
 Bundle 'Colour-Sampler-Pack'
 "帮助测试主题
 "Bundle 'ScrollColors'
 ""切换主题
-"Bundle 'altercation/vim-colors-solarized'
 Bundle 'txt.vim'
 "通用的文本文档语法
-" Bundle 'mru.vim'
-" [own],hg,Most Recently Used文件
-"Bundle 'YankRing.vim'
-"类似emacs删除环
 "Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
 Bundle 'DoxygenToolkit.vim'
 "doxygen风格快速注释
-"Bundle 'tczengming/headerGatesAdd.vim'
-" C/C++防止头文件重复包含
-"Bundle 'ShowMarks'
-"切换显示marks
 Bundle 'Lokaltog/vim-powerline'
 "缤纷的状态栏 let g:Powerline_symbols = 'fancy'
 Bundle 'kana/vim-smartinput'
@@ -195,29 +121,16 @@ Bundle 'matchit.zip'
 "Bundle 'ervandew/supertab'
 "use <Tab> for all your insert completion needs (:help ins-completion)
 
-"Bundle 'shemerey/vim-peepopen'
-""项目中文件与目录名模糊查询
-"Bundle 'Rainbow-Parenthesis'
-""高亮匹配的括号with a rainbow of colors
-"Bundle 'Engspchk'
-""[default],ec,Spelling checker: On-the-fly spell checking, multi-language, alternate spellings
-
 
 " 中文文档
 Bundle 'asins/vimcdoc'
 "Bundle 'vimcn/c.vim.cnx'
-"Bundle 'vimcn/mru.vim.cnx'
 Bundle 'vimcn/NERD_commenter.cnx'
 Bundle 'vimcn/neocompletecache.cnx'
 Bundle 'vimcn/tagbar.cnx'
-"Bundle 'vimcn/NERD_tree.vim.cnx'
-""被vimcdoc包含
 "Bundle 'vimcn/vimwiki.vim.cnx'
 Bundle 'vimcn/matchit.vim.cnx'
-"Bundle 'vimcn/bufexplorer.vim.cnx'
-""被vimcdoc包含
 "Bundle 'vimcn/snipMate.vim.cnx'
-"Bundle 'vimcn/taglist.vim.cnx'
 "Bundle 'vimcn/project.vim.acp'
 "Bundle 'vimcn/acp.vim.cnx'
 
@@ -611,32 +524,13 @@ endif
 " 插件配置
 " ###################################################
 
-" fencview.vim 对打开的文件的编码自动识别
-" let g:fencview_autodetect = 1
-
 
 " haskell 设置
-" au Bufenter *.hs compiler ghc
-" :let g:haddock_browser="/usr/bin/firefox"
-" :let g:ghc="/usr/bin/ghc"
 setlocal omnifunc=necoghc#omnifunc
 
-" For Haskell
-" :let hs_highlight_delimiters=1            " 高亮定界符
-" :let hs_highlight_boolean=1               " 把True和False识别为关键字
-" :let hs_highlight_types=1                 " 把基本类型的名字识别为关键字
-" :let hs_highlight_more_types=1            " 把更多常用类型识别为关键字
-" :let hs_highlight_debug=1                 " 高亮调试函数的名字
-" :let hs_allow_hash_operator=1             " 阻止把#高亮为错误
 
 
-
-" ###### Bundle 'altercation/vim-colors-solarized' ######
-" solarized theme
-"hi Normal ctermbg=NONE  "开启背景透明
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
-"let g:solarized_termcolors=256
-"let colorscheme = 'solarized'
 "let colorscheme = 'desert'
 let colorscheme = 'desertEx'
 set background=dark
@@ -776,16 +670,6 @@ let g:Powerline_symbols = 'unicode'
 set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
 
 
-" ###### minibufexpl.vim 编辑多个文件，标签显示 ######
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-
-
-" ###### Bundle 'xptemplate' ######
-" <C-\>snippt补全
-
 
 " ctrlp
 noremap <C-W><C-U> :CtrlPMRU<CR>
@@ -861,90 +745,6 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 let EasyMotion_leader_key = '<M-q>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 
-" Engspchk
-"let g:spchklang = "eng"
-"let g:spchkdialect  = "usa"
-
-
-"let g:SuperTabRetainCompletionType = 2
-" 0 - 不记录上次的补全方式
-" 1 - 记住上次的补全方式,直到用其他的补全命令改变它
-" 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
-"let g:SuperTabDefaultCompletionType = '<C-X><C-U>'
-
-
-
-"neocomplcache.vba 插件替代autocomplpop(acp.vim) omnicppcomplete.vim
-" plugin - NeoComplCache.vim 自动补全插件
-"-----------------------------------------------------------------
-" 1、使用缓存，自动补全时效率高；
-" 2、生成的关键词列表准确；
-" 3、支持下划线分割的关键词，如apple_boy_cat，就可以只输入a_b_c，然后补全；
-" 4、支持驼峰格式匹配关键词，如AppleBoyCat，就可以只输入ABC，然后补全；
-" 5、既可以像AutoComplPop那样在Vim中输入的同时自动弹出补全列表，又可以自定义快捷键手动触发；
-" 6、支持从文件名和目录名中匹配补全条件；
-" 7、对于程序源文件，支持从语言API中匹配补全条件；
-"-----------------------------------------------------------------
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " NeoComplCache
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " 停用 AutoComplPop.
-  "let g:acp_enableAtStartup = 0
-  " 启用 neocomplcache.
-  let g:neocomplcache_enable_at_startup = 1
-
-  let g:neocomplcache_enable_smart_case = 1
-  " 启用大写字母补全.
-  let g:neocomplcache_enable_camel_case_completion = 1
-  " 启用下划线补全.
-  let g:neocomplcache_enable_underbar_completion = 1
-  " 设定最小语法关键词长度.
-  let g:neocomplcache_min_syntax_length = 3
-  let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-  	" 定义字典.
-  let g:neocomplcache_dictionary_filetype_lists = {
-      \ 'default' : '',
-         \ }
-
-  " 定义关键词.
-  if !exists('g:neocomplcache_keyword_patterns')
-      let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-  " 插件键映射.
-  imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-  smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-  inoremap <expr><C-g>     neocomplcache#undo_completion()
-  inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-  " 类似于SuperTab用法 .
-  "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
-  " 推荐的键映射.
-  " <CR>: close popup and save indent.
-  inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-  " <TAB>: completion. NO USE with snipmate
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-  inoremap <expr><C-Y>  neocomplcache#close_popup()
-  inoremap <expr><C-e>  neocomplcache#cancel_popup()
-  "inoremap <expr><Enter>  pumvisible() ? neocomplcache#close_popup()."\<C-n>" : "\<Enter>"
-  inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
-
-  " 类似于AutoComplPop用法 .
-  let g:neocomplcache_enable_auto_select = 1
-  " 类似于 Shell 用法(不推荐).
-  "set completeopt+=longest
-  "let g:neocomplcache_enable_auto_select = 1
-  "let g:neocomplcache_disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-  "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-
   " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -967,56 +767,10 @@ let g:neocomplcache_omni_patterns.cpp = '/h/w*/%(/./|->/)/h/w*/|/h/w*::'
 
 
 
-" use neocomplcache & clang_complete
-" neocomplcache option
-"let g:neocomplcache_force_overwrite_completefunc=1
-" clang_complete option
-"let g:clang_complete_auto=1
-
-
-
 " txt.vim
 "高亮显示txt 需要txt.vim
 au BufRead,BufNewFile * setfiletype txt
 
-
-" 被FuzzyFinder与ctrlp功能包含 " mru
-" let MRU_File = '~/.vim/vim_mru_files'
-" let MRU_Max_Entries=200
-" let MRU_Exclude_Files='\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
-" "  加载菜单太耗时
-" let MRU_Add_Menu=0
-" let MRU_Auto_Close=1
-" let MRU_Max_Menu_Entries = 15
-
-
-" showmarks setting
-"let showmarks_enable = 0            " disable showmarks when vim startup
-"let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-"let showmarks_ignore_type = "hqm"   " help, Quickfix, non-modifiable
-",mt - 打开/关闭ShowMarks插件 ( 常用 )
-",mo - 强制打开ShowMarks插件
-",mh - 清除当前行的标记 ( 常用 )
-",ma - 清除当前缓冲区中所有的标记 ( 常用 )
-",mm - 在当前行打一个标记，使用下一个可用的标记名 ( 常用 )
-
-"vim 自带Marks的使用, 如果不习惯可以使用插件ShowMarks(下面有介绍), 使能showmarks_enable = 1
-"这个功能是VIM自带的功能, 习惯就好, 一切从简．可以查看帮助文档, 下面是简单介绍.
-"
-"(1) 设置标记 --> norm模式下, m + [a-z]. ( m - mark, [a-z] 也可以是[A-Z], 推荐只使用小写字母. )
-"(2) 删除标记 --> 多种方法如下:
-" 1. 删除标记所在的行．
-" 2. 在其他行作相同的标记(eg. ma ).
-" 3. 命令模式下 :delmarks a ( 简写 :delm a )
-" 4. 命令模式下 :delmarks! ( 删除所有小写字母标记 )
-" 5. 删除多个标记 :delmarks abcd (a,b,c,d都被删除, 也¯以 :delmarks a-d)
-"(3) 使用标记 -->
-" 1. 定位到标记位置(以a为例) --> `a or 'a ( 区别在于 `a到目标行的最左端,'a到目标行的第一个非空字符之前)
-" 2. 对当前行到标记位置的操作--> d`a , y`a , c`a 分别表示对该区域的删除, 复制, 更改
-" 3. 显示设置的标记信息 --> :marks (显示所有) :marks a (只显示a标记的信息)
-"(4) 有用特殊标记(系统设置好的)
-" 1. '' 或者 `` 从当前行跳回到最近一次跳到改行的位置去.
-" 2. `. 从当前行跳回到最后一次修改的行的位置去.
 
 
 " syntax/python.vim
@@ -1148,45 +902,6 @@ set diffopt=context:3
 "r可以进行反向排序.
 "d/D可以用来关闭文件.
 "p可以用来显示/关闭绝对路径模式
-
-
-
-"echofunc.vim 在命令行中显示函数信息
-"直接下载解压即可( tags 插件已包含相似功能, 没必要装此插件 )
-"这个插件的功能需要 tags 文件的支持, 并且在创建 tags 文件的时候要加选项"--fields=+lS" : ctags -R --fields=+lS
-let g:EchoFuncKeyPrev=''
-let g:EchoFuncKeyNext=''
-let g:EchoFuncLangsUsed = ["c","java","cpp"]
-
-
-
-"CCtree.Vim C Call-Tree Explorer 源码浏览工具 关系树 (赞)
-
-"1. 除了cscope ctags 程序的安装,还需安装强力胶 ccglue(ctags-cscope glue): http://sourceforge.net/projects/ccglue/files/src/
-" (1) ./configure && make && make install
-" (2) $ccglue -S cscope.out -o cctree.out 或 $ccglue -S cscope1.out cscope2.out -o cctree.out
-" (3) :CCTreeLoadXRefDBFromDisk cctree.out
-
-"2. 映射快捷键(上面F1) 其中$CCTREE_DB是环境变量,写在~/.bashrc中
-" map :CCTreeLoadXRefDBFromDisk $CCTREE_DB
-" eg.
-" export CSCOPE_DB=/home/tags/cscope.out
-" export CCTREE_DB=/home/tags/cctree.out
-" export MYTAGS_DB=/home/tags/tags
-
- " "注: 如果没有装ccglue ( 麻烦且快捷键不好设置,都用完了 )
- " (1) map xxx :CCTreeLoadDB $CSCOPE_DB "这样加载有点慢, cscope.out cctree.out存放的格式不同
- " (2) map xxx :CCTreeAppendDB $CSCOPE_DB2 "最将另一个库
- " (3) map xxx :CCTreSaveXRefDB $CSCOPE_DB "格式转化xref格式
- " (4) map xxx :CCTreeLoadXRefDB $CSCOPE_DB "加载xref格式的库 (或者如下)
- "map xxx :CCTreeLoadXRefDBFromDisk $CSCOPE_DB "加载xref格式的库
- " (5) map xxx :CCTreeUnLoadDB "卸载所有的数据库
-
- "3. 设置
-"let g:CCTreeDisplayMode = 3 " 当设置为垂直显示时, 模式为3最合适. (1-minimum width, 2-little space, 3-witde)
-"let g:CCTreeWindowVertical = 0 " 水平分割,垂直显示
-"let g:CCTreeWindowMinWidth = 40 " 最小窗口
-"let g:CCTreeUseUTF8Symbols = 1 "为了在终端模式下显示符号
 
 
 
