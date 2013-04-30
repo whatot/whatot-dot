@@ -574,6 +574,7 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " Auto change the root directory
 let NERDTreeChDirMode=2
 let g:NERDTreeWinSize = 25
+let NERDTreeShowBookmarks=1
 
 
 " Tagbar options
