@@ -41,11 +41,10 @@ Bundle 'autoload_cscope.vim'
 "自动载入cscope.out databases
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-"Bundle 'Valloric/YouCompleteMe'
-"autocomplete
+Bundle 'Valloric/YouCompleteMe'
 "Bundle 'xptemplate'
 "[default]C-\,Code snippets engine for Vim, with snippets library.
-Bundle 'snipMate'
+" Bundle 'snipMate'
 "[default]Tab,TextMate's snippets features in Vim,代码段补全
 Bundle 'nvie/vim-flake8'
 "<F7> flake8
@@ -104,29 +103,20 @@ Bundle 'txt.vim'
 "通用的文本文档语法
 "Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
-Bundle 'DoxygenToolkit.vim'
-"doxygen风格快速注释
-Bundle 'Lokaltog/vim-powerline'
-"缤纷的状态栏 let g:Powerline_symbols = 'fancy'
 Bundle 'kana/vim-smartinput'
 "Deal with pairs of punctuations such as (), [], {}, and so on
-"Bundle 'Townk/vim-autoclose'
-""自动补全括号
 
 Bundle 'Lokaltog/vim-easymotion'
 "提供了一组对应默认移动操作的键绑定, 能搜索并高亮所有可能的选择以供跳转
 
 Bundle 'matchit.zip'
 "configure % to match more than just single characters
-"Bundle 'ervandew/supertab'
-"use <Tab> for all your insert completion needs (:help ins-completion)
 
 
 " 中文文档
 Bundle 'asins/vimcdoc'
 "Bundle 'vimcn/c.vim.cnx'
 Bundle 'vimcn/NERD_commenter.cnx'
-Bundle 'vimcn/neocompletecache.cnx'
 Bundle 'vimcn/tagbar.cnx'
 "Bundle 'vimcn/vimwiki.vim.cnx'
 Bundle 'vimcn/matchit.vim.cnx'
@@ -146,7 +136,6 @@ filetype plugin indent on   " required!
 " ------------------------------------------------------------------
 "Toggle Menu and Toolbar
 if has("gui_running")
-    "au GUIEnter * simalt ~x " 窗口启动时自动最大化{这个没有用啊}
     set guioptions-=m       " 隐藏菜单栏
     set guioptions-=T        " 隐藏工具栏
     set guioptions-=L       " 隐藏左侧滚动条
@@ -162,20 +151,6 @@ map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
         \set guioptions+=m <Bar>
     \endif<CR>
 " ------------------------------------------------------------------
-" 自动更新最后修改时间
-function! AutoUpdateTheLastUpdateInfo()
-    let s:original_pos = getpos(".")
-    let s:regexp = "^\\s*\\([#\\\"\\*]\\|\\/\\/\\)\\s\\?[lL]ast \\([uU]pdate\\|[cC]hange\\):"
-    let s:lu = search(s:regexp)
-    if s:lu != 0
-        let s:update_str = matchstr(getline(s:lu), s:regexp)
-        call setline(s:lu, s:update_str . strftime("%Y-%m-%d %H:%M:%S", localtime()))
-        call setpos(".", s:original_pos)
-    endif
-endfunction
-"autocmd BufWritePost *.{h,hpp,c,cpp} call AutoUpdateTheLastUpdateInfo()
-"autocmd BufNewFile *.{h,hpp,c,cpp} exec 'call append(0, "\/\/ Last Update:" . strftime("%Y-%m-%d %H:%M:%S", localtime()))'
-" ------------------------------------------------------------------
 
 
 
@@ -186,12 +161,10 @@ endfunction
 " Enable syntax highlighting
 syntax on
 
-" set guifont=文泉驿等宽正黑\ Medium\ 10
 set guifont=Yahei\ Mono\ 12
 
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
-"set fileencodings=ucs-bom,utf-8,gb18030,gbk,gb2312,cp936,latin1  "前面存在
 set fileformats=unix,dos,mac
 set formatoptions=croqn2mB1
 "set formatoptions=tcqro     " 使得注释换行时自动加上前导的空格和星号
@@ -276,7 +249,7 @@ set showmatch
 set wildmenu
 set wildmode=longest:full,full
 
-"set mouse=a    " " 设定在任何模式下鼠标都可用
+"set mouse=a     " 设定在任何模式下鼠标都可用
 set mousemodel=popup
 
 set nobackup                " 覆盖文件时不备份
@@ -312,14 +285,6 @@ set tags+=./../tags,./../../tags,./../../../tags
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 set tags+=~/.vim/systags
-
-
-" 每行超过80个的字符用下划线标示
-"au BufRead,BufNewFile *.asm,*.c,*.cpp,*.java,*.cs,*.sh,*.lua,*.pl,*.pm,*.py,*.rb,*.hs,*.vim 2match Underlined /.\%81v/
-
-" 超过80个的字符高亮
-"au BufWinEnter * let w:m1=matchadd('Search', '\%<88v.\%>81v', -1)
-"au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 
 autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
@@ -401,7 +366,6 @@ nmap <silent> <M-n> :nohls<CR>
 " w开头
 nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
-"nnoremap <silent> wn :Sexplore!<CR>
 nnoremap <silent> wt :TagbarToggle<CR>
 noremap <silent> <F11> :BufExplorer<CR>
 noremap <silent> <m-F11> :BufExplorerHorizontalSplit<CR>
@@ -479,13 +443,9 @@ set guitablabel=%t
 "map <M-h> <C-W>h
 "map <M-l> <C-W>l
 
-"nmap <silent> <leader>fe :Sexplore!<CR>
-" nmap <silent> <leader>hg :MRU<CR>
 nmap <silent> <leader>er :e ~/.vimrc<CR>
-"nmap <silent> <leader>ec :e ~/.vim/snippets/c.snippets<CR>
 nmap <silent> <Leader>cs :!cscope -Rbq<CR>
 nmap <silent> <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
-nmap <silent> <Leader>ft :!bash ~/.vim/filenametags <CR>
 
 
 
@@ -512,27 +472,13 @@ autocmd BufReadPost *
      \ endif
 
 
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-	\ if &omnifunc == "" |
-	\   setlocal omnifunc=syntaxcomplete#Complete |
-	\ endif
-endif
-
-
 " ###################################################
 " 插件配置
 " ###################################################
 
-
-" haskell 设置
-setlocal omnifunc=necoghc#omnifunc
-
-
-
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
-"let colorscheme = 'desert'
-let colorscheme = 'desertEx'
+let colorscheme = 'desert'
+"let colorscheme = 'desertEx'
 set background=dark
 
 " 图形与终端
@@ -640,7 +586,7 @@ let g:DoxygenToolkit_briefTag_funcName="yes"
 
 " 设置命令行和状态栏 {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set ruler                  " 打开状态栏标尺
+set ruler                  " 打开状态栏标尺
 "set cmdheight=1            " 设定命令行的行数为 1
 "set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
 "set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\ %p%%\ \ \ [\ %L\ lines\ in\ all\ ]
@@ -660,13 +606,8 @@ let g:DoxygenToolkit_briefTag_funcName="yes"
                             " %%    百分号
                             " %L    当前文件总行数
 
-" ###### Lokaltog/vim-powerline缤纷的状态栏 ######
 set laststatus=2            " always have status-line'
-"if has("gui_running")
-"  let g:Powerline_symbols = 'fancy'
-let g:Powerline_symbols = 'unicode'
-"endif
-"set statusline=%F%m%r%h%w\ %{&ff}\ %Y\ [ascii:%b\ hex:0x\%02.2B]\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
+set statusline=%F%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
 set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
 
 
@@ -745,32 +686,10 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 let EasyMotion_leader_key = '<M-q>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 
-  " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd filetype cpp setlocal omnifunc=omni#cpp#complete#main
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType c setlocal omnifunc=ccomplete#Complete
-
-"Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-
-let g:neocomplcache_omni_patterns.ruby = '[^. */t]/./w*/|/h/w*::'
-let g:neocomplcache_omni_patterns.php = '[^. /t]->/h/w*/|/h/w*::'
-let g:neocomplcache_omni_patterns.c = '/%(/./|->/)/h/w*'
-let g:neocomplcache_omni_patterns.cpp = '/h/w*/%(/./|->/)/h/w*/|/h/w*::'
-
-
 
 " txt.vim
 "高亮显示txt 需要txt.vim
 au BufRead,BufNewFile * setfiletype txt
-
 
 
 " syntax/python.vim
@@ -1016,48 +935,3 @@ let alternateNoDefaultAlternate = 1 "当没有找到相应的.h文件时,不自�
 "Shell
 "巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
 ":%s /^M//g ，其中^M的写法是按住ctrl不放，再按v，然后按M，再放ctrl
-
-
-" #wash_error.sh
-" #!/bin/sh
-" ls *.h *.c | awk '{print $1}' > dealfile
-" cat dealfile | while read file
-" do
-" echo " " >> $file
-" done
-" #dos2unix *.c *.h
-"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
-
-
-"个人工程shell
-"
-"1. 创建cscope库 cs.sh
-"
-" #!/bin/sh
-" #rm -f cscope.* tags
-" find /root/Trunk/EC2108_C27/ /root/Trunk/Hippo/ -name "*.h" -o -name "*.c"
-" -o -name "*.cc" -o -name "*.cpp" > cscope.files
-" cscope -bkq -i cscope.files
-" ccglue -S cscope.out -o cctree.out
-
-"2. 创建文件查找库 filename.sh
-"
-" echo -e "!_TAG_FILE_SORTED/t2/t/2=foldcase/" > filenametags
-" find /root/Trunk/EC2108_C27 -not -regex
-" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
-" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
-" find /root/Trunk/Hippo/ -not -regex
-" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
-" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
-
-"3. 创建tags库 tags.sh
-"
-" ctags -R --c++-kinds=+p --fields=+ialS --extra=+q /root/Trunk/EC2108_C27
-" /root/Trunk/Hippo/
-
-"4. 设置环境变量(写到~/.bashrc)
-"
-" export CSCOPE_DB=/home/tags/cscope.out
-" export CCTREE_DB=/home/tags/cctree.out
-" export MYTAGS_DB=/home/tags/tags
-
