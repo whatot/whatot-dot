@@ -637,8 +637,8 @@ setlocal omnifunc=necoghc#omnifunc
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 "let g:solarized_termcolors=256
 "let colorscheme = 'solarized'
-"let colorscheme = 'desert'
-let colorscheme = 'desertEx'
+let colorscheme = 'desert'
+"let colorscheme = 'desertEx'
 set background=dark
 
 " 图形与终端
