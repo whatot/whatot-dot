@@ -213,6 +213,11 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:~ "eol:$
 set maxcombine=4
 set winaltkeys=no
 
+" Format related
+set tw=78
+set lbr
+set fo+=mB
+
 " Indent related
 " http://vimcdoc.sourceforge.net/doc/indent.html
 " g0 类的public顶格写
@@ -552,6 +557,8 @@ elseif has("unix")
   endif
 endif
 
+" youcompleteme
+let g:syntastic_c_checker='youcompleteme'
 
 
 " NERDTree options
@@ -588,7 +595,8 @@ let g:DoxygenToolkit_briefTag_funcName="yes"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler                  " 打开状态栏标尺
 "set cmdheight=1            " 设定命令行的行数为 1
-"set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
+set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
+set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
 "set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\ %p%%\ \ \ [\ %L\ lines\ in\ all\ ]
                             " 设置在状态行显示的信息如下：
                             " %F    当前文件名
@@ -606,9 +614,7 @@ set ruler                  " 打开状态栏标尺
                             " %%    百分号
                             " %L    当前文件总行数
 
-set laststatus=2            " always have status-line'
-set statusline=%F%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
-set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
+set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
 
 
 
