@@ -604,11 +604,15 @@ let g:tagbar_expand = 1  "向外拓展
 
 
 " syntastic
+nmap <leader>ee :Errors<CR>
 let g:syntastic_check_on_open = 1
+let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_error_symbol = '✗'
 " let g:syntastic_warning_symbol = '⚠'
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_loc_list_height = 5
+" set statusline+=%{SyntasticStatuslineFlag()}
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " let g:syntastic_enable_highlighting = 0
 " let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 
@@ -645,7 +649,7 @@ set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令�
                             " %%    百分号
                             " %L    当前文件总行数
 
-set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
+set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
 
 
 
