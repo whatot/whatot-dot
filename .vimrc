@@ -45,7 +45,9 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'xptemplate'
 "[default]C-\,Code snippets engine for Vim, with snippets library.
 " Bundle 'snipMate'
-"[default]Tab,TextMate's snippets features in Vim,代码段补全
+" Bundle 'SirVer/ultisnips'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+
 Bundle 'nvie/vim-flake8'
 "<F7> flake8
 Bundle 'rkulla/pydiction'
@@ -477,6 +479,23 @@ autocmd BufReadPost *
      \ endif
 
 
+" ##############################################
+
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
+
+nmap <leader>ch :call SetColorColumn()<CR>
+
+set cc=80
+
+
 " ###################################################
 " 插件配置
 " ###################################################
@@ -489,7 +508,7 @@ set background=dark
 " 图形与终端
 if has("gui_running")
   " 有些终端不能改变大小
-  set columns=85
+  set columns=88
   set lines=33
   set cursorline
   exe 'colorscheme' colorscheme
@@ -557,14 +576,16 @@ elseif has("unix")
   endif
 endif
 
+
+
 " youcompleteme
 let g:syntastic_c_checker='youcompleteme'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
 "default
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
