@@ -1,4 +1,0 @@
-#!/bin/sh
-# generate tag file for lookupfile plugin, use absolute path
-echo -e "!_TAG_FILE_SORTED\t2\t/2=foldcase/" > filenametags
-find `pwd` \( -name .repo -o -name .git -o -name .svn -o -name .gitignore \) -prune -o -not -iregex '.*\.\(jar\|gif\|jpg\|png\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\).*' -type f -printf "%f\t%p\t0\n" | sort -f >> ./filenametags
