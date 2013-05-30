@@ -5,8 +5,7 @@ set fileencodings=utf-8,gb18030,gbk,gb2312,latin1  "后方被注释
 set encoding=utf-8
 "let &termencoding=&encoding
 
-
-filetype plugin indent on   " required!
+filetype plugin indent on
 
 
 " ------------------------------------------------------------------
@@ -222,14 +221,6 @@ vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " 补全最长项
 inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
 
-" session
-" :mksession
-" :source session-file
-
-set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
-nmap <F3> :mksession! ~/.vim/sessions/
-nmap <C-F3> :so ~/.vim/sessions/
-
 
 " ###################################################
 "  mapleader
@@ -404,7 +395,7 @@ set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令�
                             " %%    百分号
                             " %L    当前文件总行数
 
-set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
+set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
 
 " --------------------------------------------------------
 
