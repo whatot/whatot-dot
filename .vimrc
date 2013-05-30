@@ -42,10 +42,10 @@ Bundle 'autoload_cscope.vim'
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'xptemplate'
+" Bundle 'xptemplate'
 "[default]C-\,Code snippets engine for Vim, with snippets library.
 " Bundle 'snipMate'
-" Bundle 'SirVer/ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 
 Bundle 'nvie/vim-flake8'
@@ -103,7 +103,7 @@ Bundle 'Colour-Sampler-Pack'
 ""切换主题
 Bundle 'txt.vim'
 "通用的文本文档语法
-"Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
 Bundle 'kana/vim-smartinput'
 "Deal with pairs of punctuations such as (), [], {}, and so on
@@ -589,6 +589,15 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
+
+" Ultisnips
+" ultisnips  https://github.com/graudeejs/dot.vim/tree/master/snippets
+" http://www.ruchee.com/code/linux/vim/snippets/python.snippets.shtml
+" https://github.com/honza/snipmate-snippets/blob/master/snippets/python.snippets
+let g:UltiSnipsExpandTrigger = "<C-\>"
+let g:UltiSnipsJumpForwardTrigger = "<C-\>"
+"定义存放代码片段的文件夹 .vim下，使用自定义和默认的，将会的到全局，有冲突的会提示
+let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
 
 
 " NERDTree options
