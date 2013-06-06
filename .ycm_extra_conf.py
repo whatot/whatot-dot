@@ -61,9 +61,15 @@ flags = [
     '-isystem',
     '~/linux-3.9.4/include',
     '-isystem',
+    '~/linux-3.9.4/',
+    '-I',
     '.'
+    # '-I',
+    # '~/.vim/bundle/YouCompleteMe/cpp/ycm/',
+    '-I',
+    '~/.vim/bundle/YouCompleteMe/cpp/ycm/ClangCompleter',
     '-isystem',
-    '~/linux-3.9.4/'
+    '/usr/src/linux-3.9.4-1-ARCH/',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
