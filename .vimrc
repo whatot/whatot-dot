@@ -292,7 +292,6 @@ set tags+=./../tags,./../../tags,./../../../tags
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 set tags+=~/.vim/systags
-" cs -Rkq /usr/include/
 
 " set tags+=~/linux-3.9.4/tags
 " cs add ~/linux-3.9.4/cscope.out
@@ -983,3 +982,48 @@ let alternateNoDefaultAlternate = 1 "当没有找到相应的.h文件时,不自�
 "Shell
 "巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
 ":%s /^M//g ，其中^M的写法是按住ctrl不放，再按v，然后按M，再放ctrl
+
+
+" #wash_error.sh
+" #!/bin/sh
+" ls *.h *.c | awk '{print $1}' > dealfile
+" cat dealfile | while read file
+" do
+" echo " " >> $file
+" done
+" #dos2unix *.c *.h
+"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
+
+
+"个人工程shell
+"
+"1. 创建cscope库 cs.sh
+"
+" #!/bin/sh
+" #rm -f cscope.* tags
+" find /root/Trunk/EC2108_C27/ /root/Trunk/Hippo/ -name "*.h" -o -name "*.c"
+" -o -name "*.cc" -o -name "*.cpp" > cscope.files
+" cscope -bkq -i cscope.files
+" ccglue -S cscope.out -o cctree.out
+
+"2. 创建文件查找库 filename.sh
+"
+" echo -e "!_TAG_FILE_SORTED/t2/t/2=foldcase/" > filenametags
+" find /root/Trunk/EC2108_C27 -not -regex
+" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
+" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
+" find /root/Trunk/Hippo/ -not -regex
+" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
+" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
+
+"3. 创建tags库 tags.sh
+"
+" ctags -R --c++-kinds=+p --fields=+ialS --extra=+q /root/Trunk/EC2108_C27
+" /root/Trunk/Hippo/
+
+"4. 设置环境变量(写到~/.bashrc)
+"
+" export CSCOPE_DB=/home/tags/cscope.out
+" export CCTREE_DB=/home/tags/cctree.out
+" export MYTAGS_DB=/home/tags/tags
+
