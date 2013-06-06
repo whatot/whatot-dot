@@ -583,7 +583,9 @@ endif
 
 " youcompleteme
 let g:syntastic_c_checker='youcompleteme'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/linux-3.9.4/.ycm_extra_conf.py'
+" 把这个文件放在项目的根目录下，打开项目文件时，YCM会循环向上搜索并加载这个文件
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
