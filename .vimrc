@@ -291,10 +291,10 @@ set tags+=./../tags,./../../tags,./../../../tags
 "如果你想补全系统函数，可以用 ctags 生成包含所有系统头文件的标签文件: >
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
-set tags+=~/.vim/systags
+" set tags+=~/.vim/systags
 
-" set tags+=~/linux-3.9.4/tags
-" cs add ~/linux-3.9.4/cscope.out
+set tags+=~/linux-3.9.4/tags
+cs add ~/linux-3.9.4/cscope.out
 
 
 autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
