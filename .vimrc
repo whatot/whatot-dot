@@ -31,7 +31,6 @@ Bundle 'gmarik/vundle'
 "Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 
 
-
 Bundle 'STL-improved'
 Bundle 'majutsushi/tagbar'
 "浏览tag,[own]wt
@@ -41,20 +40,11 @@ Bundle 'autoload_cscope.vim'
 "自动载入cscope.out databases
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'xptemplate'
+Bundle 'xptemplate'
 "[default]C-\,Code snippets engine for Vim, with snippets library.
-" Bundle 'snipMate'
-Bundle 'SirVer/ultisnips'
-Bundle 'MarcWeber/vim-addon-mw-utils'
 
-Bundle 'nvie/vim-flake8'
-"<F7> flake8
-Bundle 'rkulla/pydiction'
 Bundle 'scrooloose/syntastic'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'vim-scripts/haskell.vim'
-Bundle 'ujihisa/neco-ghc'
 
 Bundle 'bash-support.vim'
 Bundle 'bufexplorer.zip'
@@ -88,7 +78,6 @@ Bundle 'FuzzyFinder'
 " 代码注释
 Bundle 'The-NERD-Commenter'
 "[default],cc;,cu注释与取消注释快速切换
-Bundle 'c.vim'
 
 Bundle 'scrooloose/nerdtree'
 "[own]wf浏览目录
@@ -97,12 +86,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
 
-Bundle 'Colour-Sampler-Pack'
-"帮助测试主题
-"Bundle 'ScrollColors'
-""切换主题
-Bundle 'txt.vim'
-"通用的文本文档语法
 Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
 Bundle 'kana/vim-smartinput'
@@ -352,12 +335,10 @@ nnoremap <silent> sy     :FufLine<CR>
 nnoremap <silent> sr     :FufRenewCache<CR>
 
 
-
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
 nmap gb :setl fenc=gb18030<CR>
-
 
 
 " Set Up and Down non-linewise
@@ -580,31 +561,6 @@ elseif has("unix")
 endif
 
 
-
-" youcompleteme
-let g:syntastic_c_checker='youcompleteme'
-" let g:ycm_global_ycm_extra_conf = '~/linux-3.9.4/.ycm_extra_conf.py'
-" 把这个文件放在项目的根目录下，打开项目文件时，YCM会循环向上搜索并加载这个文件
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
-"default
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-
-
-" Ultisnips
-" ultisnips  https://github.com/graudeejs/dot.vim/tree/master/snippets
-" http://www.ruchee.com/code/linux/vim/snippets/python.snippets.shtml
-" https://github.com/honza/snipmate-snippets/blob/master/snippets/python.snippets
-let g:UltiSnipsExpandTrigger = "<C-\>"
-let g:UltiSnipsJumpForwardTrigger = "<C-\>"
-"定义存放代码片段的文件夹 .vim下，使用自定义和默认的，将会的到全局，有冲突的会提示
-let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
-
-
 " NERDTree options
 " Auto change the root directory
 let NERDTreeChDirMode=2
@@ -736,16 +692,6 @@ let EasyMotion_leader_key = '<M-q>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 
 
-" txt.vim
-"高亮显示txt 需要txt.vim
-au BufRead,BufNewFile * setfiletype txt
-
-
-" syntax/python.vim
-let python_highlight_all = 1
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-
-
 "NERD_commenter.vim "可以使用cvim.zip, 但是这个觉到习惯一些
 let NERDSpaceDelims=1 " 让注释符与语句之间留一个空格
 let NERDCompactSexyComs=1 " 多行注释时样子更好看
@@ -870,26 +816,6 @@ set diffopt=context:3
 "r可以进行反向排序.
 "d/D可以用来关闭文件.
 "p可以用来显示/关闭绝对路径模式
-
-
-
-"cvim.zip插件--编码必备
-"下载地址: http://www.vim.org/scripts/script.php?script_id=213
-"let g:C_MapLeader = ',' "默认的是'/'
-"Ctrl+j 的使用:eg. 当你使用/if添加一个函数时,会多出一些类似<+xxx+>的东西(需要重新填写), ctrl+j可以帮你忙,试一下很强.
-" 功能说明
-"1.添加文件头注释（自动完成）
-"2.添加c函数（标准模式执行/if, 再输入函数名）
-"3.添加main函数（标准模式执行/im）
-"4.添加函数注释 （标准模式执行/cfu）
-"5.添加注释框架 （标准模式执行/cfr）
-"6.添加头文件 （标准模式执行/p<包含头文件 或 /p"包含头文件）
-"7.添加宏定义 （标准模式执行/pd)
-"8.添加代码片段
-"（标准模式执行/nr,需在~/.vim/c-support/codesnippets/中加入存放代码的文件)
-" -- Help ---------------------------------------------------------------
-" /hm show manual for word under the cursor (n,i)
-" /hp show plugin help (n,i)
 
 
 
