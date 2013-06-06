@@ -689,6 +689,7 @@ let g:tagbar_expand = 1  "向外拓展
 nmap <leader>ee :Errors<CR>
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_c_checkers = ['make']
 " let g:syntastic_error_symbol = '✗'
 " let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 2
