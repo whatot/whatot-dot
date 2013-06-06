@@ -292,6 +292,10 @@ set tags+=./../tags,./../../tags,./../../../tags
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 set tags+=~/.vim/systags
+" cs -Rkq /usr/include/
+
+" set tags+=~/linux-3.9.4/tags
+" cs add ~/linux-3.9.4/cscope.out
 
 
 autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
@@ -720,13 +724,7 @@ nmap <A-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 ""-k: 在生成索引文件时，不搜索/usr/include目录
 ""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
 
-""1.生成一个 cscope 的数据库
-
 ""cscope -Rbq
-""  :cs add /usr/src/linux/cscope.out /usr/src/linux/
-""  :cs reset : 重新初始化所有连接. 用法 : cs reset
-"测试（1）:cscope find g 函数名 （2） :cscope find c 函数名
-":cw 显示多个结果
 
 " 解决cscope与tag共存时ctrl+]有时不正常的bug
 nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
