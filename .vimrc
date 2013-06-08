@@ -643,18 +643,18 @@ set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令�
 
 " set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
 
-hi User1 guifg=#eea040 guibg=#222222
-hi User2 guifg=#dd3333 guibg=#222222
-hi User3 guifg=#ff66ff guibg=#222222
-hi User4 guifg=#a0ee40 guibg=#222222
-hi User5 guifg=#eeee40 guibg=#222222
+hi User1 guifg=#eea040 guibg=#222222 ctermfg=6 ctermbg=0
+hi User2 guifg=#dd3333 guibg=#222222 ctermfg=5 ctermbg=0
+hi User3 guifg=#ff66ff guibg=#222222 ctermfg=4 ctermbg=0
+hi User4 guifg=#a0ee40 guibg=#222222 ctermfg=1 ctermbg=0
+hi User5 guifg=#eeee40 guibg=#222222 ctermfg=2 ctermbg=0
 
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
 set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
 set statusline +=%3*%Y\ %*              "file type
+set statusline +=%5*[%{&ff}]\ %*        "file format
 set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
-set statusline +=%5*[%{&ff}]%*            "file format
 set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
 set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
 set statusline +=%1*%=%5l%*             "current line
