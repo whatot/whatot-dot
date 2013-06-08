@@ -42,6 +42,10 @@ Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Bundle 'ervandew/supertab'
 Bundle 'OmniCppComplete'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
 
 Bundle 'scrooloose/syntastic'
 Bundle 'plasticboy/vim-markdown'
@@ -569,7 +573,23 @@ endif
 " g:SuperTabDefaultCompletionType的值设置缺省的补全方式，缺省为CTRL-P。
 
 let g:SuperTabRetainCompletionType = 2
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"-- omnicppcomplete setting --
+" set completeopt=menu,menuone
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
+let OmniCpp_GlobalScopeSearch=1
+let OmniCpp_DisplayMode=1
+let OmniCpp_DefaultNamespaces=["std"]
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
