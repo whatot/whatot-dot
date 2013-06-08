@@ -621,32 +621,48 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 
 
-" 设置命令行和状态栏 {{{
+" 设置命令行和状态栏
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler                  " 打开状态栏标尺
 "set cmdheight=1            " 设定命令行的行数为 1
 set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
-"set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\ %p%%\ \ \ [\ %L\ lines\ in\ all\ ]
-                            " 设置在状态行显示的信息如下：
-                            " %F    当前文件名
-                            " %m    当前文件修改状态
-                            " %r    当前文件是否只读
-                            " %Y    当前文件类型
-                            " %{&fileformat}5=
-                            "       当前文件编码
-                            " %b    当前光标处字符的 ASCII 码值
-                            " %B    当前光标处字符的十六进制值
-                            " %l    当前光标行号
-                            " %c    当前光标列号
-                            " %V    当前光标虚拟列号 (根据字符所占字节数计算)
-                            " %p    当前行占总行数的百分比
-                            " %%    百分号
-                            " %L    当前文件总行数
 
-set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
+" %F    当前文件名
+" %m    当前文件修改状态
+" %r    当前文件是否只读
+" %Y    当前文件类型
+" %b    当前光标处字符的 ASCII 码值
+" %B    当前光标处字符的十六进制值
+" %l    当前光标行号
+" %c    当前光标列号
+" %V    当前光标虚拟列号 (根据字符所占字节数计算)
+" %p    当前行占总行数的百分比
+" %%    百分号
+" %L    当前文件总行数
 
+" set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
 
+hi User1 guifg=#eea040 guibg=#222222
+hi User2 guifg=#dd3333 guibg=#222222
+hi User3 guifg=#ff66ff guibg=#222222
+hi User4 guifg=#a0ee40 guibg=#222222
+hi User5 guifg=#eeee40 guibg=#222222
+
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
+set statusline +=%3*%Y\ %*              "file type
+set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
+set statusline +=%5*[%{&ff}]%*            "file format
+set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
+set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ctrlp
 noremap <C-W><C-U> :CtrlPMRU<CR>
