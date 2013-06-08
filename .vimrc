@@ -40,6 +40,8 @@ Bundle 'autoload_cscope.vim'
 "自动载入cscope.out databases
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
+Bundle 'ervandew/supertab'
+Bundle 'OmniCppComplete'
 
 Bundle 'scrooloose/syntastic'
 Bundle 'plasticboy/vim-markdown'
@@ -559,7 +561,15 @@ elseif has("unix")
 endif
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" g:SuperTabRetainCompletionType的值
+" default为1，意为记住你上次的补全方式，直到使用其它的补全命令改变它；
+" 为2，意味着记住上次的补全方式，直到按ESC退出插入模式为止；
+" 为0，意味着不记录上次的补全方式。
+" g:SuperTabDefaultCompletionType的值设置缺省的补全方式，缺省为CTRL-P。
 
+let g:SuperTabRetainCompletionType = 2
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
