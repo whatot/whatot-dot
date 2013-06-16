@@ -441,7 +441,7 @@ set guitablabel=%t
 nmap <silent> <leader>er :e ~/.vimrc<CR>
 nmap <silent> <Leader>cs :!cscope -Rbq<CR>
 nmap <silent> <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
-nmap <silent> <leader>ck :cs add ~/linux/cscope.out
+nmap <silent> <leader>ck :cs add ~/linux/cscope.out<CR>
 
 
 " ###################################################
@@ -710,6 +710,15 @@ nmap <A-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <A-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <A-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <A-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+" 0 或 s: 查找本 C 符号
+" 1 或 g: 查找本定义
+" 2 或 d: 查找本函数调用的函数
+" 3 或 c: 查找调用指定函数的函数
+" 4 或 t: 查找字符串
+" 6 或 e: 查找本 egrep 模式
+" 7 或 f: 查找本文件
+" 8 或 i: 查找包含本文件的文件
 
 "" cscope使用方法
 ""下面是shell脚本，放到源码目录下运行
