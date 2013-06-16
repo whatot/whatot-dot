@@ -619,6 +619,9 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " let g:syntastic_enable_highlighting = 0
 " let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 
+let g:syntastic_mode_map = { 'mode': 'active',
+			\ 'active_filetypes': ['c', 'python'],
+			\ 'passive_filetypes': ['text','vim','mkd','puppet','scss', 'slim','ruby','php' ] }
 
 
 " 设置命令行和状态栏
