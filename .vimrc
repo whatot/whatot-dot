@@ -280,8 +280,8 @@ set tags+=./../tags,./../../tags,./../../../tags
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 " set tags+=~/.vim/systags
 
-set tags+=~/linux-3.9.4/tags
-" cs add ~/linux-3.9.4/cscope.out
+set tags+=~/linux/tags
+" cs add ~/linux/cscope.out
 
 
 autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
@@ -441,7 +441,7 @@ set guitablabel=%t
 nmap <silent> <leader>er :e ~/.vimrc<CR>
 nmap <silent> <Leader>cs :!cscope -Rbq<CR>
 nmap <silent> <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
-nmap <silent> <leader>ck :cs add ~/linux-3.9.4/cscope.out
+nmap <silent> <leader>ck :cs add ~/linux/cscope.out
 
 
 " ###################################################

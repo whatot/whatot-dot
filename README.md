@@ -21,13 +21,6 @@ git clone https://github.com/whatot/whatot-vimrc.git
 cp whatot-vimrc/.vimrc ~/.vimrc
 vim +BundleInstall +qa
 
-#YouCompleteMe install
-git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
-cd ~/.vim/bundle/YouCompleteMe/
-./install.sh --clang-completer
-#install jedi python completer
-git submodule update --init --recursive
-
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 ```
 
