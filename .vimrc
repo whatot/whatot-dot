@@ -592,14 +592,6 @@ let OmniCpp_DefaultNamespaces=["std"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-" NERDTree options
-" Auto change the root g:neosnippet
-let NERDTreeChDirMode=2
-let g:NERDTreeWinSize = 25
-let NERDTreeShowBookmarks=1
-
-
 " Tagbar options
 let g:tagbar_width = 35
 let g:tagbar_expand = 1  "向外拓展
@@ -777,11 +769,14 @@ let NERD_c_alt_style=1
 " r 递归刷新当前目录 R 递归刷新当前根目录
 "-----------------------------------------------------------------
 
-let g:NERDChristmasTree = 1 "色彩显示
-let g:NERDTreNERDShowHidden = 1 "显示隐藏文件
-let g:NERDTreeWinPos = 'left' "窗口显示位置
-let g:NERDTreeHighlightCursorline = 0 "高亮当前行
-let g:NERDTreeWinSize = 25 "设置显示宽度
+let g:NERDChristmasTree = 1  "色彩显示
+let g:NERDTreNERDShowHidden = 1  "显示隐藏文件
+let g:NERDTreeWinPos = 'left'  "窗口显示位置
+let g:NERDTreeHighlightCursorline = 0  "高亮当前行
+let g:NERDTreeWinSize = 30  "设置显示宽度
+let NERDTreeChDirMode=2
+let NERDTreeShowBookmarks=0
+
 
 "nmap :NERDTreeToggle.
 " o.......打开所选文件或目录 ( 常用 )
@@ -797,9 +792,7 @@ let g:NERDTreeWinSize = 25 "设置显示宽度
 " 鼠标双击.......相当于o, 没错支持鼠标的~!
 
 
-
 " --------------------------------------------------------
-
 
 "vim折叠功能
 "折叠方式,可用选项 'foldmethod' 来设定折叠方式：set fdm=***
