@@ -438,13 +438,15 @@ function! LoadKernelTagsAndCscope()
 	execute 'set tags=~/linux/tags'
 endfunction
 nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! LoadSysTags()
 	execute 'cs kill cscope.out'
 	execute 'set tags-=~/linux/tags'
 	execute 'set tags+=~/.vim/systags'
 endfunction
-nmap <silent> <leader>cs :call LoadSysTags()<CR>
+nmap <silent> <leader>ss :call LoadSysTags()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
