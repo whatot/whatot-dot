@@ -122,26 +122,6 @@ filetype plugin indent on   " required!
 
 " ------------------------------------------------------------------
 "  自编函数
-" ------------------------------------------------------------------
-"Toggle Menu and Toolbar
-if has("gui_running")
-    set guioptions-=m       " 隐藏菜单栏
-    set guioptions-=T        " 隐藏工具栏
-    set guioptions-=L       " 隐藏左侧滚动条
-    set guioptions-=r       " 隐藏右侧滚动条
-    "set guioptions-=b       " 隐藏底部滚动条
-    "set showtabline=0       " 隐藏Tab栏
-endif
-map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
-" ------------------------------------------------------------------
-
-
 
 " ------------------------------------------------------------------
 "  总体细节设置
@@ -273,14 +253,13 @@ endif
 
 
 set tags=tags
-set tags+=./../tags,./../../tags,./../../../tags
+" set tags+=./../tags,./../../tags,./../../../tags
 
 "如果你想补全系统函数，可以用 ctags 生成包含所有系统头文件的标签文件: >
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 " set tags+=~/.vim/systags
-
-set tags+=~/linux/tags
+" set tags+=~/linux/tags
 " cs add ~/linux/cscope.out
 
 
@@ -439,25 +418,34 @@ set guitablabel=%t
 "map <M-l> <C-W>l
 
 nmap <silent> <leader>er :e ~/.vimrc<CR>
-nmap <silent> <Leader>cs :!cscope -Rbq<CR>
-nmap <silent> <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
-nmap <silent> <leader>ck :cs add ~/linux/cscope.out<CR>
+" nmap <Leader>cr :!cscope -Rbq<CR>
+" nmap <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
 
-
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自定义命令
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "   设置成 Linux 下适用的格式
 command! Lin setl ff=unix fenc=utf8 nobomb eol
 "   设置成 Windows 下适用的格式
 command! Win setl ff=dos fenc=gb18030
 
-
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
-" ###################################################
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! LoadKernelTagsAndCscope()
+	execute 'cs add ~/linux/cscope.out'
+	execute 'set tags=~/linux/tags'
+endfunction
+nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! LoadSysTags()
+	execute 'cs kill cscope.out'
+	execute 'set tags-=~/linux/tags'
+	execute 'set tags+=~/.vim/systags'
+endfunction
+nmap <silent> <leader>cs :call LoadSysTags()<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
 " Restore the last quit position when open file.
@@ -466,9 +454,7 @@ autocmd BufReadPost *
      \     exe "normal g'\"" |
      \ endif
 
-
-" ##############################################
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SetColorColumn()
     let col_num = virtcol(".")
     let cc_list = split(&cc, ',')
@@ -483,10 +469,54 @@ nmap <leader>ch :call SetColorColumn()<CR>
 
 set cc=80
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle Menu and Toolbar
+if has("gui_running")
+    set guioptions-=m       " 隐藏菜单栏
+    set guioptions-=T        " 隐藏工具栏
+    set guioptions-=L       " 隐藏左侧滚动条
+    set guioptions-=r       " 隐藏右侧滚动条
+    "set guioptions-=b       " 隐藏底部滚动条
+    "set showtabline=0       " 隐藏Tab栏
+endif
+map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
 
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! AutoLoadCTagsAndCScope()
+    let max = 5
+    let dir = './'
+    let i = 0
+    let break = 0
+    while isdirectory(dir) && i < max
+        if filereadable(dir . 'cscope.out') 
+            execute 'cs add ' . dir . 'cscope.out'
+            let break = 1
+        endif
+        if filereadable(dir . 'tags')
+            execute 'set tags =' . dir . 'tags'
+            let break = 1
+        endif
+        if break == 1
+            execute 'lcd ' . dir
+            break
+        endif
+        let dir = dir . '../'
+        let i = i + 1
+    endwhile
+endf
+nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
+" call AutoLoadCTagsAndCScope()
+" http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件配置
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 let colorscheme = 'desert'
@@ -711,6 +741,23 @@ nmap <A-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " 6 或 e: 查找本 egrep 模式
 " 7 或 f: 查找本文件
 " 8 或 i: 查找包含本文件的文件
+
+" cscope commands:
+" add  : Add a new database             (Usage: add file|dir [pre-path] [flags])
+" find : Query for a pattern            (Usage: find c|d|e|f|g|i|s|t name)
+       " c: Find functions calling this function
+       " d: Find functions called by this function
+       " e: Find this egrep pattern
+       " f: Find this file
+       " g: Find this definition
+       " i: Find files #including this file
+       " s: Find this C symbol
+       " t: Find assignments to
+" help : Show this message              (Usage: help)
+" kill : Kill a connection              (Usage: kill #)
+" reset: Reinit all connections         (Usage: reset)
+" show : Show connections               (Usage: show)
+
 
 "" cscope使用方法
 ""下面是shell脚本，放到源码目录下运行
