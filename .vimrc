@@ -626,7 +626,7 @@ let OmniCpp_DefaultNamespaces=["std"]
 
 " Tagbar options
 let g:tagbar_width = 35
-let g:tagbar_expand = 1  "向外拓展
+let g:tagbar_expand = 0  "向外拓展
 
 
 " syntastic
@@ -823,7 +823,7 @@ let g:NERDTreNERDShowHidden = 1  "显示隐藏文件
 let g:NERDTreeWinPos = 'left'  "窗口显示位置
 let g:NERDTreeHighlightCursorline = 0  "高亮当前行
 let g:NERDTreeWinSize = 30  "设置显示宽度
-let NERDTreeChDirMode=2
+let NERDTreeChDirMode=0
 let NERDTreeShowBookmarks=0
 
 
