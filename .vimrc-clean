@@ -5,36 +5,11 @@ set fileencodings=utf-8,gb18030,gbk,gb2312,latin1  "后方被注释
 set encoding=utf-8
 "let &termencoding=&encoding
 
-filetype plugin indent on
+filetype plugin indent on   " required!
 
-
-" ------------------------------------------------------------------
-"  自编函数
-" ------------------------------------------------------------------
-"Toggle Menu and Toolbar
-if has("gui_running")
-    set guioptions-=m       " 隐藏菜单栏
-    set guioptions-=T        " 隐藏工具栏
-    set guioptions-=L       " 隐藏左侧滚动条
-    set guioptions-=r       " 隐藏右侧滚动条
-    "set guioptions-=b       " 隐藏底部滚动条
-    "set showtabline=0       " 隐藏Tab栏
-endif
-map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
-" ------------------------------------------------------------------
-
-
-
-" ------------------------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  总体细节设置
-" ------------------------------------------------------------------
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax on
 
@@ -161,21 +136,20 @@ endif
 
 
 set tags=tags
-set tags+=./../tags,./../../tags,./../../../tags
+" set tags+=./../tags,./../../tags,./../../../tags
 
 "如果你想补全系统函数，可以用 ctags 生成包含所有系统头文件的标签文件: >
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
-set tags+=~/.vim/systags
+" set tags+=~/.vim/systags
 
 
 autocmd FileType c set tabstop=8 shiftwidth=8 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
-
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 nnoremap <Space> za
 nmap ' <C-W>
@@ -221,11 +195,17 @@ vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " 补全最长项
 inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
 
+" session
+" :mksession
+" :source session-file
 
-" ###################################################
+set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
+nmap <F3> :mksession! ~/.vim/sessions/
+nmap <C-F3> :so ~/.vim/sessions/
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  mapleader
-" ###################################################
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "设置自定义的<leader>快捷键
 let mapleader=","
@@ -248,22 +228,36 @@ set guitablabel=%t
 "map <M-l> <C-W>l
 
 nmap <silent> <leader>er :e ~/.vimrc<CR>
+" nmap <Leader>cr :!cscope -Rbq<CR>
+" nmap <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
 
-
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自定义命令
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "   设置成 Linux 下适用的格式
 command! Lin setl ff=unix fenc=utf8 nobomb eol
 "   设置成 Windows 下适用的格式
 command! Win setl ff=dos fenc=gb18030
 
-
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! LoadKernelTagsAndCscope()
+	execute 'cs add ~/linux/cscope.out'
+	execute 'set tags=~/linux/tags'
+endfunction
+nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! LoadSysTags()
+	execute 'cs kill cscope.out'
+	execute 'set tags-=~/linux/tags'
+	execute 'set tags+=~/.vim/systags'
+endfunction
+nmap <silent> <leader>ss :call LoadSysTags()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
 " Restore the last quit position when open file.
@@ -272,9 +266,7 @@ autocmd BufReadPost *
      \     exe "normal g'\"" |
      \ endif
 
-
-" ##############################################
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SetColorColumn()
     let col_num = virtcol(".")
     let cc_list = split(&cc, ',')
@@ -289,10 +281,54 @@ nmap <leader>ch :call SetColorColumn()<CR>
 
 set cc=80
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle Menu and Toolbar
+if has("gui_running")
+    set guioptions-=m       " 隐藏菜单栏
+    set guioptions-=T        " 隐藏工具栏
+    set guioptions-=L       " 隐藏左侧滚动条
+    set guioptions-=r       " 隐藏右侧滚动条
+    "set guioptions-=b       " 隐藏底部滚动条
+    "set showtabline=0       " 隐藏Tab栏
+endif
+map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=m <bar>
+    \else <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=m <Bar>
+    \endif<CR>
 
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! AutoLoadCTagsAndCScope()
+    let max = 5
+    let dir = './'
+    let i = 0
+    let break = 0
+    while isdirectory(dir) && i < max
+        if filereadable(dir . 'cscope.out')
+            execute 'cs add ' . dir . 'cscope.out'
+            let break = 1
+        endif
+        if filereadable(dir . 'tags')
+            execute 'set tags =' . dir . 'tags'
+            let break = 1
+        endif
+        if break == 1
+            execute 'lcd ' . dir
+            break
+        endif
+        let dir = dir . '../'
+        let i = i + 1
+    endwhile
+endf
+nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
+" call AutoLoadCTagsAndCScope()
+" http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件配置
-" ###################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 let colorscheme = 'desert'
@@ -371,35 +407,124 @@ elseif has("unix")
 endif
 
 
-
-" 设置命令行和状态栏 {{{
+" 设置命令行和状态栏
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler                  " 打开状态栏标尺
 "set cmdheight=1            " 设定命令行的行数为 1
 set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
-"set statusline=%F%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\ %p%%\ \ \ [\ %L\ lines\ in\ all\ ]
-                            " 设置在状态行显示的信息如下：
-                            " %F    当前文件名
-                            " %m    当前文件修改状态
-                            " %r    当前文件是否只读
-                            " %Y    当前文件类型
-                            " %{&fileformat}5=
-                            "       当前文件编码
-                            " %b    当前光标处字符的 ASCII 码值
-                            " %B    当前光标处字符的十六进制值
-                            " %l    当前光标行号
-                            " %c    当前光标列号
-                            " %V    当前光标虚拟列号 (根据字符所占字节数计算)
-                            " %p    当前行占总行数的百分比
-                            " %%    百分号
-                            " %L    当前文件总行数
 
-set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %=%l/%L,%v\ %p%%
+" %F    当前文件名
+" %m    当前文件修改状态
+" %r    当前文件是否只读
+" %Y    当前文件类型
+" %b    当前光标处字符的 ASCII 码值
+" %B    当前光标处字符的十六进制值
+" %l    当前光标行号
+" %c    当前光标列号
+" %V    当前光标虚拟列号 (根据字符所占字节数计算)
+" %p    当前行占总行数的百分比
+" %%    百分号
+" %L    当前文件总行数
 
-" --------------------------------------------------------
+" set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
 
+hi User1 guifg=#eea040 guibg=#222222 ctermfg=6 ctermbg=0
+hi User2 guifg=#dd3333 guibg=#222222 ctermfg=5 ctermbg=0
+hi User3 guifg=#ff66ff guibg=#222222 ctermfg=4 ctermbg=0
+hi User4 guifg=#a0ee40 guibg=#222222 ctermfg=1 ctermbg=0
+hi User5 guifg=#eeee40 guibg=#222222 ctermfg=2 ctermbg=0
+
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
+set statusline +=%3*%Y\ %*              "file type
+set statusline +=%5*[%{&ff}]\ %*        "file format
+set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
+set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" -- cscope --
+let g:autocscope_menus=0
+" 设定是否使用 quickfix 窗口来显示 cscope 结果
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+"'csto' 被设为 0，cscope 数据库先 被搜索，搜索失败的情况下在搜索标签文件
+"设定了 'cscopetag'，这样所有的 :tag 命令就会实际上调用 :cstag。这包括 :tag、Ctrl-] 及 vim -t。
+"结果是一般的 tag 命令不仅搜索由 ctags 产生的标签文 件，同时也搜索 cscope 数据库,但是好像有bug,二者共存时有的无法搜索
+if has("cscope")
+    set csprg=/usr/bin/cscope
+    " Use both cscope and ctag
+    set cscopetag
+    " Show msg when cscope db added
+    set cscopeverbose
+    " Use cscope for definition search first
+    set cscopetagorder=0
+endif
+
+nmap <A-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <A-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <A-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <A-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <A-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <A-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <A-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <A-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+" 0 或 s: 查找本 C 符号
+" 1 或 g: 查找本定义
+" 2 或 d: 查找本函数调用的函数
+" 3 或 c: 查找调用指定函数的函数
+" 4 或 t: 查找字符串
+" 6 或 e: 查找本 egrep 模式
+" 7 或 f: 查找本文件
+" 8 或 i: 查找包含本文件的文件
+
+" cscope commands:
+" add  : Add a new database             (Usage: add file|dir [pre-path] [flags])
+" find : Query for a pattern            (Usage: find c|d|e|f|g|i|s|t name)
+       " c: Find functions calling this function
+       " d: Find functions called by this function
+       " e: Find this egrep pattern
+       " f: Find this file
+       " g: Find this definition
+       " i: Find files #including this file
+       " s: Find this C symbol
+       " t: Find assignments to
+" help : Show this message              (Usage: help)
+" kill : Kill a connection              (Usage: kill #)
+" reset: Reinit all connections         (Usage: reset)
+" show : Show connections               (Usage: show)
+
+
+"" cscope使用方法
+""下面是shell脚本，放到源码目录下运行
+""#!/bin/sh
+""find . -name "*.h" -o -name "*.c" -o -name "*.cc" > cscope.files
+""cscope -bkq -i cscope.files
+""ctags -R
+
+""下面是对cscope -Rbkq 的解释
+
+""-R: 在生成索引文件时，搜索子目录树中的代码
+""-b: 只生成索引文件，不进入cscope的界面
+""-k: 在生成索引文件时，不搜索/usr/include目录
+""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
+
+""cscope -Rbq
+
+" 解决cscope与tag共存时ctrl+]有时不正常的bug
+nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim折叠功能
+"
 "折叠方式,可用选项 'foldmethod' 来设定折叠方式：set fdm=***
 "有 6 种方法来选定折叠：
 "manual 手工定义折叠
@@ -436,6 +561,9 @@ set foldmethod=indent
 "nnoremap @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo') "使用空格打开或关闭折叠
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 文件比较
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ":vertical diffsplit FILE_RIGHT "与已打开的文件进行比较
 "设置不同之处显示上下三行
 set diffopt=context:3
@@ -453,6 +581,7 @@ set diffopt=context:3
 ":wa 保存
 ":wqa 保存退出
 ":diffupdate 重新比较
+
 
 
 "寄存器
@@ -525,3 +654,47 @@ set diffopt=context:3
 "Shell
 "巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
 ":%s /^M//g ，其中^M的写法是按住ctrl不放，再按v，然后按M，再放ctrl
+
+
+" #wash_error.sh
+" #!/bin/sh
+" ls *.h *.c | awk '{print $1}' > dealfile
+" cat dealfile | while read file
+" do
+" echo " " >> $file
+" done
+" #dos2unix *.c *.h
+"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
+
+
+"个人工程shell
+"
+"1. 创建cscope库 cs.sh
+"
+" #!/bin/sh
+" #rm -f cscope.* tags
+" find /root/Trunk/EC2108_C27/ /root/Trunk/Hippo/ -name "*.h" -o -name "*.c"
+" -o -name "*.cc" -o -name "*.cpp" > cscope.files
+" cscope -bkq -i cscope.files
+" ccglue -S cscope.out -o cctree.out
+
+"2. 创建文件查找库 filename.sh
+"
+" echo -e "!_TAG_FILE_SORTED/t2/t/2=foldcase/" > filenametags
+" find /root/Trunk/EC2108_C27 -not -regex
+" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
+" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
+" find /root/Trunk/Hippo/ -not -regex
+" '.*/./(png/|gif/|db/|bak/|swp/|doc/|html/|htm/|jsp/|js/)' ! -path "*svn*"
+" -type f -printf "%f/t%p/t1/n" | sort -f >> filenametags
+
+"3. 创建tags库 tags.sh
+"
+" ctags -R --c++-kinds=+p --fields=+ialS --extra=+q /root/Trunk/EC2108_C27
+" /root/Trunk/Hippo/
+
+"4. 设置环境变量(写到~/.bashrc)
+"
+" export CSCOPE_DB=/home/tags/cscope.out
+" export CCTREE_DB=/home/tags/cctree.out
+" export MYTAGS_DB=/home/tags/tags
