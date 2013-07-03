@@ -126,7 +126,7 @@ filetype plugin indent on   " required!
 " Enable syntax highlighting
 syntax on
 
-set guifont=Yahei\ Mono\ 12
+set guifont=Yahei\ Mono\ 11
 
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
@@ -336,9 +336,9 @@ nmap <silent> <M-n> :nohls<CR>
 nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
 nnoremap <silent> wt :TagbarToggle<CR>
-noremap <silent> <F11> :BufExplorer<CR>
-noremap <silent> <m-F11> :BufExplorerHorizontalSplit<CR>
-noremap <silent> <c-F11> :BufExplorerVerticalSplit<CR>
+noremap <silent> <F10> :BufExplorer<CR>
+noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
+noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 
 
 " FuzzyFinder
@@ -721,14 +721,14 @@ if has("cscope")
     set cscopetagorder=0
 endif
 
-nmap <A-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <A-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <A-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <A-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <A-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <A-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <A-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <A-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 " 0 或 s: 查找本 C 符号
 " 1 或 g: 查找本定义
