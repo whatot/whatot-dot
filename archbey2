@@ -1,0 +1,39 @@
+#!/bin/bash
+# Archbey2 by Mr Green
+# v 0.06
+
+colour="\e[00;32m" # Green
+os_string="ArchBang"
+host_name=$(hostname)
+kernel=$(uname -r)
+arch_bit=$(uname -m)
+up_time=$(uptime | awk '{print $3}' | sed 's|,||g')
+wm=$DE
+num_packs=$(pacman -Qq | wc -l)
+cpu_name=$(grep 'model name' /proc/cpuinfo  | uniq | awk -F':' '{print $2}' | cut -f1 -d"@")
+ram_total=$(free -mto | grep Mem: | awk '{print $2}')
+ram_used=$(free -m | grep "buffers/cache" | awk '{print $3}')
+my_shell=$(echo $SHELL | sed 's|/bin/||g')
+#df -h --output=fstype,size,used /home | tail -n1 | awk '{ print $3" / "$2" ("$1")"}'
+root_space=$(df -h --output=fstype,size,used / | tail -n1 | awk '{ print $3" / "$2" ("$1")"}')
+#home_space=$(df -h --output=fstype,size,used $HOME | tail -n1 | awk '{ print $3" / "$2" ("$1")"}')
+
+echo
+echo -e "${colour}                                OS:\e[00m ${os_string} ${arch_bit}"
+echo -e "${colour}               /\               Hostname:\e[00m ${host_name}"
+echo -e "${colour}              .;#.              Kernel:\e[00m ${kernel}"
+echo -e "${colour}             /####\             Uptime:\e[00m ${up_time}"
+echo -e "${colour}            ;##   #;            Window Manager:\e[00m ${wm}"
+echo -e "${colour}           +###  .##            Packages:\e[00m ${num_packs}"
+echo -e "${colour}          +####  ;###           RAM:\e[00m ${ram_used} / ${ram_total} MB"
+echo -e "${colour}         ######  #####;         CPU:\e[00m${cpu_name}"
+echo -e "${colour}        #######  ######         Shell:\e[00m ${my_shell}"
+echo -e "${colour}       ######## ########        Root:\e[00m ${root_space}"
+echo -e "${colour}     .########;;########;       "
+echo -e "${colour}    .########;   ;#######       "
+echo -e "${colour}    #########.   .########;     "
+echo -e "${colour}   ######'           '######    "
+echo -e "${colour}  ;####                 ####;   "
+echo -e "${colour}  ##'                     '##   "
+echo -e "${colour} #'                         '#  \e[00m"
+echo
