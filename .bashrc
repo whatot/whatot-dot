@@ -6,10 +6,9 @@ export TERM=vte-256color
 alias ls='ls --color=auto'
 
 # some more ls aliases
-alias lh='ls -lh'
 alias ll='ls -l'
 alias la='ls -A'
-#alias l='ls -CF'
+alias l='ls -CF'
 
 alias rm='rm -I'
 alias ..='cd ..'
