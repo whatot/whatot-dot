@@ -3,9 +3,10 @@ export EDITOR=vim
 export PATH=$PATH:/opt/java/jre/bin
 export TERM=vte-256color
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -F'
 
 # some more ls aliases
+alias lh='ls -lh'
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
@@ -28,6 +29,8 @@ fi
 
 export PATH=$PATH GST_ID3_TAG_ENCODING=GBK:UTF-8:GB18030
 export PATH=$PATH GST_ID3V2_TAG_ENCODING=GBK:UTF-8:GB18030
+
+export PATH=$PATH:~/.gem/ruby/2.0.0/bin
 
 export PAGER="`which less` -s"
 export BROWSER="$PAGER"

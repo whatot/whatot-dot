@@ -126,7 +126,7 @@ filetype plugin indent on   " required!
 " Enable syntax highlighting
 syntax on
 
-set guifont=Yahei\ Mono\ 11
+set guifont=Yahei\ Mono\ 12
 
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
