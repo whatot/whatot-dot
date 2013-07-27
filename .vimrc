@@ -101,6 +101,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'matchit.zip'
 "configure % to match more than just single characters
 
+Bundle 'hsitz/VimOrganizer'
 
 " 中文文档
 Bundle 'asins/vimcdoc'
