@@ -623,6 +623,7 @@ let OmniCpp_DefaultNamespaces=["std"]
 " Tagbar options
 let g:tagbar_width = 35
 let g:tagbar_expand = 0  "向外拓展
+let g:tagbar_left = 1
 
 
 " syntastic
