@@ -1,1 +1,1 @@
-kernel.vimrc
+ycm.vimrc
