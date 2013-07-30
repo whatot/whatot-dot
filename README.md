@@ -1,12 +1,8 @@
-#whatot-vimrc
+#whatot-dot
 
-my vunble vimrc
+my vunble vimrc and other config files
 
-1. 此vimrc,暂时只支持linux,其余系统未测试
-多余的注释与无效行将会去除或修改.
-额外需要ctags, escope, or more
-
-2. Install
+1. for vimrc s
 
 ```bash
 if [ -f "~/.vimrc"  ]; then
@@ -16,13 +12,11 @@ fi
 mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/sessions/
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-git clone https://github.com/whatot/whatot-vimrc.git
+git clone https://github.com/whatot/whatot-dot.git ~/whatot-dot
 
-cp whatot-vimrc/.vimrc ~/.vimrc
+ln -s ~/whatot-dot/.vimrc ~/.vimrc
 vim +BundleInstall +qa
 
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 ```
 
-3. usage
-注释非常详细,但还是不全,还需整理

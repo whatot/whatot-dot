@@ -102,6 +102,7 @@ Bundle 'matchit.zip'
 "configure % to match more than just single characters
 
 Bundle 'hsitz/VimOrganizer'
+Bundle 'mbbill/echofunc'
 
 " 中文文档
 Bundle 'asins/vimcdoc'
