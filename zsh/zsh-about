@@ -32,7 +32,7 @@ plugins=(git vi-mode tmux colorize colored-man autojump archlinux themes)
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/cdargs/cdargs-zsh.sh
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . /etc/profile.d/autojump.sh
+[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 
 bindkey '^R' history-incremental-search-backward
 
