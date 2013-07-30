@@ -102,7 +102,7 @@ Bundle 'matchit.zip'
 "configure % to match more than just single characters
 
 Bundle 'hsitz/VimOrganizer'
-Bundle 'mbbill/echofunc'
+Bundle 'echofunc.vim'
 
 " 中文文档
 Bundle 'asins/vimcdoc'
@@ -526,7 +526,7 @@ set background=dark
 if has("gui_running")
   " 有些终端不能改变大小
   set columns=88
-  set lines=33
+  set lines=32
   set cursorline
   exe 'colorscheme' colorscheme
 elseif has("unix")
