@@ -26,17 +26,22 @@ alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 #################################################################
 
+ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gentoo"
 
 plugins=(git vi-mode tmux colorize colored-man autojump archlinux themes)
 
-source $ZSH/oh-my-zsh.sh
-source /usr/share/cdargs/cdargs-zsh.sh
-[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
-
-bindkey '^R' history-incremental-search-backward
-
+# Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+source $ZSH/oh-my-zsh.sh
+# archlinux  source /usr/share/cdargs/cdargs-zsh.sh
+# ubuntu  source /usr/share/doc/cdargs/examples/cdargs-zsh.sh
+source /usr/share/autojump/autojump.zsh
+
+# Bacward search in the shell history with <C-r>
+bindkey '^R' history-incremental-search-backward
+setopt hist_ignore_all_dups
 
 #################################################################
 # 使用 zsh
