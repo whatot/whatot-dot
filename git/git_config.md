@@ -82,4 +82,7 @@ nothing           -- do not push anything
 tracking          -- push current branch to its upstream branch
  (current)   (default)
 
-### 
+
+### git 中文转义
+
+	git config core.quotepath false
