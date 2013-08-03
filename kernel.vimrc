@@ -103,6 +103,7 @@ Bundle 'matchit.zip'
 
 Bundle 'hsitz/VimOrganizer'
 Bundle 'echofunc.vim'
+Bundle 'Colour-Sampler-Pack'
 
 " 中文文档
 Bundle 'asins/vimcdoc'
