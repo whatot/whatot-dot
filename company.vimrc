@@ -518,9 +518,15 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
-let colorscheme = 'desert'
-"let colorscheme = 'desertEx'
+" let colorscheme = 'desert'
+" let colorscheme = 'desertEx'
 set background=dark
+
+if has("gui_running")
+  let colorscheme = 'desert'
+else
+  let colorscheme = 'desert256'
+endif
 
 " 图形与终端
 if has("gui_running")
