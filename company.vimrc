@@ -92,7 +92,8 @@ Bundle 'LargeFile'
 
 Bundle 'tpope/vim-surround'
 ""删除,改变或添加surroundings
-Bundle 'kana/vim-smartinput'
+" Bundle 'kana/vim-smartinput'
+Bundle 'jiangmiao/auto-pairs'
 "Deal with pairs of punctuations such as (), [], {}, and so on
 
 Bundle 'Lokaltog/vim-easymotion'
@@ -639,6 +640,10 @@ nmap <leader>ee :Errors<CR>
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_c_checkers = ['make']
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_auto_refresh_includes = 1
+let g:syntastic_cpp_include_dirs = [ 'includes', 'headers' ]
+let g:syntastic_cpp_compiler_options = ' -std=c++0x'
 " let g:syntastic_error_symbol = '✗'
 " let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list = 2
@@ -649,7 +654,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " let g:syntastic_mode_map = { 'passive_filetypes': ['scss', 'slim'] }
 
 let g:syntastic_mode_map = { 'mode': 'active',
-			\ 'active_filetypes': ['c', 'python'],
+			\ 'active_filetypes': ['c', 'python', 'cpp'],
 			\ 'passive_filetypes': ['text','vim','mkd','puppet','scss', 'slim','ruby','php' ] }
 
 
