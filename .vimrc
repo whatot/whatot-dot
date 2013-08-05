@@ -1,1 +1,1 @@
-common.vimrc
+omni.vimrc

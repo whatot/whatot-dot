@@ -1,59 +1,12 @@
-"~/.vimrc (configuration file for vim only)
-
-set fileencodings=utf-8,gb18030,gbk,gb2312,latin1
-set encoding=utf-8
-"let &termencoding=&encoding
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vundle begin
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"后方存在"set nocompatible    " 设置 vim 为不兼容vi模式
-filetype off                  " required!
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-
-"$ mkdir -p ~/.vim/bundle/
-"$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-"不同代码源上的vim插件的安装和管理方法
-"
-"格式1：Github上其他用户的仓库（非vim-scripts账户里的仓库，所以要加Github用户名）
-"Bundle 'tpope/vim-fugitive'
-"格式2：vim-scripts里面的仓库，直接打仓库名即可。
-"Bundle 'FuzzyFinder'
-"Bundle 'L9'
-"格式3：非Github的Git仓库
-"Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Bundle 'a.vim'
+"设置include(.h)文件存在何处.
+let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
+"当没有找到相应的.h文件时,不自动创建
+let alternateNoDefaultAlternate = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'STL-improved'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'majutsushi/tagbar'
-Bundle 'vimcn/tagbar.cnx'
-nnoremap <silent> wt :TagbarToggle<CR>
-let g:tagbar_width = 35
-let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
-let g:tagbar_left = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'tag_in_new_tab'
-"Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
+Bundle 'jiangmiao/auto-pairs'
 Bundle 'autoload_cscope.vim'
-"自动载入cscope.out databases
-Bundle 'CmdlineComplete'
-"补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-Bundle 'nvie/vim-flake8'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_c_checkers = ['make']
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'plasticboy/vim-markdown'
 Bundle 'bash-support.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'bufexplorer.zip'
@@ -61,14 +14,9 @@ noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'grep.vim'
-let g:Grep_Default_Options = '--binary-files=without-match'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'a.vim'
-"设置include(.h)文件存在何处.
-let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
-"当没有找到相应的.h文件时,不自动创建
-let alternateNoDefaultAlternate = 1
+Bundle 'CmdlineComplete'
+"补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
+Bundle 'Colour-Sampler-Pack'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'kien/ctrlp.vim'
 noremap <C-W><C-U> :CtrlPMRU<CR>
@@ -82,8 +30,6 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'L9'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'FuzzyFinder'
 let g:fuf_modesDisable = []
 let g:fuf_mrufile_maxItem = 400
@@ -96,6 +42,18 @@ nnoremap <silent> sp     :FufChangeList<CR>
 nnoremap <silent> sq     :FufQuickfix<CR>
 nnoremap <silent> sy     :FufLine<CR>
 nnoremap <silent> sr     :FufRenewCache<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'grep.vim'
+let g:Grep_Default_Options = '--binary-files=without-match'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'L9'
+Bundle 'LargeFile'
+""编辑大文件,g:LargeFile设置最小值
+Bundle 'matchit.zip'
+Bundle 'vimcn/matchit.vim.cnx'
+" 对%命令进行扩展使得能在嵌套标签和语句之间跳转
+" % 正向匹配      g% 反向匹配
+" [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'The-NERD-Commenter'
 Bundle 'vimcn/NERD_commenter.cnx'
@@ -114,26 +72,6 @@ let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
 let NERDTreeChDirMode=0
 let NERDTreeShowBookmarks=0
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Bundle 'tpope/vim-fugitive'
-Bundle 'LargeFile'
-""编辑大文件,g:LargeFile设置最小值
-Bundle 'Colour-Sampler-Pack'
-Bundle 'tpope/vim-surround'
-Bundle 'jiangmiao/auto-pairs'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Lokaltog/vim-easymotion'
-let EasyMotion_leader_key = '<M-q>'
-let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'matchit.zip'
-Bundle 'vimcn/matchit.vim.cnx'
-" 对%命令进行扩展使得能在嵌套标签和语句之间跳转
-" % 正向匹配      g% 反向匹配
-" [% 定位块首     ]% 定位块尾
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'hsitz/VimOrganizer'
-Bundle 'echofunc.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'kien/rainbow_parentheses.vim'
 
@@ -173,16 +111,43 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'STL-improved'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'scrooloose/syntastic'
+let g:syntastic_check_on_open = 1
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_c_checkers = ['make']
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'majutsushi/tagbar'
+Bundle 'vimcn/tagbar.cnx'
+nnoremap <silent> wt :TagbarToggle<CR>
+let g:tagbar_width = 35
+let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
+let g:tagbar_left = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'tag_in_new_tab'
+"Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 中文文档
+Bundle 'asins/vimcdoc'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'Lokaltog/vim-easymotion'
+let EasyMotion_leader_key = '<M-q>'
+let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'terryma/vim-expand-region'
 "for visual selection
 map = <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 中文文档
-Bundle 'asins/vimcdoc'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'nvie/vim-flake8'
+"Bundle 'tpope/vim-fugitive'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'hsitz/VimOrganizer'
+Bundle 'tpope/vim-surround'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on   " required!
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vundle end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
