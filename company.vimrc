@@ -105,6 +105,10 @@ Bundle 'matchit.zip'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'echofunc.vim'
 Bundle 'Colour-Sampler-Pack'
+Bundle 'kien/rainbow_parentheses.vim'
+
+"for visual selection
+Bundle 'terryma/vim-expand-region'
 
 " 中文文档
 Bundle 'asins/vimcdoc'
@@ -603,6 +607,10 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" terryma/vim-expand-region
+map = <Plug>(expand_region_expand)
+map - <Plug>(expand_region_shrink)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " g:SuperTabRetainCompletionType的值
 " default为1，意为记住你上次的补全方式，直到使用其它的补全命令改变它；
 " 为2，意味着记住上次的补全方式，直到按ESC退出插入模式为止；
@@ -626,6 +634,45 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
 let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://github.com/kien/rainbow_parentheses.vim
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+
+let g:rbpt_loadcmd_toggle = 0
+
+" commands:
+" :RainbowParenthesesToggle       " Toggle it on/off
+" :RainbowParenthesesLoadRound    " (), the default when toggling
+" :RainbowParenthesesLoadSquare   " []
+" :RainbowParenthesesLoadBraces   " {}
+" :RainbowParenthesesLoadChevrons " <>
+
+" always On:
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
