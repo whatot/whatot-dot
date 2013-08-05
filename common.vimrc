@@ -288,7 +288,7 @@ nmap 'm :marks<CR>
 nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
-nmap <S-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+nmap <S-F12> :!ctags -R --c++-kinds=+p --fields=+liaS --extra=+q .<CR>
 
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
