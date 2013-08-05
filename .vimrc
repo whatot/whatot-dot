@@ -1,1 +1,1 @@
-company.vimrc
+common.vimrc
