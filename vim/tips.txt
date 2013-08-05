@@ -1,0 +1,147 @@
+"如果你想补全系统函数，可以用 ctags 生成包含所有系统头文件的标签文件: >
+"  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
+"在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
+" set tags+=~/.vim/systags
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim折叠功能
+"
+"折叠方式,可用选项 'foldmethod' 来设定折叠方式：set fdm=***
+"有 6 种方法来选定折叠：
+"manual 手工定义折叠
+"indent 更多的缩进表示更高级别的折叠
+"expr 用表达式来定义折叠
+"syntax 用语法高亮来定义折叠
+"diff 对没有更改的文本进行折叠
+"marker 对文中的标志折叠
+"
+"常用的折叠快捷键
+"zf 创建折叠 (marker 有效)
+"zo 打开折叠
+"zO 对所在范围内所有嵌套的折叠点展开
+"zc 关闭当前折叠
+"zC 对所在范围内所有嵌套的折叠点进行折叠
+"[z 到当前打开的折叠的开始处。
+"]z 到当前打开的折叠的末尾处。
+"zM 关闭所有折叠 (我喜欢)
+"zr 打开所有折叠
+"zR 循环地打开所有折叠 (我喜欢)
+"zE 删除所有折叠
+"zd 删除当前折叠
+"zD 循环删除 (Delete) 光标下的折叠，即嵌套删除折叠
+"za 若当前打开则关闭，若当前关闭则打开 ( 这个就足够了)
+"zA 循环地打开/关闭当前折叠
+"zj 到下一折叠的开始处 ( 我喜欢 )
+"zk 到上一折叠的末尾 ( 我喜欢 )
+"set fdm=marker
+" set foldmethod=indent
+"要想在{ } 代码块中折叠，按空格键
+"syntax 与 c.vim 中的 /cc 注释功能冲突
+
+"关掉映射,经常带来麻烦
+"nnoremap @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo') "使用空格打开或关闭折叠
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 文件比较
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :vertical diffsplit FILE_RIGHT "与已打开的文件进行比较
+" 设置不同之处显示上下三行
+" set diffopt=context:3
+
+" 命令模式（ESC键进入）：
+" [c 跳转到下一个差异点
+" ]c 跳到上一个差异点
+" dp 左边文件差异复制到右边文件(直接在键盘上行按下dp)
+" do 右边文件差异复制到左边文件(直接在键盘上行按下do)
+" zo 隐藏相同行
+" zc 展开向同行
+" u 撤销
+" Ctrl+w 文件切换
+" :qa! 退出不保存
+" :wa 保存
+" :wqa 保存退出
+" :diffupdate 重新比较
+
+" 寄存器
+" q[a-z] --- 记录命令, 已q结束, @[a-z]引用 --- 很强大,需要习惯使用
+" " "[a-z]p --- 可以将寄存器[a-z]中的命令以文本的方式输出,并进行修改
+" " "[a-z]y$ --- 将寄存器修改后的内容存回到对应寄存器
+
+
+" Visual 选中模式
+" shift + v : 配合jk,上下键,整行选择
+" ctrl + v : 配合hjkl,上下左右键,灵活选择区域
+" o : 在选中的区域中对角线移动
+" O : 在选中的区域中行左右移动
+" gv : 重新选中原来的选中的区域
+" : : 在选中区域后,shift+:到命令模式, : eg. '<,'>s/pattern/newstring/g --
+" 在选中的区域中查找patte && replace
+" ctrl + v 选中一列后, 按I插入字符,Esc退出 :
+" 每一行都添加这个字符,很好的一个注释方法
+
+
+"Command Mode
+" :g/pattern/d --- delete line contained of string "pattern"
+
+
+"窗口
+"C-w 0 : 恢复窗口大小
+"C-w = : 窗口等大
+"C-w n_ : 窗口最大化
+"C-w _ : 改变窗口的大小
+"c-w C-c : 关闭窗口
+"C-w C-] : 以函数所在文件分割窗口
+"C-w C-c --- 关闭当前窗口
+"C-w S-[hjkl] : 窗口位置放置
+"shift + z + z : close vim edit. You need set auto write.
+
+"vim t1.c t2.c t3.c -o2 : open thress files using two windows. if -o(no
+"number), using three windows here.
+
+
+
+"杂项
+
+" !!date --- 插入日期
+" read !date -R --- 插入日期 ( -R 显示日期的格式而已 man date )
+" %s//s/+$// --- 删除多余的空格
+" ctrl + K --- 插入特殊字符
+" digraph --- 显示特殊字符,字符组合
+" set ic --- 忽略大小写
+" . --- 重复前次操作
+" ctrl + a --- repeat record.
+" ctrl + r --- 反撤消, 当u撤消后,又想恢复,可以使用
+" daw && caw && cis --- delete a word && change a word && 修改一个句子
+" cc && dd --- change one line reserving indent && delete one line
+" CTRL+U ---- CTRL+D ---> half page move
+" CTRL+E ---- CTRL+Y ---> one line move
+" CTRL+F ---- CTRL+B ---> one page move
+" CTRL + O --- 返回刚才位置,每按一次都会退回到之前的位置
+" CTRL + I --- 与CTRL+O相反,每按一次退回来
+" [i --- (将光标移到变量上)显示第一个局部变量定义处
+" [I --- (将光标移到变量上)显示所有该变量的定义处
+" '' --- 回到刚才停留处
+" // ---- 精确查找
+
+
+" 16进制编辑,码农必备,lol
+" :%!xxd 16进制编辑
+" :%!xxd -r 文本编辑
+
+
+"Shell
+"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
+":%s /^M//g ，其中^M的写法是按住ctrl不放，再按v，然后按M，再放ctrl
+
+
+" #wash_error.sh
+" #!/bin/sh
+" ls *.h *.c | awk '{print $1}' > dealfile
+" cat dealfile | while read file
+" do
+" echo " " >> $file
+" done
+" #dos2unix *.c *.h
+"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
+

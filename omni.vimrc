@@ -9,33 +9,32 @@ call vundle#rc()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'gmarik/vundle'
-
-"$ mkdir -p ~/.vim/bundle/
-"$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-"不同代码源上的vim插件的安装和管理方法
-"
-"格式1：Github上其他用户的仓库（非vim-scripts账户里的仓库，所以要加Github用户名）
-"Bundle 'tpope/vim-fugitive'
-"格式2：vim-scripts里面的仓库，直接打仓库名即可。
-"Bundle 'FuzzyFinder'
-"Bundle 'L9'
-"格式3：非Github的Git仓库
-"Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Valloric/YouCompleteMe'
-let g:syntastic_c_checker='youcompleteme'
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+Bundle 'ervandew/supertab'
+" g:SuperTabRetainCompletionType的值
+" default为1，意为记住你上次的补全方式，直到使用其它的补全命令改变它；
+" 为2，意味着记住上次的补全方式，直到按ESC退出插入模式为止；
+" 为0，意味着不记录上次的补全方式。
+" g:SuperTabDefaultCompletionType的值设置缺省的补全方式，缺省为CTRL-P。
+let g:SuperTabRetainCompletionType = 2
+" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger = "<C-\>"
-let g:UltiSnipsJumpForwardTrigger = "<C-\>"
-let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'OmniCppComplete'
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
+let OmniCpp_GlobalScopeSearch=1
+let OmniCpp_DisplayMode=1
+let OmniCpp_DefaultNamespaces=["std"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'a.vim'
@@ -660,3 +659,4 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 ""-b: 只生成索引文件，不进入cscope的界面
 ""-k: 在生成索引文件时，不搜索/usr/include目录
 ""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
+
