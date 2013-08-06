@@ -1,1 +1,1 @@
-ycm.vimrc
+omni.vimrc
