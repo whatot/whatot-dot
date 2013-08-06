@@ -2,6 +2,7 @@
 "  % ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 "在 vimrc 文件中，把这个标签文件增加到 'tags' 选项中: >
 " set tags+=~/.vim/systags
+" ctags -R --c-kinds=+px --c++-kinds=+p --fields=+liaS --extra=+q $(pwd)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim折叠功能
