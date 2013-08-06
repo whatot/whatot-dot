@@ -156,6 +156,16 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_c_checkers = ['make']
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_enable_highlighting = 0
+nmap <A-up> :lprev<cr>
+nmap <A-down> :lnext<cr>
+nmap <A-right> :ll<cr>
+" Quickfix and errors
+map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+noremap <Leader>cp :cp<Cr>
+noremap <Leader>cn :cn<Cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'majutsushi/tagbar'
 Bundle 'vimcn/tagbar.cnx'
@@ -320,11 +330,6 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Quickfix and errors
-map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
-noremap <Leader>cp :cp<Cr>
-noremap <Leader>cn :cn<Cr>
-
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
