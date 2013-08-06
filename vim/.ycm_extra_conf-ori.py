@@ -50,17 +50,35 @@ flags = [
 # a "-std=<something>".
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
-'-std=c99',
+'-std=c++11',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
-'c',
+'c++',
 '-isystem',
-'/usr/include',
+'../BoostParts',
+'-isystem',
+# This path will only work on OS X, but extra paths that don't exist are not
+# harmful
+'/System/Library/Frameworks/Python.framework/Headers',
+'-isystem',
+'../llvm/include',
+'-isystem',
+'../llvm/tools/clang/include',
 '-I',
 '.',
+'-I',
+'./ClangCompleter',
+'-isystem',
+'./tests/gmock/gtest',
+'-isystem',
+'./tests/gmock/gtest/include',
+'-isystem',
+'./tests/gmock',
+'-isystem',
+'./tests/gmock/include'
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the

@@ -25,7 +25,7 @@ Bundle 'gmarik/vundle'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Valloric/YouCompleteMe'
 autocmd FileType python,c,cpp nnoremap <buffer> <Leader>d :YcmCompleter GoToDefinitionElseDeclaration<Cr>
-" let g:syntastic_c_checkers = ['YouCompleteMe']
+let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
@@ -164,7 +164,7 @@ Bundle 'STL-improved'
 Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_c_checkers = ['make']
+" let g:syntastic_c_checkers = ['make']
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'majutsushi/tagbar'
