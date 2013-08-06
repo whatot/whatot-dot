@@ -320,6 +320,11 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quickfix and errors
+map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+noremap <Leader>cp :cp<Cr>
+noremap <Leader>cn :cn<Cr>
+
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
@@ -659,4 +664,3 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 ""-b: 只生成索引文件，不进入cscope的界面
 ""-k: 在生成索引文件时，不搜索/usr/include目录
 ""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
-

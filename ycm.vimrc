@@ -24,18 +24,26 @@ Bundle 'gmarik/vundle'
 "Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Valloric/YouCompleteMe'
-let g:syntastic_c_checker='youcompleteme'
+autocmd FileType python,c,cpp nnoremap <buffer> <Leader>d :YcmCompleter GoToDefinitionElseDeclaration<Cr>
+" let g:syntastic_c_checkers = ['YouCompleteMe']
+let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_extra_conf_globlist = ['~/git/*', '~/works/*','!~/*']
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:syntastic_always_populate_loc_list = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger = "<C-\>"
-let g:UltiSnipsJumpForwardTrigger = "<C-\>"
+let g:UltiSnipsJumpForwardTrigger = "<C-/>"
+let g:UltiSnipsListSnippets = '<c-o>'
 let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -322,6 +330,11 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quickfix and errors
+map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+noremap <Leader>cp :cp<Cr>
+noremap <Leader>cn :cn<Cr>
+
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>

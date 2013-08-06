@@ -282,6 +282,11 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Quickfix and errors
+map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+noremap <Leader>cp :cp<Cr>
+noremap <Leader>cn :cn<Cr>
+
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>

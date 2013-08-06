@@ -38,3 +38,18 @@ http://cfylee.me/YouCompleteMeInstall.html
     let g:ycm_global_ycm_extra_conf =  'path'  //在.vimrc中加入这句
 
 
+
+------------------------
+
+http://rickey-nctu.blogspot.com/2013/05/vim-youcompleteme.html
+
+$ sudo add-apt-repository ppa:fcwu-tw/ppa
+$ sudo apt-get update
+$ sudo apt-get install vim
+
+$ sudo apt-get install build-essential cmake python-dev
+$ cd ~/.vim/bundle
+$ git clone https://github.com/Valloric/YouCompleteMe
+$ cd ~/.vim/bundle/YouCompleteMe
+$ ./install.sh --clang-completer
+
