@@ -156,7 +156,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_c_checkers = ['make']
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 5
 let g:syntastic_enable_highlighting = 0
 nmap <A-up> :lprev<cr>
@@ -342,7 +343,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-" nmap <silent> <M-n> :nohls<CR>
+nmap <silent> <C-n> :nohls<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
