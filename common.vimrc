@@ -120,7 +120,7 @@ let g:syntastic_c_checkers = ['make']
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
-let g:syntastic_loc_list_height = 5
+let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 0
 nmap <A-up> :lprev<cr>
 nmap <A-down> :lnext<cr>
@@ -346,10 +346,12 @@ let g:mapleader=","
 map <C-right> <ESC>:bnext<CR>
 map <C-left> <ESC>:bprevious<CR>
 
-map <leader>tn :tabnew %<CR>
-map <leader>td :tabnew .<CR>
-map <leader>tl :tabclose<CR>
-map <leader>tm :tabmove
+nmap tn :tabnew %<CR>
+nmap td :tabnew .<CR>
+nmap tc :tabclose<CR>
+nmap tm :tabmove
+" :tabn[ext] {count} ----> <C-PageDown> {count} ----> gt
+" :tabp[revious] {count} ----> <C-Up> {count} ----> gT
 set guitablabel=%t            "标签栏只显示文件名
 
 nmap <silent> <leader>er :e ~/.vimrc<CR>
@@ -469,8 +471,8 @@ endif
 " 图形与终端
 if has("gui_running")
   " 有些终端不能改变大小
-  set columns=88
-  set lines=33
+  " set columns=88
+  " set lines=33
   set cursorline
   exe 'colorscheme' colorscheme
 elseif has("unix")
