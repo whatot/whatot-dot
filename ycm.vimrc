@@ -24,7 +24,8 @@ Bundle 'gmarik/vundle'
 "Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Valloric/YouCompleteMe'
-nnoremap <leader>yd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map yg <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+map yd <ESC>:YcmDiags<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
