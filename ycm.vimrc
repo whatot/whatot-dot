@@ -41,7 +41,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger = "<c-l>"
-let g:UltiSnipsJumpForwardTrigger = "<C-m>"
+" let g:UltiSnipsJumpForwardTrigger = "<c-m>"
 let g:UltiSnipsListSnippets = '<c-o>'
 let g:UltiSnipsSnippetDirectories=["snippets", "bundle/ultisnips/UltiSnips"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
