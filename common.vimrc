@@ -63,7 +63,10 @@ let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'scrooloose/nerdtree'
-nnoremap <silent> wf :NERDTreeToggle<CR>
+Bundle 'jistr/vim-nerdtree-tabs'
+" nnoremap <silent> wf :NERDTreeToggle<CR>
+nnoremap <silent> wa :NERDTreeTabsToggle<CR>
+nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
 nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
 let g:NERDChristmasTree = 1               " 色彩显示
 let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
@@ -72,6 +75,7 @@ let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
 let NERDTreeChDirMode=0
 let NERDTreeShowBookmarks=0
+let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'kien/rainbow_parentheses.vim'
 
@@ -122,11 +126,12 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 0
-nmap <A-up> :lprev<cr>
-nmap <A-down> :lnext<cr>
-nmap <A-right> :ll<cr>
+nmap <M-up> :lprev<cr>
+nmap <M-down> :lnext<cr>
+nmap <M-Left> :ll<cr>
+nmap <M-Right> :Errors<cr>
 " Quickfix and errors
-map <silent> <F8> :if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
 noremap <Leader>cp :cp<Cr>
 noremap <Leader>cn :cn<Cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
