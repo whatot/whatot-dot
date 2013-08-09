@@ -20,3 +20,8 @@ vim +BundleInstall +qa
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 ```
 
+### GNU global
+
+[ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
+
+Read install:
