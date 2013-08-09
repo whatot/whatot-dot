@@ -488,7 +488,7 @@ function! AutoLoadCTagsAndCScope()
     let break = 0
     while isdirectory(dir) && i < max
         if filereadable(dir . 'GTAGS')
-            execute 'cs add ' . dir . 'GTAGS'
+            execute 'cs add ' . dir . 'GTAGS ' . glob("`pwd`")
             let break = 1
         endif
         if filereadable(dir . 'cscope.out')
