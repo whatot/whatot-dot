@@ -54,7 +54,7 @@ let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
 let alternateNoDefaultAlternate = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'autoload_cscope.vim'
+" Bundle 'autoload_cscope.vim'
 Bundle 'bash-support.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'bufexplorer.zip'
@@ -122,8 +122,8 @@ let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
 let g:NERDTreeWinPos = 'left'             " 窗口显示位置
 let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
-let NERDTreeChDirMode=0
-let NERDTreeShowBookmarks=0
+let NERDTreeChDirMode = 2
+let NERDTreeShowBookmarks = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'kien/rainbow_parentheses.vim'
@@ -406,7 +406,7 @@ nmap tc :tabclose<CR>
 nmap tm :tabmove
 " :tabn[ext] {count} ----> <C-PageDown> {count} ----> gt
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
-set guitablabel=%N\ %f\ %m            "标签栏显示标签页号,缓冲区名,页号
+set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
 
 nmap <silent> <leader>er :e ~/.vimrc<CR>
 " nmap <Leader>cr :!cscope -Rbq<CR>
