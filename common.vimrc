@@ -44,7 +44,7 @@ let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
 let alternateNoDefaultAlternate = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'jiangmiao/auto-pairs'
-Bundle 'autoload_cscope.vim'
+" Bundle 'autoload_cscope.vim'
 Bundle 'bash-support.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'bufexplorer.zip'
@@ -112,8 +112,8 @@ let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
 let g:NERDTreeWinPos = 'left'             " 窗口显示位置
 let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
-let NERDTreeChDirMode=0
-let NERDTreeShowBookmarks=0
+let NERDTreeChDirMode = 2
+let NERDTreeShowBookmarks = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'kien/rainbow_parentheses.vim'
