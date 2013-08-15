@@ -36,6 +36,7 @@ let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'mileszs/ack.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'a.vim'
 "设置include(.h)文件存在何处.
@@ -183,6 +184,23 @@ let g:tagbar_left = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tag_in_new_tab'
 "Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'Shougo/unite.vim'
+" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
+let g:unite_source_rec_max_cache_files = 30000
+let g:unite_source_find_max_candidates = 30000
+let g:unite_source_history_yank_enable = 1
+nnoremap <C-p>  :Unite -start-insert file_rec/async:!<cr>
+nnoremap <leader>r :<C-u>Unite -start-insert <CR>
+nnoremap <leader>m :<C-u>Unite -start-insert file_mru<CR>
+nnoremap <leader>ma :<C-u>Unite mapping<CR>
+nnoremap <space>/ :<C-u>Unite -start-insert grep:.<cr>
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'Shougo/vimproc'
+" $ cd ~/.vim/bundle/vimproc.vim
+" $ make
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 Bundle 'asins/vimcdoc'
@@ -472,7 +490,7 @@ map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! AutoLoadCTagsAndCScope()
-    let max = 5
+    let max = 10
     let dir = './'
     let i = 0
     let break = 0
