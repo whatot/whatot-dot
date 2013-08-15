@@ -354,7 +354,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <leader>n :nohls<CR>
+nmap <silent> <C-n> :nohls<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
