@@ -177,13 +177,13 @@ Bundle 'Shougo/unite.vim'
 let g:unite_source_rec_max_cache_files = 30000
 let g:unite_source_find_max_candidates = 30000
 let g:unite_source_history_yank_enable = 1
-nnoremap <space>p  :Unite -start-insert file_rec/async:!<cr>
+nnoremap sp  :Unite -start-insert file_rec/async:!<cr>
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
-nnoremap <space>m :<C-u>Unite file_mru<CR>
-nnoremap <space>ma :<C-u>Unite mapping<CR>
-nnoremap <space>/ :<C-u>Unite -start-insert grep:.<cr>
-nnoremap <space>y :Unite history/yank<cr>
-nnoremap <space>s :Unite -quick-match buffer<cr>
+nnoremap sm :<C-u>Unite file_mru<CR>
+nnoremap sa :<C-u>Unite mapping<CR>
+nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
+nnoremap sy :Unite history/yank<cr>
+nnoremap ss :Unite -quick-match buffer<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/vimproc'
 " $ cd ~/.vim/bundle/vimproc.vim
