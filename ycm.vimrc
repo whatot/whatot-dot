@@ -80,19 +80,6 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'FuzzyFinder'
-let g:fuf_modesDisable = []
-let g:fuf_mrufile_maxItem = 400
-let g:fuf_mrucmd_maxItem = 400
-nnoremap <silent> sj     :FufBuffer<CR>
-nnoremap <silent> sn     :FufMruFile<CR>
-nnoremap <silent> sm     :FufMruCmd<CR>
-nnoremap <silent> so     :FufJumpList<CR>
-nnoremap <silent> sp     :FufChangeList<CR>
-nnoremap <silent> sq     :FufQuickfix<CR>
-nnoremap <silent> sy     :FufLine<CR>
-nnoremap <silent> sr     :FufRenewCache<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -201,10 +188,10 @@ Bundle 'Shougo/unite.vim'
 let g:unite_source_rec_max_cache_files = 30000
 let g:unite_source_find_max_candidates = 30000
 let g:unite_source_history_yank_enable = 1
-nnoremap <C-p>  :Unite -start-insert file_rec/async:!<cr>
-nnoremap <leader>r :<C-u>Unite -start-insert <CR>
-nnoremap <leader>m :<C-u>Unite -start-insert file_mru<CR>
-nnoremap <leader>ma :<C-u>Unite mapping<CR>
+nnoremap <space>p  :Unite -start-insert file_rec/async:!<cr>
+" nnoremap <leader>r :<C-u>Unite -start-insert <CR>
+nnoremap <space>m :<C-u>Unite file_mru<CR>
+nnoremap <space>ma :<C-u>Unite mapping<CR>
 nnoremap <space>/ :<C-u>Unite -start-insert grep:.<cr>
 nnoremap <space>y :Unite history/yank<cr>
 nnoremap <space>s :Unite -quick-match buffer<cr>
@@ -378,7 +365,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <C-n> :nohls<CR>
+nmap <silent> <leader>n :nohls<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
