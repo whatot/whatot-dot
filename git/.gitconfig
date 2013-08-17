@@ -1,0 +1,24 @@
+[user]
+	email = whatot2@gmail.com
+	name = whatot
+[credential]
+	helper = cache --timeout 3600
+[merge]
+	tool = meld
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[core]
+	autocrlf = input
+[push]
+	default = matching
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    last = log --pretty=oneline -1 HEAD
+    glog = log --graph  --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%Cblue%an%Creset%Cgreen %cr)%Creset '
