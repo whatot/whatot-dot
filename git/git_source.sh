@@ -1,3 +1,4 @@
+git clone git://anongit.freedesktop.org/git/libbsd
 git clone git://canonware.com/jemalloc.git
 git clone git://git.ghostscript.com/mupdf.git
 git clone git://github.com/blindglobe/common-lisp-stat.git
