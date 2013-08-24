@@ -42,6 +42,7 @@ git clone https://github.com/Skylersun/PyMineSweeper.git
 git clone https://github.com/soimort/soimort.github.io.git
 git clone https://github.com/spf13/spf13-vim.git
 git clone https://github.com/tczengming/myvim.git
+git clone https://github.com/torvalds/subsurface.git
 git clone https://github.com/udonmai/dotfiles.git
 git clone https://github.com/vimcn/vimrc.sample.git
 git clone https://github.com/whatot/id3-py.git
