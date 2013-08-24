@@ -13,6 +13,7 @@
 	status = auto
 [core]
 	autocrlf = input
+	editor = vim
 [push]
 	default = matching
 [alias]

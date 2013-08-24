@@ -184,17 +184,28 @@ Bundle 'tag_in_new_tab'
 "Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/unite-outline'
+" Bundle 'osyo-manga/unite-quickfix'
+" Bundle 'tsukkee/unite-tag'
+Bundle 'Shougo/unite-help'
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 let g:unite_source_rec_max_cache_files = 30000
 let g:unite_source_find_max_candidates = 30000
 let g:unite_source_history_yank_enable = 1
+let g:unite_enable_start_insert = 1
+let g:unite_enable_short_source_names = 1
 nnoremap sp  :Unite -start-insert file_rec/async:!<cr>
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
 nnoremap sa :<C-u>Unite mapping<CR>
 nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
 nnoremap sy :Unite history/yank<cr>
-nnoremap ss :Unite -quick-match buffer<cr>
+" nnoremap ss :Unite -quick-match buffer<cr>
+nnoremap ss :Unite -start-insert buffer<cr>
+nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
+nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
+nnoremap so :<C-u>Unite outline<CR>
+nnoremap sh :<C-u>Unite help<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/vimproc'
 " $ cd ~/.vim/bundle/vimproc.vim
