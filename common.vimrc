@@ -153,6 +153,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 0
+let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 nmap <M-up> :lprev<cr>
 nmap <M-down> :lnext<cr>
 nmap <M-Left> :ll<cr>
@@ -217,6 +219,15 @@ Bundle 'nvie/vim-flake8'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'hsitz/VimOrganizer'
 Bundle 'tpope/vim-surround'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'mhinz/vim-signify'
+let g:signify_vcs_list = [ 'git', 'hg' ]
+let g:signify_update_on_bufenter = 0
+let g:signify_cursorhold_normal = 0
+let g:signify_cursorhold_insert = 0
+let g:signify_line_highlight = 0
+let g:signify_disable_by_default = 0
+nmap wg <Plug>(signify-toggle)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on   " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
