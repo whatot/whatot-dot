@@ -57,18 +57,6 @@ Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Bundle 'Colour-Sampler-Pack'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'kien/ctrlp.vim'
-noremap <C-W><C-U> :CtrlPMRU<CR>
-nnoremap <C-W>u :CtrlPMRU<CR>
-"let g:ctrlp_user_command = 'find %s -type f'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$\|.rvm$'
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -367,7 +355,7 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
-nmap gb :setl fenc=gb18030<CR>
+" nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
 nmap <S-F12> :!ctags -R --c++-kinds=+p --fields=+liaS --extra=+q .<CR>
@@ -413,6 +401,7 @@ nmap <C-F3> :so ~/.vim/sessions/
 "设置自定义的<leader>快捷键
 let mapleader=","
 let g:mapleader=","
+map \ ,
 
 map <C-right> <ESC>:bnext<CR>
 map <C-left> <ESC>:bprevious<CR>
