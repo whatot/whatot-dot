@@ -192,6 +192,7 @@ Bundle 'Shougo/vimproc'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 Bundle 'asins/vimcdoc'
+Bundle 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<M-q>'
@@ -203,9 +204,17 @@ map = <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'nvie/vim-flake8'
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'hsitz/VimOrganizer'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'terryma/vim-multiple-cursors'
+" let g:multi_cursor_use_default_mapping=0
+" " Default mapping
+" let g:multi_cursor_next_key='<C-n>'
+" let g:multi_cursor_prev_key='<C-p>'
+" let g:multi_cursor_skip_key='<C-x>'
+" let g:multi_cursor_quit_key='<Esc>'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mhinz/vim-signify'
@@ -364,7 +373,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <C-n> :nohls<CR>
+nmap <silent> <leader>n :nohls<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
