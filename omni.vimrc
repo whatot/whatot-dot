@@ -225,6 +225,9 @@ let g:signify_cursorhold_insert = 0
 let g:signify_line_highlight = 0
 let g:signify_disable_by_default = 0
 nmap wg <Plug>(signify-toggle)
+" default
+nmap <leader>gj <plug>(signify-next-jump)
+nmap <leader>gk <plug>(signify-prev-jump)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on   " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,7 +376,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <leader>n :nohls<CR>
+nmap <silent> <leader>n <ESC>:nohls<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
@@ -410,7 +413,7 @@ nmap <C-F3> :so ~/.vim/sessions/
 "设置自定义的<leader>快捷键
 let mapleader=","
 let g:mapleader=","
-map \ ,
+noremap \ ,
 
 map <C-right> <ESC>:bnext<CR>
 map <C-left> <ESC>:bprevious<CR>
