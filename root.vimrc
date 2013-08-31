@@ -2,240 +2,11 @@ set fileencodings=utf-8,gb18030,gbk,gb2312,latin1
 set encoding=utf-8
 "let &termencoding=&encoding
 
-filetype off                  " required!
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'gmarik/vundle'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'ervandew/supertab'
-" g:SuperTabRetainCompletionType的值
-" default为1，意为记住你上次的补全方式，直到使用其它的补全命令改变它；
-" 为2，意味着记住上次的补全方式，直到按ESC退出插入模式为止；
-" 为0，意味着不记录上次的补全方式。
-" g:SuperTabDefaultCompletionType的值设置缺省的补全方式，缺省为CTRL-P。
-let g:SuperTabRetainCompletionType = 2
-" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-let g:SuperTabDefaultCompletionType = "context"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'OmniCppComplete'
-let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
-let OmniCpp_GlobalScopeSearch=1
-let OmniCpp_DisplayMode=1
-let OmniCpp_DefaultNamespaces=["std"]
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'mileszs/ack.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'a.vim'
-"设置include(.h)文件存在何处.
-let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
-"当没有找到相应的.h文件时,不自动创建
-let alternateNoDefaultAlternate = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'jiangmiao/auto-pairs'
-" Bundle 'autoload_cscope.vim'
-Bundle 'bash-support.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'bufexplorer.zip'
-noremap <silent> <F10> :BufExplorer<CR>
-noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
-noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'CmdlineComplete'
-"补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-Bundle 'Colour-Sampler-Pack'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'grep.vim'
-let g:Grep_Default_Options = '--binary-files=without-match'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'whatot/gtags-cscope.vim'
-Bundle 'L9'
-Bundle 'LargeFile'
-""编辑大文件,g:LargeFile设置最小值
-Bundle 'matchit.zip'
-Bundle 'vimcn/matchit.vim.cnx'
-" 对%命令进行扩展使得能在嵌套标签和语句之间跳转
-" % 正向匹配      g% 反向匹配
-" [% 定位块首     ]% 定位块尾
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'The-NERD-Commenter'
-Bundle 'vimcn/NERD_commenter.cnx'
-"[default],cc;,cu注释与取消注释快速切换
-let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
-let NERDCompactSexyComs = 1               " 多行注释时样子更好看
-let NERD_c_alt_style = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-" nnoremap <silent> wf :NERDTreeToggle<CR>
-nnoremap <silent> wa :NERDTreeTabsToggle<CR>
-nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
-nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
-let g:NERDChristmasTree = 1               " 色彩显示
-let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
-let g:NERDTreeWinPos = 'left'             " 窗口显示位置
-let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
-let g:NERDTreeWinSize = 30                " 设置显示宽度
-let NERDTreeChDirMode = 2
-let NERDTreeShowBookmarks = 0
-let g:nerdtree_tabs_open_on_gui_startup = 0
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'kien/rainbow_parentheses.vim'
-
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-let g:rbpt_max = 16
-
-let g:rbpt_loadcmd_toggle = 0
-
-" commands:
-" :RainbowParenthesesToggle       " Toggle it on/off
-" :RainbowParenthesesLoadRound    " (), the default when toggling
-" :RainbowParenthesesLoadSquare   " []
-" :RainbowParenthesesLoadBraces   " {}
-" :RainbowParenthesesLoadChevrons " <>
-
-" always On:
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'STL-improved'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_c_checkers = ['make']
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_loc_list_height = 8
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
-nmap <M-up> :lprev<cr>
-nmap <M-down> :lnext<cr>
-nmap <M-Left> :ll<cr>
-nmap <M-Right> :Errors<cr>
-" Quickfix and errors
-map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
-nmap <C-Up> :cp<Cr>
-nmap <C-Down> :cn<Cr>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'majutsushi/tagbar'
-Bundle 'vimcn/tagbar.cnx'
-nnoremap <silent> wt :TagbarToggle<CR>
-let g:tagbar_width = 35
-let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
-let g:tagbar_left = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'tag_in_new_tab'
-"Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/unite-outline'
-" Bundle 'osyo-manga/unite-quickfix'
-" Bundle 'tsukkee/unite-tag'
-Bundle 'Shougo/unite-help'
-" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
-let g:unite_source_rec_max_cache_files = 30000
-let g:unite_source_find_max_candidates = 30000
-let g:unite_source_history_yank_enable = 1
-let g:unite_enable_start_insert = 1
-let g:unite_enable_short_source_names = 1
-nnoremap sp  :Unite -start-insert file_rec/async:!<cr>
-" nnoremap <leader>r :<C-u>Unite -start-insert <CR>
-nnoremap sm :<C-u>Unite file_mru<CR>
-nnoremap sa :<C-u>Unite mapping<CR>
-nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
-nnoremap sy :Unite history/yank<cr>
-" nnoremap ss :Unite -quick-match buffer<cr>
-nnoremap ss :Unite -start-insert buffer<cr>
-nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
-nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
-nnoremap so :<C-u>Unite outline<CR>
-nnoremap sh :<C-u>Unite help<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Shougo/vimproc'
-" $ cd ~/.vim/bundle/vimproc.vim
-" $ make
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 中文文档
-Bundle 'asins/vimcdoc'
-Bundle 'hsitz/VimOrganizer'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Lokaltog/vim-easymotion'
-let EasyMotion_leader_key = '<M-q>'
-let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'terryma/vim-expand-region'
-"for visual selection
-map = <Plug>(expand_region_expand)
-map - <Plug>(expand_region_shrink)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'nvie/vim-flake8'
-Bundle 'tpope/vim-fugitive'
-Bundle 'plasticboy/vim-markdown'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'terryma/vim-multiple-cursors'
-" let g:multi_cursor_use_default_mapping=0
-" " Default mapping
-" let g:multi_cursor_next_key='<C-n>'
-" let g:multi_cursor_prev_key='<C-p>'
-" let g:multi_cursor_skip_key='<C-x>'
-" let g:multi_cursor_quit_key='<Esc>'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'tpope/vim-surround'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'mhinz/vim-signify'
-let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_update_on_bufenter = 0
-let g:signify_cursorhold_normal = 0
-let g:signify_cursorhold_insert = 0
-let g:signify_line_highlight = 0
-let g:signify_disable_by_default = 0
-nmap wg <Plug>(signify-toggle)
-" default
-nmap <leader>gj <plug>(signify-next-jump)
-nmap <leader>gk <plug>(signify-prev-jump)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on   " required!
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vundle end
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
+ ------------------------------------------------------------------
 syntax on
 
-set guifont=Yahei\ Mono\ 11
+set guifont=Yahei\ Mono\ 12
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -389,7 +160,8 @@ vnoremap <S-Del> d"+P
 nmap <silent> <C-S> :update<CR>
 imap <silent> <C-S> <ESC>:update<CR>
 vmap <silent> <C-S> <ESC><ESC>:update<CR>
-nmap <C-D> <C-W>q
+" nmap <C-D> <C-W>q
+cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " 上下移动一行文字
 nmap <C-j> mz:m+<cr>`z
@@ -400,12 +172,6 @@ vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " 补全最长项
 inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
 
-" session
-" :mksession
-" :source session-file
-set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
-nmap <F3> :mksession! ~/.vim/sessions/
-nmap <C-F3> :so ~/.vim/sessions/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  mapleader
@@ -441,21 +207,6 @@ command! Win setl ff=dos fenc=gb18030
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! LoadKernelTagsAndCscope()
-	execute 'cs add ~/linux/cscope.out'
-	execute 'set tags=~/linux/tags'
-endfunction
-nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! LoadSysTags()
-	execute 'cs kill cscope.out'
-	execute 'set tags-=~/linux/tags'
-	execute 'set tags+=~/.vim/systags'
-endfunction
-nmap <silent> <leader>ss :call LoadSysTags()<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
@@ -547,8 +298,8 @@ endif
 " 图形与终端
 if has("gui_running")
   " 有些终端不能改变大小
-  " set columns=88
-  " set lines=33
+  set columns=88
+  set lines=33
   set cursorline
   exe 'colorscheme' colorscheme
 elseif has("unix")
@@ -656,67 +407,93 @@ set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
 set statusline +=%2*0x%04B\ %*          "character under cursor
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" -- cscope --
-let g:autocscope_menus=0
-" 设定是否使用 quickfix 窗口来显示 cscope 结果
-" set cscopequickfix=s-,c-,d-,i-,t-,e-
-set cscopequickfix=c-,d-,e-,f-,g0,i-,s-,t-
 
-"设定了 'cscopetag'，这样所有的 :tag 命令就会实际上调用 :cstag。这包括 :tag、Ctrl-] 及 vim -t。
-"结果是一般的 tag 命令不仅搜索由 ctags 产生的标签文 件，同时也搜索 cscope 数据库,但是好像有bug,二者共存时有的无法搜索
+":vertical diffsplit FILE_RIGHT "与已打开的文件进行比较
+"设置不同之处显示上下三行
+"set diffopt=context:3
 
-set cscopeprg=gtags-cscope
-" Use both cscope and ctag
-set cscopetag
-" Show msg when cscope db added
-set cscopeverbose
-" 'csto','cscopetagorder' 被设为 0，cscope数据库先被搜索，搜索失败的情况下在搜索标签文件
-set cscopetagorder=0
-
-" if has("cscope")
-"     set csprg=/usr/bin/cscope
-" endif
-
-nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-" 解决cscope与tag共存时ctrl+]有时不正常的bug
-nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
-
-" 0 或 s: 查找本 C 符号
-" 1 或 g: 查找本定义
-" 2 或 d: 查找本函数调用的函数
-" 3 或 c: 查找调用指定函数的函数
-" 4 或 t: 查找字符串
-" 6 或 e: 查找本 egrep 模式
-" 7 或 f: 查找本文件
-" 8 或 i: 查找包含本文件的文件
+"命令模式（ESC键进入）：
+"[c 跳转到下一个差异点
+"]c 跳到上一个差异点
+"dp 左边文件差异复制到右边文件(直接在键盘上行按下dp)
+"do 右边文件差异复制到左边文件(直接在键盘上行按下do)
+"zo 隐藏相同行
+"zc 展开向同行
+"u 撤销
+"Ctrl+w 文件切换
+":qa! 退出不保存
+":wa 保存
+":wqa 保存退出
+":diffupdate 重新比较
 
 
-"" cscope使用方法
-""下面是shell脚本，放到源码目录下运行
-""#!/bin/sh
-""find . -name "*.h" -o -name "*.c" -o -name "*.cc" > cscope.files
-""cscope -bkq -i cscope.files
-""ctags -R
+"寄存器
+" q[a-z] --- 记录命令, 已q结束, @[a-z]引用 --- 很强大,需要习惯使用
+" " "[a-z]p --- 可以将寄存器[a-z]中的命令以文本的方式输出,并进行修改
+" " "[a-z]y$ --- 将寄存器修改后的内容存回到对应寄存器
 
-""下面是对cscope -Rbkq 的解释
 
-""-R: 在生成索引文件时，搜索子目录树中的代码
-""-b: 只生成索引文件，不进入cscope的界面
-""-k: 在生成索引文件时，不搜索/usr/include目录
-""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
+"Visual 选中模式
+" shift + v : 配合jk,上下键,整行选择
+" ctrl + v : 配合hjkl,上下左右键,灵活选择区域
+" o : 在选中的区域中对角线移动
+" O : 在选中的区域中行左右移动
+" gv : 重新选中原来的选中的区域
+" : : 在选中区域后,shift+:到命令模式, : eg. '<,'>s/pattern/newstring/g --
+" 在选中的区域中查找patte && replace
+" ctrl + v 选中一列后, 按I插入字符,Esc退出 :
+" 每一行都添加这个字符,很好的一个注释方法
 
-au BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
 
-function! UpdateGtags(f)
-	let dir = fnamemodify(a:f, ':p:h')
-	exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
-endfunction
+"Command Mode
+" :g/pattern/d --- delete line contained of string "pattern"
+
+
+"窗口
+"C-w 0 : 恢复窗口大小
+"C-w = : 窗口等大
+"C-w n_ : 窗口最大化
+"C-w _ : 改变窗口的大小
+"c-w C-c : 关闭窗口
+"C-w C-] : 以函数所在文件分割窗口
+"C-w C-c --- 关闭当前窗口
+"C-w S-[hjkl] : 窗口位置放置
+"shift + z + z : close vim edit. You need set auto write.
+
+"vim t1.c t2.c t3.c -o2 : open thress files using two windows. if -o(no
+"number), using three windows here.
+
+
+
+"杂项
+
+" !!date --- 插入日期
+" read !date -R --- 插入日期 ( -R 显示日期的格式而已 man date )
+" %s//s/+$// --- 删除多余的空格
+" ctrl + K --- 插入特殊字符
+" digraph --- 显示特殊字符,字符组合
+" set ic --- 忽略大小写
+" . --- 重复前次操作
+" ctrl + a --- repeat record.
+" ctrl + r --- 反撤消, 当u撤消后,又想恢复,可以使用
+" daw && caw && cis --- delete a word && change a word && 修改一个句子
+" cc && dd --- change one line reserving indent && delete one line
+" CTRL+U ---- CTRL+D ---> half page move
+" CTRL+E ---- CTRL+Y ---> one line move
+" CTRL+F ---- CTRL+B ---> one page move
+" CTRL + O --- 返回刚才位置,每按一次都会退回到之前的位置
+" CTRL + I --- 与CTRL+O相反,每按一次退回来
+" [i --- (将光标移到变量上)显示第一个局部变量定义处
+" [I --- (将光标移到变量上)显示所有该变量的定义处
+" '' --- 回到刚才停留处
+" // ---- 精确查找
+
+
+" 16进制编辑,码农必备,lol
+" :%!xxd 16进制编辑
+" :%!xxd -r 文本编辑
+
+
+"Shell
+"巧妙去除Linux下代码行中的^M符号和windows下代码编辑引起的警告错
+":%s /^M//g ，其中^M的写法是按住ctrl不放，再按v，然后按M，再放ctrl

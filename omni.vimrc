@@ -215,6 +215,15 @@ Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'greyblake/vim-preview'
+" <Leader>P
+" markdown(md, mkd, mkdn, mdown) - bluecloth
+" rdoc - github-markup
+" textile - RedCloth
+" html(htm)
+" ronn - ronn
+" reStructuredText(rst) - RbST, rst2html(python-docutils)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mhinz/vim-signify'
@@ -389,7 +398,8 @@ vnoremap <S-Del> d"+P
 nmap <silent> <C-S> :update<CR>
 imap <silent> <C-S> <ESC>:update<CR>
 vmap <silent> <C-S> <ESC><ESC>:update<CR>
-nmap <C-D> <C-W>q
+" nmap <C-D> <C-W>q
+cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
 " 上下移动一行文字
 nmap <C-j> mz:m+<cr>`z
