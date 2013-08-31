@@ -3,7 +3,6 @@ set encoding=utf-8
 "let &termencoding=&encoding
 
 filetype plugin indent on
- ------------------------------------------------------------------
 syntax on
 
 set guifont=Yahei\ Mono\ 12
