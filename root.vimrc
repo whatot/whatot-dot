@@ -400,7 +400,7 @@ set statusline +=%3*%Y\ %*              "file type
 set statusline +=%5*[%{&ff}]\ %*        "file format
 set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
 set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
-set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
+" set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 set statusline +=%1*%4v\ %*             "virtual column number
