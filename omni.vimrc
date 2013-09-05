@@ -200,7 +200,7 @@ let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'terryma/vim-expand-region'
 "for visual selection
-map = <Plug>(expand_region_expand)
+map + <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'nvie/vim-flake8'
