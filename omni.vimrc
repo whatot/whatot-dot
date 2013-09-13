@@ -56,6 +56,7 @@ noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Bundle 'Colour-Sampler-Pack'
+Bundle 'FencView.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
