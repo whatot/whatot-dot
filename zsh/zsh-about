@@ -12,14 +12,29 @@
 #
 # $ chsh -s /usr/bin/zsh
 #################################################################
+
+source /usr/share/cdargs/cdargs-zsh.sh
+[[ -s /etc/profile.d/autojump.zsh ]] && . /etc/profile.d/autojump.zsh
+
+bindkey '^R' history-incremental-search-backward
+
+# Customize to your needs...
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+export PATH=$PATH:~/.gem/ruby/2.0.0/bin
+export PATH=/usr/lib/ccache/bin/:$PATH
+
+############################################################
 alias ll='ls -l'
 alias la='ls -a'
 alias vi='vim'
 alias grep="grep --color=auto"
-alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
-alias -s js=vi
+alias unzipcp='unzip -O cp936 '
+# alias -s pdf=mupdf
+alias -s py=vi
 alias -s c=vi
 alias -s txt=vi
+alias -s md=vi
 alias -s gz='tar -xzvf'
 alias -s tgz='tar -xzvf'
 alias -s zip='unzip'

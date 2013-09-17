@@ -150,3 +150,5 @@ export DE="xfce4"
 
 # xmodmap /home/mir/.Xmodmap
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+export PATH="/usr/lib/ccache/bin/:$PATH"
