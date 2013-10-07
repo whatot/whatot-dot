@@ -29,6 +29,7 @@ git clone https://github.com/ideawu/ssdb.git
 git clone https://github.com/justzx2011/openyoudao.git
 git clone https://github.com/liangdong/Server.git
 git clone https://github.com/libevent/libevent
+git clone https://github.com/mcinglis/c-style
 git clone https://github.com/michaelfairley/mincemeatpy.git
 git clone https://github.com/openstack/swift.git
 git clone https://github.com/orangeduck/libCello.git
