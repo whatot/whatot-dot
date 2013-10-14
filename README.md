@@ -2,7 +2,6 @@
 
 my vunble vimrc and other config files
 
-1. for vimrc s
 
 ```bash
 if [ -f "~/.vimrc"  ]; then
@@ -11,17 +10,25 @@ fi
 
 mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/sessions/
+mkdir -p ~/git/
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-git clone https://github.com/whatot/whatot-dot.git ~/whatot-dot
+git clone https://github.com/whatot/whatot-dot.git ~/git/whatot-dot
 
-ln -s ~/whatot-dot/.vimrc ~/.vimrc
+ln -s ~/git/whatot-dot/.vimrc ~/.vimrc
 vim +BundleInstall +qa
 
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
+
+cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer
+
+make -C ~/.vim/bundle/vimproc
 ```
 
-### GNU global
+* GNU global  [ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
 
-[ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
+> if use archlinux, deps :
 
-Read install:
+```
+sudo pacman -S git gvim ack cscope
+yaourt -S global flake8 python2-flake8
+```

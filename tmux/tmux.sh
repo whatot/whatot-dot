@@ -40,8 +40,13 @@ if [ -f /usr/bin/tmux ]; then
 			tmux new-window -n mac-3 -t mydev
 			tmux send-keys -t mydev:2 "j 3" C-m
 
+			tmux new-window -n lua2 -t mydev
+			tmux split-window -h -t mydev
+			tmux send-keys -t mydev:3.1 "cd ~/git/redis/deps/lua/src/" C-m
+			tmux send-keys -t mydev:3.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
+
 			tmux new-window -n jemalloc -t mydev
-			tmux send-keys -t mydev:3 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
+			tmux send-keys -t mydev:4 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
 			tmux select-window -t mydev:1
 			tmux select-pane -t mydev:1
