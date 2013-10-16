@@ -10,6 +10,7 @@ git clone git://repo.or.cz/lua.git
 git clone http://github.com/tomwhite/hadoop-book.git
 git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
+git clone http://luajit.org/git/luajit-2.0.git
 git clone https://github.com/alibaba/tengine.git
 git clone https://github.com/antirez/redis.git
 git clone https://github.com/basho/leveldb.git
@@ -38,6 +39,7 @@ git clone https://github.com/polarssl/polarssl.git
 git clone https://github.com/sjl/learnvimscriptthehardway.git
 git clone https://github.com/Skylersun/PyMineSweeper.git
 git clone https://github.com/torvalds/subsurface.git
+git clone https://github.com/vhf/free-programming-books
 git clone https://github.com/whatot/magicmethods-zh_CN.git
 git clone https://github.com/whatot/string_matching.git
 git clone https://github.com/whatot/whatot-dot.git

@@ -142,7 +142,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$']
+let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '^\~/linux/']
 let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 nmap <M-up> :lprev<cr>
@@ -226,6 +226,9 @@ Bundle 'greyblake/vim-preview'
 " ronn - ronn
 " reStructuredText(rst) - RbST, rst2html(python-docutils)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mhinz/vim-signify'

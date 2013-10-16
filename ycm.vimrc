@@ -236,6 +236,9 @@ Bundle 'greyblake/vim-preview'
 " ronn - ronn
 " reStructuredText(rst) - RbST, rst2html(python-docutils)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-speeddating'
 Bundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mhinz/vim-signify'
