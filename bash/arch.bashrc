@@ -32,13 +32,13 @@ export PATH=$PATH GST_ID3V2_TAG_ENCODING=GBK:UTF-8:GB18030
 
 export PAGER="`which less` -s"
 export BROWSER="$PAGER"
-export LESS_TERMCAP_mb=$'\E[01;34m'
-export LESS_TERMCAP_md=$'\E[01;34m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;33m'
+# export LESS_TERMCAP_mb=$'\E[01;34m'
+# export LESS_TERMCAP_md=$'\E[01;34m'
+# export LESS_TERMCAP_me=$'\E[0m'
+# export LESS_TERMCAP_se=$'\E[0m'
+# export LESS_TERMCAP_so=$'\E[01;44;33m'
+# export LESS_TERMCAP_ue=$'\E[0m'
+# export LESS_TERMCAP_us=$'\E[01;33m'
 
 source ~/.git-completion.bash
 source ~/.git-prompt.sh

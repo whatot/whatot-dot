@@ -17,6 +17,7 @@ git clone https://github.com/basho/leveldb.git
 git clone https://github.com/bos/stanford-cs240h.git
 git clone https://github.com/cloudwu/cstring
 git clone https://github.com/corenominal/cb-pipemenus.git
+git clone https://github.com/duxing2007/ldd3-examples-3.x
 git clone https://github.com/facebook/libphenom
 git clone https://github.com/facebook/tornado.git
 git clone https://github.com/gabrielfalcao/sure.git
