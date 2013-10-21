@@ -41,6 +41,7 @@ git clone https://github.com/sjl/learnvimscriptthehardway.git
 git clone https://github.com/Skylersun/PyMineSweeper.git
 git clone https://github.com/torvalds/subsurface.git
 git clone https://github.com/vhf/free-programming-books
+git clone https://github.com/whatot/changing
 git clone https://github.com/whatot/magicmethods-zh_CN.git
 git clone https://github.com/whatot/string_matching.git
 git clone https://github.com/whatot/whatot-dot.git
