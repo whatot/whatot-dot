@@ -32,10 +32,6 @@ if [ -f /usr/bin/tmux ]; then
 			tmux select-pane -t works125:1
 		fi
 		tmux attach -t works125
-		tmux rename-window -t works125:1 "~git"
-		tmux rename-window -t works125:2 "trunk"
-		tmux rename-window -t works125:3 "mac-3"
-		tmux rename-window -t works125:4 "changing"
 
 	elif [[ $(hostname -s) == 'cru' ]]; then
 
@@ -56,17 +52,21 @@ if [ -f /usr/bin/tmux ]; then
 			tmux send-keys -t mydev:4 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
 			tmux new-window -n changing -t mydev
-			tmux send-keys -t mydev:5 "cd ~/git/changing" C-m
+			tmux send-keys -t mydev:5 "cd ~/../mirage/static/git/changing" C-m
+
+			tmux new-window -n redis -t mydev
+			tmux send-keys -t mydev:6 "cd ~/git/redis/src/" C-m
+			
+			tmux new-window -n kernel -t mydev
+			tmux send-keys -t mydev:7 "cd ~/linux/" C-m
+
+			tmux new-window -n share -t mydev
+			tmux send-keys -t mydev:8 "cd ~/" C-m
 
 			tmux select-window -t mydev:1
 			tmux select-pane -t mydev:1
 		fi
 		tmux attach -t mydev
-		tmux rename-window -t mydev:1 "~git"
-		tmux rename-window -t mydev:2 "mac-3"
-		tmux rename-window -t mydev:3 "lua2"
-		tmux rename-window -t mydev:4 "jemalloc"
-		tmux rename-window -t mydev:5 "changing"
 
 	fi
 

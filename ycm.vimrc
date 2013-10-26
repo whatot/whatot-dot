@@ -367,6 +367,11 @@ set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
 
+" 重启后撤销历史可用 persistent undo
+set undofile
+set undodir=$VIMFILES/\_undodir
+set undolevels=1000 "maximum number of changes that can be undone
+
 " Avoid command-line redraw on every entered character by turning off Arabic
 " shaping (which is implemented poorly).
 if has('arabic')
@@ -384,6 +389,12 @@ set softtabstop=4
 
 autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+
+let linux_index = stridx(expand("%:p"), "linux")
+autocmd BufEnter *
+    \ if linux_index == 10 || linux_index == 13 || linux_index == 16 |
+     \     exe "set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab" |
+     \ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
