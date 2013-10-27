@@ -152,7 +152,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '^\~/linux/']
+let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$']
 let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 nmap <M-up> :lprev<cr>
@@ -369,13 +369,13 @@ set foldmethod=indent
 
 " 重启后撤销历史可用 persistent undo
 set undofile
-set undodir=$VIMFILES/\_undodir
+set undodir=$VIMFILES/undodir
 set undolevels=1000 "maximum number of changes that can be undone
 
 " Avoid command-line redraw on every entered character by turning off Arabic
 " shaping (which is implemented poorly).
 if has('arabic')
-  set noarabicshape
+    set noarabicshape
 endif
 
 set tags=tags
@@ -390,11 +390,16 @@ set softtabstop=4
 autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
+" add for the ~/linux which contains the linux kernel src,
+" So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
+" 10, 13, 16 come up with my several username
+" Can calculate it by :echo stridx(expand("~/linux/:p"), "linux")
 let linux_index = stridx(expand("%:p"), "linux")
-autocmd BufEnter *
-    \ if linux_index == 10 || linux_index == 13 || linux_index == 16 |
-     \     exe "set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab" |
-     \ endif
+autocmd FileType c if linux_index == 10 || linux_index == 13
+    \ || linux_index == 16  |
+    \ let b:syntastic_checkers = ['make'] |
+    \ let g:syntastic_check_on_open = 0 |
+    \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
@@ -479,16 +484,16 @@ command! Win setl ff=dos fenc=gb18030
 "  自动执行命令,与函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! LoadKernelTagsAndCscope()
-	execute 'cs add ~/linux/cscope.out'
-	execute 'set tags=~/linux/tags'
+    execute 'cs add ~/linux/cscope.out'
+    execute 'set tags=~/linux/tags'
 endfunction
 nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! LoadSysTags()
-	execute 'cs kill cscope.out'
-	execute 'set tags-=~/linux/tags'
-	execute 'set tags+=~/.vim/systags'
+    execute 'cs kill cscope.out'
+    execute 'set tags-=~/linux/tags'
+    execute 'set tags+=~/.vim/systags'
 endfunction
 nmap <silent> <leader>ss :call LoadSysTags()<CR>
 
@@ -560,7 +565,7 @@ function! AutoLoadCTagsAndCScope()
         let dir = dir . '../'
         let i = i + 1
     endwhile
-endf
+endfunction
 nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " call AutoLoadCTagsAndCScope()
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
@@ -575,80 +580,80 @@ set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set background=dark
 
 if has("gui_running")
-  let colorscheme = 'desert'
+    let colorscheme = 'desert'
 else
-  let colorscheme = 'desert256'
+    let colorscheme = 'desert256'
 endif
 
 " 图形与终端
 if has("gui_running")
-  " 有些终端不能改变大小
-  " set columns=88
-  " set lines=33
-  set cursorline
-  exe 'colorscheme' colorscheme
-elseif has("unix")
-  set ambiwidth=single
-  " 防止退出时终端乱码
-  " 这里两者都需要。只前者标题会重复，只后者会乱码
-  set t_fs=(B
-  set t_IE=(B
-  if &term =~ "256color"
+    " 有些终端不能改变大小
+    " set columns=88
+    " set lines=33
     set cursorline
     exe 'colorscheme' colorscheme
-  else
-    " 在Linux文本终端下非插入模式显示块状光标
-    if &term == "linux" || &term == "fbterm"
-      set t_ve+=[?6c
-      autocmd InsertEnter * set t_ve-=[?6c
-      autocmd InsertLeave * set t_ve+=[?6c
-      " autocmd VimLeave * set t_ve-=[?6c
-    endif
-    if &term == "fbterm"
-      set cursorline
-      exe 'colorscheme' colorscheme
-    elseif $TERMCAP =~ 'Co#256'
-      set t_Co=256
-      set cursorline
-      exe 'colorscheme' colorscheme
+elseif has("unix")
+    set ambiwidth=single
+    " 防止退出时终端乱码
+    " 这里两者都需要。只前者标题会重复，只后者会乱码
+    set t_fs=(B
+    set t_IE=(B
+    if &term =~ "256color"
+        set cursorline
+        exe 'colorscheme' colorscheme
     else
-      " 暂时只有这个配色比较适合了
-      colorscheme default
-      " 在终端下自动加载vimim输入法
-      runtime so/vimim.vim
+        " 在Linux文本终端下非插入模式显示块状光标
+        if &term == "linux" || &term == "fbterm"
+            set t_ve+=[?6c
+            autocmd InsertEnter * set t_ve-=[?6c
+            autocmd InsertLeave * set t_ve+=[?6c
+            " autocmd VimLeave * set t_ve-=[?6c
+        endif
+        if &term == "fbterm"
+            set cursorline
+            exe 'colorscheme' colorscheme
+        elseif $TERMCAP =~ 'Co#256'
+            set t_Co=256
+            set cursorline
+            exe 'colorscheme' colorscheme
+        else
+            " 暂时只有这个配色比较适合了
+            colorscheme default
+            " 在终端下自动加载vimim输入法
+            runtime so/vimim.vim
+        endif
     endif
-  endif
-  " 在不同模式下使用不同颜色的光标
-  " 不要在 ssh 下使用
-  if &term =~ "256color" && !exists('$SSH_TTY')
-    let color_normal = 'HotPink'
-    let color_insert = 'RoyalBlue1'
-    let color_exit = 'green'
-    if &term =~ 'xterm\|rxvt'
-      exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
-      let &t_SI="\e]12;" . color_insert . "\007"
-      let &t_EI="\e]12;" . color_normal . "\007"
-      exe 'autocmd VimLeave * :silent !echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
-    elseif &term =~ "screen"
-      if exists('$TMUX')
-	if &ttymouse == 'xterm'
-	  set ttymouse=xterm2
-	endif
-	exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-	let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
-	let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
-	exe 'autocmd VimLeave * :silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-      elseif !exists('$SUDO_UID') " or it may still be in tmux
-	exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-	let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
-	let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
-	exe 'autocmd VimLeave * :silent !echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-      endif
+    " 在不同模式下使用不同颜色的光标
+    " 不要在 ssh 下使用
+    if &term =~ "256color" && !exists('$SSH_TTY')
+        let color_normal = 'HotPink'
+        let color_insert = 'RoyalBlue1'
+        let color_exit = 'green'
+        if &term =~ 'xterm\|rxvt'
+            exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
+            let &t_SI="\e]12;" . color_insert . "\007"
+            let &t_EI="\e]12;" . color_normal . "\007"
+            exe 'autocmd VimLeave * :silent !echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
+        elseif &term =~ "screen"
+            if exists('$TMUX')
+                if &ttymouse == 'xterm'
+                    set ttymouse=xterm2
+                endif
+                exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            elseif !exists('$SUDO_UID') " or it may still be in tmux
+                exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :silent !echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            endif
+        endif
+        unlet color_normal
+        unlet color_insert
+        unlet color_exit
     endif
-    unlet color_normal
-    unlet color_insert
-    unlet color_exit
-  endif
 endif
 
 " 设置命令行和状态栏
@@ -753,6 +758,6 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 au BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
 
 function! UpdateGtags(f)
-	let dir = fnamemodify(a:f, ':p:h')
-	exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
+    let dir = fnamemodify(a:f, ':p:h')
+    exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
 endfunction
