@@ -385,10 +385,10 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 " 10, 13, 16 come up with my several username
 " Can calculate it by :echo stridx(expand("~/linux/:p"), "linux")
 let linux_index = stridx(expand("%:p"), "linux")
-autocmd FileType c if linux_index == 10 || linux_index == 13
+autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
     \ || linux_index == 16  |
     \ let b:syntastic_checkers = ['make'] |
-    \ let g:syntastic_check_on_open = 0 |
+    \ let g:syntastic_check_on_open = 1 |
     \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

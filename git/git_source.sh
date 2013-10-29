@@ -7,6 +7,7 @@ git clone git://github.com/davidgao/LFSCN.git
 git clone git://git.netfilter.org/iptables.git
 git clone git://pdos.csail.mit.edu/xv6/xv6.git
 git clone git://repo.or.cz/lua.git
+git clone http://cs140.scs.stanford.edu/pintos.git
 git clone http://github.com/tomwhite/hadoop-book.git
 git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
@@ -29,6 +30,7 @@ git clone https://github.com/huangz1990/real-world-haskell-cn.git
 git clone https://github.com/iambus/xunlei-lixian.git
 git clone https://github.com/ideawu/ssdb.git
 git clone https://github.com/justzx2011/openyoudao.git
+git clone https://github.com/ktap/ktap
 git clone https://github.com/liangdong/Server.git
 git clone https://github.com/libevent/libevent
 git clone https://github.com/libgit2/libgit2
