@@ -387,6 +387,8 @@ set smarttab
 set tabstop=4
 set softtabstop=4
 
+set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
+
 autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
@@ -399,6 +401,13 @@ autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
     \ || linux_index == 16  |
     \ let b:syntastic_checkers = ['make'] |
     \ let g:syntastic_check_on_open = 1 |
+    \ set path=.,~/linux/include/ |
+    \ set path+=~/linux/include/uapi/ |
+    \ set path+=~/linux/include/asm-generic/ |
+"    \ set path+=~/linux/arch/x86/include |
+"    \ set path+=~/linux/arch/x86/include/generated |
+"    \ set path+=~/linux/arch/x86/include/uapi |
+"    \ set path+=~/linux/arch/x86/include/generated/uapi |
     \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -142,7 +142,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '^\~/linux/']
+let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$']
 let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 nmap <M-up> :lprev<cr>
@@ -377,6 +377,8 @@ set smarttab
 set tabstop=4
 set softtabstop=4
 
+set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
+
 autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
@@ -389,6 +391,13 @@ autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
     \ || linux_index == 16  |
     \ let b:syntastic_checkers = ['make'] |
     \ let g:syntastic_check_on_open = 1 |
+    \ set path=.,~/linux/include/ |
+    \ set path+=~/linux/include/uapi/ |
+    \ set path+=~/linux/include/asm-generic/ |
+"    \ set path+=~/linux/arch/x86/include |
+"    \ set path+=~/linux/arch/x86/include/generated |
+"    \ set path+=~/linux/arch/x86/include/uapi |
+"    \ set path+=~/linux/arch/x86/include/generated/uapi |
     \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
