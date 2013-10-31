@@ -5,11 +5,12 @@
 DIR=$(pwd)
 cd $DIR
 
+echo
+
 # 依次进入各子目录，获取 git clone的地址，并组合成 reget_git.sh
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
 do
 	cd $dis
-	echo
 	echo "###########################################################"
 	echo "enter $dis !"
 	echo

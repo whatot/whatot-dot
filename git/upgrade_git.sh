@@ -7,10 +7,11 @@
 DIR=$(pwd)
 cd $DIR
 
+echo
+
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
 do
 	cd $dis ;
-	echo
 	echo "###########################################################"
 	echo "enter $dis !"
 	echo
@@ -19,6 +20,8 @@ do
 		# git pull origin master;
 		git submodule update;
 	fi
+	echo
+	echo "leave $dis !"
 	cd ..
 done
 
