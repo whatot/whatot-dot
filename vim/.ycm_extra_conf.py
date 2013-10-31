@@ -43,7 +43,7 @@ flags = [
 '-Wno-variadic-macros',
 '-fexceptions',
 '-DNDEBUG',
-'-DUSE_CLANG_COMPLETER',
+
 # THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
 # language to use when compiling headers. So it will guess. Badly. So C++
 # headers will be compiled as C headers. You don't want that so ALWAYS specify
@@ -60,7 +60,9 @@ flags = [
 '-isystem',
 '/usr/include',
 '-I',
-'.',
+'./include/',
+'-I',
+'../include/',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
@@ -110,7 +112,7 @@ def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):
   return new_flags
 
 
-def FlagsForFile( filename ):
+def FlagsForFile( filename, **kwargs ):
   if database:
     # Bear in mind that compilation_info.compiler_flags_ does NOT return a
     # python list, but a "list-like" StringVec object
