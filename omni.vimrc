@@ -166,6 +166,7 @@ Bundle 'tag_in_new_tab'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
+" Bundle 'hewes/unite-gtags'
 " Bundle 'osyo-manga/unite-quickfix'
 " Bundle 'tsukkee/unite-tag'
 Bundle 'Shougo/unite-help'
@@ -389,16 +390,18 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 let linux_index = stridx(expand("%:p"), "linux")
 autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
     \ || linux_index == 16  |
-    \ let b:syntastic_checkers = ['make'] |
-    \ let g:syntastic_check_on_open = 1 |
+    \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab |
+    \ let g:syntastic_check_on_open = 0 |
+    \ let g:syntastic_check_on_wq = 0 |
+    \ let b:syntastic_checkers = [''] |
     \ set path=.,~/linux/include/ |
     \ set path+=~/linux/include/uapi/ |
     \ set path+=~/linux/include/asm-generic/ |
-"    \ set path+=~/linux/arch/x86/include |
-"    \ set path+=~/linux/arch/x86/include/generated |
-"    \ set path+=~/linux/arch/x86/include/uapi |
-"    \ set path+=~/linux/arch/x86/include/generated/uapi |
-    \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab | endif
+    \ set path+=~/linux/arch/x86/include |
+    \ set path+=~/linux/arch/x86/include/generated |
+    \ set path+=~/linux/arch/x86/include/uapi |
+    \ set path+=~/linux/arch/x86/include/generated/uapi | endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
