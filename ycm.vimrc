@@ -433,14 +433,15 @@ nmap <silent> <leader>n <ESC>:nohls<CR>
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
 " Shift + Delete 插入系统剪切板中的内容
+set clipboard=unnamedplus
 noremap <S-Del> "+p
 inoremap <S-Del> <esc>"+pa
 vnoremap <S-Del> d"+P
 
-" Ctrl-S 保存文件
-nmap <silent> <C-S> :update<CR>
-imap <silent> <C-S> <ESC>:update<CR>
-vmap <silent> <C-S> <ESC><ESC>:update<CR>
+" Ctrl-Z 保存文件
+nmap <silent> <C-Z> :update<CR>
+imap <silent> <C-Z> <ESC>:update<CR>
+vmap <silent> <C-Z> <ESC><ESC>:update<CR>
 " nmap <C-D> <C-W>q
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
@@ -471,6 +472,10 @@ noremap \ ,
 map <C-right> <ESC>:bnext<CR>
 map <C-left> <ESC>:bprevious<CR>
 
+" easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
+
 nmap tn :tabnew %<CR>
 nmap td :tabnew .<CR>
 nmap tc :tabclose<CR>
@@ -494,21 +499,6 @@ command! Win setl ff=dos fenc=gb18030
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! LoadKernelTagsAndCscope()
-    execute 'cs add ~/linux/cscope.out'
-    execute 'set tags=~/linux/tags'
-endfunction
-nmap <silent> <leader>ck :call LoadKernelTagsAndCscope()<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! LoadSysTags()
-    execute 'cs kill cscope.out'
-    execute 'set tags-=~/linux/tags'
-    execute 'set tags+=~/.vim/systags'
-endfunction
-nmap <silent> <leader>ss :call LoadSysTags()<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
