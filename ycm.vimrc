@@ -179,7 +179,7 @@ Bundle 'Shougo/unite-outline'
 " Bundle 'hewes/unite-gtags'
 " Bundle 'osyo-manga/unite-quickfix'
 " Bundle 'tsukkee/unite-tag'
-Bundle 'Shougo/unite-help'
+" Bundle 'Shougo/unite-help'
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 let g:unite_source_rec_max_cache_files = 30000
 let g:unite_source_find_max_candidates = 30000
@@ -197,7 +197,7 @@ nnoremap ss :Unite -start-insert buffer<cr>
 nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
 nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
 nnoremap so :<C-u>Unite outline<CR>
-nnoremap sh :<C-u>Unite help<CR>
+" nnoremap sh :<C-u>Unite help<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/vimproc'
 " $ cd ~/.vim/bundle/vimproc.vim
@@ -218,7 +218,7 @@ map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
-Bundle 'plasticboy/vim-markdown'
+" Bundle 'plasticboy/vim-markdown'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
@@ -227,6 +227,8 @@ Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_prev_key='<C-p>'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'vim-pandoc/vim-pandoc'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'greyblake/vim-preview'
 " <Leader>P
@@ -433,7 +435,6 @@ nmap <silent> <leader>n <ESC>:nohls<CR>
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
 " Shift + Delete 插入系统剪切板中的内容
-set clipboard=unnamedplus
 noremap <S-Del> "+p
 inoremap <S-Del> <esc>"+pa
 vnoremap <S-Del> d"+P
