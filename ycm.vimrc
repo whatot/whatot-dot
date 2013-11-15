@@ -218,7 +218,7 @@ map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'nvie/vim-flake8'
 Bundle 'tpope/vim-fugitive'
-" Bundle 'plasticboy/vim-markdown'
+Bundle 'plasticboy/vim-markdown'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
@@ -228,7 +228,7 @@ Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'vim-pandoc/vim-pandoc'
+" Bundle 'vim-pandoc/vim-pandoc'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'greyblake/vim-preview'
 " <Leader>P

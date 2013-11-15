@@ -155,10 +155,10 @@ noremap <S-Del> "+p
 inoremap <S-Del> <esc>"+pa
 vnoremap <S-Del> d"+P
 
-" Ctrl-S 保存文件
-nmap <silent> <C-S> :update<CR>
-imap <silent> <C-S> <ESC>:update<CR>
-vmap <silent> <C-S> <ESC><ESC>:update<CR>
+" Ctrl-Z 保存文件
+nmap <silent> <C-Z> :update<CR>
+imap <silent> <C-Z> <ESC>:update<CR>
+vmap <silent> <C-Z> <ESC><ESC>:update<CR>
 " nmap <C-D> <C-W>q
 cmap w!! w !sudo tee % >/dev/null<CR>:e!<CR><CR>
 
@@ -182,6 +182,10 @@ noremap \ ,
 
 map <C-right> <ESC>:bnext<CR>
 map <C-left> <ESC>:bprevious<CR>
+
+" easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
 
 nmap tn :tabnew %<CR>
 nmap td :tabnew .<CR>
@@ -274,7 +278,7 @@ function! AutoLoadCTagsAndCScope()
         let dir = dir . '../'
         let i = i + 1
     endwhile
-endf
+endfunction
 nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " call AutoLoadCTagsAndCScope()
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
@@ -289,80 +293,80 @@ set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set background=dark
 
 if has("gui_running")
-  let colorscheme = 'desert'
+    let colorscheme = 'desert'
 else
-  let colorscheme = 'desert256'
+    let colorscheme = 'desert256'
 endif
 
 " 图形与终端
 if has("gui_running")
-  " 有些终端不能改变大小
-  set columns=88
-  set lines=33
-  set cursorline
-  exe 'colorscheme' colorscheme
-elseif has("unix")
-  set ambiwidth=single
-  " 防止退出时终端乱码
-  " 这里两者都需要。只前者标题会重复，只后者会乱码
-  set t_fs=(B
-  set t_IE=(B
-  if &term =~ "256color"
+    " 有些终端不能改变大小
+    " set columns=88
+    " set lines=33
     set cursorline
     exe 'colorscheme' colorscheme
-  else
-    " 在Linux文本终端下非插入模式显示块状光标
-    if &term == "linux" || &term == "fbterm"
-      set t_ve+=[?6c
-      autocmd InsertEnter * set t_ve-=[?6c
-      autocmd InsertLeave * set t_ve+=[?6c
-      " autocmd VimLeave * set t_ve-=[?6c
-    endif
-    if &term == "fbterm"
-      set cursorline
-      exe 'colorscheme' colorscheme
-    elseif $TERMCAP =~ 'Co#256'
-      set t_Co=256
-      set cursorline
-      exe 'colorscheme' colorscheme
+elseif has("unix")
+    set ambiwidth=single
+    " 防止退出时终端乱码
+    " 这里两者都需要。只前者标题会重复，只后者会乱码
+    set t_fs=(B
+    set t_IE=(B
+    if &term =~ "256color"
+        set cursorline
+        exe 'colorscheme' colorscheme
     else
-      " 暂时只有这个配色比较适合了
-      colorscheme default
-      " 在终端下自动加载vimim输入法
-      runtime so/vimim.vim
+        " 在Linux文本终端下非插入模式显示块状光标
+        if &term == "linux" || &term == "fbterm"
+            set t_ve+=[?6c
+            autocmd InsertEnter * set t_ve-=[?6c
+            autocmd InsertLeave * set t_ve+=[?6c
+            " autocmd VimLeave * set t_ve-=[?6c
+        endif
+        if &term == "fbterm"
+            set cursorline
+            exe 'colorscheme' colorscheme
+        elseif $TERMCAP =~ 'Co#256'
+            set t_Co=256
+            set cursorline
+            exe 'colorscheme' colorscheme
+        else
+            " 暂时只有这个配色比较适合了
+            colorscheme default
+            " 在终端下自动加载vimim输入法
+            runtime so/vimim.vim
+        endif
     endif
-  endif
-  " 在不同模式下使用不同颜色的光标
-  " 不要在 ssh 下使用
-  if &term =~ "256color" && !exists('$SSH_TTY')
-    let color_normal = 'HotPink'
-    let color_insert = 'RoyalBlue1'
-    let color_exit = 'green'
-    if &term =~ 'xterm\|rxvt'
-      exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
-      let &t_SI="\e]12;" . color_insert . "\007"
-      let &t_EI="\e]12;" . color_normal . "\007"
-      exe 'autocmd VimLeave * :silent !echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
-    elseif &term =~ "screen"
-      if exists('$TMUX')
-	if &ttymouse == 'xterm'
-	  set ttymouse=xterm2
-	endif
-	exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-	let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
-	let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
-	exe 'autocmd VimLeave * :silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-      elseif !exists('$SUDO_UID') " or it may still be in tmux
-	exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-	let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
-	let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
-	exe 'autocmd VimLeave * :silent !echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-      endif
+    " 在不同模式下使用不同颜色的光标
+    " 不要在 ssh 下使用
+    if &term =~ "256color" && !exists('$SSH_TTY')
+        let color_normal = 'HotPink'
+        let color_insert = 'RoyalBlue1'
+        let color_exit = 'green'
+        if &term =~ 'xterm\|rxvt'
+            exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
+            let &t_SI="\e]12;" . color_insert . "\007"
+            let &t_EI="\e]12;" . color_normal . "\007"
+            exe 'autocmd VimLeave * :silent !echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
+        elseif &term =~ "screen"
+            if exists('$TMUX')
+                if &ttymouse == 'xterm'
+                    set ttymouse=xterm2
+                endif
+                exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            elseif !exists('$SUDO_UID') " or it may still be in tmux
+                exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
+                let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
+                let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
+                exe 'autocmd VimLeave * :silent !echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
+            endif
+        endif
+        unlet color_normal
+        unlet color_insert
+        unlet color_exit
     endif
-    unlet color_normal
-    unlet color_insert
-    unlet color_exit
-  endif
 endif
 
 " 设置命令行和状态栏
