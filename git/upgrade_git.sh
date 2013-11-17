@@ -4,25 +4,32 @@
 
 function update_git_hg ()
 {
-	echo
 	cd $1
-	echo "enter $1 !"
 
+	local if_success
 	if [[ -d ".git" ]]; then
-		git pull;
+		git pull || if_success=$?
+		echo "updated $1 !"
+		echo
+		if [[ if_success != 0 ]]; then
+			echo $1 >> ../error.log
+		fi
 		# git pull origin master;
-		git submodule update;
-	elif [[ -d ".hg" ]]; then
-		hg update
+		git submodule update
 	fi
 
-	echo
-	echo "leave $1 !"
+	if [[ -d ".hg" ]]; then
+		hg update || echo "update $1 !"
+	fi
+
 	cd ..
 }
 
 
 echo
+# create empty files although it exists
+echo "" > error.log
+# or ':> error.log'
 
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
 do
@@ -30,6 +37,7 @@ do
 done
 
 wait
+
 exit 0
 
 
