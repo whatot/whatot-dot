@@ -486,7 +486,7 @@ nmap <silent> <leader>er :e ~/.vimrc<CR>
 "   设置成 Linux 下适用的格式
 command! Lin setl ff=unix fenc=utf8 nobomb eol
 "   设置成 Windows 下适用的格式
-command! Win setl ff=dos fenc=gb18030
+command! Win setl ff=dos fenc=gb18030 nobomb eol
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
