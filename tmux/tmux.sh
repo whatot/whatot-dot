@@ -46,31 +46,31 @@ if [ $? != 0 ]; then
 	tmux new-session -s mydev -n '~git' -d
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
+	tmux new-window -n changing -t mydev
+	tmux send-keys -t mydev:2 "cd ~/../mirage/static/git/changing" C-m
+
+	tmux new-window -n kernel -t mydev
+	tmux send-keys -t mydev:3 "cd ~/linux/" C-m
+
 	tmux new-window -n mac-3 -t mydev
-	tmux send-keys -t mydev:2 "j 3" C-m
+	tmux send-keys -t mydev:4 "j 3" C-m
 
 	tmux new-window -n lua2 -t mydev
 	tmux split-window -h -t mydev
-	tmux send-keys -t mydev:3.1 "cd ~/git/redis/deps/lua/src/" C-m
-	tmux send-keys -t mydev:3.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
+	tmux send-keys -t mydev:5.1 "cd ~/git/redis/deps/lua/src/" C-m
+	tmux send-keys -t mydev:5.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
 
 	tmux new-window -n jemalloc -t mydev
-	tmux send-keys -t mydev:4 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
-
-	tmux new-window -n changing -t mydev
-	tmux send-keys -t mydev:5 "cd ~/../mirage/static/git/changing" C-m
+	tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
 	tmux new-window -n redis -t mydev
-	tmux send-keys -t mydev:6 "cd ~/git/redis/src/" C-m
+	tmux send-keys -t mydev:7 "cd ~/git/redis/src/" C-m
 
-	tmux new-window -n kernel -t mydev
-	tmux send-keys -t mydev:7 "cd ~/linux/" C-m
+	tmux new-window -n postgres -t mydev
+	tmux send-keys -t mydev:8 "cd ~/git/postgresql/" C-m
 
-	tmux new-window -n alp -t mydev
-	tmux send-keys -t mydev:8 "cd ~/" C-m
-
-	tmux new-window -n share -t mydev
-	tmux send-keys -t mydev:9 "cd ~/" C-m
+	tmux new-window -n zlog -t mydev
+	tmux send-keys -t mydev:9 "cd ~/git/zlog/" C-m
 
 	tmux select-window -t mydev:1
 	tmux select-pane -t mydev:1
