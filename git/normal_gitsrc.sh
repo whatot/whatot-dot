@@ -1,5 +1,3 @@
-git clone git://anongit.freedesktop.org/git/libbsd
-git clone git://canonware.com/jemalloc.git
 git clone git://git.ghostscript.com/mupdf.git
 git clone git://github.com/blindglobe/common-lisp-stat.git
 git clone git://github.com/blynn/gitmagic.git
@@ -7,7 +5,6 @@ git clone git://github.com/davidgao/LFSCN.git
 git clone git://git.netfilter.org/iptables.git
 git clone git://pdos.csail.mit.edu/xv6/xv6.git
 git clone git://repo.or.cz/lua.git
-git clone http://cs140.scs.stanford.edu/pintos.git
 git clone http://github.com/tomwhite/hadoop-book.git
 git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
@@ -20,15 +17,17 @@ git clone https://github.com/cloudwu/cstring
 git clone https://github.com/corenominal/cb-pipemenus.git
 git clone https://github.com/duxing2007/ldd3-examples-3.x
 git clone https://github.com/facebook/libphenom
+git clone https://github.com/facebook/rocksdb
 git clone https://github.com/facebook/tornado.git
 git clone https://github.com/gabrielfalcao/sure.git
-git clone https://github.com/git/git.git
 git clone https://github.com/git-mirror/nginx.git
 git clone https://github.com/goagent/goagent.git
+git clone https://github.com/HardySimpson/zlog
 git clone https://github.com/huangz1990/annotated_redis_source.git
 git clone https://github.com/huangz1990/real-world-haskell-cn.git
 git clone https://github.com/iambus/xunlei-lixian.git
 git clone https://github.com/ideawu/ssdb.git
+git clone https://github.com/jemalloc/jemalloc
 git clone https://github.com/justzx2011/openyoudao.git
 git clone https://github.com/ktap/ktap
 git clone https://github.com/liangdong/Server.git
@@ -46,7 +45,9 @@ git clone https://github.com/Skylersun/PyMineSweeper.git
 git clone https://github.com/torvalds/subsurface.git
 git clone https://github.com/vhf/free-programming-books
 git clone https://github.com/whatot/changing.git
+git clone https://github.com/whatot/libbsd.git
 git clone https://github.com/whatot/magicmethods-zh_CN.git
+git clone https://github.com/whatot/pintos.git
 git clone https://github.com/whatot/string_matching.git
 git clone https://github.com/whatot/whatot-dot.git
 hg clone https://bitbucket.org/wwq0327/rst
