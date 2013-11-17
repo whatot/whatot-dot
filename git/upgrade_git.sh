@@ -1,6 +1,7 @@
 #!/bin/sh
-#进入~/git/,分别将各git版本库更新到最新
-#2012-10-05-01:26
+# 进入~/git/,分别将各git版本库更新到最新
+# 2012-10-05-01:26
+# set -x
 
 function update_git_hg ()
 {
@@ -8,10 +9,11 @@ function update_git_hg ()
 
 	local if_success
 	if [[ -d ".git" ]]; then
-		git pull || if_success=$?
+		git pull
+		if_success=$?
 		echo "updated $1 !"
 		echo
-		if [[ if_success != 0 ]]; then
+		if [[ $if_success != 0 ]]; then
 			echo $1 >> ../error.log
 		fi
 		# git pull origin master;
@@ -37,6 +39,11 @@ do
 done
 
 wait
+
+# 如果 error.log 为空，则删除
+if [[ $(wc -l ./error.log | awk '{print $1 }') == 1 ]]; then
+	rm -f error.log
+fi
 
 exit 0
 
