@@ -14,7 +14,7 @@ function update_git_hg ()
 		echo "updated $1 !"
 		echo
 		if [[ $if_success != 0 ]]; then
-			echo $1 >> ../error.log
+			echo $1 >> /tmp/upgrade_git_error.log
 		fi
 		# git pull origin master;
 		git submodule update
@@ -31,8 +31,8 @@ function update_git_hg ()
 
 echo
 # create empty files although it exists
-echo "" > error.log
-# or ':> error.log'
+echo "" > /tmp/upgrade_git_error.log
+# or ':> /tmp/upgrade_git_error.log'
 
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
 do
@@ -42,8 +42,10 @@ done
 wait
 
 # 如果 error.log 为空，则删除
-if [[ $(wc -l ./error.log | awk '{print $1 }') == 1 ]]; then
-	rm -f error.log
+if [[ $(wc -l /tmp/upgrade_git_error.log | awk '{print $1 }') == 1 ]]; then
+	rm -f /tmp/upgrade_git_error.log
+else
+	mv /tmp/upgrade_git_error.log ./error.log
 fi
 
 exit 0

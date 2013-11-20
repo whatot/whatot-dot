@@ -479,7 +479,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 nmap tn :tabnew %<CR>
-nmap td :tabnew .<CR>
+nmap td :tabedit <c-r>=expand("%:p:h")<cr>/
 nmap tc :tabclose<CR>
 nmap tm :tabmove
 " :tabn[ext] {count} ----> <C-PageDown> {count} ----> gt
@@ -489,6 +489,22 @@ set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页
 nmap <silent> <leader>er :e ~/.vimrc<CR>
 " nmap <Leader>cr :!cscope -Rbq<CR>
 " nmap <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
+
+
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自定义命令
@@ -510,6 +526,16 @@ autocmd BufReadPost *
      \     exe "normal g'\"" |
      \ endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+function! DeleteTrailingWS()
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
+endfunction
+
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SetColorColumn()
     let col_num = virtcol(".")
@@ -574,8 +600,6 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " call AutoLoadCTagsAndCScope()
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 插件配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,

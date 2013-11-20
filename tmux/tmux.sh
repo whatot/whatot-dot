@@ -52,8 +52,8 @@ if [ $? != 0 ]; then
 	tmux new-window -n kernel -t mydev
 	tmux send-keys -t mydev:3 "cd ~/linux/" C-m
 
-	tmux new-window -n mac-3 -t mydev
-	tmux send-keys -t mydev:4 "j 3" C-m
+	tmux new-window -n share -t mydev
+	tmux send-keys -t mydev:4 "cd ~/" C-m
 
 	tmux new-window -n lua2 -t mydev
 	tmux split-window -h -t mydev
