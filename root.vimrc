@@ -134,13 +134,18 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set pastetoggle=<F5> " when in insert mode, press <F5> to go to
+" paste mode, where you can paste mass data that won't be autoindented
+
+" disbale paste mode when leaving insert mode
+au InsertLeave * set nopaste
+
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
 " nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
-nmap <S-F12> :!ctags -R --c++-kinds=+p --fields=+liaS --extra=+q .<CR>
 
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG

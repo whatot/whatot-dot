@@ -125,8 +125,7 @@ let g:rbpt_colorpairs = [
     \ ['red',         'firebrick3'],
     \ ]
 
-let g:rbpt_max = 16
-
+let g:rbpt_max = 40
 let g:rbpt_loadcmd_toggle = 0
 
 " commands:
@@ -173,7 +172,10 @@ let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tag_in_new_tab'
-"Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
+" Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'TaskList.vim'
+" <leader>t
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
@@ -419,13 +421,18 @@ autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set pastetoggle=<F5> " when in insert mode, press <F5> to go to
+" paste mode, where you can paste mass data that won't be autoindented
+
+" disbale paste mode when leaving insert mode
+au InsertLeave * set nopaste
+
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
 " nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
-nmap <S-F12> :!ctags -R --c++-kinds=+p --fields=+liaS --extra=+q .<CR>
 
 nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG

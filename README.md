@@ -1,11 +1,12 @@
-#whatot-dot
+# whatot-dot
 
 my vunble vimrc and other config files
 
+## vimrc linux deploy
 
 ```bash
 if [ -f "~/.vimrc"  ]; then
-  cp ~/.vimrc .vimrc-bakup
+  mv ~/.vimrc .vimrc-bakup
 fi
 
 mkdir -p ~/.vim/bundle/
@@ -17,12 +18,16 @@ git clone https://github.com/whatot/whatot-dot.git ~/git/whatot-dot
 ln -s ~/git/whatot-dot/.vimrc ~/.vimrc
 vim +BundleInstall +qa
 
-ctags -R -f ~/.vim/systags /usr/include /usr/local/include
-
 cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer
 
 make -C ~/.vim/bundle/vimproc
 ```
+
+temp useless
+```bash
+ctags -R -f ~/.vim/systags /usr/include /usr/local/include
+```
+
 
 * GNU global  [ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
 
@@ -32,3 +37,11 @@ make -C ~/.vim/bundle/vimproc
 sudo pacman -S git gvim ack cscope
 yaourt -S global flake8 python2-flake8
 ```
+
+## tmux
+
+* tmux/tmux.conf
+* tmux/tmux.sh
+
+## others
+
