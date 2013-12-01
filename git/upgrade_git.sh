@@ -32,6 +32,7 @@ function update_git_hg ()
 echo
 # create empty files although it exists
 echo "" > /tmp/upgrade_git_error.log
+echo "" > ./error.log
 # or ':> /tmp/upgrade_git_error.log'
 
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )

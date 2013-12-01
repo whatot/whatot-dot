@@ -13,6 +13,7 @@ git clone https://github.com/anjuke/zguide-cn
 git clone https://github.com/antirez/redis.git
 git clone https://github.com/basho/leveldb.git
 git clone https://github.com/bos/stanford-cs240h.git
+git clone https://github.com/cloudwu/bpa
 git clone https://github.com/cloudwu/cstring
 git clone https://github.com/corenominal/cb-pipemenus.git
 git clone https://github.com/duxing2007/ldd3-examples-3.x
@@ -30,6 +31,7 @@ git clone https://github.com/iambus/xunlei-lixian.git
 git clone https://github.com/ideawu/ssdb.git
 git clone https://github.com/jemalloc/jemalloc
 git clone https://github.com/justzx2011/openyoudao.git
+git clone https://github.com/kennethreitz/python-guide
 git clone https://github.com/ktap/ktap
 git clone https://github.com/liangdong/Server.git
 git clone https://github.com/libevent/libevent
