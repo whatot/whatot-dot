@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # 进入~/git/,分别将各git版本库更新到最新
 # 2012-10-05-01:26
 # set -x
@@ -42,9 +42,12 @@ done
 
 wait
 
-# 如果 error.log 为空，则删除
+# 如果 upgrade_git_error.log, error.log 为空，则删除
 if [[ $(wc -l /tmp/upgrade_git_error.log | awk '{print $1 }') == 1 ]]; then
 	rm -f /tmp/upgrade_git_error.log
+	if [[ -f ./error.log ]]; then
+		rm -f ./error.log
+	fi
 else
 	mv /tmp/upgrade_git_error.log ./error.log
 fi
