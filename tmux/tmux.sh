@@ -99,10 +99,13 @@ if [ $? != 0 ]; then
 	tmux new-window -n lua2 -t loong
 	tmux split-window -h -t loong
 	tmux send-keys -t loong:5.1 "cd ~/git/redis/deps/lua/src/" C-m
-	tmux send-keys -t loong:5.2 "cd ~/git/base/ma_c/5/deps/lua/src/" C-m
+	tmux send-keys -t loong:5.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
 
 	tmux new-window -n redis -t loong
 	tmux send-keys -t loong:6 "cd ~/git/redis/src/" C-m
+
+	tmux new-window -n tengine -t loong
+	tmux send-keys -t loong:7 "cd ~/git/tengine/" C-m
 
 	tmux select-window -t loong:1
 	tmux select-pane -t loong:1
