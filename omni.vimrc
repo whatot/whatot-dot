@@ -50,6 +50,9 @@ let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" https://github.com/ggreer/the_silver_searcher
+" debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'a.vim'
 "设置include(.h)文件存在何处.

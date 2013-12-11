@@ -13,9 +13,11 @@ git clone https://github.com/anjuke/zguide-cn
 git clone https://github.com/antirez/redis.git
 git clone https://github.com/basho/leveldb.git
 git clone https://github.com/bos/stanford-cs240h.git
+git clone https://github.com/chaconnewu/free-data-science-books
 git clone https://github.com/cloudwu/bpa
 git clone https://github.com/cloudwu/cstring
 git clone https://github.com/corenominal/cb-pipemenus.git
+git clone https://github.com/docopt/docopt.c
 git clone https://github.com/duxing2007/ldd3-examples-3.x
 git clone https://github.com/emiraga/axel
 git clone https://github.com/facebook/libphenom
@@ -39,7 +41,7 @@ git clone https://github.com/libgit2/libgit2
 git clone https://github.com/mcinglis/c-style
 git clone https://github.com/michaelfairley/mincemeatpy.git
 git clone https://github.com/openstack/swift.git
-git clone https://github.com/orangeduck/libCello.git
+git clone https://github.com/orangeduck/libCello
 git clone https://github.com/piskvorky/gensim.git
 git clone https://github.com/polarssl/polarssl.git
 git clone https://github.com/priitj/whitedb

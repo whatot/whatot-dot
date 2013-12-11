@@ -47,6 +47,9 @@ let g:UltiSnipsExpandTrigger = "<c-l>"
 let g:UltiSnipsSnippetDirectories=["snippets", "bundle/ultisnips/UltiSnips"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+" https://github.com/ggreer/the_silver_searcher
+" debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'a.vim'
 "设置include(.h)文件存在何处.
