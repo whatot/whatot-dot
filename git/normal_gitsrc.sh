@@ -7,6 +7,7 @@ git clone git://pdos.csail.mit.edu/xv6/xv6.git
 git clone http://github.com/tomwhite/hadoop-book.git
 git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
+git clone http://gitrepo.org/Liu/algorithms4.git
 git clone http://luajit.org/git/luajit-2.0.git
 git clone https://github.com/alibaba/tengine.git
 git clone https://github.com/anjuke/zguide-cn
@@ -23,6 +24,7 @@ git clone https://github.com/emiraga/axel
 git clone https://github.com/facebook/libphenom
 git clone https://github.com/facebook/rocksdb
 git clone https://github.com/facebook/tornado.git
+git clone https://github.com/fogleman/Craft.git
 git clone https://github.com/gabrielfalcao/sure.git
 git clone https://github.com/gleitz/howdoi
 git clone https://github.com/goagent/goagent.git

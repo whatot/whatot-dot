@@ -34,8 +34,14 @@ ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 > if use archlinux, deps :
 
 ```
-sudo pacman -S git gvim ack cscope
+sudo pacman -S git gvim ack cscope the_silver_searcher
 yaourt -S global flake8 python2-flake8
+```
+
+> if using debian, deps include and more :
+
+```
+sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 ```
 
 ## tmux
