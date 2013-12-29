@@ -182,7 +182,7 @@ Bundle 'TaskList.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
-Bundle 'hewes/unite-gtags'
+" Bundle 'hewes/unite-gtags'
 " Bundle 'osyo-manga/unite-quickfix'
 " Bundle 'tsukkee/unite-tag'
 " Bundle 'Shougo/unite-help'
@@ -204,11 +204,12 @@ nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
 nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
 nnoremap so :<C-u>Unite outline<CR>
 " nnoremap sh :<C-u>Unite help<CR>
-nnoremap <leader>gg :execute 'Unite gtags/def:'.expand('<cword>')<CR>
-nnoremap <leader>gc :execute 'Unite gtags/context'<CR>
-nnoremap <leader>gr :execute 'Unite gtags/ref'<CR>
-nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
-vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
+" Unite-gtags
+" nnoremap <leader>gg :execute 'Unite gtags/def:'.expand('<cword>')<CR>
+" nnoremap <leader>gc :execute 'Unite gtags/context'<CR>
+" nnoremap <leader>gr :execute 'Unite gtags/ref'<CR>
+" nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
+" vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/vimproc'
 " $ cd ~/.vim/bundle/vimproc.vim
