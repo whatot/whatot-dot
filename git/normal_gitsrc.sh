@@ -17,6 +17,7 @@ git clone https://github.com/bos/stanford-cs240h.git
 git clone https://github.com/chaconnewu/free-data-science-books
 git clone https://github.com/cloudwu/bpa
 git clone https://github.com/cloudwu/cstring
+git clone https://github.com/cloudwu/ejoy2d
 git clone https://github.com/corenominal/cb-pipemenus.git
 git clone https://github.com/docopt/docopt.c
 git clone https://github.com/duxing2007/ldd3-examples-3.x

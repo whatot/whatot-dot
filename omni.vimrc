@@ -185,7 +185,7 @@ Bundle 'TaskList.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
-" Bundle 'hewes/unite-gtags'
+Bundle 'hewes/unite-gtags'
 " Bundle 'osyo-manga/unite-quickfix'
 " Bundle 'tsukkee/unite-tag'
 " Bundle 'Shougo/unite-help'
@@ -207,6 +207,11 @@ nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
 nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
 nnoremap so :<C-u>Unite outline<CR>
 " nnoremap sh :<C-u>Unite help<CR>
+nnoremap <leader>gg :execute 'Unite gtags/def:'.expand('<cword>')<CR>
+nnoremap <leader>gc :execute 'Unite gtags/context'<CR>
+nnoremap <leader>gr :execute 'Unite gtags/ref'<CR>
+nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
+vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/vimproc'
 " $ cd ~/.vim/bundle/vimproc.vim
@@ -264,6 +269,9 @@ nmap wg <Plug>(signify-toggle)
 " default
 nmap <leader>gj <plug>(signify-next-jump)
 nmap <leader>gk <plug>(signify-prev-jump)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'mikewest/vimroom'
+" <leader>V
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on   " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -760,14 +768,36 @@ set cscopetagorder=0
 "     set csprg=/usr/bin/cscope
 " endif
 
-nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+" nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+" nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+" nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+nnoremap <leader>cg :execute 'cscope find g '.expand('<cword>')<CR>
+nnoremap <leader>cs :execute 'cscope find s '.expand('<cword>')<CR>
+nnoremap <leader>cc :execute 'cscope find c '.expand('<cword>')<CR>
+nnoremap <leader>ct :execute 'cscope find t '.expand('<cword>')<CR>
+nnoremap <leader>cf :execute 'cscope find f '.expand('<cword>')<CR>
+nnoremap <leader>ci :execute 'cscope find i '.expand('<cword>')<CR>
+vnoremap <leader>cg <ESC>:execute 'cscope find g '.GetVisualSelection()<CR>
+vnoremap <leader>cs <ESC>:execute 'cscope find s '.GetVisualSelection()<CR>
+vnoremap <leader>cc <ESC>:execute 'cscope find c '.GetVisualSelection()<CR>
+vnoremap <leader>ct <ESC>:execute 'cscope find t '.GetVisualSelection()<CR>
+vnoremap <leader>cf <ESC>:execute 'cscope find f '.GetVisualSelection()<CR>
+vnoremap <leader>ci <ESC>:execute 'cscope find i '.GetVisualSelection()<CR>
+
+function! GetVisualSelection()
+    let [s:lnum1, s:col1] = getpos("'<")[1:2]
+    let [s:lnum2, s:col2] = getpos("'>")[1:2]
+    let s:lines = getline(s:lnum1, s:lnum2)
+    let s:lines[-1] = s:lines[-1][: s:col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let s:lines[0] = s:lines[0][s:col1 - 1:]
+    return join(s:lines, ' ')
+endfunction
 
 " 解决cscope与tag共存时ctrl+]有时不正常的bug
 nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
