@@ -15,6 +15,7 @@ git clone https://github.com/antirez/redis.git
 git clone https://github.com/basho/leveldb.git
 git clone https://github.com/bos/stanford-cs240h.git
 git clone https://github.com/chaconnewu/free-data-science-books
+git clone https://github.com/charliesome/rustboot
 git clone https://github.com/cloudwu/bpa
 git clone https://github.com/cloudwu/cstring
 git clone https://github.com/cloudwu/ejoy2d
@@ -27,8 +28,8 @@ git clone https://github.com/facebook/rocksdb
 git clone https://github.com/facebook/tornado.git
 git clone https://github.com/fogleman/Craft.git
 git clone https://github.com/gabrielfalcao/sure.git
+git clone https://github.com/git/git.git
 git clone https://github.com/gleitz/howdoi
-git clone https://github.com/goagent/goagent.git
 git clone https://github.com/HardySimpson/zlog
 git clone https://github.com/huangz1990/annotated_redis_source.git
 git clone https://github.com/huangz1990/real-world-haskell-cn.git
@@ -36,6 +37,7 @@ git clone https://github.com/iambus/xunlei-lixian.git
 git clone https://github.com/ideawu/ssdb.git
 git clone https://github.com/jemalloc/jemalloc
 git clone https://github.com/justzx2011/openyoudao.git
+git clone https://github.com/jvns/kernel-module-fun
 git clone https://github.com/kennethreitz/python-guide
 git clone https://github.com/ktap/ktap
 git clone https://github.com/liangdong/Server.git
@@ -48,8 +50,11 @@ git clone https://github.com/orangeduck/libCello
 git clone https://github.com/piskvorky/gensim.git
 git clone https://github.com/polarssl/polarssl.git
 git clone https://github.com/priitj/whitedb
+git clone https://github.com/rupeshk/web2epub
+git clone https://github.com/silentbicycle/greatest
 git clone https://github.com/sjl/learnvimscriptthehardway.git
 git clone https://github.com/Skylersun/PyMineSweeper.git
+git clone https://github.com/symisc/vedis
 git clone https://github.com/torvalds/subsurface.git
 git clone https://github.com/vhf/free-programming-books
 git clone https://github.com/whatot/changing.git
