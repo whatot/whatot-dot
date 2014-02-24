@@ -21,7 +21,7 @@ function update_git_hg ()
 	fi
 
 	if [[ -d ".hg" ]]; then
-		hg update
+		hg pull & hg update
 		echo "update $1 !"
 	fi
 
