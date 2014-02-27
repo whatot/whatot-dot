@@ -16,20 +16,23 @@ if [ $? != 0 ]; then
 	tmux new-session -s works125 -n ~git -d
 	tmux send-keys -t works125 "cd ~/git/" C-m
 
-	tmux new-window -n trunk -t works125
-	tmux send-keys -t works125:2 "j trunk" C-m
+	tmux new-window -n postgresql -t works125
+	tmux send-keys -t works125:2 "cd ~/git/postgresql/" C-m
 
-	tmux new-window -n share -t works125
-	tmux send-keys -t works125:3 "cd ~/" C-m
+	tmux new-window -n pgplus -t works125
+	tmux send-keys -t works125:3 "cd ~/works/pgplus/" C-m
+
+	tmux new-window -n postgres-xc -t works125
+	tmux send-keys -t works125:4 "cd ~/git/postgres-xc/" C-m
+
+	tmux new-window -n neovim -t works125
+	tmux send-keys -t works125:5 "cd ~/git/neovim/" C-m
 
 	tmux new-window -n dot -t works125
-	tmux send-keys -t works125:4 "j dot" C-m
+	tmux send-keys -t works125:6 "cd ~/git/whatot-dot/" C-m
 
-	tmux new-window -n mac-3 -t works125
-	tmux send-keys -t works125:5 "j 3" C-m
-
-	tmux new-window -n changing -t works125
-	tmux send-keys -t works125:6 "cd ~/git/changing" C-m
+	tmux new-window -n share -t works125
+	tmux send-keys -t works125:7 "cd ~/" C-m
 
 	tmux select-window -t works125:1
 	tmux select-pane -t works125:1
