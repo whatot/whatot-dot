@@ -4,6 +4,7 @@ git clone git://github.com/blynn/gitmagic.git
 git clone git://github.com/davidgao/LFSCN.git
 git clone git://git.netfilter.org/iptables.git
 git clone git://pdos.csail.mit.edu/xv6/xv6.git
+git clone http://github.com/jkozera/zeal.git
 git clone http://github.com/tomwhite/hadoop-book.git
 git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
@@ -14,6 +15,7 @@ git clone https://github.com/anjuke/zguide-cn
 git clone https://github.com/antirez/redis.git
 git clone https://github.com/basho/leveldb.git
 git clone https://github.com/bos/stanford-cs240h.git
+git clone https://github.com/bup/bup
 git clone https://github.com/chaconnewu/free-data-science-books
 git clone https://github.com/charliesome/rustboot
 git clone https://github.com/cloudwu/bpa
@@ -45,6 +47,7 @@ git clone https://github.com/libevent/libevent
 git clone https://github.com/libgit2/libgit2
 git clone https://github.com/mcinglis/c-style
 git clone https://github.com/michaelfairley/mincemeatpy.git
+git clone https://github.com/numb3r3/crawler-python
 git clone https://github.com/openstack/swift.git
 git clone https://github.com/orangeduck/libCello
 git clone https://github.com/piskvorky/gensim.git
