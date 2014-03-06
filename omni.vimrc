@@ -176,6 +176,7 @@ nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 35
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
+autocmd FileType c,cpp :TagbarOpen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
@@ -254,6 +255,7 @@ Bundle 'greyblake/vim-preview'
 " ronn - ronn
 " reStructuredText(rst) - RbST, rst2html(python-docutils)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-speeddating'
@@ -453,7 +455,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <leader>n <ESC>:nohls<CR>
+nmap <silent> <leader>n <ESC>:nohlsearch<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
@@ -827,7 +829,7 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 ""-k: 在生成索引文件时，不搜索/usr/include目录
 ""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
 
-au BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
+autocmd BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
 
 function! UpdateGtags(f)
     let dir = fnamemodify(a:f, ':p:h')
