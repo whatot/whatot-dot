@@ -41,10 +41,10 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = "<c-l>"
 " let g:UltiSnipsJumpForwardTrigger = "<c-m>"
 " let g:UltiSnipsListSnippets = '<c-o>'
-let g:UltiSnipsSnippetDirectories=["snippets", "bundle/ultisnips/UltiSnips"]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -183,6 +183,7 @@ Bundle 'TaskList.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
+Bundle 'Shougo/neomru.vim'
 " Bundle 'hewes/unite-gtags'
 " Bundle 'osyo-manga/unite-quickfix'
 " Bundle 'tsukkee/unite-tag'
