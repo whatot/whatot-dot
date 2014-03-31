@@ -623,6 +623,14 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 最大化窗口
+" windows add -- GUIEnter * simalt ~x
+" gnome or other DE, install wmctrl
+" add to .zshrc or .bashrc -- alias gvim='gvim -c "call Maximize_Window()"'
+function! Maximize_Window()
+    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 " let colorscheme = 'desert'

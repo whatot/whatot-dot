@@ -6,6 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="gentoo"
+# ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -14,7 +15,7 @@ ZSH_THEME="gentoo"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
-# Uncomment this to disable bi-weekly auto-update checks
+# Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
@@ -45,19 +46,23 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git colored-man colorize colorizetmux autojump vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-#
+# Customize to your needs...
+# export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 
 [[ -s /usr/share/autojump/autojump.zsh ]] && . /usr/share/autojump/autojump.zsh
+[[ -s /usr/share/doc/cdargs/examples/cdargs-zsh.sh ]] && . /usr/share/doc/cdargs/examples/cdargs-zsh.sh
 
+export PATH="/usr/lib/ccache/:$PATH"
+
+# Bacward search in the shell history with <C-r>
 bindkey '^R' history-incremental-search-backward
 setopt hist_ignore_all_dups
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # # Preferred editor for local and remote sessions
@@ -74,9 +79,14 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 alias vi='vim'
+alias gvim='gvim -c "call Maximize_Window()"'
 alias grep="grep --color=auto"
-# alias -s pdf=mupdf
-alias -s py=vi
+alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s js=vi
 alias -s c=vi
 alias -s txt=vi
 alias -s md=vi
+alias -s gz='tar -xzvf'
+alias -s tgz='tar -xzvf'
+alias -s zip='unzip'
+alias -s bz2='tar -xjvf'
