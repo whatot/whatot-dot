@@ -9,6 +9,18 @@
 # /usr/bin/xfce4-terminal --maximize --execute /usr/bin/tmux.sh
 # /usr/bin/xfce4-terminal --command=tmux --maximize
 
+# tmux example
+
+# split-window
+# tmux new-window -n lua2 -t mydev
+# tmux split-window -h -t mydev
+# tmux send-keys -t mydev:5.1 "cd ~/git/redis/deps/lua/src/" C-m
+# tmux send-keys -t mydev:5.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
+
+# only create one window
+# tmux new-window -n jemalloc -t mydev
+# tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
+
 function tmux_company {
 
 tmux has-session -t works125
@@ -22,14 +34,16 @@ if [ $? != 0 ]; then
 	tmux new-window -n pgplus -t works125
 	tmux send-keys -t works125:3 "cd ~/works/pgplus/" C-m
 
-	tmux new-window -n postgres-xc -t works125
-	tmux send-keys -t works125:4 "cd ~/git/postgres-xc/" C-m
+	tmux new-window -n pgxc -t works125
+	tmux send-keys -t works125:4 "cd ~/works/pgxc/" C-m
 
-	tmux new-window -n neovim -t works125
-	tmux send-keys -t works125:5 "cd ~/git/neovim/" C-m
+	tmux new-window -n install -t works125
+	tmux split-window -h -t works125
+	tmux send-keys -t works125:5.1 "cd ~/install/" C-m
+	tmux send-keys -t works125:5.2 "cd ~/install/" C-m
 
-	tmux new-window -n dot -t works125
-	tmux send-keys -t works125:6 "cd ~/git/whatot-dot/" C-m
+	tmux new-window -n install2 -t works125
+	tmux send-keys -t works125:6 "cd ~/install/" C-m
 
 	tmux new-window -n share -t works125
 	tmux send-keys -t works125:7 "cd ~/" C-m
@@ -41,6 +55,13 @@ tmux attach -t works125
 
 }
 
+# changing -- "cd ~/../mirage/static/git/changing"
+# kernel -- "cd ~/linux/"
+# lua2 -- "cd ~/git/redis/deps/lua/src/" "cd ~/base/ma_c/5/deps/lua/src/"
+# jemalloc -- "cd ~/git/jemalloc/include/jemalloc/internal"
+# redis -- "cd ~/git/redis/src/"
+# postgresql -- "cd ~/git/postgresql/"
+# zlog -- "cd ~/git/zlog/"
 
 function tmux_mydev {
 
@@ -49,31 +70,20 @@ if [ $? != 0 ]; then
 	tmux new-session -s mydev -n '~git' -d
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
-	tmux new-window -n changing -t mydev
-	tmux send-keys -t mydev:2 "cd ~/../mirage/static/git/changing" C-m
+	tmux new-window -n scrapy -t mydev
+	tmux send-keys -t mydev:2 "cd ~/tmp/pycharm/scrapy_learn/" C-m
+
+	tmux new-window -n scrapy2 -t mydev
+	tmux send-keys -t mydev:3 "cd ~/tmp/pycharm/scrapy_learn/" C-m
 
 	tmux new-window -n kernel -t mydev
-	tmux send-keys -t mydev:3 "cd ~/linux/" C-m
+	tmux send-keys -t mydev:4 "cd ~/linux/" C-m
 
 	tmux new-window -n share -t mydev
-	tmux send-keys -t mydev:4 "cd ~/" C-m
+	tmux send-keys -t mydev:5 "cd ~/" C-m
 
-	tmux new-window -n lua2 -t mydev
-	tmux split-window -h -t mydev
-	tmux send-keys -t mydev:5.1 "cd ~/git/redis/deps/lua/src/" C-m
-	tmux send-keys -t mydev:5.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
-
-	tmux new-window -n jemalloc -t mydev
-	tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
-
-	tmux new-window -n redis -t mydev
-	tmux send-keys -t mydev:7 "cd ~/git/redis/src/" C-m
-
-	tmux new-window -n postgres -t mydev
-	tmux send-keys -t mydev:8 "cd ~/git/postgresql/" C-m
-
-	tmux new-window -n zlog -t mydev
-	tmux send-keys -t mydev:9 "cd ~/git/zlog/" C-m
+	tmux new-window -n postgresql -t mydev
+	tmux send-keys -t mydev:6 "cd ~/git/postgresql/" C-m
 
 	tmux select-window -t mydev:1
 	tmux select-pane -t mydev:1
