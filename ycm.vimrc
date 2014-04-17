@@ -76,8 +76,9 @@ let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'amix/vim-zenroom2'
 Bundle 'junegunn/goyo.vim'
-noremap <leader>gy :Goyo<cr>
+nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80
 let g:goyo_margin_top = 4
 let g:goyo_margin_bottom = 4
@@ -281,9 +282,6 @@ nmap wg <Plug>(signify-toggle)
 " default
 nmap <leader>gj <plug>(signify-next-jump)
 nmap <leader>gk <plug>(signify-prev-jump)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'mikewest/vimroom'
-" <leader>V
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on   " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
