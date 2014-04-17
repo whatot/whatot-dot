@@ -31,10 +31,10 @@ if [ $? != 0 ]; then
 	tmux new-window -n postgresql -t works125
 	tmux send-keys -t works125:2 "cd ~/git/postgresql/" C-m
 
-	tmux new-window -n pgplus -t works125
-	tmux send-keys -t works125:3 "cd ~/works/pgplus/" C-m
-
 	tmux new-window -n pgxc -t works125
+	tmux send-keys -t works125:3 "cd ~/works/pgxc/" C-m
+
+	tmux new-window -n pgxc2 -t works125
 	tmux send-keys -t works125:4 "cd ~/works/pgxc/" C-m
 
 	tmux new-window -n install -t works125

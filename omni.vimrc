@@ -78,6 +78,14 @@ Bundle 'grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'whatot/gtags-cscope.vim'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'junegunn/goyo.vim'
+noremap <leader>gy :Goyo<cr>
+let g:goyo_width = 80
+let g:goyo_margin_top = 4
+let g:goyo_margin_bottom = 4
+let g:goyo_linenr = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'L9'
 Bundle 'LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
