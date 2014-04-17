@@ -4,38 +4,20 @@ my vunble vimrc and other config files
 
 ## vimrc linux deploy
 
-```bash
-if [ -f "~/.vimrc"  ]; then
-  mv ~/.vimrc .vimrc-bakup
-fi
+details in ./deploy.sh
 
-mkdir -p ~/.vim/bundle/
-mkdir -p ~/.vim/sessions/
-mkdir -p ~/git/
-git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-git clone https://github.com/whatot/whatot-dot.git ~/git/whatot-dot
-
-ln -s ~/git/whatot-dot/.vimrc ~/.vimrc
-vim +BundleInstall +qa
-
-cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer
-
-make -C ~/.vim/bundle/vimproc
-```
-
-temp useless
+maybe useful tips
 ```bash
 ctags -R -f ~/.vim/systags /usr/include /usr/local/include
 ```
-
 
 * GNU global  [ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
 
 > if use archlinux, deps :
 
 ```
-sudo pacman -S git gvim ack cscope the_silver_searcher
-yaourt -S global flake8 python2-flake8
+sudo pacman -S git gvim ack cscope flake8 python2-flake8 the_silver_searcher
+yaourt -S global
 ```
 
 > if using debian, deps include and more :
@@ -49,5 +31,15 @@ sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 * tmux/tmux.conf
 * tmux/tmux.sh
 
-## others
+## build ycm again using local libclang.so
 
+```
+	mkdir /tmp/ycm_build/ \
+		&& cd /tmp/ycm_build/ \
+		&& cmake -G "Unix Makefiles" \
+			-DEXTERNAL_LIBCLANG_PATH=/usr/lib/libclang.so . \
+			~/.vim/bundle/YouCompleteMe/cpp \
+		&& make ycm_core
+```
+
+## others
