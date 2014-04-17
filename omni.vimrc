@@ -86,6 +86,9 @@ let g:goyo_margin_top = 4
 let g:goyo_margin_bottom = 4
 let g:goyo_linenr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'sjl/gundo.vim'
+noremap <leader>gd :GundoToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'L9'
 Bundle 'LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
@@ -398,6 +401,8 @@ set scrolloff =5            " 当光标距离极端(上,下,左,右)多少时发
 set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
+set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
+                            " 也考虑其它标签页里的窗口
 
 " 重启后撤销历史可用 persistent undo
 set undofile
@@ -511,10 +516,13 @@ map <C-left> <ESC>:bprevious<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-nmap tn :tabnew %<CR>
-nmap td :tabedit <c-r>=expand("%:p:h")<cr>/
-nmap tc :tabclose<CR>
-nmap tm :tabmove
+" :cd. change working directory to that of the current file
+cmap cd. lcd %:p:h
+
+nmap <C-t><C-t> :tabnew<CR>
+"nmap <C-t><C-d> :tabedit <c-r>=expand("%:p:h")<cr>/
+nmap <C-t><C-w> :tabclose<CR>
+"nmap <C-t><C-m> :tabmove
 " :tabn[ext] {count} ----> <C-PageDown> {count} ----> gt
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
 set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
