@@ -57,7 +57,11 @@ source $ZSH/oh-my-zsh.sh
 [[ -s /usr/share/autojump/autojump.zsh ]] && . /usr/share/autojump/autojump.zsh
 [[ -s /usr/share/doc/cdargs/examples/cdargs-zsh.sh ]] && . /usr/share/doc/cdargs/examples/cdargs-zsh.sh
 
-export PATH="/usr/lib/ccache/:$PATH"
+# for PATH, CLASSPATH
+export CLASSPATH=$JAVA_HOME/lib/
+export PATH=/usr/lib/ccache/bin/:$PATH
+export PATH=$PATH:~/.gem/ruby/2.0.0/bin:~/.cabal/bin/
+. /etc/profile.d/*.sh
 
 # Bacward search in the shell history with <C-r>
 bindkey '^R' history-incremental-search-backward
