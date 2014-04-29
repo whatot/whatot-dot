@@ -38,15 +38,17 @@ if [ $? != 0 ]; then
 	tmux send-keys -t works125:4 "cd ~/works/pgxc/" C-m
 
 	tmux new-window -n install -t works125
-	tmux split-window -h -t works125
-	tmux send-keys -t works125:5.1 "cd ~/install/" C-m
-	tmux send-keys -t works125:5.2 "cd ~/install/" C-m
+	tmux send-keys -t works125:5 "cd ~/install/" C-m
 
 	tmux new-window -n install2 -t works125
 	tmux send-keys -t works125:6 "cd ~/install/" C-m
 
+	tmux new-window -n goagent -t works125
+	tmux send-keys -t works125:7 "cd ~/git/goagent/local/" C-m
+	tmux send-keys -t works125:7 "python2 proxy.py" C-m
+
 	tmux new-window -n share -t works125
-	tmux send-keys -t works125:7 "cd ~/" C-m
+	tmux send-keys -t works125:8 "cd ~/" C-m
 
 	tmux select-window -t works125:1
 	tmux select-pane -t works125:1
@@ -70,20 +72,24 @@ if [ $? != 0 ]; then
 	tmux new-session -s mydev -n '~git' -d
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
-	tmux new-window -n scrapy -t mydev
-	tmux send-keys -t mydev:2 "cd ~/tmp/pycharm/scrapy_learn/" C-m
+	tmux new-window -n work1 -t mydev
+	tmux send-keys -t mydev:2 "cd ~/tmp/" C-m
 
-	tmux new-window -n scrapy2 -t mydev
-	tmux send-keys -t mydev:3 "cd ~/tmp/pycharm/scrapy_learn/" C-m
+	tmux new-window -n work2 -t mydev
+	tmux send-keys -t mydev:3 "cd ~/tmp/" C-m
 
 	tmux new-window -n kernel -t mydev
 	tmux send-keys -t mydev:4 "cd ~/linux/" C-m
 
+	tmux new-window -n goagent -t mydev
+	tmux send-keys -t mydev:5 "cd ~/git/goagent/local/" C-m
+	tmux send-keys -t mydev:5 "python2 proxy.py" C-m
+
 	tmux new-window -n share -t mydev
-	tmux send-keys -t mydev:5 "cd ~/" C-m
+	tmux send-keys -t mydev:6 "cd ~/" C-m
 
 	tmux new-window -n postgresql -t mydev
-	tmux send-keys -t mydev:6 "cd ~/git/postgresql/" C-m
+	tmux send-keys -t mydev:7 "cd ~/git/postgresql/" C-m
 
 	tmux select-window -t mydev:1
 	tmux select-pane -t mydev:1
