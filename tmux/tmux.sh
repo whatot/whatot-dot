@@ -24,7 +24,7 @@
 function tmux_company {
 
 tmux has-session -t works125
-if [ $? != 0 ]; then
+if [[ $? != 0 ]]; then
 	tmux new-session -s works125 -n ~git -d
 	tmux send-keys -t works125 "cd ~/git/" C-m
 
@@ -68,7 +68,7 @@ tmux attach -t works125
 function tmux_mydev {
 
 tmux has-session -t mydev
-if [ $? != 0 ]; then
+if [[ $? != 0 ]]; then
 	tmux new-session -s mydev -n '~git' -d
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
@@ -102,7 +102,7 @@ tmux attach -t mydev
 function tmux_loong {
 
 tmux has-session -t loong
-if [ $? != 0 ]; then
+if [[ $? != 0 ]]; then
 	tmux new-session -s loong -n '~git' -d
 	tmux send-keys -t loong "cd ~/git/" C-m
 
@@ -133,24 +133,25 @@ tmux attach -t loong
 
 }
 
+HOSTNAME=`cat /etc/hostname`
 
-if [ -f /usr/bin/tmux ]; then
+if [[ -f /usr/bin/tmux ]]; then
 
-	if [ $# == 0 ]; then
+	if [[ $# == 0 ]]; then
 
-		if [[ $(hostname -s) == 'mirage' ]]; then
+		if [[ $HOSTNAME == 'mirage' ]]; then
 			tmux_company
-		elif [[ $(hostname -s) == 'cru' ]]; then
+		elif [[ $HOSTNAME == 'cru' ]]; then
 			tmux_mydev
-		elif [[ $(hostname -s) == 'loo' ]]; then
+		elif [[ $HOSTNAME == 'loo' ]]; then
 			tmux_loong
 		fi
 
-	elif [ $# == 1 ] && [ $@ == 'my' ]; then
+	elif [[ $# == 1 ]] && [[ $@ == 'my' ]]; then
 		tmux_mydev
-	elif  [ $# == 1 ] && [ $@ == 'w' ]; then
+	elif  [[ $# == 1 ]] && [[ $@ == 'w' ]]; then
 		tmux_company
-	elif  [ $# == 1 ] && [ $@ == 'l' ]; then
+	elif  [[ $# == 1 ]] && [[ $@ == 'l' ]]; then
 		tmux_loong
 	fi
 
