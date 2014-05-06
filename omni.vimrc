@@ -79,7 +79,7 @@ let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'amix/vim-zenroom2'
+" Bundle 'amix/vim-zenroom2'
 Bundle 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80

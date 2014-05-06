@@ -73,10 +73,10 @@ if [[ $? != 0 ]]; then
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
 	tmux new-window -n work1 -t mydev
-	tmux send-keys -t mydev:2 "cd ~/tmp/" C-m
+	tmux send-keys -t mydev:2 "cd ~/data/" C-m
 
 	tmux new-window -n work2 -t mydev
-	tmux send-keys -t mydev:3 "cd ~/tmp/" C-m
+	tmux send-keys -t mydev:3 "cd ~/data/" C-m
 
 	tmux new-window -n kernel -t mydev
 	tmux send-keys -t mydev:4 "cd ~/linux/" C-m
