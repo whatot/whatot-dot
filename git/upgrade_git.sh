@@ -26,8 +26,25 @@ function update_git_hg ()
 	cd ..
 }
 
+function usage_exit()
+{
+	echo "Usage :"
+	echo "./upgrade_git.sh DIR           update all the git repos in this DIR"
+	echo "./upgrade_git.sh -h,--help     print this Usage"
 
-TARGET_DIR=$1
+	exit
+}
+
+# where to start
+if [[ -n "$1" ]];then
+	if [[ $1 == '-h' ]] || [[ $1 == '--help' ]] || [[ ! -d "$1" ]];then
+		usage_exit
+	fi
+	TARGET_DIR=$1
+else
+	TARGET_DIR='./'
+fi
+
 ALL_DIR_NAMES=`ls -l $TARGET_DIR | grep "^d" | awk '{print $9 }'`
 echo
 # create empty files although it exists
@@ -37,10 +54,8 @@ echo "" > ./error.log
 
 for dis in $ALL_DIR_NAMES
 do
-	update_git_hg $TARGET_DIR/$dis &
+	update_git_hg "$TARGET_DIR"/$dis &
 done
-
-echo "git-update finished !!!!"
 
 wait
 
