@@ -9,15 +9,13 @@ function update_git_hg ()
 
 	local if_success
 	if [[ -d ".git" ]]; then
-		git pull
+		git pull && git submodule update --init --recursive
 		if_success=$?
 		echo "updated $1 !"
 		echo
 		if [[ $if_success != 0 ]]; then
 			echo $1 >> /tmp/upgrade_git_error.log
 		fi
-		# git pull origin master;
-		git submodule update
 	fi
 
 	if [[ -d ".hg" ]]; then
@@ -29,16 +27,20 @@ function update_git_hg ()
 }
 
 
+TARGET_DIR=$1
+ALL_DIR_NAMES=`ls -l $TARGET_DIR | grep "^d" | awk '{print $9 }'`
 echo
 # create empty files although it exists
 echo "" > /tmp/upgrade_git_error.log
 echo "" > ./error.log
 # or ':> /tmp/upgrade_git_error.log'
 
-for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
+for dis in $ALL_DIR_NAMES
 do
-	update_git_hg $dis &
+	update_git_hg $TARGET_DIR/$dis &
 done
+
+echo "git-update finished !!!!"
 
 wait
 

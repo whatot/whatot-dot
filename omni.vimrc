@@ -107,7 +107,7 @@ let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'scrooloose/nerdtree'
-Bundle 'nerdtree-ack'
+Bundle 'tyok/nerdtree-ack'
 Bundle 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> wa :NERDTreeTabsToggle<CR>
