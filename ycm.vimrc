@@ -390,12 +390,14 @@ set nojoinspaces
 set wrap                    " 自动换行显示
 "set autochdir              " 自动切换当前目录为当前文件所在的目录
 set autoread                " 自动读取改变了的编辑中的文件
-set scrolljump =1           " 当光标达到上端或下端时 翻滚的行数
-set sidescroll =5           " 当光标达到水平极端时 移动的列数
-set scrolloff =5            " 当光标距离极端(上,下,左,右)多少时发生窗口滚
+set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
+set sidescroll=5            " 当光标达到水平极端时 移动的列数
+set scrolloff=5             " 当光标距离极端(上,下,左,右)多少时发生窗口滚
 set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
+set foldlevel+=8            " 设置较大的foldlevel使得所有折叠被默认展开
+                            " zr/zm zR/zM zc/zo zC/zO zd/zD [z ]z zj/zk
 set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
                             " 也考虑其它标签页里的窗口
 

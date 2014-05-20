@@ -106,17 +106,21 @@ set nojoinspaces
 set wrap                    " 自动换行显示
 "set autochdir              " 自动切换当前目录为当前文件所在的目录
 set autoread                " 自动读取改变了的编辑中的文件
-set scrolljump =1           " 当光标达到上端或下端时 翻滚的行数
-set sidescroll =5           " 当光标达到水平极端时 移动的列数
-set scrolloff =5            " 当光标距离极端(上,下,左,右)多少时发生窗口滚
+set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
+set sidescroll=5            " 当光标达到水平极端时 移动的列数
+set scrolloff=5             " 当光标距离极端(上,下,左,右)多少时发生窗口滚
 set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
+set foldlevel+=8            " 设置较大的foldlevel使得所有折叠被默认展开
+                            " zr/zm zR/zM zc/zo zC/zO zd/zD [z ]z zj/zk
+set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
+                            " 也考虑其它标签页里的窗口
 
 " Avoid command-line redraw on every entered character by turning off Arabic
 " shaping (which is implemented poorly).
 if has('arabic')
-  set noarabicshape
+    set noarabicshape
 endif
 
 set tags=tags
@@ -151,7 +155,7 @@ nmap t= mxHmygg=G`yzt`x
 nmap ta ggVG
 
 " 清除高亮
-nmap <silent> <leader>n <ESC>:nohls<CR>
+nmap <silent> <leader>n <ESC>:nohlsearch<CR>
 
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
@@ -192,10 +196,13 @@ map <C-left> <ESC>:bprevious<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-nmap tn :tabnew %<CR>
-nmap td :tabedit <c-r>=expand("%:p:h")<cr>/
-nmap tc :tabclose<CR>
-nmap tm :tabmove
+" :cd. change working directory to that of the current file
+cmap cd. lcd %:p:h
+
+nmap <C-t><C-t> :tabnew<CR>
+"nmap <C-t><C-d> :tabedit <c-r>=expand("%:p:h")<cr>/
+nmap <C-t><C-w> :tabclose<CR>
+"nmap <C-t><C-m> :tabmove
 " :tabn[ext] {count} ----> <C-PageDown> {count} ----> gt
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
 set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
@@ -314,6 +321,14 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " call AutoLoadCTagsAndCScope()
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 最大化窗口
+" windows add -- GUIEnter * simalt ~x
+" gnome or other DE, install wmctrl
+" add to .zshrc or .bashrc -- alias gvim='gvim -c "call Maximize_Window()"'
+function! Maximize_Window()
+    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
