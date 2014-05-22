@@ -15,7 +15,7 @@ echo
 # In archlinux
 if [ -f "/usr/bin/pacman" ];then
 	sudo pacman -S git gvim ack cscope flake8 python2-flake8 \
-		the_silver_searcher
+		the_silver_searcher clang llvm
 	# for global in AUR
 	if [ -f "/usr/bin/yaourt" ];then
 		yaourt -S global
@@ -25,7 +25,8 @@ if [ -f "/usr/bin/pacman" ];then
 
 # In debian, Ubuntu
 elif [ -f "/usr/bin/apt-get" ];then
-	sudo apt-get install git vim-gtk ack cscope silversearcher-ag
+	sudo apt-get install git vim-gtk ack cscope silversearcher-ag \
+		libclang-dev
 	# global is too old to use, so build from source.
 	if [ ! -f "/tmp/global_build/global-6.2.12.tar.gz" ];then
 		mkdir -p /tmp/global_build/
@@ -36,11 +37,11 @@ elif [ -f "/usr/bin/apt-get" ];then
 	cd global-6.2.12 && ./configure && sudo make install
 	cd .. && sudo rm -rf /tmp/global_build/global-6.2.12/
 else
-	echo "the distrbution not supported now"
+	echo "This Linux distrbution not supported now"
 fi
 
 echo
-echo "######## second: copy vimrc and plugins  ##################"
+echo "######## second: copy vimrc and install plugins  ##################"
 echo
 
 if [ -f ~/".vimrc"  ]; then

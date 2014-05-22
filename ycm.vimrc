@@ -185,7 +185,7 @@ nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 35
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
-autocmd FileType c,cpp :TagbarOpen
+" autocmd FileType c,cpp :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
