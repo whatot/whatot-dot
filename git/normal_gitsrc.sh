@@ -1,15 +1,13 @@
-git clone git://git.ghostscript.com/mupdf.git
 git clone git://github.com/blindglobe/common-lisp-stat.git
 git clone git://github.com/blynn/gitmagic.git
 git clone git://github.com/davidgao/LFSCN.git
+git clone git@github.com:whatot/whatot-dot.git
 git clone git://git.netfilter.org/iptables.git
 git clone git://pdos.csail.mit.edu/xv6/xv6.git
 git clone http://github.com/jkozera/zeal.git
 git clone http://github.com/tomwhite/hadoop-book.git
-git clone http://git.oschina.net/jouyouyun/mythesis.git
 git clone http://git.oschina.net/whatot/id3-py.git
 git clone http://gitrepo.org/Liu/algorithms4.git
-git clone http://luajit.org/git/luajit-2.0.git
 git clone https://github.com/alibaba/tengine.git
 git clone https://github.com/anjuke/zguide-cn
 git clone https://github.com/antirez/redis.git
@@ -47,6 +45,7 @@ git clone https://github.com/libevent/libevent
 git clone https://github.com/libgit2/libgit2
 git clone https://github.com/mcinglis/c-style
 git clone https://github.com/michaelfairley/mincemeatpy.git
+git clone https://github.com/neovim/neovim.git
 git clone https://github.com/numb3r3/crawler-python
 git clone https://github.com/openstack/swift.git
 git clone https://github.com/orangeduck/libCello
@@ -65,7 +64,6 @@ git clone https://github.com/whatot/libbsd.git
 git clone https://github.com/whatot/magicmethods-zh_CN.git
 git clone https://github.com/whatot/pintos.git
 git clone https://github.com/whatot/string_matching.git
-git clone https://github.com/whatot/whatot-dot.git
 git clone https://github.com/zeromq/czmq
 git clone https://github.com/zeromq/libzmq
 hg clone http://hg.nginx.org/nginx
