@@ -28,7 +28,7 @@ nmap yg <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap yd <ESC>:YcmDiags<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_extra_conf_globlist = ['~/git/*', '~/works/*','!~/*']
 let g:ycm_complete_in_comments_and_strings = 1
