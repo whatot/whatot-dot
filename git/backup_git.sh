@@ -25,7 +25,7 @@ do
 	if [ -d ".git" ]; then
 		tmp_address=`git remote -v | grep 'fetch' | \
 			awk '{print $2}' | \
-			sed 's/^/git clone /' `
+			sed 's/^/git clone --recursive /' `
 	elif [ -d ".hg" ]; then
 		tmp_address=`cat .hg/hgrc | grep $dis | \
 			awk '{print $3}' | \
