@@ -17,7 +17,6 @@ echo
 for dis in $( ls -l | grep "^d" | awk '{print $9 }' )
 do
 	cd $dis
-	echo "###########################################################"
 	echo "enter $dis !"
 	echo
 

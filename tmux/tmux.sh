@@ -28,10 +28,10 @@ if [[ $? != 0 ]]; then
 	tmux new-session -s works125 -n ~git -d
 	tmux send-keys -t works125 "cd ~/git/" C-m
 
-	tmux new-window -n postgresql -t works125
-	tmux send-keys -t works125:2 "cd ~/git/postgresql/" C-m
-
 	tmux new-window -n pgxc -t works125
+	tmux send-keys -t works125:2 "cd ~/works/pgxc/" C-m
+
+	tmux new-window -n pgxc1 -t works125
 	tmux send-keys -t works125:3 "cd ~/works/pgxc/" C-m
 
 	tmux new-window -n pgxc2 -t works125
@@ -73,10 +73,10 @@ if [[ $? != 0 ]]; then
 	tmux send-keys -t mydev "cd ~/git/" C-m
 
 	tmux new-window -n work1 -t mydev
-	tmux send-keys -t mydev:2 "cd ~/data/" C-m
+	tmux send-keys -t mydev:2 "cd ~/" C-m
 
 	tmux new-window -n work2 -t mydev
-	tmux send-keys -t mydev:3 "cd ~/data/" C-m
+	tmux send-keys -t mydev:3 "cd ~/" C-m
 
 	tmux new-window -n kernel -t mydev
 	tmux send-keys -t mydev:4 "cd ~/linux/" C-m
@@ -88,8 +88,8 @@ if [[ $? != 0 ]]; then
 	tmux new-window -n share -t mydev
 	tmux send-keys -t mydev:6 "cd ~/" C-m
 
-	tmux new-window -n postgresql -t mydev
-	tmux send-keys -t mydev:7 "cd ~/git/postgresql/" C-m
+	tmux new-window -n pg -t mydev
+	tmux send-keys -t mydev:7 "cd ~/git/" C-m
 
 	tmux select-window -t mydev:1
 	tmux select-pane -t mydev:1

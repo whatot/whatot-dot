@@ -2,9 +2,9 @@
 
 my vunble vimrc and other config files
 
-## vimrc linux deploy
+## 1. vimrc linux deploy
 
-details in ./deploy.sh
+__details in ./deploy.sh__
 
 maybe useful tips
 ```bash
@@ -26,20 +26,16 @@ yaourt -S global
 sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 ```
 
-## tmux
+## 2. tmux
 
 * tmux/tmux.conf
 * tmux/tmux.sh
 
-## build ycm again using local libclang.so
+## 3. build ycm again using local libclang.so
 
 ```
-	mkdir /tmp/ycm_build/ \
-		&& cd /tmp/ycm_build/ \
-		&& cmake -G "Unix Makefiles" \
-			-DEXTERNAL_LIBCLANG_PATH=/usr/lib/libclang.so . \
-			~/.vim/bundle/YouCompleteMe/cpp \
-		&& make ycm_core
+cd ~/.vim/bundle/YouCompleteMe/ \
+    && ./install.sh --clang-completer --system-libclang
 ```
 
-## others
+## 4. others
