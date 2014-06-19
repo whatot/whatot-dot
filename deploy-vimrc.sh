@@ -25,14 +25,15 @@ if [ -f "/usr/bin/pacman" ];then
 
 # In debian, Ubuntu
 elif [ -f "/usr/bin/apt-get" ];then
-	sudo apt-get install git vim-gtk ack cscope silversearcher-ag \
-		libclang-dev
+	sudo apt-get install git vim-gtk ack-grep cscope silversearcher-ag \
+		libclang-dev libncurses5-dev
 	# global is too old to use, so build from source.
 	if [ ! -f "/tmp/global_build/global-6.2.12.tar.gz" ];then
 		mkdir -p /tmp/global_build/
 		cd /tmp/global_build/
 		wget ftp://ftp.gnu.org/pub/gnu/global/global-6.2.12.tar.gz
 	fi
+	cd /tmp/global_build/
 	tar xvf global-6.2.12.tar.gz
 	cd global-6.2.12 && ./configure && sudo make install
 	cd .. && sudo rm -rf /tmp/global_build/global-6.2.12/
