@@ -5,7 +5,7 @@ set encoding=utf-8
 filetype plugin indent on
 syntax on
 
-set guifont=Yahei\ Mono\ 12
+set guifont=Droid\ Sans\ Mono\ 12
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac

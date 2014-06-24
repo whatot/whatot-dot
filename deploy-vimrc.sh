@@ -37,8 +37,11 @@ elif [ -f "/usr/bin/apt-get" ];then
 	tar xvf global-6.2.12.tar.gz
 	cd global-6.2.12 && ./configure && sudo make install
 	cd .. && sudo rm -rf /tmp/global_build/global-6.2.12/
-else
-	echo "This Linux distrbution not supported now"
+
+# In fedora, not in centos
+elif [ -f "/usr/bin/yum" ];then
+	sudo yum install -y the_silver_searcher global global-ctags ctags \
+		gvim git cscope ncurses-devel ncurses clang-devel clang llvm ack
 fi
 
 echo
