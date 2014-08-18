@@ -69,6 +69,7 @@ noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bundle 'hari-rangarajan/CCTree'
 Bundle 'CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Bundle 'Colour-Sampler-Pack'
@@ -399,7 +400,7 @@ set scrolloff=5             " 当光标距离极端(上,下,左,右)多少时发
 set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
-set foldlevel+=8            " 设置较大的foldlevel使得所有折叠被默认展开
+set foldlevel+=15           " 设置较大的foldlevel使得所有折叠被默认展开
                             " zr/zm zR/zM zc/zo zC/zO zd/zD [z ]z zj/zk
 set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
                             " 也考虑其它标签页里的窗口
@@ -805,18 +806,18 @@ set cscopetagorder=0
 " nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 " nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-nnoremap <leader>cg :execute 'cscope find g '.expand('<cword>')<CR>
-nnoremap <leader>cs :execute 'cscope find s '.expand('<cword>')<CR>
-nnoremap <leader>cc :execute 'cscope find c '.expand('<cword>')<CR>
-nnoremap <leader>ct :execute 'cscope find t '.expand('<cword>')<CR>
-nnoremap <leader>cf :execute 'cscope find f '.expand('<cword>')<CR>
-nnoremap <leader>ci :execute 'cscope find i '.expand('<cword>')<CR>
-vnoremap <leader>cg <ESC>:execute 'cscope find g '.GetVisualSelection()<CR>
-vnoremap <leader>cs <ESC>:execute 'cscope find s '.GetVisualSelection()<CR>
-vnoremap <leader>cc <ESC>:execute 'cscope find c '.GetVisualSelection()<CR>
-vnoremap <leader>ct <ESC>:execute 'cscope find t '.GetVisualSelection()<CR>
-vnoremap <leader>cf <ESC>:execute 'cscope find f '.GetVisualSelection()<CR>
-vnoremap <leader>ci <ESC>:execute 'cscope find i '.GetVisualSelection()<CR>
+nnoremap <C-_>g :execute 'cscope find g '.expand('<cword>')<CR>
+nnoremap <C-_>s :execute 'cscope find s '.expand('<cword>')<CR>
+nnoremap <C-_>c :execute 'cscope find c '.expand('<cword>')<CR>
+nnoremap <C-_>t :execute 'cscope find t '.expand('<cword>')<CR>
+nnoremap <C-_>f :execute 'cscope find f '.expand('<cword>')<CR>
+nnoremap <C-_>i :execute 'cscope find i '.expand('<cword>')<CR>
+vnoremap <C-_>g <ESC>:execute 'cscope find g '.GetVisualSelection()<CR>
+vnoremap <C-_>s <ESC>:execute 'cscope find s '.GetVisualSelection()<CR>
+vnoremap <C-_>c <ESC>:execute 'cscope find c '.GetVisualSelection()<CR>
+vnoremap <C-_>t <ESC>:execute 'cscope find t '.GetVisualSelection()<CR>
+vnoremap <C-_>f <ESC>:execute 'cscope find f '.GetVisualSelection()<CR>
+vnoremap <C-_>i <ESC>:execute 'cscope find i '.GetVisualSelection()<CR>
 
 function! GetVisualSelection()
     let [s:lnum1, s:col1] = getpos("'<")[1:2]
