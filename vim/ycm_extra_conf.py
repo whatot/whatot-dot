@@ -43,6 +43,14 @@ flags = [
 '-Wno-variadic-macros',
 '-fexceptions',
 '-DNDEBUG',
+# added for kernel compile
+'-Wundef',
+'-Wstrict-prototypes',
+'-Wno-trigraphs',
+'-fno-strict-aliasing',
+'-fno-common',
+'-Werror-implicit-function-declaration',
+'-Wno-format-security',
 # THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
 # language to use when compiling headers. So it will guess. Badly. So C++
 # headers will be compiled as C headers. You don't want that so ALWAYS specify
@@ -54,24 +62,32 @@ flags = [
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
-'-D_POSIX_SOURCE',
 '-x',
 'c',
 '-I',
-'.',
+'include/',
 '-I',
-'-isystem',
-'/usr/include',
-'-isystem',
-'/usr/local/include',
-'-isystem',
-'/usr/lib/clang/3.4.1/include',
+'include/generated/',
+'-I',
+'include/asm-generic/',
+'-I',
+'arch/x86/include/',
+'-I',
+'arch/x86/include/generated/',
+'-I',
+'arch/x86/include/uapi/',
+'-I',
+'arch/x86/include/generated/uapi/',
 ]
 
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
 # more details: http://clang.llvm.org/docs/JSONCompilationDatabase.html
+#
+# You can get CMake to generate this file for you by adding:
+#   set( CMAKE_EXPORT_COMPILE_COMMANDS 1 )
+# to your CMakeLists.txt file.
 #
 # Most projects will NOT need to set this to anything; you can just change the
 # 'flags' list of compilation flags. Notice that YCM itself uses that approach.

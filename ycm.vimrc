@@ -389,7 +389,7 @@ set nostartofline
 set nojoinspaces
 "set nowrapscan             " 搜索不回绕,默认回绕
 set wrap                    " 自动换行显示
-"set autochdir              " 自动切换当前目录为当前文件所在的目录
+set autochdir               " 自动切换当前目录为当前文件所在的目录
 set autoread                " 自动读取改变了的编辑中的文件
 set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
 set sidescroll=5            " 当光标达到水平极端时 移动的列数
@@ -789,19 +789,6 @@ set cscopetag
 set cscopeverbose
 " 'csto','cscopetagorder' 被设为 0，cscope数据库先被搜索，搜索失败的情况下在搜索标签文件
 set cscopetagorder=0
-
-" if has("cscope")
-"     set csprg=/usr/bin/cscope
-" endif
-
-" nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-" nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-" nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <C-_>g :execute 'cscope find g '.expand('<cword>')<CR>
 nnoremap <C-_>s :execute 'cscope find s '.expand('<cword>')<CR>
