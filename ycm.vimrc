@@ -4,26 +4,13 @@ set encoding=utf-8
 
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call plug#begin('~/.vim/plugged')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'gmarik/vundle'
-
-"$ mkdir -p ~/.vim/bundle/
-"$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-"不同代码源上的vim插件的安装和管理方法
-"
-"格式1：Github上其他用户的仓库（非vim-scripts账户里的仓库，所以要加Github用户名）
-"Bundle 'tpope/vim-fugitive'
-"格式2：vim-scripts里面的仓库，直接打仓库名即可。
-"Bundle 'FuzzyFinder'
-"Bundle 'L9'
-"格式3：非Github的Git仓库
-"Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+" vim-plug start
+" https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
 nmap yg <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap yd <ESC>:YcmDiags<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
@@ -40,73 +27,73 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger = "<c-l>"
 " let g:UltiSnipsJumpForwardTrigger = "<c-m>"
 " let g:UltiSnipsListSnippets = '<c-o>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'a.vim'
+Plug 'vim-scripts/a.vim'
 "设置include(.h)文件存在何处.
 let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
 "当没有找到相应的.h文件时,不自动创建
 let alternateNoDefaultAlternate = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'jiangmiao/auto-pairs'
-" Bundle 'autoload_cscope.vim'
-Bundle 'bash-support.vim'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'autoload_cscope.vim'
+Plug 'vim-scripts/bash-support.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'bufexplorer.zip'
+Plug 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bundle 'hari-rangarajan/CCTree'
-Bundle 'CmdlineComplete'
+" Plug 'hari-rangarajan/CCTree'
+Plug 'vim-scripts/CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-Bundle 'Colour-Sampler-Pack'
-Bundle 'FencView.vim'
+Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'vim-scripts/FencView.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'grep.vim'
+Plug 'vim-scripts/grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'whatot/gtags-cscope.vim'
+Plug 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bundle 'amix/vim-zenroom2'
-Bundle 'junegunn/goyo.vim'
+" Plug 'amix/vim-zenroom2'
+Plug 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80
 let g:goyo_margin_top = 4
 let g:goyo_margin_bottom = 4
 let g:goyo_linenr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'L9'
-Bundle 'LargeFile'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
-Bundle 'matchit.zip'
-Bundle 'vimcn/matchit.vim.cnx'
+Plug 'vim-scripts/matchit.zip'
+Plug 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'The-NERD-Commenter'
-Bundle 'vimcn/NERD_commenter.cnx'
+Plug 'vim-scripts/The-NERD-Commenter'
+Plug 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
 let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
 let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'scrooloose/nerdtree'
-Bundle 'tyok/nerdtree-ack'
-Bundle 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'tyok/nerdtree-ack'
+Plug 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> wa :NERDTreeTabsToggle<CR>
 nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
@@ -120,7 +107,7 @@ let NERDTreeChDirMode = 2
 let NERDTreeShowBookmarks = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
@@ -157,9 +144,9 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'STL-improved'
+Plug 'vim-scripts/STL-improved'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_c_checkers = ['make']
@@ -180,27 +167,27 @@ map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map!
 nmap <C-Up> :cp<Cr>
 nmap <C-Down> :cn<Cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'majutsushi/tagbar'
-Bundle 'vimcn/tagbar.cnx'
+Plug 'majutsushi/tagbar'
+Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 35
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
 " autocmd FileType c,cpp :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'tag_in_new_tab'
+Plug 'vim-scripts/tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'TaskList.vim'
+Plug 'vim-scripts/TaskList.vim'
 " <leader>t
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/unite-outline'
-Bundle 'Shougo/neomru.vim'
-" Bundle 'hewes/unite-gtags'
-" Bundle 'osyo-manga/unite-quickfix'
-" Bundle 'tsukkee/unite-tag'
-" Bundle 'Shougo/unite-help'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/neomru.vim'
+" Plug 'hewes/unite-gtags'
+" Plug 'osyo-manga/unite-quickfix'
+" Plug 'tsukkee/unite-tag'
+" Plug 'Shougo/unite-help'
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 let g:unite_source_rec_max_cache_files = 30000
 let g:unite_source_find_max_candidates = 30000
@@ -226,28 +213,28 @@ nnoremap so :<C-u>Unite outline<CR>
 " nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
 " vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Shougo/vimproc'
+Plug 'Shougo/vimproc', { 'do': 'make' }
 " $ cd ~/.vim/bundle/vimproc.vim
 " $ make
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
-Bundle 'asins/vimcdoc'
-Bundle 'hsitz/VimOrganizer'
+Plug 'asins/vimcdoc'
+Plug 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<M-q>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 "for visual selection
 map + <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'nvie/vim-flake8'
-Bundle 'tpope/vim-fugitive'
-Bundle 'plasticboy/vim-markdown'
+Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-fugitive'
+Plug 'plasticboy/vim-markdown'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
 " " Default mapping
 " let g:multi_cursor_next_key='<C-n>'
@@ -255,9 +242,9 @@ Bundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bundle 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'greyblake/vim-preview'
+Plug 'greyblake/vim-preview'
 " <Leader>P
 " markdown(md, mkd, mkdn, mdown) - bluecloth
 " rdoc - github-markup
@@ -266,13 +253,13 @@ Bundle 'greyblake/vim-preview'
 " ronn - ronn
 " reStructuredText(rst) - RbST, rst2html(python-docutils)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-speeddating'
-Bundle 'tpope/vim-surround'
+" Plug 'hynek/vim-python-pep8-indent'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Bundle 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_update_on_bufenter = 0
 let g:signify_cursorhold_normal = 0
@@ -284,10 +271,11 @@ nmap wg <Plug>(signify-toggle)
 nmap <leader>gj <plug>(signify-next-jump)
 nmap <leader>gk <plug>(signify-prev-jump)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#end()
 filetype plugin indent on   " required!
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vundle end
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-plug end
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
 set guifont=Droid\ Sans\ Mono\ 13

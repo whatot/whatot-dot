@@ -52,23 +52,24 @@ if [ -f ~/".vimrc"  ]; then
 	mv ~/.vimrc ~/.vimrc-bakup
 fi
 
-mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/sessions/
+mkdir -p ~/.vim/autoload
+curl -fLo ~/.vim/autoload/plug.vim \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 cd $PATH_NOW
 ln -s $(pwd)/.vimrc ~/.vimrc
 
-# Using bundle to install plugins in github
-vim +BundleInstall +BundleClean! +qa
+# Using vim-plug to install plugins in github
+vim +PlugInstall +PlugClean! +qa
 
 echo
 echo "######## third: build vimproc, ycm ##################"
 echo
 
-make -C ~/.vim/bundle/vimproc
+# make -C ~/.vim/plugged/vimproc
 
-cd ~/.vim/bundle/YouCompleteMe/ \
-	&& ./install.sh --clang-completer --system-libclang
+# cd ~/.vim/plugged/YouCompleteMe/ \
+# 	&& ./install.sh --clang-completer --system-libclang
 
 cd $PATH_NOW
