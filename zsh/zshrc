@@ -49,43 +49,35 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git colored-man colorize colorizetmux autojump vi-mode)
+plugins=(git tmux yum docker gitignore autojump postgres colorize)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-# export PATH=$PATH:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-# export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
-# export MANPATH="/usr/local/man:$MANPATH"
+# User configuration
 
-[[ -s /usr/share/autojump/autojump.zsh ]] && . /usr/share/autojump/autojump.zsh
-[[ -s /usr/share/doc/cdargs/examples/cdargs-zsh.sh ]] && . /usr/share/doc/cdargs/examples/cdargs-zsh.sh
+export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/local/sbin:/usr/sbin:/sbin"
+# export MANPATH="/usr/local/man:$MANPATH"
+export JAVA_HOME="/etc/alternatives/java_sdk/"
 
 # for PATH, CLASSPATH
 export CLASSPATH=$JAVA_HOME/lib/
-export PATH=/usr/lib/ccache/bin/:$PATH
-export PATH=$PATH:~/.gem/ruby/2.0.0/bin:~/.cabal/bin/
-. /etc/profile.d/*.sh
-
-# Bacward search in the shell history with <C-r>
-bindkey '^R' history-incremental-search-backward
-setopt hist_ignore_all_dups
+export PATH="/usr/lib64/ccache/":$PATH
 
 # You may need to manually set your language environment
-export LANG=zh_CN.UTF-8
+# export LANG=en_US.UTF-8
+# export LANGUAGE=zh_CN.UTF-8
+# export LANG=zh_CN.UTF-8
+export LC_ALL="en_US.UTF-8"
+export NO_AT_BRIDGE=1
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export $(dbus-launch)
+export NSS_USE_SHARED_DB=ENABLED
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export EDITOR='vim'
 
 alias vi='vim'
 alias gvim='gvim -c "call Maximize_Window()"'
