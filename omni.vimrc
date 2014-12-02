@@ -849,3 +849,9 @@ function! UpdateGtags(f)
     let dir = fnamemodify(a:f, ':p:h')
     exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
 endfunction
+
+" fix 无法正常加载中文菜单
+set langmenu=zh_CN.UTF-8            "设置菜单语言
+source $VIMRUNTIME/delmenu.vim      "导入删除菜单脚本，删除乱码的菜单
+source $VIMRUNTIME/menu.vim         "导入正常的菜单脚本
+language messages zh_CN.utf-8       "设置提示信息语言
