@@ -41,7 +41,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'a.vim'
+Plug 'vim-scripts/a.vim'
 "设置include(.h)文件存在何处.
 let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
 "当没有找到相应的.h文件时,不自动创建
@@ -49,20 +49,20 @@ let alternateNoDefaultAlternate = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'jiangmiao/auto-pairs'
 " Plug 'autoload_cscope.vim'
-Plug 'bash-support.vim'
+Plug 'vim-scripts/bash-support.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'bufexplorer.zip'
+Plug 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug 'hari-rangarajan/CCTree'
-Plug 'CmdlineComplete'
+Plug 'vim-scripts/CmdlineComplete'
 "补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
-Plug 'Colour-Sampler-Pack'
-Plug 'FencView.vim'
+Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'vim-scripts/FencView.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'grep.vim'
+Plug 'vim-scripts/grep.vim'
 let g:Grep_Default_Options = '--binary-files=without-match'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'whatot/gtags-cscope.vim'
@@ -78,16 +78,16 @@ let g:goyo_linenr = 0
 Plug 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'L9'
-Plug 'LargeFile'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
-Plug 'matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 Plug 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'The-NERD-Commenter'
+Plug 'vim-scripts/The-NERD-Commenter'
 Plug 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
 let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
@@ -147,7 +147,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'STL-improved'
+Plug 'vim-scripts/STL-improved'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
@@ -178,10 +178,10 @@ let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
 " autocmd FileType c,cpp :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'tag_in_new_tab'
+Plug 'vim-scripts/tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'TaskList.vim'
+Plug 'vim-scripts/TaskList.vim'
 " <leader>t
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Shougo/unite.vim'
@@ -216,8 +216,8 @@ nnoremap so :<C-u>Unite outline<CR>
 " nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
 " vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Shougo/vimproc'
-" $ cd ~/.vim/bundle/vimproc.vim
+Plug 'Shougo/vimproc', { 'do': 'make' }
+" $ cd ~/.vim/plugged/vimproc.vim
 " $ make
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
@@ -380,7 +380,7 @@ set nostartofline
 set nojoinspaces
 "set nowrapscan             " 搜索不回绕,默认回绕
 set wrap                    " 自动换行显示
-"set autochdir              " 自动切换当前目录为当前文件所在的目录
+set autochdir               " 自动切换当前目录为当前文件所在的目录
 set autoread                " 自动读取改变了的编辑中的文件
 set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
 set sidescroll=5            " 当光标达到水平极端时 移动的列数
@@ -780,19 +780,6 @@ set cscopetag
 set cscopeverbose
 " 'csto','cscopetagorder' 被设为 0，cscope数据库先被搜索，搜索失败的情况下在搜索标签文件
 set cscopetagorder=0
-
-" if has("cscope")
-"     set csprg=/usr/bin/cscope
-" endif
-
-" nmap <C-c>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-" nmap <C-c>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-" nmap <C-c>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-" nmap <C-c>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <C-_>g :execute 'cscope find g '.expand('<cword>')<CR>
 nnoremap <C-_>s :execute 'cscope find s '.expand('<cword>')<CR>

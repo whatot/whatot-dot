@@ -91,4 +91,6 @@ alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 
 # 每次登入控制台时关掉PC喇叭
-setterm -blength 0
+# edit /etc/inputrc Uncomment the 2nd line
+
+unset GREP_OPTIONS
