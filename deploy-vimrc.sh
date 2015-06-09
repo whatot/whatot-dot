@@ -53,6 +53,7 @@ if [ -f ~/".vimrc"  ]; then
 fi
 
 mkdir -p ~/.vim/sessions/
+mkdir -p ~/.vim/undodir/
 mkdir -p ~/.vim/autoload
 curl -fLo ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -73,3 +74,10 @@ echo
 # 	&& ./install.sh --clang-completer --system-libclang
 
 cd $PATH_NOW
+
+# others
+
+# nodejs ruby .gemrc
+# sudo npm -g install instant-markdown-d
+# gem install pygments.rb
+# gem install redcarpet

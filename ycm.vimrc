@@ -38,6 +38,14 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'bling/vim-airline'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#csv#enabled = 1
+let g:airline_powerline_fonts=1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/a.vim'
 "设置include(.h)文件存在何处.
 let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
@@ -52,6 +60,8 @@ Plug 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plug 'chrisbra/csv.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug 'hari-rangarajan/CCTree'
 Plug 'vim-scripts/CmdlineComplete'
@@ -92,6 +102,8 @@ let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore=['.d$[[dir]]', '.o$[[file]]']
+
 Plug 'tyok/nerdtree-ack'
 Plug 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
@@ -144,6 +156,8 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'rust-lang/rust.vim'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/STL-improved'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic'
@@ -189,12 +203,12 @@ Plug 'Shougo/neomru.vim'
 " Plug 'tsukkee/unite-tag'
 " Plug 'Shougo/unite-help'
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
-let g:unite_source_rec_max_cache_files = 30000
-let g:unite_source_find_max_candidates = 30000
+let g:unite_source_rec_max_cache_files = 2000
+let g:unite_source_find_max_candidates = 2000
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
 let g:unite_enable_short_source_names = 1
-nnoremap sp  :Unite -start-insert file_rec/async:!<cr>
+nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
 nnoremap sa :<C-u>Unite mapping<CR>
@@ -222,7 +236,7 @@ Plug 'asins/vimcdoc'
 Plug 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Lokaltog/vim-easymotion'
-let EasyMotion_leader_key = '<M-q>'
+let EasyMotion_leader_key = '<leader><leader>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'terryma/vim-expand-region'
@@ -241,17 +255,6 @@ Plug 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_prev_key='<C-p>'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'vim-pandoc/vim-pandoc'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'greyblake/vim-preview'
-" <Leader>P
-" markdown(md, mkd, mkdn, mdown) - bluecloth
-" rdoc - github-markup
-" textile - RedCloth
-" html(htm)
-" ronn - ronn
-" reStructuredText(rst) - RbST, rst2html(python-docutils)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug 'hynek/vim-python-pep8-indent'
 Plug 'tpope/vim-unimpaired'
@@ -278,7 +281,8 @@ filetype plugin indent on   " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
-set guifont=Droid\ Sans\ Mono\ 13
+"set guifont=Droid\ Sans\ Mono\ 13
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -286,6 +290,7 @@ set formatoptions=croqn2mB1
 "set formatoptions=tcqro     " 使得注释换行时自动加上前导的空格和星号
 set helplang=cn
 set number
+"set relativenumber
 
 " 不要响铃，更不要闪屏
 set novisualbell  " 不要闪烁
@@ -392,7 +397,7 @@ set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指�
 
 " 重启后撤销历史可用 persistent undo
 set undofile
-set undodir=$VIMFILES/undodir
+set undodir=~/.vim/undodir/
 set undolevels=1000 "maximum number of changes that can be undone
 
 " Avoid command-line redraw on every entered character by turning off Arabic
@@ -638,15 +643,18 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
-" let colorscheme = 'desert'
-" let colorscheme = 'desertEx'
-set background=dark
 
-if has("gui_running")
-    let colorscheme = 'desert'
-else
-    let colorscheme = 'desert256'
-endif
+set background=dark
+let colorscheme = 'desert'
+
+" if has('gui_running')
+	" set background=light
+	" let colorscheme = 'solarized'
+" else
+	" set background=dark
+	" let colorscheme = 'desert'
+" endif
+
 
 " 图形与终端
 if has("gui_running")
@@ -741,24 +749,24 @@ set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令�
 
 " set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
 
-hi User1 guifg=#eea040 guibg=#222222 ctermfg=6 ctermbg=0
-hi User2 guifg=#dd3333 guibg=#222222 ctermfg=5 ctermbg=0
-hi User3 guifg=#ff66ff guibg=#222222 ctermfg=4 ctermbg=0
-hi User4 guifg=#a0ee40 guibg=#222222 ctermfg=1 ctermbg=0
-hi User5 guifg=#eeee40 guibg=#222222 ctermfg=2 ctermbg=0
+" hi User1 guifg=#eea040 guibg=#222222 ctermfg=6 ctermbg=0
+" hi User2 guifg=#dd3333 guibg=#222222 ctermfg=5 ctermbg=0
+" hi User3 guifg=#ff66ff guibg=#222222 ctermfg=4 ctermbg=0
+" hi User4 guifg=#a0ee40 guibg=#222222 ctermfg=1 ctermbg=0
+" hi User5 guifg=#eeee40 guibg=#222222 ctermfg=2 ctermbg=0
 
-set statusline=
-set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
-set statusline +=%3*%Y\ %*              "file type
-set statusline +=%5*[%{&ff}]\ %*        "file format
-set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
-set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
-set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
-set statusline +=%1*%=%5l%*             "current line
-set statusline +=%2*/%L%*               "total lines
-set statusline +=%1*%4v\ %*             "virtual column number
-set statusline +=%2*0x%04B\ %*          "character under cursor
+" set statusline=
+" set statusline +=%1*\ %n\ %*            "buffer number
+" set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
+" set statusline +=%3*%Y\ %*              "file type
+" set statusline +=%5*[%{&ff}]\ %*        "file format
+" set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
+" set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
+" set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
+" set statusline +=%1*%=%5l%*             "current line
+" set statusline +=%2*/%L%*               "total lines
+" set statusline +=%1*%4v\ %*             "virtual column number
+" set statusline +=%2*0x%04B\ %*          "character under cursor
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -- cscope --

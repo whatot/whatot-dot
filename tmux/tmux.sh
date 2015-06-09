@@ -21,34 +21,38 @@
 # tmux new-window -n jemalloc -t mydev
 # tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
+IN_PATH="~/install/"
+PGC_PATH="~/works/pgc/"
+USER_TMP="~/tmp/"
+#IN_PATH="/tmp/install"
+
 function tmux_company {
 
 tmux has-session -t works125
 if [[ $? != 0 ]]; then
-	tmux new-session -s works125 -n ~git -d
-	tmux send-keys -t works125 "cd ~/git/" C-m
+	tmux new-session -s works125 -n pgc1 -d
+	tmux send-keys -t works125 "cd $PGC_PATH" C-m
 
-	tmux new-window -n pgxc -t works125
-	tmux send-keys -t works125:2 "cd ~/works/pgxc/" C-m
+	tmux new-window -n pgc2 -t works125
+	tmux send-keys -t works125:2 "cd $PGC_PATH" C-m
 
-	tmux new-window -n pgxc1 -t works125
-	tmux send-keys -t works125:3 "cd ~/works/pgxc/" C-m
+	tmux new-window -n pgc3 -t works125
+	tmux send-keys -t works125:3 "cd $PGC_PATH" C-m
 
-	tmux new-window -n pgxc2 -t works125
-	tmux send-keys -t works125:4 "cd ~/works/pgxc/" C-m
+	tmux new-window -n in4 -t works125
+	tmux send-keys -t works125:4 "cd $IN_PATH" C-m
 
-	tmux new-window -n install -t works125
-	tmux send-keys -t works125:5 "cd ~/install/" C-m
+	tmux new-window -n in5 -t works125
+	tmux send-keys -t works125:5 "cd $IN_PATH" C-m
 
-	tmux new-window -n install2 -t works125
-	tmux send-keys -t works125:6 "cd ~/install/" C-m
+	tmux new-window -n in6 -t works125
+	tmux send-keys -t works125:6 "cd $IN_PATH" C-m
 
-	tmux new-window -n goagent -t works125
-	tmux send-keys -t works125:7 "cd ~/git/goagent/local/" C-m
-	tmux send-keys -t works125:7 "python2 proxy.py" C-m
+	tmux new-window -n in7 -t works125
+	tmux send-keys -t works125:7 "cd $IN_PATH" C-m
 
-	tmux new-window -n share -t works125
-	tmux send-keys -t works125:8 "cd ~/" C-m
+	tmux new-window -n tmp8 -t works125
+	tmux send-keys -t works125:8 "cd $USER_TMP" C-m
 
 	tmux select-window -t works125:1
 	tmux select-pane -t works125:1

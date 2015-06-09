@@ -58,6 +58,7 @@ git clone https://github.com/sjl/learnvimscriptthehardway.git
 git clone https://github.com/Skylersun/PyMineSweeper.git
 git clone https://github.com/symisc/vedis
 git clone https://github.com/torvalds/subsurface.git
+git clone https://github.com/txthinking/google-hosts
 git clone https://github.com/vhf/free-programming-books
 git clone https://github.com/whatot/changing.git
 git clone https://github.com/whatot/libbsd.git
