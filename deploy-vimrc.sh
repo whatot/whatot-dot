@@ -16,7 +16,7 @@ echo
 if [ -f "/usr/bin/pacman" ];then
 	sudo pacman -S git gvim ack cscope flake8 python2-flake8 \
 		the_silver_searcher clang llvm
-	# for global in AUR
+	# for global in AUR, global is still in AUR
 	if [ -f "/usr/bin/yaourt" ];then
 		yaourt -S global
 	else
@@ -52,9 +52,12 @@ if [ -f ~/".vimrc"  ]; then
 	mv ~/.vimrc ~/.vimrc-bakup
 fi
 
+# all subdirs
+mkdir -p ~/.vim/plugged/
 mkdir -p ~/.vim/sessions/
 mkdir -p ~/.vim/undodir/
-mkdir -p ~/.vim/autoload
+mkdir -p ~/.vim/autoload/
+
 curl -fLo ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 

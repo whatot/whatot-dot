@@ -7,7 +7,7 @@
 # -t           -- specify target session
 
 # /usr/bin/xfce4-terminal --maximize --execute /usr/bin/tmux.sh
-# /usr/bin/xfce4-terminal --command=tmux --maximize
+# /usr/bin/gnome-terminal --maximize --command "/usr/bin/tmux.sh"
 
 # tmux example
 
@@ -103,40 +103,6 @@ tmux attach -t mydev
 }
 
 
-function tmux_loong {
-
-tmux has-session -t loong
-if [[ $? != 0 ]]; then
-	tmux new-session -s loong -n '~git' -d
-	tmux send-keys -t loong "cd ~/git/" C-m
-
-	tmux new-window -n share -t loong
-	tmux send-keys -t loong:2 "cd ~/" C-m
-
-	tmux new-window -n share2 -t loong
-	tmux send-keys -t loong:3 "cd ~/" C-m
-
-	tmux new-window -n changing -t loong
-	tmux send-keys -t loong:4 "cd ~/git/changing" C-m
-
-	tmux new-window -n lua2 -t loong
-	tmux split-window -h -t loong
-	tmux send-keys -t loong:5.1 "cd ~/git/redis/deps/lua/src/" C-m
-	tmux send-keys -t loong:5.2 "cd ~/base/ma_c/5/deps/lua/src/" C-m
-
-	tmux new-window -n redis -t loong
-	tmux send-keys -t loong:6 "cd ~/git/redis/src/" C-m
-
-	tmux new-window -n tengine -t loong
-	tmux send-keys -t loong:7 "cd ~/git/tengine/" C-m
-
-	tmux select-window -t loong:1
-	tmux select-pane -t loong:1
-fi
-tmux attach -t loong
-
-}
-
 HOSTNAME=`cat /etc/hostname`
 
 if [[ -f /usr/bin/tmux ]]; then
@@ -147,16 +113,12 @@ if [[ -f /usr/bin/tmux ]]; then
 			tmux_company
 		elif [[ $HOSTNAME == 'cru' ]]; then
 			tmux_mydev
-		elif [[ $HOSTNAME == 'loo' ]]; then
-			tmux_loong
 		fi
 
 	elif [[ $# == 1 ]] && [[ $@ == 'my' ]]; then
 		tmux_mydev
 	elif  [[ $# == 1 ]] && [[ $@ == 'w' ]]; then
 		tmux_company
-	elif  [[ $# == 1 ]] && [[ $@ == 'l' ]]; then
-		tmux_loong
 	fi
 
 fi

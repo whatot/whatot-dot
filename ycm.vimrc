@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 " https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
-nmap yg <ESC>:YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap yg <ESC>:YcmCompleter GoTo<CR>
 nmap yd <ESC>:YcmDiags<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
@@ -29,9 +29,9 @@ let g:ycm_seed_identifiers_with_syntax = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger = "<c-l>"
-" let g:UltiSnipsJumpForwardTrigger = "<c-m>"
-" let g:UltiSnipsListSnippets = '<c-o>'
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -119,42 +119,8 @@ let NERDTreeChDirMode = 2
 let NERDTreeShowBookmarks = 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'kien/rainbow_parentheses.vim'
-
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-let g:rbpt_max = 40
-let g:rbpt_loadcmd_toggle = 0
-
-" commands:
-" :RainbowParenthesesToggle       " Toggle it on/off
-" :RainbowParenthesesLoadRound    " (), the default when toggling
-" :RainbowParenthesesLoadSquare   " []
-" :RainbowParenthesesLoadBraces   " {}
-" :RainbowParenthesesLoadChevrons " <>
-
-" always On:
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'rust-lang/rust.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,10 +150,10 @@ nmap <C-Down> :cn<Cr>
 Plug 'majutsushi/tagbar'
 Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
-let g:tagbar_width = 35
+let g:tagbar_width = 40
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
-" autocmd FileType c,cpp :TagbarOpen  " 默认开启tagbar
+" autocmd FileType c,cpp nested :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
@@ -208,6 +174,8 @@ let g:unite_source_find_max_candidates = 2000
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
 let g:unite_enable_short_source_names = 1
+let g:unite_source_rec_async_command =
+    \ 'ag --follow --nocolor --nogroup --hidden -g ""'
 nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
@@ -234,6 +202,8 @@ Plug 'Shougo/vimproc', { 'do': 'make' }
 " 中文文档
 Plug 'asins/vimcdoc'
 Plug 'hsitz/VimOrganizer'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'octol/vim-cpp-enhanced-highlight'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<leader><leader>'
@@ -262,6 +232,19 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'xolox/vim-session'
+Plug 'vim-misc'
+let g:session_directory = '~/.vim/sessions/'
+let g:session_default_name = 'default'
+let g:session_persist_colors = 0  " don't save colorscheme and bg
+let g:session_autosave = 'yes'
+let g:session_autosave_periodic = 5
+set sessionoptions=blank,buffers,sesdir,folds,tabpages,winsize,resize
+" Don't persist options and mappings because it can corrupt sessions.
+set sessionoptions-=options
+nmap <F3> :SaveSession!
+nmap <C-F3> :OpenSession
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_update_on_bufenter = 0
@@ -282,7 +265,7 @@ filetype plugin indent on   " required!
 syntax on
 
 "set guifont=Droid\ Sans\ Mono\ 13
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 13
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -482,16 +465,6 @@ nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" 补全最长项
-inoremap <expr> <C-L> pumvisible()?"\<C-E>\<C-N>":"\<C-N>"
-
-" session
-" :mksession
-" :source session-file
-set sessionoptions=blank,buffers,sesdir,folds,help,options,tabpages,winsize,resize
-nmap <F3> :mksession! ~/.vim/sessions/
-nmap <C-F3> :so ~/.vim/sessions/
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  mapleader
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -644,16 +617,16 @@ endfunction
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 
-set background=dark
-let colorscheme = 'desert'
+" set background=dark
+" let colorscheme = 'desert'
 
-" if has('gui_running')
-	" set background=light
-	" let colorscheme = 'solarized'
-" else
-	" set background=dark
-	" let colorscheme = 'desert'
-" endif
+if has('gui_running')
+	set background=light
+	let colorscheme = 'solarized'
+else
+	set background=dark
+	let colorscheme = 'desert'
+endif
 
 
 " 图形与终端

@@ -1,3 +1,13 @@
-git clone git://git.ghostscript.com/mupdf.git
-git clone https://github.com/goagent/goagent.git
-git clone https://github.com/postgres-xc/postgres-xc
+git clone --recursive git://git.apache.org/spark.git
+git clone --recursive http://llvm.org/git/llvm.git
+git clone --recursive https://github.com/b4winckler/vim
+git clone --recursive https://github.com/goagent/goagent.git
+git clone --recursive https://github.com/gorhill/uBlock
+git clone --recursive https://github.com/metamx/druid/
+git clone --recursive https://github.com/mpv-player/mpv-build
+git clone --recursive https://github.com/postgres/postgres
+git clone --recursive https://github.com/rust-lang/rust
+git clone --recursive https://github.com/syl20bnr/spacemacs
+git clone --recursive https://github.com/tuhdo/tuhdo.github.io
+git clone --recursive https://github.com/txthinking/google-hosts
+git clone --recursive https://github.com/VoltDB/voltdb

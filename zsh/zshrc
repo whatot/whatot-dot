@@ -49,31 +49,30 @@ ZSH_THEME="gentoo"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git tmux yum docker gitignore autojump postgres colorize)
+plugins=(git tmux docker gitignore autojump postgres colorize)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/lib64/qt4/bin:/usr/local/bin:/usr/bin:/bin:~/bin:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="/usr/lib64/qt4/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin/"
+export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH="${PATH}:/usr/lib/jvm/default/bin"
 export JAVA_HOME="/etc/alternatives/java_sdk/"
 
 # for PATH, CLASSPATH
 export CLASSPATH=$JAVA_HOME/jre/lib/
-export PATH="/usr/lib64/ccache/":$PATH
+export PATH="/usr/lib/ccache/bin/":$PATH
 
 # You may need to manually set your language environment
-export LANG="zh_CN.UTF-8"
-export LANGUAGE="zh_CN:en_US:en"
-export LC_CTYPE="en_US.UTF-8"
+#export LANG="zh_CN"
+#export LANGUAGE="zh_CN:en_US:en"
+#export LC_CTYPE="en_US.UTF-8"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-
-export $(dbus-launch)
-export NSS_USE_SHARED_DB=ENABLED
 
 export EDITOR='vim'
 
@@ -94,3 +93,5 @@ alias -s bz2='tar -xjvf'
 # edit /etc/inputrc Uncomment the 2nd line
 
 unset GREP_OPTIONS
+
+export MESA_GL_VERSION_OVERRIDE=2.1
