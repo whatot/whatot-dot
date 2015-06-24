@@ -11,8 +11,9 @@ call plug#begin('~/.vim/plugged')
 " https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
-nmap yg <ESC>:YcmCompleter GoTo<CR>
-nmap yd <ESC>:YcmDiags<CR>
+nmap yg :YcmCompleter GoTo<CR>
+nmap yd :YcmDiags<CR>
+nmap yt :YcmCompleter GetType<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
@@ -30,7 +31,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
+" let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mileszs/ack.vim'
@@ -64,8 +65,6 @@ noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 " Plug 'chrisbra/csv.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug 'hari-rangarajan/CCTree'
-Plug 'vim-scripts/CmdlineComplete'
-"补全命令行keywords(在本文件中),use Ctrl-P or Ctrl-N
 Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'vim-scripts/FencView.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -180,7 +179,8 @@ nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
 nnoremap sa :<C-u>Unite mapping<CR>
-nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
+" nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
+nnoremap s/ :execute 'Unite' 'grep:'.unite#util#path2project_directory(getcwd())<CR>
 nnoremap sy :Unite history/yank<cr>
 " nnoremap ss :Unite -quick-match buffer<cr>
 nnoremap ss :Unite -start-insert buffer<cr>
@@ -241,9 +241,9 @@ let g:session_autosave = 'yes'
 let g:session_autosave_periodic = 5
 set sessionoptions=blank,buffers,sesdir,folds,tabpages,winsize,resize
 " Don't persist options and mappings because it can corrupt sessions.
-set sessionoptions-=options
-nmap <F3> :SaveSession!
-nmap <C-F3> :OpenSession
+set sessionoptions-=options,localoptions
+nmap <F3> :SaveSession!<space>
+nmap <C-F3> :OpenSession!<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
@@ -314,7 +314,8 @@ set maxcombine=4
 set winaltkeys=no
 
 " Format related
-set tw=78
+set nolinebreak             " 不在单词中间断行
+set tw=200                  " 在200个字符后，linebreak
 set lbr
 set fo+=mB
 
@@ -353,14 +354,16 @@ set hlsearch    " highlight search
 set magic       " Enable magic matching
 set showmatch
 set wildmenu
+" Ignore compiled files
+set wildignore+=*.o,*~,*.pyc
 set wildmode=longest:full,full
 "set mouse=a     " 设定在任何模式下鼠标都可用
 set mousemodel=popup
 set nobackup                " 覆盖文件时不备份
 set writebackup             " 写备份但关闭vim后自动删除
 set nocompatible            " 设定 gvim 运行在增强模式下
-set noignorecase            " 默认区分大小写
-set nolinebreak             " 在单词中间断行
+set ignorecase              " 默认不区分大小写
+set smartcase               " 在搜索词里面有大写时，区分大小写
 set nostartofline
 set nojoinspaces
 "set nowrapscan             " 搜索不回绕,默认回绕
@@ -377,6 +380,9 @@ set foldlevel+=15           " 设置较大的foldlevel使得所有折叠被默�
                             " zr/zm zR/zM zc/zo zC/zO zd/zD [z ]z zj/zk
 set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
                             " 也考虑其它标签页里的窗口
+
+" Visual mode pressing * or # searches for the current selection
+vnoremap <silent> * <ESC>:execute '/'.GetVisualSelection()<CR>
 
 " 重启后撤销历史可用 persistent undo
 set undofile
@@ -397,6 +403,7 @@ set shiftwidth=4
 set smarttab
 set tabstop=4
 set softtabstop=4
+set noexpandtab
 
 set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
 
@@ -405,11 +412,11 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
-" 10, 13, 16 come up with my several username
-" Can calculate it by :echo stridx(expand("~/linux/:p"), "linux")
-let linux_index = stridx(expand("%:p"), "linux")
-autocmd FileType c,cpp if linux_index == 10 || linux_index == 13
-    \ || linux_index == 16  |
+" :echo stridx(expand("~/linux/:p"), "linux") == strlen(expand("~/"))
+" 1 means the file in dir "~/linux/", 0 means no.
+" (username should include the "linux" string.)
+let homestr_len = strlen(expand("~/"))
+autocmd BufRead *.[ch] if stridx(expand("%:p"), "linux") == homestr_len |
     \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab |
     \ let g:syntastic_check_on_open = 0 |
     \ let g:syntastic_check_on_wq = 0 |
@@ -430,7 +437,7 @@ set pastetoggle=<F5> " when in insert mode, press <F5> to go to
 " paste mode, where you can paste mass data that won't be autoindented
 
 " disbale paste mode when leaving insert mode
-au InsertLeave * set nopaste
+autocmd InsertLeave * set nopaste
 
 nnoremap <Space> za
 nmap ' <C-W>
@@ -448,7 +455,7 @@ nmap <silent> <leader>n <ESC>:nohlsearch<CR>
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
 " Shift + Delete 插入系统剪切板中的内容
-noremap <S-Del> "+p
+nnoremap <S-Del> "+p
 inoremap <S-Del> <esc>"+pa
 vnoremap <S-Del> d"+P
 
@@ -820,3 +827,8 @@ set langmenu=zh_CN.UTF-8            "设置菜单语言
 source $VIMRUNTIME/delmenu.vim      "导入删除菜单脚本，删除乱码的菜单
 source $VIMRUNTIME/menu.vim         "导入正常的菜单脚本
 language messages zh_CN.utf-8       "设置提示信息语言
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General abbreviations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
