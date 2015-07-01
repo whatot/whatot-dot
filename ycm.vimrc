@@ -184,8 +184,8 @@ nnoremap s/ :execute 'Unite' 'grep:'.unite#util#path2project_directory(getcwd())
 nnoremap sy :Unite history/yank<cr>
 " nnoremap ss :Unite -quick-match buffer<cr>
 nnoremap ss :Unite -start-insert buffer<cr>
-nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
-nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
+" nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
+" nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
 nnoremap so :<C-u>Unite outline<CR>
 " nnoremap sh :<C-u>Unite help<CR>
 " Unite-gtags
@@ -198,6 +198,12 @@ nnoremap so :<C-u>Unite outline<CR>
 Plug 'Shougo/vimproc', { 'do': 'make' }
 " $ cd ~/.vim/plugged/vimproc.vim
 " $ make
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/vimshell.vim'
+let g:vimshell_prompt_expr =
+			\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
+let g:vimshell_use_terminal_command = 'gnome-terminal -e'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 Plug 'asins/vimcdoc'
@@ -368,7 +374,8 @@ set nostartofline
 set nojoinspaces
 "set nowrapscan             " 搜索不回绕,默认回绕
 set wrap                    " 自动换行显示
-set autochdir               " 自动切换当前目录为当前文件所在的目录
+" set autochdir               " 自动切换当前目录为当前文件所在的目录
+" autochdir don't work with vimfiler
 set autoread                " 自动读取改变了的编辑中的文件
 set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
 set sidescroll=5            " 当光标达到水平极端时 移动的列数
@@ -584,12 +591,12 @@ map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! AutoLoadCTagsAndCScope()
     let max = 10
-    let dir = './'
+    let dir = expand("%:p:h") . '/'
     let i = 0
     let break = 0
     while isdirectory(dir) && i < max
         if filereadable(dir . 'GTAGS')
-            execute 'cs add ' . dir . 'GTAGS ' . glob("`pwd`")
+            execute 'cs add ' . dir . 'GTAGS ' . dir
             let break = 1
         endif
         if filereadable(dir . 'cscope.out')
