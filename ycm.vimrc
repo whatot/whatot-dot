@@ -47,12 +47,6 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/a.vim'
-"设置include(.h)文件存在何处.
-let alternateSearchPath = 'sfr:.,sfr:./include,sfr:../include,sfr:../inc'
-"当没有找到相应的.h文件时,不自动创建
-let alternateNoDefaultAlternate = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'jiangmiao/auto-pairs'
 " Plug 'autoload_cscope.vim'
 Plug 'vim-scripts/bash-support.vim'
@@ -67,13 +61,11 @@ noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 " Plug 'hari-rangarajan/CCTree'
 Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'vim-scripts/FencView.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/grep.vim'
-let g:Grep_Default_Options = '--binary-files=without-match'
+Plug 'lilydjwg/fcitx.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'amix/vim-zenroom2'
+Plug 'amix/vim-zenroom2'
 Plug 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80
@@ -87,6 +79,7 @@ noremap <leader>gd :GundoToggle<CR>
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
+Plug 'dkasak/manpageview'
 Plug 'vim-scripts/matchit.zip'
 Plug 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
@@ -199,11 +192,6 @@ Plug 'Shougo/vimproc', { 'do': 'make' }
 " $ cd ~/.vim/plugged/vimproc.vim
 " $ make
 Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/vimshell.vim'
-let g:vimshell_prompt_expr =
-			\ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
-let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
-let g:vimshell_use_terminal_command = 'gnome-terminal -e'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 Plug 'asins/vimcdoc'
@@ -253,15 +241,7 @@ nmap <C-F3> :OpenSession!<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
-let g:signify_update_on_bufenter = 0
-let g:signify_cursorhold_normal = 0
-let g:signify_cursorhold_insert = 0
-let g:signify_line_highlight = 0
-let g:signify_disable_by_default = 0
-nmap wg <Plug>(signify-toggle)
-" default
-nmap <leader>gj <plug>(signify-next-jump)
-nmap <leader>gk <plug>(signify-prev-jump)
+nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#end()
 filetype plugin indent on   " required!
@@ -271,7 +251,8 @@ filetype plugin indent on   " required!
 syntax on
 
 "set guifont=Droid\ Sans\ Mono\ 13
-set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+"set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
+set guifont=Fantasque\ Sans\ Mono\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -280,6 +261,7 @@ set formatoptions=croqn2mB1
 set helplang=cn
 set number
 "set relativenumber
+set hidden
 
 " 不要响铃，更不要闪屏
 set novisualbell  " 不要闪烁
@@ -596,7 +578,8 @@ function! AutoLoadCTagsAndCScope()
     let break = 0
     while isdirectory(dir) && i < max
         if filereadable(dir . 'GTAGS')
-            execute 'cs add ' . dir . 'GTAGS ' . dir
+            execute 'lcd ' . dir
+            execute 'cs add ' . dir . 'GTAGS ' . dir . ' -a'
             let break = 1
         endif
         if filereadable(dir . 'cscope.out')
