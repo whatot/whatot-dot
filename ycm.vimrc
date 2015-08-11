@@ -29,7 +29,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets' " replaced by my snippets dirs
 let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -99,7 +99,8 @@ let NERDTreeIgnore=['.d$[[dir]]', '.o$[[file]]']
 Plug 'tyok/nerdtree-ack'
 Plug 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
-nnoremap <silent> wa :NERDTreeTabsToggle<CR>
+" nnoremap <silent> wa :NERDTreeTabsToggle<CR>
+nnoremap <silent> wa :TagbarToggle<CR><ESC>:NERDTreeMirrorToggle<CR>
 nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
 nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
 let g:NERDChristmasTree = 1               " 色彩显示
@@ -156,6 +157,7 @@ Plug 'vim-scripts/TaskList.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/neomru.vim'
+Plug 'lambdalisue/unite-grep-vcs'
 " Plug 'hewes/unite-gtags'
 " Plug 'osyo-manga/unite-quickfix'
 " Plug 'tsukkee/unite-tag'
@@ -172,8 +174,7 @@ nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
 nnoremap sa :<C-u>Unite mapping<CR>
-" nnoremap s/ :<C-u>Unite -start-insert grep:.<cr>
-nnoremap s/ :execute 'Unite' 'grep:'.unite#util#path2project_directory(getcwd())<CR>
+nnoremap sg :<C-u>Unite -start-insert grep/git:.<cr>
 nnoremap sy :Unite history/yank<cr>
 " nnoremap ss :Unite -quick-match buffer<cr>
 nnoremap ss :Unite -start-insert buffer<cr>
