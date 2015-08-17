@@ -137,8 +137,10 @@ nmap <M-Left> :ll<cr>
 nmap <M-Right> :Errors<cr>
 " Quickfix and errors
 map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
-nmap <C-Up> :cp<Cr>
-nmap <C-Down> :cn<Cr>
+nmap <C-Up> :cprevious<cr>
+nmap <C-Down> :cnext<cr>
+nmap <C-right> :bnext<cr>
+nmap <C-left> :bprevious<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'majutsushi/tagbar'
 Plug 'vimcn/tagbar.cnx'
@@ -168,8 +170,8 @@ let g:unite_source_find_max_candidates = 2000
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
 let g:unite_enable_short_source_names = 1
-let g:unite_source_rec_async_command =
-    \ 'ag --follow --nocolor --nogroup --hidden -g ""'
+let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor',
+			\ '--nogroup', '--hidden', '-g', '']
 nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
 " nnoremap <leader>r :<C-u>Unite -start-insert <CR>
 nnoremap sm :<C-u>Unite file_mru<CR>
@@ -469,9 +471,6 @@ vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
 let mapleader=","
 let g:mapleader=","
 noremap \ ,
-
-map <C-right> <ESC>:bnext<CR>
-map <C-left> <ESC>:bprevious<CR>
 
 " easier moving of code blocks
 vnoremap < <gv

@@ -63,7 +63,7 @@ mkdir -p ~/.vim/plugged/
 mkdir -p ~/.vim/sessions/
 mkdir -p ~/.vim/undodir/
 mkdir -p ~/.vim/autoload/
-mkdir -p ~/.vim/snippets/
+mkdir -p ~/.vim/UltiSnips/
 
 curl -fLo ~/.vim/autoload/plug.vim \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -71,8 +71,8 @@ curl -fLo ~/.vim/autoload/plug.vim \
 cd $PATH_NOW
 ln -s $(pwd)/.vimrc ~/.vimrc
 
-# snippets
-cp $(pwd)/vim/snippets/*.snippets  ~/.vim/snippets/
+# snippets in UltiSnips dirs
+cp $(pwd)/vim/UltiSnips/*.snippets  ~/.vim/UltiSnips/
 
 # Using vim-plug to install plugins in github
 vim +PlugInstall +PlugClean! +qa
