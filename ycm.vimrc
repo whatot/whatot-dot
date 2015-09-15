@@ -94,7 +94,7 @@ let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree'
-let NERDTreeIgnore=['.d$[[dir]]', '.o$[[file]]']
+let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
 
 Plug 'tyok/nerdtree-ack'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -110,6 +110,7 @@ let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
 let NERDTreeChDirMode = 2
 let NERDTreeShowBookmarks = 0
+let NERDTreeShowHidden = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'luochen1990/rainbow'
@@ -200,6 +201,7 @@ Plug 'Shougo/vimfiler.vim'
 Plug 'asins/vimcdoc'
 Plug 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'jrozner/vim-antlr'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Lokaltog/vim-easymotion'
@@ -349,7 +351,7 @@ set wildmenu
 set wildignore+=*.o,*~,*.pyc
 set wildmode=longest:full,full
 "set mouse=a     " 设定在任何模式下鼠标都可用
-set mousemodel=popup
+"set mousemodel=popup
 set nobackup                " 覆盖文件时不备份
 set writebackup             " 写备份但关闭vim后自动删除
 set nocompatible            " 设定 gvim 运行在增强模式下
