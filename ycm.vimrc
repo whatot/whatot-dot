@@ -1,22 +1,38 @@
+if 0 | endif  " Note: Skip initialization for vim-tiny or vim-small
 set fileencodings=utf-8,gb18030,gbk,gb2312,latin1
 set encoding=utf-8
+set nocompatible
 "let &termencoding=&encoding
 
-filetype off                  " required!
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+	echo "Installing NeoBundle..."
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+endif
 
-call plug#begin('~/.vim/plugged')
+" filetype off " NeoBundle#begin() called this
 
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle  " required!
+NeoBundleFetch 'Shougo/neobundle.vim'
+let g:neobundle#install_process_timeout = 1500
+NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'linux' : 'make' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-plug start
-" https://github.com/junegunn/vim-plug
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
+NeoBundle 'Valloric/YouCompleteMe', {
+      \ 'build' : {
+      \    'linux' : 'python2 ./install.py --clang-completer --system-libclang --system-boost'
+      \ },
+      \ 'build_commands' : ['python2'],
+      \ }
 nmap yg :YcmCompleter GoTo<CR>
 nmap yd :YcmDiags<CR>
 nmap yt :YcmCompleter GetType<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_extra_conf_globlist = ['~/git/*', '~/works/*','!~/*']
 let g:ycm_complete_in_comments_and_strings = 1
@@ -27,19 +43,21 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1 }
+let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets' " replaced by my snippets dirs
+NeoBundle 'SirVer/ultisnips'
+" NeoBundle 'honza/vim-snippets' " replaced by my snippets dirs
 let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'mileszs/ack.vim'
+NeoBundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'bling/vim-airline'
+NeoBundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
@@ -47,57 +65,52 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'jiangmiao/auto-pairs'
-" Plug 'autoload_cscope.vim'
-Plug 'vim-scripts/bash-support.vim'
+NeoBundle 'jiangmiao/auto-pairs'
+NeoBundleLazy 'vim-scripts/bash-support.vim', { 'autoload' : { 'filetypes' : ['sh'] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/bufexplorer.zip'
+NeoBundle 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
 noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'chrisbra/csv.vim'
+NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'vim-scripts/FencView.vim'
+NeoBundle 'lilydjwg/fcitx.vim'
+NeoBundle 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'hari-rangarajan/CCTree'
-Plug 'vim-scripts/Colour-Sampler-Pack'
-Plug 'vim-scripts/FencView.vim'
-Plug 'lilydjwg/fcitx.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'whatot/gtags-cscope.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'amix/vim-zenroom2'
-Plug 'junegunn/goyo.vim'
+NeoBundle 'amix/vim-zenroom2'
+NeoBundle 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80
 let g:goyo_margin_top = 4
 let g:goyo_margin_bottom = 4
 let g:goyo_linenr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'sjl/gundo.vim'
+NeoBundle 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/L9'
-Plug 'vim-scripts/LargeFile'
+NeoBundle 'vim-scripts/L9'
+NeoBundle 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
-Plug 'dkasak/manpageview'
-Plug 'vim-scripts/matchit.zip'
-Plug 'vimcn/matchit.vim.cnx'
+NeoBundle 'dkasak/manpageview'
+NeoBundle 'vim-scripts/matchit.zip'
+NeoBundle 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/The-NERD-Commenter'
-Plug 'vimcn/NERD_commenter.cnx'
+NeoBundle 'vim-scripts/The-NERD-Commenter'
+NeoBundle 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
 let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
 let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree', { 'augroup' : 'NERDTreeHijackNetrw'}
 let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
 
-Plug 'tyok/nerdtree-ack'
-Plug 'jistr/vim-nerdtree-tabs'
+NeoBundle 'tyok/nerdtree-ack'
+NeoBundle 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 " nnoremap <silent> wa :NERDTreeTabsToggle<CR>
 nnoremap <silent> wa :TagbarToggle<CR><ESC>:NERDTreeMirrorToggle<CR>
@@ -113,14 +126,14 @@ let NERDTreeShowBookmarks = 0
 let NERDTreeShowHidden = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'luochen1990/rainbow'
+NeoBundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'rust-lang/rust.vim'
+NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/STL-improved'
+NeoBundleLazy 'vim-scripts/STL-improved', { 'autoload' : { 'filetypes' : ["cpp"] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_c_checkers = ['make']
@@ -143,28 +156,25 @@ nmap <C-Down> :cnext<cr>
 nmap <C-right> :bnext<cr>
 nmap <C-left> :bprevious<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'majutsushi/tagbar'
-Plug 'vimcn/tagbar.cnx'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 40
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
 " autocmd FileType c,cpp nested :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/tag_in_new_tab'
+NeoBundle 'vim-scripts/tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/TaskList.vim'
-" <leader>t
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
-Plug 'Shougo/neomru.vim'
-Plug 'lambdalisue/unite-grep-vcs'
-" Plug 'hewes/unite-gtags'
-" Plug 'osyo-manga/unite-quickfix'
-" Plug 'tsukkee/unite-tag'
-" Plug 'Shougo/unite-help'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'lambdalisue/unite-grep-vcs'
+" NeoBundle 'hewes/unite-gtags'
+" NeoBundle 'osyo-manga/unite-quickfix'
+" NeoBundle 'tsukkee/unite-tag'
+" NeoBundle 'Shougo/unite-help'
 " http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 let g:unite_source_rec_max_cache_files = 2000
 let g:unite_source_find_max_candidates = 2000
@@ -192,32 +202,27 @@ nnoremap so :<C-u>Unite outline<CR>
 " nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
 " vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Shougo/vimproc', { 'do': 'make' }
-" $ cd ~/.vim/plugged/vimproc.vim
-" $ make
-Plug 'Shougo/vimfiler.vim'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
-Plug 'asins/vimcdoc'
-Plug 'hsitz/VimOrganizer'
+NeoBundle 'asins/vimcdoc'
+NeoBundle 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'jrozner/vim-antlr'
-Plug 'octol/vim-cpp-enhanced-highlight'
+NeoBundle 'jrozner/vim-antlr'
+NeoBundleLazy 'octol/vim-cpp-enhanced-highlight' , { 'autoload' : { 'filetypes' : ["c", "cpp"] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Lokaltog/vim-easymotion'
+NeoBundle 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<leader><leader>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'terryma/vim-expand-region'
+NeoBundle 'terryma/vim-expand-region'
 "for visual selection
 map + <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'nvie/vim-flake8'
-Plug 'tpope/vim-fugitive'
-Plug 'plasticboy/vim-markdown'
+NeoBundleLazy 'nvie/vim-flake8', { 'autoload' : { 'filetypes' : 'python' } }
+NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
+NeoBundle 'plasticboy/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'terryma/vim-multiple-cursors'
+NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
 " " Default mapping
 " let g:multi_cursor_next_key='<C-n>'
@@ -225,14 +230,14 @@ Plug 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'hynek/vim-python-pep8-indent'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
+" NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-speeddating'
+NeoBundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'xolox/vim-session'
-Plug 'vim-misc'
+NeoBundle 'xolox/vim-session'
+NeoBundle 'vim-misc'
 let g:session_directory = '~/.vim/sessions/'
 let g:session_default_name = 'default'
 let g:session_persist_colors = 0  " don't save colorscheme and bg
@@ -244,12 +249,15 @@ set sessionoptions-=options,localoptions
 nmap <F3> :SaveSession!<space>
 nmap <C-F3> :OpenSession!<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'mhinz/vim-signify'
+NeoBundle 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#end()
+call neobundle#end()
 filetype plugin indent on   " required!
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-plug end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

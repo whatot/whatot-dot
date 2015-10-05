@@ -59,14 +59,13 @@ if [[ -f ~/".vimrc" ]]; then
 fi
 
 # all subdirs
-mkdir -p ~/.vim/plugged/
+mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/sessions/
 mkdir -p ~/.vim/undodir/
 mkdir -p ~/.vim/autoload/
 mkdir -p ~/.vim/UltiSnips/
 
-curl -fLo ~/.vim/autoload/plug.vim \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 cd $PATH_NOW
 ln -s $(pwd)/.vimrc ~/.vimrc
@@ -74,6 +73,6 @@ ln -s $(pwd)/.vimrc ~/.vimrc
 # snippets in UltiSnips dirs
 cp $(pwd)/vim/UltiSnips/*.snippets  ~/.vim/UltiSnips/
 
-# Using vim-plug to install plugins in github
-vim +PlugInstall +PlugClean! +qa
+# Using NeoBundle to install plugins in github
+vim +NeoBundleInstall +qall
 
