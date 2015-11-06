@@ -1,8 +1,6 @@
 if 0 | endif  " Note: Skip initialization for vim-tiny or vim-small
 set fileencodings=utf-8,gb18030,gbk,gb2312,latin1
-set encoding=utf-8
 set nocompatible
-"let &termencoding=&encoding
 
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
 if !filereadable(neobundle_readme)
@@ -66,7 +64,6 @@ let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'jiangmiao/auto-pairs'
-NeoBundleLazy 'vim-scripts/bash-support.vim', { 'autoload' : { 'filetypes' : ['sh'] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
@@ -89,6 +86,7 @@ let g:goyo_linenr = 0
 NeoBundle 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'vim-scripts/L9'
 NeoBundle 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
@@ -151,10 +149,10 @@ nmap <M-Left> :ll<cr>
 nmap <M-Right> :Errors<cr>
 " Quickfix and errors
 map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
-nmap <C-Up> :cprevious<cr>
-nmap <C-Down> :cnext<cr>
-nmap <C-right> :bnext<cr>
-nmap <C-left> :bprevious<cr>
+nmap <C-Up> :cprevious<CR><CR>
+nmap <C-Down> :cnext<CR><CR>
+nmap <C-right> :bnext<CR><CR>
+nmap <C-left> :bprevious<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vimcn/tagbar.cnx'
@@ -243,9 +241,9 @@ let g:session_default_name = 'default'
 let g:session_persist_colors = 0  " don't save colorscheme and bg
 let g:session_autosave = 'yes'
 let g:session_autosave_periodic = 5
-set sessionoptions=blank,buffers,sesdir,folds,tabpages,winsize,resize
+set sessionoptions=buffers,sesdir,folds,tabpages,winsize,resize
 " Don't persist options and mappings because it can corrupt sessions.
-set sessionoptions-=options,localoptions
+set sessionoptions-=options,localoptions,blank,help
 nmap <F3> :SaveSession!<space>
 nmap <C-F3> :OpenSession!<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,6 +264,7 @@ syntax on
 "set guifont=Droid\ Sans\ Mono\ 13
 "set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
 set guifont=Fantasque\ Sans\ Mono\ 13
+set linespace=1
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -362,7 +361,6 @@ set wildmode=longest:full,full
 "set mousemodel=popup
 set nobackup                " 覆盖文件时不备份
 set writebackup             " 写备份但关闭vim后自动删除
-set nocompatible            " 设定 gvim 运行在增强模式下
 set ignorecase              " 默认不区分大小写
 set smartcase               " 在搜索词里面有大写时，区分大小写
 set nostartofline
@@ -526,6 +524,9 @@ command! Lin setl ff=unix fenc=utf8 nobomb eol
 "   设置成 Windows 下适用的格式
 command! Win setl ff=dos fenc=gb18030 nobomb eol
 
+command! Tab8 set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
+command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -623,88 +624,17 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
+set cursorline
 
-" set background=dark
-" let colorscheme = 'desert'
-
-if has('gui_running')
+if has('nvim')
+	set background=dark
+	colorscheme desert
+elseif has('gui_running')
 	set background=light
-	let colorscheme = 'solarized'
+	colorscheme solarized
 else
 	set background=dark
-	let colorscheme = 'desert'
-endif
-
-
-" 图形与终端
-if has("gui_running")
-    " 有些终端不能改变大小
-    " set columns=88
-    " set lines=33
-    set cursorline
-    exe 'colorscheme' colorscheme
-elseif has("unix")
-    set ambiwidth=single
-    " 防止退出时终端乱码
-    " 这里两者都需要。只前者标题会重复，只后者会乱码
-    set t_fs=(B
-    set t_IE=(B
-    if &term =~ "256color"
-        set cursorline
-        exe 'colorscheme' colorscheme
-    else
-        " 在Linux文本终端下非插入模式显示块状光标
-        if &term == "linux" || &term == "fbterm"
-            set t_ve+=[?6c
-            autocmd InsertEnter * set t_ve-=[?6c
-            autocmd InsertLeave * set t_ve+=[?6c
-            " autocmd VimLeave * set t_ve-=[?6c
-        endif
-        if &term == "fbterm"
-            set cursorline
-            exe 'colorscheme' colorscheme
-        elseif $TERMCAP =~ 'Co#256'
-            set t_Co=256
-            set cursorline
-            exe 'colorscheme' colorscheme
-        else
-            " 暂时只有这个配色比较适合了
-            colorscheme default
-            " 在终端下自动加载vimim输入法
-            runtime so/vimim.vim
-        endif
-    endif
-    " 在不同模式下使用不同颜色的光标
-    " 不要在 ssh 下使用
-    if &term =~ "256color" && !exists('$SSH_TTY')
-        let color_normal = 'HotPink'
-        let color_insert = 'RoyalBlue1'
-        let color_exit = 'green'
-        if &term =~ 'xterm\|rxvt'
-            exe 'silent !echo -ne "\e]12;"' . shellescape(color_normal, 1) . '"\007"'
-            let &t_SI="\e]12;" . color_insert . "\007"
-            let &t_EI="\e]12;" . color_normal . "\007"
-            exe 'autocmd VimLeave * :silent !echo -ne "\e]12;"' . shellescape(color_exit, 1) . '"\007"'
-        elseif &term =~ "screen"
-            if exists('$TMUX')
-                if &ttymouse == 'xterm'
-                    set ttymouse=xterm2
-                endif
-                exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-                let &t_SI="\033Ptmux;\033\e]12;" . color_insert . "\007\033\\"
-                let &t_EI="\033Ptmux;\033\e]12;" . color_normal . "\007\033\\"
-                exe 'autocmd VimLeave * :silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-            elseif !exists('$SUDO_UID') " or it may still be in tmux
-                exe 'silent !echo -ne "\033P\e]12;"' . shellescape(color_normal, 1) . '"\007\033\\"'
-                let &t_SI="\033P\e]12;" . color_insert . "\007\033\\"
-                let &t_EI="\033P\e]12;" . color_normal . "\007\033\\"
-                exe 'autocmd VimLeave * :silent !echo -ne "\033P\e]12;"' . shellescape(color_exit, 1) . '"\007\033\\"'
-            endif
-        endif
-        unlet color_normal
-        unlet color_insert
-        unlet color_exit
-    endif
+	colorscheme desert
 endif
 
 " 设置命令行和状态栏
