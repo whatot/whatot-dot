@@ -7,7 +7,7 @@
 # -t           -- specify target session
 
 # /usr/bin/xfce4-terminal --maximize --execute /usr/bin/tmux.sh
-# /usr/bin/gnome-terminal --maximize --command "/usr/bin/tmux.sh"
+# /usr/bin/xfce4-terminal --command=tmux --maximize
 
 # tmux example
 
@@ -22,103 +22,50 @@
 # tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
 IN_PATH="~/install/"
-PGC_PATH="~/works/pgc/"
+WORK_PATH="~/works/pg93/"
 USER_TMP="~/tmp/"
-#IN_PATH="/tmp/install"
+USER_GIT="~/git/"
 
-function tmux_company {
+function tmux_dev7 {
 
-tmux has-session -t works125
+tmux has-session -t dev7
 if [[ $? != 0 ]]; then
-	tmux new-session -s works125 -n pgc1 -d
-	tmux send-keys -t works125 "cd $PGC_PATH" C-m
+	tmux new-session -s dev7 -n work1 -d
+	tmux send-keys -t dev7 "cd $WORK_PATH" C-m
 
-	tmux new-window -n pgc2 -t works125
-	tmux send-keys -t works125:2 "cd $PGC_PATH" C-m
+	tmux new-window -n work2 -t dev7
+	tmux send-keys -t dev7:2 "cd $WORK_PATH" C-m
 
-	tmux new-window -n pgc3 -t works125
-	tmux send-keys -t works125:3 "cd $PGC_PATH" C-m
+	tmux new-window -n work3 -t dev7
+	tmux send-keys -t dev7:3 "cd $WORK_PATH" C-m
 
-	tmux new-window -n in4 -t works125
-	tmux send-keys -t works125:4 "cd $IN_PATH" C-m
+	tmux new-window -n in4 -t dev7
+	tmux send-keys -t dev7:4 "cd $IN_PATH" C-m
 
-	tmux new-window -n in5 -t works125
-	tmux send-keys -t works125:5 "cd $IN_PATH" C-m
+	tmux new-window -n in5 -t dev7
+	tmux send-keys -t dev7:5 "cd $IN_PATH" C-m
 
-	tmux new-window -n in6 -t works125
-	tmux send-keys -t works125:6 "cd $IN_PATH" C-m
+	tmux new-window -n in6 -t dev7
+	tmux send-keys -t dev7:6 "cd $IN_PATH" C-m
 
-	tmux new-window -n in7 -t works125
-	tmux send-keys -t works125:7 "cd $IN_PATH" C-m
+	tmux new-window -n tmp7 -t dev7
+	tmux send-keys -t dev7:7 "cd $USER_TMP" C-m
 
-	tmux new-window -n tmp8 -t works125
-	tmux send-keys -t works125:8 "cd $USER_TMP" C-m
+	tmux new-window -n tmp8 -t dev7
+	tmux send-keys -t dev7:8 "cd $USER_TMP" C-m
 
-	tmux select-window -t works125:1
-	tmux select-pane -t works125:1
+	tmux new-window -n git9 -t dev7
+	tmux send-keys -t dev7:9 "cd $USER_GIT" C-m
+
+	tmux select-window -t dev7:1
+	tmux select-pane -t dev7:1
 fi
-tmux attach -t works125
+tmux attach -t dev7
 
 }
 
-# changing -- "cd ~/../mirage/static/git/changing"
-# kernel -- "cd ~/linux/"
-# lua2 -- "cd ~/git/redis/deps/lua/src/" "cd ~/base/ma_c/5/deps/lua/src/"
-# jemalloc -- "cd ~/git/jemalloc/include/jemalloc/internal"
-# redis -- "cd ~/git/redis/src/"
-# postgresql -- "cd ~/git/postgresql/"
-# zlog -- "cd ~/git/zlog/"
-
-function tmux_mydev {
-
-tmux has-session -t mydev
-if [[ $? != 0 ]]; then
-	tmux new-session -s mydev -n '~git' -d
-	tmux send-keys -t mydev "cd ~/git/" C-m
-
-	tmux new-window -n work1 -t mydev
-	tmux send-keys -t mydev:2 "cd ~/" C-m
-
-	tmux new-window -n work2 -t mydev
-	tmux send-keys -t mydev:3 "cd ~/" C-m
-
-	tmux new-window -n kernel -t mydev
-	tmux send-keys -t mydev:4 "cd ~/linux/" C-m
-
-	tmux new-window -n goagent -t mydev
-	tmux send-keys -t mydev:5 "cd ~/git/goagent/local/" C-m
-	tmux send-keys -t mydev:5 "python2 proxy.py" C-m
-
-	tmux new-window -n share -t mydev
-	tmux send-keys -t mydev:6 "cd ~/" C-m
-
-	tmux new-window -n pg -t mydev
-	tmux send-keys -t mydev:7 "cd ~/git/" C-m
-
-	tmux select-window -t mydev:1
-	tmux select-pane -t mydev:1
-fi
-tmux attach -t mydev
-
-}
-
-
-HOSTNAME=`cat /etc/hostname`
 
 if [[ -f /usr/bin/tmux ]]; then
-
-	if [[ $# == 0 ]]; then
-
-		if [[ $HOSTNAME == 'mirage' ]]; then
-			tmux_company
-		elif [[ $HOSTNAME == 'cru' ]]; then
-			tmux_mydev
-		fi
-
-	elif [[ $# == 1 ]] && [[ $@ == 'my' ]]; then
-		tmux_mydev
-	elif  [[ $# == 1 ]] && [[ $@ == 'w' ]]; then
-		tmux_company
-	fi
-
+	tmux_dev7
 fi
+
