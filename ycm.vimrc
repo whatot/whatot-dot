@@ -9,8 +9,6 @@ if !filereadable(neobundle_readme)
 	silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
 endif
 
-" filetype off " NeoBundle#begin() called this
-
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -121,7 +119,7 @@ let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
 let g:NERDTreeWinSize = 30                " 设置显示宽度
 let NERDTreeChDirMode = 2
 let NERDTreeShowBookmarks = 0
-let NERDTreeShowHidden = 1
+let NERDTreeShowHidden = 0  " using 'I' to toggle (show hidden files)
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'luochen1990/rainbow'
@@ -169,11 +167,6 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'lambdalisue/unite-grep-vcs'
-" NeoBundle 'hewes/unite-gtags'
-" NeoBundle 'osyo-manga/unite-quickfix'
-" NeoBundle 'tsukkee/unite-tag'
-" NeoBundle 'Shougo/unite-help'
-" http://bling.github.io/blog/2013/06/02/unite-dot-vim-the-plugin-you-didnt-know-you-need/
 let g:unite_source_rec_max_cache_files = 2000
 let g:unite_source_find_max_candidates = 2000
 let g:unite_source_history_yank_enable = 1
@@ -182,23 +175,21 @@ let g:unite_enable_short_source_names = 1
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor',
 			\ '--nogroup', '--hidden', '-g', '']
 nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
-" nnoremap <leader>r :<C-u>Unite -start-insert <CR>
-nnoremap sm :<C-u>Unite file_mru<CR>
-nnoremap sa :<C-u>Unite mapping<CR>
-nnoremap sg :<C-u>Unite -start-insert grep/git:.<cr>
-nnoremap sy :Unite history/yank<cr>
-" nnoremap ss :Unite -quick-match buffer<cr>
-nnoremap ss :Unite -start-insert buffer<cr>
-" nnoremap sf :<C-u>Unite -buffer-name=resume resume<CR>
-" nnoremap sd :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
-nnoremap so :<C-u>Unite outline<CR>
-" nnoremap sh :<C-u>Unite help<CR>
-" Unite-gtags
-" nnoremap <leader>gg :execute 'Unite gtags/def:'.expand('<cword>')<CR>
-" nnoremap <leader>gc :execute 'Unite gtags/context'<CR>
-" nnoremap <leader>gr :execute 'Unite gtags/ref'<CR>
-" nnoremap <leader>ge :execute 'Unite gtags/grep'<CR>
-" vnoremap <leader>gg <ESC>:execute 'Unite gtags/def:'.GetVisualSelection()<CR>
+nnoremap sr :<C-u>Unite file_mru<cr>
+nnoremap sm :<C-u>Unite mapping<cr>
+nnoremap sg :<C-u>Unite -quick-match grep/git:.<cr>
+nnoremap sh :Unite history/unite<cr>
+nnoremap sb :Unite -start-insert buffer<cr>
+nnoremap so :<C-u>Unite outline<cr>
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+	" Play nice with supertab
+	let b:SuperTabDisabled=1
+	" Enable navigation with control-j and control-k in insert mode
+	imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+	imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 NeoBundle 'asins/vimcdoc'
@@ -315,9 +306,9 @@ set winaltkeys=no
 
 " Format related
 set nolinebreak             " 不在单词中间断行
-set tw=200                  " 在200个字符后，linebreak
-set lbr
-set fo+=mB
+set textwidth=200           " 在200个字符后，linebreak
+set linebreak
+set formatoptions+=mB       " :help fo-table
 
 " Indent related
 " http://vimcdoc.sourceforge.net/doc/indent.html
@@ -338,9 +329,9 @@ set mps+=<:>        " 让<>可以使用%跳转
 set shortmess=atI   " shortens messages to avoid 'press a key' prompt
 set lazyredraw      " do not redraw while executing macros (much faster)
 
-" Set Number format to null(default is octal) , when press CTRL-A on number
+" Set Number format to null(default is octal,hex) , when press CTRL-A on number
 " like 007, it would not become 010
-set nf=
+set nrformats=hex
 
 " In Visual Block Mode, cursor can be positioned where there is no actual character
 set virtualedit=block
@@ -367,8 +358,7 @@ set nostartofline
 set nojoinspaces
 "set nowrapscan             " 搜索不回绕,默认回绕
 set wrap                    " 自动换行显示
-" set autochdir               " 自动切换当前目录为当前文件所在的目录
-" autochdir don't work with vimfiler
+set autochdir               " 自动切换当前目录为当前文件所在的目录
 set autoread                " 自动读取改变了的编辑中的文件
 set scrolljump=1            " 当光标达到上端或下端时 翻滚的行数
 set sidescroll=5            " 当光标达到水平极端时 移动的列数
@@ -394,9 +384,6 @@ set undolevels=1000 "maximum number of changes that can be undone
 if has('arabic')
     set noarabicshape
 endif
-
-set tags=tags
-" set tags+=./../tags,./../../tags,./../../../tags
 
 " Tab related
 set shiftwidth=4
@@ -636,48 +623,12 @@ else
 	set background=dark
 	colorscheme desert
 endif
-
-" 设置命令行和状态栏
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置命令行和状态栏
 set ruler                  " 打开状态栏标尺
 "set cmdheight=1            " 设定命令行的行数为 1
 set laststatus=2           " 显示状态栏 (默认值为 1, 无法显示状态栏)
 set showcmd   " 在状态栏显示目前所执行的指令，未完成的指令片段亦会显示出来
-
-" %F    当前文件名
-" %m    当前文件修改状态
-" %r    当前文件是否只读
-" %Y    当前文件类型
-" %b    当前光标处字符的 ASCII 码值
-" %B    当前光标处字符的十六进制值
-" %l    当前光标行号
-" %c    当前光标列号
-" %V    当前光标虚拟列号 (根据字符所占字节数计算)
-" %p    当前行占总行数的百分比
-" %%    百分号
-" %L    当前文件总行数
-
-" set statusline=%n\ %t%m%r%h%w\ %{&ff}\ %Y\ [%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %{SyntasticStatuslineFlag()}\ %=%l/%L,%v\ %p%%
-
-" hi User1 guifg=#eea040 guibg=#222222 ctermfg=6 ctermbg=0
-" hi User2 guifg=#dd3333 guibg=#222222 ctermfg=5 ctermbg=0
-" hi User3 guifg=#ff66ff guibg=#222222 ctermfg=4 ctermbg=0
-" hi User4 guifg=#a0ee40 guibg=#222222 ctermfg=1 ctermbg=0
-" hi User5 guifg=#eeee40 guibg=#222222 ctermfg=2 ctermbg=0
-
-" set statusline=
-" set statusline +=%1*\ %n\ %*            "buffer number
-" set statusline +=%4*\ %t%m%r%h%w\ %*    "file name
-" set statusline +=%3*%Y\ %*              "file type
-" set statusline +=%5*[%{&ff}]\ %*        "file format
-" set statusline +=%3*%{''.(&fenc!=''?&fenc:&enc).''}\ %*
-" set statusline +=%3*\%{(&bomb?\",BOM\":\"\")}\ %*
-" set statusline +=%2*\ %{SyntasticStatuslineFlag()}%*
-" set statusline +=%1*%=%5l%*             "current line
-" set statusline +=%2*/%L%*               "total lines
-" set statusline +=%1*%4v\ %*             "virtual column number
-" set statusline +=%2*0x%04B\ %*          "character under cursor
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -- cscope --
 let g:autocscope_menus=0
@@ -729,21 +680,6 @@ nmap <C-]> :tj <C-R>=expand("<cword>")<CR><CR>
 " 6 或 e: 查找本 egrep 模式
 " 7 或 f: 查找本文件
 " 8 或 i: 查找包含本文件的文件
-
-
-"" cscope使用方法
-""下面是shell脚本，放到源码目录下运行
-""#!/bin/sh
-""find . -name "*.h" -o -name "*.c" -o -name "*.cc" > cscope.files
-""cscope -bkq -i cscope.files
-""ctags -R
-
-""下面是对cscope -Rbkq 的解释
-
-""-R: 在生成索引文件时，搜索子目录树中的代码
-""-b: 只生成索引文件，不进入cscope的界面
-""-k: 在生成索引文件时，不搜索/usr/include目录
-""-q: 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度
 
 autocmd BufWritePost *.[ch] call UpdateGtags(expand('<afile>'))
 
