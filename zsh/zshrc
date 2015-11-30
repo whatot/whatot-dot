@@ -54,13 +54,6 @@ plugins=(git tmux gitignore autojump postgres colorize)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
-export PATH="${PATH}:/usr/lib/jvm/default/bin"
-export JAVA_HOME="/etc/alternatives/java_sdk/"
-export CLASSPATH=$JAVA_HOME/jre/lib/
-export PATH="/usr/lib/ccache/bin/":$PATH
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -89,7 +82,7 @@ unset GREP_OPTIONS
 
 export MESA_GL_VERSION_OVERRIDE=2.1
 
-export XDG_CONFIG_HOME="/home/mir/.config/"
+export XDG_CONFIG_HOME="$HOME/.config/"
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then

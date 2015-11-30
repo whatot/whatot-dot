@@ -70,6 +70,11 @@ git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 cd $PATH_NOW
 ln -s $(pwd)/.vimrc ~/.vimrc
 
+# for neovim
+mkdir -p ~/.config/
+ln -s ~/.vim/ ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+
 # snippets in UltiSnips dirs
 cp $(pwd)/vim/UltiSnips/*.snippets  ~/.vim/UltiSnips/
 

@@ -14,23 +14,21 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle  " required!
 NeoBundleFetch 'Shougo/neobundle.vim'
-let g:neobundle#install_process_timeout = 1500
+let g:neobundle#install_process_timeout = 500
 NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'linux' : 'make' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build' : {
-      \    'linux' : 'python2 ./install.py --clang-completer --system-libclang --system-boost'
-      \ },
-      \ 'build_commands' : ['python2'],
+      \    'linux' : 'python2 ./install.py --clang-completer --system-libclang --system-boost --gocode-completer'
       \ }
-nmap yg :YcmCompleter GoTo<CR>
-nmap yd :YcmDiags<CR>
-nmap yt :YcmCompleter GetType<CR>
+      \ }
+nmap gd :YcmCompleter GoTo<CR>
+nmap gy :YcmDiags<CR>
+nmap gt :YcmCompleter GetType<CR>
 let g:syntastic_c_checkers = ['YouCompleteMe']
 let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_extra_conf_globlist = ['~/git/*', '~/works/*','!~/*']
 let g:ycm_complete_in_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -39,7 +37,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1 }
+let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 }
 let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'SirVer/ultisnips'
@@ -109,14 +107,13 @@ NeoBundle 'tyok/nerdtree-ack'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 " nnoremap <silent> wa :NERDTreeTabsToggle<CR>
-nnoremap <silent> wa :TagbarToggle<CR><ESC>:NERDTreeMirrorToggle<CR>
 nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
-nnoremap <silent> we :exec("NERDTree ".expand('%:h'))<CR>
+nnoremap <silent> we :NERDTreeFind<CR>
 let g:NERDChristmasTree = 1               " 色彩显示
 let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
 let g:NERDTreeWinPos = 'left'             " 窗口显示位置
 let g:NERDTreeHighlightCursorline = 0     " 高亮当前行
-let g:NERDTreeWinSize = 30                " 设置显示宽度
+let g:NERDTreeWinSize = 40                " 设置显示宽度
 let NERDTreeChDirMode = 2
 let NERDTreeShowBookmarks = 0
 let NERDTreeShowHidden = 0  " using 'I' to toggle (show hidden files)
@@ -126,8 +123,6 @@ NeoBundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] } }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy 'vim-scripts/STL-improved', { 'autoload' : { 'filetypes' : ["cpp"] } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
@@ -227,6 +222,7 @@ NeoBundle 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'xolox/vim-session'
 NeoBundle 'vim-misc'
+let g:session_autoload = 'no'
 let g:session_directory = '~/.vim/sessions/'
 let g:session_default_name = 'default'
 let g:session_persist_colors = 0  " don't save colorscheme and bg
@@ -613,10 +609,7 @@ endfunction
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set cursorline
 
-if has('nvim')
-	set background=dark
-	colorscheme desert
-elseif has('gui_running')
+if has('gui_running')
 	set background=light
 	colorscheme solarized
 else
