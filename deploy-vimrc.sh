@@ -63,7 +63,6 @@ mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/sessions/
 mkdir -p ~/.vim/undodir/
 mkdir -p ~/.vim/autoload/
-mkdir -p ~/.vim/UltiSnips/
 
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
@@ -74,9 +73,6 @@ ln -s $(pwd)/.vimrc ~/.vimrc
 mkdir -p ~/.config/
 ln -s ~/.vim/ ~/.config/nvim
 ln -s ~/.vimrc ~/.config/nvim/init.vim
-
-# snippets in UltiSnips dirs
-cp $(pwd)/vim/UltiSnips/*.snippets  ~/.vim/UltiSnips/
 
 # Using NeoBundle to install plugins in github
 vim +NeoBundleInstall +qall

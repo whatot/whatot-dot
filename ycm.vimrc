@@ -41,7 +41,7 @@ let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 
 let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'SirVer/ultisnips'
-" NeoBundle 'honza/vim-snippets' " replaced by my snippets dirs
+NeoBundle 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -70,6 +70,56 @@ NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'vim-scripts/FencView.vim'
 NeoBundle 'lilydjwg/fcitx.vim'
 NeoBundle 'whatot/gtags-cscope.vim'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle "fatih/vim-go", { 'autoload' : { 'filetypes' : ['go'] } }
+" git clone https://github.com/golang/tools ~/go/src/github.com/golang/tools
+" git clone https://github.com/golang/net ~/go/src/github.com/golang/net
+" ln -sf ~/go/src/github.com/golang/tools ~/go/src/golang.org/x/tools
+" ln -sf ~/go/src/github.com/golang/net ~/go/src/golang.org/x/net
+" go get -v(means verbose)/-u(means update)
+" go get -u github.com/nsf/gocode
+" go get -u github.com/jstemmer/gotags
+" go get -u github.com/golang/lint/golint
+" go get -u github.com/kisielk/errcheck
+" go get -u golang.org/x/tools/cmd/goimports
+" go get -u golang.org/x/tools/cmd/oracle
+" go get -u golang.org/x/tools/cmd/gorename
+let $GOPATH = $HOME . "/go/"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_fail_silently = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'amix/vim-zenroom2'
 NeoBundle 'junegunn/goyo.vim'
@@ -123,6 +173,10 @@ NeoBundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] } }
+NeoBundleLazy 'racer-rust/vim-racer', { 'autoload' : { 'filetypes' : ['rust'] } }
+let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
+" c-x c-o for complete, gd for definition
+let g:rustfmt_autosave = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
