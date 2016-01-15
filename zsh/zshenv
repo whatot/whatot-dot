@@ -1,5 +1,5 @@
 export JAVA_HOME="/etc/alternatives/java_sdk/"
 export CLASSPATH=$JAVA_HOME/jre/lib/
-export PATH="/usr/lib/ccache/bin/":$PATH
 export GOPATH="$HOME/go/"
 export RUST_SRC_PATH="$HOME/git/rust/src"
+export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cabal/bin/":"$HOME/.cargo/bin/":"$HOME/.gem/ruby/2.3.0/bin/"

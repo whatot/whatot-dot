@@ -6,8 +6,8 @@
 # -s           -- name the session
 # -t           -- specify target session
 
-# /usr/bin/xfce4-terminal --maximize --execute /usr/bin/tmux.sh
-# /usr/bin/xfce4-terminal --command=tmux --maximize
+# /usr/bin/gnome-terminal --maximize --execute /usr/bin/tmux.sh
+# /usr/bin/gnome-terminal --command=tmux --maximize
 
 # tmux example
 
@@ -22,7 +22,7 @@
 # tmux send-keys -t mydev:6 "cd ~/git/jemalloc/include/jemalloc/internal" C-m
 
 IN_PATH="~/install/"
-WORK_PATH="~/works/pg93/"
+WORK_PATH="~/works/"
 USER_TMP="~/tmp/"
 USER_GIT="~/git/"
 

@@ -1,5 +1,5 @@
 if 0 | endif  " Note: Skip initialization for vim-tiny or vim-small
-set fileencodings=utf-8,gb18030,gbk,gb2312,latin1
+set fileencodings=utf-8,gb18030,utf-16le,gbk,gb2312,latin1
 set nocompatible
 
 let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
@@ -57,14 +57,14 @@ let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#csv#enabled = 1
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'jiangmiao/auto-pairs'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
-noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
-noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
+" noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
+" noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'vim-scripts/FencView.vim'
@@ -74,8 +74,10 @@ NeoBundle 'whatot/gtags-cscope.vim'
 NeoBundle "fatih/vim-go", { 'autoload' : { 'filetypes' : ['go'] } }
 " git clone https://github.com/golang/tools ~/go/src/github.com/golang/tools
 " git clone https://github.com/golang/net ~/go/src/github.com/golang/net
+" git clone https://github.com/golang/crypto ~/go/src/github.com/golang/crypto
 " ln -sf ~/go/src/github.com/golang/tools ~/go/src/golang.org/x/tools
 " ln -sf ~/go/src/github.com/golang/net ~/go/src/golang.org/x/net
+" ln -sf ~/go/src/github.com/golang/crypto ~/go/src/golang.org/x/crypto
 " go get -v(means verbose)/-u(means update)
 " go get -u github.com/nsf/gocode
 " go get -u github.com/jstemmer/gotags
@@ -268,6 +270,10 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundleLazy 'derekwyatt/vim-scala', { 'autoload' : { 'filetypes' : 'scala' } }
+autocmd FileType scala set tabstop=2 shiftwidth=2 expandtab
+" scala, sbt are needed
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoBundle 'hynek/vim-python-pep8-indent'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
@@ -292,6 +298,8 @@ NeoBundle 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'bronson/vim-trailing-whitespace'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call neobundle#end()
 filetype plugin indent on   " required!
 " If there are uninstalled bundles found on startup,
@@ -303,9 +311,8 @@ NeoBundleCheck
 syntax on
 
 "set guifont=Droid\ Sans\ Mono\ 13
-"set guifont=Source\ Code\ Pro\ for\ Powerline\ 12
-set guifont=Fantasque\ Sans\ Mono\ 13
-set linespace=1
+set guifont=Source\ Code\ Pro\ Medium\ 13
+"set guifont=Fantasque\ Sans\ Mono\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -378,6 +385,7 @@ set mps+=<:>        " 让<>可以使用%跳转
 "set hid             " allow to change buffer without saving
 set shortmess=atI   " shortens messages to avoid 'press a key' prompt
 set lazyredraw      " do not redraw while executing macros (much faster)
+set synmaxcol=128
 
 " Set Number format to null(default is octal,hex) , when press CTRL-A on number
 " like 007, it would not become 010
@@ -416,8 +424,9 @@ set scrolloff=5             " 当光标距离极端(上,下,左,右)多少时发
 set clipboard+=unnamed      " 与Windows共享剪贴板
 set diffopt=context:3       " 设置不同之处显示上下三行
 set foldmethod=indent
-set foldlevel+=15           " 设置较大的foldlevel使得所有折叠被默认展开
-                            " zr/zm zR/zM zc/zo zC/zO zd/zD [z ]z zj/zk
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
 set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
                             " 也考虑其它标签页里的窗口
 
@@ -664,8 +673,13 @@ set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set cursorline
 
 if has('gui_running')
-	set background=light
-	colorscheme solarized
+	let starttime = strftime("%H")  " using molokai at night
+	if 7 < starttime && starttime < 18
+		set background=light
+		colorscheme solarized
+	else
+		colorscheme molokai
+	endif
 else
 	set background=dark
 	colorscheme desert
@@ -745,3 +759,4 @@ language messages zh_CN.utf-8       "设置提示信息语言
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
+map q: :q

@@ -72,7 +72,7 @@ alias -s txt=vi
 alias -s md=vi
 alias -s gz='tar -xzvf'
 alias -s tgz='tar -xzvf'
-alias -s zip='unzip'
+alias unzipp='unzip -O cp936'
 alias -s bz2='tar -xjvf'
 
 # 每次登入控制台时关掉PC喇叭
@@ -88,5 +88,8 @@ ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
+
+# export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cabal/bin/":"$HOME/.cargo/bin/":"$HOME/.gem/ruby/2.3.0/bin/"
 
 source $ZSH/oh-my-zsh.sh
