@@ -51,7 +51,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
@@ -180,6 +180,8 @@ let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 " c-x c-o for complete, gd for definition
 let g:rustfmt_autosave = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'pelodelfuego/vim-swoop'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
@@ -203,6 +205,7 @@ nmap <C-Down> :cnext<CR><CR>
 nmap <C-right> :bnext<CR><CR>
 nmap <C-left> :bprevious<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'godlygeek/tabular'  " needed by vim-markdown
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
@@ -667,6 +670,7 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 function! Maximize_Window()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
+nmap <F11> :call Maximize_Window()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
@@ -678,11 +682,13 @@ if has('gui_running')
 		set background=light
 		colorscheme solarized
 	else
+		set background=dark
 		colorscheme molokai
 	endif
-else
+else  " work in terminal and nvim, 'TERM=xterm-256color' is needed
 	set background=dark
-	colorscheme desert
+	colorscheme molokai
+"	colorscheme desert
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置命令行和状态栏
@@ -708,18 +714,18 @@ set cscopeverbose
 " 'csto','cscopetagorder' 被设为 0，cscope数据库先被搜索，搜索失败的情况下在搜索标签文件
 set cscopetagorder=0
 
-nnoremap <C-_>g :execute 'cscope find g '.expand('<cword>')<CR>
-nnoremap <C-_>s :execute 'cscope find s '.expand('<cword>')<CR>
-nnoremap <C-_>c :execute 'cscope find c '.expand('<cword>')<CR>
-nnoremap <C-_>t :execute 'cscope find t '.expand('<cword>')<CR>
-nnoremap <C-_>f :execute 'cscope find f '.expand('<cword>')<CR>
-nnoremap <C-_>i :execute 'cscope find i '.expand('<cword>')<CR>
-vnoremap <C-_>g <ESC>:execute 'cscope find g '.GetVisualSelection()<CR>
-vnoremap <C-_>s <ESC>:execute 'cscope find s '.GetVisualSelection()<CR>
-vnoremap <C-_>c <ESC>:execute 'cscope find c '.GetVisualSelection()<CR>
-vnoremap <C-_>t <ESC>:execute 'cscope find t '.GetVisualSelection()<CR>
-vnoremap <C-_>f <ESC>:execute 'cscope find f '.GetVisualSelection()<CR>
-vnoremap <C-_>i <ESC>:execute 'cscope find i '.GetVisualSelection()<CR>
+nnoremap <C-Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+vnoremap <C-Space>g <ESC>:execute 'cscope find g '.GetVisualSelection()<CR>
+vnoremap <C-Space>s <ESC>:execute 'cscope find s '.GetVisualSelection()<CR>
+vnoremap <C-Space>c <ESC>:execute 'cscope find c '.GetVisualSelection()<CR>
+vnoremap <C-Space>t <ESC>:execute 'cscope find t '.GetVisualSelection()<CR>
+vnoremap <C-Space>f <ESC>:execute 'cscope find f '.GetVisualSelection()<CR>
+vnoremap <C-Space>i <ESC>:execute 'cscope find i '.GetVisualSelection()<CR>
 
 function! GetVisualSelection()
     let [s:lnum1, s:col1] = getpos("'<")[1:2]
@@ -760,3 +766,14 @@ language messages zh_CN.utf-8       "设置提示信息语言
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
 map q: :q
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => neovim special configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("nvim")
+	command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
+	" Guifont DejaVu Sans Mono:h13
+	let g:Guifont="DejaVu Sans Mono:h13"
+	" let g:Guifont="Source Code Pro:h13"
+	" let g:Guifont="monaco:h13"
+endif

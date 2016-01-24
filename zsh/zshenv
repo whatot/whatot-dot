@@ -1,5 +1,7 @@
-export JAVA_HOME="/etc/alternatives/java_sdk/"
+export JAVA_HOME="/usr/lib/jvm/default/"
 export CLASSPATH=$JAVA_HOME/jre/lib/
-export GOPATH="$HOME/go/"
 export RUST_SRC_PATH="$HOME/git/rust/src"
+export GOPATH="$HOME/go/"
+export CRATES_MIRROR_URL="https://mirrors.ustc.edu.cn/crates"
 export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cabal/bin/":"$HOME/.cargo/bin/":"$HOME/.gem/ruby/2.3.0/bin/"
+export TERM="xterm-256color"
