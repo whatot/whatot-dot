@@ -55,7 +55,10 @@ def put_task():
 
 def main():
     """error into error.log, start threads"""
-    logging.basicConfig(filename='error.log', level=logging.ERROR)
+    logformat = '%(asctime)s - %(levelname)s - %(name)s - %(message)s'
+    logging.basicConfig(filename='error.log',
+                        level=logging.ERROR,
+                        format=logformat)
     threads = []
     put_task()
 

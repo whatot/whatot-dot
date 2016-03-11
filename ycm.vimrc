@@ -52,6 +52,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
@@ -263,7 +264,7 @@ map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundleLazy 'nvie/vim-flake8', { 'autoload' : { 'filetypes' : 'python' } }
 NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
-NeoBundle 'plasticboy/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }
+" NeoBundle 'plasticboy/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
@@ -388,7 +389,7 @@ set mps+=<:>        " 让<>可以使用%跳转
 "set hid             " allow to change buffer without saving
 set shortmess=atI   " shortens messages to avoid 'press a key' prompt
 set lazyredraw      " do not redraw while executing macros (much faster)
-set synmaxcol=128
+" set synmaxcol=128
 
 " Set Number format to null(default is octal,hex) , when press CTRL-A on number
 " like 007, it would not become 010
@@ -575,6 +576,7 @@ command! Win setl ff=dos fenc=gb18030 nobomb eol
 
 command! Tab8 set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
 command! Tab4 set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+command! Tab2 set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
