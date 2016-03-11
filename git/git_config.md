@@ -86,3 +86,9 @@ tracking          -- push current branch to its upstream branch
 ### git 中文转义
 
 	git config core.quotepath false
+
+### daily use
+
+	git config --global alias.st status
+	git config --global alias.last 'log -1 HEAD'
+	git config --global alias.glog "log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph"

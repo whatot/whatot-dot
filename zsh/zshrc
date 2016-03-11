@@ -83,6 +83,7 @@ unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
 
 export XDG_CONFIG_HOME="$HOME/.config/"
+export LANG="en_US.UTF-8"
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then

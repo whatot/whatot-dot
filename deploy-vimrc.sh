@@ -16,7 +16,7 @@ echo
 
 # In archlinux
 if [[ -f "/usr/bin/pacman" ]];then
-	sudo pacman -S git gvim ack the_silver_searcher clang llvm go rust boost cmake
+	sudo pacman -S git gvim ack the_silver_searcher clang llvm boost cmake
 	# for global in AUR, global is still in AUR
 	if [[ -f "/usr/bin/yaourt" ]];then
 		yaourt -S global
