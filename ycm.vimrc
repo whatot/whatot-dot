@@ -72,58 +72,6 @@ NeoBundle 'vim-scripts/FencView.vim'
 NeoBundle 'lilydjwg/fcitx.vim'
 NeoBundle 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle "fatih/vim-go", { 'autoload' : { 'filetypes' : ['go'] } }
-" git clone https://github.com/golang/tools ~/go/src/github.com/golang/tools
-" git clone https://github.com/golang/net ~/go/src/github.com/golang/net
-" git clone https://github.com/golang/crypto ~/go/src/github.com/golang/crypto
-" ln -sf ~/go/src/github.com/golang/tools ~/go/src/golang.org/x/tools
-" ln -sf ~/go/src/github.com/golang/net ~/go/src/golang.org/x/net
-" ln -sf ~/go/src/github.com/golang/crypto ~/go/src/golang.org/x/crypto
-" go get -v(means verbose)/-u(means update)
-" go get -u github.com/nsf/gocode
-" go get -u github.com/jstemmer/gotags
-" go get -u github.com/golang/lint/golint
-" go get -u github.com/kisielk/errcheck
-" go get -u golang.org/x/tools/cmd/goimports
-" go get -u golang.org/x/tools/cmd/oracle
-" go get -u golang.org/x/tools/cmd/gorename
-let $GOPATH = $HOME . "/go/"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_fail_silently = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'amix/vim-zenroom2'
 NeoBundle 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
@@ -175,7 +123,6 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 NeoBundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] } }
 NeoBundleLazy 'racer-rust/vim-racer', { 'autoload' : { 'filetypes' : ['rust'] } }
 let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 " c-x c-o for complete, gd for definition
@@ -192,7 +139,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 8
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$']
+let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$', '\c\.java$']
 let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 nmap <M-up> :lprev<cr>
@@ -206,7 +153,6 @@ nmap <C-Down> :cnext<CR><CR>
 nmap <C-right> :bnext<CR><CR>
 nmap <C-left> :bprevious<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'godlygeek/tabular'  " needed by vim-markdown
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
@@ -250,9 +196,6 @@ endfunction
 NeoBundle 'asins/vimcdoc'
 NeoBundle 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'jrozner/vim-antlr'
-NeoBundleLazy 'octol/vim-cpp-enhanced-highlight' , { 'autoload' : { 'filetypes' : ["c", "cpp"] } }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<leader><leader>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
@@ -264,7 +207,6 @@ map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundleLazy 'nvie/vim-flake8', { 'autoload' : { 'filetypes' : 'python' } }
 NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
-" NeoBundle 'plasticboy/vim-markdown', { 'autoload' : { 'filetypes' : 'markdown' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
@@ -274,11 +216,7 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy 'derekwyatt/vim-scala', { 'autoload' : { 'filetypes' : 'scala' } }
-autocmd FileType scala set tabstop=2 shiftwidth=2 expandtab
-" scala, sbt are needed
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-speeddating'
