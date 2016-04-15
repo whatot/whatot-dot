@@ -32,6 +32,8 @@ inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 set completeopt+=noinsert
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+NeoBundle 'Rip-Rip/clang_complete'
+" <CTRL-}>/<CTRL-T> jumplist <CTRL-O>/<CTRL-I>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -488,7 +490,7 @@ command! Tab2 set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
+autocmd! BufWritePost .vimrc source $HOME/.config/nvim/init.vim " .vimrc编辑后重载
 
 " Restore the last quit position when open file.
 autocmd BufReadPost *
