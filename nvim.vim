@@ -26,6 +26,12 @@ NeoBundle 'Shougo/context_filetype.vim'
 NeoBundle 'Shougo/neopairs.vim'
 NeoBundle 'Konfekt/FastFold'
 let g:deoplete#enable_at_startup = 1
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+set completeopt+=noinsert
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -241,10 +247,9 @@ set noerrorbells  " 关闭遇到错误时的声音提示
 set viminfo='100,:10000,<50,s10,h
 set history=10000
 
-if v:version >= 700
-    set completeopt=menu,longest
-    set completeopt-=previewwindow
-endif
+" for complete like deoplete-complete
+set completeopt=menu,longest
+set completeopt-=previewwindow
 
 set delcombine              " 组合字符一个个地删除
 
