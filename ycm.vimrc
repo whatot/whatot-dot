@@ -19,7 +19,7 @@ NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'linux' : 'make' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'Valloric/YouCompleteMe', {
       \ 'build' : {
-      \    'linux' : 'python2 ./install.py --clang-completer --system-libclang --system-boost --gocode-completer'
+      \    'linux' : 'python2 ./install.py --clang-completer --system-boost'
       \ }
       \ }
 nmap gd :YcmCompleter GoTo<CR>
@@ -109,7 +109,7 @@ NeoBundle 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 " nnoremap <silent> wa :NERDTreeTabsToggle<CR>
 nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
-nnoremap <silent> we :NERDTreeFind<CR>
+nnoremap <silent> we :NERDTree %:h<CR>
 let g:NERDChristmasTree = 1               " 色彩显示
 let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件
 let g:NERDTreeWinPos = 'left'             " 窗口显示位置
@@ -123,6 +123,7 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 NeoBundle 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] }}
 NeoBundleLazy 'racer-rust/vim-racer', { 'autoload' : { 'filetypes' : ['rust'] } }
 let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 " c-x c-o for complete, gd for definition
@@ -713,7 +714,7 @@ map q: :q
 if has("nvim")
 	command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
 	" Guifont DejaVu Sans Mono:h13
-	let g:Guifont="DejaVu Sans Mono:h13"
-	" let g:Guifont="Source Code Pro:h13"
+	" let g:Guifont="DejaVu Sans Mono:h13"
+	let g:Guifont="Source Code Pro:h13"
 	" let g:Guifont="monaco:h13"
 endif
