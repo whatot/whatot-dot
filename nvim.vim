@@ -1,50 +1,31 @@
 if 0 | endif  " Note: Skip initialization for vim-tiny or vim-small
 set fileencodings=utf-8,gb18030,utf-16le,gbk,gb2312,latin1
-set nocompatible
 
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+let neobundle_readme=expand('~/.config/nvim/bundle/neobundle.vim/README.md')
 if !filereadable(neobundle_readme)
-	echo "Installing NeoBundle..."
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+    echo "Installing NeoBundle..."
+    silent !mkdir -p ~/.config/nvim/bundle/
+    silent !git clone https://github.com/Shougo/neobundle.vim ~/.config/nvim/bundle/neobundle.vim/
 endif
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.config/nvim/bundle/'))
 
 " Let NeoBundle manage NeoBundle  " required!
 NeoBundleFetch 'Shougo/neobundle.vim'
 let g:neobundle#install_process_timeout = 500
 NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'linux' : 'make' } }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build' : {
-      \    'linux' : 'python2 ./install.py --clang-completer --system-boost'
-      \ }
-      \ }
-nmap gd :YcmCompleter GoTo<CR>
-nmap gy :YcmDiags<CR>
-nmap gt :YcmCompleter GetType<CR>
-let g:syntastic_c_checkers = ['YouCompleteMe']
-let g:syntastic_c_check_header = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-" let g:ycm_add_preview_to_completeopt = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 }
-let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<c-l>"
-" let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" need :NeoBundleRemotePlugins
+NeoBundle 'Shougo/deoplete.nvim'
+NeoBundle 'Shougo/neoinclude.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'zchee/deoplete-jedi'
+NeoBundle 'Shougo/context_filetype.vim'
+NeoBundle 'Shougo/neopairs.vim'
+NeoBundle 'Konfekt/FastFold'
+let g:deoplete#enable_at_startup = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -72,14 +53,6 @@ NeoBundle 'vim-scripts/FencView.vim'
 NeoBundle 'lilydjwg/fcitx.vim'
 NeoBundle 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'amix/vim-zenroom2'
-NeoBundle 'junegunn/goyo.vim'
-nnoremap <silent> <leader>z :Goyo<cr>
-let g:goyo_width = 80
-let g:goyo_margin_top = 4
-let g:goyo_margin_bottom = 4
-let g:goyo_linenr = 0
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -103,7 +76,6 @@ let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'scrooloose/nerdtree', { 'augroup' : 'NERDTreeHijackNetrw'}
 let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
-
 NeoBundle 'tyok/nerdtree-ack'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 " nnoremap <silent> wf :NERDTreeToggle<CR>
@@ -175,7 +147,7 @@ let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
 let g:unite_enable_short_source_names = 1
 let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor',
-			\ '--nogroup', '--hidden', '-g', '']
+            \ '--nogroup', '--hidden', '-g', '']
 nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
 nnoremap sr :<C-u>Unite file_mru<cr>
 nnoremap sm :<C-u>Unite mapping<cr>
@@ -186,11 +158,11 @@ nnoremap so :<C-u>Unite outline<cr>
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-	" Play nice with supertab
-	let b:SuperTabDisabled=1
-	" Enable navigation with control-j and control-k in insert mode
-	imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-	imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+    " Play nice with supertab
+    let b:SuperTabDisabled=1
+    " Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
@@ -226,7 +198,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'xolox/vim-session'
 NeoBundle 'vim-misc'
 let g:session_autoload = 'no'
-let g:session_directory = '~/.vim/sessions/'
+let g:session_directory = '~/.config/nvim/sessions/'
 let g:session_default_name = 'default'
 let g:session_persist_colors = 0  " don't save colorscheme and bg
 let g:session_autosave = 'yes'
@@ -253,9 +225,6 @@ NeoBundleCheck
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
-"set guifont=Droid\ Sans\ Mono\ 13
-set guifont=Source\ Code\ Pro\ Medium\ 13
-"set guifont=Fantasque\ Sans\ Mono\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -269,18 +238,12 @@ set hidden
 " 不要响铃，更不要闪屏
 set novisualbell  " 不要闪烁
 set noerrorbells  " 关闭遇到错误时的声音提示
-set t_vb=
-au GUIEnter * set t_vb=
 set viminfo='100,:10000,<50,s10,h
 set history=10000
 
-
 if v:version >= 700
-    set completeopt=menu,longest  ",preview
+    set completeopt=menu,longest
     set completeopt-=previewwindow
-                            " 自动补全(ctrl-p)时的一些选项：
-                            " 多于一项时显示菜单，最长选择，
-                            " 显示当前选择的额外信息
 endif
 
 set delcombine              " 组合字符一个个地删除
@@ -370,15 +333,14 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=1
-set switchbuf=usetab        " 如果包含，跳到第一个打开的包含指定缓冲区的窗口,
-                            " 也考虑其它标签页里的窗口
+set switchbuf=usetab
 
 " Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * <ESC>:execute '/'.GetVisualSelection()<CR>
 
 " 重启后撤销历史可用 persistent undo
 set undofile
-set undodir=~/.vim/undodir/
+set undodir=~/.config/nvim/undodir/
 set undolevels=1000 "maximum number of changes that can be undone
 
 " Avoid command-line redraw on every entered character by turning off Arabic
@@ -398,6 +360,7 @@ set path=.,/usr/include/,./include,../include,../../include,../../../include,../
 
 autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType vim set tabstop=4 shiftwidth=4 expandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
@@ -406,17 +369,17 @@ autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 " (username should include the "linux" string.)
 let homestr_len = strlen(expand("~/"))
 autocmd BufRead *.[ch] if stridx(expand("%:p"), "linux") == homestr_len |
-    \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab |
-    \ let g:syntastic_check_on_open = 0 |
-    \ let g:syntastic_check_on_wq = 0 |
-    \ let b:syntastic_checkers = [''] |
-    \ set path=.,~/linux/include/ |
-    \ set path+=~/linux/include/uapi/ |
-    \ set path+=~/linux/include/asm-generic/ |
-    \ set path+=~/linux/arch/x86/include |
-    \ set path+=~/linux/arch/x86/include/generated |
-    \ set path+=~/linux/arch/x86/include/uapi |
-    \ set path+=~/linux/arch/x86/include/generated/uapi | endif
+            \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab |
+            \ let g:syntastic_check_on_open = 0 |
+            \ let g:syntastic_check_on_wq = 0 |
+            \ let b:syntastic_checkers = [''] |
+            \ set path=.,~/linux/include/ |
+            \ set path+=~/linux/include/uapi/ |
+            \ set path+=~/linux/include/asm-generic/ |
+            \ set path+=~/linux/arch/x86/include |
+            \ set path+=~/linux/arch/x86/include/generated |
+            \ set path+=~/linux/arch/x86/include/uapi |
+            \ set path+=~/linux/arch/x86/include/generated/uapi | endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -484,13 +447,13 @@ nmap <C-t><C-w> :tabclose<CR>
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
 set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
 
-nmap <silent> <leader>er :e ~/.vimrc<CR>
-" nmap <Leader>cr :!cscope -Rbq<CR>
-" nmap <Leader>ct :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q `pwd`<CR>
-
+nmap <silent> <leader>er :e ~/.config/nvim/init.vim<CR>
 
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
+map q: :q
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -524,9 +487,9 @@ autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
 
 " Restore the last quit position when open file.
 autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \     exe "normal g'\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \     exe "normal g'\"" |
+            \ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -564,12 +527,12 @@ if has("gui_running")
     "set showtabline=0       " 隐藏Tab栏
 endif
 map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
-        \set guioptions-=T <Bar>
-        \set guioptions-=m <bar>
-    \else <Bar>
-        \set guioptions+=T <Bar>
-        \set guioptions+=m <Bar>
-    \endif<CR>
+            \set guioptions-=T <Bar>
+            \set guioptions-=m <bar>
+            \else <Bar>
+            \set guioptions+=T <Bar>
+            \set guioptions+=m <Bar>
+            \endif<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! AutoLoadCTagsAndCScope()
@@ -604,33 +567,9 @@ nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 " http://vifix.cn/blog/vim-auto-load-ctags-and-cscope.html
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 最大化窗口
-" windows add -- GUIEnter * simalt ~x
-" gnome or other DE, install wmctrl
-" add to .zshrc or .bashrc -- alias gvim='gvim -c "call Maximize_Window()"'
-function! Maximize_Window()
-    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
-endfunction
-nmap <F11> :call Maximize_Window()<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set cursorline
-
-if has('gui_running')
-	let starttime = strftime("%H")  " using molokai at night
-	if 7 < starttime && starttime < 18
-		set background=light
-		colorscheme solarized
-	else
-		set background=dark
-		colorscheme molokai
-	endif
-else  " work in terminal and nvim, 'TERM=xterm-256color' is needed
-	set background=dark
-	colorscheme molokai
-"	colorscheme desert
-endif
+set background=dark
+colorscheme molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置命令行和状态栏
 set ruler                  " 打开状态栏标尺
@@ -696,25 +635,8 @@ function! UpdateGtags(f)
     exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
 endfunction
 
-" fix 无法正常加载中文菜单
-set langmenu=zh_CN.UTF-8            "设置菜单语言
-source $VIMRUNTIME/delmenu.vim      "导入删除菜单脚本，删除乱码的菜单
-source $VIMRUNTIME/menu.vim         "导入正常的菜单脚本
-language messages zh_CN.utf-8       "设置提示信息语言
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General abbreviations
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
-map q: :q
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => neovim special configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("nvim")
-	command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-	" Guifont DejaVu Sans Mono:h13
-	" let g:Guifont="DejaVu Sans Mono:h13"
-	let g:Guifont="Source Code Pro:h13"
-	" let g:Guifont="monaco:h13"
+command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
+if !exists('g:Guifont')
+    " let g:Guifont="Source Code Pro:h13"
+    Guifont Source Code Pro:h13
 endif

@@ -1,22 +1,9 @@
 #!/usr/bin/env bash
-#
-# before running this script,
-# 'git clone https://github.com/whatot/whatot-dot.git' is needed,
-# because this file need the vimrc in the directory.
-#
 set -x
-
-PATH_NOW=`pwd`
-
-echo
-echo "######## first: install tools needed (include global) ##################"
-echo " Softwares maybe need:"
-echo " flake8 python-flake8 cscope ctags"
-echo
 
 # In archlinux
 if [[ -f "/usr/bin/pacman" ]];then
-	sudo pacman -S git gvim ack the_silver_searcher clang llvm boost cmake
+	sudo pacman -S git gvim ack the_silver_searcher clang llvm boost cmake ctags cscope
 	# for global in AUR, global is still in AUR
 	if [[ -f "/usr/bin/yaourt" ]];then
 		yaourt -S global
@@ -49,31 +36,4 @@ elif [[ -f "/usr/bin/emerge" ]]; then
 	sudo emerge global gvim git clang llvm ack the_silver_searcher
 
 fi
-
-echo
-echo "######## second: copy vimrc and install plugins  ##################"
-echo
-
-if [[ -f ~/".vimrc" ]]; then
-	mv ~/.vimrc ~/.vimrc-bakup
-fi
-
-# all subdirs
-mkdir -p ~/.vim/bundle/
-mkdir -p ~/.vim/sessions/
-mkdir -p ~/.vim/undodir/
-mkdir -p ~/.vim/autoload/
-
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-
-cd $PATH_NOW
-ln -s $(pwd)/.vimrc ~/.vimrc
-
-# for neovim
-mkdir -p ~/.config/
-ln -s ~/.vim/ ~/.config/nvim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
-
-# Using NeoBundle to install plugins in github
-vim +NeoBundleInstall +qall
 

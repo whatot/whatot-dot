@@ -4,7 +4,7 @@ my vunble vimrc and other config files
 
 ## 1. vimrc linux deploy
 
-__details in ./deploy.sh__
+__details in ./deploy-nvim.sh or ./deploy-ycm-vim.sh __
 
 maybe useful tips
 ```bash
@@ -32,6 +32,8 @@ sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 * tmux/tmux.sh
 
 ## 3. build ycm again using local libclang.so
+
+> local libclang always older than the needed version
 
 ```
 cd ~/.vim/bundle/YouCompleteMe/ \
