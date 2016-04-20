@@ -365,9 +365,8 @@ set noexpandtab
 
 set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
 
-autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
-autocmd FileType vim set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python set expandtab
+autocmd FileType vim set expandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
@@ -454,10 +453,8 @@ nmap <C-t><C-w> :tabclose<CR>
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
 set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
 
-nmap <silent> <leader>er :e ~/.config/nvim/init.vim<CR>
-
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+nmap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
 map q: :q
@@ -490,7 +487,10 @@ command! Tab2 set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd! BufWritePost .vimrc source $HOME/.config/nvim/init.vim " .vimrc编辑后重载
+nmap <silent> <leader>er :e $HOME/.config/nvim/init.vim<CR>
+
+autocmd! BufWritePost $HOME/.config/nvim/init.vim
+            \ source $HOME/.config/nvim/init.vim        " init.vim编辑后重载
 
 " Restore the last quit position when open file.
 autocmd BufReadPost *
@@ -521,7 +521,7 @@ endfunction
 
 nmap <leader>ch :call SetColorColumn()<CR>
 
-set cc=80
+set colorcolumn=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle Menu and Toolbar
@@ -643,7 +643,4 @@ function! UpdateGtags(f)
 endfunction
 
 command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-if !exists('g:Guifont')
-    " let g:Guifont="Source Code Pro:h13"
-    Guifont Source Code Pro:h13
-endif
+Guifont Source Code Pro:h13
