@@ -61,10 +61,11 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
-export EDITOR='nvim'
+export EDITOR='vim'
 
-alias vi='nvim --noplugin'
-alias vim='nvim-qt --maximized -- '
+alias vi='nvim -u NONE'
+alias vim='nvim'
+alias nvim-qt='nvim-qt --maximized -- '
 alias gvim='gvim -c "call Maximize_Window()"'
 alias gdb="gdb -q"
 alias grep="grep --color=auto"

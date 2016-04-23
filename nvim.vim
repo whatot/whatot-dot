@@ -75,6 +75,9 @@ NeoBundle 'vimcn/matchit.vim.cnx'
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'equalsraf/neovim-gui-shim'
+autocmd BufEnter * :GuiFont Source Code Pro:h13
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'vim-scripts/The-NERD-Commenter'
 NeoBundle 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
@@ -641,6 +644,3 @@ function! UpdateGtags(f)
     let dir = fnamemodify(a:f, ':p:h')
     exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
 endfunction
-
-command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-Guifont Source Code Pro:h13
