@@ -5,18 +5,17 @@ PATH_NOW=`pwd`
 
 bash ./install-deps.sh
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 if [[ -f "${HOME}/.vimrc" ]]; then
 	mv ~/.vimrc ~/.vimrc.backup
 fi
 
 # all needed subdirs
-mkdir -p ~/.vim/{bundle,sessions,undodir,autoload}
+mkdir -p ~/.vim/{plugged,sessions,undodir,autoload}
 ln -s ${PATH_NOW}/ycm.vim ~/.vimrc
 
-if [[ ! -d "${HOME}/.vim/bundle/neobundle.vim" ]]; then
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-fi
-
-# Using NeoBundle to install plugins in github
-vim +NeoBundleInstall +qall
+# Using vim-plug to install plugins in github
+vim +PlugInstall +qall
 

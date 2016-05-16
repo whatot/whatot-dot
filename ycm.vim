@@ -2,26 +2,11 @@ if 0 | endif  " Note: Skip initialization for vim-tiny or vim-small
 set fileencodings=utf-8,gb18030,utf-16le,gbk,gb2312,latin1
 set nocompatible
 
-let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
-if !filereadable(neobundle_readme)
-	echo "Installing NeoBundle..."
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
-endif
+call plug#begin(expand('~/.vim/plugged'))
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle  " required!
-NeoBundleFetch 'Shougo/neobundle.vim'
-let g:neobundle#install_process_timeout = 500
-NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'linux' : 'make' } }
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'Valloric/YouCompleteMe', {
-      \ 'build' : {
-      \    'linux' : 'python2 ./install.py --clang-completer --system-boost'
-      \ }
-      \ }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --system-boost' }
 nmap gd :YcmCompleter GoTo<CR>
 nmap gy :YcmDiags<CR>
 nmap gt :YcmCompleter GetType<CR>
@@ -40,19 +25,19 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 }
 let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
@@ -60,51 +45,51 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'vim-scripts/bufexplorer.zip'
+Plug 'vim-scripts/bufexplorer.zip'
 noremap <silent> <F10> :BufExplorer<CR>
 " noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 " noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'vim-scripts/Colour-Sampler-Pack'
-NeoBundle 'vim-scripts/FencView.vim'
-NeoBundle 'lilydjwg/fcitx.vim'
-NeoBundle 'whatot/gtags-cscope.vim'
+Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'vim-scripts/FencView.vim'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'amix/vim-zenroom2'
-NeoBundle 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
+Plug 'junegunn/goyo.vim'
 nnoremap <silent> <leader>z :Goyo<cr>
 let g:goyo_width = 80
 let g:goyo_margin_top = 4
 let g:goyo_margin_bottom = 4
 let g:goyo_linenr = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 noremap <leader>gd :GundoToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'vim-scripts/L9'
-NeoBundle 'vim-scripts/LargeFile'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
-NeoBundle 'dkasak/manpageview'
-NeoBundle 'vim-scripts/matchit.zip'
-NeoBundle 'vimcn/matchit.vim.cnx'
+Plug 'dkasak/manpageview'
+Plug 'vim-scripts/matchit.zip'
+Plug 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'vim-scripts/The-NERD-Commenter'
-NeoBundle 'vimcn/NERD_commenter.cnx'
+Plug 'vim-scripts/The-NERD-Commenter'
+Plug 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
 let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
 let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'scrooloose/nerdtree', { 'augroup' : 'NERDTreeHijackNetrw'}
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
-NeoBundle 'tyok/nerdtree-ack'
-NeoBundle 'jistr/vim-nerdtree-tabs'
+Plug 'tyok/nerdtree-ack', { 'on':  'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs', { 'on':  'NERDTreeToggle' }
 " nnoremap <silent> wf :NERDTreeToggle<CR>
 " nnoremap <silent> wa :NERDTreeTabsToggle<CR>
 nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
@@ -119,18 +104,18 @@ let NERDTreeShowBookmarks = 0
 let NERDTreeShowHidden = 0  " using 'I' to toggle (show hidden files)
 let g:nerdtree_tabs_open_on_gui_startup = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy 'rust-lang/rust.vim', { 'autoload' : { 'filetypes' : ['rust'] }}
-NeoBundleLazy 'racer-rust/vim-racer', { 'autoload' : { 'filetypes' : ['rust'] } }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 " c-x c-o for complete, gd for definition
 let g:rustfmt_autosave = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'pelodelfuego/vim-swoop'
+Plug 'pelodelfuego/vim-swoop'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
 " let g:syntastic_c_checkers = ['make']
@@ -153,28 +138,27 @@ nmap <C-Down> :cnext<CR><CR>
 nmap <C-right> :bnext<CR><CR>
 nmap <C-left> :bprevious<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'vimcn/tagbar.cnx'
+Plug 'majutsushi/tagbar'
+Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 40
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
 let g:tagbar_left = 1
 " autocmd FileType c,cpp nested :TagbarOpen  " 默认开启tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'vim-scripts/tag_in_new_tab'
+Plug 'vim-scripts/tag_in_new_tab'
 " Shift-Enter in normal mode opens a definition of identifier under cursor in a new tab. Uses tag files (see :help tags)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'lambdalisue/unite-grep-vcs'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/unite-outline'
+Plug 'Shougo/neomru.vim'
+Plug 'lambdalisue/unite-grep-vcs'
 let g:unite_source_rec_max_cache_files = 2000
 let g:unite_source_find_max_candidates = 2000
 let g:unite_source_history_yank_enable = 1
 let g:unite_enable_start_insert = 1
 let g:unite_enable_short_source_names = 1
-let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor',
-            \ '--nogroup', '--hidden', '-g', '']
+let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
 nnoremap sp :execute 'Unite' 'file_rec/async:'.unite#util#path2project_directory(getcwd())<CR>
 nnoremap sr :<C-u>Unite file_mru<cr>
 nnoremap sm :<C-u>Unite mapping<cr>
@@ -193,22 +177,22 @@ function! s:unite_settings()
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
-NeoBundle 'asins/vimcdoc'
-NeoBundle 'hsitz/VimOrganizer'
+Plug 'asins/vimcdoc'
+Plug 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<leader><leader>'
 let EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 "for visual selection
 map + <Plug>(expand_region_expand)
 map - <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy 'nvie/vim-flake8', { 'autoload' : { 'filetypes' : 'python' } }
-NeoBundle 'tpope/vim-fugitive', { 'augroup' : 'fugitive' }
+Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'tpope/vim-fugitive'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_use_default_mapping=0
 " " Default mapping
 " let g:multi_cursor_next_key='<C-n>'
@@ -216,14 +200,14 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_skip_key='<C-x>'
 " let g:multi_cursor_quit_key='<Esc>'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-speeddating'
-NeoBundle 'tpope/vim-surround'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'xolox/vim-session'
-NeoBundle 'vim-misc'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 let g:session_autoload = 'no'
 let g:session_directory = '~/.vim/sessions/'
 let g:session_default_name = 'default'
@@ -236,21 +220,17 @@ set sessionoptions-=options,localoptions,blank,help
 nmap <F3> :SaveSession!<space>
 nmap <C-F3> :OpenSession!<space>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call neobundle#end()
-filetype plugin indent on   " required!
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-plug end
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Add plugins to &runtimepath
+call plug#end()
+filetype plugin indent on
 syntax on
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "set guifont=Droid\ Sans\ Mono\ 13
 set guifont=Source\ Code\ Pro\ Medium\ 13
@@ -273,10 +253,9 @@ au GUIEnter * set t_vb=
 set viminfo='100,:10000,<50,s10,h
 set history=10000
 
-if v:version >= 700
-    set completeopt=menu,longest
-    set completeopt-=previewwindow
-endif
+" for completer
+set completeopt=menu,longest
+set completeopt-=previewwindow
 
 set delcombine              " 组合字符一个个地删除
 
@@ -390,9 +369,8 @@ set noexpandtab
 
 set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
 
-autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
-autocmd FileType vim set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python set expandtab
+autocmd FileType vim set expandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
@@ -479,10 +457,8 @@ nmap <C-t><C-w> :tabclose<CR>
 " :tabp[revious] {count} ----> <C-PageUp> {count} ----> gT
 set guitablabel=%N\ %t\ %m            "标签栏显示标签页号,文件名,页号
 
-nmap <silent> <leader>er :e ~/.vimrc<CR>
-
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+nmap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 iab xdate <c-r>=strftime("%Y%m%d %H:%M:%S")<cr>
 map q: :q
@@ -515,7 +491,9 @@ command! Tab2 set tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  自动执行命令,与函数
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd! BufWritePost .vimrc source $HOME/.vimrc    " .vimrc编辑后重载
+nmap <silent> <leader>er :e $HOME/.vimrc<CR>
+
+autocmd! BufWritePost $HOME/.vimrc source $HOME/.vimrc        " vimrc编辑后重载
 
 " Restore the last quit position when open file.
 autocmd BufReadPost *
@@ -546,7 +524,7 @@ endfunction
 
 nmap <leader>ch :call SetColorColumn()<CR>
 
-set cc=80
+set colorcolumn=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle Menu and Toolbar
@@ -611,22 +589,6 @@ nmap <F11> :call Maximize_Window()<CR>
 
 set t_Co=256   " Explicitly tell vim that the terminal supports 256 colors,
 set cursorline
-
-if has('gui_running')
-	let starttime = strftime("%H")  " using molokai at night
-	if 7 < starttime && starttime < 18
-		set background=light
-		colorscheme solarized
-	else
-		set background=dark
-		colorscheme molokai
-	endif
-else  " work in terminal and nvim, 'TERM=xterm-256color' is needed
-	set background=dark
-	colorscheme molokai
-"	colorscheme desert
-endif
-
 set background=dark
 colorscheme molokai
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

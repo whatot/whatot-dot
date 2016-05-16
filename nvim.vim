@@ -236,7 +236,7 @@ set noerrorbells  " 关闭遇到错误时的声音提示
 set viminfo='100,:10000,<50,s10,h
 set history=10000
 
-" for complete like deoplete-complete
+" for completer
 set completeopt=menu,longest
 set completeopt-=previewwindow
 
