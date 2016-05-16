@@ -22,7 +22,7 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 set completeopt+=noinsert
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 Plug 'Rip-Rip/clang_complete'
-" <CTRL-}>/<CTRL-T> jumplist <CTRL-O>/<CTRL-I>
+" <CTRL-]>/<CTRL-T> jumplist <CTRL-O>/<CTRL-I>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'

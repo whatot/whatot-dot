@@ -31,13 +31,13 @@ sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 * tmux/tmux.conf
 * tmux/tmux.sh
 
-## 3. build ycm again using local libclang.so
+## 3. build ycm using system-libclang and system-boost
 
 > local libclang always older than the needed version
 
 ```
 cd ~/.vim/bundle/YouCompleteMe/ \
-    && ./install.sh --clang-completer --system-libclang
+    && python2 ./install.py --clang-completer --system-libclang --system-boost
 ```
 
 ## 4. others
