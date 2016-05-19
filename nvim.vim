@@ -64,9 +64,6 @@ Plug 'vimcn/matchit.vim.cnx'
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'equalsraf/neovim-gui-shim'
-autocmd BufEnter * :GuiFont Source Code Pro:h13
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/The-NERD-Commenter'
 Plug 'vimcn/NERD_commenter.cnx'
 "[default],cc;,cu注释与取消注释快速切换
