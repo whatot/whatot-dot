@@ -131,9 +131,9 @@ set shiftwidth=4
 set smarttab
 set tabstop=4
 set softtabstop=4
+set expandtab
 
-autocmd FileType c set tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
+autocmd FileType make set noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map

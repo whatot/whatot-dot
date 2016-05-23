@@ -365,12 +365,11 @@ set shiftwidth=4
 set smarttab
 set tabstop=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 
 set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
 
-autocmd FileType python set expandtab
-autocmd FileType vim set expandtab
+autocmd FileType make set noexpandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
