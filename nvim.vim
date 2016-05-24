@@ -58,6 +58,13 @@ Plug 'vim-scripts/L9'
 Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
 Plug 'dkasak/manpageview'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+" gx open the link under the cursor
+" :Toc create a quickfix vertical window navigable TOC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/matchit.zip'
 Plug 'vimcn/matchit.vim.cnx'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
@@ -380,10 +387,11 @@ set pastetoggle=<F5> " when in insert mode, press <F5> to go to
 " disbale paste mode when leaving insert mode
 autocmd InsertLeave * set nopaste
 
+" Fast switching between the last two files
+nnoremap <leader><leader> <C-^>
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
-" nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
 
@@ -505,25 +513,6 @@ endfunction
 nmap <leader>ch :call SetColorColumn()<CR>
 
 set colorcolumn=80
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle Menu and Toolbar
-if has("gui_running")
-    set guioptions-=m       " 隐藏菜单栏
-    set guioptions-=T        " 隐藏工具栏
-    set guioptions-=L       " 隐藏左侧滚动条
-    set guioptions-=r       " 隐藏右侧滚动条
-    "set guioptions-=b       " 隐藏底部滚动条
-    "set showtabline=0       " 隐藏Tab栏
-endif
-map <silent> <c-s-F2> :if &guioptions =~# 'T' <Bar>
-            \set guioptions-=T <Bar>
-            \set guioptions-=m <bar>
-            \else <Bar>
-            \set guioptions+=T <Bar>
-            \set guioptions+=m <Bar>
-            \endif<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! AutoLoadCTagsAndCScope()
     let max = 10

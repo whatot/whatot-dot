@@ -400,10 +400,11 @@ set pastetoggle=<F5> " when in insert mode, press <F5> to go to
 " disbale paste mode when leaving insert mode
 autocmd InsertLeave * set nopaste
 
+" Fast switching between the last two files
+nnoremap <leader><leader> <C-^>
 nnoremap <Space> za
 nmap ' <C-W>
 nmap 'm :marks<CR>
-" nmap gb :setl fenc=gb18030<CR>
 
 nnoremap <F12> :%s/[ \t\r]\+$//g<CR>
 
