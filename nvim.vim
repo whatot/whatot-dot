@@ -103,7 +103,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 " c-x c-o for complete, gd for definition
-let g:rustfmt_autosave = 0
+let g:rustfmt_autosave = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'pelodelfuego/vim-swoop'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
