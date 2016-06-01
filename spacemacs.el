@@ -39,6 +39,9 @@ values."
      ;; ----------------------------------------------------------------
      helm
      auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t)
      better-defaults
      emacs-lisp
      git
@@ -50,13 +53,18 @@ values."
      ;; spell-checking
      syntax-checking
      version-control
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-global-margin t)
      rust
      python
      shell-scripts
      vimscript
      semantic
      gtags
+     c-c++
      (c-c++ :variables c-c++-enable-clang-support t)
+     colors
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -289,6 +297,7 @@ you should place your code here."
   (setq-default show-trailing-whitespace t)
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
+  (setq-default vc-follow-symlinks t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
