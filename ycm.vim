@@ -233,8 +233,7 @@ syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "set guifont=Droid\ Sans\ Mono\ 13
-set guifont=Source\ Code\ Pro\ 14
-"set guifont=Fantasque\ Sans\ Mono\ 13
+set guifont=Source\ Code\ Pro\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac

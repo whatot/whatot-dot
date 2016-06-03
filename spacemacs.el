@@ -43,28 +43,29 @@ values."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
-     emacs-lisp
-     git
-     markdown
-     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
+     semantic
+     colors
+     git
      version-control
      (version-control :variables
                       version-control-diff-tool 'git-gutter+
                       version-control-global-margin t)
+     gtags
+     org
+     emacs-lisp
+     markdown
+     c-c++
+     (c-c++ :variables c-c++-enable-clang-support t)
      rust
      python
      shell-scripts
      vimscript
-     semantic
-     gtags
-     c-c++
-     (c-c++ :variables c-c++-enable-clang-support t)
-     colors
+     puppet
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
