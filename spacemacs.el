@@ -67,6 +67,7 @@ values."
      yaml
      javascript
      html
+     systemd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -313,6 +314,7 @@ you should place your code here."
   (setq-default c-default-style "linux")
   (setq-default vc-follow-symlinks t)
   (setq-default puppet-indent-level 4)
+  (setq-default evil-shift-width 4)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
