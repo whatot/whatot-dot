@@ -51,7 +51,6 @@ values."
      colors
      git
      version-control
-     (version-control :variables version-control-diff-tool 'git-gutter+)
      (version-control :variables version-control-global-margin t)
      gtags
      org
@@ -68,6 +67,8 @@ values."
      javascript
      html
      systemd
+     go
+     (go :variables go-tab-width 4)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -272,7 +273,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
