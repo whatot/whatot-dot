@@ -4,17 +4,10 @@ set -x
 PATH_NOW=`pwd`
 
 if [[ -f "/usr/bin/pacman" ]];then
-    sudo pacman -S ipython python-nose
-    cargo install rustfmt racer
+    sudo pacman -S git ipython python-nose cargo rust go go-tools
+    cargo install rustfmt
+    cargo install racer
 fi
-
-## for go
-# go get -u -v github.com/nsf/gocode
-# go get -u -v github.com/rogpeppe/godef
-# go get -u -v golang.org/x/tools/cmd/oracle
-# go get -u -v golang.org/x/tools/cmd/gorename
-# go get -u -v golang.org/x/tools/cmd/goimports
-
 
 if [[ -f "${HOME}/.spacemacs" ]]; then
     mv ~/.spacemacs ~/.spacemacs.bak
