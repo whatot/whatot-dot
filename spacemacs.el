@@ -68,7 +68,6 @@ values."
      html
      systemd
      go
-     (go :variables go-tab-width 4)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -316,6 +315,9 @@ you should place your code here."
   (setq-default vc-follow-symlinks t)
   (setq-default puppet-indent-level 4)
   (setq-default evil-shift-width 4)
+  (setq-default go-tab-width 4)
+  (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin")))
+  ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
