@@ -304,14 +304,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :weight normal
                                               :width normal
                                               :powerline-scale 1.1))
-    (spacemacs//set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 32 29))
+    (set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 32 29))
   (when (string= system-name "x411")
     (setq-default dotspacemacs-default-font '("Source Code Pro"
                                               :size 19
                                               :weight normal
                                               :width normal
                                               :powerline-scale 1.1))
-    (spacemacs//set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 19 18))
+    (set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 19 17))
   )
 
 (defun dotspacemacs/user-config ()
@@ -339,7 +339,7 @@ you should place your code here."
   )
 
 ;; code from chinese layer
-(defun spacemacs//set-monospaced-font (english chinese english-size chinese-size)
+(defun set-monospaced-font (english chinese english-size chinese-size)
   (set-face-attribute 'default nil :font
                       (format "%s:pixelsize=%d" english english-size))
   (dolist (charset '(kana han cjk-misc bopomofo))

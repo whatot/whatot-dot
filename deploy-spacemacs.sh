@@ -4,7 +4,8 @@ set -x
 PATH_NOW=`pwd`
 
 if [[ -f "/usr/bin/pacman" ]];then
-    sudo pacman -S git tig ipython python-nose cargo rust go go-tools
+    sudo pacman -S git tig noto-fonts-cjk the_silver_searcher \
+         ipython python-nose cargo rust go go-tools
     cargo install rustfmt
     cargo install racer
 fi
