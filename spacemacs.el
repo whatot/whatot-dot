@@ -73,7 +73,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(youdao-dictionary fcitx)
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when downloading packages.
@@ -298,6 +298,20 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  (when (string= system-name "b150")
+    (setq-default dotspacemacs-default-font '("Source Code Pro"
+                                              :size 32
+                                              :weight normal
+                                              :width normal
+                                              :powerline-scale 1.1))
+    (spacemacs//set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 32 29))
+  (when (string= system-name "x411")
+    (setq-default dotspacemacs-default-font '("Source Code Pro"
+                                              :size 19
+                                              :weight normal
+                                              :width normal
+                                              :powerline-scale 1.1))
+    (spacemacs//set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 19 18))
   )
 
 (defun dotspacemacs/user-config ()
@@ -318,7 +332,19 @@ you should place your code here."
   (setq-default go-tab-width 4)
   (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin")))
   ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
+  (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
+  (fcitx-aggressive-setup)
+  (fcitx-prefix-keys-add "M-m")
+  (setq-default fcitx-use-dbus t)
   )
+
+;; code from chinese layer
+(defun spacemacs//set-monospaced-font (english chinese english-size chinese-size)
+  (set-face-attribute 'default nil :font
+                      (format "%s:pixelsize=%d" english english-size))
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family chinese :size chinese-size))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
