@@ -48,7 +48,6 @@ values."
      ;; spell-checking
      syntax-checking
      semantic
-     colors
      git
      version-control
      (version-control :variables version-control-global-margin t)
@@ -64,16 +63,16 @@ values."
      vimscript
      puppet
      yaml
-     javascript
      html
      systemd
      go
+     sql
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(youdao-dictionary fcitx)
+   dotspacemacs-additional-packages '(youdao-dictionary fcitx json-mode)
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when downloading packages.
@@ -134,7 +133,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(monokai
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -336,6 +336,7 @@ you should place your code here."
   (fcitx-aggressive-setup)
   (fcitx-prefix-keys-add "M-m")
   (setq-default fcitx-use-dbus t)
+  (setq-default frame-title-format '("%b (%f) [%m]"))
   )
 
 ;; code from chinese layer
