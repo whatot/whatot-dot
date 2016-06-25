@@ -72,7 +72,13 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(youdao-dictionary fcitx json-mode)
+   dotspacemacs-additional-packages
+   '(
+     youdao-dictionary
+     fcitx
+     json-mode
+     highlight-indentation
+     )
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when downloading packages.
@@ -323,7 +329,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (setq-default show-trailing-whitespace t)
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
   (setq-default vc-follow-symlinks t)
@@ -337,6 +342,12 @@ you should place your code here."
   (fcitx-prefix-keys-add "M-m")
   (setq-default fcitx-use-dbus t)
   (setq-default frame-title-format '("%b (%f) [%m]"))
+  (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
+  (add-hook 'prog-mode-hook 'highlight-indentation-current-column-mode)
+  (add-hook 'prog-mode-hook 'indent-guide-mode)
+  (global-whitespace-mode 1)
+  (setq whitespace-style '(face tabs trailing lines tab-mark))
   )
 
 ;; code from chinese layer
