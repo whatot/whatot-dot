@@ -63,8 +63,7 @@ export XMODIFIERS="@im=fcitx"
 
 export EDITOR='vim'
 
-alias vi='nvim -u NONE'
-alias vim='nvim'
+alias vi='vim -u NONE'
 alias gvim='gvim -c "call Maximize_Window()"'
 alias gdb="gdb -q"
 alias grep="grep --color=auto"

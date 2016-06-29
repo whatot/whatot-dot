@@ -42,19 +42,19 @@ values."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
+     emacs-lisp
+     git
+     markdown
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
      semantic
-     git
      version-control
      (version-control :variables version-control-global-margin t)
      gtags
-     org
-     emacs-lisp
-     markdown
      c-c++
      (c-c++ :variables c-c++-enable-clang-support t)
      rust
@@ -75,9 +75,7 @@ values."
    dotspacemacs-additional-packages
    '(
      youdao-dictionary
-     fcitx
      json-mode
-     highlight-indentation
      )
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -127,13 +125,12 @@ values."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner 'official
-   ;; List of items to show in the startup buffer. If nil it is disabled.
-   ;; Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.
-   ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(recents projects)
-   ;; Number of recent files to show in the startup buffer. Ignored if
-   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
-   dotspacemacs-startup-recent-list-size 5
+   ;; List of items to show in startup buffer or an association list of of
+   ;; the form `(list-type . list-size)`. If nil it is disabled.
+   ;; Possible values for list-type are:
+   ;; `recents' `bookmarks' `projects' `agenda' `todos'."
+   dotspacemacs-startup-lists '((recents . 5)
+                                (projects . 7))
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
@@ -141,12 +138,7 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
                          spacemacs-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         monokai
-                         zenburn)
+                         spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -292,7 +284,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup `changed
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 (defun dotspacemacs/user-init ()
@@ -338,16 +330,12 @@ you should place your code here."
   (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin")))
   ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
-  (fcitx-aggressive-setup)
-  (fcitx-prefix-keys-add "M-m")
-  (setq-default fcitx-use-dbus t)
   (setq-default frame-title-format '("%b (%f) [%m]"))
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
-  (add-hook 'prog-mode-hook 'highlight-indentation-current-column-mode)
-  (add-hook 'prog-mode-hook 'indent-guide-mode)
   (global-whitespace-mode 1)
   (setq whitespace-style '(face tabs trailing lines tab-mark))
+  (setq-default require-final-newline t)
   )
 
 ;; code from chinese layer
