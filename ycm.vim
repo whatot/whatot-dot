@@ -232,8 +232,15 @@ filetype plugin indent on
 syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set guifont=Droid\ Sans\ Mono\ 13
-set guifont=Source\ Code\ Pro\ 13
+" set font based on hostname()
+if hostname() == 'b150'
+    set guifont=Source\ Code\ Pro\ 11
+elseif hostname() == 'x411'
+    set guifont=Source\ Code\ Pro\ 13
+else
+    set guifont=Source\ Code\ Pro\ 13
+endif
+
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac

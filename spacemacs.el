@@ -67,6 +67,7 @@ values."
      systemd
      go
      sql
+     ansible
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -334,7 +335,7 @@ you should place your code here."
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
   (global-whitespace-mode 1)
-  (setq whitespace-style '(face tabs trailing lines tab-mark))
+  (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   (setq-default require-final-newline t)
   )
 
