@@ -337,6 +337,8 @@ you should place your code here."
   (global-whitespace-mode 1)
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   (setq-default require-final-newline t)
+  (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
+  (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
   )
 
 ;; code from chinese layer
@@ -346,6 +348,9 @@ you should place your code here."
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family chinese :size chinese-size))))
+
+(defun indent-using-tabs ()
+  (setq indent-tabs-mode t))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
