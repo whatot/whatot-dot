@@ -59,6 +59,7 @@ values."
      (c-c++ :variables c-c++-enable-clang-support t)
      rust
      python
+     (python :variables python-enable-yapf-format-on-save t)
      shell-scripts
      vimscript
      puppet
@@ -77,6 +78,7 @@ values."
    '(
      youdao-dictionary
      json-mode
+     ag
      )
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -337,8 +339,7 @@ you should place your code here."
   (global-whitespace-mode 1)
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   (setq-default require-final-newline t)
-  (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
-  (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
+  (setup-special-modes-using-tabs)
   )
 
 ;; code from chinese layer
@@ -348,6 +349,13 @@ you should place your code here."
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family chinese :size chinese-size))))
+
+(defun setup-special-modes-using-tabs ()
+  (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
+  (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
+  (add-hook 'makefile-mode-hook 'indent-using-tabs)
+  (add-hook 'go-mode-hook 'indent-using-tabs)
+  )
 
 (defun indent-using-tabs ()
   (setq indent-tabs-mode t))
