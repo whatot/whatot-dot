@@ -340,6 +340,7 @@ you should place your code here."
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   (setq-default require-final-newline t)
   (setup-special-modes-using-tabs)
+  (setup-selinux-file-mode)
   )
 
 ;; code from chinese layer
@@ -350,11 +351,18 @@ you should place your code here."
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family chinese :size chinese-size))))
 
+(defun setup-selinux-file-mode ()
+  (add-to-list 'auto-mode-alist '("\\.te\\'" . m4-mode))
+  (add-to-list 'auto-mode-alist '("\\.if\\'" . m4-mode))
+  (add-to-list 'auto-mode-alist '("\\.fc\\'" . m4-mode))
+  )
+
 (defun setup-special-modes-using-tabs ()
   (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
   (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
   (add-hook 'go-mode-hook 'indent-using-tabs)
+  (add-hook 'm4-mode-hook 'indent-using-tabs)
   )
 
 (defun indent-using-tabs ()
