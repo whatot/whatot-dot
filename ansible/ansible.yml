@@ -105,10 +105,10 @@
   - name: Set jdk8 as default java
     shell: archlinux-java set java-8-jdk
 
-  - name: Ensure target user in /etc/sudoers
+  - name: Ensure sudoer user in /etc/sudoers
     lineinfile:
-      regexp: '^{{ target_user }} ALL=\(ALL\) NOPASSWD: ALL$'
-      line: '{{ target_user }} ALL=(ALL) NOPASSWD: ALL'
+      regexp: '^{{ sudoer_user }} ALL=\(ALL\) NOPASSWD: ALL$'
+      line: '{{ sudoer_user }} ALL=(ALL) NOPASSWD: ALL'
       dest: /etc/sudoers
       state: present
       insertafter: EOF
