@@ -10,8 +10,26 @@
         SigLevel = Optional TrustedOnly
         Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
-  - name: Using ustc mirror in /etc/pacman.d/mirrorlist
+  - debug: var=ansible_distribution
+
+  - name: Using ustc mirror in /etc/pacman.d/mirrorlist in Archlinux
     shell: sed -i '/ustc/s/^#//' /etc/pacman.d/mirrorlist
+    when: ansible_distribution == "Archlinux"
+
+  - name: Setup /etc/pacman-mirrors.conf in Manjaro
+    lineinfile:
+      regexp: '^OnlyCountry = China$'
+      line: 'OnlyCountry = China'
+      dest: /etc/pacman-mirrors.conf
+      state: present
+      insertafter: EOF
+    when: ansible_distribution == "Manjaro Linux"
+    register: pacman_mirrors_conf_updated
+
+  - name: Update /etc/pacman.d/mirrorlist by pacman-mirrors in Manjaro
+    shell: pacman-mirrors
+    when: ansible_distribution == "Manjaro Linux" and
+          (pacman_mirrors_conf_updated | changed)
 
   - name: Update and Upgrade the system
     pacman: update_cache=yes upgrade=yes
@@ -111,6 +129,7 @@
       line: '{{ sudoer_user }} ALL=(ALL) NOPASSWD: ALL'
       dest: /etc/sudoers
       state: present
+      backup: yes
       insertafter: EOF
 
   - sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
