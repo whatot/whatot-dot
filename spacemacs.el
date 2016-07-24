@@ -79,6 +79,7 @@ values."
      youdao-dictionary
      json-mode
      ag
+     fcitx
      )
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -339,8 +340,9 @@ you should place your code here."
   (global-whitespace-mode 1)
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   (setq-default require-final-newline t)
-  (setup-special-modes-using-tabs)
-  (setup-selinux-file-mode)
+  (local-setup-special-modes-using-tabs)
+  (local-setup-selinux-file-mode)
+  (local-setup-fcitx-about)
   )
 
 ;; code from chinese layer
@@ -351,13 +353,16 @@ you should place your code here."
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family chinese :size chinese-size))))
 
-(defun setup-selinux-file-mode ()
+(defun indent-using-tabs ()
+  (setq indent-tabs-mode t))
+
+(defun local-setup-selinux-file-mode ()
   (add-to-list 'auto-mode-alist '("\\.te\\'" . m4-mode))
   (add-to-list 'auto-mode-alist '("\\.if\\'" . m4-mode))
   (add-to-list 'auto-mode-alist '("\\.fc\\'" . m4-mode))
   )
 
-(defun setup-special-modes-using-tabs ()
+(defun local-setup-special-modes-using-tabs ()
   (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
   (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
@@ -365,8 +370,13 @@ you should place your code here."
   (add-hook 'm4-mode-hook 'indent-using-tabs)
   )
 
-(defun indent-using-tabs ()
-  (setq indent-tabs-mode t))
+(defun local-setup-fcitx-about ()
+  ;; Should setup "LC_CTYPE=zh_CN.UTF8" before start emacs
+  (fcitx-aggressive-setup)
+  (fcitx-prefix-keys-add "M-m")
+  (setq fcitx-use-dbus t)
+  (fcitx-evil-turn-on)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
