@@ -58,8 +58,7 @@ values."
      c-c++
      (c-c++ :variables c-c++-enable-clang-support t)
      rust
-     python
-     (python :variables python-enable-yapf-format-on-save t)
+     (python :variables python-test-runner '(nose pytest))
      shell-scripts
      vimscript
      puppet
@@ -376,6 +375,7 @@ you should place your code here."
   (fcitx-prefix-keys-add "M-m")
   (setq fcitx-use-dbus t)
   (fcitx-evil-turn-on)
+  ;; (global-set-key (kbd "C-S-A") 'nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
