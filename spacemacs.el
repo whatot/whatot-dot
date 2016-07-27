@@ -58,7 +58,7 @@ values."
      c-c++
      (c-c++ :variables c-c++-enable-clang-support t)
      rust
-     (python :variables python-test-runner '(nose pytest))
+     ;; (python :variables python-test-runner '(nose pytest))
      shell-scripts
      vimscript
      puppet
@@ -68,6 +68,8 @@ values."
      go
      sql
      ansible
+     search-engine
+     colors
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
