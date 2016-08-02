@@ -1,0 +1,75 @@
+---
+# default vars for task arch
+skip_font_install: True
+
+font_pkgs:
+  - noto-fonts-cjk
+  - ttf-google-fonts-git
+
+basic_pkgs:
+  - archlinux-keyring
+  - archlinuxcn-keyring
+  - clipit
+  - dnsmasq
+  - fcitx
+  - fcitx-configtool
+  - fcitx-im
+  - fcitx-rime
+  - gedit
+  - gnome-clocks
+  - gnome-tweak-tool
+  - libvirt
+  - ntp
+  - oh-my-zsh-git
+  - openssl
+  - qemu
+  - rsync
+  - sysstat
+  - transmission-gtk
+  - yaourt
+
+view_pkgs:
+  - baka-mplayer
+  - calibre
+  - deadbeef
+  - file-roller
+  - firefox
+  - google-chrome
+  - mpv
+  - p7zip
+  - pandoc
+  - unrar
+  - unzip
+  - viewnior
+  - zeal-git
+  - zim
+
+program_tool_pkgs:
+  - ack
+  - cscope
+  - emacs
+  - git
+  - global
+  - gvim
+  - intellij-idea-community-edition
+  - pycharm-community
+  - the_silver_searcher
+  - tig
+  - yapf
+
+program_bin_pkgs:
+  - boost
+  - cargo
+  - clang
+  - cmake
+  - flake8
+  - go
+  - go-tools
+  - ipython
+  - ipython2
+  - jdk
+  - llvm
+  - python-nose
+  - python-pylint
+  - python2-pylint
+  - rust

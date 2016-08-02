@@ -1,0 +1,42 @@
+---
+# tasks file for arch
+
+- name: Set the Asia/Shanghai timezone
+  file:
+    src: "/usr/share/zoneinfo/Asia/Shanghai"
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+- include: mirror.yml
+- include: user.yml
+
+- name: Update and Upgrade the system
+  pacman: update_cache=yes upgrade=yes
+
+- name: Install fonts packages
+  pacman: name='{{ item }}' state=latest
+  with_items: '{{ font_pkgs }}'
+  when: not skip_font_install
+
+- name: Install packages
+  pacman: name='{{ item }}' state=latest
+  with_flattened:
+    - '{{ basic_pkgs }}'
+    - '{{ view_pkgs }}'
+    - '{{ program_tool_pkgs }}'
+    - '{{ program_bin_pkgs }}'
+
+- name: Ensure basic services is running and enabled
+  service: name='{{ item }}' state=started enabled=yes
+  with_items:
+    - fstrim.timer
+    - ntpd
+
+- name: Disable sshd service
+  service: name=sshd state=stopped enabled=no
+
+- name: Set jdk8 as default java
+  shell: archlinux-java set java-8-jdk
+
+- sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
