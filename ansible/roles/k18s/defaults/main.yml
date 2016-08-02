@@ -1,0 +1,13 @@
+---
+# default vars file for task k18s
+
+before_all_pkgs:
+  - deltarpm
+  - epel-release
+  - libselinux-python
+
+basic_pkgs:
+  - bash-completion
+  - git
+  - rsync
+  - vim

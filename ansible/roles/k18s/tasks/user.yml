@@ -1,0 +1,25 @@
+---
+# tasks file for k18s-user
+
+- name: Ensure wheel group exists
+  group: name=wheel state=present
+
+- name: Config wheel group
+  lineinfile:
+    dest: /etc/sudoers.d/20_wheel
+    regexp: '^%wheel'
+    line: '%wheel  ALL=(ALL)  NOPASSWD: ALL'
+    state: present
+    backup: yes
+    insertafter: EOF
+    create: yes
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Manage default user
+  user:
+    name: '{{ default_user }}'
+    groups: wheel
+    append: yes
+    state: present

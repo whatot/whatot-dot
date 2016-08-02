@@ -3,3 +3,6 @@ ansible_python_interpreter=/usr/bin/python2
 
 [pc]
 localhost ansible_connection=local
+
+[k18s]
+k18s ansible_ssh_host=192.168.122.55

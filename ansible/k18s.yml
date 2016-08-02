@@ -1,0 +1,5 @@
+
+- hosts: k18s
+  roles:
+    - role: k18s
+      default_user: mir
