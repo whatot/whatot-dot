@@ -1,5 +1,5 @@
 
-- hosts: k18s
+- hosts: k8s
   roles:
-    - role: k18s
+    - role: k8s
       default_user: mir

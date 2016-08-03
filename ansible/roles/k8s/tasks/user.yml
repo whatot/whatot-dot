@@ -1,5 +1,5 @@
 ---
-# tasks file for k18s-user
+# tasks file for k8s-user
 
 - name: Ensure wheel group exists
   group: name=wheel state=present

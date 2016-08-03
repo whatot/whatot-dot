@@ -1,4 +1,4 @@
-K18s
+K8s
 =========
 
 Install and Config kubernetes in centos7
@@ -9,7 +9,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - role: k18s
+      - role: k8s
 ```
 
 Author Information

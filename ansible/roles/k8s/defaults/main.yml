@@ -1,5 +1,5 @@
 ---
-# default vars file for task k18s
+# default vars file for task k8s
 
 before_all_pkgs:
   - deltarpm

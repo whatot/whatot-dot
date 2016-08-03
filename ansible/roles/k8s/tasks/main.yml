@@ -1,5 +1,5 @@
 ---
-# tasks file for k18s
+# tasks file for k8s
 
 - name: Set the Asia/Shanghai timezone
   file:
