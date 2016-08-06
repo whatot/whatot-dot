@@ -54,9 +54,8 @@ values."
      semantic
      version-control
      (version-control :variables version-control-global-margin t)
-     gtags
-     c-c++
-     (c-c++ :variables c-c++-enable-clang-support t)
+     ;; gtags
+     ;; (c-c++ :variables c-c++-enable-clang-support t)
      rust
      ;; (python :variables python-test-runner '(nose pytest))
      shell-scripts
