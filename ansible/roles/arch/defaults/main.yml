@@ -1,10 +1,24 @@
 ---
 # default vars for task arch
-skip_font_install: True
 
 font_pkgs:
+  - adobe-source-code-pro-fonts
+  - adobe-source-han-sans-cn-fonts
+  - adobe-source-sans-pro-fonts
+  - adobe-source-serif-pro-fonts
+  - ttf-bitstream-vera
+  - ttf-dejavu
+  - ttf-droid
+  - ttf-liberation
+  - wqy-microhei
+
+font_absent_pkgs:
+  - noto-fonts
   - noto-fonts-cjk
   - ttf-google-fonts-git
+
+aur_pkgs:
+  - ttf-opensans
 
 basic_pkgs:
   - archlinux-keyring

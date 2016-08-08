@@ -2,36 +2,32 @@
 
 my vunble vimrc and other config files
 
-## 1. vimrc linux deploy
+## ansible
 
-__details in ./deploy-nvim.sh or ./deploy-ycm-vim.sh __
+The `arch.yml` in `ansible/` will install all needed packages,
+and configure the localhost well.
 
-maybe useful tips
-```bash
-ctags -R -f ~/.vim/systags /usr/include /usr/local/include
-```
-
-* GNU global  [ftp://ftp.gnu.org/pub/gnu/global/](ftp://ftp.gnu.org/pub/gnu/global/)
-
-> if use archlinux, deps :
+> Only support Archlinux and Manjaro
 
 ```
-sudo pacman -S git gvim ack cscope flake8 python2-flake8 the_silver_searcher
-yaourt -S global
+cd ansible/
+./config-arch.sh
 ```
 
-> if using debian, deps include and more :
+## deploy vim and spacemacs
 
 ```
-sudo apt-get install git vim ack cscope silversearcher-ag global flake8
+./deploy-nvim.sh
+./deploy-ycm-vim.sh
+./deploy-spacemacs.sh
 ```
 
-## 2. tmux
+## tmux
 
 * tmux/tmux.conf
 * tmux/tmux.sh
 
-## 3. build ycm using system-libclang and system-boost
+## build ycm using system-libclang and system-boost
 
 > local libclang always older than the needed version
 
@@ -39,5 +35,3 @@ sudo apt-get install git vim ack cscope silversearcher-ag global flake8
 cd ~/.vim/bundle/YouCompleteMe/ \
     && python2 ./install.py --clang-completer --system-libclang --system-boost
 ```
-
-## 4. others

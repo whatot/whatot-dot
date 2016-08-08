@@ -3,8 +3,6 @@ set -x
 
 PATH_NOW=`pwd`
 
-bash ./install-deps.sh
-
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -23,4 +21,3 @@ ln -s ${PATH_NOW}/ginit.vim ~/.config/nvim/ginit.vim
 
 # Using vim-plug to install plugins in github
 nvim +PlugInstall +qall
-

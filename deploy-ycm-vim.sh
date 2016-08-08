@@ -3,8 +3,6 @@ set -x
 
 PATH_NOW=`pwd`
 
-bash ./install-deps.sh
-
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -18,4 +16,3 @@ ln -s ${PATH_NOW}/ycm.vim ~/.vimrc
 
 # Using vim-plug to install plugins in github
 vim +PlugInstall +qall
-

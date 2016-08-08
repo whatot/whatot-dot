@@ -2,4 +2,3 @@
 - hosts: pc
   roles:
     - role: arch
-      skip_font_install: yes

@@ -306,14 +306,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :weight normal
                                               :width normal
                                               :powerline-scale 1.1))
-    (set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 32 29))
+    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 29))
   (when (string= system-name "x411")
     (setq-default dotspacemacs-default-font '("Source Code Pro"
                                               :size 19
                                               :weight normal
                                               :width normal
                                               :powerline-scale 1.1))
-    (set-monospaced-font "Source Code Pro" "Noto Sans Mono CJK SC" 19 17))
+    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17))
   )
 
 (defun dotspacemacs/user-config ()
