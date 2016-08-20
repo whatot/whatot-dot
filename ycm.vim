@@ -6,7 +6,7 @@ call plug#begin(expand('~/.vim/plugged'))
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --system-libclang --system-boost' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --system-libclang --system-boost --gocode-completer' }
 nmap gd :YcmCompleter GoTo<CR>
 nmap gy :YcmDiags<CR>
 nmap gt :YcmCompleter GetType<CR>
@@ -22,7 +22,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 }
+" let g:ycm_filetype_whitelist = { 'c': 1, 'cpp': 1, 'vim': 1, 'python':1, 'go':1 }
 let g:ycm_filetype_specific_completion_to_disable = { 'gitcommit': 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'SirVer/ultisnips'
