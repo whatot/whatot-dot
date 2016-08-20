@@ -5,4 +5,15 @@ ansible_python_interpreter=/usr/bin/python2
 localhost ansible_connection=local
 
 [k8s]
-k8s ansible_ssh_host=192.168.122.55
+km ansible_ssh_host=192.168.122.55
+ks1 ansible_ssh_host=192.168.122.56
+ks2 ansible_ssh_host=192.168.122.57
+ks3 ansible_ssh_host=192.168.122.58
+
+[k8s-master]
+km
+
+[k8s-minion]
+ks1
+ks2
+ks3

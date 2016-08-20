@@ -5,6 +5,7 @@ before_all_pkgs:
   - deltarpm
   - epel-release
   - libselinux-python
+  - centos-release-scl
 
 basic_pkgs:
   - bash-completion
