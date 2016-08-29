@@ -10,8 +10,10 @@ font_pkgs:
   - ttf-dejavu
   - ttf-droid
   - ttf-liberation
+  - ttf-ubuntu-font-family
   - wqy-microhei
 
+# "noto-fonts" is the same as "adobe-source-han-sans-cn"
 font_absent_pkgs:
   - noto-fonts
   - noto-fonts-cjk
