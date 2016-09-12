@@ -376,6 +376,7 @@ set expandtab
 set path=.,/usr/include/,./include,../include,../../include,../../../include,../../../../include
 
 autocmd FileType make set noexpandtab
+autocmd FileType puppet set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " add for the ~/linux which contains the linux kernel src,
 " So tabstop, shiftwidth, softtabstop = 8 and noexpandtab are needed
