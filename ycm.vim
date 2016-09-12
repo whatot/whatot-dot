@@ -114,6 +114,10 @@ let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
 let g:rustfmt_autosave = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'pelodelfuego/vim-swoop'
+" nmap <Leader>l :call Swoop()<CR>
+" vmap <Leader>l :call SwoopSelection()<CR>
+" nmap <Leader>ml :call SwoopMulti()<CR>
+" vmap <Leader>ml :call SwoopMultiSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic'
 let g:syntastic_check_on_open = 1
