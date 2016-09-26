@@ -55,7 +55,7 @@ view_pkgs:
   - p7zip
   - pandoc
   - unrar
-  - unzip
+  - unzip-iconv
   - viewnior
   - zeal-git
   - zim
@@ -78,14 +78,20 @@ program_bin_pkgs:
   - cargo
   - clang
   - cmake
-  - flake8
   - go
   - go-tools
-  - ipython
-  - ipython2
   - jdk
   - llvm
+  - rust
+
+python_pkgs:
+  - flake8
+  - ipython
+  - ipython2
   - python-nose
   - python-pylint
+  - python-virtualenv
+  - python-virtualenvwrapper
+  - python2-flake8
   - python2-pylint
-  - rust
+  - python2-virtualenv

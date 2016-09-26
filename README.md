@@ -35,3 +35,12 @@ cd ansible/
 cd ~/.vim/bundle/YouCompleteMe/ \
     && python2 ./install.py --clang-completer --system-libclang --system-boost
 ```
+
+## use virtualenvwrapper
+
+```
+export WORKON_HOME="$HOME/envs/"
+mkdir -p $WORKON_HOME
+mkvirtualenv venv
+workon venv
+```

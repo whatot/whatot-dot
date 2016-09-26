@@ -35,6 +35,7 @@
     - '{{ view_pkgs }}'
     - '{{ program_tool_pkgs }}'
     - '{{ program_bin_pkgs }}'
+    - '{{ python_pkgs }}'
 
 - name: Ensure basic services is running and enabled
   service: name='{{ item }}' state=started enabled=yes
