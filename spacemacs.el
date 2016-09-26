@@ -348,6 +348,7 @@ you should place your code here."
   (setq-default go-tab-width 4)
   (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin")))
   ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
+  (setenv "WORKON_HOME" "~/envs/")
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
   (setq-default frame-title-format '("%b (%f) [%m]"))
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)

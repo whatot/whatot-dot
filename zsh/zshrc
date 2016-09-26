@@ -91,6 +91,12 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
+PY_ENV_WRAPPER=/usr/bin/virtualenvwrapper.sh
+if [[ -f $PY_ENV_WRAPPER ]]; then
+    source $PY_ENV_WRAPPER
+    export WORKON_HOME="$HOME/envs/"
+fi
+
 # export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 # export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cabal/bin/":"$HOME/.cargo/bin/":"$HOME/.gem/ruby/2.3.0/bin/"
 
