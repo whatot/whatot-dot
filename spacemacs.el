@@ -57,7 +57,7 @@ values."
      (gtags :enabled-for c-c++)
      (c-c++ :variables c-c++-enable-clang-support t)
      rust
-     python
+     (python :variables python-enable-yapf-format-on-save t)
      shell-scripts
      vimscript
      puppet
