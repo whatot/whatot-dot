@@ -56,6 +56,7 @@ values."
      (version-control :variables version-control-global-margin t)
      (gtags :enabled-for c-c++)
      (c-c++ :variables c-c++-enable-clang-support t)
+     (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      rust
      (python :variables python-enable-yapf-format-on-save t)
      shell-scripts
@@ -64,10 +65,11 @@ values."
      yaml
      html
      systemd
-     go
+     (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
+     lua
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
