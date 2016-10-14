@@ -8,6 +8,8 @@ go get -u -v golang.org/x/tools/cmd/oracle
 go get -u -v golang.org/x/tools/cmd/gorename
 go get -u -v golang.org/x/tools/cmd/goimports
 go get -u -v github.com/alecthomas/gometalinter
+# gometalinter install all known linters:
+gometalinter --install
 
 # for rust
 cargo install rustfmt
