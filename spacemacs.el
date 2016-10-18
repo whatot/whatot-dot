@@ -401,7 +401,7 @@ you should place your code here."
 (defun local-setup-c-c++-about ()
   (setq ycmd-server-command (list "python2"
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
-  (setq-default ycmd-force-semantic-completion nil)
+  (setq-default ycmd-force-semantic-completion t)
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
