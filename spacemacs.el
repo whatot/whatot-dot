@@ -37,7 +37,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t)
@@ -55,7 +54,6 @@ values."
      version-control
      (version-control :variables version-control-global-margin t)
      (gtags :enabled-for c-c++)
-     (c-c++ :variables c-c++-enable-clang-support t)
      (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      rust
      (python :variables python-enable-yapf-format-on-save t)
@@ -70,6 +68,7 @@ values."
      ansible
      colors
      lua
+     ycmd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -362,6 +361,7 @@ you should place your code here."
   (local-setup-special-modes-using-tabs)
   (local-setup-selinux-file-mode)
   (local-setup-fcitx-about)
+  (local-setup-c-c++-about)
   )
 
 ;; code from chinese layer
@@ -397,6 +397,12 @@ you should place your code here."
   (fcitx-evil-turn-on)
   ;; (global-set-key (kbd "C-S-A") 'nil)
   )
+
+(defun local-setup-c-c++-about ()
+  (setq ycmd-server-command (list "python2"
+    (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
+  (setq-default ycmd-force-semantic-completion nil)
+ )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
