@@ -1,0 +1,6 @@
+-std=c++0x
+-DDEBUG
+-DENABLE_OPT_HASH=1
+-DENABLE_OPT_DIR_TABLE=0
+-DRHEL7
+-I/usr/include/c++/6.2.1/

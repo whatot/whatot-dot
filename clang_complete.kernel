@@ -1,0 +1,7 @@
+-I./include/
+-I./arch/x86/include/
+-include ./include/generated/autoconf.h
+-include ./include/linux/kconfig.h
+-std=gnu89
+-D__KERNEL__
+-DMODULE
