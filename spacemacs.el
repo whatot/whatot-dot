@@ -402,6 +402,7 @@ you should place your code here."
   (setq ycmd-server-command (list "python2"
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
   (setq-default ycmd-force-semantic-completion t)
+  (setq ycmd-extra-conf-whitelist '("~/linux/*" "~/git/*" "~/work/*"))
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
