@@ -57,6 +57,7 @@ values."
      (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      rust
      (python :variables python-enable-yapf-format-on-save t)
+     (python :variables python-shell-completion-native-enable nil)
      shell-scripts
      vimscript
      puppet
