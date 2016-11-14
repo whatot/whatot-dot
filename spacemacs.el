@@ -38,6 +38,8 @@ values."
      ;; ----------------------------------------------------------------
      helm
      (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
@@ -52,12 +54,12 @@ values."
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (semantic :disabled-for python)
      (version-control :variables version-control-global-margin t)
+     (version-control :variables version-control-diff-side 'left)
      (gtags :enabled-for c-c++)
      (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      rust
-     (python :variables
-             python-enable-yapf-format-on-save t
-             python-shell-completion-native-enable nil)
+     (python :variables python-shell-completion-native-enable nil)
+     (python :variables python-enable-yapf-format-on-save t)
      shell-scripts
      vimscript
      puppet
@@ -340,6 +342,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :width normal
                                               :powerline-scale 1.1))
     (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17))
+  ;; http://elpa.emacs-china.org/
+  (setq configuration-layer--elpa-archives
+    '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+      ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+      ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
