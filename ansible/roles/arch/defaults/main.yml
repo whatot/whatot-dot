@@ -20,6 +20,10 @@ font_absent_pkgs:
   - ttf-google-fonts-git
 
 aur_pkgs:
+  - gnome-shell-extension-caffeine-git
+  - gnome-shell-extension-topicons-plus-git
+  - nautilus-nutstore
+  - nutstore
   - ttf-opensans
 
 basic_pkgs:
@@ -27,22 +31,30 @@ basic_pkgs:
   - archlinuxcn-keyring
   - clipit
   - dnsmasq
+  - faenza-icon-theme
   - fcitx
   - fcitx-configtool
   - fcitx-im
   - fcitx-rime
+  - firefox-i18n-zh-cn
   - gedit
   - gnome-clocks
   - gnome-tweak-tool
   - libvirt
   - ntp
   - oh-my-zsh-git
+  - openssh
   - openssl
+  - proxychains-ng
   - qemu
   - rsync
+  - shadowsocks-qt5
   - sysstat
+  - tmux
   - transmission-gtk
+  - wmctrl
   - yaourt
+  - zsh-completions
 
 view_pkgs:
   - baka-mplayer
@@ -57,6 +69,8 @@ view_pkgs:
   - unrar
   - unzip-iconv
   - viewnior
+  - you-get-git
+  - youtube-dl-git
   - zeal-git
   - zim
 
