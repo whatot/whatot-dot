@@ -379,6 +379,7 @@ you should place your code here."
   (local-setup-selinux-file-mode)
   (local-setup-fcitx-about)
   (local-setup-c-c++-about)
+  (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
   )
 
 ;; code from chinese layer
