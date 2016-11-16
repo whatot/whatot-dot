@@ -7,7 +7,8 @@
     block: |
       [archlinuxcn]
       SigLevel = Optional TrustedOnly
-      Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+      #Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+      Server = https://cdn.repo.archlinuxcn.org/$arch
 
 - debug: var=ansible_distribution
 

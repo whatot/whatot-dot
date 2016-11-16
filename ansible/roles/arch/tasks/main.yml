@@ -14,9 +14,11 @@
 - name: Update and Upgrade the system
   pacman: update_cache=yes upgrade=yes
 
-- name: Uninstall unneeded fonts packages
+- name: Uninstall unneeded packages
   pacman: name='{{ item }}' state=absent
-  with_items: '{{ font_absent_pkgs }}'
+  with_items:
+    - '{{ absent_pkgs }}'
+  when: absent_pkgs is defined
 
 - name: Install fonts packages
   pacman: name='{{ item }}' state=latest

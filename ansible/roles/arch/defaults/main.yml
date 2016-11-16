@@ -14,10 +14,13 @@ font_pkgs:
   - wqy-microhei
 
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
-font_absent_pkgs:
+absent_pkgs:
   - noto-fonts
   - noto-fonts-cjk
   - ttf-google-fonts-git
+  - unzip
+  - you-get
+  - youtube-dl
 
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
