@@ -43,6 +43,7 @@ basic_pkgs:
   - gedit
   - gnome-clocks
   - gnome-tweak-tool
+  - htop
   - libvirt
   - ntp
   - oh-my-zsh-git
@@ -57,6 +58,7 @@ basic_pkgs:
   - transmission-gtk
   - wmctrl
   - yaourt
+  - ydcv
   - zsh-completions
 
 view_pkgs:
