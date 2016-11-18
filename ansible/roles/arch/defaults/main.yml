@@ -19,8 +19,8 @@ absent_pkgs:
   - noto-fonts-cjk
   - ttf-google-fonts-git
   - unzip
-  - you-get
-  - youtube-dl
+  - you-get-git
+  - youtube-dl-git
 
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
@@ -74,8 +74,8 @@ view_pkgs:
   - unrar
   - unzip-iconv
   - viewnior
-  - you-get-git
-  - youtube-dl-git
+  - you-get
+  - youtube-dl
   - zeal-git
   - zim
 
