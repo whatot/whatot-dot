@@ -380,6 +380,7 @@ you should place your code here."
   (local-setup-fcitx-about)
   (local-setup-c-c++-about)
   (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
+  (local-fix-spacemacs-errors)
   )
 
 ;; code from chinese layer
@@ -421,7 +422,13 @@ you should place your code here."
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
   (setq-default ycmd-force-semantic-completion t)
   (setq ycmd-extra-conf-whitelist '("~/linux/*" "~/git/*" "~/work/*"))
- )
+  )
+
+(defun local-fix-spacemacs-errors ()
+  ;; https://github.com/syl20bnr/spacemacs/issues/5435
+  (add-hook 'spacemacs-buffer-mode-hook (lambda ()
+    (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
