@@ -334,7 +334,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :weight normal
                                               :width normal
                                               :powerline-scale 1.1))
-    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 29))
+    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30))
   (when (string= system-name "x411")
     (setq-default dotspacemacs-default-font '("Source Code Pro"
                                               :size 19
