@@ -34,6 +34,7 @@ basic_pkgs:
   - archlinuxcn-keyring
   - clipit
   - dnsmasq
+  - dstat
   - faenza-icon-theme
   - fcitx
   - fcitx-configtool
@@ -44,6 +45,9 @@ basic_pkgs:
   - gnome-clocks
   - gnome-tweak-tool
   - htop
+  - iftop
+  - ifuse
+  - ipad_charge
   - libvirt
   - ntp
   - oh-my-zsh-git
@@ -68,6 +72,7 @@ view_pkgs:
   - file-roller
   - firefox
   - google-chrome
+  - libva-intel-driver
   - mpv
   - p7zip
   - pandoc
