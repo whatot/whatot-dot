@@ -1,5 +1,5 @@
 ---
-# tasks file for arch-mirror
+# mirror tasks file for arch
 
 - name: Config archlinuxcn in pacman.conf
   blockinfile:
@@ -27,6 +27,6 @@
   register: pacman_mirrors_conf_updated
 
 - name: Update /etc/pacman.d/mirrorlist by pacman-mirrors in Manjaro
-  shell: pacman-mirrors
+  shell: pacman-mirrors --generate --timeout 1
   when: ansible_distribution == "Manjaro Linux" and
         (pacman_mirrors_conf_updated | changed)

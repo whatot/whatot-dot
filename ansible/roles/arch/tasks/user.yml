@@ -1,5 +1,5 @@
 ---
-# tasks file for arch-user
+# user tasks file for arch
 
 - name: Ensure wheel group exists
   group: name=wheel state=present

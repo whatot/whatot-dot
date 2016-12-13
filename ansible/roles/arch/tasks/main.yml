@@ -1,5 +1,5 @@
 ---
-# tasks file for arch
+# main tasks file for arch
 
 - name: Set the Asia/Shanghai timezone
   file:
@@ -10,34 +10,7 @@
 
 - include: mirror.yml
 - include: user.yml
-
-- name: Update and Upgrade the system
-  pacman: update_cache=yes upgrade=yes
-
-- name: Uninstall unneeded packages
-  pacman: name='{{ item }}' state=absent
-  with_items:
-    - '{{ absent_pkgs }}'
-  when: absent_pkgs is defined
-
-- name: Install fonts packages
-  pacman: name='{{ item }}' state=latest
-  with_items: '{{ font_pkgs }}'
-
-- name: Special packages need install from AUR
-  debug: msg='{{ item }}'
-  with_items:
-    '{{ aur_pkgs }}'
-  when: aur_pkgs is defined
-
-- name: Install packages
-  pacman: name='{{ item }}' state=latest
-  with_flattened:
-    - '{{ basic_pkgs }}'
-    - '{{ view_pkgs }}'
-    - '{{ program_tool_pkgs }}'
-    - '{{ program_bin_pkgs }}'
-    - '{{ python_pkgs }}'
+- include: pkg.yml
 
 - name: Ensure basic services is running and enabled
   service: name='{{ item }}' state=started enabled=yes
