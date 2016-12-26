@@ -53,8 +53,10 @@ values."
      ;; spell-checking
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (semantic :disabled-for python)
-     (version-control :variables version-control-global-margin t)
-     (version-control :variables version-control-diff-side 'left)
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t
+                      version-control-diff-side 'left)
      (gtags :enabled-for c-c++)
      (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
      rust
@@ -381,6 +383,7 @@ you should place your code here."
   (local-setup-c-c++-about)
   (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
   (local-fix-spacemacs-errors)
+  (setq-default helm-follow-mode-persistent t)
   )
 
 ;; code from chinese layer
