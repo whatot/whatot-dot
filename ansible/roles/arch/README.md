@@ -11,8 +11,3 @@ Example Playbook
   roles:
       - role: arch
 ```
-
-Author Information
-------------------
-
-whatot whatot2@gmail.com

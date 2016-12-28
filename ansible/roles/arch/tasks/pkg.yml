@@ -12,12 +12,14 @@
 
 - name: Install fonts packages
   pacman: name='{{ item }}' state=latest
-  with_items: '{{ font_pkgs }}'
+  with_items:
+    - '{{ font_pkgs }}'
+  when: font_pkgs is defined
 
 - name: Special packages need install from AUR
   debug: msg='{{ item }}'
   with_items:
-    '{{ aur_pkgs }}'
+    - '{{ aur_pkgs }}'
   when: aur_pkgs is defined
 
 - name: Install packages

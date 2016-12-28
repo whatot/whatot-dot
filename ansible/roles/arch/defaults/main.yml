@@ -40,7 +40,6 @@ basic_pkgs:
   - fcitx-configtool
   - fcitx-im
   - fcitx-rime
-  - firefox-i18n-zh-cn
   - gedit
   - gnome-clocks
   - gnome-tweak-tool
@@ -71,6 +70,7 @@ view_pkgs:
   - deadbeef
   - file-roller
   - firefox
+  - firefox-i18n-zh-cn
   - google-chrome
   - libva-intel-driver
   - mpv
