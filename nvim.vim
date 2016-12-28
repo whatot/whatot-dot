@@ -99,12 +99,6 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
-" c-x c-o for complete, gd for definition
-let g:rustfmt_autosave = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'pelodelfuego/vim-swoop'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic'

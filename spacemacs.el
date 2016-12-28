@@ -59,7 +59,6 @@ values."
                       version-control-diff-side 'left)
      (gtags :enabled-for c-c++)
      (c-c++ :variables c-c++-default-mode-for-headers 'c++-mode)
-     rust
      (python :variables python-shell-completion-native-enable nil)
      (python :variables python-enable-yapf-format-on-save t)
      shell-scripts

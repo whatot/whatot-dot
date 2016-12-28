@@ -11,6 +11,14 @@ go get -u -v github.com/alecthomas/gometalinter
 # gometalinter install all known linters:
 gometalinter --install --update
 
-# for rust
-cargo install rustfmt
-cargo install racer
+## for rust
+# cargo install rustfmt
+# cargo install racer
+
+## for rust in vim
+# """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+# Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+# let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
+# " c-x c-o for complete, gd for definition
+# let g:rustfmt_autosave = 1

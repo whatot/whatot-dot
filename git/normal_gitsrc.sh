@@ -19,11 +19,9 @@ git clone --recursive https://github.com/anjuke/zguide-cn
 git clone --recursive https://github.com/antirez/redis.git
 git clone --recursive https://github.com/basho/leveldb.git
 git clone --recursive https://github.com/bos/stanford-cs240h.git
-git clone --recursive https://github.com/brson/multirust
 git clone --recursive https://github.com/bup/bup
 git clone --recursive https://github.com/chaconnewu/free-data-science-books
 git clone --recursive https://github.com/charliesome/axel
-git clone --recursive https://github.com/charliesome/rustboot
 git clone --recursive https://github.com/citusdata/cstore_fdw
 git clone --recursive https://github.com/citusdata/file_fdw
 git clone --recursive https://github.com/citusdata/postgres_vectorization_test
