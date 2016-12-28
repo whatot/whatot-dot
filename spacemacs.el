@@ -65,11 +65,13 @@ values."
      vimscript
      puppet
      yaml
+     html
      systemd
      (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
+     lua
      ycmd
      csv
      )
@@ -83,8 +85,6 @@ values."
      json-mode
      ag
      fcitx
-     web-mode
-     lua-mode
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
