@@ -52,7 +52,7 @@ noremap <silent> <F10> :BufExplorer<CR>
 " noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
 " noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/Colour-Sampler-Pack'
+Plug 'whatot/molokai'
 Plug 'vim-scripts/FencView.vim'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'whatot/gtags-cscope.vim'
