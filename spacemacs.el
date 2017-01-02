@@ -424,6 +424,9 @@ you should place your code here."
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
   (setq-default ycmd-force-semantic-completion t)
   (setq ycmd-extra-conf-whitelist '("~/linux/*" "~/git/*" "~/work/*"))
+  ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+  ;; https://google.github.io/styleguide/cppguide.html
+  (setq clang-format-style "Google")
   )
 
 (defun local-fix-spacemacs-errors ()
