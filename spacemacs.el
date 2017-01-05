@@ -426,7 +426,7 @@ you should place your code here."
   (setq ycmd-extra-conf-whitelist '("~/linux/*" "~/git/*" "~/work/*"))
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
-  (setq clang-format-style "Google")
+  (setq clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
   )
 
 (defun local-fix-spacemacs-errors ()
