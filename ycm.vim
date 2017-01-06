@@ -42,6 +42,14 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'w0rp/ale'
+" let g:ale_lint_on_save = 1
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_lint_on_enter = 0
+" I already wrap LocationList and Quickfix, so below is not needed
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'jiangmiao/auto-pairs'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/bufexplorer.zip'
