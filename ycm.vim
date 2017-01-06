@@ -10,8 +10,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer -
 nmap gd :YcmCompleter GoTo<CR>
 nmap gy :YcmDiags<CR>
 nmap gt :YcmCompleter GetType<CR>
-let g:syntastic_c_checkers = ['YouCompleteMe']
-let g:syntastic_c_check_header = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments_and_strings = 1
@@ -41,7 +39,6 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -113,18 +110,6 @@ Plug 'pelodelfuego/vim-swoop'
 " nmap <Leader>ml :call SwoopMulti()<CR>
 " vmap <Leader>ml :call SwoopMultiSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'scrooloose/syntastic'
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_c_checkers = ['make']
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_loc_list_height = 8
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$', '\c\.java$']
-let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
 Plug 'majutsushi/tagbar'
 Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
@@ -373,9 +358,6 @@ autocmd FileType puppet set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 let homestr_len = strlen(expand("~/"))
 autocmd BufRead *.[ch] if stridx(expand("%:p"), "linux") == homestr_len |
             \ set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab |
-            \ let g:syntastic_check_on_open = 0 |
-            \ let g:syntastic_check_on_wq = 0 |
-            \ let b:syntastic_checkers = [''] |
             \ set path=.,~/linux/include/ |
             \ set path+=~/linux/include/uapi/ |
             \ set path+=~/linux/include/asm-generic/ |
