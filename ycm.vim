@@ -125,17 +125,6 @@ let g:syntastic_enable_highlighting = 1
 let g:syntastic_ignore_files=['^/usr/include/', '\c\.xml$', '\c\.txt$', '\c\.cnx$', '\c\.java$']
 let g:syntastic_c_compiler_options = '-std=c11 -pedantic -Wall -Wextra -Wfloat-equal -ftrapv'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -pedantic -Wall -Wextra -Weffc++'
-nmap <M-up> :lprev<cr>
-nmap <M-down> :lnext<cr>
-nmap <M-Left> :ll<cr>
-nmap <M-Right> :Errors<cr>
-" Quickfix and errors
-map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
-nmap <C-Up> :cprevious<CR><CR>
-nmap <C-Down> :cnext<CR><CR>
-nmap <C-right> :bnext<CR><CR>
-nmap <C-left> :bprevious<CR><CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'majutsushi/tagbar'
 Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
@@ -438,6 +427,17 @@ nmap <C-j> mz:m+<cr>`z
 nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Quickfix and errors
+nmap <M-up> :lprev<cr>
+nmap <M-down> :lnext<cr>
+nmap <M-Left> :ll<cr>
+nmap <M-Right> :Errors<cr>
+map <silent> <F8> <ESC>:if exists("g:qfix_win")\|ccl\|else\|cope\|endif<Cr>|map! <F8> <C-o><F8>
+nmap <C-Up> :cprevious<CR><CR>
+nmap <C-Down> :cnext<CR><CR>
+nmap <C-right> :bnext<CR><CR>
+nmap <C-left> :bprevious<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  mapleader
