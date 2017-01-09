@@ -28,6 +28,8 @@ aur_pkgs:
   - nautilus-nutstore
   - nutstore
   - ttf-opensans
+  - puppet-lint
+  - ansible-lint
 
 basic_pkgs:
   - archlinux-keyring
@@ -86,12 +88,14 @@ view_pkgs:
 
 program_tool_pkgs:
   - ack
+  - ansible
   - cscope
   - emacs
   - git
   - global
   - gvim
   - intellij-idea-community-edition
+  - puppet
   - pycharm-community
   - the_silver_searcher
   - tig
