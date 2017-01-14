@@ -12,6 +12,7 @@ font_pkgs:
   - ttf-liberation
   - ttf-ubuntu-font-family
   - wqy-microhei
+  - wqy-zenhei
 
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
 absent_pkgs:
@@ -30,6 +31,7 @@ aur_pkgs:
   - ttf-opensans
   - puppet-lint
   - ansible-lint
+  - typora
 
 basic_pkgs:
   - archlinux-keyring
@@ -78,6 +80,8 @@ view_pkgs:
   - mpv
   - p7zip
   - pandoc
+  - texlive-core
+  - texlive-latexextra
   - unrar
   - unzip-iconv
   - viewnior
