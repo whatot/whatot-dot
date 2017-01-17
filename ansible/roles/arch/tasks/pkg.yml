@@ -28,3 +28,4 @@
     - '{{ program_tool_pkgs }}'
     - '{{ program_bin_pkgs }}'
     - '{{ python_pkgs }}'
+    - '{{ haskell_pkgs }}'

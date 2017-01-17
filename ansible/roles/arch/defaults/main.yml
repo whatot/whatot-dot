@@ -24,13 +24,14 @@ absent_pkgs:
   - youtube-dl-git
 
 aur_pkgs:
+  - ansible-lint
   - gnome-shell-extension-caffeine-git
   - gnome-shell-extension-topicons-plus-git
+  - haskell-apply-refact
   - nautilus-nutstore
   - nutstore
-  - ttf-opensans
   - puppet-lint
-  - ansible-lint
+  - ttf-opensans
   - typora
 
 basic_pkgs:
@@ -110,6 +111,7 @@ program_bin_pkgs:
   - cargo
   - clang
   - cmake
+  - erlang-nox
   - go
   - go-tools
   - jdk
@@ -127,3 +129,14 @@ python_pkgs:
   - python2-flake8
   - python2-pylint
   - python2-virtualenv
+
+haskell_pkgs:
+  - cabal-install
+  - ghc
+  - ghc-mod
+  - hasktags
+  - hindent
+  - hlint
+  - hoogle
+  - stack
+  - stylish-haskell
