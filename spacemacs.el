@@ -388,6 +388,7 @@ you should place your code here."
   (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
   (local-fix-spacemacs-errors)
   (setq-default helm-follow-mode-persistent t)
+  (local-improve-hippie-expand)
   )
 
 ;; code from chinese layer
@@ -438,6 +439,19 @@ you should place your code here."
   ;; https://github.com/syl20bnr/spacemacs/issues/5435
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
     (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+  )
+
+(defun local-improve-hippie-expand ()
+  (setq hippie-expand-try-function-list '(try-expand-debbrev
+                                          try-expand-debbrev-all-buffers
+                                          try-expand-debbrev-from-kill
+                                          try-complete-file-name-partially
+                                          try-complete-file-name
+                                          try-expand-all-abbrevs
+                                          try-expand-list
+                                          try-expand-line
+                                          try-complete-lisp-symbol-partially
+                                          try-complete-lisp-symbol))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
