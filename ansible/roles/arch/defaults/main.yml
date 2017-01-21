@@ -94,34 +94,35 @@ view_pkgs:
 program_tool_pkgs:
   - ack
   - ansible
-  - cscope
-  - emacs
-  - git
-  - global
-  - gvim
-  - intellij-idea-community-edition
-  - puppet
-  - pycharm-community
-  - the_silver_searcher
-  - tig
-  - yapf
-
-program_bin_pkgs:
   - boost
   - cargo
   - clang
   - cmake
+  - cscope
+  - emacs
   - erlang-nox
+  - git
+  - global
   - go
   - go-tools
-  - jdk
+  - gvim
   - llvm
-  - rust
+  - puppet
+  - the_silver_searcher
+  - tig
+  - yapf
+
+java_pkgs:
+  - intellij-idea-community-edition
+  - jdk
+  - maven
+  - apache-ant
 
 python_pkgs:
   - flake8
   - ipython
   - ipython2
+  - pycharm-community
   - python-nose
   - python-pylint
   - python-virtualenv

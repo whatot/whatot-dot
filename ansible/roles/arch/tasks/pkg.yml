@@ -24,8 +24,8 @@
   pacman: name='{{ item }}' state=latest
   with_flattened:
     - '{{ basic_pkgs }}'
-    - '{{ view_pkgs }}'
-    - '{{ program_tool_pkgs }}'
-    - '{{ program_bin_pkgs }}'
-    - '{{ python_pkgs }}'
     - '{{ haskell_pkgs }}'
+    - '{{ java_pkgs }}'
+    - '{{ program_tool_pkgs }}'
+    - '{{ python_pkgs }}'
+    - '{{ view_pkgs }}'
