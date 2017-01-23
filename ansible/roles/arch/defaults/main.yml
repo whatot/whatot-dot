@@ -38,7 +38,6 @@ basic_pkgs:
   - archlinux-keyring
   - archlinuxcn-keyring
   - clipit
-  - dnsmasq
   - dstat
   - faenza-icon-theme
   - fcitx
@@ -50,15 +49,8 @@ basic_pkgs:
   - gnome-tweak-tool
   - htop
   - iftop
-  - ifuse
-  - ipad_charge
-  - libvirt
-  - ntp
   - oh-my-zsh-git
-  - openssh
-  - openssl
   - proxychains-ng
-  - qemu
   - rsync
   - shadowsocks-qt5
   - sysstat
@@ -68,6 +60,18 @@ basic_pkgs:
   - yaourt
   - ydcv
   - zsh-completions
+
+backend_pkgs:
+  - bridge-utils
+  - dnsmasq
+  - ebtables
+  - ifuse
+  - ipad_charge
+  - libvirt
+  - ntp
+  - openssh
+  - openssl
+  - qemu
 
 view_pkgs:
   - baka-mplayer

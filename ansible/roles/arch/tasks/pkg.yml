@@ -23,6 +23,7 @@
 - name: Install packages
   pacman: name='{{ item }}' state=latest
   with_flattened:
+    - '{{ backend_pkgs }}'
     - '{{ basic_pkgs }}'
     - '{{ haskell_pkgs }}'
     - '{{ java_pkgs }}'
