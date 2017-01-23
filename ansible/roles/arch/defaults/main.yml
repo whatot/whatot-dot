@@ -103,6 +103,8 @@ program_tool_pkgs:
   - clang
   - cmake
   - cscope
+  - docker
+  - docker-compose
   - emacs
   - erlang-nox
   - git
