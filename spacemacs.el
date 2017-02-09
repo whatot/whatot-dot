@@ -430,7 +430,8 @@ you should place your code here."
   (setq ycmd-server-command (list "python2"
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
   (setq-default ycmd-force-semantic-completion t)
-  (setq ycmd-extra-conf-whitelist '("~/linux/*" "~/git/*" "~/work/*"))
+  (setq ycmd-extra-conf-whitelist
+        '("~/linux/*" "~/git/*" "~/work/*" "/dev/shm/*"))
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
   (setq clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
