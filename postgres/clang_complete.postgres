@@ -1,0 +1,15 @@
+-DDLSUFFIX=".so"
+-DFRONTEND
+-DHOST_TUPLE="x86_64-pc-linux-gnu"
+-DSHELLPROG="/bin/sh"
+-DSO_MAJOR_VERSION=5
+-DUNSAFE_STAT_OK
+-D_GNU_SOURCE
+-D_POSIX_PTHREAD_SEMANTICS
+-D_REENTRANT
+-D_THREAD_SAFE
+-Isrc/include
+-Isrc/port
+-Isrc/timezone
+-Isrc/interfaces/libpq
+-Isrc/interfaces/ecpg/include
