@@ -98,8 +98,10 @@ view_pkgs:
 program_tool_pkgs:
   - ack
   - ansible
+  - bison
   - boost
   - cargo
+  - ccache
   - clang
   - cmake
   - cscope
@@ -107,6 +109,7 @@ program_tool_pkgs:
   - docker-compose
   - emacs
   - erlang-nox
+  - flex
   - git
   - global
   - go
