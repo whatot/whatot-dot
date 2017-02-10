@@ -378,9 +378,6 @@ you should place your code here."
   (setq-default frame-title-format '("%b (%f) [%m]"))
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
-  (global-whitespace-mode t)
-  (setq whitespace-style '(face indentation space-before-tab trailing lines-tail))
-  (setq whitespace-global-modes '(not go-mode))
   (setq-default require-final-newline t)
   (local-setup-special-modes-using-tabs)
   (local-setup-selinux-file-mode)
@@ -390,6 +387,8 @@ you should place your code here."
   (local-fix-spacemacs-errors)
   (setq-default helm-follow-mode-persistent t)
   (local-improve-hippie-expand)
+  (local-setup-whitespace-about)
+  (global-prettify-symbols-mode t)
   )
 
 ;; code from chinese layer
@@ -455,6 +454,18 @@ you should place your code here."
                                           try-complete-lisp-symbol-partially
                                           try-complete-lisp-symbol))
   )
+
+(defun local-setup-whitespace-about ()
+  (global-whitespace-mode t)
+  (setq whitespace-global-modes '(not go-mode))
+  (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
+  )
+
+(custom-set-faces
+ ;; '(whitespace-indentation ((t (:foreground "#073642"))))
+ '(whitespace-tab ((t (:background "#073642" :foreground "#a07f41"))))
+ '(whitespace-trailing ((t (:background "#073642" :foreground "#a07f41"))))
+ )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
