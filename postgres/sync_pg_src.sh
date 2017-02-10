@@ -38,4 +38,5 @@ git checkout REL9_6_STABLE
 
 make install
 make clean
+make submake-generated-headers
 bash ./gene-gtags.sh
