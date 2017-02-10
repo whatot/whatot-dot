@@ -379,7 +379,7 @@ you should place your code here."
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
   (global-whitespace-mode t)
-  (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
+  (setq whitespace-style '(face indentation space-before-tab trailing lines-tail))
   (setq whitespace-global-modes '(not go-mode))
   (setq-default require-final-newline t)
   (local-setup-special-modes-using-tabs)
