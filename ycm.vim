@@ -52,11 +52,6 @@ Plug 'w0rp/ale'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'jiangmiao/auto-pairs'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/bufexplorer.zip'
-noremap <silent> <F10> :BufExplorer<CR>
-" noremap <silent> <m-F10> :BufExplorerHorizontalSplit<CR>
-" noremap <silent> <c-F10> :BufExplorerVerticalSplit<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'whatot/molokai'
 Plug 'vim-scripts/FencView.vim'
 Plug 'lilydjwg/fcitx.vim'
