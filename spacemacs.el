@@ -383,7 +383,7 @@ you should place your code here."
   (local-setup-selinux-file-mode)
   (local-setup-fcitx-about)
   (local-setup-c-c++-about)
-  (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
+  (local-setup-golang-about)
   (local-fix-spacemacs-errors)
   (setq-default helm-follow-mode-persistent t)
   (local-improve-hippie-expand)
@@ -434,6 +434,13 @@ you should place your code here."
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
   (setq clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
+  )
+
+(defun local-setup-golang-about ()
+  (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
+  (setq flycheck-gometalinter-fast t)
+  ;; Set different deadline (default: 5s)
+  (setq flycheck-gometalinter-deadline "10s")
   )
 
 (defun local-fix-spacemacs-errors ()
