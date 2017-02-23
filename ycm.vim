@@ -34,13 +34,13 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " https://github.com/ggreer/the_silver_searcher
 " debian silversearcher-ag, others the_silver_searcher
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'  " filename too long
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline_powerline_fonts=0
+let g:airline_theme='molokai'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'w0rp/ale'
 " let g:ale_lint_on_save = 1
@@ -51,9 +51,8 @@ Plug 'w0rp/ale'
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'jiangmiao/auto-pairs'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'whatot/molokai'
-Plug 'vim-scripts/FencView.vim'
+" Plug 'mbbill/fencview'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'whatot/gtags-cscope.vim'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -73,14 +72,12 @@ Plug 'vim-scripts/L9'
 Plug 'vim-scripts/LargeFile'
 ""编辑大文件,g:LargeFile设置最小值
 Plug 'dkasak/manpageview'
-Plug 'vim-scripts/matchit.zip'
-Plug 'vimcn/matchit.vim.cnx'
+Plug 'tmhedberg/matchit'
 " 对%命令进行扩展使得能在嵌套标签和语句之间跳转
 " % 正向匹配      g% 反向匹配
 " [% 定位块首     ]% 定位块尾
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/The-NERD-Commenter'
-Plug 'vimcn/NERD_commenter.cnx'
+Plug 'scrooloose/nerdcommenter'
 "[default],cc;,cu注释与取消注释快速切换
 let NERDSpaceDelims = 1                   " 让注释符与语句之间留一个空格
 let NERDCompactSexyComs = 1               " 多行注释时样子更好看
@@ -114,7 +111,6 @@ Plug 'pelodelfuego/vim-swoop'
 " vmap <Leader>ml :call SwoopMultiSelection()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'majutsushi/tagbar'
-Plug 'vimcn/tagbar.cnx'
 nnoremap <silent> wt :TagbarToggle<CR>
 let g:tagbar_width = 40
 let g:tagbar_expand = 0  " 0向内拓展 - 1向外拓展
@@ -153,7 +149,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 中文文档
 Plug 'asins/vimcdoc'
-Plug 'hsitz/VimOrganizer'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'Lokaltog/vim-easymotion'
 let EasyMotion_leader_key = '<leader><leader>'
@@ -646,10 +641,10 @@ function! UpdateGtags(f)
     exe 'silent !cd ' . dir . ' && global -u &> /dev/null &'
 endfunction
 
-" fix 无法正常加载中文菜单
+"" 如果需要使用菜单，uncomment下面2-3两行
 set langmenu=zh_CN.UTF-8            "设置菜单语言
-source $VIMRUNTIME/delmenu.vim      "导入删除菜单脚本，删除乱码的菜单
-source $VIMRUNTIME/menu.vim         "导入正常的菜单脚本
+" source $VIMRUNTIME/delmenu.vim      "导入删除菜单脚本，删除乱码的菜单
+" source $VIMRUNTIME/menu.vim         "导入正常的菜单脚本
 language messages zh_CN.utf-8       "设置提示信息语言
 
 
