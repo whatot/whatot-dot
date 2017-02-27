@@ -91,6 +91,8 @@ values."
      json-mode
      ag
      fcitx
+     protobuf-mode
+     thrift
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
