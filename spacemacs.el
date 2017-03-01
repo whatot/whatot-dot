@@ -52,7 +52,7 @@ values."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
-     (semantic :disabled-for python)
+     ;; (semantic :disabled-for python)
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t
