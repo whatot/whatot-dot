@@ -387,7 +387,7 @@ you should place your code here."
   (local-setup-c-c++-about)
   (local-setup-golang-about)
   (local-fix-spacemacs-errors)
-  (setq-default helm-follow-mode-persistent t)
+  (local-setup-helm-about)
   (local-improve-hippie-expand)
   (local-setup-whitespace-about)
   (global-prettify-symbols-mode t)
@@ -451,7 +451,15 @@ you should place your code here."
     (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   )
 
+(defun local-setup-helm-about ()
+  ;; use 'SPC-r-s' to call 'resume-last-search-buffer'
+  ;; use 'SPC-s-a-p' to call 'helm-project-do-ag'
+  ;; if without 'persistent-mode', use 'tab' to preview the files
+  (setq-default helm-follow-mode-persistent t)
+  )
+
 (defun local-improve-hippie-expand ()
+  ;; use 'M-/' to call 'hippie-expand'
   (setq hippie-expand-try-function-list '(try-expand-debbrev
                                           try-expand-debbrev-all-buffers
                                           try-expand-debbrev-from-kill
