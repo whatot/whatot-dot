@@ -29,4 +29,5 @@
     - '{{ java_pkgs }}'
     - '{{ program_tool_pkgs }}'
     - '{{ python_pkgs }}'
+    - '{{ rust_pkgs }}'
     - '{{ view_pkgs }}'

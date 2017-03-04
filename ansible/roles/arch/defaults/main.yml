@@ -100,7 +100,6 @@ program_tool_pkgs:
   - ansible
   - bison
   - boost
-  - cargo
   - ccache
   - clang
   - cmake
@@ -150,3 +149,10 @@ haskell_pkgs:
   - hoogle
   - stack
   - stylish-haskell
+
+rust_pkgs:
+  - rust
+  - rust-docs
+  - rustfmt
+  - cargo
+  - rust-racer
