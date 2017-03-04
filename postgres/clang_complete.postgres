@@ -4,7 +4,6 @@
 -DSHELLPROG="/bin/sh"
 -DSO_MAJOR_VERSION=5
 -DUNSAFE_STAT_OK
--D_GNU_SOURCE
 -D_POSIX_PTHREAD_SEMANTICS
 -D_REENTRANT
 -D_THREAD_SAFE
@@ -13,3 +12,6 @@
 -Isrc/timezone
 -Isrc/interfaces/libpq
 -Isrc/interfaces/ecpg/include
+-I/usr/include/c++/6.3.1/
+-include src/include/c.h
+-include src/include/pg_config.h

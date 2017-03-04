@@ -4,4 +4,5 @@
 -include ./include/linux/kconfig.h
 -std=gnu89
 -D__KERNEL__
+-nostdinc
 -DMODULE
