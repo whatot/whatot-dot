@@ -41,6 +41,7 @@ values."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
      emacs-lisp
@@ -61,8 +62,9 @@ values."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
-     (python :variables python-shell-completion-native-enable nil)
-     (python :variables python-enable-yapf-format-on-save t)
+     (python :variables
+             python-shell-completion-native-enable nil
+             python-enable-yapf-format-on-save t)
      shell-scripts
      vimscript
      puppet
@@ -452,6 +454,8 @@ you should place your code here."
   ;; https://github.com/syl20bnr/spacemacs/issues/5435
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
     (set (make-local-variable 'mouse-1-click-follows-link) nil)))
+  ;; https://github.com/syl20bnr/spacemacs/issues/7038
+  (remove-hook 'emacs-lisp-mode-hook 'company-mode)
   )
 
 (defun local-setup-helm-about ()
