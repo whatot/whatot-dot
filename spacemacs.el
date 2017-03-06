@@ -81,7 +81,7 @@ values."
      erlang
      (haskell :variables
               haskell-completion-backend 'ghc-mod
-              haskell-enable-hindent-style "johan-tibell")
+              haskell-enable-hindent-style 'johan-tibell)
      imenu-list
      docker
      (rust :variables rust-format-on-save t)
