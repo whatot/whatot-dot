@@ -388,7 +388,7 @@ you should place your code here."
   (setq-default puppet-indent-level 4)
   (setq-default evil-shift-width 4)
   (setq-default go-tab-width 4)
-  (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin" "~/.cabal/bin")))
+  (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin" "~/.local/bin")))
   ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
   (setenv "WORKON_HOME" "~/envs/")
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
