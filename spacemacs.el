@@ -61,7 +61,7 @@ values."
      (gtags :enabled-for c-c++)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
+            c-c++-enable-clang-support nil)
      (python :variables
              python-shell-completion-native-enable nil
              python-enable-yapf-format-on-save t)
@@ -450,7 +450,7 @@ you should place your code here."
         '("~/linux/*" "~/git/*" "~/work/*" "/dev/shm/*"))
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
-  (setq clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
+  (setq-default clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
   )
 
 (defun local-setup-golang-about ()
