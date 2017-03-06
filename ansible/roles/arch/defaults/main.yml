@@ -27,7 +27,6 @@ aur_pkgs:
   - ansible-lint
   - gnome-shell-extension-caffeine-git
   - gnome-shell-extension-topicons-plus-git
-  - haskell-apply-refact
   - nautilus-nutstore
   - nutstore
   - puppet-lint
@@ -143,14 +142,7 @@ python_pkgs:
 haskell_pkgs:
   - cabal-install
   - ghc
-  - ghc-mod
-  - haskell-ghc-mod
-  - hasktags
-  - hindent
-  - hlint
-  - hoogle
   - stack
-  - stylish-haskell
 
 rust_pkgs:
   - rust

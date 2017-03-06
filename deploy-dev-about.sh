@@ -11,6 +11,12 @@ go get -u -v github.com/alecthomas/gometalinter
 # gometalinter install all known linters:
 gometalinter --install --update
 
+# for haskell, use stack instead of cabal
+# the haskell packages are old in system, need be cleaned up by hand
+# https://haskell-lang.org/tutorial/stack-build
+yaourt -Rsn ghc-mod hlint hasktags hoogle haskell-apply-refact stylish-haskell
+stack install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod intero
+
 ## for rust
 # cargo install rustfmt
 # cargo install racer
