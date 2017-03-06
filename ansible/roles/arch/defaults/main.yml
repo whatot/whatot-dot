@@ -121,10 +121,11 @@ program_tool_pkgs:
   - yapf
 
 java_pkgs:
+  - apache-ant
+  - apache-ivy
   - intellij-idea-community-edition
   - jdk
   - maven
-  - apache-ant
 
 python_pkgs:
   - flake8
@@ -143,6 +144,7 @@ haskell_pkgs:
   - cabal-install
   - ghc
   - ghc-mod
+  - haskell-ghc-mod
   - hasktags
   - hindent
   - hlint
