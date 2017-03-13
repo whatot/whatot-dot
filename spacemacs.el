@@ -371,6 +371,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
       ("org-cn"   . "https://elpa.zilongshanren.com/org/")
       ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
+  (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   )
 
 (defun dotspacemacs/user-config ()
