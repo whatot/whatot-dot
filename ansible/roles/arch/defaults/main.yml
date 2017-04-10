@@ -4,6 +4,7 @@
 font_pkgs:
   - adobe-source-code-pro-fonts
   - adobe-source-han-sans-cn-fonts
+  - adobe-source-han-serif-cn-fonts
   - adobe-source-sans-pro-fonts
   - adobe-source-serif-pro-fonts
   - ttf-bitstream-vera
