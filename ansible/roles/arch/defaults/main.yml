@@ -27,12 +27,12 @@ absent_pkgs:
 aur_pkgs:
   - ansible-lint
   - gnome-shell-extension-caffeine-git
+  - gnome-shell-extension-pixel-saver-git
   - gnome-shell-extension-topicons-plus-git
   - nautilus-nutstore
   - nutstore
   - puppet-lint
   - ttf-opensans
-  - typora
 
 basic_pkgs:
   - archlinux-keyring
