@@ -6,7 +6,7 @@ call plug#begin(expand('~/.vim/plugged'))
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'Valloric/YouCompleteMe', { 'do': 'python2 ./install.py --clang-completer --system-libclang --system-boost --gocode-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --clang-completer --system-libclang --system-boost --gocode-completer' }
 nmap gd :YcmCompleter GoTo<CR>
 nmap gy :YcmDiags<CR>
 nmap gt :YcmCompleter GetType<CR>

@@ -429,6 +429,7 @@ you should place your code here."
   (local-improve-hippie-expand)
   (local-setup-whitespace-about)
   (global-prettify-symbols-mode t)
+  (setq-default neo-autorefresh nil)
   )
 
 ;; code from chinese layer
@@ -466,7 +467,7 @@ you should place your code here."
   )
 
 (defun local-setup-c-c++-about ()
-  (setq ycmd-server-command (list "python2"
+  (setq ycmd-server-command (list "python"
     (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
   (setq-default ycmd-force-semantic-completion t)
   (setq ycmd-extra-conf-whitelist
