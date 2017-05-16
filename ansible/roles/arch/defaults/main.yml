@@ -25,10 +25,8 @@ absent_pkgs:
   - youtube-dl-git
 
 aur_pkgs:
-  - ansible-lint
   - gnome-shell-extension-caffeine-git
-  - gnome-shell-extension-pixel-saver-git
-  - gnome-shell-extension-topicons-plus-git
+  - gnome-shell-extension-freon-git
   - nautilus-nutstore
   - nutstore
   - puppet-lint
@@ -46,6 +44,9 @@ basic_pkgs:
   - fcitx-rime
   - gedit
   - gnome-clocks
+  - gnome-shell-extension-gnomenu
+  - gnome-shell-extension-topicons-plus
+  - gnome-shell-extension-unite
   - gnome-tweak-tool
   - htop
   - iftop
@@ -98,27 +99,33 @@ view_pkgs:
 program_tool_pkgs:
   - ack
   - ansible
+  - ansible-lint
+  - docker
+  - docker-compose
+  - emacs
+  - erlang-nox
+  - git
+  - go
+  - go-tools
+  - gvim
+  - puppet
+  - the_silver_searcher
+  - tig
+
+c_pkgs:
   - bison
   - boost
   - ccache
   - clang
   - cmake
   - cscope
-  - docker
-  - docker-compose
-  - emacs
-  - erlang-nox
   - flex
-  - git
+  - gcc
+  - gdb
   - global
-  - go
-  - go-tools
-  - gvim
   - llvm
-  - puppet
-  - the_silver_searcher
-  - tig
-  - yapf
+  - make
+  - ninja
 
 java_pkgs:
   - apache-ant
@@ -139,6 +146,7 @@ python_pkgs:
   - python2-flake8
   - python2-pylint
   - python2-virtualenv
+  - yapf
 
 haskell_pkgs:
   - cabal-install

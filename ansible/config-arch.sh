@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
-set -x
+set -eux
 
 sudo sed -i '/ustc/s/^#//' /etc/pacman.d/mirrorlist
-sudo pacman -S ansible python2
 
-ansible-playbook arch.yml --extra-vars "default_user=$USER remote_user=$USER"
+if [ ! -f "/usr/bin/ansible" ]; then
+    sudo pacman -S --noconfirm ansible
+fi
+
+ansible-playbook arch.yml --extra-vars "default_user=$USER"
 
 echo "fcitx-setup for gnome3"
-cat << EndOfMessage
+cat << EOF
 gsettings set \\
   org.gnome.settings-daemon.plugins.xsettings overrides \\
   "{'Gtk/IMModule':<'fcitx'>}"
-EndOfMessage
+EOF
