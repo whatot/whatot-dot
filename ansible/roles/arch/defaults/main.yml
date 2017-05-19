@@ -65,6 +65,7 @@ basic_pkgs:
 backend_pkgs:
   - bridge-utils
   - dnsmasq
+  - dnsmasq-china-list-git
   - ebtables
   - ifuse
   - ipad_charge

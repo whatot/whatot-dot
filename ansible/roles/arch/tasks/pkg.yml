@@ -32,3 +32,10 @@
     - '{{ python_pkgs }}'
     - '{{ rust_pkgs }}'
     - '{{ view_pkgs }}'
+
+- name: link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
+  file:
+    src: '/etc/dnsmasq.d/{{ item | basename }}'
+    dest: '/etc/NetworkManager/dnsmasq.d/{{ item | basename}}'
+    state: link
+  with_fileglob: '/etc/dnsmasq.d/*'
