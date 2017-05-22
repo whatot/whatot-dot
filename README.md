@@ -22,11 +22,6 @@ cd ansible/
 ./deploy-spacemacs.sh
 ```
 
-## tmux
-
-* tmux/tmux.conf
-* tmux/tmux.sh
-
 ## build ycm using system-libclang and system-boost
 
 > local libclang always older than the needed version
