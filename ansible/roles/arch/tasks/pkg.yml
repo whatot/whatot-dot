@@ -26,6 +26,7 @@
     - '{{ backend_pkgs }}'
     - '{{ basic_pkgs }}'
     - '{{ c_pkgs }}'
+    - '{{ erlang_elixir_pkgs }}'
     - '{{ haskell_pkgs }}'
     - '{{ java_pkgs }}'
     - '{{ program_tool_pkgs }}'
