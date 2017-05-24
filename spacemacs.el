@@ -36,7 +36,8 @@ values."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
+     ;; helm
+     ivy
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
@@ -427,7 +428,7 @@ you should place your code here."
   (local-setup-c-c++-about)
   (local-setup-golang-about)
   (local-fix-spacemacs-errors)
-  (local-setup-helm-about)
+  (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
   (local-setup-whitespace-about)
   (global-prettify-symbols-mode t)
@@ -494,11 +495,16 @@ you should place your code here."
   (remove-hook 'emacs-lisp-mode-hook 'company-mode)
   )
 
-(defun local-setup-helm-about ()
-  ;; use 'SPC-r-s' to call 'resume-last-search-buffer'
-  ;; use 'SPC-s-a-p' to call 'helm-project-do-ag'
+(defun local-setup-helm-ivy-about ()
+  ;; use 'SPC-r-s' to call 'resume-last-search-buffer', 'c-x c-r' ivy-resume
+  ;; use 'SPC-s-a-p' to call 'helm-project-do-ag', counsel-ag
   ;; if without 'persistent-mode', use 'tab' to preview the files
-  (setq-default helm-follow-mode-persistent t)
+  ;; (setq-default helm-follow-mode-persistent t)
+  ;; load file in project, 'SPC-p-SPC', 'SPC-p-f', 'SPC-p-r'
+  ;; isearch replacement, swiper, 'SPC-s-s'
+  ;; use ag search project, 'SPC-p-s-a' in helm, 'SPC-s-p' in swiper
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
   )
 
 (defun local-improve-hippie-expand ()
