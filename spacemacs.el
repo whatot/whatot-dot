@@ -36,8 +36,7 @@ values."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; helm
-     ivy
+     helm
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
@@ -59,7 +58,7 @@ values."
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t
                       version-control-diff-side 'left)
-     ;; (gtags :enabled-for c-c++)
+     (gtags :enabled-for c-c++)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support nil)
@@ -100,8 +99,6 @@ values."
      fcitx
      protobuf-mode
      thrift
-     ggtags
-     counsel-gtags
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -504,7 +501,7 @@ you should place your code here."
   ;; resume last search, helm 'SPC-r-s', ivy-resume 'c-x c-r'
   ;; load file in project, 'SPC-p-SPC', 'SPC-p-f', 'SPC-p-r'
   ;; search project by ag, 'SPC-s-a-p' 'SPC-p-s-a', 'SPC-s-p'
-  ;; buffer navigation , swiper 'SPC-s-s', emacs-swoop
+  ;; buffer navigation 'SPC-s-s', helm-swoop, swiper
   (setq-default helm-follow-mode-persistent t)
   )
 
