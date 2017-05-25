@@ -59,7 +59,7 @@ values."
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t
                       version-control-diff-side 'left)
-     (gtags :enabled-for c-c++)
+     ;; (gtags :enabled-for c-c++)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support nil)
@@ -67,26 +67,26 @@ values."
              python-shell-completion-native-enable nil
              python-enable-yapf-format-on-save t)
      shell-scripts
-     vimscript
+     ;; vimscript
      puppet
      yaml
-     html
+     ;; html
      systemd
      (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
-     lua
+     ;; lua
      ycmd
-     csv
+     ;; csv
      erlang
+     elixir
      (haskell :variables
               haskell-completion-backend 'ghc-mod
               haskell-enable-hindent-style 'johan-tibell)
      imenu-list
      docker
      (rust :variables rust-format-on-save t)
-     elixir
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -100,6 +100,8 @@ values."
      fcitx
      protobuf-mode
      thrift
+     ggtags
+     counsel-gtags
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -496,15 +498,11 @@ you should place your code here."
   )
 
 (defun local-setup-helm-ivy-about ()
-  ;; use 'SPC-r-s' to call 'resume-last-search-buffer', 'c-x c-r' ivy-resume
-  ;; use 'SPC-s-a-p' to call 'helm-project-do-ag', counsel-ag
-  ;; if without 'persistent-mode', use 'tab' to preview the files
-  ;; (setq-default helm-follow-mode-persistent t)
+  ;; resume last search, helm 'SPC-r-s', ivy-resume 'c-x c-r'
   ;; load file in project, 'SPC-p-SPC', 'SPC-p-f', 'SPC-p-r'
-  ;; isearch replacement, swiper, 'SPC-s-s'
-  ;; use ag search project, 'SPC-p-s-a' in helm, 'SPC-s-p' in swiper
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
+  ;; search project by ag, 'SPC-s-a-p' 'SPC-p-s-a', 'SPC-s-p'
+  ;; buffer navigation , swiper 'SPC-s-s', emacs-swoop
+  (setq-default helm-follow-mode-persistent t)
   )
 
 (defun local-improve-hippie-expand ()
