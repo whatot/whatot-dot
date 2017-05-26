@@ -66,18 +66,17 @@ values."
              python-shell-completion-native-enable nil
              python-enable-yapf-format-on-save t)
      shell-scripts
-     ;; vimscript
+     vimscript
      puppet
      yaml
-     ;; html
+     html
      systemd
      (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
-     ;; lua
      ycmd
-     ;; csv
+     csv
      erlang
      elixir
      (haskell :variables
@@ -503,6 +502,7 @@ you should place your code here."
   ;; search project by ag, 'SPC-s-a-p' 'SPC-p-s-a', 'SPC-s-p'
   ;; buffer navigation 'SPC-s-s', helm-swoop, swiper
   (setq-default helm-follow-mode-persistent t)
+  (setq-default projectile-enable-caching t)
   )
 
 (defun local-improve-hippie-expand ()
