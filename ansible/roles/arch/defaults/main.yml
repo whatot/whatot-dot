@@ -28,10 +28,12 @@ absent_pkgs:
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
   - gnome-shell-extension-freon-git
+  - marp
   - nautilus-nutstore
   - nutstore
   - puppet-lint
   - ttf-opensans
+  - typora
 
 basic_pkgs:
   - archlinux-keyring
