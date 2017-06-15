@@ -12,6 +12,6 @@
 -Isrc/timezone
 -Isrc/interfaces/libpq
 -Isrc/interfaces/ecpg/include
--I/usr/include/c++/6.3.1/
+-I/usr/include/c++/7.1.1/
 -include src/include/c.h
 -include src/include/pg_config.h
