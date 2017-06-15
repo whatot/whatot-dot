@@ -392,6 +392,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :width normal
                                               :powerline-scale 1.1))
     (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17))
+  ;; http://elpa.emacs-china.org/
+  (setq configuration-layer--elpa-archives
+    '(("melpa-cn" . "https://elpa.zilongshanren.com/melpa/")
+      ("org-cn"   . "https://elpa.zilongshanren.com/org/")
+      ("gnu-cn"   . "https://elpa.zilongshanren.com/gnu/")))
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   )
 
