@@ -7,6 +7,7 @@ font_pkgs:
   - adobe-source-han-serif-cn-fonts
   - adobe-source-sans-pro-fonts
   - adobe-source-serif-pro-fonts
+  - noto-fonts
   - ttf-bitstream-vera
   - ttf-dejavu
   - ttf-droid
@@ -19,7 +20,6 @@ font_pkgs:
 absent_pkgs:
   - cargo
   - erlang
-  - noto-fonts
   - noto-fonts-cjk
   - rust
   - rust-docs
