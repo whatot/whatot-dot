@@ -50,7 +50,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore autojump colorize cargo)
+plugins=(git gitignore autojump colorize cargo common-aliases)
 
 # User configuration
 
@@ -65,15 +65,7 @@ export EDITOR='vim'
 
 alias vi='vim -u NONE'
 alias gvim='gvim -c "call Maximize_Window()"'
-alias gdb="gdb -q"
-alias grep="grep --color=auto"
-alias -s c=vi
-alias -s txt=vi
-alias -s md=vi
-alias -s gz='tar -xzvf'
-alias -s tgz='tar -xzvf'
 alias unzipp='unzip -O cp936'
-alias -s bz2='tar -xjvf'
 
 # 每次登入控制台时关掉PC喇叭
 # edit /etc/inputrc Uncomment the 2nd line
