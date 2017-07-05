@@ -17,9 +17,12 @@ font_pkgs:
 
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
 absent_pkgs:
+  - cargo
   - erlang
   - noto-fonts
   - noto-fonts-cjk
+  - rust
+  - rust-docs
   - ttf-google-fonts-git
   - unzip
   - you-get-git
@@ -159,11 +162,10 @@ haskell_pkgs:
   - stack
 
 rust_pkgs:
-  - rust
-  - rust-docs
-  - rustfmt
-  - cargo
+  - racerd-git
   - rust-racer
+  - rustfmt
+  - rustup
 
 erlang_elixir_pkgs:
   - erlang-nox

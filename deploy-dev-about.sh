@@ -19,14 +19,10 @@ stack install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod \
       intero hindent
 # hindent: M-x hindent-reformat-buffer
 
-## for rust
-# cargo install rustfmt
-# cargo install racer
-
-## for rust in vim
-# """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-# Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-# let $RUST_SRC_PATH = $HOME . '/git/rust/src/'
-# " c-x c-o for complete, gd for definition
-# let g:rustfmt_autosave = 1
+## for rustup
+rustup toolchain install nightly
+rustup default nightly
+rustup component add rls
+rustup component add rust-src
+rustup update
+rustc --print sysroot
