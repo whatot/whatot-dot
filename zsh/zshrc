@@ -1,12 +1,19 @@
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+case `uname` in
+    Darwin)
+        ZSH=~/.oh-my-zsh/
+        ZSH_THEME="robbyrussell"
+    ;;
+    Linux)
+        ZSH=/usr/share/oh-my-zsh/
+        ZSH_THEME="gentoo"
+    ;;
+esac
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="gentoo"
-# ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
