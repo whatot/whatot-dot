@@ -393,10 +393,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                               :powerline-scale 1.1))
     (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17))
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
-  (setq configuration-layer--elpa-archives
-    '(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-      ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
