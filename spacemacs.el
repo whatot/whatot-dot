@@ -94,7 +94,6 @@ This function should only modify configuration layer settings."
      youdao-dictionary
      json-mode
      ag
-     fcitx
      protobuf-mode
      thrift
      )
@@ -424,7 +423,6 @@ before packages are loaded."
   (setq-default require-final-newline t)
   (local-setup-special-modes-using-tabs)
   (local-setup-selinux-file-mode)
-  (local-setup-fcitx-about)
   (local-setup-c-c++-about)
   (local-setup-golang-about)
   (local-fix-spacemacs-errors)
@@ -458,15 +456,6 @@ before packages are loaded."
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
   (add-hook 'go-mode-hook 'indent-using-tabs)
   (add-hook 'm4-mode-hook 'indent-using-tabs)
-  )
-
-(defun local-setup-fcitx-about ()
-  ;; Should setup "LC_CTYPE=zh_CN.UTF8" before start emacs
-  (fcitx-aggressive-setup)
-  (fcitx-prefix-keys-add "M-m")
-  (setq fcitx-use-dbus t)
-  (fcitx-evil-turn-on)
-  ;; (global-set-key (kbd "C-S-A") 'nil)
   )
 
 (defun local-setup-c-c++-about ()
