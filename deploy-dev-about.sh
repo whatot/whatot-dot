@@ -19,7 +19,7 @@ stack install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod \
       intero hindent
 # hindent: M-x hindent-reformat-buffer
 
-## for rustup
+# for rustup
 rustup toolchain install nightly
 rustup default nightly
 rustup component add rls
@@ -28,3 +28,6 @@ rustup component add rust-analysis
 rustup update
 rustc --print sysroot
 cargo install clippy
+
+# for emacs in mac
+emacs --insecure
