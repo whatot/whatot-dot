@@ -418,7 +418,6 @@ before packages are loaded."
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
   (setq-default require-final-newline t)
   (local-setup-special-modes-using-tabs)
-  (local-setup-selinux-file-mode)
   (local-setup-c-c++-about)
   (local-setup-golang-about)
   (local-fix-spacemacs-errors)
@@ -440,18 +439,11 @@ before packages are loaded."
 (defun indent-using-tabs ()
   (setq indent-tabs-mode t))
 
-(defun local-setup-selinux-file-mode ()
-  (add-to-list 'auto-mode-alist '("\\.te\\'" . m4-mode))
-  (add-to-list 'auto-mode-alist '("\\.if\\'" . m4-mode))
-  (add-to-list 'auto-mode-alist '("\\.fc\\'" . m4-mode))
-  )
-
 (defun local-setup-special-modes-using-tabs ()
   (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
   (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
   (add-hook 'go-mode-hook 'indent-using-tabs)
-  (add-hook 'm4-mode-hook 'indent-using-tabs)
   )
 
 (defun local-setup-c-c++-about ()
