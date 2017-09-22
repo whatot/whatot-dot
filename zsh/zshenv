@@ -1,8 +1,16 @@
-export JAVA_HOME="/usr/lib/jvm/default/"
-export CLASSPATH=$JAVA_HOME/jre/lib/
+case `uname` in
+    Darwin)
+        export PATH=$PATH:"$HOME/.cargo/bin/"
+    ;;
+    Linux)
+        export JAVA_HOME="/usr/lib/jvm/default/"
+        export CLASSPATH=$JAVA_HOME/jre/lib/
+        export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"/usr/lib/go/pkg/tool/linux_amd64/"
+        export PATH=$PATH:"$HOME/.local/bin/":"$HOME/.gem/ruby/2.3.0/bin/":"$HOME/.cargo/bin/"
+        export TERM="xterm-256color"
+    ;;
+esac
+
 export GOPATH="$HOME/go/"
 export CRATES_MIRROR_URL="https://mirrors.ustc.edu.cn/crates"
-export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"/usr/lib/go/pkg/tool/linux_amd64/"
-export PATH=$PATH:"$HOME/.local/bin/":"$HOME/.gem/ruby/2.3.0/bin/":"$HOME/.cargo/bin/"
-export TERM="xterm-256color"
 export WORKON_HOME="$HOME/envs/"
