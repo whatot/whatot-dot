@@ -21,7 +21,7 @@
 - name: Disable sshd service
   service: name=sshd state=stopped enabled=no
 
-- name: Set jdk8 as default java
-  shell: archlinux-java set java-8-jdk
+- name: Set jdk9 as default java
+  shell: archlinux-java set java-9-jdk
 
 - sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes

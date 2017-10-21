@@ -120,6 +120,7 @@ program_tool_pkgs:
   - shellcheck
   - the_silver_searcher
   - tig
+  - visual-studio-code
 
 c_pkgs:
   - bison
