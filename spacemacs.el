@@ -378,20 +378,7 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-  (when (string= system-name "b150")
-    (setq-default dotspacemacs-default-font '("Source Code Pro"
-                                              :size 32
-                                              :weight normal
-                                              :width normal
-                                              :powerline-scale 1.1))
-    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30))
-  (when (string= system-name "x411")
-    (setq-default dotspacemacs-default-font '("Source Code Pro"
-                                              :size 19
-                                              :weight normal
-                                              :width normal
-                                              :powerline-scale 1.1))
-    (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17))
+  (normal-font-1080p-screen)
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   (when (string-equal system-type "gnu/linux")
     (setq configuration-layer--elpa-archives
@@ -505,6 +492,24 @@ before packages are loaded."
   (global-whitespace-mode t)
   (setq whitespace-global-modes '(not go-mode))
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
+  )
+
+(defun normal-font-1080p-screen ()
+  (setq-default dotspacemacs-default-font '("Source Code Pro"
+                                            :size 19
+                                            :weight normal
+                                            :width normal
+                                            :powerline-scale 1.1))
+  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17)
+  )
+
+(defun big-font-4k-screen ()
+  (setq-default dotspacemacs-default-font '("Source Code Pro"
+                                            :size 32
+                                            :weight normal
+                                            :width normal
+                                            :powerline-scale 1.1))
+  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30)
   )
 
 (custom-set-faces
