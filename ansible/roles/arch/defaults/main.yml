@@ -132,10 +132,12 @@ c_pkgs:
   - flex
   - gcc
   - gdb
+  - gflags
   - global
   - llvm
   - make
   - ninja
+  - rocksdb
 
 java_pkgs:
   - apache-ant
