@@ -382,14 +382,11 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-  (pcase system-type
-    ('darwin (font-2k-13-screen))
-    ('gnu/linux
-     (pcase system-name
-       ('x411 (font-1080p-14-screen))
-       ('b150 (font-4k-24-screen)))
-     )
-    )
+  (cond
+   ((string-equal (system-name) "x411") (font-x411-14))
+   ((string-equal (system-name) "b150") (font-b150-24))
+   ((string-equal system-type "darwin") (font-darwin-13))
+   )
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   (when (string-equal system-type "gnu/linux")
     (setq configuration-layer--elpa-archives
@@ -505,24 +502,19 @@ before packages are loaded."
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
   )
 
-(defun font-1080p-14-screen ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 19))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17)
-  )
-
-(defun font-1080p-24-screen ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 19))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17)
-  )
-
-(defun font-2k-13-screen ()
+(defun font-darwin-13 ()
   (setq-default dotspacemacs-default-font '("Source Code Pro" :size 15))
   (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 15 14)
   )
 
-(defun font-4k-24-screen ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 32))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30)
+(defun font-x411-14 ()
+  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 19))
+  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17)
+  )
+
+(defun font-b150-24 ()
+  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 18))
+  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 18 17)
   )
 
 (custom-set-faces
