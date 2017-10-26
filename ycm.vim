@@ -202,13 +202,14 @@ filetype plugin indent on
 syntax on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set font based on hostname()
-if hostname() == 'b150'
-    set guifont=Source\ Code\ Pro:h11
-elseif hostname() == 'x411'
+if has("mac")
     set guifont=Source\ Code\ Pro:h13
-else
-    set guifont=Source\ Code\ Pro:h13
+elseif has("unix")
+    if hostname() == 'b150'
+        set guifont=Source\ Code\ Pro\ 11
+    elseif hostname() == 'x411'
+        set guifont=Source\ Code\ Pro\ 13
+    endif
 endif
 
 set shiftround
