@@ -204,11 +204,11 @@ syntax on
 
 " set font based on hostname()
 if hostname() == 'b150'
-    set guifont=Source\ Code\ Pro\ 11
+    set guifont=Source\ Code\ Pro:h11
 elseif hostname() == 'x411'
-    set guifont=Source\ Code\ Pro\ 13
+    set guifont=Source\ Code\ Pro:h13
 else
-    set guifont=Source\ Code\ Pro\ 13
+    set guifont=Source\ Code\ Pro:h13
 endif
 
 set shiftround
