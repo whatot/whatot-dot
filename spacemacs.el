@@ -513,8 +513,8 @@ before packages are loaded."
   )
 
 (defun font-b150-24 ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 18))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 18 17)
+  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 32))
+  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30)
   )
 
 (custom-set-faces
