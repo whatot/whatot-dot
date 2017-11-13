@@ -142,8 +142,11 @@ c_pkgs:
 java_pkgs:
   - apache-ant
   - apache-ivy
+  - gradle
   - intellij-idea-community-edition
   - jdk
+  - jdk8-openjdk
+  - jdk9-openjdk
   - maven
 
 python_pkgs:
