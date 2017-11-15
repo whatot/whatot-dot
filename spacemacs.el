@@ -66,7 +66,6 @@ This function should only modify configuration layer settings."
              python-enable-yapf-format-on-save t)
      shell-scripts
      vimscript
-     puppet
      yaml
      html
      systemd
@@ -407,7 +406,6 @@ before packages are loaded."
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
   (setq-default vc-follow-symlinks t)
-  (setq-default puppet-indent-level 4)
   (setq-default evil-shift-width 4)
   (setq-default go-tab-width 4)
   (setq-default cmake-tab-width 4)

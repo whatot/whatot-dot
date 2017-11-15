@@ -30,17 +30,17 @@ absent_pkgs:
 
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
-  - gnome-shell-extension-freon-git
   - marp
   - nautilus-nutstore
   - nutstore
-  - puppet-lint
   - ttf-opensans
   - typora
 
 basic_pkgs:
   - archlinux-keyring
   - archlinuxcn-keyring
+  - aspell
+  - aspell-en
   - clipit
   - dstat
   - faenza-icon-theme
@@ -48,6 +48,7 @@ basic_pkgs:
   - fcitx-configtool
   - fcitx-im
   - fcitx-rime
+  - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
   - gnome-shell-extension-gnomenu
@@ -116,7 +117,6 @@ program_tool_pkgs:
   - go-tools
   - gvim
   - perf
-  - puppet
   - shellcheck
   - the_silver_searcher
   - tig
