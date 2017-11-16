@@ -13,6 +13,7 @@ font_pkgs:
   - ttf-droid
   - ttf-liberation
   - ttf-ubuntu-font-family
+  - ttf-roboto
   - wqy-microhei
   - wqy-zenhei
 
@@ -57,6 +58,8 @@ basic_pkgs:
   - gnome-tweak-tool
   - htop
   - iftop
+  - libzip
+  - meld
   - oh-my-zsh-git
   - proxychains-ng
   - rsync
