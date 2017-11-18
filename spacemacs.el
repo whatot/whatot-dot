@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     (spell-checking :variables spell-checking-enable-auto-dictionary t)
+     ;; (spell-checking :variables spell-checking-enable-auto-dictionary t)
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
      (semantic :enabled-for c-c++)
      (version-control :variables

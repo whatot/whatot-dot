@@ -40,8 +40,6 @@ aur_pkgs:
 basic_pkgs:
   - archlinux-keyring
   - archlinuxcn-keyring
-  - aspell
-  - aspell-en
   - clipit
   - dstat
   - faenza-icon-theme
