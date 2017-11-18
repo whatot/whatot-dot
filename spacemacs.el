@@ -46,6 +46,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      markdown
+     neotree
      org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -432,6 +433,7 @@ before packages are loaded."
   (local-setup-whitespace-about)
   (global-prettify-symbols-mode t)
   (setq-default neo-autorefresh nil)
+  (setq neo-theme 'nerd)
   )
 
 ;; code from chinese layer
