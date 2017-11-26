@@ -47,7 +47,7 @@ This function should only modify configuration layer settings."
      git
      markdown
      neotree
-     org
+     ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -70,17 +70,17 @@ This function should only modify configuration layer settings."
      yaml
      html
      systemd
-     (go :variables go-use-gometalinter t)
+     ;; (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
-     ycmd
+     (ycmd :enabled-for c-c++)
      csv
-     erlang
-     elixir
-     (haskell :variables
-              haskell-completion-backend 'ghc-mod
-              haskell-enable-hindent-style 'johan-tibell)
+     ;; erlang
+     ;; elixir
+     ;; (haskell :variables
+     ;;          haskell-completion-backend 'ghc-mod
+     ;;          haskell-enable-hindent-style 'johan-tibell)
      imenu-list
      docker
      (rust :variables rust-format-on-save t)
