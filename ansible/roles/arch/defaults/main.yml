@@ -145,7 +145,6 @@ java_pkgs:
   - apache-ivy
   - gradle
   - intellij-idea-community-edition
-  - jdk
   - jdk8-openjdk
   - jdk9-openjdk
   - maven
@@ -154,7 +153,7 @@ python_pkgs:
   - flake8
   - ipython
   - ipython2
-  - pycharm-community
+  - pycharm-community-edition
   - python-nose
   - python-pylint
   - python-virtualenv
