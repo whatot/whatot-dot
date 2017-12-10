@@ -24,4 +24,5 @@
 - name: Set openjdk9 as default java
   shell: archlinux-java set java-9-openjdk
 
-- sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
+- name: Use sysctl to setup vm.swappiness
+  sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
