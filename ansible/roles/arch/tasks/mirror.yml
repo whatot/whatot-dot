@@ -1,6 +1,11 @@
 ---
 # mirror tasks file for arch
 
+- name: Check /etc/pacman.conf
+  stat:
+    path: /etc/pacman.conf
+  register: pacman_conf_file
+
 - name: Config archlinuxcn in pacman.conf
   blockinfile:
     dest: /etc/pacman.conf
@@ -9,24 +14,33 @@
       SigLevel = Optional TrustedOnly
       Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
       #Server = https://cdn.repo.archlinuxcn.org/$arch
+  when: pacman_conf_file.stat.exists == True
 
-- debug: var=ansible_distribution
+- name: Check /etc/pacman.d/mirrorlist
+  stat:
+    path: /etc/pacman.d/mirrorlist
+  register: pacman_mirrorlist_file
 
-- name: Using ustc mirror in /etc/pacman.d/mirrorlist in Archlinux
-  shell: sed -i '/ustc/s/^#//' /etc/pacman.d/mirrorlist
-  when: ansible_distribution == "Archlinux"
+- name: Uncomment ustc mirror in /etc/pacman.d/mirrorlist
+  replace:
+    path: /etc/pacman.d/mirrorlist
+    regexp: '^#(.*ustc.*)'
+    replace: '\1'
+  when: pacman_mirrorlist_file.stat.exists == True
 
-- name: Setup /etc/pacman-mirrors.conf in Manjaro
-  lineinfile:
-    regexp: '^OnlyCountry = China$'
-    line: 'OnlyCountry = China'
+- name: Check /etc/pacman-mirrors.conf
+  stat:
+    path: /etc/pacman-mirrors.conf
+  register: pacman_mirrors_conf_file
+
+- name: Setup testing branch in /etc/pacman-mirrors.conf
+  replace:
     dest: /etc/pacman-mirrors.conf
-    state: present
-    insertafter: EOF
-  when: ansible_distribution == "Manjaro Linux"
-  register: pacman_mirrors_conf_updated
+    regexp: '^Branch = stable$'
+    replace: 'Branch = testing'
+  when: pacman_mirrors_conf_file.stat.exists == True
+  register: pacman_mirrors_conf_file_updated
 
-- name: Update /etc/pacman.d/mirrorlist by pacman-mirrors in Manjaro
-  shell: pacman-mirrors --generate --timeout 1
-  when: ansible_distribution == "Manjaro Linux" and
-        (pacman_mirrors_conf_updated | changed)
+- name: Update /etc/pacman.d/mirrorlist by pacman-mirrors
+  shell: pacman-mirrors --branch testing --country China --timeout 1
+  when: pacman_mirrors_conf_file_updated | changed

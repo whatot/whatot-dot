@@ -8,9 +8,9 @@
     state: link
     force: yes
 
-- include: mirror.yml
-- include: user.yml
-- include: pkg.yml
+- include_tasks: mirror.yml
+- include_tasks: user.yml
+- include_tasks: pkg.yml
 
 - name: Ensure basic services is running and enabled
   service: name='{{ item }}' state=started enabled=yes
@@ -21,7 +21,7 @@
 - name: Disable sshd service
   service: name=sshd state=stopped enabled=no
 
-- name: Set jdk9 as default java
-  shell: archlinux-java set java-9-jdk
+- name: Set openjdk9 as default java
+  shell: archlinux-java set java-9-openjdk
 
 - sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
