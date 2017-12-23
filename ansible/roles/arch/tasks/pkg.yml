@@ -34,9 +34,18 @@
     - '{{ rust_pkgs }}'
     - '{{ view_pkgs }}'
 
-- name: link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
+- name: Link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
   file:
     src: '/etc/dnsmasq.d/{{ item | basename }}'
     dest: '/etc/NetworkManager/dnsmasq.d/{{ item | basename}}'
     state: link
   with_fileglob: '/etc/dnsmasq.d/*'
+
+- name: Configure NetworkManager
+  file:
+    src: NetworkManager.conf
+    dest: /etc/NetworkManager/NetworkManager.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
