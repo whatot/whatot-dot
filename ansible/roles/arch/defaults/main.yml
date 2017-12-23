@@ -28,6 +28,7 @@ absent_pkgs:
   - unzip
   - you-get-git
   - youtube-dl-git
+  - visual-studio-code
 
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
@@ -121,7 +122,7 @@ program_tool_pkgs:
   - shellcheck
   - the_silver_searcher
   - tig
-  - visual-studio-code
+  - visual-studio-code-bin
 
 c_pkgs:
   - bison
