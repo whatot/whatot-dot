@@ -76,7 +76,7 @@ export EDITOR='vim'
 alias vi='vim -u NONE'
 alias gvim='gvim -c "call Maximize_Window()"'
 alias unzipp='unzip -O cp936'
-alias mbuild='mvn clean install -U -T 2C -Dmaven.test.skip=true -Dmaven.compile.fork=true'
+alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 
 # 每次登入控制台时关掉PC喇叭
