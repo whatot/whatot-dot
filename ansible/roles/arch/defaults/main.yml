@@ -24,6 +24,7 @@ absent_pkgs:
   - noto-fonts-cjk
   - rust
   - rust-docs
+  - rustfmt
   - ttf-google-fonts-git
   - unzip
   - you-get-git
@@ -172,7 +173,6 @@ haskell_pkgs:
 rust_pkgs:
   - racerd-git
   - rust-racer
-  - rustfmt
   - rustup
 
 erlang_elixir_pkgs:

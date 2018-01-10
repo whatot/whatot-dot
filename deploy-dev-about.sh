@@ -22,8 +22,9 @@ stack install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod \
 # for rustup
 rustup toolchain install nightly
 rustup default nightly
-rustup component add rls
+rustup component add rls-preview
 rustup component add rust-src
+rustup component add rustfmt-preview
 rustup component add rust-analysis
 rustup update
 rustc --print sysroot
