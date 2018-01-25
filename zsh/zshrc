@@ -78,6 +78,7 @@ alias gvim='gvim -c "call Maximize_Window()"'
 alias unzipp='unzip -O cp936'
 alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
+alias mtest='mvn clean test -U'
 
 # 每次登入控制台时关掉PC喇叭
 # edit /etc/inputrc Uncomment the 2nd line
