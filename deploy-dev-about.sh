@@ -14,9 +14,9 @@ gometalinter --install --update
 # for haskell, use stack instead of cabal
 # the haskell packages are old in system, need be cleaned up by hand
 # https://haskell-lang.org/tutorial/stack-build
-yaourt -Rsn ghc-mod hlint hasktags hoogle haskell-apply-refact stylish-haskell
-stack install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod \
-      intero hindent
+yaourt -Rsn haskell-apply-refact hlint stylish-haskell hasktags hoogle ghc-mod
+cabal update
+cabal install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod intero hindent
 # hindent: M-x hindent-reformat-buffer
 
 # for rustup

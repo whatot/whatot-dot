@@ -43,6 +43,7 @@ brew_install zsh
 
 brew_install ghc
 brew_install cabal cabal-install
+brew_install stack haskell-stack
 
 brew_install cmake
 brew_install mvn maven
