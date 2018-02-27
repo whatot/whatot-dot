@@ -31,6 +31,7 @@ fi
 if [[ "$(which brew)" != *"brew"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew tap homebrew/dupes
+    brew tap d12frosted/emacs-plus
 fi
 
 brew_install tree
@@ -40,6 +41,8 @@ brew_install realpath coreutils
 brew_install rsync
 brew_install git
 brew_install zsh
+brew_install gtar gnu-tar
+brew_install gnutls-cli gnutls
 
 brew_install ghc
 brew_install cabal cabal-install
@@ -49,6 +52,6 @@ brew_install cmake
 brew_install mvn maven
 brew_install rustup rustup-init
 brew_install ag the_silver_searcher
-brew_install emacs
+brew_install /usr/local/bin/emacs emacs-plus
 
 echo "finined!"
