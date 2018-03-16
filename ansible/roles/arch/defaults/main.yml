@@ -155,7 +155,6 @@ python_pkgs:
   - flake8
   - ipython
   - ipython2
-  - pycharm-community-edition
   - python-nose
   - python-pylint
   - python-virtualenv
