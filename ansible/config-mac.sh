@@ -50,6 +50,7 @@ brew_install stack haskell-stack
 
 brew_install cmake
 brew_install mvn maven
+brew_install ant ant
 brew_install rustup rustup-init
 brew_install ag the_silver_searcher
 brew_install /usr/local/bin/emacs emacs-plus
