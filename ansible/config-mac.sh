@@ -41,6 +41,7 @@ brew_install realpath coreutils
 brew_install rsync
 brew_install git
 brew_install zsh
+brew_install htop
 brew_install gtar gnu-tar
 brew_install gnutls-cli gnutls
 
