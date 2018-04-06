@@ -26,9 +26,10 @@ absent_pkgs:
   - rust-docs
   - rustfmt
   - ttf-google-fonts-git
+  - vim
+  - visual-studio-code
   - you-get-git
   - youtube-dl-git
-  - visual-studio-code
 
 aur_pkgs:
   - gnome-shell-extension-caffeine-git
