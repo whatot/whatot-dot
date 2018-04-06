@@ -26,7 +26,6 @@ absent_pkgs:
   - rust-docs
   - rustfmt
   - ttf-google-fonts-git
-  - unzip
   - you-get-git
   - youtube-dl-git
   - visual-studio-code
@@ -38,12 +37,12 @@ aur_pkgs:
   - nutstore
   - ttf-opensans
   - typora
+  - unzip-iconv
 
 basic_pkgs:
   - archlinux-keyring
   - archlinuxcn-keyring
   - clipit
-  - dstat
   - faenza-icon-theme
   - fcitx
   - fcitx-configtool
@@ -55,16 +54,11 @@ basic_pkgs:
   - gnome-shell-extension-gnomenu
   - gnome-shell-extension-topicons-plus
   - gnome-shell-extension-unite
-  - gnome-tweak-tool
-  - htop
-  - iftop
+  - gnome-tweaks
   - libzip
-  - meld
   - oh-my-zsh-git
   - proxychains-ng
   - rsync
-  - shadowsocks-qt5
-  - sysstat
   - tmux
   - transmission-gtk
   - wmctrl
@@ -76,17 +70,21 @@ backend_pkgs:
   - bridge-utils
   - dnsmasq
   - dnsmasq-china-list-git
+  - dstat
   - ebtables
+  - htop
+  - iftop
   - ifuse
   - ipad_charge
   - libvirt
+  - meld
   - ntp
   - openssh
   - openssl
   - qemu
+  - sysstat
 
 view_pkgs:
-  - baka-mplayer
   - calibre
   - deadbeef
   - file-roller
@@ -100,7 +98,6 @@ view_pkgs:
   - texlive-core
   - texlive-latexextra
   - unrar
-  - unzip-iconv
   - viewnior
   - you-get
   - youtube-dl

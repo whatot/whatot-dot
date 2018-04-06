@@ -20,19 +20,27 @@
   debug: var=aur_pkgs
   when: aur_pkgs is defined
 
-- name: Install packages
+- name: Install basic packages
+  pacman: name='{{ item }}' state=latest
+  with_flattened:
+    - '{{ basic_pkgs }}'
+    - '{{ view_pkgs }}'
+
+- name: Install programming based packages
   pacman: name='{{ item }}' state=latest
   with_flattened:
     - '{{ backend_pkgs }}'
-    - '{{ basic_pkgs }}'
+    - '{{ program_tool_pkgs }}'
+
+- name: Install language about packages
+  pacman: name='{{ item }}' state=latest
+  with_flattened:
     - '{{ c_pkgs }}'
     - '{{ erlang_elixir_pkgs }}'
     - '{{ haskell_pkgs }}'
     - '{{ java_pkgs }}'
-    - '{{ program_tool_pkgs }}'
     - '{{ python_pkgs }}'
     - '{{ rust_pkgs }}'
-    - '{{ view_pkgs }}'
 
 - name: Link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
   file:
