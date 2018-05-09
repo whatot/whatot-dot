@@ -481,7 +481,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    )
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   (when (string-equal system-type "gnu/linux")
-    (setq configuration-layer--elpa-archives
+    (setq configuration-layer-elpa-archives
           '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
             ("org-cn"   . "https://elpa.emacs-china.org/org/")
             ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
