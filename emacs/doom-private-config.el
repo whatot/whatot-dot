@@ -7,7 +7,7 @@
                         ((string= (system-name) "b150") '30)
                         ((string= system-type "darwin") '13))))
 (setq frame-title-format
-          '(buffer-file-name "%f"
+          '(buffer-file-name "%f [%m]"
             (dired-directory dired-directory "%b")))
 
 (provide 'doom-private-config)
