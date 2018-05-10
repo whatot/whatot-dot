@@ -21,6 +21,7 @@ font_pkgs:
 absent_pkgs:
   - cargo
   - erlang
+  - emacs
   - noto-fonts-cjk
   - rust
   - rust-docs
@@ -111,7 +112,7 @@ program_tool_pkgs:
   - ansible-lint
   - docker
   - docker-compose
-  - emacs
+  - emacs-git
   - flamegraph-git
   - git
   - go
