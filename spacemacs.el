@@ -480,12 +480,10 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    ((string-equal system-type "darwin") (font-darwin-13))
    )
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
-  (when (string-equal system-type "gnu/linux")
-    (setq configuration-layer-elpa-archives
-          '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
-            ("org-cn"   . "https://elpa.emacs-china.org/org/")
-            ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
-    )
+  (setq configuration-layer-elpa-archives
+        '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "https://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
   )
 
 (defun dotspacemacs/user-config ()
