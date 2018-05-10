@@ -75,7 +75,7 @@
       ;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
       ;ess               ; emacs speaks statistics
-       go                ; the hipster dialect
+      ;go                ; the hipster dialect
       ;(haskell +intero) ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
@@ -100,7 +100,7 @@
       ;plantuml          ; diagrams for confusing people more
       ;purescript        ; javascript, but functional
        python            ; beautiful is better than ugly
-       rest              ; Emacs as a REST client
+      ;rest              ; Emacs as a REST client
       ;ruby              ; 1.step do {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
       ;scala             ; java, but good
