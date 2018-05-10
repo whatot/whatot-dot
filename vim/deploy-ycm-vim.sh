@@ -12,7 +12,7 @@ fi
 
 # all needed subdirs
 mkdir -p ~/.vim/{plugged,sessions,undodir,autoload}
-ln -s "${PATH_NOW}"/ycm.vim ~/.vimrc
+ln -sf "${PATH_NOW}"/ycm.vim ~/.vimrc
 
 # Using vim-plug to install plugins in github
 vim +PlugInstall +qall

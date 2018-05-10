@@ -7,10 +7,8 @@ DOOM_D_PATH="${HOME}/.doom.d"
 PRIVATE_SOURCE_PATH="${PATH_NOW}/private"
 PRIVATE_TARGET_PATH="${HOME}/.emacs.d/modules/config/private"
 
-if [[ ! -d "${DOOM_D_PATH}" ]]; then
-    mkdir -p "${DOOM_D_PATH}"
-    ln -s "${PATH_NOW}"/doom-init.el "${DOOM_D_PATH}"/init.el
-fi
+mkdir -p "${DOOM_D_PATH}"
+ln -sf "${PATH_NOW}"/doom-init.el "${DOOM_D_PATH}"/init.el
 
 if [[ ! -d "${EMACS_D_PATH}" ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d

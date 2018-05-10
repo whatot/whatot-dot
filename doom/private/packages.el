@@ -1,6 +1,6 @@
 
-(package! 'thrift)
-(package! 'ag)
-(package! 'protobuf-mode)
-(package! 'youdao-dictionary)
+(package! ag)
+(package! thrift)
+(package! protobuf-mode)
+(package! youdao-dictionary)
 
