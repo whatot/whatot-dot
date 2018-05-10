@@ -126,5 +126,6 @@
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
+       (private)
        (default +bindings +snippets +evil-commands))
 
