@@ -21,5 +21,3 @@
                 ("melpa" . "http://elpa.emacs-china.org/melpa/")
                 ("org" . "http://elpa.emacs-china.org/org/")))
 
-(provide 'doom-private-config)
-;;; doom-private-config.el ends here
