@@ -13,6 +13,7 @@
 
 ;;; maximized at startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
 ;;; china mirror
 (setq-default package-archives
