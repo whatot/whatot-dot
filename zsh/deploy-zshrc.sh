@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-PATH_NOW=$(pwd)
+SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
 
-ln -sf "${PATH_NOW}"/zshrc ~/.zshrc
-ln -sf "${PATH_NOW}"/zshenv ~/.zshenv
+ln -sf "${SCRIPT_PATH}"/zshrc ~/.zshrc
+ln -sf "${SCRIPT_PATH}"/zshenv ~/.zshenv

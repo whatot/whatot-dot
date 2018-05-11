@@ -1,14 +1,14 @@
 #!/bin/bash
 set -x
 
-PATH_NOW=$(pwd)
+SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
 EMACS_D_PATH="${HOME}/.emacs.d"
 DOOM_D_PATH="${HOME}/.doom.d"
-PRIVATE_SOURCE_PATH="${PATH_NOW}/private"
+PRIVATE_SOURCE_PATH="${SCRIPT_PATH}/private"
 PRIVATE_TARGET_PATH="${HOME}/.emacs.d/modules/config/private"
 
 mkdir -p "${DOOM_D_PATH}"
-ln -sf "${PATH_NOW}"/doom-init.el "${DOOM_D_PATH}"/init.el
+ln -sf "${SCRIPT_PATH}"/doom-init.el "${DOOM_D_PATH}"/init.el
 
 if [[ ! -d "${EMACS_D_PATH}" ]]; then
     git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
@@ -20,4 +20,4 @@ fi
 
 cd "${EMACS_D_PATH}" || return
 git checkout develop
-make
+make upgrade
