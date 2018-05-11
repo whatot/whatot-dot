@@ -16,7 +16,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
 ;;; china mirror
-(setq-default package-archives
+(setq package-archives
               '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
                 ("melpa" . "http://elpa.emacs-china.org/melpa/")
                 ("org" . "http://elpa.emacs-china.org/org/")))
