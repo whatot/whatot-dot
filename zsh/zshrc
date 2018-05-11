@@ -4,6 +4,7 @@ case `uname` in
         ZSH=~/.oh-my-zsh/
         ZSH_THEME="robbyrussell"
         DISABLE_AUTO_UPDATE="false"
+        source ${HOME}/.zshenv
     ;;
     Linux)
         ZSH=/usr/share/oh-my-zsh/

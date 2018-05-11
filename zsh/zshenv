@@ -1,7 +1,10 @@
 case `uname` in
     Darwin)
-        export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/opt/gnu-tar/libexec/gnubin":"$HOME/.cargo/bin/":$PATH
+        export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${HOME}/.cargo/bin"
+        NEW_PATH="$(brew --prefix coreutils)/libexec/gnubin":${PATH}
+        NEW_PATH="/usr/local/opt/gnu-tar/libexec/gnubin":${NEW_PATH}
+        NEW_PATH="/usr/local/opt/make/libexec/gnubin":${NEW_PATH}
+        export PATH="${NEW_PATH}"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
