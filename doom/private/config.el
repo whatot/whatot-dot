@@ -21,3 +21,6 @@
                 ("melpa" . "http://elpa.emacs-china.org/melpa/")
                 ("org" . "http://elpa.emacs-china.org/org/")))
 
+(def-package! youdao-dictionary
+  :commands (youdao-dictionary-search-at-point)
+  :config (map! "C-c y" 'youdao-dictionary-search-at-point))
