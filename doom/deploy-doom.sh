@@ -20,4 +20,4 @@ fi
 
 cd "${EMACS_D_PATH}" || return
 git checkout develop
-make install
+make
