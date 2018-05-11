@@ -55,5 +55,7 @@ brew_install ant ant
 brew_install rustup rustup-init
 brew_install ag the_silver_searcher
 brew_install /usr/local/bin/emacs emacs-plus
+brew_install erl erlang
+brew_install elixir
 
 echo "finined!"
