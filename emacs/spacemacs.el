@@ -473,12 +473,11 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq tramp-ssh-controlmaster-options
-      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   (cond
-   ((string-equal (system-name) "x411") (font-x411-14))
-   ((string-equal (system-name) "b150") (font-b150-24))
-   ((string-equal system-type "darwin") (font-darwin-13))
-   )
+   ((string= (system-name) "x411") (config-font-size 19 17))
+   ((string= (system-name) "b150") (config-font-size 32 30))
+   ((string= system-type "darwin") (config-font-size 15 14)))
   (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
   (setq configuration-layer-elpa-archives
         '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
@@ -519,13 +518,13 @@ before packages are loaded."
   (setq neo-theme 'nerd)
   )
 
-;; code from chinese layer
-(defun set-monospaced-font (english chinese english-size chinese-size)
+(defun config-font-size (en-size cn-size)
+  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 32))
   (set-face-attribute 'default nil :font
-                      (format "%s:pixelsize=%d" english english-size))
+                      (format "%s:pixelsize=%d" "Source Code Pro" en-size))
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
-                      (font-spec :family chinese :size chinese-size))))
+                      (font-spec :family "Source Han Sans CN" :size cn-size))))
 
 (defun indent-using-tabs ()
   (setq indent-tabs-mode t))
@@ -590,21 +589,6 @@ before packages are loaded."
   (global-whitespace-mode t)
   (setq whitespace-global-modes '(not go-mode))
   (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
-  )
-
-(defun font-darwin-13 ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 15))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 15 14)
-  )
-
-(defun font-x411-14 ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 19))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 19 17)
-  )
-
-(defun font-b150-24 ()
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 32))
-  (set-monospaced-font "Source Code Pro" "Source Han Sans CN" 32 30)
   )
 
 (custom-set-faces
