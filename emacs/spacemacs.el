@@ -74,7 +74,6 @@ This function should only modify configuration layer settings."
      yaml
      html
      systemd
-     ;; (go :variables go-use-gometalinter t)
      sql
      ansible
      colors
@@ -501,10 +500,8 @@ before packages are loaded."
   (setq-default c-default-style "linux")
   (setq-default vc-follow-symlinks t)
   (setq-default evil-shift-width 4)
-  (setq-default go-tab-width 4)
   (setq-default cmake-tab-width 4)
-  (setq exec-path (append exec-path '("~/go/bin" "~/.cargo/bin" "~/.local/bin")))
-  ;; (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/.cargo/bin"))
+  (setq exec-path (append exec-path '("~/.cargo/bin" "~/.local/bin")))
   (setenv "WORKON_HOME" "~/envs/")
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
@@ -512,7 +509,6 @@ before packages are loaded."
   (setq-default require-final-newline t)
   (local-setup-special-modes-using-tabs)
   (local-setup-c-c++-about)
-  (local-setup-golang-about)
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
@@ -537,7 +533,6 @@ before packages are loaded."
   (add-hook 'conf-colon-mode-hook 'indent-using-tabs)
   (add-hook 'conf-unix-mode-hook 'indent-using-tabs)
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
-  (add-hook 'go-mode-hook 'indent-using-tabs)
   )
 
 (defun local-setup-c-c++-about ()
@@ -549,13 +544,6 @@ before packages are loaded."
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
   (setq-default clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
-  )
-
-(defun local-setup-golang-about ()
-  (setq flycheck-gometalinter-disable-linters '("gotype" "gocyclo"))
-  (setq flycheck-gometalinter-fast t)
-  ;; Set different deadline (default: 5s)
-  (setq flycheck-gometalinter-deadline "10s")
   )
 
 (defun local-fix-spacemacs-errors ()
