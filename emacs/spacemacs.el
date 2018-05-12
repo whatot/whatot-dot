@@ -80,8 +80,8 @@ This function should only modify configuration layer settings."
      colors
      (ycmd :enabled-for c-c++)
      csv
-     ;; erlang
-     ;; elixir
+     erlang
+     elixir
      ;; (haskell :variables
      ;;          haskell-completion-backend 'ghc-mod
      ;;          haskell-enable-hindent-style 'johan-tibell)
