@@ -519,7 +519,7 @@ before packages are loaded."
   )
 
 (defun config-font-size (en-size cn-size)
-  (setq-default dotspacemacs-default-font '("Source Code Pro" :size 32))
+  (setq-default dotspacemacs-default-font (list "Source Code Pro" :size en-size))
   (set-face-attribute 'default nil :font
                       (format "%s:pixelsize=%d" "Source Code Pro" en-size))
   (dolist (charset '(kana han cjk-misc bopomofo))
