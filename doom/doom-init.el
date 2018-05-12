@@ -56,7 +56,7 @@
        magit             ;
        neotree           ; a project drawer, like NERDTree for vim
       ;password-store    ; password manager for nerds
-       pdf               ; pdf enhancements
+      ;pdf               ; pdf enhancements
       ;rgb               ; creating color strings
        rotate-text       ; cycle region at point between text candidates
       ;term              ; terminals in Emacs
