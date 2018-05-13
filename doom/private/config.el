@@ -24,3 +24,7 @@
 (def-package! youdao-dictionary
   :commands (youdao-dictionary-search-at-point)
   :config (map! "C-c y" 'youdao-dictionary-search-at-point))
+
+(setq ivy-re-builders-alist
+      '((swiper . ivy--regex-plus)
+        (t      . ivy--regex-fuzzy)))
