@@ -12,6 +12,7 @@ font_pkgs:
   - ttf-dejavu
   - ttf-droid
   - ttf-liberation
+  - ttf-opensans
   - ttf-ubuntu-font-family
   - ttf-roboto
   - wqy-microhei
@@ -37,8 +38,7 @@ aur_pkgs:
   - marp
   - nautilus-nutstore
   - nutstore
-  - ttf-opensans
-  - typora
+  - rtags-git
   - unzip-iconv
 
 basic_pkgs:
@@ -63,6 +63,7 @@ basic_pkgs:
   - rsync
   - tmux
   - transmission-gtk
+  - typora
   - wmctrl
   - yaourt
   - ydcv
@@ -125,11 +126,13 @@ program_tool_pkgs:
   - visual-studio-code-bin
 
 c_pkgs:
+  - bear
   - bison
   - boost
   - ccache
   - clang
   - cmake
+  - cquery-git
   - cscope
   - flex
   - gcc
