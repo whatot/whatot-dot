@@ -18,6 +18,7 @@ Plug 'dkasak/manpageview'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
+Plug 'keremc/asyncomplete-racer.vim'
 Plug 'lambdalisue/unite-grep-vcs'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'luochen1990/rainbow'
@@ -25,6 +26,9 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
@@ -45,6 +49,23 @@ Plug 'whatot/molokai'
 call plug#end()
 filetype plugin indent on
 syntax on
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#racer#get_source_options())
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-l>"
