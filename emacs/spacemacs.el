@@ -57,7 +57,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; (spell-checking :variables spell-checking-enable-auto-dictionary t)
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
-     (semantic :enabled-for c-c++)
+     semantic
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t
@@ -545,7 +545,12 @@ before packages are loaded."
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
     (set (make-local-variable 'mouse-1-click-follows-link) nil)))
   ;; https://github.com/syl20bnr/spacemacs/issues/7038
-  (remove-hook 'emacs-lisp-mode-hook 'company-mode)
+  (eval-after-load 'semantic
+    (add-hook 'semantic-mode-hook
+              (lambda ()
+                (dolist (x (default-value 'completion-at-point-functions))
+                  (when (string-prefix-p "semantic-" (symbol-name x))
+                    (remove-hook 'completion-at-point-functions x))))))
   )
 
 (defun local-setup-helm-ivy-about ()
