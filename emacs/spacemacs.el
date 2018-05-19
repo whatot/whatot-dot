@@ -65,7 +65,7 @@ This function should only modify configuration layer settings."
      (gtags :enabled-for c-c++)
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support nil)
+            c-c++-enable-clang-support t)
      (python :variables
              python-shell-completion-native-enable nil
              python-enable-yapf-format-on-save t)
@@ -77,7 +77,6 @@ This function should only modify configuration layer settings."
      sql
      ansible
      colors
-     (ycmd :enabled-for c-c++)
      csv
      erlang
      elixir
@@ -496,11 +495,8 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (setq-default c-basic-offset 4)
-  (setq-default c-default-style "linux")
   (setq-default vc-follow-symlinks t)
   (setq-default evil-shift-width 4)
-  (setq-default cmake-tab-width 4)
   (setq exec-path (append exec-path '("~/.cargo/bin" "~/.local/bin")))
   (setenv "WORKON_HOME" "~/envs/")
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
@@ -536,11 +532,9 @@ before packages are loaded."
   )
 
 (defun local-setup-c-c++-about ()
-  (setq ycmd-server-command (list "python"
-    (file-truename "~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/")))
-  (setq-default ycmd-force-semantic-completion t)
-  (setq ycmd-extra-conf-whitelist
-        '("~/linux/*" "~/git/*" "~/work/*" "/dev/shm/*"))
+  (setq-default c-basic-offset 4)
+  (setq-default c-default-style "linux")
+  (setq-default cmake-tab-width 4)
   ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
   ;; https://google.github.io/styleguide/cppguide.html
   (setq-default clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
