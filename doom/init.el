@@ -55,7 +55,7 @@
        magit             ;
       ;password-store    ; password manager for nerds
       ;pdf               ; pdf enhancements
-      ;prodigy           ; Managing external services
+       prodigy           ; Managing external services
       ;rgb               ; creating color strings
        rotate-text       ; cycle region at point between text candidates
       ;term              ; terminals in Emacs

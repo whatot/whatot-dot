@@ -28,3 +28,4 @@
 (setq-default truncate-lines nil)
 (setq-default word-wrap t)
 (setq-default show-trailing-whitespace t)
+(setq-default require-final-newline t)
