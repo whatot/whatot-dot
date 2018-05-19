@@ -16,5 +16,4 @@ case `uname` in
 esac
 
 export GOPATH="$HOME/go/"
-export CRATES_MIRROR_URL="https://mirrors.ustc.edu.cn/crates"
 export WORKON_HOME="$HOME/envs/"
