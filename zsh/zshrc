@@ -1,15 +1,19 @@
 # Path to your oh-my-zsh installation.
+if [[ -d "${HOME}/.oh-my-zsh/" ]];then
+    ZSH=~/.oh-my-zsh/
+    DISABLE_AUTO_UPDATE="false"
+else
+    ZSH=/usr/share/oh-my-zsh/
+    DISABLE_AUTO_UPDATE="true"
+fi
+
 case `uname` in
     Darwin)
-        ZSH=~/.oh-my-zsh/
         ZSH_THEME="robbyrussell"
-        DISABLE_AUTO_UPDATE="false"
         source ${HOME}/.zshenv
     ;;
     Linux)
-        ZSH=/usr/share/oh-my-zsh/
         ZSH_THEME="gentoo"
-        DISABLE_AUTO_UPDATE="true"
     ;;
 esac
 
