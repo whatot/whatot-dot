@@ -538,20 +538,31 @@ before packages are loaded."
 (defun local-setup-common-things ()
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (setq-default vc-follow-symlinks t)
   (setq-default evil-shift-width 4)
-  (setq-default require-final-newline t)
   (setq-default global-prettify-symbols-mode t)
-  (setq-default neo-autorefresh nil)
-  (setq-default neo-theme 'nerd)
-  (diff-hl-flydiff-mode '(:global t))
-  (setq-default magit-repository-directories `(("~/work/" . 1) ("~/git/" . 1)))
   (setenv "WORKON_HOME" "~/envs/")
 
+  ;; neotree
+  (setq-default neo-autorefresh nil)
+  (setq-default neo-theme 'nerd)
+
+  ;; git and vc
+  (setq-default vc-follow-symlinks t)
+  (diff-hl-flydiff-mode '(:global t))
+  (setq-default magit-repository-directories `(("~/work/" . 1) ("~/git/" . 1)))
+
+  ;; line break and wrap
+  (setq-default truncate-lines nil)
+  (setq-default word-wrap t)
+  (setq-default require-final-newline t)
+
+  ;; whitespace
+  (setq-default show-trailing-whitespace t)
   (global-whitespace-mode '(:global t))
   (setq-default whitespace-global-modes '(not go-mode))
   (setq-default whitespace-style '(face tabs trailing lines-tail tab-mark))
 
+  ;; keymap
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point-tooltip)
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
