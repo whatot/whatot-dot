@@ -485,33 +485,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
   )
 
-(defun dotspacemacs/user-config ()
-  "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 4)
-  (setq-default vc-follow-symlinks t)
-  (setq-default evil-shift-width 4)
-  (setq exec-path (append exec-path '("~/.cargo/bin" "~/.local/bin")))
-  (setenv "WORKON_HOME" "~/envs/")
-  (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
-  (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
-  (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
-  (setq-default require-final-newline t)
-  (local-setup-special-modes-using-tabs)
-  (local-setup-c-c++-about)
-  (local-fix-spacemacs-errors)
-  (local-setup-helm-ivy-about)
-  (local-improve-hippie-expand)
-  (local-setup-whitespace-about)
-  (global-prettify-symbols-mode t)
-  (setq-default neo-autorefresh nil)
-  (setq neo-theme 'nerd)
-  )
-
 (defun config-font-size (en-size cn-size)
   (setq-default dotspacemacs-default-font (list "Source Code Pro" :size en-size))
   (set-face-attribute 'default nil :font
@@ -519,6 +492,40 @@ before packages are loaded."
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family "Source Han Sans CN" :size cn-size))))
+
+(defun dotspacemacs/user-config ()
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
+  (local-setup-common-things)
+  (local-setup-special-modes-using-tabs)
+  (local-setup-c-c++-about)
+  (local-fix-spacemacs-errors)
+  (local-setup-helm-ivy-about)
+  (local-improve-hippie-expand)
+  )
+
+(defun local-setup-common-things ()
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq-default vc-follow-symlinks t)
+  (setq-default evil-shift-width 4)
+  (setq-default require-final-newline t)
+  (setq-default global-prettify-symbols-mode t)
+  (setq-default neo-autorefresh nil)
+  (setq-default neo-theme 'nerd)
+  (global-whitespace-mode t)
+  (setq-default whitespace-global-modes '(not go-mode))
+  (setq-default whitespace-style '(face tabs trailing lines-tail tab-mark))
+
+  (setenv "WORKON_HOME" "~/envs/")
+
+  (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
+  (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
+   )
 
 (defun indent-using-tabs ()
   (setq indent-tabs-mode t))
@@ -573,18 +580,6 @@ before packages are loaded."
                                           try-complete-lisp-symbol-partially
                                           try-complete-lisp-symbol))
   )
-
-(defun local-setup-whitespace-about ()
-  (global-whitespace-mode t)
-  (setq whitespace-global-modes '(not go-mode))
-  (setq whitespace-style '(face tabs trailing lines-tail tab-mark))
-  )
-
-(custom-set-faces
- ;; '(whitespace-indentation ((t (:foreground "#073642"))))
- '(whitespace-tab ((t (:background "#073642" :foreground "#a07f41"))))
- '(whitespace-trailing ((t (:background "#073642" :foreground "#a07f41"))))
- )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
