@@ -72,12 +72,10 @@ This function should only modify configuration layer settings."
      shell-scripts
      vimscript
      yaml
-     html
      systemd
      sql
      ansible
      colors
-     csv
      erlang
      elixir
      ;; (haskell :variables
