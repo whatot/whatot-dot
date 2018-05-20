@@ -84,6 +84,8 @@ This function should only modify configuration layer settings."
      imenu-list
      docker
      (rust :variables rust-format-on-save t)
+     protobuf
+     json
      )
 
    ;; List of additional packages that will be installed without being
@@ -96,9 +98,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(
      youdao-dictionary
-     json-mode
      ag
-     protobuf-mode
      thrift
      )
 
@@ -525,7 +525,7 @@ before packages are loaded."
   (setq-default whitespace-global-modes '(not go-mode))
   (setq-default whitespace-style '(face tabs trailing lines-tail tab-mark))
 
-  (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
+  (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point-tooltip)
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
    )
