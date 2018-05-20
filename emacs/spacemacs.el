@@ -472,17 +472,18 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq tramp-ssh-controlmaster-options
+  (setq-default tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   (cond
    ((string= (system-name) "x411") (config-font-size 19 17))
    ((string= (system-name) "b150") (config-font-size 32 30))
    ((string= system-type "darwin") (config-font-size 15 14)))
-  (setq custom-file "/tmp/.spacemacs-tmp-custom-file")
-  (setq configuration-layer-elpa-archives
+  (setq-default custom-file "/tmp/.spacemacs-tmp-custom-file")
+  (setq-default configuration-layer-elpa-archives
         '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
           ("org-cn"   . "https://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
+  (setq-default git-magit-status-fullscreen t)
   )
 
 (defun config-font-size (en-size cn-size)
@@ -516,11 +517,13 @@ before packages are loaded."
   (setq-default global-prettify-symbols-mode t)
   (setq-default neo-autorefresh nil)
   (setq-default neo-theme 'nerd)
-  (global-whitespace-mode t)
+  (diff-hl-flydiff-mode '(:global t))
+  (setq-default magit-repository-directories `(("~/work/" . 1) ("~/git/" . 1)))
+  (setenv "WORKON_HOME" "~/envs/")
+
+  (global-whitespace-mode '(:global t))
   (setq-default whitespace-global-modes '(not go-mode))
   (setq-default whitespace-style '(face tabs trailing lines-tail tab-mark))
-
-  (setenv "WORKON_HOME" "~/envs/")
 
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point)
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
