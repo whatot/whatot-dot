@@ -84,7 +84,7 @@ let NERDCompactSexyComs = 1               " 多行注释时样子更好看
 let NERD_c_alt_style = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
-nnoremap <silent> wf :NERDTreeMirrorToggle<CR>
+nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> we :NERDTree %:h<CR>
 let g:NERDChristmasTree = 1               " 色彩显示
 let g:NERDTreNERDShowHidden = 1           " 显示隐藏文件

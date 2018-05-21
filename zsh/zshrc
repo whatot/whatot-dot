@@ -10,7 +10,7 @@ fi
 case `uname` in
     Darwin)
         ZSH_THEME="robbyrussell"
-        source ${HOME}/.zshenv
+        source ~/.zshenv
     ;;
     Linux)
         ZSH_THEME="gentoo"
@@ -65,7 +65,7 @@ esac
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitignore autojump colorize cargo common-aliases)
+plugins=(git colorize cargo common-aliases)
 
 # User configuration
 
