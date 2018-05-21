@@ -29,6 +29,7 @@ Plug 'pelodelfuego/vim-swoop'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -70,6 +71,12 @@ autocmd User asyncomplete_setup call asyncomplete#register_source(
     \ 'name': 'buffer',
     \ 'whitelist': ['*'],
     \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#ultisnips#get_source_options({
+    \ 'name': 'ultisnips',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
     \ }))
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<c-l>"
