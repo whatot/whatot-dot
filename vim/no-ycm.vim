@@ -18,6 +18,7 @@ Plug 'dkasak/manpageview'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/goyo.vim'
+Plug 'keremc/asyncomplete-racer.vim'
 Plug 'lambdalisue/unite-grep-vcs'
 Plug 'lilydjwg/fcitx.vim'
 Plug 'luochen1990/rainbow'
@@ -25,6 +26,10 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
 Plug 'mileszs/ack.vim'
 Plug 'pelodelfuego/vim-swoop'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
@@ -50,10 +55,25 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:UltiSnipsExpandTrigger               <tab>
-" let g:UltiSnipsListSnippets                <c-tab>
-" let g:UltiSnipsJumpForwardTrigger          <c-j>
-" let g:UltiSnipsJumpBackwardTrigger         <c-k>
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#racer#get_source_options())
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#file#get_source_options({
+    \ 'name': 'file',
+    \ 'whitelist': ['*'],
+    \ 'priority': 10,
+    \ 'completor': function('asyncomplete#sources#file#completor')
+    \ }))
+autocmd User asyncomplete_setup call asyncomplete#register_source(
+    \ asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'whitelist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<c-l>"
+" let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ackprg = 'ag --nogroup --nocolor --column'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
