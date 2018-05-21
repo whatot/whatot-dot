@@ -55,6 +55,7 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set updatetime=750
 autocmd User asyncomplete_setup call asyncomplete#register_source(
     \ asyncomplete#sources#racer#get_source_options())
 autocmd User asyncomplete_setup call asyncomplete#register_source(
