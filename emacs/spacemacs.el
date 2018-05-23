@@ -100,6 +100,7 @@ This function should only modify configuration layer settings."
      youdao-dictionary
      ag
      thrift
+     doom-themes
      )
 
    ;; A list of packages that cannot be updated.
@@ -223,7 +224,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(doom-one
+                         spacemacs-dark
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
