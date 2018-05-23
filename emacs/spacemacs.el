@@ -224,7 +224,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one
+   dotspacemacs-themes '(doom-vibrant
                          spacemacs-dark
                          spacemacs-light)
 
@@ -559,7 +559,7 @@ before packages are loaded."
   (setq-default require-final-newline t)
 
   ;; whitespace
-  (setq-default show-trailing-whitespace t)
+  ;; (setq-default show-trailing-whitespace t)
   (global-whitespace-mode '(:global t))
   (setq-default whitespace-global-modes '(not go-mode))
   (setq-default whitespace-style '(face tabs trailing lines-tail tab-mark))
