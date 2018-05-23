@@ -16,7 +16,7 @@ mkdir ${DATA_DIR}
 rsync -avP --delete "${SOURCE_DIR}" "${SHM_DIR}"
 cp "${SCRIPT_DIR}"/clang_complete.postgres "${TARGET_DIR}"/.clang_complete
 cp "${SCRIPT_DIR}"/ycm_extra_conf.py "${TARGET_DIR}"/.ycm_extra_conf.py
-cp "${SCRIPT_DIR}"/gen-gtags.sh "${TARGET_DIR}"/gen-gtags.sh
+cp "${SCRIPT_DIR}"/gen-index.sh "${TARGET_DIR}"/gen-index.sh
 cp "${SCRIPT_DIR}"/postgres.dir-locals.el "${TARGET_DIR}"/.dir-locals.el
 
 cd ${TARGET_DIR} || return
@@ -39,4 +39,4 @@ git checkout REL_10_STABLE
 make install
 make clean
 make submake-generated-headers
-bash ./gen-gtags.sh
+bash ./gen-index.sh
