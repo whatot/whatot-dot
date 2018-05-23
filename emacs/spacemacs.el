@@ -86,6 +86,7 @@ This function should only modify configuration layer settings."
      (rust :variables rust-format-on-save t)
      protobuf
      json
+     osx
      )
 
    ;; List of additional packages that will be installed without being
