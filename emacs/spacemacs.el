@@ -499,7 +499,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (cond
    ((string= (system-name) "x411") (config-font-size 19 17))
    ((string= (system-name) "b150") (config-font-size 32 30))
-   ((string= system-type "darwin") (config-font-size 13 13)))
+   ((string= system-type "darwin") (config-font-size 14 13)))
   (setq-default custom-file "/tmp/.spacemacs-tmp-custom-file")
   (setq-default configuration-layer-elpa-archives
         '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
