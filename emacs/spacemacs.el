@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      markdown
-     treemacs
+     neotree
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -548,6 +548,7 @@ before packages are loaded."
   ;; neotree
   (setq-default neo-autorefresh nil)
   (setq-default neo-theme 'nerd)
+  (setq-default neo-vc-integration '(face))
 
   ;; git and vc
   (setq-default vc-follow-symlinks t)
