@@ -7,10 +7,12 @@ brew info emacs
 
 brew unlink emacs
 brew uninstall emacs
-brew install emacs --devel --with-modules --with-cocoa --with-gnutls \
-    --with-librsvg --with-mailutils --with-imagemagick@6
+brew tap d12frosted/emacs-plus
+brew unlink emacs-plus
+brew install emacs-plus --devel
 
 # The imagemagick@6 library and emacs devel change frequently
 # so exclude them from automatic updates and do updates manually at convenient times:
-brew pin imagemagick@6 emacs
+brew pin imagemagick@6 emacs-plus
 
+# SPC SPC spacemacs/recompile-elpa
