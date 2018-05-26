@@ -1,6 +1,10 @@
 # whatot-dot
 
-my vunble vimrc and other config files
+spacemacs and other config files
+
+* vim ``./vim/deploy-ycm-vim.sh``
+* spacemacs ``./emacs/deploy-spacemacs.sh``
+* zsh ``./zsh/deploy-zshrc.sh``
 
 ## ansible
 
@@ -12,23 +16,6 @@ and configure the localhost well.
 ```
 cd ansible/
 ./config-arch.sh
-```
-
-## deploy vim and spacemacs
-
-```
-./deploy-nvim.sh
-./deploy-ycm-vim.sh
-./deploy-spacemacs.sh
-```
-
-## build ycm using system-libclang and system-boost
-
-> local libclang always older than the needed version
-
-```
-cd ~/.vim/bundle/YouCompleteMe/ \
-    && python2 ./install.py --clang-completer --system-libclang --system-boost
 ```
 
 ## use virtualenvwrapper
