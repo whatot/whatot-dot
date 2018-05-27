@@ -3,7 +3,7 @@ set fileencodings=utf-8,gb18030,utf-16le,gbk,gb2312,latin1
 set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'asins/vimcdoc'
 Plug 'bronson/vim-trailing-whitespace'
@@ -22,8 +22,9 @@ call plug#end()
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 nnoremap <silent> <space>c  :<C-u>Denite command<cr>
-nnoremap <silent> <space>e  :<C-u>Denite buffer<cr>
+nnoremap <silent> <space>b  :<C-u>Denite buffer<cr>
 nnoremap <silent> <space>f  :<C-u>Denite file_rec<cr>
+nnoremap <silent> <space>r  :<C-u>Denite file_mru<cr>
 nnoremap <silent> <space>p  :<C-u>Denite -resume<CR>
 nnoremap <silent> <space>t  :call execute('Denite file_rec:'.expand('%:p:h'))<CR>
 nnoremap <silent> <space>w  :<C-u>DeniteCursorWord  -auto-resize line<CR>
