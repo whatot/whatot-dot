@@ -3,7 +3,7 @@ set fileencodings=utf-8,gb18030,utf-16le,gbk,gb2312,latin1
 set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
+Plug 'Shougo/denite.nvim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'asins/vimcdoc'
 Plug 'bronson/vim-trailing-whitespace'
@@ -13,12 +13,21 @@ Plug 'mhinz/vim-signify'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'whatot/molokai'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeIgnore=['\.d$[[dir]]', '\.o$[[file]]', '\.swp$[[file]]']
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+nnoremap <silent> <space>c  :<C-u>Denite command<cr>
+nnoremap <silent> <space>e  :<C-u>Denite buffer<cr>
+nnoremap <silent> <space>f  :<C-u>Denite file_rec<cr>
+nnoremap <silent> <space>p  :<C-u>Denite -resume<CR>
+nnoremap <silent> <space>t  :call execute('Denite file_rec:'.expand('%:p:h'))<CR>
+nnoremap <silent> <space>w  :<C-u>DeniteCursorWord  -auto-resize line<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> we :NERDTree %:h<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
