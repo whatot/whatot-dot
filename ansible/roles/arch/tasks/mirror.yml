@@ -42,5 +42,5 @@
   register: pacman_mirrors_conf_file_updated
 
 - name: Update /etc/pacman.d/mirrorlist by pacman-mirrors
-  shell: pacman-mirrors --branch testing --country China --timeout 1
+  shell: pacman-mirrors -a -B testing -c China --timeout 1
   when: pacman_mirrors_conf_file_updated is changed
