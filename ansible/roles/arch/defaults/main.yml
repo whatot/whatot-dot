@@ -23,9 +23,7 @@ absent_pkgs:
   - cargo
   - erlang
   - emacs
-  - noto-fonts
   - noto-fonts-cjk
-  - noto-fonts-compat
   - rust
   - rust-docs
   - rustfmt
