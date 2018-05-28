@@ -11,6 +11,7 @@ case `uname` in
     Darwin)
         ZSH_THEME="robbyrussell"
         source ~/.zshenv
+        alias vim='mvim -v'
     ;;
     Linux)
         ZSH_THEME="gentoo"
@@ -78,7 +79,6 @@ export XMODIFIERS="@im=fcitx"
 
 export EDITOR='vim'
 
-alias vi='vim -u NONE'
 alias gvim='gvim -c "call Maximize_Window()"'
 alias unzipp='unzip -O cp936'
 alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
