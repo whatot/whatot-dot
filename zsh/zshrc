@@ -1,10 +1,10 @@
 # Path to your oh-my-zsh installation.
-if [[ -d "${HOME}/.oh-my-zsh/" ]];then
-    ZSH=~/.oh-my-zsh/
-    DISABLE_AUTO_UPDATE="false"
-else
+if [[ -d "/usr/share/oh-my-zsh/" ]];then
     ZSH=/usr/share/oh-my-zsh/
     DISABLE_AUTO_UPDATE="true"
+else
+    ZSH=~/.oh-my-zsh/
+    DISABLE_AUTO_UPDATE="false"
 fi
 
 case `uname` in
