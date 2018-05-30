@@ -534,6 +534,7 @@ before packages are loaded."
   (local-setup-common-things)
   (local-setup-special-modes-using-tabs)
   (local-setup-c-c++-about)
+  (local-setup-elixir-about)
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
@@ -625,6 +626,15 @@ before packages are loaded."
                                           try-expand-line
                                           try-complete-lisp-symbol-partially
                                           try-complete-lisp-symbol))
+  )
+
+(defun local-setup-elixir-about ()
+  (add-hook 'elixir-mode-hook
+            (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  (when (string= system-type "darwin")
+    (setq-default elixir-format-elixir-path "/usr/local/bin/elixir")
+    (setq-default elixir-format-mix-path "/usr/local/bin/mix")
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
