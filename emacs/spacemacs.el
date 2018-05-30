@@ -616,7 +616,7 @@ before packages are loaded."
 
 (defun local-improve-hippie-expand ()
   ;; use 'M-/' to call 'hippie-expand'
-  (setq hippie-expand-try-function-list '(try-expand-debbrev
+  (setq-default hippie-expand-try-function-list '(try-expand-debbrev
                                           try-expand-debbrev-all-buffers
                                           try-expand-debbrev-from-kill
                                           try-complete-file-name-partially
