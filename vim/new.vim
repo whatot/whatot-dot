@@ -4,7 +4,6 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'asins/vimcdoc'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'luochen1990/rainbow'
@@ -31,9 +30,6 @@ nnoremap <silent> <space>w  :<C-u>DeniteCursorWord  -auto-resize line<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> wf :NERDTreeToggle<CR>
 nnoremap <silent> we :NERDTree %:h<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'
