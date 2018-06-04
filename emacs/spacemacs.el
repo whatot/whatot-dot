@@ -546,6 +546,7 @@ before packages are loaded."
   (setq-default evil-shift-width 4)
   (setq-default global-prettify-symbols-mode t)
   (setenv "WORKON_HOME" "~/envs/")
+  (setq-default recentf-auto-cleanup 60)
 
   ;; neotree
   (setq-default neo-autorefresh nil)
