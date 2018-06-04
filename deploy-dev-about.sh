@@ -11,14 +11,6 @@ go get -u -v github.com/alecthomas/gometalinter
 # gometalinter install all known linters:
 gometalinter --install --update
 
-# for haskell, use stack instead of cabal
-# the haskell packages are old in system, need be cleaned up by hand
-# https://haskell-lang.org/tutorial/stack-build
-yaourt -Rsn haskell-apply-refact hlint stylish-haskell hasktags hoogle ghc-mod
-cabal update
-cabal install apply-refact hlint stylish-haskell hasktags hoogle ghc-mod intero hindent
-# hindent: M-x hindent-reformat-buffer
-
 # for rustup
 rustup toolchain install nightly
 rustup default nightly
