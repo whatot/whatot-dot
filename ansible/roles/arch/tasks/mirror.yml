@@ -16,8 +16,11 @@
       #Server = https://cdn.repo.archlinuxcn.org/$arch
   when: pacman_conf_file.stat.exists == True
 
+- name: Ensure archlinux-keyring was installed
+  pacman: name=archlinux-keyring state=present
+
 - name: Ensure archlinuxcn-keyring was installed
-  pacman: name=archlinuxcn-keyring state=installed
+  pacman: name=archlinuxcn-keyring state=present
 
 - name: Check /etc/pacman.d/mirrorlist
   stat:

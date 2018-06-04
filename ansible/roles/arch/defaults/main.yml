@@ -21,12 +21,13 @@ font_pkgs:
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
 absent_pkgs:
   - cargo
-  - erlang
   - emacs
+  - erlang
   - noto-fonts-cjk
   - rust
   - rust-docs
   - rustfmt
+  - shellcheck
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
@@ -39,11 +40,10 @@ aur_pkgs:
   - nautilus-nutstore
   - nutstore
   - rtags-git
+  - shellcheck-static
   - unzip-iconv
 
 basic_pkgs:
-  - archlinux-keyring
-  - archlinuxcn-keyring
   - clipit
   - faenza-icon-theme
   - fcitx
@@ -53,9 +53,7 @@ basic_pkgs:
   - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
-  - gnome-shell-extension-gnomenu
   - gnome-shell-extension-topicons-plus
-  - gnome-shell-extension-unite
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
@@ -97,9 +95,6 @@ view_pkgs:
   - libva-intel-driver
   - mpv
   - p7zip
-  - pandoc
-  - texlive-core
-  - texlive-latexextra
   - unrar
   - viewnior
   - you-get
@@ -120,7 +115,6 @@ program_tool_pkgs:
   - go-tools
   - gvim
   - perf
-  - shellcheck
   - the_silver_searcher
   - tig
   - visual-studio-code-bin
@@ -165,11 +159,6 @@ python_pkgs:
   - python2-pylint
   - python2-virtualenv
   - yapf
-
-haskell_pkgs:
-  - cabal-install
-  - ghc
-  - stack
 
 rust_pkgs:
   - racerd-git

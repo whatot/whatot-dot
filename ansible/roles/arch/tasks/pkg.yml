@@ -4,40 +4,28 @@
 - name: Update and Upgrade the system
   pacman: update_cache=yes upgrade=yes
 
-- name: Uninstall unneeded packages
-  pacman: name='{{ item }}' state=absent
-  with_items:
-    - '{{ absent_pkgs }}'
-  when: absent_pkgs is defined
+#- name: Uninstall unneeded packages
+#  pacman: name='{{ absent_pkgs }}' state=absent recurse=yes
 
 - name: Install fonts packages
-  pacman: name='{{ item }}' state=latest
-  with_items:
-    - '{{ font_pkgs }}'
-  when: font_pkgs is defined
+  pacman: name='{{ font_pkgs }}' state=present
 
 - name: Special packages need install from AUR
   debug: var=aur_pkgs
-  when: aur_pkgs is defined
 
 - name: Install basic packages
-  pacman: name='{{ item }}' state=latest
-  with_flattened:
+  pacman: name='{{ item }}' state=present
+  with_items:
     - '{{ basic_pkgs }}'
     - '{{ view_pkgs }}'
 
-- name: Install programming based packages
-  pacman: name='{{ item }}' state=latest
-  with_flattened:
+- name: Install devel packages
+  pacman: name='{{ item }}' state=present
+  with_items:
     - '{{ backend_pkgs }}'
     - '{{ program_tool_pkgs }}'
-
-- name: Install language about packages
-  pacman: name='{{ item }}' state=latest
-  with_flattened:
     - '{{ c_pkgs }}'
     - '{{ erlang_elixir_pkgs }}'
-    - '{{ haskell_pkgs }}'
     - '{{ java_pkgs }}'
     - '{{ python_pkgs }}'
     - '{{ rust_pkgs }}'
