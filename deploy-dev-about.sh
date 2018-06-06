@@ -21,5 +21,4 @@ rustup component add rust-analysis
 rustup update
 rustc --print sysroot
 cargo install --force clippy
-cargo install --force rustfmt
 cargo install --force racer
