@@ -24,8 +24,10 @@ absent_pkgs:
   - emacs
   - erlang
   - noto-fonts-cjk
+  - racerd-git
   - rust
   - rust-docs
+  - rust-racer
   - rustfmt
   - shellcheck
   - ttf-google-fonts-git
@@ -161,8 +163,6 @@ python_pkgs:
   - yapf
 
 rust_pkgs:
-  - racerd-git
-  - rust-racer
   - rustup
 
 erlang_elixir_pkgs:

@@ -20,7 +20,6 @@ rustup component add rustfmt-preview
 rustup component add rust-analysis
 rustup update
 rustc --print sysroot
-cargo install clippy
-
-# for emacs in mac
-emacs --insecure
+cargo install --force clippy
+cargo install --force rustfmt
+cargo install --force racer
