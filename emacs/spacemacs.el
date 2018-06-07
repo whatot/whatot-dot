@@ -547,6 +547,9 @@ before packages are loaded."
   (setq-default global-prettify-symbols-mode t)
   (setenv "WORKON_HOME" "~/envs/")
   (setq-default recentf-auto-cleanup 60)
+  (golden-ratio-mode '(:global t))
+  (when (string= system-type "darwin")
+    (exec-path-from-shell-initialize))
 
   ;; neotree
   (setq-default neo-autorefresh nil)
