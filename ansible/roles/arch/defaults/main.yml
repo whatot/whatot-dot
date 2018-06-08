@@ -70,6 +70,7 @@ basic_pkgs:
   - zsh-completions
 
 backend_pkgs:
+  - bind-tools
   - bridge-utils
   - dnsmasq
   - dnsmasq-china-list-git
