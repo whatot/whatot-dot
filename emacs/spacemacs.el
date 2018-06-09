@@ -552,8 +552,8 @@ before packages are loaded."
     (exec-path-from-shell-initialize))
 
   ;; neotree
-  (setq-default neo-autorefresh nil)
-  (setq-default neo-theme 'nerd)
+  (setq-default neo-autorefresh t)
+  (setq-default neo-theme 'icons)
   (setq-default neo-vc-integration '(face))
 
   ;; git and vc
