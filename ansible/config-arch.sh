@@ -7,7 +7,7 @@ if [ ! -f "/usr/bin/ansible" ]; then
     sudo pacman -Syy --noconfirm ansible
 fi
 
-time ansible-playbook arch.yml -i hosts --extra-vars "default_user=$USER"
+time ansible-playbook arch.yml -i hosts.yml --extra-vars "default_user=$USER"
 
 echo "fcitx-setup for gnome3"
 cat << EOF
