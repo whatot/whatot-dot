@@ -37,9 +37,13 @@
     state: link
   with_fileglob: '/etc/dnsmasq.d/*'
 
-- name: Configure NetworkManager
-  file:
-    src: NetworkManager.conf
+- name: Configure NetworkManager.conf
+  copy:
+    content: |
+      # Configuration file for NetworkManager.
+      # See "man 5 NetworkManager.conf" for details.
+      [main]
+      dns=dnsmasq
     dest: /etc/NetworkManager/NetworkManager.conf
     owner: root
     group: root
