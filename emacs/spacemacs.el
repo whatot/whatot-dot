@@ -521,7 +521,7 @@ before packages are loaded."
 
   ;; neotree
   (setq-default neo-autorefresh t)
-  (setq-default neo-theme 'icons)
+  (setq-default neo-theme 'nerd)
   (setq-default neo-vc-integration '(face))
 
   ;; git and vc
