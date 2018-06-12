@@ -517,7 +517,7 @@ before packages are loaded."
   (setq-default recentf-auto-cleanup 60)
 
   ;; neotree
-  (setq-default neo-autorefresh t)
+  (setq-default neo-autorefresh nil)
   (setq-default neo-theme 'nerd)
   (setq-default neo-vc-integration '(face))
 
