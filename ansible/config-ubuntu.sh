@@ -2,4 +2,4 @@
 set -eux
 
 sudo apt update
-sudo apt install vim zsh git curl zsh openssh-server
+sudo apt install vim zsh git curl zsh openssh-server htop
