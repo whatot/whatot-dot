@@ -62,10 +62,6 @@ This function should only modify configuration layer settings."
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t
                       version-control-diff-side 'left)
-     (gtags :enabled-for c-c++)
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
      (python :variables
              python-shell-completion-native-enable nil
              python-enable-yapf-format-on-save t)
@@ -76,11 +72,6 @@ This function should only modify configuration layer settings."
      sql
      ansible
      colors
-     erlang
-     elixir
-     ;; (haskell :variables
-     ;;          haskell-completion-backend 'ghc-mod
-     ;;          haskell-enable-hindent-style 'johan-tibell)
      imenu-list
      docker
      (rust :variables rust-format-on-save t)
@@ -503,8 +494,6 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (local-setup-common-things)
   (local-setup-special-modes-using-tabs)
-  (local-setup-c-c++-about)
-  (local-setup-elixir-about)
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
@@ -554,15 +543,6 @@ before packages are loaded."
   (add-hook 'makefile-mode-hook 'indent-using-tabs)
   )
 
-(defun local-setup-c-c++-about ()
-  (setq-default c-basic-offset 4)
-  (setq-default c-default-style "linux")
-  (setq-default cmake-tab-width 4)
-  ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-  ;; https://google.github.io/styleguide/cppguide.html
-  (setq-default clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
-  )
-
 (defun local-fix-spacemacs-errors ()
   ;; https://github.com/syl20bnr/spacemacs/issues/5435
   (add-hook 'spacemacs-buffer-mode-hook (lambda ()
@@ -597,6 +577,16 @@ before packages are loaded."
                                           try-expand-line
                                           try-complete-lisp-symbol-partially
                                           try-complete-lisp-symbol))
+  )
+
+;; just backup, maybe cleanup someday
+(defun local-setup-c-c++-about ()
+  (setq-default c-basic-offset 4)
+  (setq-default c-default-style "linux")
+  (setq-default cmake-tab-width 4)
+  ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+  ;; https://google.github.io/styleguide/cppguide.html
+  (setq-default clang-format-style "{BasedOnStyle: Google, IndentWidth: 4}")
   )
 
 (defun local-setup-elixir-about ()
