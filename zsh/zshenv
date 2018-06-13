@@ -19,3 +19,4 @@ esac
 
 export GOPATH="$HOME/go/"
 export WORKON_HOME="$HOME/envs/"
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"

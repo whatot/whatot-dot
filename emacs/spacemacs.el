@@ -497,6 +497,7 @@ before packages are loaded."
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
+  (local-setup-env-about)
   )
 
 (defun local-setup-common-things ()
@@ -504,7 +505,6 @@ before packages are loaded."
   (setq-default tab-width 4)
   (setq-default evil-shift-width 4)
   (setq-default global-prettify-symbols-mode t)
-  (setenv "WORKON_HOME" "~/envs/")
   (setq-default recentf-auto-cleanup 60)
 
   ;; neotree
@@ -577,6 +577,13 @@ before packages are loaded."
                                           try-expand-line
                                           try-complete-lisp-symbol-partially
                                           try-complete-lisp-symbol))
+  )
+
+(defun local-setup-env-about ()
+  (setq exec-path-from-shell-variables (list "PATH" "MANPATH" "WORKON_HOME" "RUST_SRC_PATH"))
+  (setq exec-path-from-shell-check-startup-files nil)
+  (setq exec-path-from-shell-arguments '("-l" ))
+  (exec-path-from-shell-initialize)
   )
 
 ;; just backup, maybe cleanup someday
