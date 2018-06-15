@@ -497,7 +497,6 @@ before packages are loaded."
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
-  (local-setup-env-about)
   )
 
 (defun local-setup-common-things ()
@@ -579,6 +578,7 @@ before packages are loaded."
                                           try-complete-lisp-symbol))
   )
 
+;; just backup, maybe cleanup someday
 (defun local-setup-env-about ()
   (setq exec-path-from-shell-variables (list "PATH" "MANPATH" "WORKON_HOME" "RUST_SRC_PATH"))
   (setq exec-path-from-shell-check-startup-files nil)
@@ -586,7 +586,6 @@ before packages are loaded."
   (exec-path-from-shell-initialize)
   )
 
-;; just backup, maybe cleanup someday
 (defun local-setup-c-c++-about ()
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
