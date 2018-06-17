@@ -579,13 +579,6 @@ before packages are loaded."
   )
 
 ;; just backup, maybe cleanup someday
-(defun local-setup-env-about ()
-  (setq exec-path-from-shell-variables (list "PATH" "MANPATH" "WORKON_HOME" "RUST_SRC_PATH"))
-  (setq exec-path-from-shell-check-startup-files nil)
-  (setq exec-path-from-shell-arguments '("-l" ))
-  (exec-path-from-shell-initialize)
-  )
-
 (defun local-setup-c-c++-about ()
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
