@@ -1,4 +1,4 @@
 
-- hosts: pc
+- hosts: local_pc
   roles:
     - role: arch
