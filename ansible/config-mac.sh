@@ -44,19 +44,19 @@ brew_install htop
 brew_install gtar gnu-tar
 brew_install gnutls-cli gnutls
 
-brew_install ghc
-brew_install cabal cabal-install
-brew_install stack haskell-stack
-
 brew_install cmake
 brew_install mvn maven
 brew_install ant ant
 brew_install rustup rustup-init
 brew_install ag the_silver_searcher
-brew_install erl erlang
-brew_install elixir
 brew_install bear
 brew_install rc rtags
 brew_install cquery
+
+# brew_install ghc
+# brew_install cabal cabal-install
+# brew_install stack haskell-stack
+# brew_install erl erlang
+# brew_install elixir
 
 echo "finined!"
