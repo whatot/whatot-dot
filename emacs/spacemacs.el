@@ -481,6 +481,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
           ("org-cn"   . "https://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
   (setq-default git-magit-status-fullscreen t)
+  (setq-default spacemacs-env-vars-file "~/.spacemacs.env")
   )
 
 (defun config-font-size (en-size cn-size)
