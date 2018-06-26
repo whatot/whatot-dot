@@ -1,18 +1,14 @@
 case `uname` in
     Darwin)
-        origin_p="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        export PATH="${origin_p}"
-        core_p="$(brew --prefix coreutils)/libexec/gnubin"
-        cargo_p="${HOME}/.cargo/bin"
-        tar_p="/usr/local/opt/gnu-tar/libexec/gnubin"
-        make_p="/usr/local/opt/make/libexec/gnubin"
-        export PATH="${core_p}:${cargo_p}:${tar_p}:${make_p}:${origin_p}"
+        export PATH="/usr/local/opt/coreutils/libexec/gnubin:\
+/usr/local/opt/gnu-tar/libexec/gnubin:\
+/usr/local/opt/make/libexec/gnubin:\
+${HOME}/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
         export CLASSPATH=$JAVA_HOME/jre/lib/
-        export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"/usr/lib/go/pkg/tool/linux_amd64/"
-        export PATH=$PATH:"$HOME/.local/bin/":"$HOME/.gem/ruby/2.3.0/bin/":"$HOME/.cargo/bin/"
+        export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cargo/bin/"
         export TERM="xterm-256color"
     ;;
 esac
