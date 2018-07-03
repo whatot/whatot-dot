@@ -474,13 +474,11 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    ((string= (system-name) "b150") (config-font-size 32 30))
    ((string= (system-name) "G10") (config-font-size 32 30))
    ((string= system-type "darwin") (config-font-size 14 13)))
-  (setq-default custom-file "/tmp/.spacemacs-tmp-custom-file")
+  (setq-default custom-file "~/.spacemacs-tmp-custom-file")
   (setq-default configuration-layer-elpa-archives
         '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
           ("org-cn"   . "https://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
-  (setq-default git-magit-status-fullscreen t)
-  (setq-default spacemacs-env-vars-file "~/.spacemacs.env")
   )
 
 (defun config-font-size (en-size cn-size)
