@@ -61,6 +61,7 @@ basic_pkgs:
   - oh-my-zsh-git
   - proxychains-ng
   - rsync
+  - tealdeer
   - tmux
   - transmission-gtk
   - typora
