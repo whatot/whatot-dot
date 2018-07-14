@@ -21,3 +21,6 @@ rustup update
 rustc --print sysroot
 cargo install --force racer
 cargo install --force clippy
+
+# for tldr to update cache, ``tldr --update``
+# cargo install tealdeer
