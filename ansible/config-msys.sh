@@ -29,13 +29,13 @@ Server = https://mirror.yandex.ru/mirrors/msys2/mingw/i686/
 EOF
 
 # config path for rust
-PATH_LINE='export PATH="$USERPROFILE\.cargo\bin":$PATH'
-PROFILE_FILE="$HOME"/.bashrc
-grep -qF -- "$PATH_LINE" "$PROFILE_FILE" || echo "$PATH_LINE" >> "$PROFILE_FILE"
+# PATH_LINE='export PATH="$USERPROFILE\.cargo\bin":$PATH'
+# PROFILE_FILE="$HOME"/.bashrc
+# grep -qF -- "$PATH_LINE" "$PROFILE_FILE" || echo "$PATH_LINE" >> "$PROFILE_FILE"
 
 # install basic pkg
 # if run cmake with missing shared library error, try run it in old windows cmd
 pacman -Syyu
 pacman -S git make
-pacman -S mingw-w64-x86_64-toolchain 
+pacman -S mingw-w64-x86_64-toolchain
 pacman -S mingw-w64-x86_64-libpsl mingw-w64-x86_64-cmake
