@@ -19,7 +19,7 @@ function brew_install() {
 
     echo "install $pkg_name"
 
-    if [[ "$(which $bin_name)" != *"$bin_name"* ]]; then
+    if [[ "$(command -v "$bin_name")" != *"$bin_name"* ]]; then
         brew install "$pkg_name"
     fi
 }
@@ -28,7 +28,7 @@ if [ ! -d "$(xcode-select --print-path)" ]; then
     xcode-select --install
 fi
 
-if [[ "$(which brew)" != *"brew"* ]]; then
+if [[ "$(command -v brew)" != *"brew"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew tap homebrew/dupes
 fi
