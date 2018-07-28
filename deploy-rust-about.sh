@@ -34,4 +34,4 @@ if [[ ! "$OSTYPE" == "msys" ]]; then
 fi
 
 # for tldr to update cache, ``tldr --update``
-# cargo install tealdeer
+cargo install --force tealdeer
