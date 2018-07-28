@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 set -eux
 
+# curl https://sh.rustup.rs -sSf | sh
+
 if [[ "$OSTYPE" == "msys" ]]; then
-    CARGO_CONFIG_FILE="$USERPROFILE/.cargo/config"
+    CARGO_CONFIG_PATH="$USERPROFILE/.cargo"
 else
-    CARGO_CONFIG_FILE="${HOME}/.cargo/config"
+    CARGO_CONFIG_PATH="${HOME}/.cargo"
 fi
 
-cat <<EOF > "${CARGO_CONFIG_FILE}"
+mkdir -p "${CARGO_CONFIG_PATH}"
+cat <<EOF > "${CARGO_CONFIG_PATH}/config"
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'ustc'
