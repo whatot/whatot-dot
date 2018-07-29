@@ -65,6 +65,7 @@ basic_pkgs:
   - tmux
   - transmission-gtk
   - typora
+  - vertex-theme
   - wmctrl
   - yaourt
   - ydcv
