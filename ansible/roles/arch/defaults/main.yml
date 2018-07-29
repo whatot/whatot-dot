@@ -151,6 +151,8 @@ java_pkgs:
   - jdk9-openjdk
   - maven
 
+default_jdk: java-9-openjdk
+
 python_pkgs:
   - flake8
   - ipython
