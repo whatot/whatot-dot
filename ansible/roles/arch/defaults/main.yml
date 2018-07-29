@@ -147,11 +147,13 @@ java_pkgs:
   - apache-ivy
   - gradle
   - intellij-idea-community-edition
+  - jdk10-openjdk
   - jdk8-openjdk
-  - jdk9-openjdk
   - maven
+  - openjdk10-src
+  - openjdk8-src
 
-default_jdk: java-9-openjdk
+default_jdk: java-10-openjdk
 
 python_pkgs:
   - flake8
