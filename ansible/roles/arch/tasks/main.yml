@@ -29,8 +29,10 @@
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     sysctl_set: yes
+    sysctl_file: '/etc/sysctl.d/98-sysctl.config'
     state: present
     reload: yes
   with_items:
     - { name: "vm.swappiness", value: 2 }
     - { name: "fs.inotify.max_user_watches", value: 524288 }
+    - { name: "net.ipv4.tcp_fastopen", value: 3 }
