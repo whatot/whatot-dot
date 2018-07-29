@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/LargeFile'
 Plug 'w0rp/ale'
 Plug 'whatot/molokai'
 call plug#end()
@@ -39,6 +40,7 @@ let g:airline_powerline_fonts=0
 let g:airline_theme='molokai'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1
+let g:LargeFile = 2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
