@@ -83,7 +83,6 @@ backend_pkgs:
   - ipad_charge
   - libvirt
   - meld
-  - ntp
   - openssh
   - openssl
   - qemu

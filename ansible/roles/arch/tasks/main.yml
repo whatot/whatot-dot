@@ -16,7 +16,7 @@
   service: name='{{ item }}' state=started enabled=yes
   with_items:
     - fstrim.timer
-    - ntpd
+    - systemd-timesyncd
 
 - name: Disable sshd service
   service: name=sshd state=stopped enabled=no
