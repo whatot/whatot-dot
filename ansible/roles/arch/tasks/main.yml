@@ -24,5 +24,13 @@
 - name: Set default jdk
   shell: archlinux-java set {{ default_jdk }}
 
-- name: Use sysctl to setup vm.swappiness
-  sysctl: name="vm.swappiness" value=2 sysctl_set=yes state=present reload=yes
+- name: Sysctl configs
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  with_items:
+    - { name: "vm.swappiness", value: 2 }
+    - { name: "fs.inotify.max_user_watches", value: 524288 }
