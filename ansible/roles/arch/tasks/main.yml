@@ -29,7 +29,7 @@
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     sysctl_set: yes
-    sysctl_file: '/etc/sysctl.d/98-sysctl.config'
+    sysctl_file: '/etc/sysctl.d/98-sysctl.conf'
     state: present
     reload: yes
   with_items:
