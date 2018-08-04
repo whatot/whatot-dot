@@ -130,7 +130,7 @@ c_pkgs:
   - ccache
   - clang
   - cmake
-  - cquery-git
+  - cquery
   - cscope
   - flex
   - gcc
