@@ -50,7 +50,6 @@ brew_install ant ant
 brew_install rustup rustup-init
 brew_install ag the_silver_searcher
 brew_install bear
-brew_install rc rtags
 brew_install cquery
 
 # brew_install ghc
