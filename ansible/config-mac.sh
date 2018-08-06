@@ -53,6 +53,9 @@ brew_install rustup-init
 brew_install the_silver_searcher
 brew_install bear
 brew_install cquery
+brew_install shellcheck
+
+brew_cask_install iina
 
 brew_cask_install font-source-code-pro
 brew_cask_install macvim
