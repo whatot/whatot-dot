@@ -8,7 +8,11 @@ brew uninstall emacs
 
 brew tap caskroom/fonts
 brew tap d12frosted/emacs-plus
-brew install emacs-plus --devel
+brew install emacs-plus
 brew cask install font-source-code-pro
+
+# link
+rm /Applications/Emacs.app
+ln -s /usr/local/Cellar/emacs-plus/*/Emacs.app/ /Applications/
 
 # SPC SPC spacemacs/recompile-elpa
