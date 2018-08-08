@@ -15,7 +15,7 @@
 	autocrlf = input
 	editor = vim
 [push]
-	default = matching
+	default = upstream
 [alias]
     co = checkout
     br = branch
