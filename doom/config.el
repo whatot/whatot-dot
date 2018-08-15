@@ -5,7 +5,7 @@
                  :size (cond
                         ((string= (system-name) "x411") '19)
                         ((string= (system-name) "b150") '30)
-                        ((string= system-type "darwin") '13))))
+                        ((string= system-type "darwin") '14))))
 ;;; windows frame title
 (setq frame-title-format
           '(buffer-file-name "%f [%m]"
@@ -23,7 +23,7 @@
 
 (def-package! youdao-dictionary
   :commands (youdao-dictionary-search-at-point)
-  :config (map! "C-c y" 'youdao-dictionary-search-at-point))
+  :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 
 (setq-default truncate-lines nil)
 (setq-default word-wrap t)
