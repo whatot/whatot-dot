@@ -93,6 +93,7 @@ This function should only modify configuration layer settings."
      thrift
      doom-themes
      dracula-theme
+     fcitx
      )
 
    ;; A list of packages that cannot be updated.
@@ -550,6 +551,10 @@ before packages are loaded."
   (global-set-key (kbd "C-c y") 'youdao-dictionary-search-at-point-tooltip)
   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
+
+  ;; fcitx
+  (fcitx-aggressive-setup)
+  (when (string= system-type "darwin") (setq fcitx-use-dbus t))
    )
 
 (defun indent-using-tabs ()
