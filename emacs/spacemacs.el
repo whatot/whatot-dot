@@ -553,8 +553,9 @@ before packages are loaded."
   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
 
   ;; fcitx
-  (fcitx-aggressive-setup)
-  (when (string= system-type "darwin") (setq fcitx-use-dbus t))
+  (when (string= system-type "gnu/linux")
+    (fcitx-aggressive-setup)
+    (setq fcitx-use-dbus t))
    )
 
 (defun indent-using-tabs ()
