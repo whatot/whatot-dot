@@ -27,6 +27,7 @@ plugins=(git colorize cargo common-aliases)
 alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
+alias msource='mvn dependency:sources'
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
