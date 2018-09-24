@@ -143,8 +143,8 @@ c_pkgs:
   - rocksdb
 
 java_pkgs:
-  - apache-ant
-  - apache-ivy
+  - ant
+  - ivy
   - gradle
   - intellij-idea-community-edition
   - jdk10-openjdk
