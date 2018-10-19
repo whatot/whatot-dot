@@ -59,6 +59,7 @@ brew_cask_install iina
 
 brew_cask_install font-source-code-pro
 brew_cask_install macvim
+brew_cask_install jetbrains-toolbox
 
 # install emacs and link
 brew_install emacs-plus
