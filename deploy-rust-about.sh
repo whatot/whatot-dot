@@ -28,6 +28,7 @@ rustup component add rustfmt-preview
 rustup update
 rustc --print sysroot
 cargo install --force racer
+cargo install --force cargo-tree
 
 if [[ ! "$OSTYPE" == "msys" ]]; then
     rustup component add rls-preview
