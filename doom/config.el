@@ -22,6 +22,7 @@
                 ("org" . "http://elpa.emacs-china.org/org/")))
 
 (def-package! youdao-dictionary
+  :demand t
   :commands (youdao-dictionary-search-at-point)
   :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 

@@ -17,4 +17,5 @@ cd "${EMACS_D_PATH}" || return
 git checkout develop
 git pull
 make install
-# make update
+make clean
+make update

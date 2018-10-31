@@ -54,6 +54,7 @@ brew_install the_silver_searcher
 brew_install bear
 brew_install cquery
 brew_install shellcheck
+brew_install editorconfig
 
 brew_cask_install iina
 
