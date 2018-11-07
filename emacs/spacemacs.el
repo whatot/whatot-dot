@@ -74,7 +74,10 @@ This function should only modify configuration layer settings."
      colors
      imenu-list
      docker
-     (rust :variables rust-format-on-save t)
+     (rust :variables
+           rust-format-on-save t
+           rust-backend 'lsp)
+     lsp
      protobuf
      json
      )
