@@ -20,15 +20,16 @@ EOF
 
 rustup toolchain install nightly
 rustup default nightly
+rustup update
 rustup component add clippy-preview
 rustup component add llvm-tools-preview
 rustup component add rust-analysis
 rustup component add rust-src
 rustup component add rustfmt-preview
-rustup update
 rustc --print sysroot
 cargo install --force racer
 cargo install --force cargo-tree
+cargo install --force cargo-outdated
 
 if [[ ! "$OSTYPE" == "msys" ]]; then
     rustup component add rls-preview

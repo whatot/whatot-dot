@@ -28,6 +28,7 @@ alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
+alias mtest='mvn clean test -U'
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
