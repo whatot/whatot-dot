@@ -560,6 +560,9 @@ before packages are loaded."
   (when (string= system-type "gnu/linux")
     (fcitx-aggressive-setup)
     (setq fcitx-use-dbus t))
+
+  ;; lsp common config
+  (setq-default lsp-ui-doc-max-width 80)
    )
 
 (defun indent-using-tabs ()
