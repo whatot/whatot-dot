@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git
      markdown
+     multiple-cursors
      neotree
      ;; org
      ;; (shell :variables
