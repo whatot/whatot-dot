@@ -34,3 +34,5 @@ cargo install --force cargo-tree
 cargo install --force cargo-outdated
 # for tldr to update cache, ``tldr --update``
 cargo install --force tealdeer
+
+# cargo fix --edition
