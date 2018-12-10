@@ -18,22 +18,19 @@ replace-with = 'ustc'
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-rustup toolchain install nightly
-rustup default nightly
+rustup toolchain uninstall nightly
+rustup toolchain install beta
+rustup default beta
 rustup update
-rustup component add clippy-preview
+rustup component add rls
+rustup component add clippy
 rustup component add llvm-tools-preview
 rustup component add rust-analysis
 rustup component add rust-src
-rustup component add rustfmt-preview
+rustup component add rustfmt
 rustc --print sysroot
-cargo install --force racer
+
 cargo install --force cargo-tree
 cargo install --force cargo-outdated
-
-if [[ ! "$OSTYPE" == "msys" ]]; then
-    rustup component add rls-preview
-fi
-
 # for tldr to update cache, ``tldr --update``
 cargo install --force tealdeer
