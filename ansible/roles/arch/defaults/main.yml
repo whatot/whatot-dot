@@ -11,11 +11,12 @@ font_pkgs:
   - ttf-bitstream-vera
   - ttf-dejavu
   - ttf-droid
+  - ttf-fira-sans
   - ttf-liberation
-  - ttf-opensans
-  - ttf-ubuntu-font-family
+  - ttf-monaco
   - ttf-roboto
-  - wqy-microhei
+  - ttf-ubuntu-font-family
+  - wqy-microhei-kr-patched
   - wqy-zenhei
 
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
@@ -33,16 +34,18 @@ absent_pkgs:
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
+  - wqy-microhei
   - you-get-git
   - youtube-dl-git
 
 aur_pkgs:
+  - caffeine-ng
   - gnome-shell-extension-caffeine-git
   - marp
   - nautilus-nutstore
   - nutstore
-  - rtags-git
   - shellcheck-static
+  - ttf-opensans
   - unzip-iconv
 
 basic_pkgs:
@@ -68,6 +71,7 @@ basic_pkgs:
   - vertex-theme
   - wmctrl
   - yaourt
+  - yay
   - ydcv
   - zsh-completions
 
