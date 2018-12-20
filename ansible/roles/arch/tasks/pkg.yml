@@ -13,22 +13,22 @@
 - name: Special packages need install from AUR
   debug: var=aur_pkgs
 
-- name: Install basic packages
-  pacman: name='{{ item }}' state=present
-  with_items:
-    - '{{ basic_pkgs }}'
-    - '{{ view_pkgs }}'
-
-- name: Install devel packages
-  pacman: name='{{ item }}' state=present
+- name: Summary all needed package names
+  set_fact:
+    all_pkgs: "{{ all_pkgs }} + [ '{{ item }}' ]"
   with_items:
     - '{{ backend_pkgs }}'
-    - '{{ program_tool_pkgs }}'
+    - '{{ basic_pkgs }}'
     - '{{ c_pkgs }}'
     - '{{ erlang_elixir_pkgs }}'
     - '{{ java_pkgs }}'
+    - '{{ program_tool_pkgs }}'
     - '{{ python_pkgs }}'
     - '{{ rust_pkgs }}'
+    - '{{ view_pkgs }}'
+
+- name: Install all needed packages
+  pacman: name='{{ all_pkgs }}' state=present
 
 - name: Link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
   file:
