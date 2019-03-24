@@ -18,7 +18,7 @@ font_pkgs:
   - ttf-monaco
   - ttf-roboto
   - ttf-ubuntu-font-family
-  - wqy-microhei-kr-patched
+  - wqy-microhei
   - wqy-zenhei
 
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
@@ -36,7 +36,6 @@ absent_pkgs:
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
-  - wqy-microhei
   - you-get-git
   - youtube-dl-git
 
@@ -60,7 +59,7 @@ basic_pkgs:
   - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
-  - gnome-shell-extension-topicons-plus
+  - gnome-shell-extension-topicons-plus-git
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
@@ -150,16 +149,18 @@ c_pkgs:
 
 java_pkgs:
   - ant
-  - ivy
   - gradle
   - intellij-idea-community-edition
+  - ivy
+  - jdk-openjdk
   - jdk10-openjdk
   - jdk8-openjdk
   - maven
+  - openjdk-src
   - openjdk10-src
   - openjdk8-src
 
-default_jdk: java-10-openjdk
+default_jdk: java-11-openjdk
 
 python_pkgs:
   - flake8
