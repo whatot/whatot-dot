@@ -18,12 +18,12 @@ replace-with = 'ustc'
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-rustup toolchain install beta
-rustup toolchain install nightly
-rustup default nightly
-rustup update
+rustup toolchain install nightly-2019-04-19
+rustup default nightly-2019-04-19
+#rustup update
 rustup component add rls
 rustup component add clippy
+rustup component add miri
 rustup component add llvm-tools-preview
 rustup component add rust-analysis
 rustup component add rust-src
