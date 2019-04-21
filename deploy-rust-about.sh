@@ -3,6 +3,10 @@ set -eux
 
 # curl https://sh.rustup.rs -sSf | sh
 
+function cargo_install() {
+    cargo install -Z install-upgrade "$1"
+}
+
 if [[ "$OSTYPE" == "msys" ]]; then
     CARGO_CONFIG_PATH="$USERPROFILE/.cargo"
 else
@@ -18,8 +22,11 @@ replace-with = 'ustc'
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-rustup toolchain install nightly-2019-04-19
-rustup default nightly-2019-04-19
+rustup toolchain list
+echo
+NIGHTLY_VERSION=nightly-2019-04-21
+rustup toolchain install "${NIGHTLY_VERSION}"
+rustup default "${NIGHTLY_VERSION}"
 #rustup update
 rustup component add rls
 rustup component add clippy
@@ -30,10 +37,11 @@ rustup component add rust-src
 rustup component add rustfmt
 rustc --print sysroot
 
-cargo install --force racer
-cargo install --force cargo-tree
-cargo install --force cargo-outdated
+cargo_install sccache
+cargo_install racer
+cargo_install cargo-tree
+cargo_install cargo-outdated
 # for tldr to update cache, ``tldr --update``
-cargo install --force tealdeer
+cargo_install tealdeer
 
 # cargo fix --edition
