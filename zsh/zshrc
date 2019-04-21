@@ -48,4 +48,9 @@ if [[ -f $PY_ENV_WRAPPER ]]; then
     export WORKON_HOME="$HOME/envs/"
 fi
 
+SCCACHE_WRAPPER="$HOME/.cargo/bin/sccache"
+if [[ -f $SCCACHE_WRAPPER ]]; then
+    export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
+fi
+
 source $ZSH/oh-my-zsh.sh

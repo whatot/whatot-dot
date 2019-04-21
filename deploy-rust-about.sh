@@ -4,7 +4,7 @@ set -eux
 # curl https://sh.rustup.rs -sSf | sh
 
 function cargo_install() {
-    cargo install -Z install-upgrade "$1"
+    cargo install --force "$1"
 }
 
 if [[ "$OSTYPE" == "msys" ]]; then
