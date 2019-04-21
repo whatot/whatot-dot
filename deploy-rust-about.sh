@@ -45,3 +45,4 @@ cargo_install cargo-outdated
 cargo_install tealdeer
 
 # cargo fix --edition
+sccache --show-stats
