@@ -135,7 +135,6 @@ c_pkgs:
   - ccache
   - clang
   - cmake
-  - cquery
   - cscope
   - flex
   - gcc

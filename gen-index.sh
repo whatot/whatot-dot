@@ -29,7 +29,7 @@ print_usage_exit() {
     echo "Usage:"
     echo "./gen-index.sh"
     echo "./gen-index.sh [g|j|a]"
-    exit -1
+    exit 0
 }
 
 case "$#" in
