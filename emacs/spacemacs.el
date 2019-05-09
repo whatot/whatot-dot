@@ -109,6 +109,7 @@ This function should only modify configuration layer settings."
    '(
      mmm-mode
      vmd-mode
+     lsp-treemacs
      )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
