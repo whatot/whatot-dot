@@ -56,6 +56,7 @@ brew_install cquery
 brew_install shellcheck
 brew_install editorconfig
 brew_install ydcv
+brew_install plantuml
 
 brew_cask_install iina
 

@@ -63,6 +63,7 @@ basic_pkgs:
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
+  - plantuml
   - proxychains-ng
   - rsync
   - tealdeer
