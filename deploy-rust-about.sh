@@ -24,7 +24,7 @@ EOF
 
 rustup toolchain list
 echo
-NIGHTLY_VERSION=nightly-2019-05-01
+NIGHTLY_VERSION=nightly-2019-05-22
 rustup toolchain install "${NIGHTLY_VERSION}"
 rustup default "${NIGHTLY_VERSION}"
 #rustup update
