@@ -524,6 +524,7 @@ before packages are loaded."
   (local-fix-spacemacs-errors)
   (local-setup-helm-ivy-about)
   (local-improve-hippie-expand)
+  (local-setup-plantuml-about)
   )
 
 (defun local-setup-common-things ()
@@ -631,6 +632,14 @@ before packages are loaded."
     (setq-default elixir-format-mix-path "/usr/local/bin/mix")
     )
   )
+
+(defun local-setup-plantuml-about ()
+  (setq-default plantuml-jar-path
+                (cond ((string= system-type "darwin")
+                       "/usr/local/Cellar/plantuml/1.2019.5/libexec/plantuml.jar")
+                      ((string= system-type "gnu/linux")
+                       "/usr/share/java/plantuml/plantuml.jar")))
+   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
