@@ -56,7 +56,6 @@ basic_pkgs:
   - fcitx-configtool
   - fcitx-im
   - fcitx-rime
-  - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
   - gnome-shell-extension-topicons-plus-git
@@ -153,11 +152,9 @@ java_pkgs:
   - intellij-idea-community-edition
   - ivy
   - jdk-openjdk
-  - jdk10-openjdk
   - jdk8-openjdk
   - maven
   - openjdk-src
-  - openjdk10-src
   - openjdk8-src
 
 default_jdk: java-11-openjdk
