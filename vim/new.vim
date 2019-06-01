@@ -115,3 +115,7 @@ function! Maximize_Window()
 endfunction
 nmap <F11> :call Maximize_Window()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("mac")
+    set clipboard=unnamed
+endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
