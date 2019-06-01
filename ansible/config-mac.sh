@@ -57,6 +57,7 @@ brew_install shellcheck
 brew_install editorconfig
 brew_install ydcv
 brew_install plantuml
+brew_install fd
 
 brew_cask_install iina
 

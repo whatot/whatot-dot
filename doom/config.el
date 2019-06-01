@@ -15,12 +15,6 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
-;;; china mirror
-(setq package-archives
-              '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                ("melpa" . "http://elpa.emacs-china.org/melpa/")
-                ("org" . "http://elpa.emacs-china.org/org/")))
-
 (def-package! youdao-dictionary
   :demand t
   :commands (youdao-dictionary-search-at-point)
