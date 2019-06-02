@@ -51,6 +51,7 @@ aur_pkgs:
 
 basic_pkgs:
   - clipit
+  - discount
   - faenza-icon-theme
   - fcitx
   - fcitx-configtool
@@ -63,6 +64,7 @@ basic_pkgs:
   - libzip
   - oh-my-zsh-git
   - plantuml
+  - proselint
   - proxychains-ng
   - rsync
   - tealdeer

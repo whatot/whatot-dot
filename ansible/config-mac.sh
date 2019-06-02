@@ -58,6 +58,8 @@ brew_install editorconfig
 brew_install ydcv
 brew_install plantuml
 brew_install fd
+brew_install proselint
+brew_install discount
 
 brew_cask_install iina
 
