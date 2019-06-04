@@ -35,16 +35,30 @@ if [[ "$(command -v brew)" != *"brew"* ]]; then
     brew tap d12frosted/emacs-plus
 fi
 
-brew_install tree
-brew_install wget
-brew_install axel
 brew_install coreutils
+brew_install binutils
+brew_install diffutils
+brew_install ed --with-default-names
+brew_install findutils --with-default-names
+brew_install gawk
+brew_install gnu-indent --with-default-names
+brew_install gnu-sed --with-default-names
+brew_install gnu-tar --with-default-names
+brew_install gnu-which --with-default-names
+brew_install gnutls
+brew_install grep --with-default-names
+brew_install gzip
+brew_install screen
+brew_install watch
+brew_install wdiff --with-gettext
+brew_install wget
+
+brew_install tree
+brew_install axel
 brew_install rsync
 brew_install git
 brew_install zsh
 brew_install htop
-brew_install gnu-tar
-brew_install gnutls
 
 brew_install cmake
 brew_install maven
