@@ -38,19 +38,19 @@ fi
 brew_install coreutils
 brew_install binutils
 brew_install diffutils
-brew_install ed --with-default-names
-brew_install findutils --with-default-names
+brew_install ed
+brew_install findutils
 brew_install gawk
-brew_install gnu-indent --with-default-names
-brew_install gnu-sed --with-default-names
-brew_install gnu-tar --with-default-names
-brew_install gnu-which --with-default-names
+brew_install gnu-indent
+brew_install gnu-sed
+brew_install gnu-tar
+brew_install gnu-which
 brew_install gnutls
-brew_install grep --with-default-names
+brew_install grep
 brew_install gzip
 brew_install screen
 brew_install watch
-brew_install wdiff --with-gettext
+brew_install wdiff
 brew_install wget
 
 brew_install tree
