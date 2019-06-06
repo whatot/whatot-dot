@@ -24,3 +24,6 @@
 (setq-default word-wrap t)
 (setq-default show-trailing-whitespace t)
 (setq-default require-final-newline t)
+
+;;; quick exit emacs without comfirm
+(setq-default confirm-kill-emacs nil)
