@@ -111,7 +111,7 @@ view_pkgs:
   - viewnior
   - you-get
   - youtube-dl
-  - zeal-git
+  - zeal
   - zim
 
 program_tool_pkgs:
@@ -121,7 +121,6 @@ program_tool_pkgs:
   - docker
   - docker-compose
   - emacs-git
-  - flamegraph-git
   - git
   - go
   - go-tools
