@@ -66,6 +66,7 @@ basic_pkgs:
   - plantuml
   - proselint
   - proxychains-ng
+  - ranger
   - rsync
   - tealdeer
   - tmux

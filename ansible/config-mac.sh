@@ -59,6 +59,7 @@ brew_install rsync
 brew_install git
 brew_install zsh
 brew_install htop
+brew_install ranger
 
 brew_install cmake
 brew_install maven
