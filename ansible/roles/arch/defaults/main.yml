@@ -118,9 +118,11 @@ program_tool_pkgs:
   - ack
   - ansible
   - ansible-lint
+  - discount
   - docker
   - docker-compose
   - emacs-git
+  - fd
   - git
   - go
   - go-tools
