@@ -1,15 +1,12 @@
 #!/bin/bash
-set -x
+set -aux
 
-EMACS_WRAPPER_PATH="/usr/bin/emacs.wrapper"
+WRAPPER_NAME="emacs.wrapper"
+LOCAL_PATH=$(dirname "$(readlink -f "$0")")"/${WRAPPER_NAME}"
+TARGET_PATH="/usr/bin/${WRAPPER_NAME}"
 
-if [[ ! -f "${EMACS_WRAPPER_PATH}" ]]; then
-
-    sudo bash -c 'cat > ${EMACS_WRAPPER_PATH}' <<EOF
-#! /bin/bash
-export LC_CTYPE=zh_CN.UTF-8; emacsclient -c -a emacs
-EOF
-
-    sudo chmod +x "${EMACS_WRAPPER_PATH}"
+if [[ ! -f "${TARGET_PATH}" ]]; then
+    sudo cp "${LOCAL_PATH}" "${TARGET_PATH}"
+    sudo chmod +x "${TARGET_PATH}"
 fi
 
