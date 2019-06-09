@@ -20,6 +20,11 @@
   :commands (youdao-dictionary-search-at-point)
   :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 
+(def-package! fcitx
+  :after evil
+  :config
+  (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
+
 (setq-default truncate-lines nil)
 (setq-default word-wrap t)
 (setq-default show-trailing-whitespace t)

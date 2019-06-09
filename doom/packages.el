@@ -3,4 +3,4 @@
 (package! thrift)
 (package! protobuf-mode)
 (package! youdao-dictionary)
-
+(package! fcitx)

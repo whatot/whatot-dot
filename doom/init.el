@@ -9,7 +9,7 @@
 ;; found in modules/README.org.
 
 (doom! :input
-       chinese
+       ;;chinese
        ;;japanese
 
        :completion
