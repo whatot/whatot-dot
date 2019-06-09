@@ -23,10 +23,11 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
 # 特殊指定版本
-NEEDED_RUST_TOOLCHAIN=nightly-2019-04-25-x86_64-unknown-linux-gnu
-rustup component add rls --toolchain "${NEEDED_RUST_TOOLCHAIN}"
-rustup component add clippy --toolchain "${NEEDED_RUST_TOOLCHAIN}"
-rustup component add rustfmt --toolchain "${NEEDED_RUST_TOOLCHAIN}"
+NEEDED_RUST_VERSION=nightly-2019-04-25
+rustup toolchain install "${NEEDED_RUST_VERSION}"
+rustup component add rls --toolchain "${NEEDED_RUST_VERSION}"
+rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
+rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 
 # 最新的健康nightly版本
 echo
