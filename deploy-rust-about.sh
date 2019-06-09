@@ -22,12 +22,16 @@ replace-with = 'ustc'
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-rustup toolchain list
+# 特殊指定版本
+rustup component add rls --toolchain nightly-2019-04-25-x86_64-unknown-linux-gnu
+rustup component add clippy --toolchain nightly-2019-04-25-x86_64-unknown-linux-gnu
+rustup component add rustfmt --toolchain nightly-2019-04-25-x86_64-unknown-linux-gnu
+
+# 最新的健康nightly版本
 echo
-NIGHTLY_VERSION=nightly-2019-06-06
-rustup toolchain install "${NIGHTLY_VERSION}"
-rustup default "${NIGHTLY_VERSION}"
-#rustup update
+HEALTHY_NIGHTLY_VERSION=nightly-2019-06-06
+rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
+rustup default "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add rls
 rustup component add clippy
 rustup component add miri
@@ -36,6 +40,7 @@ rustup component add rust-analysis
 rustup component add rust-src
 rustup component add rustfmt
 rustc --print sysroot
+rustup toolchain list
 
 cargo_install sccache
 cargo_install racer
