@@ -3,6 +3,7 @@
 (setq doom-font (font-spec
                  :family "Source Code Pro"
                  :size (cond
+                        ((string= (system-name) "msi") '15)
                         ((string= (system-name) "x411") '19)
                         ((string= (system-name) "b150") '30)
                         ((string= system-type "darwin") '14))))

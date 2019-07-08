@@ -43,7 +43,9 @@ colorscheme molokai
 if has("mac")
     set guifont=Source\ Code\ Pro:h13
 elseif has("unix")
-    if hostname() == 'b150'
+    if hostname() == 'msi'
+        set guifont=Source\ Code\ Pro\ 12
+    elseif hostname() == 'b150'
         set guifont=Source\ Code\ Pro\ 11
     elseif hostname() == 'x411'
         set guifont=Source\ Code\ Pro\ 13
