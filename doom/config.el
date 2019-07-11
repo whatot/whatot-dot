@@ -1,12 +1,20 @@
 
 ;;; font
-(setq doom-font (font-spec
-                 :family "Source Code Pro"
-                 :size (cond
-                        ((string= (system-name) "msi") '16)
-                        ((string= (system-name) "x411") '19)
-                        ((string= (system-name) "b150") '30)
-                        ((string= system-type "darwin") '14))))
+(defun config-font-size (en-size cn-size)
+  (setq doom-font (font-spec
+                   :family "Source Code Pro"
+                   :size en-size))
+  (set-face-attribute 'default nil :font
+                      (format "%s:pixelsize=%d" "Source Code Pro" en-size))
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family "Source Han Sans CN" :size cn-size))))
+(cond
+ ((string= (system-name) "msi") (config-font-size 18 16))
+ ((string= (system-name) "x411") (config-font-size 18 16))
+ ((string= (system-name) "b150") (config-font-size 32 30))
+ ((string= system-type "darwin") (config-font-size 14 13)))
+
 ;;; windows frame title
 (setq frame-title-format
           '(buffer-file-name "%f [%m]"

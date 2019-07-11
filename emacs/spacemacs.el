@@ -488,7 +488,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq-default tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   (cond
-   ((string= (system-name) "msi") (config-font-size 17 16))
+   ((string= (system-name) "msi") (config-font-size 18 16))
    ((string= (system-name) "x411") (config-font-size 18 16))
    ((string= (system-name) "b150") (config-font-size 32 30))
    ((string= system-type "darwin") (config-font-size 14 13)))
