@@ -25,7 +25,7 @@ esac
 plugins=(git colorize cargo common-aliases)
 
 alias mvalidate="mvn validate -U"
-alias mcompile='mvn clean compile -U -Dmaven.test.skip=true'
+alias mcc='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'

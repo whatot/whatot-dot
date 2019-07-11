@@ -80,6 +80,8 @@ basic_pkgs:
   - zsh-completions
 
 backend_pkgs:
+  - autoconfig
+  - automake
   - bind-tools
   - bridge-utils
   - dnsmasq
@@ -94,6 +96,7 @@ backend_pkgs:
   - meld
   - openssh
   - openssl
+  - patch
   - qemu
   - sysstat
 
