@@ -6,9 +6,10 @@
                    :size en-size))
   (set-face-attribute 'default nil :font
                       (format "%s:pixelsize=%d" "Source Code Pro" en-size))
-  (dolist (charset '(kana han cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font) charset
-                      (font-spec :family "Source Han Sans CN" :size cn-size))))
+  (if (display-graphic-p)
+      (dolist (charset '(kana han cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font) charset
+                          (font-spec :family "Source Han Sans CN" :size cn-size)))))
 (cond
  ((string= (system-name) "msi") (config-font-size 18 16))
  ((string= (system-name) "x411") (config-font-size 18 16))
