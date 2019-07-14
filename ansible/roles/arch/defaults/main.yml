@@ -14,9 +14,11 @@ font_pkgs:
   - ttf-dejavu
   - ttf-droid
   - ttf-fira-sans
+  - ttf-fira-mono
   - ttf-liberation
   - ttf-monaco
   - ttf-roboto
+  - ttf-opensans
   - ttf-ubuntu-font-family
   - wqy-microhei
   - wqy-zenhei
@@ -27,6 +29,7 @@ absent_pkgs:
   - emacs
   - erlang
   - noto-fonts-cjk
+  - noto-fonts-extra
   - racerd-git
   - rust
   - rust-docs
@@ -46,7 +49,6 @@ aur_pkgs:
   - nautilus-nutstore
   - nutstore
   - shellcheck-static
-  - ttf-opensans
   - unzip-iconv
 
 basic_pkgs:
@@ -80,7 +82,7 @@ basic_pkgs:
   - zsh-completions
 
 backend_pkgs:
-  - autoconfig
+  - autoconf
   - automake
   - bind-tools
   - bridge-utils
@@ -103,6 +105,7 @@ backend_pkgs:
 view_pkgs:
   - calibre
   - deadbeef
+  - feedreader
   - file-roller
   - firefox
   - firefox-i18n-zh-cn
@@ -164,7 +167,7 @@ java_pkgs:
   - openjdk-src
   - openjdk8-src
 
-default_jdk: java-11-openjdk
+default_jdk: java-12-openjdk
 
 python_pkgs:
   - flake8
