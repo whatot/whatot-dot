@@ -167,7 +167,7 @@ java_pkgs:
   - openjdk-src
   - openjdk8-src
 
-default_jdk: java-12-openjdk
+default_jdk: java-8-openjdk
 
 python_pkgs:
   - flake8
