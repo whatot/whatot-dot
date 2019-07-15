@@ -68,7 +68,6 @@ basic_pkgs:
   - plantuml
   - proselint
   - proxychains-ng
-  - ranger
   - rsync
   - tealdeer
   - tmux
@@ -113,6 +112,8 @@ view_pkgs:
   - libva-intel-driver
   - mpv
   - p7zip
+  - ranger
+  - tree
   - unrar
   - viewnior
   - you-get
