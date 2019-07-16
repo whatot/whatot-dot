@@ -20,7 +20,7 @@ cp "${SCRIPT_DIR}"/gen-index.sh "${TARGET_DIR}"/gen-index.sh
 cp "${SCRIPT_DIR}"/postgres.dir-locals.el "${TARGET_DIR}"/.dir-locals.el
 
 cd ${TARGET_DIR} || return
-git checkout REL_10_STABLE
+git checkout REL_12_STABLE
 ./configure --prefix=${INSTALL_DIR} \
     --enable-debug \
     --sysconfdir=/etc \
