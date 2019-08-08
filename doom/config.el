@@ -36,7 +36,7 @@
   (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
 
 (setq-default truncate-lines nil)
-(setq-default word-wrap t)
+(setq-default word-wrap nil)
 (setq-default show-trailing-whitespace t)
 (setq-default require-final-newline t)
 (setq-default rust-format-on-save t)
