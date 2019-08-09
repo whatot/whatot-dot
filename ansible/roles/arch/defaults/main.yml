@@ -164,12 +164,14 @@ java_pkgs:
   - intellij-idea-community-edition
   - ivy
   - jdk-openjdk
+  - jdk11-openjdk
   - jdk8-openjdk
   - maven
   - openjdk-src
+  - openjdk11-src
   - openjdk8-src
 
-default_jdk: java-8-openjdk
+default_jdk: java-11-openjdk
 
 python_pkgs:
   - flake8
