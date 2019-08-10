@@ -64,6 +64,7 @@
 
        :term
        ;;eshell            ; a consistent, cross-platform shell (WIP)
+       ;;shell             ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
        ;;vterm             ; another terminals in Emacs
 
@@ -81,7 +82,7 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
        lsp
-       macos             ; MacOS-specific commands
+       ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -124,11 +125,11 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org)              ; organize your plain life in plain text
-       ;; +dragndrop       ; file drag & drop support
-       ;; +ipython         ; ipython support for babel
-       ;; +pandoc          ; pandoc integration into org's exporter
-       ;; +present)        ; using Emacs for presentations
+       (org              ; organize your plain life in plain text
+        +dragndrop       ; file drag & drop support
+        +ipython         ; ipython support for babel
+        +pandoc          ; pandoc integration into org's exporter
+        +present)        ; using Emacs for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
