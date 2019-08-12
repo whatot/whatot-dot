@@ -66,14 +66,11 @@ basic_pkgs:
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
-  - plantuml
-  - proselint
   - proxychains-ng
   - rsync
   - tealdeer
   - tmux
   - transmission-gtk
-  - typora
   - vertex-theme
   - wmctrl
   - yaourt
@@ -121,6 +118,15 @@ view_pkgs:
   - youtube-dl
   - zeal
   - zim
+
+write_pkgs:
+  - gnuplot
+  - plantuml
+  - proselint
+  - texlive-bin
+  - texlive-core
+  - texlive-science
+  - typora
 
 program_tool_pkgs:
   - ack
