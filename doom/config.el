@@ -51,3 +51,4 @@
                     ((string= system-type "gnu/linux")
                      "/usr/share/java/plantuml/plantuml.jar")))
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
+(setq-default plantuml-default-exec-mode 'jar)
