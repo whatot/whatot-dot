@@ -58,8 +58,11 @@ basic_pkgs:
   - faenza-icon-theme
   - fcitx
   - fcitx-configtool
-  - fcitx-im
+  - fcitx-gtk2
+  - fcitx-gtk3
+  - fcitx-qt5
   - fcitx-rime
+  - fcitx-sunpinyin
   - gedit
   - gnome-clocks
   - gnome-shell-extension-topicons-plus-git
