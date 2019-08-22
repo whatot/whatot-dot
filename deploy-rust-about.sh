@@ -4,7 +4,7 @@ set -eux
 # curl https://sh.rustup.rs -sSf | sh
 
 function cargo_install() {
-    cargo install --force "$1"
+    cargo install --force "$*"
 }
 
 if [[ "$OSTYPE" == "msys" ]]; then
@@ -47,8 +47,14 @@ cargo_install sccache
 cargo_install racer
 cargo_install cargo-tree
 cargo_install cargo-outdated
+
 # for tldr to update cache, ``tldr --update``
 cargo_install tealdeer
+
+cargo_install cargo-bloat --features regex-filter
+# cargo bloat --release -n 10
+# cargo bloat --release --crates
+# cargo bloat --release --filter '^__' -n 10
 
 # cargo fix --edition
 sccache --show-stats
