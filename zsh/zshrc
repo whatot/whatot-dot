@@ -48,7 +48,7 @@ if [[ -f $PY_ENV_WRAPPER ]]; then
     export WORKON_HOME="$HOME/envs/"
 fi
 
-SCCACHE_WRAPPER="$HOME/.cargo/bin/sccache"
+SCCACHE_WRAPPER="/usr/bin/sccache"
 if [[ -f $SCCACHE_WRAPPER ]]; then
     export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
 fi

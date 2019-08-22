@@ -145,6 +145,8 @@ program_tool_pkgs:
   - go-tools
   - gvim
   - perf
+  - ripgrep
+  - sccache
   - the_silver_searcher
   - tig
   - visual-studio-code-bin

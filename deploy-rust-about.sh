@@ -4,7 +4,7 @@ set -eux
 # curl https://sh.rustup.rs -sSf | sh
 
 function cargo_install() {
-    cargo install --force "$*"
+    cargo install --force "$@"
 }
 
 if [[ "$OSTYPE" == "msys" ]]; then
@@ -43,7 +43,6 @@ rustup component add rustfmt
 rustc --print sysroot
 rustup toolchain list
 
-cargo_install sccache
 cargo_install racer
 cargo_install cargo-tree
 cargo_install cargo-outdated
