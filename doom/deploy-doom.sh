@@ -29,4 +29,4 @@ cd "${EMACS_D_PATH}" || return
 git checkout develop
 git pull
 ./bin/doom refresh
-./bin/doom env enable
+./bin/doom env
