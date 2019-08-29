@@ -173,8 +173,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   ;; (default t)
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -243,7 +243,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.2)
+   dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -511,6 +511,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   )
 
 (defun config-font-size (en-size cn-size)
+  (setq-default doom-modeline-height cn-size)
+
   (setq-default dotspacemacs-default-font (list "Source Code Pro" :size en-size))
   (set-face-attribute 'default nil :font
                       (format "%s:pixelsize=%d" "Source Code Pro" en-size))
