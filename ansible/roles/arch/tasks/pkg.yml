@@ -27,6 +27,7 @@
     - '{{ rust_pkgs }}'
     - '{{ view_pkgs }}'
     - '{{ write_pkgs }}'
+    - '{{ haskell_pkgs }}'
 
 - name: Install all needed packages
   pacman: name='{{ all_pkgs }}' state=present

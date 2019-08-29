@@ -203,3 +203,9 @@ rust_pkgs:
 erlang_elixir_pkgs:
   - erlang-nox
   - elixir
+
+haskell_pkgs:
+  - cabal-install
+  - ghc
+  - hint
+  - stack
