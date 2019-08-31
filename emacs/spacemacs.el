@@ -81,8 +81,7 @@ This function should only modify configuration layer settings."
      protobuf
      json
      plantuml
-     dap
-     treemacs
+     neotree
      )
 
    ;; List of additional packages that will be installed without being
