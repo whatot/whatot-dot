@@ -26,7 +26,7 @@ font_pkgs:
 # "noto-fonts" is the same as "adobe-source-han-sans-cn"
 absent_pkgs:
   - cargo
-  - emacs-git
+  - emacs
   - erlang
   - noto-fonts-cjk
   - noto-fonts-extra
@@ -138,7 +138,7 @@ program_tool_pkgs:
   - discount
   - docker
   - docker-compose
-  - emacs
+  - emacs-git
   - fd
   - git
   - go
