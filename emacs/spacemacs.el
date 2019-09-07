@@ -504,9 +504,14 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    ((string= system-type "darwin") (config-font-size 14 13)))
   (setq-default custom-file "~/.spacemacs-tmp-custom-file")
   (setq-default configuration-layer-elpa-archives
-        '(("melpa-cn" . "https://elpa.emacs-china.org/melpa/")
-          ("org-cn"   . "https://elpa.emacs-china.org/org/")
-          ("gnu-cn"   . "https://elpa.emacs-china.org/gnu/")))
+                '(
+                  ("melpa-cn" . "elpa.emacs-china.org/melpa/")
+                  ("org-cn"   . "elpa.emacs-china.org/org/")
+                  ("gnu-cn"   . "elpa.emacs-china.org/gnu/")
+                  ("melpa"    . "melpa.org/packages/")
+                  ("org"      . "orgmode.org/elpa/")
+                  ("gnu"      . "elpa.gnu.org/packages/")
+                  ))
   )
 
 (defun config-font-size (en-size cn-size)
