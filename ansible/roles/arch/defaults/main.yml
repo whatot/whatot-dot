@@ -154,6 +154,7 @@ program_tool_pkgs:
   - the_silver_searcher
   - tig
   - visual-studio-code-bin
+  - yarn
 
 c_pkgs:
   - bear
