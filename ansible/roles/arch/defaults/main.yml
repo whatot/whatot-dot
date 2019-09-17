@@ -53,6 +53,8 @@ aur_pkgs:
   - unzip-iconv
 
 basic_pkgs:
+  - aria2
+  - axel
   - clipit
   - discount
   - faenza-icon-theme
@@ -75,6 +77,7 @@ basic_pkgs:
   - tmux
   - transmission-gtk
   - vertex-theme
+  - wget
   - wmctrl
   - yaourt
   - yay
@@ -145,6 +148,7 @@ program_tool_pkgs:
   - go-tools
   - gvim
   - perf
+  - repo
   - ripgrep
   - sccache
   - the_silver_searcher
