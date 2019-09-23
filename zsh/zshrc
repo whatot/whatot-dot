@@ -25,11 +25,14 @@ esac
 plugins=(git colorize cargo common-aliases kubectl stack)
 
 alias mvalidate="mvn validate -U"
-alias mcc='mvn clean compile -U -Dmaven.test.skip=true'
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
+
+alias mcc='mvn clean compile -U -Dmaven.test.skip=true'
+alias mcco='mvn clean compile -U -Dmaven.test.skip=true --offline'
 alias mtt='mvn clean test -U'
+alias mtto='mvn clean test -U --offline'
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
