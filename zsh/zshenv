@@ -6,6 +6,7 @@ case `uname` in
 /usr/local/opt/findutils/libexec/gnubin:\
 /usr/local/opt/grep/libexec/gnubin:\
 /usr/local/opt/binutils/bin:\
+/usr/local/opt/emacs-plus/bin:\
 ${HOME}/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
