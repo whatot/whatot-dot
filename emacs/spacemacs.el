@@ -97,6 +97,7 @@ This function should only modify configuration layer settings."
      ag
      thrift
      fcitx
+     doom-themes
      color-theme-sanityinc-tomorrow
      material-theme
      dracula-theme
@@ -106,11 +107,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages
-   '(
-     mmm-mode
-     vmd-mode
-     )
+   dotspacemacs-excluded-packages '()
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -229,9 +226,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-tomorrow-night
-                         dracula
-                         material
+   dotspacemacs-themes '(doom-one
                          spacemacs-dark
                          spacemacs-light)
 
