@@ -7,7 +7,9 @@ case `uname` in
 /usr/local/opt/grep/libexec/gnubin:\
 /usr/local/opt/binutils/bin:\
 /usr/local/opt/emacs-plus/bin:\
-${HOME}/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+${HOME}/.cargo/bin:\
+${HOME}/go/bin:\
+/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
