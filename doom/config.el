@@ -25,12 +25,12 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
-(def-package! youdao-dictionary
+(use-package! youdao-dictionary
   :demand t
   :commands (youdao-dictionary-search-at-point)
   :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 
-(def-package! fcitx
+(use-package! fcitx
   :after evil
   :config
   (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
@@ -47,7 +47,7 @@
 ;;; config plantuml-jar-path
 (setq-default plantuml-jar-path
               (cond ((string= system-type "darwin")
-                     "/usr/local/Cellar/plantuml/1.2019.5/libexec/plantuml.jar")
+                     "/usr/local/Cellar/plantuml/1.2019.11/libexec/plantuml.jar")
                     ((string= system-type "gnu/linux")
                      "/usr/share/java/plantuml/plantuml.jar")))
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))

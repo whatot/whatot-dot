@@ -650,7 +650,7 @@ before packages are loaded."
 (defun local-setup-plantuml-about ()
   (setq-default plantuml-jar-path
                 (cond ((string= system-type "darwin")
-                       "/usr/local/Cellar/plantuml/1.2019.5/libexec/plantuml.jar")
+                       "/usr/local/Cellar/plantuml/1.2019.11/libexec/plantuml.jar")
                       ((string= system-type "gnu/linux")
                        "/usr/share/java/plantuml/plantuml.jar")))
    )
