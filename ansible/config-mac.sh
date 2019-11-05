@@ -30,8 +30,7 @@ fi
 
 if [[ "$(command -v brew)" != *"brew"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap homebrew/dupes
-    brew tap caskroom/fonts
+    brew tap homebrew/cask-fonts
     brew tap d12frosted/emacs-plus
 fi
 
