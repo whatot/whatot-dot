@@ -23,6 +23,7 @@ case `uname` in
         ZSH_THEME="robbyrussell"
         source ~/.zshenv
         alias vim='mvim -v'
+        SCCACHE_WRAPPER="/usr/local/bin/sccache"
     ;;
     Linux)
         ZSH_THEME="gentoo"
@@ -31,6 +32,7 @@ case `uname` in
         export XMODIFIERS="@im=fcitx"
         alias gvim='gvim -c "call Maximize_Window()"'
         alias unzipp='unzip -O cp936'
+        SCCACHE_WRAPPER="/usr/bin/sccache"
     ;;
 esac
 
@@ -65,7 +67,6 @@ if [[ -f $PY_ENV_WRAPPER ]]; then
     export WORKON_HOME="$HOME/envs/"
 fi
 
-SCCACHE_WRAPPER="/usr/bin/sccache"
 if [[ -f $SCCACHE_WRAPPER ]]; then
     export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
 fi

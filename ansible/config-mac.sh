@@ -74,6 +74,7 @@ brew_install plantuml
 brew_install fd
 brew_install proselint
 brew_install discount
+brew_install sccache
 
 brew_cask_install iina
 
@@ -84,7 +85,8 @@ brew_cask_install meld
 
 # install emacs and link
 brew_install emacs-plus
-rm /Applications/Emacs.app
-ln -s /usr/local/Cellar/emacs-plus/*/Emacs.app/ /Applications/
+
+ln -sf /usr/local/opt/emacs-plus/Emacs.app /Applications
+ln -sf /usr/local/bin/rustup-init /usr/local/bin/rustup
 
 echo "finined!"
