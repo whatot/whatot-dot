@@ -6,6 +6,18 @@ else
     DISABLE_AUTO_UPDATE="false"
 fi
 
+function setproxy() {
+    export ALL_PROXY="socks5://127.0.0.1:13659"
+    export http_proxy="socks5://127.0.0.1:13659"
+    export https_proxy="socks5://127.0.0.1:13659"
+}
+
+function unsetproxy() {
+    unset ALL_PROXY
+    unset http_proxy
+    unset https_proxy
+}
+
 case `uname` in
     Darwin)
         ZSH_THEME="robbyrussell"
@@ -33,6 +45,8 @@ alias mcc='mvn clean compile -U'
 alias mcco='mvn clean compile -U --offline'
 alias mtt='mvn clean test -U'
 alias mtto='mvn clean test -U --offline'
+
+alias myip="curl ifconfig.me"
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
