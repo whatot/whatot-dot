@@ -75,6 +75,7 @@ brew_install fd
 brew_install proselint
 brew_install discount
 brew_install sccache
+brew_install sphinx-doc
 
 brew_cask_install iina
 
