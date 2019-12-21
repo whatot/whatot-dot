@@ -56,5 +56,7 @@ cargo_install cargo-bloat --features regex-filter
 # cargo bloat --release --crates
 # cargo bloat --release --filter '^__' -n 10
 
+cargo_install cargo-generate --features vendored-openssl
+
 # cargo fix --edition
 sccache --show-stats
