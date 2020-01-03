@@ -23,7 +23,7 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
 # 特殊指定版本
-NEEDED_RUST_VERSION=nightly-2019-09-05
+NEEDED_RUST_VERSION=nightly-2019-12-20
 rustup toolchain install "${NEEDED_RUST_VERSION}"
 rustup component add rls --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
@@ -33,7 +33,7 @@ rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 
 # 最新的健康nightly版本
 echo
-HEALTHY_NIGHTLY_VERSION=nightly-2019-11-05
+HEALTHY_NIGHTLY_VERSION=nightly-2019-12-20
 rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
 rustup default "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add rls
@@ -57,6 +57,8 @@ cargo_install cargo-bloat --features regex-filter
 # cargo bloat --release --filter '^__' -n 10
 
 cargo_install cargo-generate --features vendored-openssl
+cargo_install cargo-edit
+cargo_install bindgen
 
 # cargo fix --edition
 sccache --show-stats
