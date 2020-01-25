@@ -59,6 +59,9 @@ cargo_install cargo-bloat --features regex-filter
 cargo_install cargo-generate --features vendored-openssl
 cargo_install cargo-edit
 cargo_install bindgen
+# A program that list statistics related to usage of unsafe Rust code
+# in a Rust crate and all its dependencies.
+cargo_install cargo-geiger
 
 # cargo fix --edition
 sccache --show-stats
