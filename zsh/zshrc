@@ -11,7 +11,6 @@ function setproxy() {
     export http_proxy="socks5://127.0.0.1:13659"
     export https_proxy="socks5://127.0.0.1:13659"
 }
-
 function unsetproxy() {
     unset ALL_PROXY
     unset http_proxy
@@ -36,7 +35,7 @@ case `uname` in
     ;;
 esac
 
-plugins=(git colorize cargo common-aliases kubectl stack)
+plugins=(git colorize cargo common-aliases kubectl sdk)
 
 alias mvalidate="mvn validate -U"
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
@@ -72,3 +71,21 @@ if [[ -f $SCCACHE_WRAPPER ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+# curl -s "https://get.sdkman.io" | bash
+# sdk install java 11.0.6.hs-adpt
+# sdk install java 8.0.242.hs-adpt
+# sdk list java
+# sdk current java
+export SDKMAN_DIR="$HOME/.sdkman"
+if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+    sdk offline enable
+
+    function usejdk8() {
+        sdk use java 8.0.242.hs-adpt
+    }
+    function usejdk11() {
+        sdk use java 11.0.6.hs-adpt
+    }
+fi
