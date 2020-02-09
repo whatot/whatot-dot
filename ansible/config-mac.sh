@@ -61,8 +61,6 @@ brew_install htop
 brew_install ranger
 
 brew_install cmake
-brew_install maven
-brew_install ant
 brew_install rustup-init
 brew_install the_silver_searcher
 brew_install bear
