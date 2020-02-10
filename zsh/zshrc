@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 export SDKMAN_DIR="$HOME/.sdkman"
 if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     source "$SDKMAN_DIR/bin/sdkman-init.sh"
-    sdk offline enable
+    # sdk offline enable
 
     function usejdk8() {
         sdk use java 8.0.242.hs-adpt
