@@ -23,6 +23,7 @@ case `uname` in
         source ~/.zshenv
         alias vim='mvim -v'
         SCCACHE_WRAPPER="/usr/local/bin/sccache"
+        export HOMEBREW_NO_AUTO_UPDATE=1
     ;;
     Linux)
         ZSH_THEME="gentoo"
