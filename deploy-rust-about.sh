@@ -63,5 +63,8 @@ cargo_install bindgen
 # in a Rust crate and all its dependencies.
 cargo_install cargo-geiger
 
+# profile anything
+cargo_install flamegraph
+
 # cargo fix --edition
 sccache --show-stats
