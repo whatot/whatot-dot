@@ -6,10 +6,15 @@ else
     DISABLE_AUTO_UPDATE="false"
 fi
 
-function setproxy() {
+function aliproxy() {
     export ALL_PROXY="socks5://127.0.0.1:13659"
     export http_proxy="socks5://127.0.0.1:13659"
     export https_proxy="socks5://127.0.0.1:13659"
+}
+function setproxy() {
+    export ALL_PROXY="socks5://127.0.0.1:13659"
+    export http_proxy="http://127.0.0.1:13658"
+    export https_proxy="http://127.0.0.1:13658"
 }
 function unsetproxy() {
     unset ALL_PROXY
