@@ -81,7 +81,7 @@ basic_pkgs:
   - wmctrl
   - yaourt
   - yay
-  - ydcv
+  - ydcv-rs-git
   - zsh-completions
 
 backend_pkgs:
@@ -213,4 +213,13 @@ haskell_pkgs:
   - cabal-install
   - ghc
   - hlint
-  - stack
+  - stack-bin
+
+fq_pkgs:
+  - clash
+  - mmdblookup
+  - python-pysocks
+  - python2-pysocks
+  - qv2ray-dev-git
+  - telegram-desktop
+  - v2ray
