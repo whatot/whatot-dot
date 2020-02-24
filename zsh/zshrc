@@ -6,21 +6,25 @@ else
     DISABLE_AUTO_UPDATE="false"
 fi
 
-function aliproxy() {
-    export all_proxy="socks5://127.0.0.1:13659"
-    export http_proxy="socks5://127.0.0.1:13659"
-    export https_proxy="socks5://127.0.0.1:13659"
-}
-function setproxy() {
-    export all_proxy="socks5://127.0.0.1:7891"
-    export http_proxy="http://127.0.0.1:7890"
-    export https_proxy="http://127.0.0.1:7890"
-}
 function unsetproxy() {
     unset ALL_PROXY
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
     unset all_proxy
     unset http_proxy
     unset https_proxy
+}
+function aliproxy() {
+    unsetproxy
+    export ALL_PROXY="socks5://127.0.0.1:13659"
+    export HTTP_PROXY="socks5://127.0.0.1:13659"
+    export HTTPS_PROXY="socks5://127.0.0.1:13659"
+}
+function setproxy() {
+    unsetproxy
+    export ALL_PROXY="socks5://127.0.0.1:7891"
+    export HTTP_PROXY="http://127.0.0.1:7890"
+    export HTTPS_PROXY="http://127.0.0.1:7890"
 }
 
 case `uname` in
@@ -39,6 +43,7 @@ case `uname` in
         alias gvim='gvim -c "call Maximize_Window()"'
         alias unzipp='unzip -O cp936'
         SCCACHE_WRAPPER="/usr/bin/sccache"
+        unsetproxy
     ;;
 esac
 
