@@ -45,6 +45,7 @@ rustc --print sysroot
 rustup toolchain list
 
 # cargo_install racer
+cargo_install cargo-check
 cargo_install cargo-tree
 cargo_install cargo-outdated
 
