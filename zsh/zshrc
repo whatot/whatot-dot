@@ -56,8 +56,8 @@ alias msource='mvn dependency:sources'
 
 alias mcc='mvn clean compile -U'
 alias mcco='mvn clean compile -U --offline'
-alias mtt='mvn clean test -U'
-alias mtto='mvn clean test -U --offline'
+alias mtt='mvn clean test -U -DfailIfNoTests=false'
+alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl ifconfig.me"
 
