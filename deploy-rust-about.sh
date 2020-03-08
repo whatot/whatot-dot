@@ -69,3 +69,8 @@ cargo_install flamegraph
 
 # cargo fix --edition
 sccache --show-stats
+
+# https://hoverbear.org/blog/setting-up-a-rust-devenv/
+# https://rust-analyzer.github.io/manual.html
+echo "git clone https://github.com/rust-analyzer/rust-analyzer.git && cd rust-analyzer && git pull"
+echo "cargo xtask install --server"

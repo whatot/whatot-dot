@@ -39,7 +39,10 @@
 (setq-default word-wrap nil)
 (setq-default show-trailing-whitespace t)
 (setq-default require-final-newline t)
+
+;;; rust about
 (setq-default rust-format-on-save t)
+(setq rustic-lsp-server 'rust-analyzer)
 
 ;;; quick exit emacs without comfirm
 (setq-default confirm-kill-emacs nil)
@@ -52,3 +55,32 @@
                      "/usr/share/java/plantuml/plantuml.jar")))
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
 (setq-default plantuml-default-exec-mode 'jar)
+
+;; Configure network proxy
+(setq-default my-proxy "127.0.0.1:7890")
+(defun show-proxy ()
+  "Show http/https proxy."
+  (interactive)
+  (if url-proxy-services
+      (message "Current proxy is \"%s\"" my-proxy)
+    (message "No proxy")))
+
+(defun set-proxy ()
+  "Set http/https proxy."
+  (interactive)
+  (setq url-proxy-services `(("http" . ,my-proxy)
+                             ("https" . ,my-proxy)))
+  (show-proxy))
+
+(defun unset-proxy ()
+  "Unset http/https proxy."
+  (interactive)
+  (setq url-proxy-services nil)
+  (show-proxy))
+
+(defun toggle-proxy ()
+  "Toggle http/https proxy."
+  (interactive)
+  (if url-proxy-services
+      (unset-proxy)
+    (set-proxy)))
