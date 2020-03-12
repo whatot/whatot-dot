@@ -40,7 +40,7 @@ class WorkerThread(threading.Thread):
             print_header = ">>> update " + path + "\n"
 
             if retry_count > MAX_RETRY_COUNT:
-                logging.error("%s end retry: %d", path, retry_count)
+                logging.error("%s - reach max retry", path)
                 continue
 
             try:
@@ -48,7 +48,7 @@ class WorkerThread(threading.Thread):
                 print(print_header + out.decode())
             except subprocess.CalledProcessError as errorexception:
                 print(print_header + errorexception.output.decode())
-                logging.error("%s failed retry: %d", path, retry_count)
+                logging.error("%s - failed retry: %d", path, retry_count)
                 self.queue.put([path, cmd, retry_count + 1])
 
             self.queue.task_done()
