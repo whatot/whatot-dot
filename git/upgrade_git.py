@@ -36,20 +36,19 @@ class WorkerThread(threading.Thread):
             path = item[0]
             cmd = item[1]
             retry_count = item[2]
-            run_cmd = "cd " + path + " && " + cmd
-            print_header = ">>> update " + path + "\n"
 
             if retry_count > MAX_RETRY_COUNT:
                 logging.error("%s - reach max retry", path)
-                continue
-
-            try:
-                out = subprocess.check_output(run_cmd, shell=True)
-                print(print_header + out.decode())
-            except subprocess.CalledProcessError as errorexception:
-                print(print_header + errorexception.output.decode())
-                logging.error("%s - failed retry: %d", path, retry_count)
-                self.queue.put([path, cmd, retry_count + 1])
+            else:
+                print_header = ">>> update " + path + "\n"
+                try:
+                    run_cmd = "cd " + path + " && " + cmd
+                    out = subprocess.check_output(run_cmd, shell=True)
+                    print(print_header + out.decode())
+                except subprocess.CalledProcessError as errorexception:
+                    print(print_header + errorexception.output.decode())
+                    logging.error("%s - failed retry: %d", path, retry_count)
+                    self.queue.put([path, cmd, retry_count + 1])
 
             self.queue.task_done()
 
