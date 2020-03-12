@@ -49,6 +49,7 @@ class WorkerThread(threading.Thread):
             except subprocess.CalledProcessError as errorexception:
                 print(print_header + errorexception.output.decode())
                 logging.error("%s failed retry: %d", path, retry_count)
+                self.queue.put([path, cmd, retry_count + 1])
 
             self.queue.task_done()
 
