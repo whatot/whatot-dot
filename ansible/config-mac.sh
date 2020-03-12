@@ -74,6 +74,8 @@ brew_install proselint
 brew_install discount
 brew_install sccache
 brew_install sphinx-doc
+brew_install black
+brew_install flake8
 
 brew_cask_install iina
 
