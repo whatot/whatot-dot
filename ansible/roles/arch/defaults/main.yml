@@ -193,6 +193,8 @@ python_pkgs:
   - flake8
   - ipython
   - ipython2
+  - python-isort
+  - python-black
   - python-nose
   - python-pylint
   - python-virtualenv
@@ -200,7 +202,6 @@ python_pkgs:
   - python2-flake8
   - python2-pylint
   - python2-virtualenv
-  - yapf
 
 rust_pkgs:
   - rustup
