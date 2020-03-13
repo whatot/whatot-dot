@@ -43,6 +43,7 @@
 ;;; rust about
 (setq-default rust-format-on-save t)
 (setq rustic-lsp-server 'rust-analyzer)
+(setq lsp-file-watch-threshold '1200)
 
 ;;; quick exit emacs without comfirm
 (setq-default confirm-kill-emacs nil)
@@ -56,6 +57,7 @@
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
 (setq-default plantuml-default-exec-mode 'jar)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Configure network proxy
 (setq-default my-proxy "127.0.0.1:7890")
 (defun show-proxy ()
@@ -84,3 +86,5 @@
   (if url-proxy-services
       (unset-proxy)
     (set-proxy)))
+(set-proxy)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
