@@ -14,7 +14,7 @@ ${HOME}/go/bin:\
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
         export CLASSPATH=$JAVA_HOME/jre/lib/
-        export PATH="/usr/lib/ccache/bin/":$PATH:"$HOME/go/bin/":"$HOME/.cargo/bin/"
+        export PATH="/usr/lib/ccache/bin/":"$HOME/go/bin/":"$HOME/.cargo/bin/":$PATH
         export TERM="xterm-256color"
     ;;
 esac

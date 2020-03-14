@@ -11,6 +11,10 @@ function common_pkgs_by_go() {
     go get -u -v github.com/mdempsky/gocode
     go get -u -v github.com/rogpeppe/godef
     go get -u -v github.com/zmb3/gogetdoc
+
+    # don't use -u when install gopls
+    rm -f ~/go/bin/gopls
+    GO111MODULE=on go get -v golang.org/x/tools/gopls@latest
 }
 
 function for_linux() {
@@ -25,8 +29,6 @@ function for_mac() {
     # go get -u -v github.com/golangci/golangci-lint/cmd/golangci-lint
     brew install golangci/tap/golangci-lint
 
-    # included in linux go-tools
-    GO111MODULE=on go get -v golang.org/x/tools/gopls@latest
     go get -u -v golang.org/x/tools/cmd/goimports
     go get -u -v golang.org/x/tools/cmd/godoc
     go get -u -v golang.org/x/tools/cmd/gorename
