@@ -67,6 +67,14 @@ cargo_install cargo-geiger
 # profile anything
 cargo_install flamegraph
 
+# ydcv-rs in mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    cargo install ydcv-rs --no-default-features --force
+    ln -sf ~/.cargo/bin/ydcv-rs ~/.cargo/bin/ydcv
+else
+    echo "not install ydcv"
+fi
+
 # cargo fix --edition
 sccache --show-stats
 
