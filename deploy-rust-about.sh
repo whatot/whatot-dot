@@ -17,9 +17,11 @@ mkdir -p "${CARGO_CONFIG_PATH}"
 cat <<EOF > "${CARGO_CONFIG_PATH}/config"
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
-replace-with = 'ustc'
+replace-with = 'tuna'
 [source.ustc]
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 EOF
 
 # 特殊指定版本
