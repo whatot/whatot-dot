@@ -9,16 +9,17 @@ font_pkgs:
   - adobe-source-han-serif-cn-fonts
   - adobe-source-sans-pro-fonts
   - adobe-source-serif-pro-fonts
+  - nerd-fonts-jetbrains-mono
   - noto-fonts
   - ttf-bitstream-vera
   - ttf-dejavu
   - ttf-droid
-  - ttf-fira-sans
   - ttf-fira-mono
+  - ttf-fira-sans
   - ttf-liberation
   - ttf-monaco
-  - ttf-roboto
   - ttf-opensans
+  - ttf-roboto
   - ttf-ubuntu-font-family
   - wqy-microhei
   - wqy-zenhei
