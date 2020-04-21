@@ -36,7 +36,6 @@ absent_pkgs:
   - rust-docs
   - rust-racer
   - rustfmt
-  - shellcheck
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
@@ -50,7 +49,6 @@ aur_pkgs:
   - marp
   - nautilus-nutstore
   - nutstore
-  - shellcheck-static
   - unzip-iconv
 
 basic_pkgs:
@@ -152,6 +150,7 @@ program_tool_pkgs:
   - repo
   - ripgrep
   - sccache
+  - shellcheck
   - the_silver_searcher
   - tig
   - visual-studio-code-bin
