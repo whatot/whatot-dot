@@ -59,11 +59,10 @@ basic_pkgs:
   - faenza-icon-theme
   - fcitx
   - fcitx-configtool
-  - fcitx-gtk2
-  - fcitx-gtk3
   - fcitx-qt5
   - fcitx-rime
   - fcitx-sunpinyin
+  - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
   - gnome-shell-extension-topicons-plus-git
@@ -107,7 +106,6 @@ backend_pkgs:
 view_pkgs:
   - calibre
   - deadbeef
-  - feedreader
   - file-roller
   - firefox
   - firefox-i18n-zh-cn
