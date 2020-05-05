@@ -39,8 +39,10 @@ absent_pkgs:
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
+  - ydcv
   - you-get-git
   - youtube-dl-git
+  - zeal
 
 aur_pkgs:
   - caffeine-ng
@@ -119,7 +121,7 @@ view_pkgs:
   - viewnior
   - you-get
   - youtube-dl
-  - zeal
+  - zeal-git
   - zim
 
 write_pkgs:

@@ -4,8 +4,14 @@
 - name: Update and Upgrade the system
   pacman: update_cache=yes upgrade=yes
 
-#- name: Uninstall unneeded packages
-#  pacman: name='{{ absent_pkgs }}' state=absent recurse=yes
+- name: Uninstall unneeded packages names
+  debug: var=absent_pkgs
+
+- name: Uninstall unneeded packages
+  pacman: name='{{ absent_pkgs }}' state=absent
+
+- name: Install fonts packages names
+  debug: var=font_pkgs
 
 - name: Install fonts packages
   pacman: name='{{ font_pkgs }}' state=present
