@@ -28,6 +28,13 @@ fi
 cd "${EMACS_D_PATH}" || return
 git checkout develop
 git pull
+
+echo "!!!! ad-hoc fix !!!!"
+echo "https://github.com/hlissner/doom-emacs/issues/2802"
+git -C ~/.emacs.d/.local/straight/repos/melpa pull
+rm -f ~/.emacs.d/.local/straight/build-cache.el
+echo "!!!! ad-hoc fix !!!!"
+
 ./bin/doom refresh
 ./bin/doom update
 ./bin/doom env
