@@ -25,7 +25,7 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 EOF
 
 # 特殊指定版本
-NEEDED_RUST_VERSION=nightly-2019-12-20
+NEEDED_RUST_VERSION=nightly-2020-04-23
 rustup toolchain install "${NEEDED_RUST_VERSION}"
 rustup component add rls --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
