@@ -19,7 +19,7 @@ function common_pkgs_by_go() {
 }
 
 function for_linux() {
-    yaourt -S go go-tools golangci-lint
+    yaourt -S go go-tools golangci-lint-bin
 
     common_pkgs_by_go
 }
@@ -29,6 +29,7 @@ function for_mac() {
     # suggest install by binary(brew) rather than go-get
     # go get -u -v github.com/golangci/golangci-lint/cmd/golangci-lint
     brew install golangci/tap/golangci-lint
+    brew upgrade golangci/tap/golangci-lint
 
     go get -u -v golang.org/x/tools/cmd/goimports
     go get -u -v golang.org/x/tools/cmd/godoc
