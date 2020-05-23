@@ -140,6 +140,7 @@ program_tool_pkgs:
   - discount
   - docker
   - docker-compose
+  - editorconfig-core-c
   - emacs-git
   - fd
   - git
@@ -196,7 +197,9 @@ python_pkgs:
   - python-isort
   - python-black
   - python-nose
+  - python-pipenv
   - python-pylint
+  - python-pytest
   - python-virtualenv
   - python-virtualenvwrapper
   - python2-flake8

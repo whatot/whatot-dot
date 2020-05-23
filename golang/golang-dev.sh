@@ -11,6 +11,7 @@ function common_pkgs_by_go() {
     go get -u -v github.com/mdempsky/gocode
     go get -u -v github.com/rogpeppe/godef
     go get -u -v github.com/zmb3/gogetdoc
+    go get -u -v github.com/motemen/gore/cmd/gore
 
     # don't use -u when install gopls
     rm -f ~/go/bin/gopls
