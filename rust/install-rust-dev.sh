@@ -38,6 +38,14 @@ else
     echo "skip tarpaulin in ${OSTYPE}"
 fi
 
+# Audit Cargo.lock for crates with security vulnerabilities
+cargo_install cargo-audit
+
+# Lints your project's crate graph
+cargo_install cargo-deny
+# cargo deny init
+# cargo deny check
+
 # cargo fix --edition
 sccache --show-stats
 
