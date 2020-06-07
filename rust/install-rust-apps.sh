@@ -13,7 +13,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     cargo install ydcv-rs --no-default-features --force
     ln -sf ~/.cargo/bin/ydcv-rs ~/.cargo/bin/ydcv
 else
-    echo "not install ydcv"
+    echo "skip ydcv in ${OSTYPE}"
 fi
 
 sccache --show-stats

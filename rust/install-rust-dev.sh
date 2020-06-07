@@ -31,6 +31,13 @@ cargo_install cargo-geiger
 # profile anything
 cargo_install flamegraph
 
+# Tool to analyse test coverage of cargo projects
+if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
+    cargo_install cargo-tarpaulin
+else
+    echo "skip tarpaulin in ${OSTYPE}"
+fi
+
 # cargo fix --edition
 sccache --show-stats
 
