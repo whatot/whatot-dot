@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 set -eux
 
 # curl https://sh.rustup.rs -sSf | sh
