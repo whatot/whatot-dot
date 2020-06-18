@@ -17,9 +17,16 @@
 [push]
 	default = upstream
 [alias]
-    co = checkout
-    br = branch
-    ci = commit
-    st = status
-    last = log --pretty=oneline -1 HEAD
-    glog = log --graph  --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%Cblue%an%Creset%Cgreen %cr)%Creset '
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	last = log --pretty=oneline -1 HEAD
+	glog = log --graph  --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%Cblue%an%Creset%Cgreen %cr)%Creset '
+[http]
+	postBuffer = 524288000
+	lowSpeedLimit = 0
+	lowSpeedTime = 999999
+[pull]
+	ff = only
+	rebase = false
