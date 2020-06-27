@@ -31,7 +31,7 @@ rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 
 # 最新的健康nightly版本
 echo
-HEALTHY_NIGHTLY_VERSION=nightly-2020-05-30
+HEALTHY_NIGHTLY_VERSION=nightly-2020-06-26
 rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
 rustup default "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add rls
