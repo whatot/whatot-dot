@@ -46,6 +46,11 @@ cargo_install cargo-deny
 # cargo deny init
 # cargo deny check
 
+# vendors all crates.io dependencies into a local directory
+# using Cargo's support for source replacement.
+# https://crates.io/crates/cargo-vendor
+cargo_install cargo-vendor
+
 # cargo fix --edition
 sccache --show-stats
 
