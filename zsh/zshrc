@@ -26,6 +26,14 @@ function setproxy() {
     export HTTP_PROXY="http://127.0.0.1:7890"
     export HTTPS_PROXY="http://127.0.0.1:7890"
 }
+function proxyinfo() {
+    echo ${ALL_PROXY}
+    echo ${HTTP_PROXY}
+    echo ${HTTPS_PROXY}
+}
+
+# turn on proxy by default
+setproxy
 
 case `uname` in
     Darwin)
@@ -43,7 +51,6 @@ case `uname` in
         alias gvim='gvim -c "call Maximize_Window()"'
         alias unzipp='unzip -O cp936'
         SCCACHE_WRAPPER="/usr/bin/sccache"
-        unsetproxy
     ;;
 esac
 
