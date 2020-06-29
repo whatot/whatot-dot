@@ -27,9 +27,9 @@ function setproxy() {
     export HTTPS_PROXY="http://127.0.0.1:7890"
 }
 function proxyinfo() {
-    echo ${ALL_PROXY}
-    echo ${HTTP_PROXY}
-    echo ${HTTPS_PROXY}
+    echo "ALL_PROXY =" ${ALL_PROXY}
+    echo "HTTP_PROXY =" ${HTTP_PROXY}
+    echo "HTTPS_PROXY =" ${HTTPS_PROXY}
 }
 
 # turn on proxy by default
