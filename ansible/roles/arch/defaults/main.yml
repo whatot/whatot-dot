@@ -193,7 +193,6 @@ default_jdk: java-11-openjdk
 python_pkgs:
   - flake8
   - ipython
-  - ipython2
   - python-isort
   - python-black
   - python-nose
@@ -202,9 +201,6 @@ python_pkgs:
   - python-pytest
   - python-virtualenv
   - python-virtualenvwrapper
-  - python2-flake8
-  - python2-pylint
-  - python2-virtualenv
 
 rust_pkgs:
   - rustup
