@@ -27,6 +27,7 @@ fi
 # 切换分支，更新操作
 cd "${EMACS_D_PATH}" || return
 git checkout develop
+git pull
 ./bin/doom upgrade -f
 ./bin/doom sync
 ./bin/doom env
