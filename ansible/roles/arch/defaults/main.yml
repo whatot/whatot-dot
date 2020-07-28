@@ -147,7 +147,9 @@ program_tool_pkgs:
   - go
   - go-tools
   - gvim
+  - jq
   - perf
+  - prettier
   - repo
   - ripgrep
   - sccache

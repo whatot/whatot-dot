@@ -76,6 +76,8 @@ brew_install sccache
 brew_install sphinx-doc
 brew_install black
 brew_install flake8
+brew_install prettier
+brew_install jq
 
 brew_cask_install iina
 
