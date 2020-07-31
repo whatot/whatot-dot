@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'asins/vimcdoc'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-signify'
