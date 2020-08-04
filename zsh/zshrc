@@ -92,9 +92,9 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # curl -s "https://get.sdkman.io" | bash
-# sdk install java 14.0.1.hs-adpt
-# sdk install java 11.0.7.hs-adpt
-# sdk install java 8.0.252.hs-adpt
+# sdk install java 14.0.2.hs-adpt
+# sdk install java 11.0.8.hs-adpt
+# sdk install java 8.0.265.hs-adpt
 # sdk list java
 # sdk current java
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -103,12 +103,12 @@ if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     # sdk offline enable
 
     function usejdk8() {
-        sdk use java 8.0.252.hs-adpt
+        sdk use java 8.0.265.hs-adpt
     }
     function usejdk11() {
-        sdk use java 11.0.7.hs-adpt
+        sdk use java 11.0.8.hs-adpt
     }
     function usejdk14() {
-        sdk use java 14.0.1.hs-adpt
+        sdk use java 14.0.2.hs-adpt
     }
 fi
