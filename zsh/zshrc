@@ -61,8 +61,11 @@ alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
 
+alias mqc='mvn compile --offline'
 alias mcc='mvn clean compile -U'
 alias mcco='mvn clean compile -U --offline'
+
+alias mqt='mvn test -DfailIfNoTests=false --offline'
 alias mtt='mvn clean test -U -DfailIfNoTests=false'
 alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
 
