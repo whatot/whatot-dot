@@ -87,7 +87,7 @@ basic_pkgs:
 backend_pkgs:
   - autoconf
   - automake
-  - bind-tools
+  - bind
   - bridge-utils
   - dnsmasq
   - dnsmasq-china-list-git
@@ -141,7 +141,7 @@ program_tool_pkgs:
   - docker
   - docker-compose
   - editorconfig-core-c
-  - emacs-git
+  - emacs
   - fd
   - git
   - go
