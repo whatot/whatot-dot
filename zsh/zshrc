@@ -6,6 +6,15 @@ else
     DISABLE_AUTO_UPDATE="false"
 fi
 
+if [[ -v WSL_INTEROP ]]; then
+    hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+    export PROXY_HOST=${hostip}
+    echo "wsl2 proxy: ${PROXY_HOST} "
+else
+    export PROXY_HOST="127.0.0.1"
+    echo "local proxy: ${PROXY_HOST} "
+fi
+
 function unsetproxy() {
     unset ALL_PROXY
     unset HTTP_PROXY
@@ -14,17 +23,11 @@ function unsetproxy() {
     unset http_proxy
     unset https_proxy
 }
-function aliproxy() {
-    unsetproxy
-    export ALL_PROXY="socks5://127.0.0.1:13659"
-    export HTTP_PROXY="socks5://127.0.0.1:13659"
-    export HTTPS_PROXY="socks5://127.0.0.1:13659"
-}
 function setproxy() {
     unsetproxy
-    export ALL_PROXY="socks5://127.0.0.1:7891"
-    export HTTP_PROXY="http://127.0.0.1:7890"
-    export HTTPS_PROXY="http://127.0.0.1:7890"
+    export ALL_PROXY="socks5://${PROXY_HOST}:7891"
+    export HTTP_PROXY="http://${PROXY_HOST}:7890"
+    export HTTPS_PROXY="http://${PROXY_HOST}:7890"
 }
 function proxyinfo() {
     echo "ALL_PROXY =" ${ALL_PROXY}
@@ -69,7 +72,7 @@ alias mqt='mvn test -DfailIfNoTests=false --offline'
 alias mtt='mvn clean test -U -DfailIfNoTests=false'
 alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
 
-alias myip="curl ifconfig.me"
+alias myip="curl myip.ipip.net"
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
