@@ -51,7 +51,7 @@
 ;;; config plantuml-jar-path
 (setq-default plantuml-jar-path
               (cond ((string= system-type "darwin")
-                     "/usr/local/Cellar/plantuml/1.2019.11/libexec/plantuml.jar")
+                     "/usr/local/opt/plantuml/libexec/plantuml.jar")
                     ((string= system-type "gnu/linux")
                      "/usr/share/java/plantuml/plantuml.jar")))
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
