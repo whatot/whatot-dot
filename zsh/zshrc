@@ -54,6 +54,10 @@ case `uname` in
         alias gvim='gvim -c "call Maximize_Window()"'
         alias unzipp='unzip -O cp936'
         SCCACHE_WRAPPER="/usr/bin/sccache"
+        # wsl only config
+        if [[ -v WSL_INTEROP ]]; then
+            SCCACHE_WRAPPER="$HOME/.cargo/bin/sccache"
+        fi
     ;;
 esac
 
