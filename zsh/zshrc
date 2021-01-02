@@ -61,7 +61,7 @@ case `uname` in
     ;;
 esac
 
-plugins=(git colorize cargo common-aliases kubectl sdk)
+plugins=(git colorize cargo common-aliases sdk golang)
 
 alias mvalidate="mvn validate -U"
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
