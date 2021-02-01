@@ -30,7 +30,7 @@ rustup component add rust-src --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 echo
 
-# 最新的健康nightly版本,临时自己加脚本解决调用问题
+# 最新的健康nightly版本，临时加脚本解决调用问题，下个rustup版本删除
 HEALTHY_NIGHTLY_VERSION=nightly-2021-01-22
 RUST_ANALYZER_BIN="${HOME}/.cargo/bin/rust-analyzer"
 cat <<EOF > "${RUST_ANALYZER_BIN}"
@@ -40,10 +40,11 @@ EOF
 chmod +x "${RUST_ANALYZER_BIN}"
 
 rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
+rustup component add clippy --toolchain "${HEALTHY_NIGHTLY_VERSION}"
+rustup component add rust-analyzer-preview  --toolchain "${HEALTHY_NIGHTLY_VERSION}"
+rustup component add rust-src --toolchain "${HEALTHY_NIGHTLY_VERSION}"
+rustup component add rustfmt --toolchain "${HEALTHY_NIGHTLY_VERSION}"
+
 rustup default "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add clippy
-rustup component add rust-analyzer-preview
-rustup component add rust-src
-rustup component add rustfmt
 rustc --print sysroot
 rustup toolchain list
