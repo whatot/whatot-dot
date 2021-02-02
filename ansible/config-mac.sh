@@ -16,11 +16,11 @@ function brew_install() {
 function brew_cask_install() {
     pkg_name=$1
 
-    if brew cask ls --versions "$pkg_name" > /dev/null; then
+    if brew list --cask --versions "$pkg_name" > /dev/null; then
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
-        brew cask install "$pkg_name"
+        brew install --cask "$pkg_name"
     fi
 }
 
@@ -88,6 +88,7 @@ brew_cask_install meld
 
 # install emacs and link
 brew_install emacs-plus
+brew link --overwrite emacs-plus
 
 ln -sf /usr/local/opt/emacs-plus/Emacs.app /Applications
 ln -sf /usr/local/bin/rustup-init /usr/local/bin/rustup
