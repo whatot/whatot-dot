@@ -100,9 +100,9 @@ if [[ -f $SCCACHE_WRAPPER ]]; then
 fi
 
 export SDKMAN_DIR="$HOME/.sdkman"
-export SDKMAN_JDK8="8.0.265.hs-adpt"
-export SDKMAN_JDK11="11.0.8.hs-adpt"
-export SDKMAN_JDKX="15.0.0.hs-adpt"
+export SDKMAN_JDK8="8.0.292.hs-adpt"
+export SDKMAN_JDK11="11.0.11.hs-adpt"
+export SDKMAN_JDKX="16.0.0.hs-adpt"
 
 if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     source "$SDKMAN_DIR/bin/sdkman-init.sh"
