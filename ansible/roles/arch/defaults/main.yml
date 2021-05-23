@@ -67,7 +67,7 @@ basic_pkgs:
   - fcitx-sogoupinyin
   - gedit
   - gnome-clocks
-  - gnome-shell-extension-topicons-plus-git
+  - gnome-shell-extension-tray-icons
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
