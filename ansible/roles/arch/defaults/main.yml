@@ -141,7 +141,7 @@ program_tool_pkgs:
   - docker
   - docker-compose
   - editorconfig-core-c
-  - emacs
+  - emacs-git
   - fd
   - git
   - go
