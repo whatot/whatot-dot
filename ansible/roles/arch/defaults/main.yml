@@ -221,7 +221,6 @@ fq_pkgs:
   - clash
   - mmdblookup
   - python-pysocks
-  - python2-pysocks
   - qv2ray-dev-git
   - telegram-desktop
   - v2ray
