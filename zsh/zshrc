@@ -68,13 +68,13 @@ alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
 
-alias mqc='mvn compile --offline'
-alias mcc='mvn clean compile -U'
-alias mcco='mvn clean compile -U --offline'
+alias mqc='mvnd compile --offline'
+alias mcc='mvnd clean compile -U'
+alias mcco='mvnd clean compile -U --offline'
 
-alias mqt='mvn test -DfailIfNoTests=false --offline'
-alias mtt='mvn clean test -U -DfailIfNoTests=false'
-alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
+alias mqt='mvnd test -DfailIfNoTests=false --offline'
+alias mtt='mvnd clean test -U -DfailIfNoTests=false'
+alias mtto='mvnd clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl myip.ipip.net"
 
@@ -122,6 +122,7 @@ function init_sdkman() {
     sdk install java "${SDKMAN_JDK8}"
     sdk install java "${SDKMAN_JDK11}"
     sdk install java "${SDKMAN_JDKX}"
+    sdk install mvnd
     sdk list java
     sdk current java
 }
