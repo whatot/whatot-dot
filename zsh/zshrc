@@ -25,9 +25,9 @@ function unsetproxy() {
 }
 function setproxy() {
     unsetproxy
-    export ALL_PROXY="socks5://${PROXY_HOST}:7891"
-    export HTTP_PROXY="http://${PROXY_HOST}:7890"
-    export HTTPS_PROXY="http://${PROXY_HOST}:7890"
+    export ALL_PROXY="socks5://${PROXY_HOST}:8899"
+    export HTTP_PROXY="http://${PROXY_HOST}:8899"
+    export HTTPS_PROXY="http://${PROXY_HOST}:8899"
 }
 function proxyinfo() {
     echo "ALL_PROXY =" ${ALL_PROXY}
