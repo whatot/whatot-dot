@@ -71,6 +71,7 @@ basic_pkgs:
   - gnome-tweaks
   - libzip
   - oh-my-zsh-git
+  - paru
   - proxychains-ng
   - rsync
   - tealdeer
@@ -79,8 +80,6 @@ basic_pkgs:
   - vertex-theme
   - wget
   - wmctrl
-  - yaourt
-  - yay
   - ydcv-rs-git
   - zsh-completions
 
