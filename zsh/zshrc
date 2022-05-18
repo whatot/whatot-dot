@@ -78,6 +78,8 @@ alias mtto='mvnd clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl myip.ipip.net"
 
+alias yay="paru"
+
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
 export XDG_CONFIG_HOME="$HOME/.config/"
