@@ -22,16 +22,16 @@ EOF
 
 
 # 特殊指定版本
-NEEDED_RUST_VERSION=nightly-2022-01-07
+NEEDED_RUST_VERSION=nightly-2022-07-07
 rustup toolchain install "${NEEDED_RUST_VERSION}"
 rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
-rustup component add rust-analyzer-preview --toolchain "${NEEDED_RUST_VERSION}"
+rustup component add rust-analyzer --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rust-src --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 echo
 
 # 最新的健康nightly版本，临时加脚本解决调用问题，下个rustup版本删除
-HEALTHY_NIGHTLY_VERSION=nightly-2022-01-25
+HEALTHY_NIGHTLY_VERSION=nightly-2022-07-07
 RUST_ANALYZER_BIN="${HOME}/.cargo/bin/rust-analyzer"
 cat <<EOF > "${RUST_ANALYZER_BIN}"
 #!/bin/sh
@@ -41,7 +41,7 @@ chmod +x "${RUST_ANALYZER_BIN}"
 
 rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add clippy --toolchain "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add rust-analyzer-preview  --toolchain "${HEALTHY_NIGHTLY_VERSION}"
+rustup component add rust-analyzer --toolchain "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add rust-src --toolchain "${HEALTHY_NIGHTLY_VERSION}"
 rustup component add rustfmt --toolchain "${HEALTHY_NIGHTLY_VERSION}"
 
