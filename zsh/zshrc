@@ -118,6 +118,10 @@ if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     function usejdkx() {
         sdk use java "${SDKMAN_JDKX}"
     }
+    function gradle_wrapper_jdk8() {
+        usejdk8
+        gradle wrapper --gradle-version 4.2.1
+    }
 fi
 function init_sdkman() {
     curl -s "https://get.sdkman.io" | bash
