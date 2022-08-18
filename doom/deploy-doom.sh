@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
 DOOM_SOURCE_PATH="${HOME}/.emacs.d.doom"
 DOOM_CONFIG_PATH="${HOME}/.doom.d"
 EMACS_D_PATH="${HOME}/.emacs.d"
@@ -26,8 +26,8 @@ fi
 
 # 切换分支，更新操作
 cd "${EMACS_D_PATH}" || return
-git checkout develop
+git checkout master
 git pull
-./bin/doom upgrade -f
+./bin/doom upgrade
 ./bin/doom sync
 ./bin/doom env

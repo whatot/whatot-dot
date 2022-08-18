@@ -9,7 +9,7 @@ function brew_install() {
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
-        brew install "$pkg_name"
+        brew install $*
     fi
 }
 
@@ -64,7 +64,6 @@ brew_install cmake
 brew_install rustup-init
 brew_install the_silver_searcher
 brew_install bear
-brew_install cquery
 brew_install shellcheck
 brew_install editorconfig
 brew_install ydcv
@@ -73,24 +72,21 @@ brew_install fd
 brew_install proselint
 brew_install discount
 brew_install sccache
-brew_install sphinx-doc
-brew_install black
-brew_install flake8
 brew_install prettier
 brew_install jq
+brew_install ripgrep
 
 brew_cask_install iina
 
 brew_cask_install font-source-code-pro
 brew_cask_install macvim
-brew_cask_install jetbrains-toolbox
 brew_cask_install meld
 
 # install emacs and link
-brew_install emacs-plus
+brew_install emacs-plus@28 --with-native-comp
 brew link --overwrite emacs-plus
 
-ln -sf /usr/local/opt/emacs-plus/Emacs.app /Applications
-ln -sf /usr/local/bin/rustup-init /usr/local/bin/rustup
+ln -sf /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
+ln -sf /opt/homebrew/bin/rustup-init /opt/homebrew/bin/rustup
 
 echo "finined!"
