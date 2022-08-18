@@ -81,13 +81,16 @@ alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
 
-alias mqc='mvnd compile --offline'
-alias mcc='mvnd clean compile -U'
-alias mcco='mvnd clean compile -U --offline'
-
-alias mqt='mvnd test -DfailIfNoTests=false --offline'
-alias mtt='mvnd clean test -U -DfailIfNoTests=false'
-alias mtto='mvnd clean test -U -DfailIfNoTests=false --offline'
+MVN=mvn
+if [[ $(command -v mvnd) ]]; then
+    MVN=mvnd
+fi
+alias mqc='${MVN} compile --offline'
+alias mcc='${MVN} clean compile -U'
+alias mcco='${MVN} clean compile -U --offline'
+alias mqt='${MVN} test -DfailIfNoTests=false --offline'
+alias mtt='${MVN} clean test -U -DfailIfNoTests=false'
+alias mtto='${MVN} clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl myip.ipip.net"
 
