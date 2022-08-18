@@ -6,15 +6,6 @@ else
     DISABLE_AUTO_UPDATE="false"
 fi
 
-if [[ -v WSL_INTEROP ]]; then
-    hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-    export PROXY_HOST=${hostip}
-    echo "wsl2 proxy: ${PROXY_HOST} "
-else
-    export PROXY_HOST="127.0.0.1"
-    echo "local proxy: ${PROXY_HOST} "
-fi
-
 function unsetproxy() {
     unset ALL_PROXY
     unset HTTP_PROXY
@@ -25,14 +16,36 @@ function unsetproxy() {
 }
 function setproxy() {
     unsetproxy
-    export ALL_PROXY="socks5://${PROXY_HOST}:8899"
-    export HTTP_PROXY="http://${PROXY_HOST}:8899"
-    export HTTPS_PROXY="http://${PROXY_HOST}:8899"
+
+    ## determine proxy host
+    if [[ -v WSL_INTEROP ]]; then
+        hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+        export PROXY_HOST=${hostip}
+        echo "wsl2 proxy: ${PROXY_HOST} "
+    else
+        export PROXY_HOST="127.0.0.1"
+        echo "local proxy: ${PROXY_HOST} "
+    fi
+
+    ## determine proxy port
+    PROXY_PORT=8899
+    if checkport 7890 ; then
+        PROXY_PORT=7890
+    else if checkport 8899
+        PROXY_PORT=8899
+    fi
+
+    export ALL_PROXY="socks5://${PROXY_HOST}:${PROXY_PORT}"
+    export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
+    export HTTPS_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 }
 function proxyinfo() {
     echo "ALL_PROXY =" ${ALL_PROXY}
     echo "HTTP_PROXY =" ${HTTP_PROXY}
     echo "HTTPS_PROXY =" ${HTTPS_PROXY}
+}
+function checkport() {
+    lsof -Pi :$1 -sTCP:LISTEN -t >/dev/null
 }
 
 # turn on proxy by default
@@ -128,7 +141,6 @@ function init_sdkman() {
     sdk list java
     sdk current java
 }
-
 
 BREW_BIN="/opt/homebrew/bin/brew"
 if [[ -f ${BREW_BIN} ]]; then
