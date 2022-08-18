@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-SCRIPT_PATH=$(dirname $(realpath "$0"))
+SCRIPT_PATH=$(dirname "$(realpath "$0")")
 
 if [[ -f "${HOME}/.vimrc" ]]; then
 	mv ~/.vimrc ~/.vimrc.backup
