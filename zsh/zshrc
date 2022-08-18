@@ -102,9 +102,8 @@ if [[ -f $SCCACHE_WRAPPER ]]; then
 fi
 
 export SDKMAN_DIR="$HOME/.sdkman"
-export SDKMAN_JDK8="8.0.332-sem"
-export SDKMAN_JDK11="11.0.15-sem"
-export SDKMAN_JDKX="17.0.3-sem"
+export SDKMAN_JDK8="8.0.342-amzn"
+export SDKMAN_JDK11="11.0.16-amzn"
 
 if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     source "$SDKMAN_DIR/bin/sdkman-init.sh"
@@ -115,9 +114,6 @@ if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     function usejdk11() {
         sdk use java "${SDKMAN_JDK11}"
     }
-    function usejdkx() {
-        sdk use java "${SDKMAN_JDKX}"
-    }
     function gradle_wrapper_jdk8() {
         usejdk8
         gradle wrapper --gradle-version 4.2.1
@@ -127,8 +123,8 @@ function init_sdkman() {
     curl -s "https://get.sdkman.io" | bash
     sdk install java "${SDKMAN_JDK8}"
     sdk install java "${SDKMAN_JDK11}"
-    sdk install java "${SDKMAN_JDKX}"
     sdk install mvnd
+    sdk install gradle 4.2.1
     sdk list java
     sdk current java
 }
