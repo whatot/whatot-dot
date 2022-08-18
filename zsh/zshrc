@@ -129,4 +129,10 @@ function init_sdkman() {
     sdk current java
 }
 
+
+BREW_BIN="/opt/homebrew/bin/brew"
+if [[ -f ${BREW_BIN} ]]; then
+    eval "$(${BREW_BIN} shellenv)"
+fi
+
 source $ZSH/oh-my-zsh.sh
