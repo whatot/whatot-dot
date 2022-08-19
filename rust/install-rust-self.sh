@@ -3,8 +3,8 @@ set -eux
 
 # curl https://sh.rustup.rs -sSf | sh
 
-if [[ "$OSTYPE" == "msys" ]]; then
-    CARGO_CONFIG_PATH="$USERPROFILE/.cargo"
+if [[ "${OSTYPE}" == "msys" ]]; then
+    CARGO_CONFIG_PATH="${USERPROFILE}/.cargo"
 else
     CARGO_CONFIG_PATH="${HOME}/.cargo"
 fi
@@ -30,21 +30,6 @@ rustup component add rust-src --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
 echo
 
-# 最新的健康nightly版本，临时加脚本解决调用问题，下个rustup版本删除
-HEALTHY_NIGHTLY_VERSION=nightly-2022-07-30
-RUST_ANALYZER_BIN="${HOME}/.cargo/bin/rust-analyzer"
-cat <<EOF > "${RUST_ANALYZER_BIN}"
-#!/bin/sh
-rustup run ${HEALTHY_NIGHTLY_VERSION} rust-analyzer "\$@"
-EOF
-chmod +x "${RUST_ANALYZER_BIN}"
-
-rustup toolchain install "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add clippy --toolchain "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add rust-analyzer --toolchain "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add rust-src --toolchain "${HEALTHY_NIGHTLY_VERSION}"
-rustup component add rustfmt --toolchain "${HEALTHY_NIGHTLY_VERSION}"
-
-rustup default "${HEALTHY_NIGHTLY_VERSION}"
-rustc --print sysroot
+rustup default "${NEEDED_RUST_VERSION}"
+rustup run "${NEEDED_RUST_VERSION}" rustc --print sysroot
 rustup toolchain list
