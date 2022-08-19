@@ -26,10 +26,8 @@ function for_linux() {
 
 function for_mac() {
     # https://github.com/golangci/golangci-lint#install
-    # suggest install by binary(brew) rather than go-get
-    # go get -u -v github.com/golangci/golangci-lint/cmd/golangci-lint
-    brew install golangci/tap/golangci-lint
-    brew upgrade golangci/tap/golangci-lint
+    # suggest install by binary(brew)
+    brew install golangci-lint
 
     go get -u -v golang.org/x/tools/cmd/goimports
     go get -u -v golang.org/x/tools/cmd/godoc
@@ -45,5 +43,7 @@ case $(uname) in
     ;;
     Linux)
         for_linux
+    ;;
+    *)
     ;;
 esac
