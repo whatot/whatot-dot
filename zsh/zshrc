@@ -1,9 +1,9 @@
 if [[ -d "/usr/share/oh-my-zsh/" ]];then
     ZSH=/usr/share/oh-my-zsh/
-    DISABLE_AUTO_UPDATE="true"
+    export DISABLE_AUTO_UPDATE="true"
 else
     ZSH=~/.oh-my-zsh/
-    DISABLE_AUTO_UPDATE="false"
+    export DISABLE_AUTO_UPDATE="false"
 fi
 
 function unsetproxy() {
@@ -19,7 +19,7 @@ function setproxy() {
 
     ## determine proxy host
     if [[ -v WSL_INTEROP ]]; then
-        hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
+        hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
         export PROXY_HOST=${hostip}
         echo "wsl2 proxy: ${PROXY_HOST} "
     else
@@ -29,9 +29,9 @@ function setproxy() {
 
     ## determine proxy port
     PROXY_PORT=8899
-    if checkport 7890 ; then
+    if checkport 7890; then
         PROXY_PORT=7890
-    else if checkport 8899
+    elif checkport 8899; then
         PROXY_PORT=8899
     fi
 
@@ -69,8 +69,10 @@ case `uname` in
         SCCACHE_WRAPPER="/usr/bin/sccache"
         # wsl only config
         if [[ -v WSL_INTEROP ]]; then
-            SCCACHE_WRAPPER="$HOME/.cargo/bin/sccache"
+            SCCACHE_WRAPPER="${HOME}/.cargo/bin/sccache"
         fi
+    ;;
+    *)
     ;;
 esac
 
