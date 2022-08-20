@@ -40,23 +40,23 @@ function setproxy() {
     export HTTPS_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 }
 function proxyinfo() {
-    echo "ALL_PROXY =" ${ALL_PROXY}
-    echo "HTTP_PROXY =" ${HTTP_PROXY}
-    echo "HTTPS_PROXY =" ${HTTPS_PROXY}
+    echo "ALL_PROXY = ${ALL_PROXY}"
+    echo "HTTP_PROXY = ${HTTP_PROXY}"
+    echo "HTTPS_PROXY = ${HTTPS_PROXY}"
 }
 function checkport() {
-    lsof -Pi :$1 -sTCP:LISTEN -t >/dev/null
+    lsof -Pi :"$1" -sTCP:LISTEN -t >/dev/null
 }
 
 # turn on proxy by default
 setproxy
 
-case `uname` in
+case $(uname) in
     Darwin)
         ZSH_THEME="robbyrussell"
         source ~/.zshenv
         alias vim='mvim -v'
-        SCCACHE_WRAPPER="/usr/local/bin/sccache"
+        SCCACHE_WRAPPER="/opt/homebrew/bin/sccache"
         export HOMEBREW_NO_AUTO_UPDATE=1
     ;;
     Linux)
@@ -76,7 +76,7 @@ case `uname` in
     ;;
 esac
 
-plugins=(git colorize rust common-aliases sdk golang brew)
+plugins=(git golang rust common-aliases sdk brew gnu-utils colorize aliases)
 
 alias mvalidate="mvn validate -U"
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
@@ -95,25 +95,10 @@ alias mtt='${MVN} clean test -U -DfailIfNoTests=false'
 alias mtto='${MVN} clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl myip.ipip.net"
-
 alias yay="paru"
 
-unset GREP_OPTIONS
-export MESA_GL_VERSION_OVERRIDE=2.1
-export XDG_CONFIG_HOME="${HOME}/.config/"
 export LC_MESSAGES="en_US.UTF-8"
 export EDITOR='vim'
-
-ZSH_CACHE_DIR=${HOME}/.oh-my-zsh-cache
-if [[ ! -d ${ZSH_CACHE_DIR} ]]; then
-    mkdir "${ZSH_CACHE_DIR}"
-fi
-
-PY_ENV_WRAPPER=/usr/bin/virtualenvwrapper.sh
-if [[ -f ${PY_ENV_WRAPPER} ]]; then
-    source ${PY_ENV_WRAPPER}
-    export WORKON_HOME="${HOME}/envs/"
-fi
 
 if [[ -f ${SCCACHE_WRAPPER} ]]; then
     export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
@@ -157,4 +142,9 @@ if [[ -f ${BREW_BIN} ]]; then
     eval "$(${BREW_BIN} shellenv)"
 fi
 
-source ${ZSH}/oh-my-zsh.sh
+ZSH_CACHE_DIR=${HOME}/.oh-my-zsh-cache
+if [[ ! -d ${ZSH_CACHE_DIR} ]]; then
+    mkdir "${ZSH_CACHE_DIR}"
+fi
+
+source "${ZSH}/oh-my-zsh.sh"
