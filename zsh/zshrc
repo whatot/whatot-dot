@@ -100,22 +100,22 @@ alias yay="paru"
 
 unset GREP_OPTIONS
 export MESA_GL_VERSION_OVERRIDE=2.1
-export XDG_CONFIG_HOME="$HOME/.config/"
+export XDG_CONFIG_HOME="${HOME}/.config/"
 export LC_MESSAGES="en_US.UTF-8"
 export EDITOR='vim'
 
-ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-    mkdir $ZSH_CACHE_DIR
+ZSH_CACHE_DIR=${HOME}/.oh-my-zsh-cache
+if [[ ! -d ${ZSH_CACHE_DIR} ]]; then
+    mkdir "${ZSH_CACHE_DIR}"
 fi
 
 PY_ENV_WRAPPER=/usr/bin/virtualenvwrapper.sh
-if [[ -f $PY_ENV_WRAPPER ]]; then
-    source $PY_ENV_WRAPPER
-    export WORKON_HOME="$HOME/envs/"
+if [[ -f ${PY_ENV_WRAPPER} ]]; then
+    source ${PY_ENV_WRAPPER}
+    export WORKON_HOME="${HOME}/envs/"
 fi
 
-if [[ -f $SCCACHE_WRAPPER ]]; then
+if [[ -f ${SCCACHE_WRAPPER} ]]; then
     export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
 fi
 
@@ -123,8 +123,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export SDKMAN_JDK8="8.0.342-amzn"
 export SDKMAN_JDK11="11.0.16-amzn"
 
-if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
-    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
+    source "${SDKMAN_DIR}/bin/sdkman-init.sh"
     # sdk offline enable
     function usejdk8() {
         sdk use java "${SDKMAN_JDK8}"

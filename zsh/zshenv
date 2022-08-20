@@ -1,6 +1,13 @@
 case $(uname) in
     Darwin)
-        export PATH="${HOME}/.cargo/bin:${HOME}/go/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:\
+/opt/homebrew/opt/findutils/libexec/gnubin:\
+/opt/homebrew/opt/gnu-which/libexec/gnubin:\
+/opt/homebrew/opt/gnu-tar/libexec/gnubin:\
+/opt/homebrew/opt/gnu-sed/libexec/gnubin:\
+/opt/homebrew/opt/gnu-indent/libexec/gnubin:\
+${HOME}/.cargo/bin:${HOME}/go/bin:\
+/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
