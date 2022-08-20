@@ -76,7 +76,7 @@ case `uname` in
     ;;
 esac
 
-plugins=(git colorize rust common-aliases sdk golang)
+plugins=(git colorize rust common-aliases sdk golang brew)
 
 alias mvalidate="mvn validate -U"
 alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'

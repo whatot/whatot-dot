@@ -1,26 +1,19 @@
-case `uname` in
+case $(uname) in
     Darwin)
-        export PATH="/usr/local/opt/coreutils/libexec/gnubin:\
-/usr/local/opt/gnu-tar/libexec/gnubin:\
-/usr/local/opt/make/libexec/gnubin:\
-/usr/local/opt/findutils/libexec/gnubin:\
-/usr/local/opt/grep/libexec/gnubin:\
-/usr/local/opt/sphinx-doc/bin:\
-/usr/local/opt/llvm/bin:\
-${HOME}/.cargo/bin:\
-${HOME}/go/bin:\
-/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        export PATH="${HOME}/.cargo/bin:${HOME}/go/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
-        export CLASSPATH=$JAVA_HOME/jre/lib/
-        export PATH="/usr/lib/ccache/bin/":"$HOME/go/bin/":"$HOME/.cargo/bin/":$PATH
+        export CLASSPATH=${JAVA_HOME}/jre/lib/
+        export PATH="/usr/lib/ccache/bin/":"${HOME}/go/bin/":"${HOME}/.cargo/bin/":${PATH}
         export TERM="xterm-256color"
+    ;;
+    *)
     ;;
 esac
 
-export GOPATH="$HOME/go/"
-export WORKON_HOME="$HOME/envs/"
+export GOPATH="${HOME}/go/"
+export WORKON_HOME="${HOME}/envs/"
 # export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
