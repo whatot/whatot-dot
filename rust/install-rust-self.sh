@@ -24,7 +24,10 @@ case $(uname) in
     Darwin)
         # 在 macos, brew install rustup-init 后，
         # 执行 rustup-init 初始化后，~/.cargo/bin 中相关bin都是rustup-init的软链
-        if [[ ! -f "${LOCAL_RUSTUP_BIN}" ]]; then
+        if [[ -f "${LOCAL_RUSTUP_BIN}" ]]; then
+            echo -n "already run rustup-init in macos"
+        else
+            echo -n "try to run rustup-init in macos"
             rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
         fi
     ;;
