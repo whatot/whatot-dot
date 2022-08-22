@@ -23,8 +23,8 @@ EOF
 # 默认指定版本
 NEEDED_RUST_VERSION=nightly-2022-07-30
 
-# rustup-init 正常初始化后，~/.cargo/bin 中相关bin都是rustup的软链
-if [[ ! -f "${CARGO_CONFIG_PATH}/bin/cargo" ]]; then
+# rustup-init 正常初始化后，~/.cargo/bin 中相关bin都是rustup-init的软链
+if [[ ! -f "${CARGO_CONFIG_PATH}/bin/rustup" ]]; then
     rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
 fi
 
