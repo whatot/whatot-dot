@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 set -eux
 
-# curl https://sh.rustup.rs -sSf | sh
+# 默认指定版本
+NEEDED_RUST_VERSION=nightly-2022-07-30
 
-if [[ "${OSTYPE}" == "msys" ]]; then
-    CARGO_CONFIG_PATH="${USERPROFILE}/.cargo"
-else
-    CARGO_CONFIG_PATH="${HOME}/.cargo"
-fi
-
+# 基础目录
+CARGO_CONFIG_PATH="${HOME}/.cargo"
+LOCAL_RUSTUP_BIN="${CARGO_CONFIG_PATH}/bin/rustup"
 mkdir -p "${CARGO_CONFIG_PATH}"
+
 cat <<EOF > "${CARGO_CONFIG_PATH}/config"
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
@@ -20,13 +19,34 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 EOF
 
-# 默认指定版本
-NEEDED_RUST_VERSION=nightly-2022-07-30
-
-# rustup-init 正常初始化后，~/.cargo/bin 中相关bin都是rustup-init的软链
-if [[ ! -f "${CARGO_CONFIG_PATH}/bin/rustup" ]]; then
-    rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
-fi
+# 初始化 rustup
+case $(uname) in
+    Darwin)
+        # 在 macos, brew install rustup-init 后，
+        # 执行 rustup-init 初始化后，~/.cargo/bin 中相关bin都是rustup-init的软链
+        if [[ ! -f "${LOCAL_RUSTUP_BIN}" ]]; then
+            rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
+        fi
+    ;;
+    Linux)
+        if [[ -f "/usr/bin/pacman" ]]; then
+            # arch 与 manjaro 直接系统安装 rustup，不需要执行安装脚本
+            echo -n "install rustup by pkg manager in arch or manjaro"
+            sudo pacman -S rustup
+        else
+            # 不能直接使用系统 rustup 的发行版中，使用远程安装脚本初始化 rustup
+            if  [[ -f "${LOCAL_RUSTUP_BIN}" ]]; then
+                echo -n "already init rustup with curl"
+            else
+                echo -n "to init rustup with curl"
+                curl https://sh.rustup.rs -sSf | sh
+            fi
+        fi
+    ;;
+    *)
+        echo -n "unsuppprted os"
+    ;;
+esac
 
 rustup toolchain install "${NEEDED_RUST_VERSION}"
 rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
