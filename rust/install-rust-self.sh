@@ -20,9 +20,14 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 EOF
 
-
-# 特殊指定版本
+# 默认指定版本
 NEEDED_RUST_VERSION=nightly-2022-07-30
+
+# rustup-init 正常初始化后，~/.cargo/bin 中相关bin都是rustup的软链
+if [[ ! -f "${CARGO_CONFIG_PATH}/bin/cargo" ]]; then
+    rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
+fi
+
 rustup toolchain install "${NEEDED_RUST_VERSION}"
 rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rust-analyzer --toolchain "${NEEDED_RUST_VERSION}"
