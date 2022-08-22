@@ -85,8 +85,6 @@ brew_cask_install meld
 # install emacs and link
 brew_install emacs-plus@28 --with-native-comp
 brew link --overwrite emacs-plus
-
 ln -sf /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
-ln -sf /opt/homebrew/bin/rustup-init /opt/homebrew/bin/rustup
 
 echo "finined!"
