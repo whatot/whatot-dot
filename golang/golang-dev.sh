@@ -42,13 +42,13 @@ function for_mac() {
 }
 
 export GO111MODULE=on
-OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
 
 case $(uname) in
     Darwin)
         for_mac
     ;;
     Linux)
+        OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
         case ${OS_ID} in
         ubuntu)
             for_ubuntu
