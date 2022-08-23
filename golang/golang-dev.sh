@@ -15,7 +15,7 @@ function common_dev_pkgs() {
 }
 
 function for_arch() {
-    yaourt -S go go-tools golangci-lint-bin
+    sudo pacman -S go go-tools
 }
 
 function for_ubuntu() {
