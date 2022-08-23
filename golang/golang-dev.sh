@@ -12,6 +12,8 @@ function common_dev_pkgs() {
     go install github.com/zmb3/gogetdoc@latest
     go install github.com/x-motemen/gore/cmd/gore@latest
     go install golang.org/x/tools/gopls@latest
+    go install github.com/go-delve/delve/cmd/dlv@latest
+    go install honnef.co/go/tools/cmd/staticcheck@latest
 }
 
 function for_arch() {
