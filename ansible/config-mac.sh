@@ -30,8 +30,6 @@ fi
 
 if [[ "$(command -v brew)" != *"brew"* ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew tap homebrew/cask-fonts
-    brew tap d12frosted/emacs-plus
 fi
 
 brew_install coreutils
@@ -77,14 +75,8 @@ brew_install jq
 brew_install ripgrep
 
 brew_cask_install iina
-
-brew_cask_install font-source-code-pro
+brew_cask_install visual-studio-code
 brew_cask_install macvim
 brew_cask_install meld
-
-# install emacs and link
-brew_install emacs-plus@28 --with-native-comp
-brew link --overwrite emacs-plus
-ln -sf /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
 
 echo "finined!"
