@@ -6,3 +6,4 @@
 *.bin
 *.retry
 *.elc
+.DS_Store
