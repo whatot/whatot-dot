@@ -13,7 +13,7 @@ fi
 
 # clone源码
 if [[ ! -d "${DOOM_SOURCE_PATH}" ]]; then
-    git clone https://github.com/hlissner/doom-emacs "${DOOM_SOURCE_PATH}"
+    git clone https://github.com/doomemacs/doomemacs "${DOOM_SOURCE_PATH}"
 fi
 
 # 将.emacs.d指向doom源码
