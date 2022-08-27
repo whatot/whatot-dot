@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -xue
 
 SCRIPT_PATH=$(dirname "$(realpath "$0")")
 DOOM_SOURCE_PATH="${HOME}/.emacs.d.doom"

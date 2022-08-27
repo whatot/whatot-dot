@@ -21,13 +21,7 @@ function for_arch() {
 }
 
 function for_ubuntu() {
-    if [[ -f "/etc/apt/sources.list.d/longsleep-ubuntu-golang-backports-focal.list" ]]; then
-        echo "golang-backports ppa is already installed"
-    else
-        echo "try to install golang-backports ppa"
-        sudo add-apt-repository ppa:longsleep/golang-backports
-    fi
-
+    sudo add-apt-repository ppa:longsleep/golang-backports
     sudo apt update
     sudo apt install golang-go
 }
