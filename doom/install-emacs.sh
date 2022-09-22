@@ -17,7 +17,14 @@ function for_ubuntu() {
 function for_mac() {
     brew tap d12frosted/emacs-plus
     brew install emacs-plus@28 --with-native-comp
-    ln -s /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
+
+    M1_BREW_EMACS_PATH="/opt/homebrew/opt/emacs-plus@28/Emacs.app"
+    INTEL_BREW_EMACS_PATH="/usr/local/opt/emacs-plus@28/Emacs.app"
+    if [[ -d "${M1_BREW_EMACS_PATH}" ]]; then
+        ln -sf "${M1_BREW_EMACS_PATH}" /Applications
+    else
+        ln -sf "${INTEL_BREW_EMACS_PATH}" /Applications
+    fi
 }
 
 case $(uname) in
