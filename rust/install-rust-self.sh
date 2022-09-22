@@ -28,7 +28,7 @@ case $(uname) in
             echo -n "already run rustup-init in macos"
         else
             echo -n "try to run rustup-init in macos"
-            rustup-init -v -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
+            rustup-init -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
         fi
     ;;
     Linux)

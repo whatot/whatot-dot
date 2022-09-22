@@ -74,6 +74,7 @@ brew_install sccache
 brew_install prettier
 brew_install jq
 brew_install ripgrep
+brew_install shfmt
 
 brew_cask_install iina
 brew_cask_install visual-studio-code

@@ -43,8 +43,8 @@
 ;;; rust about
 (setq-default rust-format-on-save t)
 (setq lsp-file-watch-threshold '1200)
-(after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+(after! lsp-rust
+  (setq lsp-rust-server 'rust-analyzer))
 
 ;;; quick exit emacs without comfirm
 (setq-default confirm-kill-emacs nil)
