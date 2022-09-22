@@ -17,7 +17,7 @@ function for_ubuntu() {
 function for_mac() {
     brew tap d12frosted/emacs-plus
     brew install emacs-plus@28 --with-native-comp
-    ln -s /usr/local/opt/emacs-plus@28/Emacs.app /Applications
+    ln -s /opt/homebrew/opt/emacs-plus@28/Emacs.app /Applications
 }
 
 case $(uname) in
