@@ -27,10 +27,21 @@ function for_ubuntu() {
     sudo apt install golang-go
 }
 
+function brew_install() {
+    pkg_name=$1
+
+    if brew ls --versions "$pkg_name" > /dev/null; then
+        echo "$pkg_name installed"
+    else
+        echo "to install $pkg_name"
+        brew install $*
+    fi
+}
+
 function for_mac() {
     # https://github.com/golangci/golangci-lint#install
     # suggest install by binary(brew)
-    brew install golangci-lint
+    brew_install golangci-lint
 
     go install golang.org/x/tools/cmd/goimports@latest
     go install golang.org/x/tools/cmd/godoc@latest
