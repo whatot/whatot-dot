@@ -9,7 +9,7 @@ function brew_install() {
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
-        brew install $*
+        brew install "$*"
     fi
 }
 
@@ -65,7 +65,6 @@ brew_install the_silver_searcher
 brew_install bear
 brew_install shellcheck
 brew_install editorconfig
-brew_install ydcv
 brew_install plantuml
 brew_install fd
 brew_install proselint
@@ -80,5 +79,6 @@ brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
 brew_cask_install meld
+brew_cask_install rancher
 
 echo "finined!"
