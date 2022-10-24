@@ -1,10 +1,10 @@
 # whatot-dot
 
-spacemacs and other config files
-
-* vim ``./vim/deploy-ycm-vim.sh``
-* spacemacs ``./emacs/deploy-spacemacs.sh``
-* zsh ``./zsh/deploy-zshrc.sh``
+- vim `./vim/deploy-tiny.sh`
+- doom emacs `./doom/deploy-doom.sh`
+- zsh `./zsh/deploy-zshrc.sh`
+- golang `./golang/install-golang.sh`
+- rust `./rust/install-rust-self.sh`
 
 ## ansible
 
@@ -18,34 +18,11 @@ cd ansible/
 ./config-arch.sh
 ```
 
-## use virtualenvwrapper
+## use python venv
 
-in .zshrc
-```
-PY_ENV_WRAPPER=/usr/bin/virtualenvwrapper.sh
-if [[ -f $PY_ENV_WRAPPER ]]; then
-   source $PY_ENV_WRAPPER
-fi
-```
+[venv](https://docs.python.org/3/library/venv.html)
 
-in .zshenv
-```
-export WORKON_HOME="$HOME/envs/"
-```
-
-in .spacemacs and packages for completion
-```
-(setenv "WORKON_HOME" "~/envs/")
-
-pip install anaconda-mode jedi
-```
-
-usage
 ```
 mkdir -p $WORKON_HOME
-mkvirtualenv venv35
-mkvirtualenv -p /usr/bin/python2.7 venv27
-workon venv35
-workon venv27
+python3 -m venv $WORKON_HOME/env3
 ```
-
