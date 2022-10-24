@@ -23,6 +23,8 @@ cd ansible/
 [venv](https://docs.python.org/3/library/venv.html)
 
 ```
-mkdir -p $WORKON_HOME
-python3 -m venv $WORKON_HOME/env3
+mkdir -p ~/envs
+python3 -m venv ~/envs/e3
+source ~/envs/e3/bin/activate
+deactivate
 ```
