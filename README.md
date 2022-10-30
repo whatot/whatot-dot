@@ -13,7 +13,7 @@ and configure the localhost well.
 
 > Only support Archlinux and Manjaro
 
-```
+```shell
 cd ansible/
 ./config-arch.sh
 ```
@@ -22,7 +22,7 @@ cd ansible/
 
 [venv](https://docs.python.org/3/library/venv.html)
 
-```
+```shell
 mkdir -p ~/envs
 python3 -m venv ~/envs/e3
 source ~/envs/e3/bin/activate
