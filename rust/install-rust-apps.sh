@@ -8,12 +8,7 @@ cargo_install() {
 # for tldr to update cache, ``tldr --update``
 cargo_install tealdeer
 
-# ydcv-rs in mac
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    cargo install ydcv-rs --no-default-features --force
-    ln -sf ~/.cargo/bin/ydcv-rs ~/.cargo/bin/ydcv
-else
-    echo "skip ydcv in ${OSTYPE}"
-fi
+# A command-line tool that converts TOML to JSON. Nothing more, nothing less.
+cargo install toml2json
 
 sccache --show-stats
