@@ -156,6 +156,7 @@ program_tool_pkgs:
   - shellcheck
   - the_silver_searcher
   - tig
+  - tokei
   - visual-studio-code-bin
   - yarn
 
