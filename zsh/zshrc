@@ -105,9 +105,9 @@ if [[ -f ${SCCACHE_WRAPPER} ]]; then
 fi
 
 export SDKMAN_DIR="${HOME}/.sdkman"
-export SDKMAN_JDK8="8.0.342-amzn"
-export SDKMAN_JDK11="11.0.16-amzn"
-export SDKMAN_JDK17="17.0.4-amzn"
+export SDKMAN_JDK8="8.0.352-amzn"
+export SDKMAN_JDK11="11.0.17-amzn"
+export SDKMAN_JDK17="17.0.5-amzn"
 
 if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
     source "${SDKMAN_DIR}/bin/sdkman-init.sh"
@@ -131,8 +131,6 @@ function init_sdkman() {
     sdk install java "${SDKMAN_JDK8}"
     sdk install java "${SDKMAN_JDK11}"
     sdk install java "${SDKMAN_JDK17}"
-    sdk install mvnd
-    sdk install gradle 4.2.1
     sdk list java
     sdk current java
 }
