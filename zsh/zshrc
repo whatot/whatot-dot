@@ -51,6 +51,11 @@ function checkport() {
 # turn on proxy by default
 setproxy
 
+# for gradle proxy setting
+export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
+  -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT} \
+  -Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost"
+
 case $(uname) in
     Darwin)
         ZSH_THEME="robbyrussell"
