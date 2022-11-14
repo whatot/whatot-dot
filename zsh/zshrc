@@ -30,9 +30,9 @@ function setproxy() {
     ## determine proxy port
     PROXY_PORT=8899
     if checkport 7890; then
-        PROXY_PORT=7890
+        export PROXY_PORT=7890
     elif checkport 8899; then
-        PROXY_PORT=8899
+        export PROXY_PORT=8899
     fi
 
     export ALL_PROXY="socks5://${PROXY_HOST}:${PROXY_PORT}"
