@@ -88,6 +88,7 @@ alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
 alias mtree='mvn clean dependency:tree -U'
 alias msource='mvn dependency:sources'
 
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Duser.language=en"
 MVN=mvn
 if [[ $(command -v mvnd) ]]; then
     MVN=mvnd
