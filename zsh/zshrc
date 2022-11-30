@@ -17,22 +17,22 @@ function unsetproxy() {
 function setproxy() {
     unsetproxy
 
-    ## determine proxy host
-    if [[ -v WSL_INTEROP ]]; then
-        hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
-        export PROXY_HOST=${hostip}
-        echo "wsl2 proxy: ${PROXY_HOST} "
-    else
-        export PROXY_HOST="127.0.0.1"
-        echo "local proxy: ${PROXY_HOST} "
-    fi
-
     ## determine proxy port
     PROXY_PORT=8899
     if checkport 7890; then
         export PROXY_PORT=7890
     elif checkport 8899; then
         export PROXY_PORT=8899
+    fi
+
+    ## determine proxy host
+    if [[ -v WSL_INTEROP ]]; then
+        hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
+        export PROXY_HOST=${hostip}
+        echo "proxy wsl: ${PROXY_HOST}:${PROXY_PORT} "
+    else
+        export PROXY_HOST="127.0.0.1"
+        echo "proxy local: ${PROXY_HOST}:${PROXY_PORT} "
     fi
 
     export ALL_PROXY="socks5://${PROXY_HOST}:${PROXY_PORT}"
