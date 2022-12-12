@@ -63,6 +63,9 @@ case $(uname) in
         alias vim='mvim -v'
         SCCACHE_WRAPPER="/opt/homebrew/bin/sccache"
         export HOMEBREW_NO_AUTO_UPDATE=1
+        if [[ $(command -v podman) != *"podman"* ]]; then
+            alias docker="podman"
+        fi
     ;;
     Linux)
         ZSH_THEME="gentoo"
@@ -80,6 +83,11 @@ case $(uname) in
     *)
     ;;
 esac
+
+# podman machine init
+# podman machine set --rootful
+# podman machine start
+# podman machine stop
 
 plugins=(git golang rust common-aliases sdk brew gnu-utils colorize aliases python fd)
 
