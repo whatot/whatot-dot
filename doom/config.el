@@ -40,12 +40,6 @@
 (setq-default show-trailing-whitespace t)
 (setq-default require-final-newline t)
 
-;;; rust about
-(setq-default rust-format-on-save t)
-(setq lsp-file-watch-threshold '1200)
-(after! lsp-rust
-  (setq lsp-rust-server 'rust-analyzer))
-
 ;;; quick exit emacs without comfirm
 (setq-default confirm-kill-emacs nil)
 
