@@ -4,3 +4,4 @@
 (package! youdao-dictionary)
 (package! fcitx)
 (package! go-impl)
+(package! beacon)

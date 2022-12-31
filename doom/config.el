@@ -24,6 +24,26 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
+(setq-default truncate-lines nil)
+(setq-default word-wrap nil)
+(setq-default show-trailing-whitespace t)
+(setq-default require-final-newline t)
+
+;;; quick exit emacs without comfirm
+(setq-default confirm-kill-emacs nil)
+
+;; Replace annoying yes/no prompt with a y/n prompt
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(setq byte-compile-warnings '(cl-functions))
+
+;; disable warning generated when functions are redefined with defadvice
+(setq ad-redefinition-action 'accept)
+
+(prefer-coding-system 'utf-8)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package! youdao-dictionary
   :demand t
   :commands (youdao-dictionary-search-at-point)
@@ -34,15 +54,7 @@
   :config
   (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
 
-(setq-default truncate-lines nil)
-(setq-default word-wrap nil)
-(setq-default show-trailing-whitespace t)
-(setq-default require-final-newline t)
-
-;;; quick exit emacs without comfirm
-(setq-default confirm-kill-emacs nil)
-
-;;; config plantuml-jar-path
+;; config plantuml-jar-path
 (setq-default plantuml-jar-path
               (cond ((string= system-type "darwin")
                      "/usr/local/opt/plantuml/libexec/plantuml.jar")
@@ -51,8 +63,11 @@
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
 (setq-default plantuml-default-exec-mode 'jar)
 
+;; Beacon — Never lose your cursor again
+(beacon-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Configure network proxy
+
 (setq-default my-proxy "127.0.0.1:7890")
 (defun show-proxy ()
   "Show http/https proxy."
@@ -80,5 +95,7 @@
   (if url-proxy-services
       (unset-proxy)
     (set-proxy)))
+
 (set-proxy)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
