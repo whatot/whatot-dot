@@ -13,7 +13,7 @@
 (cond
  ((string= (system-name) "msi") (config-font-size 18 16))
  ((string= (system-name) "b150") (config-font-size 32 30))
- ((string= system-type "darwin") (config-font-size 15 14)))
+ ((string= system-type "darwin") (config-font-size 14 13)))
 
 ;;; windows frame title
 (setq frame-title-format
