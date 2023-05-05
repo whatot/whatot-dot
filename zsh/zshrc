@@ -117,16 +117,13 @@ if [[ -f ${SCCACHE_WRAPPER} ]]; then
 fi
 
 export SDKMAN_DIR="${HOME}/.sdkman"
-export SDKMAN_JDK8="8.0.362-amzn"
-export SDKMAN_JDK11="11.0.18-amzn"
-export SDKMAN_JDK17="17.0.6-amzn"
+export SDKMAN_JDK11="11.0.19-amzn"
+export SDKMAN_JDK17="17.0.7-amzn"
 
 if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
     source "${SDKMAN_DIR}/bin/sdkman-init.sh"
     # sdk offline enable
-    function usejdk8() {
-        sdk use java "${SDKMAN_JDK8}"
-    }
+    # sdk config
     function usejdk11() {
         sdk use java "${SDKMAN_JDK11}"
     }
@@ -134,15 +131,16 @@ if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
         sdk use java "${SDKMAN_JDK17}"
     }
     function gradle_wrapper_jdk8() {
-        usejdk8
+        usejdk11
         gradle wrapper --gradle-version 4.2.1
     }
 fi
 function init_sdkman() {
     curl -s "https://get.sdkman.io" | bash
-    sdk install java "${SDKMAN_JDK8}"
-    sdk install java "${SDKMAN_JDK11}"
+    source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+    sdk config
     sdk install java "${SDKMAN_JDK17}"
+    sdk install java "${SDKMAN_JDK11}"
     sdk list java
     sdk current java
 }
