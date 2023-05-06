@@ -99,7 +99,7 @@ MVN=mvn
 if [[ $(command -v mvnd) ]]; then
     MVN=mvnd
 fi
-alias mqc='${MVN} compile --offline'
+alias mqc='${MVN} com.coveo:fmt-maven-plugin:format -o && ${MVN} compile --offline'
 alias mcc='${MVN} clean compile -U'
 alias mcco='${MVN} clean compile -U --offline'
 alias mqt='${MVN} test -DfailIfNoTests=false --offline'
