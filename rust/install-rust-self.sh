@@ -2,7 +2,7 @@
 set -eux
 
 # 默认指定版本
-NEEDED_RUST_VERSION=nightly-2023-04-01
+NEEDED_RUST_VERSION=nightly-2023-05-01
 
 # 基础目录
 CARGO_CONFIG_PATH="${HOME}/.cargo"
@@ -14,9 +14,9 @@ cat <<EOF >"${CARGO_CONFIG_PATH}/config"
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'tuna'
 [source.ustc]
-registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 [source.tuna]
-registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
 EOF
 
 # 初始化 rustup
