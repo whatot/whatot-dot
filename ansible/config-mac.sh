@@ -81,5 +81,6 @@ brew_cask_install visual-studio-code
 brew_cask_install macvim
 brew_cask_install meld
 brew_cask_install rancher
+brew_cask_install font-meslo-lg-nerd-font
 
 echo "finined!"
