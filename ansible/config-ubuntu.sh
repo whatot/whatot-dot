@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -eux
 
-# https://launchpad.net/~ubuntu-elisp/+archive/ubuntu/ppa
-# sudo add-apt-repository ppa:ubuntu-elisp/ppa
-# sudo apt install emacs-snapshot
+# https://launchpad.net/~kelleyk/+archive/ubuntu/emacs
+# sudo add-apt-repository ppa:kelleyk/emacs
+# sudo apt install emacs28-nativecomp
 
 sudo apt update
 sudo apt install vim zsh git curl zsh openssh-server htop jq

@@ -35,7 +35,7 @@ function setproxy() {
         echo "proxy local: ${PROXY_HOST}:${PROXY_PORT} "
     fi
 
-    export ALL_PROXY="socks5://${PROXY_HOST}:${PROXY_PORT}"
+    export ALL_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
     export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
     export HTTPS_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 }

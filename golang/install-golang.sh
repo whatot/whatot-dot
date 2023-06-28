@@ -25,12 +25,14 @@ function for_ubuntu() {
     sudo add-apt-repository ppa:longsleep/golang-backports
     sudo apt update
     sudo apt install golang-go
+
+    go install golang.org/x/tools/cmd/guru@latest
 }
 
 function brew_install() {
     pkg_name=$1
 
-    if brew ls --versions "$pkg_name" > /dev/null; then
+    if brew ls --versions "$pkg_name" >/dev/null; then
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
@@ -54,24 +56,24 @@ export GO111MODULE=on
 case $(uname) in
     Darwin)
         for_mac
-    ;;
+        ;;
     Linux)
         OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
         case ${OS_ID} in
-        ubuntu)
-            for_ubuntu
-        ;;
-        manjaro | archlinux)
-            for_arch
-        ;;
-        *)
-            echo -n "unsupported os id: ${OS_ID}"
-        ;;
+            ubuntu)
+                for_ubuntu
+                ;;
+            manjaro | archlinux)
+                for_arch
+                ;;
+            *)
+                echo -n "unsupported os id: ${OS_ID}"
+                ;;
         esac
-    ;;
+        ;;
     *)
         echo -n "unsuppprted os"
-    ;;
+        ;;
 esac
 
 common_dev_pkgs
