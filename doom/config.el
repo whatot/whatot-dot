@@ -43,6 +43,9 @@
 
 (prefer-coding-system 'utf-8)
 
+;; 增大同LSP服务器交互时的读取文件的大小 128MB
+(setq read-process-output-max (* 1024 1024 128))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package! youdao-dictionary
@@ -69,7 +72,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default my-proxy "127.0.0.1:7890")
+(setq-default my-proxy "127.0.0.1:8890")
 (defun show-proxy ()
   "Show http/https proxy."
   (interactive)
