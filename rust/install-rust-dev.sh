@@ -5,6 +5,9 @@ cargo_install() {
     cargo install --force "$@"
 }
 
+# build rust pkg with cache
+cargo_install sccache
+
 # Check a local package and all of its dependencies for errors
 cargo_install cargo-check
 
@@ -22,7 +25,7 @@ cargo_install cargo-bloat --features regex-filter
 
 cargo_install cargo-generate --features vendored-openssl
 cargo_install cargo-edit
-cargo_install bindgen
+cargo_install bindgen-cli
 
 # A program that list statistics related to usage of unsafe Rust code
 # in a Rust crate and all its dependencies.
@@ -48,4 +51,3 @@ cargo_install cargo-deny
 
 # cargo fix --edition
 sccache --show-stats
-
