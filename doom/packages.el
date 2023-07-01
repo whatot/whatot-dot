@@ -5,3 +5,4 @@
 (package! fcitx)
 (package! go-impl)
 (package! beacon)
+(package! vimrc-mode)

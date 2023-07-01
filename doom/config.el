@@ -70,6 +70,10 @@
 ;; Beacon — Never lose your cursor again
 (beacon-mode 1)
 
+;; for edit vim file in emacs
+(use-package! vimrc-mode
+  :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default my-proxy "127.0.0.1:8890")
