@@ -119,7 +119,6 @@ export LC_MESSAGES="en_US.UTF-8"
 export EDITOR='vim'
 
 export RUSTC_WRAPPER=$(find_bin_path "sccache")
-echo $(find_bin_path "rustup")
 
 export SDKMAN_DIR="${HOME}/.sdkman"
 export SDKMAN_JDK11="11.0.19-amzn"
