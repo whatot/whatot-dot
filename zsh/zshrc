@@ -6,6 +6,15 @@ else
     export DISABLE_AUTO_UPDATE="false"
 fi
 
+function find_first_exist_file() {
+    for var in "$@"
+    do
+        if [[ -f "${var}" ]]; then
+           echo "${var}"
+        fi
+    done
+    echo ""
+}
 function unsetproxy() {
     unset ALL_PROXY
     unset HTTP_PROXY
@@ -61,7 +70,6 @@ case $(uname) in
         ZSH_THEME="robbyrussell"
         source ~/.zshenv
         alias vim='mvim -v'
-        SCCACHE_WRAPPER="/opt/homebrew/bin/sccache"
         export HOMEBREW_NO_AUTO_UPDATE=1
     ;;
     Linux)
@@ -71,11 +79,6 @@ case $(uname) in
         export XMODIFIERS="@im=fcitx"
         alias gvim='gvim -c "call Maximize_Window()"'
         alias unzipp='unzip -O cp936'
-        SCCACHE_WRAPPER="/usr/bin/sccache"
-        # wsl only config
-        if [[ -v WSL_INTEROP ]]; then
-            SCCACHE_WRAPPER="${HOME}/.cargo/bin/sccache"
-        fi
     ;;
     *)
     ;;
@@ -113,9 +116,8 @@ alias yay="paru"
 export LC_MESSAGES="en_US.UTF-8"
 export EDITOR='vim'
 
-if [[ -f ${SCCACHE_WRAPPER} ]]; then
-    export RUSTC_WRAPPER="${SCCACHE_WRAPPER}"
-fi
+SCCACHE_CANDIDATES=("/opt/homebrew/bin/sccache" "/usr/bin/sccache" "${HOME}/.cargo/bin/sccache")
+export RUSTC_WRAPPER=$(find_first_exist_file "${SCCACHE_CANDIDATES[@]}")
 
 export SDKMAN_DIR="${HOME}/.sdkman"
 export SDKMAN_JDK11="11.0.19-amzn"
