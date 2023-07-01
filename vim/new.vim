@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/LargeFile'
 Plug 'dense-analysis/ale'
 Plug 'whatot/molokai'
+Plug 'moorereason/vim-markdownfmt'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-p>'
@@ -38,6 +39,8 @@ let g:LargeFile = 2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:markdownfmt_autosave=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme molokai
 if has("mac")

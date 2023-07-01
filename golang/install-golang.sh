@@ -17,6 +17,10 @@ function common_dev_pkgs() {
     go install github.com/cweill/gotests/gotests@latest
 }
 
+function common_useful_pkgs() {
+    go install github.com/Kunde21/markdownfmt/v3/cmd/markdownfmt@latest
+}
+
 function for_arch() {
     sudo pacman -S go go-tools
 }
@@ -77,3 +81,4 @@ case $(uname) in
 esac
 
 common_dev_pkgs
+common_useful_pkgs

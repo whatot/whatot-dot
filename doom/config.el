@@ -74,6 +74,11 @@
 (use-package! vimrc-mode
   :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
 
+;; use fmt in golang for missing fmt
+(use-package! markdownfmt
+  :after markdown-mode
+  :config (add-hook 'markdown-mode-hook #'markdownfmt-enable-on-save))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default my-proxy "127.0.0.1:8890")
