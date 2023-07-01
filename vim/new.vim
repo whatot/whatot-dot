@@ -45,6 +45,8 @@ if has("mac")
 elseif has("unix")
     if hostname() == 'msi'
         set guifont=Source\ Code\ Pro\ 12
+    elseif hostname() == "gs65"
+        set guifont=Source\ Code\ Pro\ 13
     elseif hostname() == 'b150'
         set guifont=Source\ Code\ Pro\ 11
     elseif hostname() == 'x411'
@@ -71,6 +73,8 @@ set cursorline
 set background=dark
 set laststatus=2
 set showcmd
+set novisualbell  " 不要闪烁
+set noerrorbells  " 关闭遇到错误时的声音提示
 autocmd FileType make set noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
@@ -109,6 +113,8 @@ if has("gui_running")
     set guioptions-=T   " hide tool bar
     set guioptions-=L   " hide left scroll
     set guioptions-=r   " hide right scroll
+    set columns=120
+    set lines=42
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " alias gvim='gvim -c "call Maximize_Window()"'
