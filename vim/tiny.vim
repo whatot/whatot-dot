@@ -5,7 +5,7 @@ set encoding=utf-8
 filetype plugin indent on
 syntax on
 
-set guifont=Droid\ Sans\ Mono\ 12
+set guifont=Ubuntu\ Mono\ 13
 set shiftround
 set diffopt+=vertical,context:3,foldcolumn:0
 set fileformats=unix,dos,mac
@@ -22,14 +22,11 @@ au GUIEnter * set t_vb=
 set viminfo='100,:10000,<50,s10,h
 set history=10000
 
-
-if v:version >= 700
-    set completeopt=menu,longest  ",preview
-    set completeopt-=previewwindow
-                            " 自动补全(ctrl-p)时的一些选项：
-                            " 多于一项时显示菜单，最长选择，
-                            " 显示当前选择的额外信息
-endif
+set completeopt=menu,longest,preview
+set completeopt-=previewwindow
+" 自动补全(ctrl-p)时的一些选项
+" 多于一项时显示菜单，最长选择，
+" 显示当前选择的额外信息
 
 set delcombine              " 组合字符一个个地删除
 
@@ -338,8 +335,8 @@ let colorscheme = 'desert'
 " 图形与终端
 if has("gui_running")
     " 有些终端不能改变大小
-    " set columns=88
-    " set lines=33
+    set columns=120
+    set lines=42
     set cursorline
     exe 'colorscheme' colorscheme
 elseif has("unix")
