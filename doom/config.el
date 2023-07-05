@@ -54,16 +54,16 @@
   :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 
 (use-package! fcitx
-  :if IS-LINUX
+  :if (string= system-type 'gnu/linux)
   :after evil
   :config
   (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
 
 ;; config plantuml-jar-path
 (setq-default plantuml-jar-path
-              (cond ((string= system-type "darwin")
+              (cond ((string= system-type 'darwin)
                      "/usr/local/opt/plantuml/libexec/plantuml.jar")
-                    ((string= system-type "gnu/linux")
+                    ((string= system-type 'gnu/linux)
                      "/usr/share/java/plantuml/plantuml.jar")))
 (setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
 (setq-default plantuml-default-exec-mode 'jar)
