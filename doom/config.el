@@ -79,6 +79,17 @@
   :after markdown-mode
   :config (add-hook 'markdown-mode-hook #'markdownfmt-enable-on-save))
 
+; optional as clangd is the default cc lsp in Doom
+(after! lsp-clangd
+  (setq lsp-clients-clangd-args
+        '("-j=3"
+          "--background-index"
+          "--clang-tidy"
+          "--completion-style=detailed"
+          "--header-insertion=never"
+          "--header-insertion-decorators=0"))
+  (set-lsp-priority! 'clangd 2))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq-default my-proxy "127.0.0.1:8890")

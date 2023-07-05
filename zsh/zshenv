@@ -5,7 +5,7 @@ case $(uname) in
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
         export CLASSPATH=${JAVA_HOME}/jre/lib/
-        export PATH="/usr/lib/ccache/bin/":"${HOME}/go/bin/":"${HOME}/.cargo/bin/":${PATH}
+        export PATH="/usr/lib/ccache":"${HOME}/go/bin":"${HOME}/.cargo/bin":"${HOME}/.local/bin":${PATH}
         export TERM="xterm-256color"
     ;;
     *)
