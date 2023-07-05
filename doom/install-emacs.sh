@@ -15,6 +15,26 @@ function for_ubuntu() {
 }
 
 function for_mac() {
+    use_emacs_mac
+}
+
+function use_emacs_mac() {
+    brew tap railwaycat/emacsmacport
+    brew reinstall emacs-mac --with-dbus\
+        --with-starter\
+        --with-no-title-bars\
+        --with-spacemacs-icon\
+        --with-native-comp\
+        --with-mac-metal\
+        --with-xwidgets
+
+    M1_BREW_EMACS_PATH="/opt/homebrew/Cellar/emacs-mac/emacs-28.2-mac-9.1/Emacs.app"
+    if [[ -d "${M1_BREW_EMACS_PATH}" ]]; then
+        ln -sf "${M1_BREW_EMACS_PATH}" /Applications
+    fi
+}
+
+function use_emacs_plus() {
     brew tap d12frosted/emacs-plus
     brew install emacs-plus@28 --with-native-comp
 
