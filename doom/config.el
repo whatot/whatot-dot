@@ -54,6 +54,7 @@
   :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
 
 (use-package! fcitx
+  :if IS-LINUX
   :after evil
   :config
   (when (executable-find "fcitx-remote") (fcitx-evil-turn-on)))
