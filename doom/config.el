@@ -48,10 +48,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package! youdao-dictionary
+;; https://github.com/lorniu/go-translate/blob/master/README-zh.md
+(use-package! go-translate
   :demand t
-  :commands (youdao-dictionary-search-at-point)
-  :config (map! "C-c y" 'youdao-dictionary-search-at-point+))
+  :config
+  (map! "C-c y" 'gts-do-translate))
+(setq gts-translate-list '(("en" "zh")))
+(setq gts-default-translator
+      (gts-translator
+       :picker (gts-noprompt-picker :texter (gts-current-or-selection-texter) :single t)
+       :engines (list (gts-bing-engine) (gts-google-rpc-engine))
+       :render (gts-posframe-pop-render :width 120 :height 32)))
 
 (use-package! fcitx
   :if (string= system-type 'gnu/linux)
