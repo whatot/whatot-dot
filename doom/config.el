@@ -100,7 +100,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default my-proxy "127.0.0.1:8890")
+(setq-default my-proxy "127.0.0.1:8899")
 (defun show-proxy ()
   "Show http/https proxy."
   (interactive)
