@@ -3,13 +3,14 @@
 - vim `./vim/deploy-tiny.sh`
 - doom emacs `./doom/deploy-doom.sh`
 - zsh `./zsh/deploy-zshrc.sh`
-- golang `./golang/install-golang.sh`
 - rust `./rust/install-rust-self.sh`
+- language
+  - cc `./lang/cc.sh`
+  - golang `./lang/golang.sh`
 
 ## ansible
 
-The `arch.yml` in `ansible/` will install all needed packages,
-and configure the localhost well.
+The `arch.yml` in `ansible/` will install all needed packages, and configure the localhost well.
 
 > Only support Archlinux and Manjaro
 
