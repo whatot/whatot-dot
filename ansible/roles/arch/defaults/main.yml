@@ -39,7 +39,6 @@ absent_pkgs:
   - ttf-google-fonts-git
   - vim
   - visual-studio-code
-  - ydcv
   - you-get-git
   - youtube-dl-git
   - zeal
@@ -80,7 +79,6 @@ basic_pkgs:
   - vertex-theme
   - wget
   - wmctrl
-  - ydcv-rs-git
   - zsh-completions
 
 backend_pkgs:
