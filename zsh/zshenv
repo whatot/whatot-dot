@@ -18,3 +18,8 @@ export WORKON_HOME="${HOME}/envs/"
 # export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
+
+NIX_PROFILE_PATH="${HOME}/.nix-profile/etc/profile.d/nix.sh"
+if [[ -e "${NIX_PROFILE_PATH}" ]]; then
+   source "${NIX_PROFILE_PATH}"
+fi
