@@ -147,9 +147,12 @@ function init_sdkman() {
     sdk current java
 }
 
-BREW_BIN="/opt/homebrew/bin/brew"
-if [[ -f ${BREW_BIN} ]]; then
-    eval "$(${BREW_BIN} shellenv)"
+BREW_BIN="$(command -v brew)"
+if [[ $? -eq 0 ]]; then
+    eval "$(brew shellenv)"
+
+    # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 ZSH_CACHE_DIR=${HOME}/.oh-my-zsh-cache
