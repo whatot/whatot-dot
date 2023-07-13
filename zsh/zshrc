@@ -30,13 +30,7 @@ function unsetproxy() {
 function setproxy() {
     unsetproxy
 
-    ## determine proxy port
     PROXY_PORT=8899
-    if checkport 7890; then
-        export PROXY_PORT=7890
-    elif checkport 8899; then
-        export PROXY_PORT=8899
-    fi
 
     ## determine proxy host
     if [[ -v WSL_INTEROP ]]; then
@@ -56,9 +50,6 @@ function proxyinfo() {
     echo "ALL_PROXY = ${ALL_PROXY}"
     echo "HTTP_PROXY = ${HTTP_PROXY}"
     echo "HTTPS_PROXY = ${HTTPS_PROXY}"
-}
-function checkport() {
-    lsof -Pi :"$1" -sTCP:LISTEN -t >/dev/null
 }
 
 # turn on proxy by default
