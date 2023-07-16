@@ -87,7 +87,7 @@
   :after markdown-mode
   :config (add-hook 'markdown-mode-hook #'markdownfmt-enable-on-save))
 
-; optional as clangd is the default cc lsp in Doom
+;; optional as clangd is the default cc lsp in Doom
 (after! lsp-clangd
   (setq lsp-clients-clangd-args
         '("-j=3"
@@ -97,6 +97,10 @@
           "--header-insertion=never"
           "--header-insertion-decorators=0"))
   (set-lsp-priority! 'clangd 2))
+
+;; config dired
+(setq dired-dwim-target t)
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
