@@ -78,7 +78,11 @@ brew_install tokei
 brew_install editorconfig
 brew_install neofetch
 brew_install tree-sitter
+brew_install btop
+brew_install neovim
 
+brew_cask_install neovide
+brew_cask_install wezterm
 brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
