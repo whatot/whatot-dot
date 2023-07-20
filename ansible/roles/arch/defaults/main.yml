@@ -76,12 +76,15 @@ basic_pkgs:
   - plantuml
   - rime-pinyin-zhwiki
   - rsync
+  - starship
   - sysstat
   - tree
   - ungoogled-chromium
   - wezterm
   - wget
+  - zsh-autosuggestions
   - zsh-completions
+  - zsh-syntax-highlighting
 
 program_tool_pkgs:
   - ansible

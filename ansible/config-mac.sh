@@ -80,6 +80,7 @@ brew_install neofetch
 brew_install tree-sitter
 brew_install btop
 brew_install neovim
+brew_install starship
 
 brew_cask_install neovide
 brew_cask_install wezterm
