@@ -10,5 +10,5 @@ fi
 # all needed subdirs
 mkdir -p ~/.vim/{plugged,sessions,undodir,autoload}
 
-ln -sf "${SCRIPT_PATH}"/tiny.vim ~/.vimrc
+ln -sf "${SCRIPT_PATH}"/no-plugin.vim ~/.vimrc
 
