@@ -5,7 +5,7 @@ set -eu
 function brew_install() {
     pkg_name=$1
 
-    if brew ls --versions "$pkg_name" > /dev/null; then
+    if brew ls --versions "$pkg_name" >/dev/null; then
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
@@ -16,7 +16,7 @@ function brew_install() {
 function brew_cask_install() {
     pkg_name=$1
 
-    if brew list --cask --versions "$pkg_name" > /dev/null; then
+    if brew list --cask --versions "$pkg_name" >/dev/null; then
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
@@ -75,6 +75,9 @@ brew_install jq
 brew_install ripgrep
 brew_install shfmt
 brew_install tokei
+brew_install editorconfig
+brew_install neofetch
+brew_install tree-sitter
 
 brew_cask_install iina
 brew_cask_install visual-studio-code
