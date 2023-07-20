@@ -109,7 +109,6 @@ alias mtto='${MVN} clean test -U -DfailIfNoTests=false --offline'
 
 alias myip="curl myip.ipip.net"
 alias yay="paru"
-alias find="fd"
 alias ll='ls -alF --color'
 alias ..='cd ..'
 
