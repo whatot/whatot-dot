@@ -50,13 +50,10 @@ basic_pkgs:
   - dnsmasq
   - dnsmasq-china-list-git
   - dstat
-  - fcitx5
   - fcitx5-chinese-addons
-  - fcitx5-configtool
-  - fcitx5-gtk
+  - fcitx5-im
   - fcitx5-material-color
   - fcitx5-pinyin-zhwiki
-  - fcitx5-qt5
   - fcitx5-rime
   - firefox
   - firefox-i18n-zh-cn
