@@ -7,6 +7,6 @@
 
 ## os
 
-- *assess* truenas scale
-- *assess* OpenMediaVault
-- *assess* others
+- _assess_ truenas scale
+- _assess_ OpenMediaVault
+- _assess_ others

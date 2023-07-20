@@ -9,47 +9,47 @@
 
 ### os on bare metal
 
-- *trial* pve
+- _trial_ pve
 
 ### os under k8s
 
 > https://thenewstack.io/looking-for-a-k3os-alternative-choosing-a-container-os-for-edge-k8s/
 
-- *assess* [talos linux](https://github.com/siderolabs/talos)
-- *assess* [Flatcar Container Linux](https://github.com/flatcar/Flatcar)
-- *assess* [Kairos](https://github.com/kairos-io/kairos)
-- *assess* [rancher k8os](https://github.com/rancher/k3os)
-- *hold* [aws bottlerocket](https://github.com/bottlerocket-os/bottlerocket)
+- _assess_ [talos linux](https://github.com/siderolabs/talos)
+- _assess_ [Flatcar Container Linux](https://github.com/flatcar/Flatcar)
+- _assess_ [Kairos](https://github.com/kairos-io/kairos)
+- _assess_ [rancher k8os](https://github.com/rancher/k3os)
+- _hold_ [aws bottlerocket](https://github.com/bottlerocket-os/bottlerocket)
 
 ### os for normal server
 
-- *adopt* debian
+- _adopt_ debian
 
 ## k8s
 
 ### k8s solution
 
-- *assess* [portainer](https://docs.portainer.io/)
-- *assess* [nomad](https://github.com/hashicorp/nomad)
-- *assess* k3s
-- *assess* kubernetes
-- *hold* KubeSphere
+- _assess_ [portainer](https://docs.portainer.io/)
+- _assess_ [nomad](https://github.com/hashicorp/nomad)
+- _assess_ k3s
+- _assess_ kubernetes
+- _hold_ KubeSphere
 
 ### k8s daily tools
 
-- *assess* [openlens](https://github.com/lensapp/lens) Kubernetes IDE
+- _assess_ [openlens](https://github.com/lensapp/lens) Kubernetes IDE
 
 ## network
 
-- *assess* [nebula](https://github.com/slackhq/nebula)
-- *assess* [tailscale](https://github.com/tailscale/tailscale) [headscale](https://github.com/juanfont/headscale)
+- _assess_ [nebula](https://github.com/slackhq/nebula)
+- _assess_ [tailscale](https://github.com/tailscale/tailscale) [headscale](https://github.com/juanfont/headscale)
 
 ## managed services
 
 > https://github.com/awesome-selfhosted/awesome-selfhosted
 
 - dns
-  - *adopt* [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
-  - *assess* [pi-hole](https://github.com/pi-hole/pi-hole)
+  - _adopt_ [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
+  - _assess_ [pi-hole](https://github.com/pi-hole/pi-hole)
 - ebook
 - rss
