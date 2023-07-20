@@ -9,7 +9,7 @@ font_pkgs:
   - adobe-source-han-serif-cn-fonts
   - adobe-source-sans-pro-fonts
   - adobe-source-serif-pro-fonts
-  - nerd-fonts-jetbrains-mono
+  - ttf-jetbrains-mono-nerd
   - noto-fonts
   - ttf-bitstream-vera
   - ttf-dejavu
@@ -31,12 +31,10 @@ absent_pkgs:
   - erlang
   - noto-fonts-cjk
   - noto-fonts-extra
-  - racerd-git
   - rust
   - rust-docs
   - rust-racer
   - rustfmt
-  - ttf-google-fonts-git
   - vim
   - visual-studio-code
   - you-get-git
@@ -45,181 +43,81 @@ absent_pkgs:
 
 aur_pkgs:
   - caffeine-ng
-  - gnome-shell-extension-caffeine-git
-  - gnome-shell-extension-freon-git
   - marp
   - nautilus-nutstore
-  - nutstore
-  - unzip-iconv
 
 basic_pkgs:
-  - aria2
-  - axel
+  - autoconf
+  - automake
+  - bridge-utils
+  - btop
   - clipit
   - discount
-  - faenza-icon-theme
+  - dnsmasq
+  - dnsmasq-china-list-git
+  - dstat
   - fcitx
   - fcitx-configtool
   - fcitx-qt5
   - fcitx-rime
-  - fcitx-sunpinyin
-  - fcitx-sogoupinyin
+  - fcitx5-pinyin-zhwiki
+  - firefox
+  - firefox-i18n-zh-cn
   - gedit
-  - gnome-clocks
-  - gnome-shell-extension-tray-icons
   - gnome-tweaks
-  - libzip
-  - oh-my-zsh-git
-  - paru
-  - proxychains-ng
-  - rsync
-  - tealdeer
-  - tmux
-  - transmission-gtk
-  - vertex-theme
-  - wget
-  - wmctrl
-  - zsh-completions
-
-backend_pkgs:
-  - autoconf
-  - automake
-  - bind
-  - bridge-utils
-  - dnsmasq
-  - dnsmasq-china-list-git
-  - dstat
-  - ebtables
+  - gnuplot
   - htop
   - iftop
   - ifuse
-  - ipad_charge
-  - libvirt
   - meld
+  - mpv
+  - nnn
+  - nutstore
+  - oh-my-zsh-git
   - openssh
   - openssl
-  - patch
-  - qemu
-  - sysstat
-
-view_pkgs:
-  - calibre
-  - deadbeef
-  - file-roller
-  - firefox
-  - firefox-i18n-zh-cn
-  - google-chrome
-  - libva-intel-driver
-  - mpv
   - p7zip
-  - ranger
-  - tilda
-  - tree
-  - unrar
-  - viewnior
-  - you-get
-  - youtube-dl
-  - zeal-git
-  - zim
-
-write_pkgs:
-  - gnuplot
+  - paru
+  - patch
   - plantuml
-  - proselint
-  - texlive-bin
-  - texlive-core
-  - texlive-science
-  - typora
+  - rime-pinyin-zhwiki
+  - rsync
+  - sysstat
+  - tree
+  - ungoogled-chromium
+  - wezterm
+  - wget
+  - zsh-completions
 
 program_tool_pkgs:
-  - ack
   - ansible
   - ansible-lint
-  - discount
-  - docker
-  - docker-compose
-  - editorconfig-core-c
-  - emacs-git
-  - fd
-  - git
-  - go
-  - go-tools
-  - gvim
-  - jq
-  - perf
-  - prettier
-  - repo
-  - ripgrep
-  - sccache
-  - shellcheck
-  - the_silver_searcher
-  - tig
-  - tokei
-  - visual-studio-code-bin
-  - yarn
-
-c_pkgs:
-  - bear
   - bison
   - boost
   - ccache
   - clang
   - cmake
-  - cscope
+  - discount
+  - editorconfig-core-c
+  - emacs-gcc-wayland-devel-bin
+  - fd
   - flex
   - gcc
   - gdb
-  - gflags
-  - global
+  - git
+  - go
+  - go-tools
+  - gvim
+  - jdk11-openjdk
   - llvm
   - make
-  - ninja
-  - rocksdb
-
-java_pkgs:
-  - ant
-  - gradle
-  - intellij-idea-community-edition
-  - ivy
-  - jdk-openjdk
-  - jdk11-openjdk
-  - jdk8-openjdk
   - maven
-  - openjdk-src
-  - openjdk11-src
-  - openjdk8-src
-
-default_jdk: java-11-openjdk
-
-python_pkgs:
-  - flake8
-  - ipython
-  - python-isort
-  - python-black
-  - python-nose
-  - python-pipenv
-  - python-pylint
-  - python-pytest
-  - python-virtualenv
-  - python-virtualenvwrapper
-
-rust_pkgs:
+  - ninja
+  - prettier
+  - ripgrep
   - rustup
-
-erlang_elixir_pkgs:
-  - erlang-nox
-  - elixir
-
-haskell_pkgs:
-  - cabal-install
-  - ghc
-  - hlint
-  - stack-bin
+  - sccache
 
 fq_pkgs:
-  - clash
-  - mmdblookup
-  - python-pysocks
-  - qv2ray-dev-git
   - telegram-desktop
-  - v2ray
+  - v2raya

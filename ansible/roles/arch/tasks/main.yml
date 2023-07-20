@@ -21,9 +21,6 @@
 - name: Disable sshd service
   service: name=sshd state=stopped enabled=no
 
-- name: Set default jdk
-  shell: archlinux-java set {{ default_jdk }}
-
 - name: Sysctl configs
   sysctl:
     name: "{{ item.name }}"
