@@ -1,4 +1,4 @@
-# software
+# desktop
 
 - 采纳 adopt
 - 试验 trial
@@ -28,7 +28,6 @@
 
 - *adopt* ansible
 - *trial* transform
-- *trial* [portainer](https://docs.portainer.io/)
 - *assess* [just](https://github.com/casey/just) [just备忘清单](https://wangchujiang.com/reference/docs/justfile.html)
 
 ## input method
