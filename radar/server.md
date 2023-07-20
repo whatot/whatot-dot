@@ -35,7 +35,21 @@
 - *assess* kubernetes
 - *hold* KubeSphere
 
+### k8s daily tools
+
+- *assess* [openlens](https://github.com/lensapp/lens) Kubernetes IDE
+
 ## network
 
 - *assess* [nebula](https://github.com/slackhq/nebula)
 - *assess* [tailscale](https://github.com/tailscale/tailscale) [headscale](https://github.com/juanfont/headscale)
+
+## managed services
+
+> https://github.com/awesome-selfhosted/awesome-selfhosted
+
+- dns
+  - *adopt* [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
+  - *assess* [pi-hole](https://github.com/pi-hole/pi-hole)
+- ebook
+- rss
