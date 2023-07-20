@@ -7,5 +7,5 @@ fi
 
 SCRIPT_PATH=$(dirname "$(realpath "$0")")
 
-ln -sf "${SCRIPT_PATH}"/zshrc ~/.zshrc
+ln -sf "${SCRIPT_PATH}"/ohmyzsh.zsh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv ~/.zshenv
