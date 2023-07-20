@@ -1,8 +1,6 @@
 ---
 # default vars for task arch
 
-all_pkgs: []
-
 font_pkgs:
   - adobe-source-code-pro-fonts
   - adobe-source-han-sans-cn-fonts
@@ -28,7 +26,6 @@ font_pkgs:
 absent_pkgs:
   - cargo
   - emacs
-  - erlang
   - noto-fonts-cjk
   - noto-fonts-extra
   - rust
@@ -37,9 +34,6 @@ absent_pkgs:
   - rustfmt
   - vim
   - visual-studio-code
-  - you-get-git
-  - youtube-dl-git
-  - zeal
 
 aur_pkgs:
   - caffeine-ng
