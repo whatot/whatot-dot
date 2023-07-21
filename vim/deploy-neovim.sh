@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -aux
 
+SCRIPT_PATH=$(
+	cd "$(dirname "$0")" || return
+	pwd -P
+)
+
 init_astro_nvim() {
 	NVIM_CONFIG_PATH=${HOME}/.config/nvim
 	if [[ ! -d "${NVIM_CONFIG_PATH}" ]]; then
@@ -20,6 +25,14 @@ maximized = true
 idle = true
 frame = "Full"
 EOF
+}
+
+sync_nvim_user_config() {
+	TARGET_NVIM_USER_CONFIG=${HOME}/.config/nvim/lua/user
+	mkdir -p "$(dirname "${TARGET_NVIM_USER_CONFIG}")"
+	mkdir -p "${TARGET_NVIM_USER_CONFIG}"
+
+	ln -sf "${SCRIPT_PATH}"/nvim_user.lua "${TARGET_NVIM_USER_CONFIG}/init.lua"
 }
 
 for_mac() {
@@ -69,3 +82,4 @@ esac
 
 init_astro_nvim
 init_neovide
+sync_nvim_user_config

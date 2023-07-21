@@ -1,10 +1,13 @@
 #!/bin/bash
 set -x
 
-SCRIPT_PATH=$(dirname "$(realpath "$0")")
+SCRIPT_PATH=$(
+	cd "$(dirname "$0")" || return
+	pwd -P
+)
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 if [[ -f "${HOME}/.vimrc" ]]; then
 	mv ~/.vimrc ~/.vimrc.backup
