@@ -1,11 +1,6 @@
-function load_zsh_plugins() {
-    ZSH_PLUGINS=("zsh-history-substring-search" "zsh-syntax-highlighting" "zsh-autosuggestions")
-    SEARCH_PATH=("/usr/share/zsh/plugins" "/opt/homebrew/share")
-
-    for plugin in "${ZSH_PLUGINS[@]}"
-    do
-        for dir in "${SEARCH_PATH[@]}"
-        do
+load_zsh_plugins() {
+    for plugin in zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions; do
+        for dir in /usr/share/zsh/plugins /opt/homebrew/share; do
             full_path="${dir}/${plugin}/${plugin}.zsh"
             if [[ -f "${full_path}" ]]; then
                 # echo "load ${full_path}"
@@ -15,21 +10,19 @@ function load_zsh_plugins() {
     done
 }
 
-function find_bin_path() {
-    BIN_PATH_CANDIDATES=("/opt/homebrew/bin" "/usr/bin" "/usr/local/bin" "${HOME}/.cargo/bin" "${HOME}/go/bin")
+find_bin_path() {
     local bin_name=$1
-    for var in "${BIN_PATH_CANDIDATES[@]}"
-    do
+    for var in /opt/homebrew/bin /usr/bin ${HOME}/.local/bin ${HOME}/.cargo/bin ${HOME}/go/bin; do
         full_path="${var}/${bin_name}"
         if [[ -f "${full_path}" ]]; then
-           echo "${full_path}"
-           return 0
+            echo "${full_path}"
+            return 0
         fi
     done
     return 1
 }
 
-function unsetproxy() {
+unsetproxy() {
     unset ALL_PROXY
     unset HTTP_PROXY
     unset HTTPS_PROXY
@@ -37,7 +30,7 @@ function unsetproxy() {
     unset http_proxy
     unset https_proxy
 }
-function setproxy() {
+setproxy() {
     unsetproxy
 
     PROXY_PORT=8899
@@ -56,13 +49,13 @@ function setproxy() {
     export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
     export HTTPS_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 }
-function proxyinfo() {
+proxyinfo() {
     echo "ALL_PROXY = ${ALL_PROXY}"
     echo "HTTP_PROXY = ${HTTP_PROXY}"
     echo "HTTPS_PROXY = ${HTTPS_PROXY}"
 }
 
-function config_java_about () {
+config_java_about() {
     # for gradle proxy setting
     export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
       -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT} \
@@ -84,7 +77,7 @@ function config_java_about () {
     alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
 }
 
-function config_sccache () {
+config_sccache() {
     sccache_path=$(find_bin_path "sccache")
     if [[ $? -eq 0 ]]; then
         export RUSTC_WRAPPER="${sccache_path}"
@@ -93,7 +86,7 @@ function config_sccache () {
     fi
 }
 
-function config_brew () {
+config_brew() {
     export HOMEBREW_NO_AUTO_UPDATE=1
 
     BREN_PREFIX=/opt/homebrew
@@ -107,13 +100,13 @@ function config_brew () {
     fi
 }
 
-function config_input_method () {
+config_input_method() {
     export GTK_IM_MODULE=fcitx
     export QT_IM_MODULE=fcitx
     export XMODIFIERS="@im=fcitx"
 }
 
-function config_alias () {
+config_alias() {
     # podman machine init
     # sudo podman-mac-helper install
     # podman machine set --rootful
@@ -152,12 +145,13 @@ case $(uname) in
         source ~/.zshenv
         alias vim='mvim -v'
         config_brew
-    ;;
+        ;;
     Linux)
         config_input_method
-    ;;
+        ;;
     *)
-    ;;
+        echo "not supported os"
+        ;;
 esac
 
 autoload -Uz compinit && compinit
