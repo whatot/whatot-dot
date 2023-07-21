@@ -39,10 +39,10 @@ setproxy() {
     if [[ -v WSL_INTEROP ]]; then
         hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
         export PROXY_HOST=${hostip}
-        echo "proxy wsl: ${PROXY_HOST}:${PROXY_PORT} "
+        # echo "proxy wsl: ${PROXY_HOST}:${PROXY_PORT} "
     else
         export PROXY_HOST="127.0.0.1"
-        echo "proxy local: ${PROXY_HOST}:${PROXY_PORT} "
+        # echo "proxy local: ${PROXY_HOST}:${PROXY_PORT} "
     fi
 
     export ALL_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
