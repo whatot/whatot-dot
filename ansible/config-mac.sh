@@ -55,7 +55,11 @@ brew_install axel
 brew_install rsync
 brew_install git
 brew_install zsh
+brew_install zsh-autosuggestions
+brew_install zsh-syntax-highlighting
+brew_install zsh-history-substring-search
 brew_install htop
+brew_install btop
 brew_install ranger
 
 brew_install cmake
@@ -89,7 +93,6 @@ brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
 brew_cask_install meld
-brew_cask_install rancher
 brew_cask_install font-meslo-lg-nerd-font
 
 echo "finined!"
