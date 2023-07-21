@@ -2,7 +2,7 @@
 
 load_zsh_plugins() {
 	for plugin in zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions; do
-		for dir in /usr/share/zsh/plugins /opt/homebrew/share; do
+		for dir in /usr/share/zsh/plugins /opt/homebrew/share /usr/local/share; do
 			full_path="${dir}/${plugin}/${plugin}.zsh"
 			if [[ -f "${full_path}" ]]; then
 				# echo "load ${full_path}"
@@ -14,7 +14,7 @@ load_zsh_plugins() {
 
 find_bin_path() {
 	bin_name=$1
-	for var in /opt/homebrew/bin /usr/bin ${HOME}/.local/bin ${HOME}/.cargo/bin ${HOME}/go/bin; do
+	for var in /opt/homebrew/bin /usr/local/bin /usr/bin ${HOME}/.local/bin ${HOME}/.cargo/bin ${HOME}/go/bin; do
 		full_path="${var}/${bin_name}"
 		if [[ -f "${full_path}" ]]; then
 			echo "${full_path}"
@@ -92,7 +92,11 @@ config_sccache() {
 config_brew() {
 	export HOMEBREW_NO_AUTO_UPDATE=1
 
-	BREN_PREFIX=/opt/homebrew
+	BREN_PREFIX=/usr/local
+	if [[ -d "/opt/homebrew" ]]; then
+		BREN_PREFIX=/opt/homebrew
+	fi
+
 	BREW_BIN=${BREN_PREFIX}/bin/brew
 	if [[ -f ${BREW_BIN} ]]; then
 		eval "$(${BREW_BIN} shellenv)"
