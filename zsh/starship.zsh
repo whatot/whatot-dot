@@ -1,22 +1,24 @@
-eval "$(starship init zsh)"
+function load_zsh_plugins() {
+    ZSH_PLUGINS=("zsh-history-substring-search" "zsh-syntax-highlighting" "zsh-autosuggestions")
+    SEARCH_PATH=("/usr/share/zsh/plugins" "/opt/homebrew/share")
 
-ZSH_AUTOSUGGESTIONS="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-ZSH_HISTORY_SUBSTRING_SEARCH="/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
-ZSH_SYNTAX_HIGHLIGHTING="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-if [[ -f ${ZSH_AUTOSUGGESTIONS} ]]; then
-    source ${ZSH_AUTOSUGGESTIONS}
-fi
-if [[ -f ${ZSH_HISTORY_SUBSTRING_SEARCH} ]]; then
-    source ${ZSH_HISTORY_SUBSTRING_SEARCH}
-fi
-if [[ -f ${ZSH_SYNTAX_HIGHLIGHTING} ]]; then
-    source ${ZSH_SYNTAX_HIGHLIGHTING}
-fi
+    for plugin in "${ZSH_PLUGINS[@]}"
+    do
+        for dir in "${SEARCH_PATH[@]}"
+        do
+            full_path="${dir}/${plugin}/${plugin}.zsh"
+            if [[ -f "${full_path}" ]]; then
+                # echo "load ${full_path}"
+                source "${full_path}"
+            fi
+        done
+    done
+}
 
-PATH_CANDIDATES=("/opt/homebrew/bin" "/usr/bin" "/usr/local/bin" "${HOME}/.cargo/bin" "${HOME}/go/bin")
 function find_bin_path() {
+    BIN_PATH_CANDIDATES=("/opt/homebrew/bin" "/usr/bin" "/usr/local/bin" "${HOME}/.cargo/bin" "${HOME}/go/bin")
     local bin_name=$1
-    for var in "${PATH_CANDIDATES[@]}"
+    for var in "${BIN_PATH_CANDIDATES[@]}"
     do
         full_path="${var}/${bin_name}"
         if [[ -f "${full_path}" ]]; then
@@ -26,6 +28,7 @@ function find_bin_path() {
     done
     return 1
 }
+
 function unsetproxy() {
     unset ALL_PROXY
     unset HTTP_PROXY
@@ -59,104 +62,102 @@ function proxyinfo() {
     echo "HTTPS_PROXY = ${HTTPS_PROXY}"
 }
 
+function config_java_about () {
+    # for gradle proxy setting
+    export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
+      -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT} \
+      -Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost"
+
+    # for error message in en
+    export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Duser.language=en"
+
+    alias mvalidate="mvn validate -U"
+    alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
+    alias mtree='mvn clean dependency:tree -U'
+    alias msource='mvn dependency:sources'
+    alias fmt='mvn com.coveo:fmt-maven-plugin:format -o'
+    alias mqc='mvn com.coveo:fmt-maven-plugin:format -o && ${MVN} compile --offline'
+    alias mcc='mvn clean compile -U'
+    alias mcco='mvn clean compile -U --offline'
+    alias mqt='mvn test -DfailIfNoTests=false --offline'
+    alias mtt='mvn clean test -U -DfailIfNoTests=false'
+    alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
+}
+
+function config_sccache () {
+    sccache_path=$(find_bin_path "sccache")
+    if [[ $? -eq 0 ]]; then
+        export RUSTC_WRAPPER="${sccache_path}"
+    else
+        echo "sccache not found"
+    fi
+}
+
+function config_brew () {
+    export HOMEBREW_NO_AUTO_UPDATE=1
+
+    BREN_PREFIX=/opt/homebrew
+    BREW_BIN=${BREN_PREFIX}/bin/brew
+    if [[ $? -eq 0 ]]; then
+        eval "$(${BREW_BIN} shellenv)"
+        # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+        export FPATH="${BREN_PREFIX}/share/zsh/site-functions:${FPATH}"
+    else
+        echo "brew not found"
+    fi
+}
+
+function config_input_method () {
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS="@im=fcitx"
+}
+
+function config_alias () {
+    # podman machine init
+    # sudo podman-mac-helper install
+    # podman machine set --rootful
+    # podman machine start
+    # podman machine stop
+
+    alias myip="curl myip.ipip.net"
+    alias yay="paru"
+    alias ll='ls -alF --color'
+    alias ..='cd ..'
+
+    export LC_MESSAGES="en_US.UTF-8"
+    export EDITOR='vim'
+}
+
+# starship only
+eval "$(starship init zsh)"
+
 # turn on proxy by default
 setproxy
 
-# for gradle proxy setting
-export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
-  -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT} \
-  -Dhttp.nonProxyHosts=*.nonproxyrepos.com|localhost"
+# load zsh plugins in system
+load_zsh_plugins
+
+# java project
+config_java_about
+
+# sccache
+config_sccache
+
+# common part
+config_alias
 
 case $(uname) in
     Darwin)
         source ~/.zshenv
         alias vim='mvim -v'
-        export HOMEBREW_NO_AUTO_UPDATE=1
+        config_brew
     ;;
     Linux)
-        export GTK_IM_MODULE=fcitx
-        export QT_IM_MODULE=fcitx
-        export XMODIFIERS="@im=fcitx"
-        alias gvim='gvim -c "call Maximize_Window()"'
+        config_input_method
     ;;
     *)
     ;;
 esac
-
-# podman machine init
-# sudo podman-mac-helper install
-# podman machine set --rootful
-# podman machine start
-# podman machine stop
-
-alias mvalidate="mvn validate -U"
-alias mdeploy='mvn clean deploy -Dmaven.test.skip=true'
-alias mtree='mvn clean dependency:tree -U'
-alias msource='mvn dependency:sources'
-
-export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Duser.language=en"
-MVN=mvn
-if [[ $(command -v mvnd) ]]; then
-    MVN=mvnd
-fi
-alias fmt='${MVN} com.coveo:fmt-maven-plugin:format -o'
-alias mqc='${MVN} com.coveo:fmt-maven-plugin:format -o && ${MVN} compile --offline'
-alias mcc='${MVN} clean compile -U'
-alias mcco='${MVN} clean compile -U --offline'
-alias mqt='${MVN} test -DfailIfNoTests=false --offline'
-alias mtt='${MVN} clean test -U -DfailIfNoTests=false'
-alias mtto='${MVN} clean test -U -DfailIfNoTests=false --offline'
-
-alias myip="curl myip.ipip.net"
-alias yay="paru"
-alias ll='ls -alF --color'
-alias ..='cd ..'
-
-export LC_MESSAGES="en_US.UTF-8"
-export EDITOR='vim'
-
-sccache_path=$(find_bin_path "sccache")
-if [[ $? -eq 0 ]]; then
-    export RUSTC_WRAPPER="${sccache_path}"
-else
-    echo "sccache not installed"
-fi
-
-export SDKMAN_DIR="${HOME}/.sdkman"
-export SDKMAN_JDK11="11.0.19-amzn"
-export SDKMAN_JDK17="17.0.7-amzn"
-
-if [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]]; then
-    source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-    # sdk offline enable
-    # sdk config
-    function usejdk11() {
-        sdk use java "${SDKMAN_JDK11}"
-    }
-    function usejdk17() {
-        sdk use java "${SDKMAN_JDK17}"
-    }
-    function gradle_wrapper_jdk8() {
-        usejdk11
-        gradle wrapper --gradle-version 4.2.1
-    }
-fi
-function init_sdkman() {
-    curl -s "https://get.sdkman.io" | bash
-    source "${SDKMAN_DIR}/bin/sdkman-init.sh"
-    sdk config
-    sdk install java "${SDKMAN_JDK17}"
-    sdk install java "${SDKMAN_JDK11}"
-    sdk list java
-    sdk current java
-}
-
-BREW_BIN="$(command -v brew)"
-if [[ $? -eq 0 ]]; then
-    eval "$(brew shellenv)"
-
-    # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
 
 autoload -Uz compinit && compinit

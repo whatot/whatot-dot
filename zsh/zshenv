@@ -1,6 +1,6 @@
 case $(uname) in
     Darwin)
-        export PATH="${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        export PATH="/opt/homebrew/opt/openjdk@11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     ;;
     Linux)
         export JAVA_HOME="/usr/lib/jvm/default/"
@@ -19,7 +19,3 @@ export WORKON_HOME="${HOME}/envs/"
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 
-NIX_PROFILE_PATH="${HOME}/.nix-profile/etc/profile.d/nix.sh"
-if [[ -e "${NIX_PROFILE_PATH}" ]]; then
-   source "${NIX_PROFILE_PATH}"
-fi
