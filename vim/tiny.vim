@@ -18,6 +18,7 @@ Plug 'vim-scripts/LargeFile'
 Plug 'dense-analysis/ale'
 Plug 'whatot/molokai'
 Plug 'moorereason/vim-markdownfmt'
+Plug '42wim/vim-shfmt'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-p>'
@@ -41,6 +42,10 @@ let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:markdownfmt_autosave=1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:sh_fmt_autosave = 1
+let g:sh_fmt_options = '-ci --posix'
+autocmd FileType zsh call Autoformat()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme molokai
 if has("mac")
@@ -117,7 +122,7 @@ if has("gui_running")
     set guioptions-=L   " hide left scroll
     set guioptions-=r   " hide right scroll
     set columns=120
-    set lines=42
+    set lines=40
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " alias gvim='gvim -c "call Maximize_Window()"'
