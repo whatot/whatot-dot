@@ -77,6 +77,7 @@ config_java_about() {
 	alias mqt='mvn test -DfailIfNoTests=false --offline'
 	alias mtt='mvn clean test -U -DfailIfNoTests=false'
 	alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
+	alias bubu='brew update && brew outdated && brew upgrade && brew cleanup'
 }
 
 config_sccache() {
