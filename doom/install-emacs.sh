@@ -2,7 +2,7 @@
 set -eux
 
 function for_arch() {
-    sudo pacman -S emacs
+    sudo pacman -S emacs-gcc-wayland-devel-bin
 }
 
 function for_ubuntu() {
@@ -20,13 +20,7 @@ function for_mac() {
 
 function use_emacs_mac() {
     brew tap railwaycat/emacsmacport
-    brew reinstall emacs-mac --with-dbus\
-        --with-starter\
-        --with-no-title-bars\
-        --with-spacemacs-icon\
-        --with-native-comp\
-        --with-mac-metal\
-        --with-xwidgets
+    brew reinstall emacs-mac --with-dbus --with-starter --with-no-title-bars --with-spacemacs-icon --with-native-comp --with-mac-metal --with-xwidgets
 
     M1_BREW_EMACS_PATH="/opt/homebrew/Cellar/emacs-mac/emacs-28.2-mac-9.1/Emacs.app"
     if [[ -d "${M1_BREW_EMACS_PATH}" ]]; then
@@ -50,23 +44,22 @@ function use_emacs_plus() {
 case $(uname) in
     Darwin)
         for_mac
-    ;;
+        ;;
     Linux)
         OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
         case ${OS_ID} in
-        ubuntu)
-            for_ubuntu ubuntu-elisp/ppa emacs-snapshot
-        ;;
-        manjaro | archlinux)
-            for_arch
-        ;;
-        *)
-            echo -n "unsupported os id: ${OS_ID}"
-        ;;
+            ubuntu)
+                for_ubuntu ubuntu-elisp/ppa emacs-snapshot
+                ;;
+            manjaro | archlinux)
+                for_arch
+                ;;
+            *)
+                echo -n "unsupported os id: ${OS_ID}"
+                ;;
         esac
-    ;;
+        ;;
     *)
         echo -n "unsuppprted os"
-    ;;
+        ;;
 esac
-
