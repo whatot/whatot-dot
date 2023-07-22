@@ -90,18 +90,12 @@ config_sccache() {
 }
 
 config_brew() {
-	export HOMEBREW_NO_AUTO_UPDATE=1
-
-	BREN_PREFIX=/usr/local
-	if [[ -d "/opt/homebrew" ]]; then
-		BREN_PREFIX=/opt/homebrew
-	fi
-
-	BREW_BIN=${BREN_PREFIX}/bin/brew
-	if [[ -f ${BREW_BIN} ]]; then
+	brew_path=$(find_bin_path "brew")
+	if [[ $? ]]; then
+		export HOMEBREW_NO_AUTO_UPDATE=1
 		eval "$(${BREW_BIN} shellenv)"
 		# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-		export FPATH="${BREN_PREFIX}/share/zsh/site-functions:${FPATH}"
+		export FPATH="$(${brew_path} --prefix)/share/zsh/site-functions:${FPATH}"
 	else
 		echo "brew not found"
 	fi
@@ -113,7 +107,7 @@ config_input_method() {
 	export XMODIFIERS="@im=fcitx"
 }
 
-config_alias() {
+config_others() {
 	# podman machine init
 	# sudo podman-mac-helper install
 	# podman machine set --rootful
@@ -152,27 +146,7 @@ ex() {
 	fi
 }
 
-# like PROMPT_COMMAND in bash
-precmd() {print -Pn "\e]0;%n@%m: %~\a"}
-
-# starship only
-eval "$(starship init zsh)"
-
-# turn on proxy by default
-setproxy
-
-# load zsh plugins in system
-load_zsh_plugins
-
-# java project
-config_java_about
-
-# sccache
-config_sccache
-
-# common part
-config_alias
-
+# load basis like path about
 case $(uname) in
 	Darwin)
 		source "${HOME}/.zshenv"
@@ -186,5 +160,23 @@ case $(uname) in
 		echo "not supported os"
 		;;
 esac
+
+# starship only
+eval "$(starship init zsh)"
+
+# turn on proxy by default
+setproxy
+
+# load zsh plugins in system
+load_zsh_plugins
+
+# java project
+config_java_about
+
+# rust build cache
+config_sccache
+
+# common part
+config_others
 
 autoload -Uz compinit && compinit
