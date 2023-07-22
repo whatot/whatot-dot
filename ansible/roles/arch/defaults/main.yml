@@ -80,11 +80,7 @@ basic_pkgs:
   - sysstat
   - tree
   - ungoogled-chromium
-  - wezterm
   - wget
-  - zsh-autosuggestions
-  - zsh-completions
-  - zsh-syntax-highlighting
 
 program_tool_pkgs:
   - ansible
