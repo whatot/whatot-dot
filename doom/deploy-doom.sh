@@ -1,7 +1,11 @@
 #!/bin/bash
 set -xue
 
-SCRIPT_PATH=$(dirname "$(realpath "$0")")
+SCRIPT_PATH=$(
+    cd "$(dirname "$0")" || return
+    pwd -P
+)
+
 DOOM_SOURCE_PATH="${HOME}/.emacs.d.doom"
 DOOM_CONFIG_PATH="${HOME}/.doom.d"
 EMACS_D_PATH="${HOME}/.emacs.d"
