@@ -1,15 +1,14 @@
 # shellcheck disable=SC2148,SC1090,SC1091
 
-load_zsh_plugins() {
-	for plugin in zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions; do
-		for dir in /usr/share/zsh/plugins /opt/homebrew/share /usr/local/share; do
-			full_path="${dir}/${plugin}/${plugin}.zsh"
-			if [[ -f "${full_path}" ]]; then
-				# echo "load ${full_path}"
-				source "${full_path}"
-			fi
-		done
-	done
+export OS_TYPE
+OS_TYPE="$(uname -s)"
+is_linux() { [[ "${OS_TYPE}" == "Linux" ]]; }
+is_darwin() { [[ "${OS_TYPE}" == "Darwin" ]]; }
+
+init_before_all() {
+	if [[ $(is_darwin) ]]; then
+		source "${HOME}/.zshenv"
+	fi
 }
 
 find_bin_path() {
@@ -90,6 +89,10 @@ config_sccache() {
 }
 
 config_brew() {
+	if [[ ! $(is_darwin) ]]; then
+		return 1
+	fi
+
 	brew_path=$(find_bin_path "brew")
 	if [[ $? ]]; then
 		export HOMEBREW_NO_AUTO_UPDATE=1
@@ -102,12 +105,14 @@ config_brew() {
 }
 
 config_input_method() {
-	export GTK_IM_MODULE=fcitx
-	export QT_IM_MODULE=fcitx
-	export XMODIFIERS="@im=fcitx"
+	if [[ $(is_linux) ]]; then
+		export GTK_IM_MODULE=fcitx
+		export QT_IM_MODULE=fcitx
+		export XMODIFIERS="@im=fcitx"
+	fi
 }
 
-config_others() {
+config_mixed() {
 	# podman machine init
 	# sudo podman-mac-helper install
 	# podman machine set --rootful
@@ -119,56 +124,29 @@ config_others() {
 	alias ll='ls -alF --color'
 	alias ..='cd ..'
 
+	if [[ $(is_darwin) ]]; then
+		alias vim='mvim -v'
+	fi
+
 	export LC_MESSAGES="en_US.UTF-8"
 	export EDITOR='vim'
 }
 
-# ex - archive extractor
-# usage: ex <file>
-ex() {
-	if [[ -f $1 ]]; then
-		case $1 in
-			*.tar.bz2) tar xjf $1 ;;
-			*.tar.gz) tar xzf $1 ;;
-			*.bz2) bunzip2 $1 ;;
-			*.rar) unrar x $1 ;;
-			*.gz) gunzip $1 ;;
-			*.tar) tar xf $1 ;;
-			*.tbz2) tar xjf $1 ;;
-			*.tgz) tar xzf $1 ;;
-			*.zip) unzip $1 ;;
-			*.Z) uncompress $1 ;;
-			*.7z) 7z x $1 ;;
-			*) echo "'$1' cannot be extracted via ex()" ;;
-		esac
+config_prezto() {
+	prezto_path="${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+	if [[ -s "${prezto_path}" ]]; then
+		source "${prezto_path}"
 	else
-		echo "'$1' is not a valid file"
+		echo "prezto not found"
+		return 0
 	fi
 }
 
-# load basis like path about
-case $(uname) in
-	Darwin)
-		source "${HOME}/.zshenv"
-		alias vim='mvim -v'
-		config_brew
-		;;
-	Linux)
-		config_input_method
-		;;
-	*)
-		echo "not supported os"
-		;;
-esac
-
-# starship only
-eval "$(starship init zsh)"
+# init env, path about before all
+init_before_all
 
 # turn on proxy by default
 setproxy
-
-# load zsh plugins in system
-load_zsh_plugins
 
 # java project
 config_java_about
@@ -176,7 +154,11 @@ config_java_about
 # rust build cache
 config_sccache
 
-# common part
-config_others
+# unclassified part
+config_mixed
 
-autoload -Uz compinit && compinit
+# load prezto with plugins
+config_prezto
+
+# starship last
+eval "$(starship init zsh)"
