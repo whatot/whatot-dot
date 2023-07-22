@@ -50,6 +50,7 @@ basic_pkgs:
   - dnsmasq
   - dnsmasq-china-list-git
   - dstat
+  - exa
   - fcitx5-chinese-addons
   - fcitx5-im
   - fcitx5-material-color
@@ -57,6 +58,7 @@ basic_pkgs:
   - fcitx5-rime
   - firefox
   - firefox-i18n-zh-cn
+  - fzf
   - gedit
   - gnome-tweaks
   - gnuplot

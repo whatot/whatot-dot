@@ -36,7 +36,9 @@ brew_install coreutils
 brew_install binutils
 brew_install diffutils
 brew_install ed
+brew_install exa
 brew_install findutils
+brew_install fzf
 brew_install gawk
 brew_install gnu-indent
 brew_install gnu-sed
