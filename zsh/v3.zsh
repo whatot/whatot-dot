@@ -162,3 +162,7 @@ config_prezto
 
 # starship last
 eval "$(starship init zsh)"
+
+# refresh zsh completion
+autoload -U compinit
+compinit
