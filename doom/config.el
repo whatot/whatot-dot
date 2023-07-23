@@ -48,6 +48,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; make treemacs automatically switch to the project for the current buffer.
+(after! treemacs
+  (treemacs-follow-mode 1))
+
 ;; https://github.com/lorniu/go-translate/blob/master/README-zh.md
 (use-package! go-translate
   :demand t
