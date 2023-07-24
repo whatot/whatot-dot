@@ -7,19 +7,19 @@
 - name: Config wheel group
   lineinfile:
     dest: /etc/sudoers.d/20_wheel
-    regexp: '^%wheel'
-    line: '%wheel  ALL=(ALL)  NOPASSWD: ALL'
+    regexp: "^%wheel"
+    line: "%wheel  ALL=(ALL)  NOPASSWD: ALL"
     state: present
-    backup: yes
+    backup: true
     insertafter: EOF
-    create: yes
+    create: true
     owner: root
     group: root
     mode: 0440
 
 - name: Manage default user
   user:
-    name: '{{ default_user }}'
+    name: "{{ default_user }}"
     groups: wheel
-    append: yes
+    append: true
     state: present

@@ -30,10 +30,10 @@
 
 - name: Link files in /etc/dnsmasq.d to /etc/networkmanager/dnsmasq.d
   file:
-    src: '/etc/dnsmasq.d/{{ item | basename }}'
-    dest: '/etc/NetworkManager/dnsmasq.d/{{ item | basename}}'
+    src: "/etc/dnsmasq.d/{{ item | basename }}"
+    dest: "/etc/NetworkManager/dnsmasq.d/{{ item | basename}}"
     state: link
-  with_fileglob: '/etc/dnsmasq.d/*'
+  with_fileglob: "/etc/dnsmasq.d/*"
 
 - name: Configure NetworkManager.conf
   copy:
@@ -45,5 +45,5 @@
     dest: /etc/NetworkManager/NetworkManager.conf
     owner: root
     group: root
-    mode: '0644'
-    backup: yes
+    mode: "0644"
+    backup: true

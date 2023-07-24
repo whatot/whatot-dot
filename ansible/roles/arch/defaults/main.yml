@@ -86,7 +86,10 @@ basic_pkgs:
 
 program_tool_pkgs:
   - ansible
+  - ansible-language-server
   - ansible-lint
+  - ansible-bender
+  - bash-language-server
   - bison
   - boost
   - ccache

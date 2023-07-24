@@ -6,7 +6,7 @@
     src: "/usr/share/zoneinfo/Asia/Shanghai"
     dest: /etc/localtime
     state: link
-    force: yes
+    force: true
 
 - include_tasks: mirror.yml
 - include_tasks: user.yml
@@ -25,10 +25,10 @@
   sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
-    sysctl_set: yes
-    sysctl_file: '/etc/sysctl.d/98-sysctl.conf'
+    sysctl_set: true
+    sysctl_file: "/etc/sysctl.d/98-sysctl.conf"
     state: present
-    reload: yes
+    reload: true
   with_items:
     - { name: "vm.swappiness", value: 1 }
     - { name: "fs.inotify.max_user_watches", value: 524288 }
