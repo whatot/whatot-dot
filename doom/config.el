@@ -48,6 +48,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; enable tree-sitter global
+(setq global-tree-sitter-mode 1)
+
 ;; make treemacs automatically switch to the project for the current buffer.
 (after! treemacs
   (treemacs-follow-mode 1))
