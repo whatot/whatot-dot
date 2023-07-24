@@ -1,10 +1,12 @@
 # shellcheck disable=SC2148,SC1090,SC1091
 
+# zmodload zsh/zprof
+# enable zprof module, start zsh, then call zprof cmd
+
 export ZSH_OS_TYPE
 ZSH_OS_TYPE="$(uname -s)"
 is_linux() { [[ "${ZSH_OS_TYPE}" == "Linux" ]]; }
 is_darwin() { [[ "${ZSH_OS_TYPE}" == "Darwin" ]]; }
-is_wsl() { [[ -v WSL_INTERO ]]; }
 
 init_before_all() {
 	if [[ is_darwin ]]; then
@@ -35,17 +37,8 @@ unsetproxy() {
 setproxy() {
 	unsetproxy
 
-	PROXY_PORT=8899
-
-	if [[ is_wsl ]]; then
-		## wsl use proxy of host
-		hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
-		export PROXY_HOST=${hostip}
-		# echo "proxy wsl: ${PROXY_HOST}:${PROXY_PORT} "
-	else
-		export PROXY_HOST="127.0.0.1"
-		# echo "proxy local: ${PROXY_HOST}:${PROXY_PORT} "
-	fi
+	export PROXY_PORT=8899
+	export PROXY_HOST="127.0.0.1"
 
 	export ALL_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 	export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
