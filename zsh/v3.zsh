@@ -1,12 +1,12 @@
 # shellcheck disable=SC2148,SC1090,SC1091
 
-export OS_TYPE
-OS_TYPE="$(uname -s)"
-is_linux() { [[ "${OS_TYPE}" == "Linux" ]]; }
-is_darwin() { [[ "${OS_TYPE}" == "Darwin" ]]; }
+export ZSH_OS_TYPE
+ZSH_OS_TYPE="$(uname -s)"
+is_linux() { [[ "${ZSH_OS_TYPE}" == "Linux" ]]; }
+is_darwin() { [[ "${ZSH_OS_TYPE}" == "Darwin" ]]; }
 
 init_before_all() {
-	if [[ $(is_darwin) ]]; then
+	if [[ is_darwin ]]; then
 		source "${HOME}/.zshenv"
 	fi
 }
@@ -89,14 +89,13 @@ config_sccache() {
 }
 
 config_brew() {
-	if [[ ! $(is_darwin) ]]; then
-		return 1
+	if [[ ! is_darwin ]]; then
 	fi
 
 	brew_path=$(find_bin_path "brew")
 	if [[ $? ]]; then
 		export HOMEBREW_NO_AUTO_UPDATE=1
-		eval "$(${BREW_BIN} shellenv)"
+		eval "$(${brew_path} shellenv)"
 		# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 		export FPATH="$(${brew_path} --prefix)/share/zsh/site-functions:${FPATH}"
 	else
@@ -105,7 +104,7 @@ config_brew() {
 }
 
 config_input_method() {
-	if [[ $(is_linux) ]]; then
+	if [[ is_linux ]]; then
 		export GTK_IM_MODULE=fcitx
 		export QT_IM_MODULE=fcitx
 		export XMODIFIERS="@im=fcitx"
@@ -124,7 +123,7 @@ config_mixed() {
 	alias ll='ls -alF --color'
 	alias ..='cd ..'
 
-	if [[ $(is_darwin) ]]; then
+	if [[ is_darwin ]]; then
 		alias vim='mvim -v'
 	fi
 
@@ -153,6 +152,9 @@ config_java_about
 
 # rust build cache
 config_sccache
+
+# init brew if mac
+config_brew
 
 # unclassified part
 config_mixed
