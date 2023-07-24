@@ -85,6 +85,9 @@ brew_install btop
 brew_install neovim
 brew_install starship
 brew_install openjdk@11
+brew_install bash-language-server
+brew_install direnv
+brew_install terraform
 
 brew_cask_install neovide
 brew_cask_install wezterm
