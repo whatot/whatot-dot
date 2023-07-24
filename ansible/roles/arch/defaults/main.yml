@@ -92,6 +92,7 @@ program_tool_pkgs:
   - ccache
   - clang
   - cmake
+  - direnv
   - discount
   - editorconfig-core-c
   - emacs-gcc-wayland-devel-bin
@@ -112,6 +113,7 @@ program_tool_pkgs:
   - ripgrep
   - rustup
   - sccache
+  - terraform
 
 fq_pkgs:
   - telegram-desktop
