@@ -3,13 +3,8 @@
 zmodload zsh/zprof
 # enable zprof module, start zsh, then call zprof cmd
 
-export ZSH_OS_TYPE
-ZSH_OS_TYPE="$(uname -s)"
-is_linux() { [[ "${ZSH_OS_TYPE}" == "Linux" ]]; }
-is_darwin() { [[ "${ZSH_OS_TYPE}" == "Darwin" ]]; }
-
 init_before_all() {
-	if [[ is_darwin ]]; then
+	if [[ ${OSTYPE} == 'Darwin'* ]]; then
 		source "${HOME}/.zshenv"
 	fi
 }
@@ -83,22 +78,21 @@ config_sccache() {
 }
 
 config_brew() {
-	if [[ ! is_darwin ]]; then
-	fi
-
-	brew_path=$(find_bin_path "brew")
-	if [[ $? ]]; then
-		export HOMEBREW_NO_AUTO_UPDATE=1
-		eval "$(${brew_path} shellenv)"
-		# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-		export FPATH="$(${brew_path} --prefix)/share/zsh/site-functions:${FPATH}"
-	else
-		echo "brew not found"
+	if [[ ${OSTYPE} == 'Darwin'* ]]; then
+		brew_path=$(find_bin_path "brew")
+		if [[ $? ]]; then
+			export HOMEBREW_NO_AUTO_UPDATE=1
+			eval "$(${brew_path} shellenv)"
+			# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+			export FPATH="$(${brew_path} --prefix)/share/zsh/site-functions:${FPATH}"
+		else
+			echo "brew not found"
+		fi
 	fi
 }
 
 config_input_method() {
-	if [[ is_linux ]]; then
+	if [[ ${OSTYPE} == 'Linux'* ]]; then
 		export GTK_IM_MODULE=fcitx
 		export QT_IM_MODULE=fcitx
 		export XMODIFIERS="@im=fcitx"
@@ -117,7 +111,7 @@ config_mixed() {
 	alias ll='ls -alF --color'
 	alias ..='cd ..'
 
-	if [[ is_darwin ]]; then
+	if [[ ${OSTYPE} == 'Darwin'* ]]; then
 		alias vim='mvim -v'
 	fi
 
