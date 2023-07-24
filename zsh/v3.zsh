@@ -4,6 +4,7 @@ export ZSH_OS_TYPE
 ZSH_OS_TYPE="$(uname -s)"
 is_linux() { [[ "${ZSH_OS_TYPE}" == "Linux" ]]; }
 is_darwin() { [[ "${ZSH_OS_TYPE}" == "Darwin" ]]; }
+is_wsl() { [[ -v WSL_INTERO ]]; }
 
 init_before_all() {
 	if [[ is_darwin ]]; then
@@ -36,8 +37,8 @@ setproxy() {
 
 	PROXY_PORT=8899
 
-	## determine proxy host
-	if [[ -v WSL_INTEROP ]]; then
+	if [[ is_wsl ]]; then
+		## wsl use proxy of host
 		hostip=$(grep nameserver /etc/resolv.conf | awk '{ print $2 }')
 		export PROXY_HOST=${hostip}
 		# echo "proxy wsl: ${PROXY_HOST}:${PROXY_PORT} "
@@ -166,5 +167,5 @@ config_prezto
 eval "$(starship init zsh)"
 
 # refresh zsh completion
-autoload -U compinit
-compinit
+[ ! "$(find ${HOME}/.zcompdump -mtime 1)" ] || compinit
+compinit -C
