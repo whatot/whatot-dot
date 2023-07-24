@@ -128,9 +128,9 @@ config_ohmyzsh() {
 		export DISABLE_AUTO_UPDATE="false"
 	fi
 
-	ZSH_THEME="gentoo"
+	export ZSH_THEME="gentoo"
 	if [[ $(is_darwin) ]]; then
-		ZSH_THEME="robbyrussell"
+		export ZSH_THEME="robbyrussell"
 	fi
 
 	ZSH_CACHE_DIR=${HOME}/.oh-my-zsh-cache
