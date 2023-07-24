@@ -109,6 +109,8 @@ program_tool_pkgs:
   - gvim
   - jdk11-openjdk
   - llvm
+  - lua
+  - lua-language-server
   - make
   - maven
   - ninja

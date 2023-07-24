@@ -88,6 +88,8 @@ brew_install openjdk@11
 brew_install bash-language-server
 brew_install direnv
 brew_install terraform
+brew_install lua
+brew_install lua-language-server
 
 brew_cask_install neovide
 brew_cask_install wezterm
