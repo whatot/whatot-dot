@@ -154,5 +154,5 @@ config_prezto
 eval "$(starship init zsh)"
 
 # refresh zsh completion
-[ ! "$(find ${HOME}/.zcompdump -mtime 1)" ] || compinit
+[ ! "$(find "${HOME}"/.zcompdump -mtime 1)" ] || compinit
 compinit -C

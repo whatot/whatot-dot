@@ -16,5 +16,5 @@ SCRIPT_PATH=$(
 	pwd -P
 )
 
-ln -sf "${SCRIPT_PATH}"/v1.zsh ~/.zshrc
-ln -sf "${SCRIPT_PATH}"/zshenv.zsh ~/.zshenv
+ln -sf "${SCRIPT_PATH}"/zshrc_v1.sh ~/.zshrc
+ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv

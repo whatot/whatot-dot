@@ -19,6 +19,6 @@ add_newline = true
 battery.disabled = true
 EOF
 
-ln -sf "${SCRIPT_PATH}"/v3.zsh ~/.zshrc
-ln -sf "${SCRIPT_PATH}"/zshenv.zsh ~/.zshenv
-ln -sf "${SCRIPT_PATH}"/zpreztorc.zsh ~/.zpreztorc
+ln -sf "${SCRIPT_PATH}"/zshrc_v3.sh ~/.zshrc
+ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv
+ln -sf "${SCRIPT_PATH}"/zpreztorc.sh ~/.zpreztorc
