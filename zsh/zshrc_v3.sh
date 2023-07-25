@@ -4,7 +4,10 @@ zmodload zsh/zprof
 # enable zprof module, start zsh, then call zprof cmd
 
 init_before_all() {
-	if [[ ${OSTYPE} == 'Darwin'* ]]; then
+	uname_os=$(uname -s)
+	export ZSH_OSTYPE=${uname_os}
+
+	if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
 		source "${HOME}/.zshenv"
 	fi
 }
@@ -78,7 +81,7 @@ config_sccache() {
 }
 
 config_brew() {
-	if [[ ${OSTYPE} == 'Darwin'* ]]; then
+	if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
 		brew_path=$(find_bin_path "brew")
 		if [[ $? ]]; then
 			export HOMEBREW_NO_AUTO_UPDATE=1
@@ -92,7 +95,7 @@ config_brew() {
 }
 
 config_input_method() {
-	if [[ ${OSTYPE} == 'Linux'* ]]; then
+	if [[ ${ZSH_OSTYPE} == 'Linux' ]]; then
 		export GTK_IM_MODULE=fcitx
 		export QT_IM_MODULE=fcitx
 		export XMODIFIERS="@im=fcitx"
@@ -111,7 +114,7 @@ config_mixed() {
 	alias ll='ls -alF --color'
 	alias ..='cd ..'
 
-	if [[ ${OSTYPE} == 'Darwin'* ]]; then
+	if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
 		alias vim='mvim -v'
 	fi
 
