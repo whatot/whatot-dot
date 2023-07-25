@@ -9,47 +9,59 @@
 
 ### os on bare metal
 
-- _trial_ pve
+- *trial* pve
 
 ### os under k8s
 
 > https://thenewstack.io/looking-for-a-k3os-alternative-choosing-a-container-os-for-edge-k8s/
 
-- _assess_ [talos linux](https://github.com/siderolabs/talos)
-- _assess_ [Flatcar Container Linux](https://github.com/flatcar/Flatcar)
-- _assess_ [Kairos](https://github.com/kairos-io/kairos)
-- _assess_ [rancher k8os](https://github.com/rancher/k3os)
-- _hold_ [aws bottlerocket](https://github.com/bottlerocket-os/bottlerocket)
+- *assess* [talos linux](https://github.com/siderolabs/talos)
+- *assess* [Flatcar Container Linux](https://github.com/flatcar/Flatcar)
+- *assess* [Kairos](https://github.com/kairos-io/kairos)
+- *assess* [rancher k8os](https://github.com/rancher/k3os)
+- *hold* [aws bottlerocket](https://github.com/bottlerocket-os/bottlerocket)
 
 ### os for normal server
 
-- _adopt_ debian
+- *adopt* debian
 
 ## k8s
 
-### k8s solution
+### container management
 
-- _assess_ [portainer](https://docs.portainer.io/)
-- _assess_ [nomad](https://github.com/hashicorp/nomad)
-- _assess_ k3s
-- _assess_ kubernetes
-- _hold_ KubeSphere
+- *assess* [portainer](https://docs.portainer.io/) 支持 Docker/k3s/nomad 多种编排服务的管理服务
+- *assess* [nomad](https://github.com/hashicorp/nomad) 入门门槛较低但缺乏教学资料的编排服务
+- *assess* k3s
+- *assess* kubernetes
+- *hold* KubeSphere
 
-### k8s daily tools
+### gateway
 
-- _assess_ [openlens](https://github.com/lensapp/lens) Kubernetes IDE
+- *assess* [traefik](https://doc.traefik.io/traefik/) "最好用的网关服务"
+- *assess* [caddy](https://caddyserver.com/) 简单好用的支持 Let's Encrypt 的网关服务
+- *assess* nginx
+
+### gitops or auto
+
+- *assess* ansible 自动化部署
+- *assess* terraform 只要有接口管理的服务都能自动化部署的工具,还是 ansible 最佳排挡
+- *assess* [fluxcd](https://fluxcd.io/flux/) 最好用的 gitops 里对 k8s 自动配置部署工具
+- *assess* [argocd](https://argo-cd.readthedocs.io) gitops 里对 k8s 自动配置部署还有可视化拓扑图
+- *assess* [pulumi](https://www.pulumi.com/) 支持多种原生语言配置版本的 terraform 实现架构优秀，使用者友好，插件开发者痛苦
+- *assess* [openlens](https://github.com/lensapp/lens) Kubernetes IDE
+- *assess* [just](https://github.com/casey/just) [just备忘清单](https://wangchujiang.com/reference/docs/justfile.html)
 
 ## network
 
-- _assess_ [nebula](https://github.com/slackhq/nebula)
-- _assess_ [tailscale](https://github.com/tailscale/tailscale) [headscale](https://github.com/juanfont/headscale)
+- *assess* [nebula](https://github.com/slackhq/nebula)
+- *assess* [tailscale](https://github.com/tailscale/tailscale) [headscale](https://github.com/juanfont/headscale)
 
 ## managed services
 
 > https://github.com/awesome-selfhosted/awesome-selfhosted
 
 - dns
-  - _adopt_ [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
-  - _assess_ [pi-hole](https://github.com/pi-hole/pi-hole)
+  - *adopt* [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
+  - *assess* [pi-hole](https://github.com/pi-hole/pi-hole)
 - ebook
 - rss

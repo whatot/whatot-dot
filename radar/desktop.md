@@ -7,39 +7,29 @@
 
 ## os
 
-- _adopt_ archlinux
+- *adopt* archlinux,manjaro
   - pros: 各种软件都能安装最新版，各类软件都能有维护与适配
   - cons: 需要自行维护配置，实现自动化部署与配置方案
-- _trial_ nixos
+- *hold* nixos
   - pros: 支持自动化部署与配置到指定状态
   - cons: 很多配置需要探索与试验，没有现成的情况下需要自行维护，国内专属软件无维护者，到日常易用比较难
-- _assess_ gentoo
-- _hold_ debian,ubuntu
+- *hold* gentoo
+- *hold* debian,ubuntu
   - pros: 系统部署容易；无复杂配置才能解决的问题
   - cons: 官方源软件版本低，部分软件需要慢速的ppa源，部分软件依旧无法找到；无法自动化部署与配置到指定状态
   - try: [mpr](https://mpr.makedeb.org/)
 
-### nixos trial step
-
-- https://github.com/gvolpe/nix-config
-- https://github.com/nix-community/nix-doom-emacs
-
-## deploy tools
-
-- _adopt_ ansible
-- _trial_ transform
-- _assess_ [just](https://github.com/casey/just) [just备忘清单](https://wangchujiang.com/reference/docs/justfile.html)
-
 ## input method
 
-- _trial_ [felix zhwiki dict](https://github.com/felixonmars/fcitx5-pinyin-zhwiki)
-- _trial_ [rime coverpinyin](https://github.com/fkxxyz/rime-cloverpinyin)
+- *trial* [felix zhwiki dict](https://github.com/felixonmars/fcitx5-pinyin-zhwiki)
+  - arch中安装 rime-pinyin-zhwiki 后，自动在 import table 范围内
+- *trial* [rime coverpinyin](https://github.com/fkxxyz/rime-cloverpinyin)
 
 ## editor
 
-- _adopt_ doom emacs
-- _adopt_ vim
-- _adopt_ vscode
-- _assess_ neovim
-- _assess_ helix
-- _assess_ zen
+- *adopt* doom emacs
+- *adopt* vim
+- *adopt* vscode
+- *hold* helix 轻量级编辑的场景下，vim已经满足要求
+- *hold* zen 待后续rust开发再尝试
+- *hold* neovim emacs与vim已经暂时足够,并且相关配置集太麻烦
