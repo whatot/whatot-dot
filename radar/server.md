@@ -58,7 +58,8 @@
 
 ## managed services
 
-> https://github.com/awesome-selfhosted/awesome-selfhosted
+> - https://github.com/awesome-selfhosted/awesome-selfhosted
+> - https://github.com/tborychowski/self-hosted-cookbook
 
 - dns
   - *adopt* [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
