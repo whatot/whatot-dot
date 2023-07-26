@@ -1,14 +1,36 @@
 
-;;; font
-(defun config-font-size (size)
-  (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size size))
-  ;;(setq doom-font (font-spec :family "Hack Nerd Font" :size size))
-  (setq doom-unicode-font (font-spec :family "LXGW WenKai")))
-(cond
- ((string= (system-name) "msi") (config-font-size 18))
- ((string= (system-name) "gs65") (config-font-size 18))
- ((string= (system-name) "b150") (config-font-size 32))
- ((string= system-type "darwin") (config-font-size 15)))
+;;; font  M-x: describe-font
+(defun +font-available-p (font)
+  (if (null (x-list-fonts font)) nil t))
+(defvar +prefer-en-fonts '("JetBrainsMono Nerd Font" "Hack Nerd Font"
+                           "Source Code Pro" "Hack" "Menlo" "monospace"))
+(defvar +prefer-cjk-fonts '("LXGW WenKai" "Source Han Sans CN" "monospace"))
+(defvar +font-size
+  (cond
+   ((string= (system-name) "msi") 18)
+   ((string= (system-name) "gs65") 18)
+   ((string= (system-name) "b150") 32)
+   ((string= system-type "darwin") 15)))
+(defun +match-font-p (font-candidates)
+  (cl-loop for font in font-candidates
+           when (+font-available-p font)
+           return (font-spec :family font :size +font-size)))
+(defvar +en-font (+match-font-p +prefer-en-fonts))
+(defvar +cjk-font (+match-font-p +prefer-cjk-fonts))
+(defvar +emoji-font (font-spec :name "Noto Color Emoji"))
+(defvar +symbol-font (font-spec :name "Symbola"))
+(setq doom-font +en-font)
+(setq doom-unicode-font +cjk-font)
+(add-hook 'after-init-hook
+          (lambda ()
+            ;; cjk check 语言 中文 早上好 おはよう 좋은 아침이에요
+            (dolist (charset '(han kana hangul cjk-misc))
+              (set-fontset-font "fontset-default" charset +cjk-font))
+            ;; ¢ $ € £ ¥
+            (dolist (charset '(greek symbol))
+              (set-fontset-font "fontset-default" charset +symbol-font nil 'prepend))
+            ;; emoji check 😀 😃 🫱🏼‍🫲🏿
+            (set-fontset-font "fontset-default" 'emoji +emoji-font)))
 
 ;;; windows frame title
 (setq frame-title-format
