@@ -15,7 +15,7 @@ function for_ubuntu() {
 }
 
 function for_mac() {
-    use_emacs_mac
+    use_emacs_plus
 }
 
 function use_emacs_mac() {
@@ -30,7 +30,7 @@ function use_emacs_mac() {
 
 function use_emacs_plus() {
     brew tap d12frosted/emacs-plus
-    brew install emacs-plus@28 --with-native-comp
+    brew install emacs-plus@28 --with-dbus --with-native-comp --with-no-titlebar-and-round-corners
 
     M1_BREW_EMACS_PATH="/opt/homebrew/opt/emacs-plus@28/Emacs.app"
     INTEL_BREW_EMACS_PATH="/usr/local/opt/emacs-plus@28/Emacs.app"
