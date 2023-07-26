@@ -99,6 +99,6 @@ brew_cask_install macvim
 brew_cask_install meld
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
-brew_cask_install font-lxgw-bright-gb
+brew_cask_install font-lxgw-wenkai
 
 echo "finined!"

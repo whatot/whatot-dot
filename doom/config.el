@@ -3,7 +3,7 @@
 (defun config-font-size (size)
   (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size size))
   ;;(setq doom-font (font-spec :family "Hack Nerd Font" :size size))
-  (setq doom-unicode-font (font-spec :family "LXGW Bright GB")))
+  (setq doom-unicode-font (font-spec :family "LXGW WenKai")))
 (cond
  ((string= (system-name) "msi") (config-font-size 18))
  ((string= (system-name) "gs65") (config-font-size 18))

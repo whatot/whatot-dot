@@ -26,5 +26,3 @@ gsettings set org.gnome.shell.keybindings switch-to-application-8 "[]"
 gsettings set org.gnome.shell.keybindings switch-to-application-9 "[]"
 
 EOF
-
-yay -S ttf-lxgw-bright-gb-git

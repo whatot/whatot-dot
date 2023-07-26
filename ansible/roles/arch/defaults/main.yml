@@ -7,14 +7,15 @@ font_pkgs:
   - adobe-source-han-serif-cn-fonts
   - adobe-source-sans-pro-fonts
   - adobe-source-serif-pro-fonts
-  - ttf-jetbrains-mono-nerd
   - noto-fonts
   - ttf-bitstream-vera
   - ttf-dejavu
   - ttf-droid
   - ttf-fira-mono
   - ttf-fira-sans
+  - ttf-jetbrains-mono-nerd
   - ttf-liberation
+  - ttf-lxgw-wenkai
   - ttf-monaco
   - ttf-opensans
   - ttf-roboto
@@ -39,7 +40,6 @@ aur_pkgs:
   - caffeine-ng
   - marp
   - nautilus-nutstore
-  - ttf-lxgw-bright-gb-git
 
 basic_pkgs:
   - autoconf
