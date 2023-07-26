@@ -6,7 +6,7 @@
                            "Source Code Pro" "Hack" "Menlo" "monospace"))
 (defvar +prefer-cjk-fonts '("LXGW WenKai" "Source Han Sans CN" "monospace"))
 (defvar +prefer-emoji-fonts '("Apple Color Emoji" "Noto Color Emoji"))
-(defvar +prefer-symbol-fonts '("Apple Symbols" "Symbola"))
+(defvar +prefer-symbol-fonts '("Apple Symbols" "Noto Sans Symbols"))
 (defvar +font-size
   (cond
    ((string= (system-name) "msi") 18)
