@@ -39,6 +39,7 @@ aur_pkgs:
   - caffeine-ng
   - marp
   - nautilus-nutstore
+  - ttf-lxgw-bright-gb-git
 
 basic_pkgs:
   - autoconf

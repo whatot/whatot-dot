@@ -1,20 +1,14 @@
 
 ;;; font
-(defun config-font-size (en-size cn-size)
-  (setq doom-font (font-spec
-                   :family "Source Code Pro"
-                   :size en-size))
-  (set-face-attribute 'default nil :font
-                      (format "%s:pixelsize=%d" "Source Code Pro" en-size))
-  (if (display-graphic-p)
-      (dolist (charset '(kana han cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font) charset
-                          (font-spec :family "Source Han Sans CN" :size cn-size)))))
+(defun config-font-size (size)
+  (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size size))
+  ;;(setq doom-font (font-spec :family "Hack Nerd Font" :size size))
+  (setq doom-unicode-font (font-spec :family "LXGW Bright GB")))
 (cond
- ((string= (system-name) "msi") (config-font-size 18 16))
- ((string= (system-name) "gs65") (config-font-size 18 16))
- ((string= (system-name) "b150") (config-font-size 32 30))
- ((string= system-type "darwin") (config-font-size 14 13)))
+ ((string= (system-name) "msi") (config-font-size 18))
+ ((string= (system-name) "gs65") (config-font-size 18))
+ ((string= (system-name) "b150") (config-font-size 32))
+ ((string= system-type "darwin") (config-font-size 14)))
 
 ;;; windows frame title
 (setq frame-title-format
