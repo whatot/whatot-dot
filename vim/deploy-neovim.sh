@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 set -aux
 
-SCRIPT_PATH=$(
-	cd "$(dirname "$0")" || return
-	pwd -P
-)
-
-init_astro_nvim() {
+init_nvim_config() {
 	NVIM_CONFIG_PATH=${HOME}/.config/nvim
 	if [[ ! -d "${NVIM_CONFIG_PATH}" ]]; then
-		git clone --depth 1 https://github.com/AstroNvim/AstroNvim "${NVIM_CONFIG_PATH}"
-		nvim
+		git clone https://github.com/NvChad/NvChad "${NVIM_CONFIG_PATH}" --depth 1 && nvim
 	else
 		echo "${NVIM_CONFIG_PATH} already exist!"
 	fi
@@ -25,14 +19,6 @@ maximized = true
 idle = true
 frame = "Full"
 EOF
-}
-
-sync_nvim_user_config() {
-	TARGET_NVIM_USER_CONFIG=${HOME}/.config/nvim/lua/user
-	mkdir -p "$(dirname "${TARGET_NVIM_USER_CONFIG}")"
-	mkdir -p "${TARGET_NVIM_USER_CONFIG}"
-
-	ln -sf "${SCRIPT_PATH}"/nvim_user.lua "${TARGET_NVIM_USER_CONFIG}/init.lua"
 }
 
 for_mac() {
@@ -58,28 +44,27 @@ for_ubuntu() {
 }
 
 case $(uname) in
-Darwin)
-	for_mac
-	;;
-Linux)
-	OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
-	case ${OS_ID} in
-	ubuntu)
-		for_ubuntu
+	Darwin)
+		for_mac
 		;;
-	manjaro | archlinux)
-		for_arch
+	Linux)
+		OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
+		case ${OS_ID} in
+			ubuntu)
+				for_ubuntu
+				;;
+			manjaro | archlinux)
+				for_arch
+				;;
+			*)
+				echo -n "unsupported os id: ${OS_ID}"
+				;;
+		esac
 		;;
 	*)
-		echo -n "unsupported os id: ${OS_ID}"
+		echo -n "unsuppprted os"
 		;;
-	esac
-	;;
-*)
-	echo -n "unsuppprted os"
-	;;
 esac
 
-init_astro_nvim
 init_neovide
-sync_nvim_user_config
+init_nvim_config
