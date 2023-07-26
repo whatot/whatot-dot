@@ -1,7 +1,12 @@
 case $(uname) in
     Darwin)
-        export PATH="/opt/homebrew/opt/openjdk@11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        export JAVA_HOME="/opt/homebrew/opt/openjdk@11"
+        if [[ -f "/opt/homebrew/bin/brew" ]]; then
+            export PATH="/opt/homebrew/opt/openjdk@11/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+            export JAVA_HOME="/opt/homebrew/opt/openjdk@11"
+        else
+            export PATH="/usr/local/opt/openjdk@11/bin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+            export JAVA_HOME="/usr/local/opt/openjdk@11"
+        fi
         # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
         export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
         ;;
