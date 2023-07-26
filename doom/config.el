@@ -5,6 +5,8 @@
 (defvar +prefer-en-fonts '("JetBrainsMono Nerd Font" "Hack Nerd Font"
                            "Source Code Pro" "Hack" "Menlo" "monospace"))
 (defvar +prefer-cjk-fonts '("LXGW WenKai" "Source Han Sans CN" "monospace"))
+(defvar +prefer-emoji-fonts '("Apple Color Emoji" "Noto Color Emoji"))
+(defvar +prefer-symbol-fonts '("Apple Symbols" "Symbola"))
 (defvar +font-size
   (cond
    ((string= (system-name) "msi") 18)
@@ -17,8 +19,8 @@
            return (font-spec :family font :size +font-size)))
 (defvar +en-font (+match-font-p +prefer-en-fonts))
 (defvar +cjk-font (+match-font-p +prefer-cjk-fonts))
-(defvar +emoji-font (font-spec :name "Noto Color Emoji"))
-(defvar +symbol-font (font-spec :name "Symbola"))
+(defvar +emoji-font (+match-font-p +prefer-emoji-fonts))
+(defvar +symbol-font (+match-font-p +prefer-symbol-fonts))
 (setq doom-font +en-font)
 (setq doom-unicode-font +cjk-font)
 (add-hook 'after-init-hook
