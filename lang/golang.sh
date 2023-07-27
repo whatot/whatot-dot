@@ -23,6 +23,7 @@ function common_useful_pkgs() {
 
 function for_arch() {
     sudo pacman -S go go-tools
+    yay -S golangci-lint-bin
 }
 
 function for_ubuntu() {
@@ -40,7 +41,7 @@ function brew_install() {
         echo "$pkg_name installed"
     else
         echo "to install $pkg_name"
-        brew install $*
+        brew install "$*"
     fi
 }
 
