@@ -7,3 +7,4 @@
 (package! vimrc-mode)
 (package! markdownfmt)
 (package! go-translate)
+(package! sqlformat)

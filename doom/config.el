@@ -66,6 +66,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; use pgformatter by sqlformat
+(use-package! sqlformat
+  :demand t
+  :config
+  (setq sqlformat-command 'pgformatter)
+  (setq sqlformat-args '("-s2" "-g"))
+  (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
+
 ;; enable tree-sitter global
 (setq global-tree-sitter-mode 1)
 

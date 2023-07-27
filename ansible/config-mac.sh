@@ -90,6 +90,7 @@ brew_install direnv
 brew_install terraform
 brew_install lua
 brew_install lua-language-server
+brew_install pgformatter
 
 brew_cask_install neovide
 brew_cask_install wezterm

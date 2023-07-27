@@ -116,6 +116,7 @@ program_tool_pkgs:
   - make
   - maven
   - ninja
+  - pgformatter
   - prettier
   - ripgrep
   - rustup
