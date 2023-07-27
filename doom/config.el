@@ -66,7 +66,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; use pgformatter by sqlformat
+;; use sqlformat
 (use-package! sqlformat
   :demand t
   :config
