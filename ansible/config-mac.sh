@@ -101,6 +101,5 @@ brew_cask_install meld
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
 brew_cask_install font-lxgw-wenkai
-brew_cask_install font-noto-color-emoji
 
 echo "finined!"
