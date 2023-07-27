@@ -116,8 +116,8 @@ program_tool_pkgs:
   - make
   - maven
   - ninja
-  - pgformatter
   - prettier
+  - python-sqlparse
   - ripgrep
   - rustup
   - sccache

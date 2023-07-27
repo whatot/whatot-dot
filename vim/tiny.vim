@@ -17,8 +17,7 @@ Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/LargeFile'
 Plug 'dense-analysis/ale'
 Plug 'whatot/molokai'
-Plug 'moorereason/vim-markdownfmt'
-Plug '42wim/vim-shfmt'
+Plug 'vim-autoformat/vim-autoformat'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_map = '<c-p>'
@@ -41,11 +40,15 @@ let g:LargeFile = 2
 let g:signify_vcs_list = [ 'git', 'hg' ]
 nnoremap <silent> wg :SignifyToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:markdownfmt_autosave=1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:sh_fmt_autosave = 1
-let g:sh_fmt_options = '-ci --posix'
-autocmd FileType zsh call Autoformat()
+let g:autoformat_autoindent = 1
+let g:autoformat_retab = 1
+let g:autoformat_remove_trailing_spaces = 1
+let g:autoformat_verbosemode = 1
+let g:formatdef_markdownfmt = '"markdownfmt"'
+let g:formatters_markdown = ['markdownfmt']
+let g:formatdef_shfmt = '"shfmt -ci --posix"'
+let g:formatters_sh = ['shfmt']
+autocmd BufWrite * :Autoformat
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme molokai
 if has("mac")

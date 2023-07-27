@@ -70,8 +70,8 @@
 (use-package! sqlformat
   :demand t
   :config
-  (setq sqlformat-command 'pgformatter)
-  (setq sqlformat-args '("-s2" "-g"))
+  (setq sqlformat-command 'sqlformat)
+  (setq sqlformat-args '())
   (add-hook 'sql-mode-hook 'sqlformat-on-save-mode))
 
 ;; enable tree-sitter global
