@@ -38,8 +38,6 @@ absent_pkgs:
   - visual-studio-code
 
 aur_pkgs:
-  - caffeine-ng
-  - marp
   - nautilus-nutstore
 
 basic_pkgs:

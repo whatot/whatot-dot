@@ -36,8 +36,8 @@ case $(uname) in
     Linux)
         if [[ -f "/usr/bin/pacman" ]]; then
             # arch 与 manjaro 直接系统安装 rustup，不需要执行安装脚本
-            echo -n "install rustup,rust-analyzer by pkg manager in arch or manjaro"
-            sudo pacman -S rustup rust-analyzer
+            echo -n "install rustup by pacman in arch or manjaro"
+            sudo pacman -S rustup
         else
             # 不能直接使用系统 rustup 的发行版中，使用远程安装脚本初始化 rustup
             if [[ -f "${LOCAL_RUSTUP_BIN}" ]]; then
