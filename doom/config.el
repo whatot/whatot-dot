@@ -66,6 +66,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; roam
+(setq org-roam-directory (file-truename "~/roam"))
+
 ;; use sqlformat
 (use-package! sqlformat
   :demand t
