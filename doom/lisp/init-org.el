@@ -2,13 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar org-directory)
 (defvar org-roam-directory)
 (defvar org-roam-dailies-capture-templates)
 
+(defvar +is-star (string= (system-name) "star"))
+
+(setq org-directory
+      (file-truename (if +is-star "~/org" "~/nutstore/org")))
 (setq org-roam-directory
-      (if (string= (system-name) "star")
-          (file-truename "~/roam")
-        (file-truename "~/nutstore/thoughts/roam")))
+      (file-truename (if +is-star "~/org/roam" "~/nutstore/org/roam")))
 
 (provide 'init-org)
 ;;; init-org.el ends here
