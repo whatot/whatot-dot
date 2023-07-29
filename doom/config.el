@@ -8,11 +8,12 @@
 (defvar +prefer-emoji-fonts '("Apple Color Emoji" "Noto Color Emoji"))
 (defvar +prefer-symbol-fonts '("Apple Symbols" "Noto Sans Symbols"))
 (defvar +font-size
-  (cond
-   ((string= (system-name) "msi") 18)
-   ((string= (system-name) "gs65") 18)
-   ((string= (system-name) "b150") 32)
-   ((string= system-type "darwin") 15)))
+  (cl-case (system-name)
+    ("msi" 16)
+    ("gs65" 16)
+    ("b150" 32)
+    ("star" 14)
+    ("mercury" 13)))
 (defun +match-font-p (font-candidates)
   (cl-loop for font in font-candidates
            when (+font-available-p font)
