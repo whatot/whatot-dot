@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+;; https://github.com/alphapapa/org-ql
+;; org-ql-find searches in the current buffer.
+;; org-ql-find-in-agenda searches in (org-agenda-files).
+;; org-ql-find-in-org-directory searches in org-directory.
+(use-package! org-ql
+  :demand t)
 
 ;; use sqlformat
 (use-package! sqlformat
