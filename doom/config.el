@@ -67,7 +67,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; roam
-(setq org-roam-directory (file-truename "~/roam"))
+(setq org-roam-directory
+      (if (string= (system-name) "star")
+          (file-truename "~/roam")
+        (file-truename "~/nutstore/thoughts/roam")))
 
 ;; use sqlformat
 (use-package! sqlformat
