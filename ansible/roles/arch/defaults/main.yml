@@ -58,6 +58,7 @@ basic_pkgs:
   - fcitx5-rime
   - firefox
   - firefox-i18n-zh-cn
+  - foliate
   - fzf
   - gedit
   - gnome-tweaks
