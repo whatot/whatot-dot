@@ -10,17 +10,16 @@
 (after! treemacs
   (treemacs-follow-mode 1))
 
-;; config plantuml-jar-path
-(setq-default plantuml-jar-path
-              (cond ((string= system-type 'darwin)
-                     "/usr/local/opt/plantuml/libexec/plantuml.jar")
-                    ((string= system-type 'gnu/linux)
-                     "/usr/share/java/plantuml/plantuml.jar")))
-(setq-default org-plantuml-jar-path (expand-file-name plantuml-jar-path))
-(setq-default plantuml-default-exec-mode 'jar)
-
 ;; Beacon — Never lose your cursor again
 (beacon-mode 1)
+
+;; support plantuml
+(after! plantuml-mode
+  (setq plantuml-default-exec-mode 'executable)
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((emacs-lisp . t) (plantuml . t)))
+  )
 
 ;; optional as clangd is the default cc lsp in Doom
 (after! lsp-clangd

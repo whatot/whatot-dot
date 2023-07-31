@@ -17,7 +17,7 @@
 (setq org-roam-capture-templates
       '(
         ("d" "default" plain "%?"
-         :target (file+head "%<%Y%m%d%H>-${slug}.org"
+         :target (file+head "inbox/%<%Y%m%d%H>-${slug}.org"
                             "#+title: ${title}\n#+filetags: \n")
          :unnarrowed t)
         ("b" "book notes" plain "%?"
@@ -40,6 +40,10 @@
          :target (file+head "homelab/homelab%<%Y%m%d%H>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :homelab: \n\n")
          :unnarrowed t)
+        ("m" "month" plain "%?"
+         :target (file+head "month/month%<%Y%m%d%H>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :month: \n\n")
+         :unnarrowed t)
         ("p" "project" plain "%?"
          :target (file+head "project/project%<%Y%m%d%H>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :project: \n\n")
@@ -48,10 +52,6 @@
          :target (file+head "tools/<%Y%m%d%H>-${slug}.org"
                             "#+title: {$title}\n%#+filetags: :tools: \n\n")
          :unarrowed t)
-        ("w" "work" plain "%?"
-         :target (file+head "work/work%<%Y%m%d%H>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :work: \n\n")
-         :unnarrowed t)
         ))
 
 
