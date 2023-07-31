@@ -21,36 +21,36 @@
                             "#+title: ${title}\n#+filetags: \n")
          :unnarrowed t)
         ("b" "book notes" plain "%?"
-         :target (file+head "book/book%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :book: \n\n")
+         :target (file+head "book/book-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :book:\n\n")
          :unnarrowed t)
         ("a" "algorithm" plain "%?"
-         :target (file+head "algorithm/algorithm%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :algorithm: \n\n")
+         :target (file+head "algorithm/algorithm-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :algorithm:\n\n")
          :unnarrowed t)
         ("d" "data science" plain "%?"
-         :target (file+head "data/data%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :data: \n\n")
+         :target (file+head "data/data-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :data:\n\n")
          :unnarrowed t)
         ("e" "engineering" plain "%?"
-         :target (file+head "engineering/engineering%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :engineering: \n\n")
+         :target (file+head "engineering/engineering-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :engineering:\n\n")
          :unnarrowed t)
         ("h" "homelab" plain "%?"
-         :target (file+head "homelab/homelab%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :homelab: \n\n")
+         :target (file+head "homelab/homelab-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :homelab:\n\n")
          :unnarrowed t)
         ("m" "work month" plain "%?"
          :target (file+head "work/month-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :work:month: \n\n")
+                            "#+title: ${title}\n#+filetags: :work:month:\n\n")
          :unnarrowed t)
         ("p" "project" plain "%?"
-         :target (file+head "project/project%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :project: \n\n")
+         :target (file+head "project/project-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :project:\n\n")
          :unnarrowed t)
         ("t" "tools" plain "%?"
-         :target (file+head "tools/tools%<%Y%m%d>-${slug}.org"
-                            "#+title: {$title}\n%#+filetags: :tools: \n\n")
+         :target (file+head "tools/tools-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :tools:\n\n")
          :unarrowed t)
         ))
 
