@@ -27,5 +27,8 @@
 ;; disable warning generated when functions are redefined with defadvice
 (setq ad-redefinition-action 'accept)
 
+;; auto save global
+(add-hook 'after-init-hook #'auto-save-visited-mode)
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
