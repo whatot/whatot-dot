@@ -43,13 +43,17 @@
          :target (file+head "homelab/homelab-%<%Y%m%d>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :homelab:\n\n")
          :unnarrowed t)
-        ("m" "work month" plain "%?"
-         :target (file+head "work/month-${slug}.org"
+        ("m" "monthly work" plain "%?"
+         :target (file+head "work/month/month-${slug}.org"
                             "#+title: ${title}\n#+filetags: :work:month:\n\n")
          :unnarrowed t)
-        ("p" "project" plain "%?"
-         :target (file+head "project/project-%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :project:\n\n")
+        ("o" "oneshot work" plain "%?"
+         :target (file+head "work/oneshot/oneshot-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :work:oneshot:\n\n")
+         :unnarrowed t)
+        ("p" "project in work" plain "%?"
+         :target (file+head "work/project/project-%<%Y%m%d>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :work:project:\n\n")
          :unnarrowed t)
         ("t" "tools" plain "%?"
          :target (file+head "tools/tools-%<%Y%m%d>-${slug}.org"
