@@ -23,10 +23,6 @@
          :target (file+head "inbox/%<%Y%m%d>-${slug}.org"
                             "#+title: ${title}\n#+filetags: \n")
          :unnarrowed t)
-        ("b" "book notes" plain "%?"
-         :target (file+head "book/book-%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :book:\n\n")
-         :unnarrowed t)
         ("a" "algorithm" plain "%?"
          :target (file+head "algorithm/algorithm-%<%Y%m%d>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :algorithm:\n\n")
@@ -39,20 +35,15 @@
          :target (file+head "engineering/engineering-%<%Y%m%d>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :engineering:\n\n")
          :unnarrowed t)
-        ("h" "homelab" plain "%?"
-         :target (file+head "homelab/homelab-%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :homelab:\n\n")
+        ("o" "owned topic" plain "%?"
+         :target (file+head "topic/${slug}.org"
+                            "#+title: ${title}\n#+filetags: :topic:\n\n")
          :unnarrowed t)
-        ("m" "monthly work" plain "%?"
-         :target (file+head "work/month/month-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :work:month:\n\n")
-         :unnarrowed t)
-        ("o" "oneshot work" plain "%?"
-         :target (file+head "work/oneshot/oneshot-%<%Y%m%d>-${slug}.org"
-                            "#+title: ${title}\n#+filetags: :work:oneshot:\n\n")
+        ("m" "work monthly in 2023" plain "* ${title} :work:\n :PROPERTIES:\n :ID: %(org-id-uuid)\n:END:\n\n"
+         :target (file+olp "work/year-2023.org" ("Year 2023"))
          :unnarrowed t)
         ("p" "project in work" plain "%?"
-         :target (file+head "work/project/project-%<%Y%m%d>-${slug}.org"
+         :target (file+head "work/project-%<%Y%m%d>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :work:project:\n\n")
          :unnarrowed t)
         ("t" "tools" plain "%?"
