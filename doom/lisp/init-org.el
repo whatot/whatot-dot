@@ -15,6 +15,10 @@
 ;; https://emacs.stackexchange.com/questions/30520/org-mode-c-c-c-c-to-display-inline-image
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
+;; 列表换行时，新行的开头不再有多余的空格
+(defvar org-adapt-indentation)
+(setq org-adapt-indentation `headline-data)
+
 ;; https://emacs-china.org/t/org-ql-columnview-org-roam-org-capture-org-super-links/21599
 (defvar org-roam-capture-templates)
 (setq org-roam-capture-templates
