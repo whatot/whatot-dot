@@ -72,6 +72,7 @@ brew_install plantuml
 brew_install fd
 brew_install proselint
 brew_install discount
+brew_install ccache
 brew_install sccache
 brew_install prettier
 brew_install jq
