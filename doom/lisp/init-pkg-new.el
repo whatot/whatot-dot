@@ -37,7 +37,9 @@
 
 ;; for edit vim file in emacs
 (use-package! vimrc-mode
-  :mode ("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+  :demand t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode)))
 
 ;; use fmt in golang for missing fmt
 (use-package! markdownfmt

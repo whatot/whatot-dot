@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
 ;; enable tree-sitter global
 (setq global-tree-sitter-mode 1)
 
@@ -17,6 +16,7 @@
 (after! plantuml-mode
   (setq plantuml-default-exec-mode 'executable)
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((emacs-lisp . t) (plantuml . t)))
   )
