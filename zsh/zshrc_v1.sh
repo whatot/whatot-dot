@@ -113,6 +113,7 @@ config_mixed() {
 	alias yay="paru"
 	alias ll='ls -alF --color'
 	alias ..='cd ..'
+	alias gf="git pull"
 
 	if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
 		alias vim='mvim -v'
