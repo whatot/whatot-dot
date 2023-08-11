@@ -30,5 +30,8 @@
 ;; auto save global
 (add-hook 'after-init-hook #'auto-save-visited-mode)
 
+;; hide title bar
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
