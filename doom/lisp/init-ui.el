@@ -7,9 +7,18 @@
           '(buffer-file-name "%f [%m]"
             (dired-directory dired-directory "%b")))
 
-;;; maximized at startup
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+;;; maximized,no title at startup
+(setq default-frame-alist
+      '(
+        (undecorated . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
+        (drag-internal-border . 1)
+        (internal-border-width . 5)
+        (vertical-scroll-bars);隐藏滚动条
+        (left-fringe);显示左fringe
+        (right-fringe . 0);关闭右fringe
+        (fullscreen . maximized)
+        (fullscreen . fullheight)
+        ))
 
 (setq-default truncate-lines nil)
 (setq-default word-wrap nil)
@@ -29,9 +38,6 @@
 
 ;; auto save global
 (add-hook 'after-init-hook #'auto-save-visited-mode)
-
-;; hide title bar
-(add-to-list 'default-frame-alist '(undecorated . t))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here
