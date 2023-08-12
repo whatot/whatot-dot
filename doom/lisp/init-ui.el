@@ -7,18 +7,25 @@
           '(buffer-file-name "%f [%m]"
             (dired-directory dired-directory "%b")))
 
-;;; maximized,no title at startup
-(setq default-frame-alist
-      '(
-        (undecorated . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
-        (drag-internal-border . 1)
-        (internal-border-width . 5)
-        (vertical-scroll-bars);隐藏滚动条
-        (left-fringe);显示左fringe
-        (right-fringe . 0);关闭右fringe
-        (fullscreen . maximized)
-        (fullscreen . fullheight)
-        ))
+;;; maximized,no titlebar at startup
+(if (eq system-type 'darwin)
+  ; in macos
+  ; use toggle-frame-maximized to maximize init frame
+  ; use "--with-no-titlebar" in build arg to hide titlebar
+  ; XXX undecorated=t conflict with toggle-frame-maximized now
+  (add-hook 'window-setup-hook #'toggle-frame-maximized)
+
+  ; in linux
+  ; use "emacs --maximized" to maximize init frame
+  ; use "undecorated" in frame config to hide titlebar
+  (setq default-frame-alist
+        '(
+          (undecorated . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
+          (drag-internal-border . 1)
+          (internal-border-width . 5)
+          (vertical-scroll-bars);隐藏滚动条
+          ))
+)
 
 (setq-default truncate-lines nil)
 (setq-default word-wrap nil)
