@@ -2,7 +2,7 @@
 set -eux
 
 # 默认指定版本
-NEEDED_RUST_VERSION=nightly-2023-06-15
+NEEDED_RUST_VERSION=nightly-2023-08-10
 
 # 基础目录
 CARGO_CONFIG_PATH="${HOME}/.cargo"
@@ -30,7 +30,7 @@ case $(uname) in
             echo -n "try to run rustup-init in macos"
             rustup-init -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
         fi
-        # rust-analyzer不住上面的rustup-init软链范围，需要单独处理
+        # rust-analyzer不在rustup-init软链范围，需要单独处理
         brew install rust-analyzer
         ;;
     Linux)
