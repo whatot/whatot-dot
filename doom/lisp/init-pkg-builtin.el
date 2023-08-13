@@ -17,8 +17,6 @@
   (setq plantuml-default-exec-mode 'executable)
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((emacs-lisp . t) (plantuml . t)))
   )
 
 ;; optional as clangd is the default cc lsp in Doom

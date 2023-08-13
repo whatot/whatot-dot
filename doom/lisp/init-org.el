@@ -2,9 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'org)
+
 (defvar +is-star (string= (system-name) "star"))
 
-(defvar org-directory)
 (setq org-directory
       (file-truename (if +is-star "~/org" "~/nutstore/org")))
 
@@ -12,12 +13,33 @@
 (setq org-roam-directory
       (file-truename (if +is-star "~/org/roam" "~/nutstore/org/roam")))
 
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (plantuml . t))))
+
+(defvar electric-indent-mode-hook)
+(defvar evil-auto-indent)
+(defun yet-org-mode ()
+  "Just more org init config."
+  ;; 关闭electric的自动缩进
+  (electric-indent-local-mode -1)
+  ;; 控制evil下的自动缩进，即类按o键的创建新行
+  (setq evil-auto-indent nil)
+  (goto-address-mode 1)
+  (auto-fill-mode 1))
+(add-hook 'org-mode-hook 'yet-org-mode)
+
+;; Turn off all org auto indentation completely
+(setq org-startup-indented nil)
+;; https://orgmode.org/worg/org-faq.html#indentation
+;; Turn off manual indentation completely,
+;; AKA when you suddenly press TAB or =
+(setq org-adapt-indentation nil)
+
 ;; https://emacs.stackexchange.com/questions/30520/org-mode-c-c-c-c-to-display-inline-image
 (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-
-;; 列表换行时，新行的开头不再有多余的空格
-(defvar org-adapt-indentation)
-(setq org-adapt-indentation `headline-data)
 
 ;; https://emacs-china.org/t/org-ql-columnview-org-roam-org-capture-org-super-links/21599
 (defvar org-roam-capture-templates)
