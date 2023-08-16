@@ -27,8 +27,7 @@
   (electric-indent-local-mode -1)
   ;; 控制evil下的自动缩进，即类按o键的创建新行
   (setq evil-auto-indent nil)
-  (goto-address-mode 1)
-  (auto-fill-mode 1))
+  (goto-address-mode 1))
 (add-hook 'org-mode-hook 'yet-org-mode)
 
 ;; Turn off all org auto indentation completely
