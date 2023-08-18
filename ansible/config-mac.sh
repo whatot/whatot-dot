@@ -93,13 +93,14 @@ brew_install lua
 brew_install lua-language-server
 brew_install sqlparse
 brew_install docker-completion
+brew_install kubectl
 
 brew_cask_install neovide
 brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
 brew_cask_install meld
-brew_cask_install podman
+brew_cask_install podman-desktop
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
 brew_cask_install font-lxgw-wenkai
