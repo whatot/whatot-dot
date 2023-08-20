@@ -1,6 +1,6 @@
 
 (package! ag)
-(package! protobuf-mode)
+;;(package! protobuf-mode)
 (package! fcitx)
 (package! go-impl)
 (package! beacon)
