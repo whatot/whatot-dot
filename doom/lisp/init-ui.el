@@ -8,11 +8,9 @@
             (dired-directory dired-directory "%b")))
 
 ;;; maximized,no titlebar at startup
-; use "emacs --maximized" to maximize init frame in linux
-; use "undecorated" in frame config to hide titlebar
 (setq default-frame-alist
       '(
-        (undecorated-round . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
+        (undecorated . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
         (drag-internal-border . 1)
         (internal-border-width . 5)
         (vertical-scroll-bars);隐藏滚动条
