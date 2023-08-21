@@ -99,7 +99,7 @@ program_tool_pkgs:
   - direnv
   - discount
   - editorconfig-core-c
-  - emacs-gcc-wayland-devel-bin
+  - emacs-wayland
   - fd
   - flex
   - gcc
