@@ -8,13 +8,15 @@
             (dired-directory dired-directory "%b")))
 
 ;;; maximized,no titlebar at startup
-(setq default-frame-alist
-      '(
-        (undecorated . t);会导致所有边框全部消失无法拖动调整窗口大小 需要加上后面两句
-        (drag-internal-border . 1)
-        (internal-border-width . 5)
-        (vertical-scroll-bars);隐藏滚动条
-        ))
+(if (eq system-type 'darwin)
+    ;; in macos, original undecorated conflict with maximized-toggle
+    (add-to-list 'default-frame-alist '(undecorated-round . t))
+  ;; in linux, undecorated-round conflict with maximized-toggle
+  (add-to-list 'default-frame-alist '(undecorated . t)))
+(add-to-list 'default-frame-alist '(drag-internal-border . 1))
+(add-to-list 'default-frame-alist '(internal-border-width . 5))
+(add-to-list 'default-frame-alist '(drag-with-tab-line . t))
+(add-to-list 'default-frame-alist '(vertical-scroll-bars))
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (setq-default truncate-lines nil)
