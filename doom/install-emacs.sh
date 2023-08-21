@@ -2,8 +2,6 @@
 set -eux
 
 function for_arch() {
-    sudo pacman -Rsn emacs-gcc-wayland-devel-bin
-    # https://archlinux.org/packages/extra/x86_64/emacs-wayland/
     sudo pacman -S emacs-wayland
 }
 
