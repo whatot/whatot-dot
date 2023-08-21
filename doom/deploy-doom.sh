@@ -10,6 +10,18 @@ DOOM_SOURCE_PATH="${HOME}/.emacs.d.doom"
 DOOM_CONFIG_PATH="${HOME}/.doom.d"
 EMACS_D_PATH="${HOME}/.emacs.d"
 
+# config proselint for org-mode or markdown
+# https://github.com/amperser/proselint
+PROSELINT_CONFIG_PATH="${HOME}/.config/proselint"
+mkdir -p "${PROSELINT_CONFIG_PATH}"
+cat <<EOF >"${PROSELINT_CONFIG_PATH}/config.json"
+{
+  "checks": {
+    "lexical_illusions.misc": false
+  }
+}
+EOF
+
 # 将doom配置指向正确位置
 if [[ ! -d "${DOOM_CONFIG_PATH}" ]]; then
     ln -sf "${SCRIPT_PATH}" "${DOOM_CONFIG_PATH}"
