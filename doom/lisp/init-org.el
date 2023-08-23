@@ -13,6 +13,8 @@
 (setq org-roam-directory
       (file-truename (if +is-star "~/org/roam" "~/nutstore/org/roam")))
 
+(map! :leader "n n" #'org-roam-node-find)
+
 (with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
