@@ -3,6 +3,7 @@
 ;;; Code:
 
 (require 'org)
+(require 'org-modern)
 
 (defvar +is-star (string= (system-name) "star"))
 
@@ -13,6 +14,7 @@
 (setq org-roam-directory
       (file-truename (if +is-star "~/org/roam" "~/nutstore/org/roam")))
 
+;; <SPC> n n key
 (map! :leader "n n" #'org-roam-node-find)
 
 (with-eval-after-load 'org
@@ -21,7 +23,9 @@
    '((emacs-lisp . t)
      (plantuml . t))))
 
-(defvar electric-indent-mode-hook)
+;; better ui for org-mode
+(with-eval-after-load 'org (global-org-modern-mode))
+
 (defvar evil-auto-indent)
 (defun yet-org-mode ()
   "Just more org init config."
@@ -29,6 +33,13 @@
   (electric-indent-local-mode -1)
   ;; 控制evil下的自动缩进，即类按o键的创建新行
   (setq evil-auto-indent nil)
+  (setq org-src-preserve-indentation t)
+  (setq org-edit-src-content-indentation 0)
+  (setq org-src-tab-acts-natively t)
+  (setq org-startup-with-inline-images t)
+  ;; 特别设置org-mode中除了src模块的tab宽度
+  (setq tab-width 2)
+  (setq evil-shift-width tab-width)
   (goto-address-mode 1))
 (add-hook 'org-mode-hook 'yet-org-mode)
 

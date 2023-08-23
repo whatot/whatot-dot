@@ -9,3 +9,4 @@
 (package! go-translate)
 (package! sqlformat)
 (package! org-ql)
+(package! org-modern)
