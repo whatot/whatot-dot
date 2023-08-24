@@ -38,5 +38,10 @@
 ;; auto save global
 (add-hook 'after-init-hook #'auto-save-visited-mode)
 
+;; https://blog.kamens.us/2022/03/02/hack-of-the-day-stop-accidental-text-scaling-from-brushing-trackpad-in-gnu-emacs-on-macos/
+;; disable text scale by wheel-down/wheel-up
+(unbind-key "C-<wheel-down>")
+(unbind-key "C-<wheel-up>")
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
