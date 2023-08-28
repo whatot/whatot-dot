@@ -124,8 +124,8 @@ if has("gui_running")
     set guioptions-=T   " hide tool bar
     set guioptions-=L   " hide left scroll
     set guioptions-=r   " hide right scroll
-    set columns=120
-    set lines=40
+    set columns=999
+    set lines=999
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " alias gvim='gvim -c "call Maximize_Window()"'
