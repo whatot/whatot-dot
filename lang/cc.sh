@@ -10,7 +10,7 @@ fi
 if [[ "${cmd}" = "ortools" ]]; then
     # https://github.com/google/or-tools/blob/stable/cmake/README.md
     cd ~/git/or-tools
-    cmake -S. -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_SCIP=OFF -DBUILD_DEPS=ON
+    cmake -S. -Bbuild -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_SCIP=OFF -DBUILD_DEPS=ON -DBUILD_JAVA=ON -DJAVA_HOME="$(/usr/libexec/java_home)"
 elif [[ "${cmd}" = "xgboost" ]]; then
     # https://github.com/dmlc/xgboost
     cd ~/git/xgboost
