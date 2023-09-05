@@ -8,5 +8,3 @@
 (require 'init-pkg-new)
 (require 'init-proxy)
 (require 'init-ui)
-
-(require 'swig-mode)

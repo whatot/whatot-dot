@@ -18,7 +18,7 @@ cat <<EOF >"${PROSELINT_CONFIG_PATH}/config.json"
 {
   "checks": {
     "lexical_illusions.misc": false,
-    "typography.symbols.curly_quotes": false
+    "typography.symbols": false
   }
 }
 EOF
