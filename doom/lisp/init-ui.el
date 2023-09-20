@@ -4,8 +4,8 @@
 
 ;;; windows frame title
 (setq frame-title-format
-          '(buffer-file-name "%f [%m]"
-            (dired-directory dired-directory "%b")))
+      '(buffer-file-name "%f [%m]"
+        (dired-directory dired-directory "%b")))
 
 ;;; maximized,no titlebar at startup
 (if (eq system-type 'darwin)
@@ -21,6 +21,7 @@
 
 (setq-default truncate-lines nil)
 (setq-default word-wrap nil)
+(setq-default word-wrap-by-category t)
 (setq-default show-trailing-whitespace t)
 (setq-default require-final-newline t)
 
