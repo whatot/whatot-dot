@@ -48,7 +48,7 @@ let g:formatdef_markdownfmt = '"markdownfmt"'
 let g:formatters_markdown = ['markdownfmt']
 let g:formatdef_shfmt = '"shfmt -ci --posix"'
 let g:formatters_sh = ['shfmt']
-autocmd BufWrite * :Autoformat
+autocmd BufWrite *.md,*.sh,*.sql :Autoformat
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme molokai
 if has("mac")
