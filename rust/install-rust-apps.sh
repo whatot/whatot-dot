@@ -9,9 +9,9 @@ cargo_install() {
 cargo_install tealdeer
 
 # A command-line tool that converts TOML to JSON. Nothing more, nothing less.
-cargo install toml2json
+cargo_install toml2json
 
 # Tokei will show the number of files, total lines within those files and code, comments, and blanks grouped by language.
-cargo install tokei
+cargo_install tokei
 
 sccache --show-stats
