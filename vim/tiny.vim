@@ -46,7 +46,9 @@ let g:autoformat_remove_trailing_spaces = 1
 let g:autoformat_verbosemode = 1
 let g:formatdef_markdownfmt = '"markdownfmt"'
 let g:formatters_markdown = ['markdownfmt']
-let g:formatdef_shfmt = '"shfmt -ci --posix"'
+"" use two spaces to indent based on google style guide
+"" https://google.github.io/styleguide/shellguide.html#s5-formatting
+let g:formatdef_shfmt = '"shfmt -ci -i 2 --posix"'
 let g:formatters_sh = ['shfmt']
 autocmd BufWrite *.md,*.sh,*.sql :Autoformat
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

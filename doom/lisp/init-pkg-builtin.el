@@ -34,5 +34,11 @@
 (setq dired-dwim-target t)
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+;; setting sh and shfmt
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 2)))
+
 (provide 'init-pkg-builtin)
 ;;; init-pkg-builtin.el ends here
