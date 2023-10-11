@@ -2,15 +2,15 @@
 set -aux
 
 SCRIPT_PATH=$(
-	cd "$(dirname "$0")" || return
-	pwd -P
+  cd "$(dirname "$0")" || return
+  pwd -P
 )
 
 prezto_path="${ZDOTDIR:-$HOME}/.zprezto"
 if [[ -d "${prezto_path}" ]]; then
-	echo "prezto already installed"
+  echo "prezto already installed"
 else
-	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${prezto_path}"
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${prezto_path}"
 fi
 
 cat <<EOF >"${HOME}/.config/starship.toml"
