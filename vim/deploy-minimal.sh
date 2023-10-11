@@ -2,12 +2,12 @@
 set -x
 
 SCRIPT_PATH=$(
-	cd "$(dirname "$0")" || return
-	pwd -P
+  cd "$(dirname "$0")" || return
+  pwd -P
 )
 
 if [[ -f "${HOME}/.vimrc" ]]; then
-	mv ~/.vimrc ~/.vimrc.backup
+  mv ~/.vimrc ~/.vimrc.backup
 fi
 
 # all needed subdirs
