@@ -2,7 +2,7 @@
 set -eux
 
 cargo_install() {
-    cargo install --force "$@"
+  cargo install --force "$@"
 }
 
 # for tldr to update cache, ``tldr --update``

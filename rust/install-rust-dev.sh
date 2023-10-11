@@ -2,7 +2,7 @@
 set -eux
 
 cargo_install() {
-    cargo install --force "$@"
+  cargo install --force "$@"
 }
 
 # build rust pkg with cache
@@ -36,9 +36,9 @@ cargo_install flamegraph
 
 # Tool to analyse test coverage of cargo projects
 if [[ "${OSTYPE}" == "linux-gnu"* ]]; then
-    cargo_install cargo-tarpaulin
+  cargo_install cargo-tarpaulin
 else
-    echo "skip tarpaulin in ${OSTYPE}"
+  echo "skip tarpaulin in ${OSTYPE}"
 fi
 
 # Audit Cargo.lock for crates with security vulnerabilities
