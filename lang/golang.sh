@@ -19,6 +19,7 @@ function common_dev_pkgs() {
 
 function common_useful_pkgs() {
     go install github.com/Kunde21/markdownfmt/v3/cmd/markdownfmt@latest
+    go install github.com/jessfraz/dockfmt@latest
 }
 
 function for_arch() {
