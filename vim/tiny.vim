@@ -72,8 +72,6 @@ set number
 set hidden
 set list
 set nolinebreak
-set smartindent
-set cindent
 set smartcase
 set wrap
 set autochdir
@@ -88,7 +86,8 @@ set laststatus=2
 set showcmd
 set novisualbell  " 不要闪烁
 set noerrorbells  " 关闭遇到错误时的声音提示
-autocmd FileType make set noexpandtab
+autocmd FileType make setlocal noexpandtab
+autocmd FileType markdown setlocal ts=2 sw=2 sts=2 expandtab autoindent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=","
 let g:mapleader=","
