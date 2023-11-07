@@ -3,7 +3,6 @@
 
 (require 'init-font)
 (require 'init-optimize)
-;; (require 'init-org)
 (require 'init-pkg-builtin)
 (require 'init-pkg-new)
 (require 'init-proxy)
