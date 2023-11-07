@@ -40,18 +40,20 @@ setproxy() {
 
   case ${ZSH_HOSTNAME} in
     star)
-      export PROXY_URL="http://proxy.nioint.com:8080"
+      export PROXY_URL="place:port"
       ;;
     *)
       export PROXY_URL="http://127.0.0.1:8899"
       ;;
   esac
 
+  export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
   export ALL_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
   export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
   export HTTPS_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
 }
 proxyinfo() {
+  echo "NO_PROXY = ${NO_PROXY}"
   echo "ALL_PROXY = ${ALL_PROXY}"
   echo "HTTP_PROXY = ${HTTP_PROXY}"
   echo "HTTPS_PROXY = ${HTTPS_PROXY}"
