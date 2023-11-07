@@ -16,5 +16,10 @@ SCRIPT_PATH=$(
   pwd -P
 )
 
+mkdir -p "${HOME}/.config/git"
+cat <<EOF >"${HOME}/.config/git/ignore"
+.DS_Store
+EOF
+
 ln -sf "${SCRIPT_PATH}"/zshrc_v1.sh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv

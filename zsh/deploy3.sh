@@ -19,6 +19,11 @@ add_newline = true
 battery.disabled = true
 EOF
 
+mkdir -p "${HOME}/.config/git"
+cat <<EOF >"${HOME}/.config/git/ignore"
+.DS_Store
+EOF
+
 ln -sf "${SCRIPT_PATH}"/zshrc_v3.sh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv
 ln -sf "${SCRIPT_PATH}"/zpreztorc.sh ~/.zpreztorc

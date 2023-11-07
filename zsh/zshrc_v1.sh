@@ -7,6 +7,9 @@ init_before_all() {
   uname_os=$(uname -s)
   export ZSH_OSTYPE=${uname_os}
 
+  hostname_os=$(hostname -d)
+  export ZSH_HOSTNAME=${hostname_os}
+
   if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
     source "${HOME}/.zshenv"
   fi
@@ -35,8 +38,14 @@ unsetproxy() {
 setproxy() {
   unsetproxy
 
-  export PROXY_PORT=8899
-  export PROXY_HOST="127.0.0.1"
+  case ${ZSH_HOSTNAME} in
+    star)
+      export PROXY_URL="http://proxy.nioint.com:8080"
+      ;;
+    *)
+      export PROXY_URL="http://127.0.0.1:8899"
+      ;;
+  esac
 
   export ALL_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
   export HTTP_PROXY="http://${PROXY_HOST}:${PROXY_PORT}"
