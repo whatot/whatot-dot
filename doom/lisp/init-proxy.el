@@ -4,7 +4,7 @@
 
 (defvar url-proxy-services)
 
-(defvar my-proxy "127.0.0.1:8899")
+(defvar my-proxy (string-replace "http://" "" (getenv "HTTP_PROXY")))
 
 (defun show-proxy ()
   "Show http/https proxy."
@@ -16,8 +16,10 @@
 (defun set-proxy ()
   "Set http/https proxy."
   (interactive)
-  (setq url-proxy-services `(("http" . ,my-proxy)
-                             ("https" . ,my-proxy)))
+  (setq url-proxy-services
+        '(("no_proxy" . "^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)")
+          ("http" . my-proxy)
+          ("https" . my-proxy)))
   (show-proxy))
 
 (defun unset-proxy ()
