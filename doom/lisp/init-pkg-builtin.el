@@ -39,6 +39,8 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)))
+(after! sh-script
+  (set-formatter! 'shfmt '("shfmt" "--case-indent" "--indent" "2")))
 
 (provide 'init-pkg-builtin)
 ;;; init-pkg-builtin.el ends here
