@@ -13,6 +13,17 @@ init_before_all() {
   if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
     source "${HOME}/.zshenv"
   fi
+
+  private_env_file="${HOME}/.env_private"
+  if [[ -f "${private_env_file}" ]]; then
+    eval "$(
+      awk '!/^\s*#/' <"${private_env_file}" | awk '!/^\s*$/' | while IFS='' read -r line; do
+        key=$(echo "$line" | cut -d '=' -f 1)
+        value=$(echo "$line" | cut -d '=' -f 2-)
+        echo "export $key=\"$value\""
+      done
+    )"
+  fi
 }
 
 find_bin_path() {
@@ -38,19 +49,11 @@ unsetproxy() {
 setproxy() {
   unsetproxy
 
-  case ${ZSH_HOSTNAME} in
-    star)
-      export PROXY_URL="place:port"
-      ;;
-    *)
-      export PROXY_URL="http://127.0.0.1:8899"
-      ;;
-  esac
-
+  url=${PROXY_URL:-http://127.0.0.1:8899}
   export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
-  export ALL_PROXY="${PROXY_URL}"
-  export HTTP_PROXY="${PROXY_URL}"
-  export HTTPS_PROXY="${PROXY_URL}"
+  export ALL_PROXY="${url}"
+  export HTTP_PROXY="${url}"
+  export HTTPS_PROXY="${url}"
 }
 proxyinfo() {
   echo "NO_PROXY = ${NO_PROXY}"
