@@ -3,6 +3,20 @@
 zmodload zsh/zprof
 # enable zprof module, start zsh, then call zprof cmd
 
+load_env_file() {
+  file_path=$1
+
+  if [[ -f "${file_path}" ]]; then
+    eval "$(
+      awk '!/^\s*#/' <"${file_path}" | awk '!/^\s*$/' | while IFS='' read -r line; do
+        key=$(echo "$line" | cut -d '=' -f 1)
+        value=$(echo "$line" | cut -d '=' -f 2-)
+        echo "export $key=\"$value\""
+      done
+    )"
+  fi
+}
+
 init_before_all() {
   uname_os=$(uname -s)
   export ZSH_OSTYPE=${uname_os}
@@ -14,16 +28,7 @@ init_before_all() {
     source "${HOME}/.zshenv"
   fi
 
-  private_env_file="${HOME}/.env_private"
-  if [[ -f "${private_env_file}" ]]; then
-    eval "$(
-      awk '!/^\s*#/' <"${private_env_file}" | awk '!/^\s*$/' | while IFS='' read -r line; do
-        key=$(echo "$line" | cut -d '=' -f 1)
-        value=$(echo "$line" | cut -d '=' -f 2-)
-        echo "export $key=\"$value\""
-      done
-    )"
-  fi
+  load_env_file "${HOME}/.env_private"
 }
 
 find_bin_path() {
