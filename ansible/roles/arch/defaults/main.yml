@@ -120,6 +120,7 @@ program_tool_pkgs:
   - ripgrep
   - rustup
   - sccache
+  - shfmt
   - terraform
 
 fq_pkgs:

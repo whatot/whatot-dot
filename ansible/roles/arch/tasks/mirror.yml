@@ -17,12 +17,6 @@
       #Server = https://cdn.repo.archlinuxcn.org/$arch
   when: pacman_conf_file.stat.exists == True
 
-- name: Ensure archlinux-keyring was installed
-  pacman: name=archlinux-keyring state=present
-
-- name: Ensure archlinuxcn-keyring was installed
-  pacman: name=archlinuxcn-keyring state=present
-
 - name: Check /etc/pacman.d/mirrorlist
   stat:
     path: /etc/pacman.d/mirrorlist
@@ -51,3 +45,11 @@
 - name: Update /etc/pacman.d/mirrorlist by pacman-mirrors
   shell: pacman-mirrors -a -B testing -c China --timeout 1
   when: pacman_mirrors_conf_file_updated is changed
+
+- name: Ensure archlinux-keyring and archlinuxcn-keyring were installed
+  community.general.pacman:
+    name:
+      - archlinux-keyring
+      - archlinuxcn-keyring
+    state: present
+    update_cache: true

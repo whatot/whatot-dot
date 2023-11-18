@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -eux
 
-sudo sed -i '/ustc/s/^#//' /etc/pacman.d/mirrorlist
-
 if [ ! -f "/usr/bin/ansible" ]; then
-    sudo pacman -Syy --noconfirm ansible
+  sudo pacman -Syy --noconfirm ansible
 fi
 
 time ansible-playbook arch.yml -i hosts.yml --extra-vars "default_user=$USER"

@@ -1,28 +1,37 @@
 ---
 # main tasks file for arch
 
-- name: Set the Asia/Shanghai timezone
-  file:
+- name: Set the Asia/Shanghai timezone by link
+  ansible.builtin.file:
     src: "/usr/share/zoneinfo/Asia/Shanghai"
     dest: /etc/localtime
     state: link
     force: true
 
-- include_tasks: mirror.yml
-- include_tasks: user.yml
-- include_tasks: pkg.yml
+- name: Config pacman mirror
+  ansible.builtin.include_tasks:
+    file: mirror.yml
+
+- name: Config user and group
+  ansible.builtin.include_tasks:
+    file: user.yml
+
+- name: Install pkgs
+  ansible.builtin.include_tasks:
+    file: pkg.yml
 
 - name: Ensure basic services is running and enabled
-  service: name='{{ item }}' state=started enabled=yes
+  ansible.builtin.service:
+    name: '{{ item }}'
+    state: started
+    enabled: true
   with_items:
+    - sshd
     - fstrim.timer
     - systemd-timesyncd
 
-- name: Disable sshd service
-  service: name=sshd state=stopped enabled=no
-
 - name: Sysctl configs
-  sysctl:
+  ansible.posix.sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     sysctl_set: true
@@ -30,6 +39,6 @@
     state: present
     reload: true
   with_items:
-    - { name: "vm.swappiness", value: 1 }
-    - { name: "fs.inotify.max_user_watches", value: 524288 }
-    - { name: "net.ipv4.tcp_fastopen", value: 3 }
+    - {name: "vm.swappiness", value: 1}
+    - {name: "fs.inotify.max_user_watches", value: 524288}
+    - {name: "net.ipv4.tcp_fastopen", value: 3}
