@@ -44,6 +44,7 @@ find_bin_path() {
 }
 
 unsetproxy() {
+  unset NO_PROXY
   unset ALL_PROXY
   unset HTTP_PROXY
   unset HTTPS_PROXY
@@ -54,11 +55,14 @@ unsetproxy() {
 setproxy() {
   unsetproxy
 
-  url=${PROXY_URL:-http://127.0.0.1:8899}
-  export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
-  export ALL_PROXY="${url}"
-  export HTTP_PROXY="${url}"
-  export HTTPS_PROXY="${url}"
+  use_proxy=${USE_PROXY:-true}
+  if [[ ${use_proxy} == "true" ]]; then
+    url=${PROXY_URL:-http://127.0.0.1:8899}
+    export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
+    export ALL_PROXY="${url}"
+    export HTTP_PROXY="${url}"
+    export HTTPS_PROXY="${url}"
+  fi
 }
 proxyinfo() {
   echo "NO_PROXY = ${NO_PROXY}"
