@@ -17,6 +17,8 @@ replace-with = 'tuna'
 registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 [source.tuna]
 registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+[unstable]
+sparse-registry = true
 EOF
 
 # 初始化 rustup
