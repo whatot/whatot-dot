@@ -3,33 +3,33 @@ set -eu
 #set -eux
 
 function brew_install() {
-	pkg_name=$1
+  pkg_name=$1
 
-	if brew ls --versions "$pkg_name" >/dev/null; then
-		echo "$pkg_name installed"
-	else
-		echo "to install $pkg_name"
-		brew install "$*"
-	fi
+  if brew ls --versions "$pkg_name" >/dev/null; then
+    echo "$pkg_name installed"
+  else
+    echo "to install $pkg_name"
+    brew install "$*"
+  fi
 }
 
 function brew_cask_install() {
-	pkg_name=$1
+  pkg_name=$1
 
-	if brew list --cask --versions "$pkg_name" >/dev/null; then
-		echo "$pkg_name installed"
-	else
-		echo "to install $pkg_name"
-		brew install --cask "$pkg_name"
-	fi
+  if brew list --cask --versions "$pkg_name" >/dev/null; then
+    echo "$pkg_name installed"
+  else
+    echo "to install $pkg_name"
+    brew install --cask "$pkg_name"
+  fi
 }
 
 if [ ! -d "$(xcode-select --print-path)" ]; then
-	xcode-select --install
+  xcode-select --install
 fi
 
 if [[ "$(command -v brew)" != *"brew"* ]]; then
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 brew_install coreutils
@@ -94,6 +94,7 @@ brew_install lua-language-server
 brew_install sqlparse
 brew_install docker-completion
 brew_install kubectl
+brew_install navi
 
 brew_cask_install neovide
 brew_cask_install iina
