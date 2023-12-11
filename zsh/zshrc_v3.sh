@@ -31,18 +31,6 @@ init_before_all() {
   load_env_file "${HOME}/.env_private"
 }
 
-find_bin_path() {
-  bin_name=$1
-  for var in /opt/homebrew/bin /usr/local/bin /usr/bin ${HOME}/.local/bin ${HOME}/.cargo/bin ${HOME}/go/bin; do
-    full_path="${var}/${bin_name}"
-    if [[ -f "${full_path}" ]]; then
-      echo "${full_path}"
-      return 0
-    fi
-  done
-  return 1
-}
-
 unsetproxy() {
   unset NO_PROXY
   unset ALL_PROXY
@@ -95,7 +83,7 @@ config_java_about() {
 }
 
 config_sccache() {
-  sccache_path=$(find_bin_path "sccache")
+  sccache_path=$(which sccache)
   if [[ $? ]]; then
     export RUSTC_WRAPPER="${sccache_path}"
   else
@@ -104,8 +92,8 @@ config_sccache() {
 }
 
 config_navi() {
-  navi_path=$(find_bin_path "navi")
-  if [[ $? ]]; then
+  navi_path=$(which navi)
+  if [[ -x "${navi_path}" ]]; then
     eval "$(${navi_path} widget zsh)"
   else
     echo "navi not found"
@@ -114,8 +102,8 @@ config_navi() {
 
 config_brew() {
   if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
-    brew_path=$(find_bin_path "brew")
-    if [[ $? ]]; then
+    brew_path=$(which brew)
+    if [[ -x "${brew_path}" ]]; then
       export HOMEBREW_NO_AUTO_UPDATE=1
       eval "$(${brew_path} shellenv)"
       # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
