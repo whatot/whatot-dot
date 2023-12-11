@@ -103,6 +103,15 @@ config_sccache() {
   fi
 }
 
+config_navi() {
+  navi_path=$(find_bin_path "navi")
+  if [[ $? ]]; then
+    eval "$(${navi_path} widget zsh)"
+  else
+    echo "navi not found"
+  fi
+}
+
 config_brew() {
   if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
     brew_path=$(find_bin_path "brew")
@@ -182,6 +191,9 @@ config_prezto
 
 # starship last
 eval "$(starship init zsh)"
+
+# Ctrl+G, a interactive cheatsheet tool
+config_navi
 
 # refresh zsh completion
 [ ! "$(find "${HOME}"/.zcompdump -mtime 1)" ] || compinit
