@@ -14,6 +14,7 @@
 [core]
 	autocrlf = input
 	editor = vim
+	ignorecase = false
 [push]
 	default = upstream
 [alias]
