@@ -95,6 +95,7 @@ brew_install sqlparse
 brew_install docker-completion
 brew_install kubectl
 brew_install navi
+brew_install connect
 
 brew_cask_install neovide
 brew_cask_install iina
