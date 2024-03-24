@@ -9,7 +9,7 @@ CARGO_CONFIG_PATH="${HOME}/.cargo"
 LOCAL_RUSTUP_BIN="${CARGO_CONFIG_PATH}/bin/rustup"
 mkdir -p "${CARGO_CONFIG_PATH}"
 
-cat <<EOF >"${CARGO_CONFIG_PATH}/config"
+cat <<EOF >"${CARGO_CONFIG_PATH}/config.toml"
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'tuna'
