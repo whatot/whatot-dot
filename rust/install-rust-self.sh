@@ -2,7 +2,7 @@
 set -eux
 
 # 默认指定版本
-NEEDED_RUST_VERSION=nightly-2024-02-24
+NEEDED_RUST_VERSION=nightly-2024-04-01
 
 # 基础目录
 CARGO_CONFIG_PATH="${HOME}/.cargo"
