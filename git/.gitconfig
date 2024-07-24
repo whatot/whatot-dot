@@ -24,6 +24,12 @@
 	st = status
 	last = log --pretty=oneline -1 HEAD
 	glog = log --graph  --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%Cblue%an%Creset%Cgreen %cr)%Creset '
+	# 删除最近一个提交，保留文件修改
+	undo = reset --soft HEAD^
+	# 删除最近一个提交，不保留文件
+	cancel = reset --hard HEAD^
+	# 提交完了，发现还需要一点小修改，不想新建一个提交
+	onemore = commit -a --amend --no-edit
 [http]
 	postBuffer = 524288000
 	lowSpeedLimit = 0
