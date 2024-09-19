@@ -12,13 +12,19 @@ mkdir -p "${CARGO_CONFIG_PATH}"
 cat <<EOF >"${CARGO_CONFIG_PATH}/config.toml"
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
-replace-with = 'tuna'
+replace-with = 'rsproxy-sparse'
 [source.ustc]
 registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 [source.tuna]
 registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
-[unstable]
-sparse-registry = true
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+[net]
+git-fetch-with-cli = true
 EOF
 
 # 初始化 rustup

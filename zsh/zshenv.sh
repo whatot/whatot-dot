@@ -21,6 +21,8 @@ esac
 
 export GOPATH="${HOME}/go/"
 # export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 # https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
 export LSP_USE_PLISTS=true
