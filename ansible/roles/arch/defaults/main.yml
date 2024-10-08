@@ -68,7 +68,6 @@ basic_pkgs:
   - ifuse
   - meld
   - mpv
-  - nnn
   - nutstore
   - oh-my-zsh-git
   - openssh
@@ -81,6 +80,7 @@ basic_pkgs:
   - rsync
   - starship
   - sysstat
+  - tealdeer
   - tree
   - ungoogled-chromium
   - wget
