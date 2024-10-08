@@ -1,0 +1,7 @@
+- name: Install fzf with pacman
+  pacman: name=fzf state=present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install fzf with Homebrew
+  homebrew: name=fzf state=present
+  when: ansible_os_family == "Darwin"

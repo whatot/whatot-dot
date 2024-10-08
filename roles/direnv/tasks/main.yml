@@ -1,0 +1,7 @@
+- name: Install direnv with pacman
+  pacman: name=direnv state=present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install direnv with Homebrew
+  homebrew: name=direnv state=present
+  when: ansible_os_family == "Darwin"

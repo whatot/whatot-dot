@@ -1,0 +1,7 @@
+- name: Install kubernetes with pacman
+  pacman: name=kubectl state=present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install kubernetes with Homebrew
+  homebrew: name=kubernetes-cli state=present
+  when: ansible_os_family == "Darwin"

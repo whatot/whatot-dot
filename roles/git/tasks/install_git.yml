@@ -1,0 +1,7 @@
+- name: Install git with pacman
+  pacman: name=git state=present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install git with Homebrew
+  homebrew: name=git state=present
+  when: ansible_os_family == "Darwin"

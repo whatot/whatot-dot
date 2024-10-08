@@ -1,0 +1,14 @@
+- name: Install prezto
+  script: install_prezto.sh creates="{{ '~/.zprezto' | expanduser}}"
+
+- name: Link zpreztorc file
+  file:
+    src: "{{ dotfiles_home }}/roles/zsh/files/link.zpreztorc.sh"
+    dest: "{{ '~/.zpreztorc' | expanduser }}"
+    state: link
+
+- name: Link zshrc file
+  file:
+    src: "{{ dotfiles_home }}/roles/zsh/files/link.zshrc.sh"
+    dest: "{{ '~/.zshrc' | expanduser }}"
+    state: link

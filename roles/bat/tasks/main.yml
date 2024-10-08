@@ -1,0 +1,7 @@
+- name: Install bat with pacman
+  pacman: name=bat state=present
+  when: ansible_os_family == "Archlinux"
+
+- name: Install bat with Homebrew
+  homebrew: name=bat state=present
+  when: ansible_os_family == "Darwin"

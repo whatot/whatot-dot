@@ -1,0 +1,96 @@
+[user]
+name = {{ full_name }}
+email = {{ git_email }}
+
+[github]
+user = {{ git_user }}
+
+[credential]
+helper = cache --timeout 3600
+
+[alias]
+a = add
+st = status
+s = status
+co = checkout
+cob = checkout -b
+cp = cherry-pick
+c = checkout
+ci = commit
+noff = merge --no-ff
+l = log --graph --decorate --oneline --abbrev-commit --all
+h = log --graph --decorate --oneline --abbrev-commit
+plr = pull --rebase
+amend = commit --amend
+wip = !git add -A && git commit -m "WIP" --no-verify
+br = branch
+rn = branch -m
+delete-tag = "!f() { git push --delete ${2-origin} ${1}; git tag -d ${1}; }; f"
+up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+last = log --pretty=oneline -1 HEAD
+glog = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%Cblue%an%Creset%Cgreen %cr)%Creset '
+
+# diff-so-fancy
+# https://github.com/so-fancy/diff-so-fancy/#usage
+df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+dfs = df --staged
+# Get changes for a single commit
+dfc = "!dfc() { git df $1^ $1; }; dfc"
+
+# Nukes a branch locally and on the origin remote.
+nuke = "!f() { git branch -D $1 && git push origin :$1; }; f"
+
+# Remove local branches that have been removed upstream
+cleanup = "!git fetch --all -p && git branch -vv | grep \": gone]\" | awk '{ print $1 }' | xargs -n 1 git branch -D"
+
+# http://gggritso.com/human-git-aliases
+unstage = reset -q HEAD --
+uns = unstage
+discard = checkout --
+dis = discard
+uncommit = reset --mixed HEAD~
+unc = uncommit
+
+[color]
+diff = auto
+status = auto
+branch = auto
+ui = true
+interactive = auto
+
+[core]
+excludesfile = ~/.gitignore_global
+attributesfile = ~/.gitattributes_global
+editor = vim
+autocrlf = input
+ignorecase = false
+
+[apply]
+whitespace = nowarn
+
+[mergetool]
+keepBackup = false
+
+[difftool]
+prompt = false
+
+[pull]
+ff = only
+rebase = false
+
+[push]
+autoSetupRemote = false
+
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+
+[init]
+defaultBranch = main
+
+[http]
+postBuffer = 524288000
+lowSpeedLimit = 0
+lowSpeedTime = 999999
