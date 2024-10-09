@@ -2,9 +2,11 @@ local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local config = {}
 
+-- all show
 config.font_size = 13.0
 config.font = wezterm.font_with_fallback {'JetBrains Mono', 'Monaco'}
 config.color_scheme = 'Monokai (terminal.sexy)'
+config.term = "xterm-256color"
 
 -- all window about
 config.window_background_gradient = {
@@ -39,9 +41,15 @@ wezterm.on('gui-startup', function(cmd)
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
 end)
+wezterm.on("update-right-status", function(window)
+    local date = wezterm.strftime("%Y-%m-%d %H:%M:%S ")
+    window:set_right_status(wezterm.format({{
+        Text = date
+    }}))
+end)
 
+-- all tab about
 -- change the title of tab to current working directory.
--- ref:
 -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html#format-tab-title
 -- https://wezfurlong.org/wezterm/config/lua/PaneInformation.html
 -- https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
@@ -61,5 +69,9 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     local home_dir = os.getenv('HOME')
     return string.gsub(cwd_str, home_dir, '~')
 end)
+config.enable_tab_bar = true
+config.use_fancy_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = false
 
 return config
