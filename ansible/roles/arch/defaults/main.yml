@@ -68,6 +68,7 @@ basic_pkgs:
   - ifuse
   - meld
   - mpv
+  - nushell
   - nutstore
   - oh-my-zsh-git
   - openssh
@@ -99,7 +100,6 @@ program_tool_pkgs:
   - direnv
   - discount
   - editorconfig-core-c
-  - emacs-wayland
   - fd
   - flex
   - gcc
@@ -121,7 +121,6 @@ program_tool_pkgs:
   - rustup
   - sccache
   - shfmt
-  - terraform
 
 fq_pkgs:
   - telegram-desktop
