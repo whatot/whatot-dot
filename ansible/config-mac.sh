@@ -99,6 +99,7 @@ brew_install connect
 # for tldr to update cache, `tldr --update`
 # macos cache dir: `~/Library/Caches/tealdeer`
 brew_install tealdeer
+brew_install nushell
 
 brew_cask_install neovide
 brew_cask_install iina
