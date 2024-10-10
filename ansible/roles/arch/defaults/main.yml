@@ -109,6 +109,7 @@ program_tool_pkgs:
   - go-tools
   - gvim
   - jdk11-openjdk
+  - jdk17-openjdk
   - llvm
   - lua
   - lua-language-server

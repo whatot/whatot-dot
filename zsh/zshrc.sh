@@ -170,6 +170,9 @@ config_mixed
 # load prezto with plugins
 config_prezto
 
+# support direnv. add .envrc, then direnv allow.
+eval "$(direnv hook zsh)"
+
 # starship last
 eval "$(starship init zsh)"
 
