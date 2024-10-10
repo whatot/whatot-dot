@@ -29,3 +29,7 @@ export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 # https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
 export LSP_USE_PLISTS=true
+
+# https://docs.flutter.cn/community/china/
+export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
+export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"
