@@ -7,6 +7,9 @@ case $(uname) in
       export PATH="/usr/local/opt/rustup/bin:/opt/local/opt/ccache/libexec:/usr/local/opt/openjdk@17/bin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
       export JAVA_HOME="/usr/local/opt/openjdk@17"
     fi
+    export ANDROID_HOME=$HOME/Library/Android/sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
     # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
     export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
     ;;
