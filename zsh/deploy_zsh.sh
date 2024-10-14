@@ -24,6 +24,9 @@ cat <<EOF >"${HOME}/.config/git/ignore"
 .DS_Store
 EOF
 
+mkdir -p "${HOME}/.gradle"
+cp -f "${SCRIPT_PATH}"/init.gradle.kts "${HOME}/.gradle"
+
 ln -sf "${SCRIPT_PATH}"/zshrc.sh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv
 ln -sf "${SCRIPT_PATH}"/zpreztorc.sh ~/.zpreztorc

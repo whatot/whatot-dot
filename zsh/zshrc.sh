@@ -61,8 +61,7 @@ proxyinfo() {
 
 config_java_about() {
   # for gradle proxy setting
-  export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
-      -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT}"
+  export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_URL} -Dhttp.proxyPort=${PROXY_URL}"
 
   # for error message in en
   export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Duser.language=en"
