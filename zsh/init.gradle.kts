@@ -1,3 +1,5 @@
+// https://gist.github.com/bennyhuo/af7c43cc4831661193605e124f539942
+
 fun RepositoryHandler.enableMirror() {
     all {
         if (this is MavenArtifactRepository) {
