@@ -46,6 +46,8 @@ setproxy() {
   use_proxy=${USE_PROXY:-true}
   if [[ ${use_proxy} == "true" ]]; then
     url=${PROXY_URL:-http://127.0.0.1:8899}
+    export PROXY_HOST=$(echo ${url} | awk -F'://|:' '{print $2}')
+    export PROXY_PORT=$(echo ${url} | awk -F'://|:' '{print $3}')
     export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
     export ALL_PROXY="${url}"
     export HTTP_PROXY="${url}"
@@ -53,6 +55,8 @@ setproxy() {
   fi
 }
 proxyinfo() {
+  echo "PROXY_HOST = ${PROXY_HOST}"
+  echo "PROXY_PORT = ${PROXY_PORT}"
   echo "NO_PROXY = ${NO_PROXY}"
   echo "ALL_PROXY = ${ALL_PROXY}"
   echo "HTTP_PROXY = ${HTTP_PROXY}"
@@ -61,7 +65,8 @@ proxyinfo() {
 
 config_java_about() {
   # for gradle proxy setting
-  export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_URL} -Dhttp.proxyPort=${PROXY_URL}"
+  export GRADLE_OPTS="-Dhttp.proxyHost=${PROXY_HOST} -Dhttp.proxyPort=${PROXY_PORT} \
+   -Dhttps.proxyHost=${PROXY_HOST} -Dhttps.proxyPort=${PROXY_PORT}"
 
   # for error message in en
   export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF-8 -Duser.language=en"
