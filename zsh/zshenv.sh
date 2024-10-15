@@ -1,11 +1,11 @@
 case $(uname) in
   Darwin)
     if [[ -f "/opt/homebrew/bin/brew" ]]; then
-      export PATH="/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/ccache/libexec:/opt/homebrew/opt/openjdk@17/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-      export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+      export PATH="/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/ccache/libexec:/opt/homebrew/opt/openjdk@21/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
     else
-      export PATH="/usr/local/opt/rustup/bin:/opt/local/opt/ccache/libexec:/usr/local/opt/openjdk@17/bin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-      export JAVA_HOME="/usr/local/opt/openjdk@17"
+      export PATH="/usr/local/opt/rustup/bin:/opt/local/opt/ccache/libexec:/usr/local/opt/openjdk@21/bin:${HOME}/.cargo/bin:${HOME}/go/bin:${HOME}/.rd/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      export JAVA_HOME="/usr/local/opt/openjdk@21"
     fi
     export ANDROID_HOME=$HOME/Library/Android/sdk
     export PATH=$PATH:$ANDROID_HOME/emulator

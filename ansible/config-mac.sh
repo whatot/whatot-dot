@@ -86,7 +86,7 @@ brew_install btop
 brew_install neovim
 brew_install starship
 brew_install openjdk@11
-brew_install openjdk@17
+brew_install openjdk@21
 brew_install bash-language-server
 brew_install direnv
 brew_install terraform
@@ -102,7 +102,6 @@ brew_install connect
 brew_install tealdeer
 brew_install nushell
 
-brew_cask_install neovide
 brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
