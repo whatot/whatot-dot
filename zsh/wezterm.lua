@@ -1,6 +1,33 @@
 local wezterm = require 'wezterm'
+local os = require 'os'
 local mux = wezterm.mux
 local config = {}
+
+-- 检查文件是否存在
+local function file_exists(path)
+    local file = io.open(path, "r")
+    if file then
+        file:close()
+        return true
+    else
+        return false
+    end
+end
+
+-- 遍历候选路径，找到第一个存在的文件
+local function find_first(paths, default)
+    for _, path in ipairs(paths) do
+        if file_exists(path) then
+            return path
+        end
+    end
+    return default
+end
+
+-- fish
+local fish_candidates = {"/opt/homebrew/bin/fish", "/usr/local/bin/fish", "/usr/bin/fish", "/usr/local/bin/fish"}
+local fish_path = find_first(fish_candidates, fish_candidates.get(1))
+config.default_prog = {fish_path, '-l'}
 
 -- all show
 config.font_size = 13.0
@@ -48,5 +75,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.prefer_to_spawn_tabs = true
 config.tab_max_width = 32
+
+-- reload
+config.automatically_reload_config = false
 
 return config
