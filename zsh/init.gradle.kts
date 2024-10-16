@@ -5,7 +5,7 @@ fun RepositoryHandler.enableMirror() {
         if (this is MavenArtifactRepository) {
             val originalUrl = this.url.toString().removeSuffix("/")
             urlMappings[originalUrl]?.let {
-                logger.lifecycle("Repository[$url] is mirrored to $it")
+                logger.info("Repository[$url] is mirrored to $it")
                 this.setUrl(it)
             }
         }
@@ -34,8 +34,8 @@ gradle.beforeSettings {
         val getRepos = drm.javaClass.getDeclaredMethod("getRepositories")
         val repos = getRepos.invoke(drm) as RepositoryHandler
         repos.enableMirror()
-        println("Gradle ${gradle.gradleVersion} DependencyResolutionManagement Configured $settings")
+        logger.info("Gradle ${gradle.gradleVersion} DependencyResolutionManagement Configured $settings")
     } else {
-        println("Gradle ${gradle.gradleVersion} DependencyResolutionManagement Ignored $settings")
+        logger.info("Gradle ${gradle.gradleVersion} DependencyResolutionManagement Ignored $settings")
     }
 }
