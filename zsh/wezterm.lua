@@ -26,7 +26,7 @@ end
 
 -- fish
 local fish_candidates = {"/opt/homebrew/bin/fish", "/usr/local/bin/fish", "/usr/bin/fish", "/usr/local/bin/fish"}
-local fish_path = find_first(fish_candidates, fish_candidates.get(1))
+local fish_path = find_first(fish_candidates, fish_candidates[0])
 config.default_prog = {fish_path, '-l'}
 
 -- all show
@@ -67,6 +67,7 @@ wezterm.on('gui-startup', function(cmd)
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
 end)
+config.window_close_confirmation = 'NeverPrompt'
 
 -- all tab about
 config.enable_tab_bar = true
