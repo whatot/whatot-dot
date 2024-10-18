@@ -24,6 +24,10 @@ cat <<EOF >"${HOME}/.config/git/ignore"
 .DS_Store
 EOF
 
+cat <<EOF >"${HOME}/.npmrc"
+registry=https://registry.npmmirror.com/
+EOF
+
 mkdir -p "${HOME}/.gradle"
 cp -f "${SCRIPT_PATH}"/init.gradle.kts "${HOME}/.gradle"
 

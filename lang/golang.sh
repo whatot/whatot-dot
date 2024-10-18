@@ -15,6 +15,7 @@ function common_dev_pkgs() {
     go install github.com/go-delve/delve/cmd/dlv@latest
     go install honnef.co/go/tools/cmd/staticcheck@latest
     go install github.com/cweill/gotests/gotests@latest
+    go install github.com/air-verse/air@latest
 }
 
 function common_useful_pkgs() {
