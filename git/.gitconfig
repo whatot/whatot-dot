@@ -1,6 +1,8 @@
 [user]
 	email = whatot2@gmail.com
 	name = whatot
+[includeIf "gitdir/i:~/work/"]
+	path = ~/.gitconfig_work
 [credential]
 	helper = cache --timeout 3600
 [merge]
