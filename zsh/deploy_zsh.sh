@@ -6,13 +6,6 @@ SCRIPT_PATH=$(
   pwd -P
 )
 
-prezto_path="${ZDOTDIR:-$HOME}/.zprezto"
-if [[ -d "${prezto_path}" ]]; then
-  echo "prezto already installed"
-else
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${prezto_path}"
-fi
-
 cat <<EOF >"${HOME}/.config/starship.toml"
 # https://starship.rs/config/
 add_newline = true
@@ -33,4 +26,4 @@ cp -f "${SCRIPT_PATH}"/init.gradle.kts "${HOME}/.gradle"
 
 ln -sf "${SCRIPT_PATH}"/zshrc.sh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv
-ln -sf "${SCRIPT_PATH}"/zpreztorc.sh ~/.zpreztorc
+ln -sf "${SCRIPT_PATH}"/.zimrc ~/.zimrc
