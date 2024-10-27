@@ -76,12 +76,10 @@ config_java_about() {
   alias mtree='mvn clean dependency:tree -U'
   alias msource='mvn dependency:sources'
   alias fmt='mvn com.coveo:fmt-maven-plugin:format -o'
-  alias mqc='mvn com.coveo:fmt-maven-plugin:format -o && ${MVN} compile --offline'
-  alias mcc='mvn clean compile -U'
-  alias mcco='mvn clean compile -U --offline'
-  alias mqt='mvn test -DfailIfNoTests=false --offline'
+  alias moo='mvn com.coveo:fmt-maven-plugin:format -o && mvn clean compile --offline'
+  alias mcc='mvn com.coveo:fmt-maven-plugin:format -o && mvn clean compile -U'
   alias mtt='mvn clean test -U -DfailIfNoTests=false'
-  alias mtto='mvn clean test -U -DfailIfNoTests=false --offline'
+
   alias bubu='brew update && brew outdated && brew upgrade && brew cleanup'
 }
 
