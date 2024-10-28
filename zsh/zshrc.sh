@@ -253,3 +253,19 @@ eval "$(direnv hook zsh)"
 
 # comment starship and use quick asciiship now
 # eval "$(starship init zsh)"
+
+# fzf (https://github.com/chinanf-boy/fzf-zh)
+# CTRL-T 将选定的文件和目录粘贴到命令行上
+#  - 设置FZF_CTRL_T_COMMAND覆盖默认命令
+#  - 设置FZF_CTRL_T_OPTS传递其他选项
+# CTRL-R 将所选命令从历史记录粘贴到命令行
+#  - 如果要按时间顺序查看命令,请按CTRL-R再次按相关性切换排序
+#  - 设置FZF_CTRL_R_OPTS传递其他选项
+# ALT-C cd进入所选目录(Esc+C in item)
+#  - 设置FZF_ALT_C_COMMAND覆盖默认命令
+#  - 设置FZF_ALT_C_OPTS传递其他选项
+if (( ${+commands[fzf]} )); then
+    source <(fzf --zsh)
+else
+    echo "fzf not installed"
+fi
