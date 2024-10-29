@@ -188,20 +188,6 @@ config_sccache() {
   fi
 }
 
-config_brew() {
-  if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then
-    brew_path=$(which brew)
-    if [[ -x "${brew_path}" ]]; then
-      export HOMEBREW_NO_AUTO_UPDATE=1
-      eval "$(${brew_path} shellenv)"
-      # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-      export FPATH="$(${brew_path} --prefix)/share/zsh/site-functions:${FPATH}"
-    else
-      echo "brew not found"
-    fi
-  fi
-}
-
 config_input_method() {
   if [[ ${ZSH_OSTYPE} == 'Linux' ]]; then
     export GTK_IM_MODULE=fcitx
@@ -211,6 +197,8 @@ config_input_method() {
 }
 
 config_mixed() {
+  export HOMEBREW_NO_AUTO_UPDATE=1
+
   # podman machine init
   # sudo podman-mac-helper install
   # podman machine set --rootful
@@ -242,30 +230,5 @@ config_java_about
 # rust build cache
 config_sccache
 
-# init brew if mac
-config_brew
-
 # unclassified part
 config_mixed
-
-# support direnv. add .envrc, then direnv allow.
-eval "$(direnv hook zsh)"
-
-# comment starship and use quick asciiship now
-# eval "$(starship init zsh)"
-
-# fzf (https://github.com/chinanf-boy/fzf-zh)
-# CTRL-T 将选定的文件和目录粘贴到命令行上
-#  - 设置FZF_CTRL_T_COMMAND覆盖默认命令
-#  - 设置FZF_CTRL_T_OPTS传递其他选项
-# CTRL-R 将所选命令从历史记录粘贴到命令行
-#  - 如果要按时间顺序查看命令,请按CTRL-R再次按相关性切换排序
-#  - 设置FZF_CTRL_R_OPTS传递其他选项
-# ALT-C cd进入所选目录(Esc+C in item)
-#  - 设置FZF_ALT_C_COMMAND覆盖默认命令
-#  - 设置FZF_ALT_C_OPTS传递其他选项
-if (( ${+commands[fzf]} )); then
-    source <(fzf --zsh)
-else
-    echo "fzf not installed"
-fi

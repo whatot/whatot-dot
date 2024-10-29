@@ -101,6 +101,7 @@ brew_install connect
 # macos cache dir: `~/Library/Caches/tealdeer`
 brew_install tealdeer
 brew_install nushell
+brew_install zoxide
 
 brew_cask_install iina
 brew_cask_install visual-studio-code

@@ -18,6 +18,25 @@ zmodule input
 zmodule termtitle
 # Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
+# Sets up the direnv Zsh shell integration
+zmodule direnv
+# Config then adds aliases for Homebrew.
+zmodule homebrew
+# add z, a smarter cd command
+zmodule kiesman99/zim-zoxide
+
+# Configures fzf for faster fetching of files and directories names.
+# fzf (https://github.com/chinanf-boy/fzf-zh)
+# CTRL-T 将选定的文件和目录粘贴到命令行上
+#  - 设置FZF_CTRL_T_COMMAND覆盖默认命令
+#  - 设置FZF_CTRL_T_OPTS传递其他选项
+# CTRL-R 将所选命令从历史记录粘贴到命令行
+#  - 如果要按时间顺序查看命令,请按CTRL-R再次按相关性切换排序
+#  - 设置FZF_CTRL_R_OPTS传递其他选项
+# ALT-C cd进入所选目录(Esc+C in item)
+#  - 设置FZF_ALT_C_COMMAND覆盖默认命令
+#  - 设置FZF_ALT_C_OPTS传递其他选项
+zmodule fzf
 
 #
 # Prompt
