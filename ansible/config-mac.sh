@@ -47,7 +47,6 @@ brew_install gnu-which
 brew_install gnutls
 brew_install grep
 brew_install gzip
-brew_install screen
 brew_install watch
 brew_install wdiff
 brew_install wget
@@ -59,7 +58,6 @@ brew_install git
 brew_install zsh
 brew_install htop
 brew_install btop
-brew_install ranger
 
 brew_install cmake
 brew_install ninja
@@ -106,7 +104,6 @@ brew_install zoxide
 brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install macvim
-brew_cask_install meld
 brew_cask_install sequel-ace
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
