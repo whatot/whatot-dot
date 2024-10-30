@@ -36,6 +36,9 @@ zstyle ':zim:input' double-dot-expand yes
 # See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
 # If none is provided, the default '%n@%m: %~' is used.
 #zstyle ':zim:termtitle' format '%1~'
+zstyle ':zim:termtitle' hooks 'preexec' 'precmd'
+zstyle ':zim:termtitle:preexec' format '${${(A)=1}[1]}'
+zstyle ':zim:termtitle:precmd'  format '%1~'
 
 # zsh-autosuggestions
 # Disable automatic widget re-binding on each precmd. This can be set when
