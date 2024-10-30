@@ -36,7 +36,7 @@ brew_install coreutils
 brew_install binutils
 brew_install diffutils
 brew_install ed
-brew_install exa
+brew_install eza
 brew_install findutils
 brew_install fzf
 brew_install gawk

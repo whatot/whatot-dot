@@ -206,8 +206,6 @@ config_mixed() {
   # podman machine stop
 
   alias myip="curl myip.ipip.net"
-  alias ll='ls -alF --color'
-  alias ..='cd ..'
   alias gf="git pull"
 
   if [[ ${ZSH_OSTYPE} == 'Darwin' ]]; then

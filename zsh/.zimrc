@@ -18,6 +18,8 @@ zmodule input
 zmodule termtitle
 # Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
+# Adds aliases and better defaults for exa/eza.
+zmodule exa
 # Sets up the direnv Zsh shell integration
 zmodule direnv
 # Config then adds aliases for Homebrew.
