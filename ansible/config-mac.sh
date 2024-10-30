@@ -100,6 +100,8 @@ brew_install connect
 brew_install tealdeer
 brew_install nushell
 brew_install zoxide
+brew_install chezmoi
+brew_install mise
 
 brew_cask_install iina
 brew_cask_install visual-studio-code

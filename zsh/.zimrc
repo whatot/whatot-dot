@@ -5,7 +5,7 @@
 #
 
 #
-# Modules
+# Modules https://zimfw.sh/docs/modules/
 #
 
 # Sets sane Zsh built-in environment options.
@@ -28,6 +28,12 @@ zmodule homebrew
 zmodule kiesman99/zim-zoxide
 # Shown when there is no command and user presses ENTER.
 zmodule magic-enter
+# Manage your dotfiles across multiple diverse machines
+joke/zim-chezmoi
+# Mise: dev tools, env vars, task runner
+# https://github.com/jdx/mise
+# https://mise.jdx.dev/walkthrough.html
+joke/zim-mise
 
 # Configures fzf for faster fetching of files and directories names.
 # fzf (https://github.com/chinanf-boy/fzf-zh)
