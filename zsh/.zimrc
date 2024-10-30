@@ -26,6 +26,8 @@ zmodule direnv
 zmodule homebrew
 # add z, a smarter cd command
 zmodule kiesman99/zim-zoxide
+# Shown when there is no command and user presses ENTER.
+zmodule magic-enter
 
 # Configures fzf for faster fetching of files and directories names.
 # fzf (https://github.com/chinanf-boy/fzf-zh)
