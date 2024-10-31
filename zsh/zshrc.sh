@@ -37,8 +37,8 @@ zstyle ':zim:input' double-dot-expand yes
 # If none is provided, the default '%n@%m: %~' is used.
 #zstyle ':zim:termtitle' format '%1~'
 zstyle ':zim:termtitle' hooks 'preexec' 'precmd'
-zstyle ':zim:termtitle:preexec' format '${${(A)=1}[1]}'
-zstyle ':zim:termtitle:precmd'  format '%1~'
+zstyle ':zim:termtitle:preexec' format '${${(A)=1}}'
+zstyle ':zim:termtitle:precmd'  format '%32<...<$(shrink_path -f)'
 
 # zsh-autosuggestions
 # Disable automatic widget re-binding on each precmd. This can be set when
@@ -233,3 +233,5 @@ config_sccache
 
 # unclassified part
 config_mixed
+
+## vim:ft=zsh
