@@ -23,6 +23,7 @@ local options = {
             inherit = false,
             command = "shfmt",
             args = {"-p", "-bn", "-ci", "-i", "2"}
+            -- -p -bn -ci -i 2
         }
     }
 }

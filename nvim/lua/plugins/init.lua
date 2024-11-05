@@ -1,7 +1,7 @@
 return { -- add space lines
 {
     "stevearc/conform.nvim",
-    event = 'BufWritePre',
+    event = "BufWritePre",
     opts = require "configs.conform"
 }, {
     "neovim/nvim-lspconfig",
