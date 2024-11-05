@@ -24,6 +24,8 @@ EOF
 mkdir -p "${HOME}/.gradle"
 cp -f "${SCRIPT_PATH}"/init.gradle.kts "${HOME}/.gradle"
 
+cp -f "${SCRIPT_PATH}"/global.editorconfig "${HOME}/.editorconfig"
+
 ln -sf "${SCRIPT_PATH}"/zshrc.sh ~/.zshrc
 ln -sf "${SCRIPT_PATH}"/zshenv.sh ~/.zshenv
 ln -sf "${SCRIPT_PATH}"/.zimrc ~/.zimrc
