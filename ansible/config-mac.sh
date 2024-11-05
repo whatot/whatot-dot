@@ -81,8 +81,6 @@ brew_install editorconfig
 brew_install neofetch
 brew_install tree-sitter
 brew_install btop
-brew_install neovim
-brew_install neovide
 brew_install starship
 brew_install openjdk@11
 brew_install openjdk@21
@@ -104,15 +102,13 @@ brew_install nushell
 brew_install zoxide
 brew_install chezmoi
 brew_install mise
-brew_install vim
 
+brew_cask_install macvim
 brew_cask_install iina
 brew_cask_install visual-studio-code
 brew_cask_install sequel-ace
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
 brew_cask_install font-lxgw-wenkai
-
-brew link vim
 
 echo "finined!"
