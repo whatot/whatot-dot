@@ -13,6 +13,12 @@ SCRIPT_PATH=$(
 # A: Run `Lazy sync` to update pkgs
 # A: Run `:h nvui` to view docs
 
+cleanup_nvim_config() {
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.local/state/nvim
+  rm -rf ~/.config/nvim
+}
+
 sync_nvim_config() {
   NVIM_CONFIG_PATH=${HOME}/.config/nvim
   rm -rf "${NVIM_CONFIG_PATH}"
@@ -53,26 +59,26 @@ for_ubuntu() {
 }
 
 case $(uname) in
-Darwin)
-  for_mac
-  ;;
-Linux)
-  OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
-  case ${OS_ID} in
-  ubuntu)
-    for_ubuntu
+  Darwin)
+    for_mac
     ;;
-  manjaro | archlinux)
-    for_arch
+  Linux)
+    OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
+    case ${OS_ID} in
+      ubuntu)
+        for_ubuntu
+        ;;
+      manjaro | archlinux)
+        for_arch
+        ;;
+      *)
+        echo -n "unsupported os id: ${OS_ID}"
+        ;;
+    esac
     ;;
   *)
-    echo -n "unsupported os id: ${OS_ID}"
+    echo -n "unsuppprted os"
     ;;
-  esac
-  ;;
-*)
-  echo -n "unsuppprted os"
-  ;;
 esac
 
 init_neovide
