@@ -1,16 +1,19 @@
 return { -- add space lines
-{
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre",
-    opts = require "configs.conform"
-}, {
+    opts = require "configs.conform",
+  },
+  {
     "neovim/nvim-lspconfig",
     config = function()
-        require "configs.lspconfig"
-    end
-}, {
+      require "configs.lspconfig"
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-        ensure_installed = {"vim", "lua", "vimdoc", "html", "css"}
-    }
-}}
+      ensure_installed = { "vim", "lua", "vimdoc", "html", "css" },
+    },
+  },
+}
