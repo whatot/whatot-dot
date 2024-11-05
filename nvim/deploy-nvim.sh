@@ -6,19 +6,6 @@ SCRIPT_PATH=$(
   pwd -P
 )
 
-# https://neovide.dev/
-# https://nvchad.com/
-# A: if init nvchad error, try to rm -rf ~/.local/share/nvim rm -rf ~/.local/state/nvim && rm -rf ~/.config/nvim
-# A: Run :MasonInstallAll command after lazy.nvim finishes downloading plugins.
-# A: Run `Lazy sync` to update pkgs
-# A: Run `:h nvui` to view docs
-
-cleanup_nvim_config() {
-  rm -rf ~/.local/share/nvim
-  rm -rf ~/.local/state/nvim
-  rm -rf ~/.config/nvim
-}
-
 sync_nvim_config() {
   NVIM_CONFIG_PATH=${HOME}/.config/nvim
   rm -rf "${NVIM_CONFIG_PATH}"
@@ -59,29 +46,28 @@ for_ubuntu() {
 }
 
 case $(uname) in
-  Darwin)
-    for_mac
+Darwin)
+  for_mac
+  ;;
+Linux)
+  OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
+  case ${OS_ID} in
+  ubuntu)
+    for_ubuntu
     ;;
-  Linux)
-    OS_ID=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
-    case ${OS_ID} in
-      ubuntu)
-        for_ubuntu
-        ;;
-      manjaro | archlinux)
-        for_arch
-        ;;
-      *)
-        echo -n "unsupported os id: ${OS_ID}"
-        ;;
-    esac
+  manjaro | archlinux)
+    for_arch
     ;;
   *)
-    echo -n "unsuppprted os"
+    echo -n "unsupported os id: ${OS_ID}"
     ;;
+  esac
+  ;;
+*)
+  echo -n "unsuppprted os"
+  ;;
 esac
 
 init_neovide
 sync_nvim_config
-nvim +MasonInstallAll +qall
-nvim +Lazy sync +qall
+nvim +LazyHealth +qall
