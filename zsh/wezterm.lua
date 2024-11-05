@@ -41,7 +41,6 @@ wezterm.on('gui-startup', function(cmd)
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
 end)
-config.window_close_confirmation = 'NeverPrompt'
 
 -- all tab about
 config.enable_tab_bar = true
