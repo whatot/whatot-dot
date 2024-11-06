@@ -103,6 +103,7 @@ brew_install zoxide
 brew_install chezmoi
 brew_install mise
 
+brew_cask_install bruno
 brew_cask_install macvim
 brew_cask_install iina
 brew_cask_install visual-studio-code
