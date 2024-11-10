@@ -101,7 +101,10 @@ brew_install tealdeer
 brew_install nushell
 brew_install zoxide
 brew_install chezmoi
+# https://mise.jdx.dev/getting-started.html
 brew_install mise
+# https://docs.helix-editor.com/
+brew_install helix
 
 brew_cask_install bruno
 brew_cask_install macvim
