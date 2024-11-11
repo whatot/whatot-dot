@@ -8,6 +8,7 @@ case $(uname) in
       export JAVA_HOME="/usr/local/opt/openjdk@21"
     fi
     export ANDROID_HOME=$HOME/Library/Android/sdk
+    export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
