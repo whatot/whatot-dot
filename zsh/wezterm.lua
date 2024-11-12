@@ -54,9 +54,10 @@ config.tab_max_width = 32
 -- reload
 config.automatically_reload_config = false
 
+-- https://wezfurlong.org/wezterm/config/lua/wezterm/target_triple.html
+-- https://wezfurlong.org/wezterm/config/lua/keyassignment/ActivateTab.html
 if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
   -- update keys
-  -- https://wezfurlong.org/wezterm/config/lua/keyassignment/ActivateTab.html
   config.keys = {}
   for i = 1, 8 do
     -- ALT + number to activate that tab
