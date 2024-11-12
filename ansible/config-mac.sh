@@ -77,11 +77,9 @@ brew_install jq
 brew_install ripgrep
 brew_install shfmt
 brew_install tokei
-brew_install editorconfig
 brew_install neofetch
 brew_install tree-sitter
 brew_install btop
-brew_install starship
 brew_install openjdk@11
 brew_install openjdk@21
 brew_install bash-language-server

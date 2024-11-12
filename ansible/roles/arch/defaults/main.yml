@@ -39,6 +39,8 @@ absent_pkgs:
 
 aur_pkgs:
   - nautilus-nutstore
+  - mise
+  - bruno-bin
 
 basic_pkgs:
   - autoconf
@@ -49,8 +51,8 @@ basic_pkgs:
   - discount
   - dnsmasq
   - dnsmasq-china-list-git
-  - dstat
-  - exa
+  - sysstat
+  - eza
   - fcitx5-chinese-addons
   - fcitx5-im
   - fcitx5-material-color
@@ -74,17 +76,14 @@ basic_pkgs:
   - openssh
   - openssl
   - p7zip
-  - paru
   - patch
   - plantuml
-  - rime-pinyin-zhwiki
   - rsync
-  - starship
   - sysstat
   - tealdeer
   - tree
-  - ungoogled-chromium
   - wget
+  - pkg-config
 
 program_tool_pkgs:
   - ansible
@@ -108,11 +107,11 @@ program_tool_pkgs:
   - go
   - go-tools
   - gvim
-  - jdk11-openjdk
   - jdk21-openjdk
   - llvm
   - lua
   - lua-language-server
+  - stylua
   - make
   - maven
   - ninja
@@ -122,7 +121,8 @@ program_tool_pkgs:
   - rustup
   - sccache
   - shfmt
+  - zoxide
+  - chezmoi
 
 fq_pkgs:
   - telegram-desktop
-  - v2raya
