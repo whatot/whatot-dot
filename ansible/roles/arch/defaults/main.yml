@@ -124,5 +124,8 @@ program_tool_pkgs:
   - zoxide
   - chezmoi
 
+frontend_pkgs:
+  - pnpm
+
 fq_pkgs:
   - telegram-desktop
