@@ -1,6 +1,7 @@
 local wezterm = require "wezterm"
 local os = require "os"
 local mux = wezterm.mux
+local act = wezterm.action
 local config = {}
 
 -- all show
@@ -52,5 +53,19 @@ config.tab_max_width = 32
 
 -- reload
 config.automatically_reload_config = false
+
+if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+  -- update keys
+  -- https://wezfurlong.org/wezterm/config/lua/keyassignment/ActivateTab.html
+  config.keys = {}
+  for i = 1, 8 do
+    -- ALT + number to activate that tab
+    table.insert(config.keys, {
+      key = tostring(i),
+      mods = 'ALT',
+      action = act.ActivateTab(i - 1),
+    })
+  end
+end
 
 return config
