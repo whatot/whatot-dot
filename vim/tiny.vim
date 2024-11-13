@@ -44,7 +44,7 @@ let g:autoformat_autoindent = 1
 let g:autoformat_retab = 1
 let g:autoformat_remove_trailing_spaces = 1
 let g:autoformat_verbosemode = 1
-let g:formatdef_markdownfmt = '"markdownfmt"'
+let g:formatdef_markdownfmt = '"~/go/bin/markdownfmt"'
 let g:formatters_markdown = ['markdownfmt']
 "" use two spaces to indent based on google style guide
 "" https://google.github.io/styleguide/shellguide.html#s5-formatting
