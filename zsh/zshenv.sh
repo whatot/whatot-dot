@@ -19,6 +19,11 @@ case $(uname) in
     export CLASSPATH=${JAVA_HOME}/jre/lib/
     export PATH="/usr/lib/ccache":"${HOME}/go/bin":"${HOME}/.cargo/bin":"${HOME}/.local/bin":${PATH}
     export TERM="xterm-256color"
+    # android about
+    export ANDROID_HOME=$HOME/Android/Sdk
+    export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
     ;;
   *) ;;
 esac
