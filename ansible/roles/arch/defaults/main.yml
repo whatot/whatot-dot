@@ -41,6 +41,8 @@ aur_pkgs:
   - nautilus-nutstore
   - mise
   - bruno-bin
+  - wechat-bin
+  - qqmusic-bin
 
 basic_pkgs:
   - autoconf
