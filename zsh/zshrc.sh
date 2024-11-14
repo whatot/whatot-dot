@@ -208,6 +208,10 @@ config_mixed() {
   # podman machine start
   # podman machine stop
 
+  if (( ${+commands[bat]} )); then
+    alias cat="bat"
+  fi
+
   alias myip="curl myip.ipip.net"
   alias gf="git pull"
 
