@@ -39,7 +39,7 @@ absent_pkgs:
 
 aur_pkgs:
   - nautilus-nutstore
-  - mise
+  - mise-bin
   - bruno-bin
   - wechat-bin
   - qqmusic-bin
