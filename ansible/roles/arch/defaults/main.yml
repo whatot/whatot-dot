@@ -114,6 +114,7 @@ program_tool_pkgs:
   - lua
   - lua-language-server
   - stylua
+  - mold
   - make
   - maven
   - ninja
@@ -128,6 +129,7 @@ program_tool_pkgs:
 
 frontend_pkgs:
   - pnpm
+  - npm
 
 fq_pkgs:
   - telegram-desktop
