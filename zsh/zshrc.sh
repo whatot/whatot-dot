@@ -214,6 +214,7 @@ config_mixed() {
 
   alias myip="curl myip.ipip.net"
   alias gf="git pull"
+  alias pn="pnpm"
 
   export LC_MESSAGES="en_US.UTF-8"
   export EDITOR='vim'
