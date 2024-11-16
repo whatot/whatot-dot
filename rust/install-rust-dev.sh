@@ -58,5 +58,8 @@ cargo_install toml2json
 # Tokei will show the number of files, total lines within those files and code, comments, and blanks grouped by language.
 cargo_install tokei
 
+# Build Rust code for Android
+cargo_install cargo-ndk
+
 # cargo fix --edition
 sccache --show-stats
