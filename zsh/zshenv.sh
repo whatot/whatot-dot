@@ -8,7 +8,8 @@ case $(uname) in
       export JAVA_HOME="/usr/local/opt/openjdk@21"
     fi
     export ANDROID_HOME=$HOME/Library/Android/sdk
-    export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
+    export NDK_VERSION="$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
+    export NDK_HOME="$ANDROID_HOME/ndk/$NDK_VERSION"
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
@@ -21,7 +22,8 @@ case $(uname) in
     export TERM="xterm-256color"
     # android about
     export ANDROID_HOME=$HOME/Android/Sdk
-    export NDK_HOME="$ANDROID_HOME/ndk/$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
+    export NDK_VERSION="$(ls -1 $ANDROID_HOME/ndk | tail -n 1)"
+    export NDK_HOME="$ANDROID_HOME/ndk/$NDK_VERSION"
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/platform-tools
     ;;

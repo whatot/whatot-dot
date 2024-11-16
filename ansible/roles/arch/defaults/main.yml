@@ -49,6 +49,7 @@ basic_pkgs:
   - automake
   - bridge-utils
   - btop
+  - chezmoi
   - clipit
   - discount
   - dnsmasq
@@ -80,12 +81,14 @@ basic_pkgs:
   - p7zip
   - patch
   - plantuml
+  - ripgrep
   - rsync
   - sysstat
   - tealdeer
   - tree
   - wget
   - pkg-config
+  - zoxide
 
 program_tool_pkgs:
   - ansible
@@ -109,6 +112,7 @@ program_tool_pkgs:
   - go
   - go-tools
   - gvim
+  - jdk17-openjdk
   - jdk21-openjdk
   - llvm
   - lua
@@ -120,12 +124,9 @@ program_tool_pkgs:
   - ninja
   - prettier
   - python-sqlparse
-  - ripgrep
   - rustup
   - sccache
   - shfmt
-  - zoxide
-  - chezmoi
 
 frontend_pkgs:
   - pnpm
