@@ -71,6 +71,7 @@ basic_pkgs:
   - htop
   - iftop
   - ifuse
+  - just
   - meld
   - mpv
   - nushell
