@@ -62,6 +62,7 @@ brew_install btop
 brew_install cmake
 brew_install ninja
 brew_install rustup-init
+brew_install mold
 brew_install the_silver_searcher
 brew_install bear
 brew_install shellcheck

@@ -2,7 +2,7 @@
 set -eux
 
 # 默认指定版本
-NEEDED_RUST_VERSION=nightly-2024-09-18
+NEEDED_RUST_VERSION=nightly-2024-11-18
 
 # 基础目录
 CARGO_CONFIG_PATH="${HOME}/.cargo"
@@ -49,7 +49,7 @@ case $(uname) in
       echo -n "install rustup by pacman in arch or manjaro"
       sudo pacman -S rustup
     elif [[ -f "/snap/bin/rustup" ]]; then
-        echo -n "already init rustup with snap ubuntu"
+      echo -n "already init rustup with snap ubuntu"
     else
       # 不能直接使用系统 rustup 的发行版中，使用远程安装脚本初始化 rustup
       if [[ -f "${LOCAL_RUSTUP_BIN}" ]]; then
