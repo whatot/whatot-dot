@@ -103,6 +103,8 @@ brew_install chezmoi
 brew_install mise
 # https://docs.helix-editor.com/
 brew_install helix
+# https://github.com/biomejs/biome
+brew_install biome
 
 brew_cask_install bruno
 brew_cask_install macvim
