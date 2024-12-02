@@ -123,6 +123,9 @@ program_tool_pkgs:
   - make
   - maven
   - ninja
+  - podman-docker
+  - podman-compose
+  - postgresql
   - prettier
   - python-sqlparse
   - rustup
