@@ -107,6 +107,7 @@ brew_install helix
 # https://github.com/biomejs/biome
 brew_install biome
 
+brew_cask_install beekeeper-studio
 brew_cask_install bruno
 brew_cask_install macvim
 brew_cask_install iina

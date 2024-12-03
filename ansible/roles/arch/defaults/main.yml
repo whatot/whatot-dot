@@ -38,6 +38,7 @@ absent_pkgs:
   - visual-studio-code
 
 aur_pkgs:
+  - beekeeper-studio-bin
   - nautilus-nutstore
   - mise-bin
   - bruno-bin
