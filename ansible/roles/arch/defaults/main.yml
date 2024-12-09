@@ -83,6 +83,7 @@ basic_pkgs:
   - p7zip
   - patch
   - plantuml
+  - powertop
   - ripgrep
   - rsync
   - sysstat
