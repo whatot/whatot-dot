@@ -30,12 +30,13 @@ zmodule kiesman99/zim-zoxide
 zmodule magic-enter
 # Manage your dotfiles across multiple diverse machines
 zmodule joke/zim-chezmoi
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/shrink-path
+zmodule ohmyzsh/ohmyzsh --root plugins/shrink-path
+
 # Mise: dev tools, env vars, task runner
 # https://github.com/jdx/mise
 # https://mise.jdx.dev/walkthrough.html
-zmodule joke/zim-mise
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/shrink-path
-zmodule ohmyzsh/ohmyzsh --root plugins/shrink-path
+#zmodule joke/zim-mise
 
 # Configures fzf for faster fetching of files and directories names.
 # fzf (https://github.com/chinanf-boy/fzf-zh)
