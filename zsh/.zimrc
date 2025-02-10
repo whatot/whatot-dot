@@ -36,7 +36,9 @@ zmodule ohmyzsh/ohmyzsh --root plugins/shrink-path
 # Mise: dev tools, env vars, task runner
 # https://github.com/jdx/mise
 # https://mise.jdx.dev/walkthrough.html
-#zmodule joke/zim-mise
+zmodule joke/zim-mise
+# mise ls-remote java | grep "\-11"
+# mise use -g java@zulu-17
 
 # Configures fzf for faster fetching of files and directories names.
 # fzf (https://github.com/chinanf-boy/fzf-zh)
