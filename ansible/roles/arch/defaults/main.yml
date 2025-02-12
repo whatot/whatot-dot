@@ -48,6 +48,7 @@ aur_pkgs:
 basic_pkgs:
   - autoconf
   - automake
+  - bottom
   - bridge-utils
   - btop
   - chezmoi

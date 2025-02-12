@@ -58,6 +58,7 @@ brew_install git
 brew_install zsh
 brew_install htop
 brew_install btop
+brew_install bottom
 
 brew_install cmake
 brew_install ninja
