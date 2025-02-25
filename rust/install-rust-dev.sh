@@ -61,5 +61,9 @@ cargo_install tokei
 # Build Rust code for Android
 cargo_install cargo-ndk
 
+# background code checker, live-reloading
+# https://github.com/Canop/bacon
+cargo_install bacon
+
 # cargo fix --edition
 sccache --show-stats
