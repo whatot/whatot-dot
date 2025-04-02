@@ -2,7 +2,7 @@
 set -eux
 
 cargo_install() {
-  cargo install --force "$@"
+  cargo binstall --only-signed --no-confirm --continue-on-failure --force "$@"
 }
 
 # build rust pkg with cache
@@ -18,12 +18,12 @@ cargo_install cargo-tree
 cargo_install cargo-outdated
 
 # Find out what takes most of the space in your executable
-cargo_install cargo-bloat --features regex-filter
+cargo_install cargo-bloat
 # cargo bloat --release -n 10
 # cargo bloat --release --crates
 # cargo bloat --release --filter '^__' -n 10
 
-cargo_install cargo-generate --features vendored-openssl
+cargo_install cargo-generate
 cargo_install cargo-edit
 cargo_install bindgen-cli
 

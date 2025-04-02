@@ -41,13 +41,13 @@ case $(uname) in
       rustup-init -y --default-toolchain "${NEEDED_RUST_VERSION}" --no-modify-path
     fi
     # rust-analyzer不在rustup-init软链范围，需要单独处理
-    brew install rust-analyzer
+    brew install rust-analyzer cargo-binstall
     ;;
   Linux)
     if [[ -f "/usr/bin/pacman" ]]; then
       # arch 与 manjaro 直接系统安装 rustup，不需要执行安装脚本
       echo -n "install rustup by pacman in arch or manjaro"
-      sudo pacman -S rustup
+      sudo pacman -S rustup cargo-binstall
     elif [[ -f "/snap/bin/rustup" ]]; then
       echo -n "already init rustup with snap ubuntu"
     else
