@@ -5,6 +5,13 @@ cargo_install() {
   cargo binstall --only-signed --no-confirm --continue-on-failure --force "$@"
 }
 
+if [[ ${GITHUB_TOKEN} ]];then
+  echo "GITHUB_TOKEN = ${GITHUB_TOKEN}"
+else
+  echo "GITHUB_TOKEN ENV IS NOT EXISTS"
+  exit -1
+fi
+
 # build rust pkg with cache
 cargo_install sccache
 
