@@ -55,6 +55,7 @@ brew_install tree
 brew_install axel
 brew_install rsync
 brew_install git
+brew_install git-lfs
 brew_install zsh
 brew_install htop
 brew_install btop
