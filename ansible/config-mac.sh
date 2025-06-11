@@ -61,6 +61,7 @@ brew_install htop
 brew_install btop
 brew_install bottom
 
+brew_install just
 brew_install cmake
 brew_install ninja
 brew_install rustup-init
@@ -118,5 +119,7 @@ brew_cask_install sequel-ace
 brew_cask_install font-hack-nerd-font
 brew_cask_install font-jetbrains-mono-nerd-font
 brew_cask_install font-lxgw-wenkai
+brew_cask_install notunes
+brew_cask_install jordanbaird-ice
 
 echo "finined!"
