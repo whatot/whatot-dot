@@ -40,5 +40,11 @@ export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 export LSP_USE_PLISTS=true
 
 # https://docs.flutter.cn/community/china/
-export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
-export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+# export PUB_HOSTED_URL=https://mirrors.cloud.tencent.com/dart-pub
+# export FLUTTER_STORAGE_BASE_URL=https://mirrors.cloud.tencent.com/flutter
+# export PUB_HOSTED_URL=https://mirror.sjtu.edu.cn/dart-pub
+# export FLUTTER_STORAGE_BASE_URL=https://mirror.sjtu.edu.cn
+# export PUB_HOSTED_URL=https://mirrors.tuna.tsinghua.edu.cn/dart-pub
+# export FLUTTER_STORAGE_BASE_URL=https://mirrors.tuna.tsinghua.edu.cn/flutter
