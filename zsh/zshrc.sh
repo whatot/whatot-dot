@@ -216,6 +216,9 @@ config_mixed() {
   alias gf="git pull"
   alias pn="pnpm"
 
+  # 检查你的 Mac 网络速度
+  alias net="networkQuality"
+
   export LC_MESSAGES="en_US.UTF-8"
   export EDITOR='vim'
 
