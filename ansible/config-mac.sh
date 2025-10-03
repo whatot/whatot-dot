@@ -109,6 +109,8 @@ brew_install mise
 brew_install helix
 # https://github.com/biomejs/biome
 brew_install biome
+# https://github.com/typst/typst
+brew_install typst
 
 brew_cask_install beekeeper-studio
 brew_cask_install bruno

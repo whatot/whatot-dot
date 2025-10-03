@@ -58,7 +58,9 @@ config.automatically_reload_config = false
 -- https://wezfurlong.org/wezterm/config/lua/keyassignment/ActivateTab.html
 if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
   -- update keys
-  config.keys = {}
+  config.keys = {
+  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
+}
   for i = 1, 8 do
     -- ALT + number to activate that tab
     table.insert(config.keys, {
