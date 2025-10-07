@@ -111,6 +111,8 @@ brew_install helix
 brew_install biome
 # https://github.com/typst/typst
 brew_install typst
+# https://github.com/Orange-OpenSource/hurl
+brew_install hurl
 
 brew_cask_install beekeeper-studio
 brew_cask_install bruno
@@ -123,5 +125,7 @@ brew_cask_install font-jetbrains-mono-nerd-font
 brew_cask_install font-lxgw-wenkai
 brew_cask_install notunes
 brew_cask_install jordanbaird-ice
+# https://github.com/chrox/readest ebook reader
+brew_cask_install readest
 
 echo "finined!"
