@@ -215,6 +215,7 @@ config_mixed() {
   alias myip="curl myip.ipip.net"
   alias gf="git pull"
   alias pn="pnpm"
+  alias j="just"
 
   # 检查你的 Mac 网络速度
   alias net="networkQuality"
