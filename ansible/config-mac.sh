@@ -113,6 +113,11 @@ brew_install biome
 brew_install typst
 # https://github.com/Orange-OpenSource/hurl
 brew_install hurl
+# https://jj-vcs.github.io/jj/latest/
+# https://github.com/jj-vcs/jj
+brew_install jj
+# https://github.com/AyuGram/AyuGramDesktop Telegram client
+brew_install --cask ayugram
 
 brew_cask_install beekeeper-studio
 brew_cask_install bruno

@@ -2,7 +2,7 @@
 set -eux
 
 # 默认指定版本
-NEEDED_RUST_VERSION=nightly-2025-09-16
+NEEDED_RUST_VERSION=nightly-2025-11-20
 
 # 基础目录
 CARGO_CONFIG_PATH="${HOME}/.cargo"
@@ -70,6 +70,7 @@ rustup component add clippy --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rust-analyzer --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rust-src --toolchain "${NEEDED_RUST_VERSION}"
 rustup component add rustfmt --toolchain "${NEEDED_RUST_VERSION}"
+rustup component add llvm-tools --toolchain "${NEEDED_RUST_VERSION}"
 echo
 
 rustup default "${NEEDED_RUST_VERSION}"
