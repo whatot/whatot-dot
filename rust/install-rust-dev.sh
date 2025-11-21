@@ -5,7 +5,7 @@ cargo_install() {
   cargo binstall --only-signed --no-confirm --continue-on-failure --force "$@"
 }
 
-if [[ ${GITHUB_TOKEN} ]];then
+if [[ ${GITHUB_TOKEN} ]]; then
   echo "GITHUB_TOKEN = ${GITHUB_TOKEN}"
 else
   echo "GITHUB_TOKEN ENV IS NOT EXISTS"
@@ -71,6 +71,10 @@ cargo_install cargo-ndk
 # background code checker, live-reloading
 # https://github.com/Canop/bacon
 cargo_install bacon
+
+# code coverage
+# https://github.com/taiki-e/cargo-llvm-cov
+cargo_install cargo-llvm-cov
 
 # cargo fix --edition
 sccache --show-stats
