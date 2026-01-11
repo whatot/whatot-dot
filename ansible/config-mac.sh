@@ -118,6 +118,9 @@ brew_install hurl
 brew_install jj
 # https://github.com/AyuGram/AyuGramDesktop Telegram client
 brew_install --cask ayugram
+# https://github.com/cloudflare/workers-rs
+# https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler
+brew_install cloudflare-wrangler
 
 brew_cask_install beekeeper-studio
 brew_cask_install bruno
@@ -132,5 +135,7 @@ brew_cask_install notunes
 brew_cask_install jordanbaird-ice
 # https://github.com/chrox/readest ebook reader
 brew_cask_install readest
+# https://github.com/newmarcel/KeepingYouAwake
+brew_cask_install keepingyouawake
 
 echo "finined!"
