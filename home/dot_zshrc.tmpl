@@ -69,6 +69,21 @@ register_completion() {
   fi
 }
 
+_mise_run_completion() {
+  local -a original_words
+  local original_current
+
+  (( ${+functions[_mise]} )) || return 1
+
+  original_words=("${words[@]}")
+  original_current=$CURRENT
+
+  local -a words=("mise" "run" "${original_words[@]:1}")
+  integer CURRENT=$(( original_current + 1 ))
+
+  _mise
+}
+
 load_zsh_plugin() {
   local plugin=$1
 
@@ -208,11 +223,13 @@ setup_aliases() {
   alias ..="cd .."
   alias ...="cd ../.."
   alias bubu="brew update && brew outdated && brew upgrade && brew cleanup"
+  alias m="mise run"
   alias pn="pnpm"
   alias gf="git pull"
   alias myip="curl myip.ipip.net"
 
   register_completion bubu _brew brew
+  register_completion m _mise_run_completion
   register_completion mise _mise
   register_completion pnpm _pnpm_completion
   register_completion pn _pnpm_completion
