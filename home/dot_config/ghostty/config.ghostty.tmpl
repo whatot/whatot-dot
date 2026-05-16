@@ -9,6 +9,9 @@ window-padding-y = 6
 confirm-close-surface = false
 
 {{- if eq .chezmoi.os "darwin" }}
-macos-titlebar-style = tabs
+window-title-font-family = SF Pro Text
+macos-titlebar-style = transparent
+window-save-state = always
 macos-option-as-alt = true
+macos-titlebar-proxy-icon = hidden
 {{- end }}

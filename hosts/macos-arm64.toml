@@ -9,4 +9,4 @@ devtools = ["rust-toolchain", "rust-tools", "go-tools"]
 profile = "tiny"
 
 [ghostty]
-font_size = 14
+font_size = 13
