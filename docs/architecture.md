@@ -1,30 +1,76 @@
 # Architecture
 
-This is a workstation configuration repository, not a general-purpose
-configuration management system.
+This repository manages one workstation at a time. It is not trying to become
+general-purpose configuration management.
+
+## Main Path
+
+The default path stays intentionally small:
+
+- `chezmoi` manages dotfiles and rendered templates from `home/`
+- `mise` manages daily tasks, portable CLIs, and language runtimes
+- `hosts/*.toml` select which package groups and setup steps apply to a machine
+- `bootstrap/` installs only enough software to make the repository usable
+- `packages/` define the long-term OS package inventory
 
 ## Responsibilities
 
 ```text
-home/       dotfiles rendered by chezmoi
-packages/   software inventories
-bootstrap/  minimum new-machine setup
-hosts/      host execution plans
-scripts/     stable command entrypoints
+home/       dotfiles and generated user config
+packages/   coarse OS package inventories
+bootstrap/  first-run system preparation
+hosts/      per-machine execution plans
+scripts/    stable command entrypoints
 mise.toml   daily task registry
+docs/       runbooks and design notes
+```
+
+## Configuration Model
+
+1. Private env outside git selects the active host and Git identity.
+2. `scripts/preflight` requires `DOTFILES_HOST`, `DOTFILES_GIT_NAME`, and
+   `DOTFILES_GIT_EMAIL` before user-facing tasks run.
+3. `hosts/*.toml` decide which package groups and optional setup behavior apply
+   to a machine.
+4. `bootstrap/` installs the minimum prerequisites, applies Linux mirrors, and
+   makes `chezmoi` plus `mise` usable.
+5. `packages/` provide the long-term OS-level inventory.
+6. `home/` provides dotfiles rendered by `chezmoi`.
+7. `scripts/` plus `mise.toml` expose stable entrypoints such as `setup`,
+   `refresh`, `check`, and `test`.
+
+Local private defaults live in:
+
+```text
+~/.env_private
+~/.dotfiles.env
+```
+
+## Placement Rules
+
+- Put first-run prerequisites and distro mirror changes in `bootstrap/`.
+- Put OS packages, GUI apps, fonts, compilers, native build dependencies, and
+  shell plugins in `packages/`.
+- Put portable developer CLIs and language runtimes in `mise.toml` when they
+  work well cross-platform.
+- Put machine-specific combinations in `hosts/`, not ad hoc conditionals across
+  unrelated scripts.
+- Put user config and templated dotfiles in `home/`.
+- Keep secrets and machine-local values in `~/.env_private` or
+  `~/.dotfiles.env`, never in git-managed files.
+
+Package groups stay coarse:
+
+```text
+base      terminal-safe baseline packages
+desktop   GUI apps, fonts, and input methods
+dev       OS-level development dependencies and heavier local services
 ```
 
 ## Tool Choices
 
-The main path is intentionally small:
-
-- `chezmoi` for dotfiles, templates, and per-host data.
-- `mise` for tasks, development runtimes, and cross-platform CLI tools.
-- coarse package set files for OS packages.
-- `pacman` plus an AUR helper for Arch packages.
-- small shell scripts for bootstrap, package install, and tool setup.
-
-The following tools are intentionally removed from the main path:
+The main path intentionally avoids heavier framework stacks. These are removed
+from the default path:
 
 - Ansible
 - Nix, Home Manager, nix-darwin
@@ -33,172 +79,33 @@ The following tools are intentionally removed from the main path:
 - Nvim
 - Zim
 
-## Configuration Flow
-
-New machines enter through `scripts/bootstrap`.
-
-Daily changes should follow this flow:
-
-```shell
-mise run status
-mise run chezmoi:diff
-mise run chezmoi:apply
-mise run refresh
-mise run check
-git diff
-```
-
-Host selections go into `hosts/`. Package inventories go into `packages/`.
-Dotfile changes go into `home/` and are previewed/applied through
-`chezmoi:diff` and `chezmoi:apply`. First-run OS setup goes into `bootstrap/`.
-The bootstrap stage installs only enough software to make the repository usable;
-the `base` package set is the long-term baseline managed by the active host. The
-active host is selected locally or per command:
-
-```shell
-mise run host
-DOTFILES_HOST=ubuntu-amd64 mise run setup
-DOTFILES_HOST=macos-arm64 mise run setup
-```
-
-Local defaults can live outside git in:
-
-```text
-~/.config/dotfiles/env
-~/.dotfiles.env
-~/.env_private
-```
-
-`scripts/lib/env` only loads these private env files. Host execution plan
-parsing lives in `scripts/lib/plan` and reads the git-managed `hosts/*.toml`
-files.
-
-`scripts/preflight` runs before user-facing lifecycle tasks and before
-bootstrap applies chezmoi. It requires `DOTFILES_HOST`, `DOTFILES_GIT_NAME`, and
-`DOTFILES_GIT_EMAIL` so host selection and generated Git identity never fall
-back to silent defaults.
-
-Linux bootstrap changes should be smoke-tested in OrbStack machines before they
-are trusted on a real host:
-
-```shell
-scripts/container-test ubuntu-amd64
-scripts/container-test debian-amd64
-scripts/container-test arch-amd64
-scripts/container-test ubuntu-arm64
-scripts/container-test all
-```
-
-Containers are the fast path for bootstrap, mirror, chezmoi, mise, and doctor
-checks. OrbStack machines are the slower path for host-like behavior:
-
-```shell
-scripts/container-test all packages
-```
-
-The package stage installs only the package sets declared by the fixed
-container hosts. Desktop, font, input-method, and AUR checks belong to OrbStack
-machines or real hosts.
-
-```shell
-scripts/orbstack-test ubuntu-amd64
-scripts/orbstack-test debian-amd64
-scripts/orbstack-test arch-amd64
-scripts/orbstack-test ubuntu-arm64
-scripts/orbstack-test all
-```
-
-Package sets should stay coarse:
-
-```text
-base       terminal-safe baseline packages
-desktop    GUI apps, fonts, and input methods
-dev        OS-level development dependencies and heavier local services
-```
-
-Tools should default to `mise.toml` when they are language runtimes or portable
-developer CLIs. Keep GUI apps, fonts, shell plugins, compilers, native build
-dependencies, and OS integration packages in `packages/`.
-
-Tools that are not available on every supported platform should stay outside
-the global `[tools]` set until a host explicitly needs them.
-
-Local quality gates use `pre-commit`, installed by mise. `mise run check` also
-runs a repository-level script check so newly added, not-yet-tracked shell files
-are covered during refactors. `shellcheck`, `shfmt`, and `dprint` are managed by
-mise and invoked through `mise exec`.
-
-## Mirrors
-
-Bootstrap applies package mirrors before installing base tools on Linux:
-
-```text
-bootstrap/ubuntu.sh   Ubuntu apt sources
-bootstrap/debian.sh   Debian apt sources
-bootstrap/arch.sh     Arch pacman mirrorlist
-```
-
-Default mirrors use USTC. They can be overridden with:
-
-```text
-DOTFILES_UBUNTU_MIRROR
-DOTFILES_DEBIAN_MIRROR
-DOTFILES_DEBIAN_SECURITY_MIRROR
-DOTFILES_ARCH_MIRRORS
-DOTFILES_ARCH_MIRROR
-DOTFILES_ARCHLINUXCN_MIRRORS
-DOTFILES_ARCHLINUXCN_MIRROR
-DOTFILES_ENABLE_ARCHLINUXCN
-DOTFILES_MISE_INSTALL_URL
-DOTFILES_MISE_CURL_RETRIES
-```
-
 ## Development Tools
 
-Language tool setup is represented as inventory plus commands:
+Language runtimes and portable CLIs should default to `mise`. OS-level build
+dependencies stay in `packages/`.
 
-```text
-packages/go/tools.txt
-packages/rust/system-*.txt
-packages/rust/tools.txt
-packages/rust/tools-extra.txt
-scripts/devtools
-```
+Rust versions should normally come from each project's `rust-toolchain.toml`.
+This repository only ensures `rustup` exists, has a usable default toolchain,
+and can install the workstation CLI set.
 
-Language-specific setup is exposed through:
+Heavier or less portable cargo tools should stay in separate inventories or
+tasks instead of slowing the default setup path for every machine.
 
-```shell
-mise run setup
-mise run devtools:rust-system
-mise run devtools:rust-toolchain
-mise run devtools:rust-tools
-mise run devtools:rust-tools-extra
-mise run devtools:go-tools
-```
+## Defaults
 
-Rust project versions should normally be selected by each project through
-`rust-toolchain.toml`. Workstation hosts ensure rustup has an active default
-toolchain before cargo-managed tools; new machines default to `stable`. Use
-`DOTFILES_RUST_TOOLCHAIN` or pass a toolchain name to override that default.
+- Ghostty is the default terminal.
+- Zed is the default GUI editor.
+- Vim is the default terminal editor, with `minimal` and `tiny` profiles.
+- Zsh is configured directly by `chezmoi`, without a shell framework.
 
-Cargo configuration is a normal chezmoi-managed dotfile at
-`home/dot_cargo/config.toml`.
+## Validation
 
-The default Rust tools list should stay fast and broadly portable. Heavier cargo
-tools that often depend on platform-specific binaries or slower fallback builds
-belong in `packages/rust/tools-extra.txt`.
+Local quality gates run through `mise run check` and `pre-commit`. Environment
+validation is split by layer:
 
-C/C++ setup is not a default path, but Rust keeps its own small system
-dependency lists for linkers, pkg-config based crates, and build scripts.
+- containers for fast Linux bootstrap and container-safe package checks
+- OrbStack machines for host-like Linux validation
+- real hosts for desktop apps, fonts, input methods, AUR, and other
+  machine-bound behavior
 
-## Shell
-
-Zsh is configured as a direct chezmoi-managed file at `home/dot_zshrc.tmpl`.
-There is no `.zimrc` and no shell framework bootstrap. Interactive features come
-from standalone tools and distro/Homebrew packages:
-
-- `mise activate zsh`, with the repository trusted via `mise trust`
-- `zoxide init zsh`
-- `direnv hook zsh`
-- `fzf --zsh`
-- zsh autosuggestions and syntax highlighting
+See `testing.md` for the concrete commands and test matrix.
