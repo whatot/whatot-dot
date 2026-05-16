@@ -7,7 +7,7 @@ dotfiles_load_private_env() {
   if [[ -n ${DOTFILES_ENV_FILE:-} ]]; then
     files+=("${DOTFILES_ENV_FILE}")
   else
-    files+=("${HOME}/.config/dotfiles/env" "${HOME}/.dotfiles.env" "${HOME}/.env_private")
+    files+=("${HOME}/.dotfiles.env" "${HOME}/.env_private")
   fi
 
   for file in "${files[@]}"; do

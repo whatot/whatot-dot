@@ -27,7 +27,7 @@ if [[ ${missing} -ne 0 ]]; then
   cat >&2 <<'EOF'
 
 Required private settings are missing.
-Create ~/.env_private or ~/.config/dotfiles/env from docs/env_private.example and fill:
+Create ~/.env_private or ~/.dotfiles.env from docs/env_private.example and fill:
 
   DOTFILES_HOST
   DOTFILES_GIT_NAME
