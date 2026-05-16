@@ -17,13 +17,43 @@ HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 
-autoload -Uz compinit
-compinit
+fpath_prepend() {
+  [[ -d "$1" ]] || return
+  fpath=("$1" "${(@)fpath:#$1}")
+}
+
+case "$(uname -s)" in
+Darwin)
+  fpath_prepend "/opt/homebrew/share/zsh/site-functions"
+  fpath_prepend "/usr/local/share/zsh/site-functions"
+  ;;
+Linux)
+  fpath_prepend "/usr/local/share/zsh/site-functions"
+  fpath_prepend "/usr/share/zsh/site-functions"
+  fpath_prepend "/usr/share/zsh/vendor-completions"
+  ;;
+esac
+
+completion_cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
+if ! mkdir -p "${completion_cache_dir}" 2>/dev/null; then
+  completion_cache_dir="${TMPDIR:-/tmp}"
+fi
+zmodload -i zsh/complist
+autoload -Uz add-zsh-hook colors compinit vcs_info
+compinit -d "${completion_cache_dir}/.zcompdump-${ZSH_VERSION}"
+colors
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' rehash true
 
-PROMPT='%F{cyan}%~%f %# '
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr '+'
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' formats 'on %F{magenta}%b%f%c%u'
+zstyle ':vcs_info:git:*' actionformats 'on %F{magenta}%b%f %F{yellow}%a%f%c%u'
 
 load_env_files() {
   local file_path key value current
@@ -51,6 +81,19 @@ load_env_files() {
 source_if_exists() {
   local file_path=$1
   [[ -r "${file_path}" ]] && source "${file_path}"
+}
+
+register_completion() {
+  local command_name=$1
+  local function_name=$2
+  local service=${3:-}
+
+  (( ${+functions[${function_name}]} )) || return
+  if [[ -n "${service}" ]]; then
+    compdef "${function_name}" "${command_name}=${service}"
+  else
+    compdef "${function_name}" "${command_name}"
+  fi
 }
 
 load_zsh_plugin() {
@@ -104,6 +147,9 @@ setproxy
 
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh --quiet)"
+  if command -v usage >/dev/null 2>&1; then
+    source_if_exists <(mise completion zsh)
+  fi
 fi
 
 if command -v zoxide >/dev/null 2>&1; then
@@ -118,6 +164,10 @@ if [[ -t 0 && -t 1 ]] && command -v fzf >/dev/null 2>&1; then
   source_if_exists <(fzf --zsh)
 fi
 
+if command -v pnpm >/dev/null 2>&1; then
+  source_if_exists <(pnpm completion zsh)
+fi
+
 load_zsh_plugin zsh-autosuggestions
 load_zsh_plugin zsh-syntax-highlighting
 
@@ -128,6 +178,28 @@ fi
 alias pn="pnpm"
 alias gf="git pull"
 alias myip="curl myip.ipip.net"
+
+register_completion mise _mise
+register_completion pnpm _pnpm_completion
+register_completion pn _pnpm_completion
+register_completion gf _git git-pull
+register_completion myip _curl
+
+prompt_context() {
+  if [[ -n "${SSH_CONNECTION:-}" ]]; then
+    printf '%%F{yellow}%%m%%f '
+  fi
+}
+
+update_prompt() {
+  vcs_info
+  PROMPT="$(prompt_context)%F{cyan}%~%f ${vcs_info_msg_0_}
+%(?.%F{green}.%F{red})%#%f "
+  RPROMPT='%F{blue}%*%f'
+}
+
+add-zsh-hook precmd update_prompt
+update_prompt
 
 export EDITOR="vim"
 export LC_MESSAGES="en_US.UTF-8"
