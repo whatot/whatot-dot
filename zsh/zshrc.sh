@@ -87,6 +87,8 @@ init_before_all() {
   load_env_file "${HOME}/.env_private"
 }
 unsetproxy() {
+  unset PROXY_HOST
+  unset PROXY_PORT
   unset NO_PROXY
   unset ALL_PROXY
   unset HTTP_PROXY
