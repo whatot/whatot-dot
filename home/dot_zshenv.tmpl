@@ -1,0 +1,40 @@
+path_prepend() {
+  [[ -d "$1" ]] || return
+  case ":${PATH:-}:" in
+    *":$1:"*) ;;
+    *) export PATH="$1${PATH:+:${PATH}}" ;;
+  esac
+}
+
+case $(uname -s) in
+  Darwin)
+    path_prepend "/usr/local/bin"
+    path_prepend "/usr/local/sbin"
+    path_prepend "${HOME}/go/bin"
+    path_prepend "${HOME}/.cargo/bin"
+    path_prepend "${HOME}/.local/bin"
+    path_prepend "/opt/homebrew/sbin"
+    path_prepend "/opt/homebrew/bin"
+    path_prepend "/opt/homebrew/opt/coreutils/libexec/gnubin"
+    ;;
+  Linux)
+    path_prepend "${HOME}/go/bin"
+    path_prepend "${HOME}/.cargo/bin"
+    path_prepend "${HOME}/.local/bin"
+    export TERM="${TERM:-xterm-256color}"
+    ;;
+  *) ;;
+esac
+
+unset -f path_prepend
+
+export GOPATH="${HOME}/go/"
+
+export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
+export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
+
+export RUSTUP_DIST_SERVER="${RUSTUP_DIST_SERVER:-https://rsproxy.cn}"
+export RUSTUP_UPDATE_ROOT="${RUSTUP_UPDATE_ROOT:-https://rsproxy.cn/rustup}"
+
+export PUB_HOSTED_URL="${PUB_HOSTED_URL:-https://pub.flutter-io.cn}"
+export FLUTTER_STORAGE_BASE_URL="${FLUTTER_STORAGE_BASE_URL:-https://storage.flutter-io.cn}"

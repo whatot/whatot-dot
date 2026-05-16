@@ -1,0 +1,5 @@
+build-essential
+pkg-config
+mold
+ccache
+sccache

@@ -1,0 +1,9 @@
+name = "arch-amd64"
+os = "arch"
+arch = "amd64"
+
+packages = ["base"]
+devtools = []
+
+[vim]
+profile = "minimal"

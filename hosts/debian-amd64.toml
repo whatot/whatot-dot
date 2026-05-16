@@ -1,0 +1,9 @@
+name = "debian-amd64"
+os = "debian"
+arch = "amd64"
+
+packages = ["base"]
+devtools = []
+
+[vim]
+profile = "minimal"

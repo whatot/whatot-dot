@@ -1,0 +1,6 @@
+golang.org/x/tools/gopls@latest
+golang.org/x/tools/cmd/goimports@latest
+github.com/go-delve/delve/cmd/dlv@latest
+honnef.co/go/tools/cmd/staticcheck@latest
+github.com/cweill/gotests/gotests@latest
+github.com/air-verse/air@latest

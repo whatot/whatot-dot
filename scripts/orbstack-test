@@ -1,0 +1,212 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+
+usage() {
+  cat <<'EOF'
+usage: scripts/orbstack-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [--reset]
+
+Create or reuse fixed OrbStack Linux test machines and run the bootstrap smoke
+test.
+
+Machines:
+  dotfiles-ubuntu-amd64
+  dotfiles-debian-amd64
+  dotfiles-arch-amd64
+  dotfiles-ubuntu-arm64
+
+Options:
+  --reset  delete the target machine before creating it again
+EOF
+}
+
+log() {
+  printf "==> %s\n" "$*"
+}
+
+require_orbstack() {
+  if ! command -v orbctl >/dev/null 2>&1; then
+    echo "orbctl is required. Install OrbStack first." >&2
+    exit 1
+  fi
+}
+
+machine_for_target() {
+  case "$1" in
+    ubuntu-amd64) printf "dotfiles-ubuntu-amd64" ;;
+    debian-amd64) printf "dotfiles-debian-amd64" ;;
+    arch-amd64) printf "dotfiles-arch-amd64" ;;
+    ubuntu-arm64) printf "dotfiles-ubuntu-arm64" ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+distro_for_target() {
+  case "$1" in
+    ubuntu-amd64 | ubuntu-arm64) printf "ubuntu:resolute" ;;
+    debian-amd64) printf "debian:trixie" ;;
+    arch-amd64) printf "arch" ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+arch_for_target() {
+  case "$1" in
+    ubuntu-amd64 | debian-amd64 | arch-amd64) printf "amd64" ;;
+    ubuntu-arm64) printf "arm64" ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+machine_exists() {
+  local machine=$1
+  orbctl info "${machine}" >/dev/null 2>&1
+}
+
+delete_machine() {
+  local machine=$1
+
+  if machine_exists "${machine}"; then
+    orbctl delete "${machine}"
+  fi
+}
+
+ensure_machine() {
+  local target=$1
+  local machine distro arch
+
+  machine=$(machine_for_target "${target}")
+  distro=$(distro_for_target "${target}")
+  arch=$(arch_for_target "${target}")
+
+  if machine_exists "${machine}"; then
+    log "reuse ${machine}"
+    return
+  fi
+
+  log "create ${machine} from ${distro} (${arch})"
+  orbctl create --arch "${arch}" "${distro}" "${machine}"
+}
+
+sync_repo() {
+  local machine=$1
+
+  log "sync repository to ${machine}:~/dotfiles-test"
+  orbctl run -m "${machine}" rm -rf dotfiles-test
+  orbctl run -m "${machine}" mkdir -p dotfiles-test
+  orbctl push -m "${machine}" "${ROOT_DIR}/." dotfiles-test/
+}
+
+run_smoke_test() {
+  local machine=$1
+  local target=$2
+  local name
+  local env_args=(
+    "DOTFILES_HOST=${target}"
+    "DOTFILES_GIT_NAME=Dotfiles Test"
+    "DOTFILES_GIT_EMAIL=dotfiles-test@example.invalid"
+  )
+
+  for name in \
+    DOTFILES_UBUNTU_MIRROR \
+    DOTFILES_DEBIAN_MIRROR \
+    DOTFILES_DEBIAN_SECURITY_MIRROR \
+    DOTFILES_ARCH_MIRRORS \
+    DOTFILES_ARCH_MIRROR \
+    DOTFILES_ARCHLINUXCN_MIRRORS \
+    DOTFILES_ARCHLINUXCN_MIRROR \
+    DOTFILES_ENABLE_ARCHLINUXCN \
+    DOTFILES_RETRY_ATTEMPTS \
+    DOTFILES_RETRY_DELAY \
+    DOTFILES_MISE_CURL_RETRIES \
+    DOTFILES_MISE_INSTALL_URL; do
+    if [[ -n "${!name:-}" ]]; then
+      env_args+=("${name}=${!name}")
+    fi
+  done
+
+  log "run bootstrap smoke test on ${machine}"
+  # shellcheck disable=SC2016
+  orbctl run -m "${machine}" --workdir dotfiles-test env "${env_args[@]}" bash -lc '
+    set -euo pipefail
+    ./scripts/bootstrap
+    export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+    mise trust
+    ./scripts/doctor
+    chezmoi managed --source .
+  '
+}
+
+run_target() {
+  local target=$1
+  local reset=$2
+  local machine
+
+  require_orbstack
+  machine=$(machine_for_target "${target}")
+
+  if [[ "${reset}" == "true" ]]; then
+    delete_machine "${machine}"
+  fi
+
+  ensure_machine "${target}"
+  sync_repo "${machine}"
+  run_smoke_test "${machine}" "${target}"
+}
+
+target=${1:-}
+reset=false
+
+if [[ -z "${target}" ]]; then
+  usage
+  exit 1
+fi
+shift
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --reset)
+      reset=true
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "unknown option: $1" >&2
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+case "${target}" in
+  all)
+    run_target ubuntu-amd64 "${reset}"
+    run_target debian-amd64 "${reset}"
+    run_target arch-amd64 "${reset}"
+    run_target ubuntu-arm64 "${reset}"
+    ;;
+  ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
+    run_target "${target}" "${reset}"
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    echo "unsupported target: ${target}" >&2
+    usage
+    exit 1
+    ;;
+esac

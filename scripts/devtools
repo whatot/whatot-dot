@@ -1,0 +1,280 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/common
+source "${ROOT_DIR}/scripts/lib/common"
+dotfiles_load_private_env
+
+usage() {
+  cat <<'EOF'
+usage: scripts/devtools <command>
+
+commands:
+  rust-system     install system packages commonly needed by Rust builds
+  rust-toolchain  install the default Rust toolchain and components
+  rust-tools      install Rust CLI tools with cargo-binstall
+  rust-tools-extra install heavier Rust CLI tools with cargo-binstall
+  go-tools        install Go CLI tools with go install
+  host           install devtools enabled by the active host
+EOF
+}
+
+init_sudo_cmd
+
+configure_rustup_mirror() {
+  export PATH="${HOME}/.cargo/bin:${PATH}"
+  export RUSTUP_DIST_SERVER="${RUSTUP_DIST_SERVER:-https://rsproxy.cn}"
+  export RUSTUP_UPDATE_ROOT="${RUSTUP_UPDATE_ROOT:-https://rsproxy.cn/rustup}"
+  log "rustup dist server: ${RUSTUP_DIST_SERVER}"
+  log "rustup update root: ${RUSTUP_UPDATE_ROOT}"
+}
+
+install_rustup_from_script() {
+  local toolchain=$1
+
+  curl --http1.1 \
+    --retry "${DOTFILES_RUSTUP_CURL_RETRIES:-2}" \
+    --retry-all-errors \
+    --retry-delay "${DOTFILES_RETRY_DELAY:-5}" \
+    -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain "${toolchain}"
+}
+
+install_brew_packages_from_file() {
+  local package_file=$1
+  local installed=()
+  local missing=()
+  local package
+
+  while IFS= read -r package; do
+    [[ -z "${package}" || "${package}" == \#* ]] && continue
+    if brew list --formula --versions "${package}" >/dev/null 2>&1; then
+      installed+=("${package}")
+    else
+      missing+=("${package}")
+    fi
+  done <"${package_file}"
+
+  if [[ ${#installed[@]} -gt 0 ]]; then
+    log "skip installed brew formulae: ${installed[*]}"
+  fi
+
+  if [[ ${#missing[@]} -eq 0 ]]; then
+    log "all brew formulae already installed: ${package_file#"${ROOT_DIR}"/}"
+    return
+  fi
+
+  run_step "brew install ${#missing[@]} Rust system packages" brew install "${missing[@]}"
+}
+
+ensure_cargo_binstall() {
+  if ! command -v cargo >/dev/null 2>&1 || ! rustup show active-toolchain >/dev/null 2>&1; then
+    run_step "ensure Rust toolchain" install_rust_toolchain
+  fi
+
+  if ! command -v cargo-binstall >/dev/null 2>&1; then
+    run_step "cargo install cargo-binstall" cargo install cargo-binstall
+  fi
+}
+
+install_rust_system() {
+  case "$(uname -s)" in
+    Darwin)
+      install_brew_packages_from_file "${ROOT_DIR}/packages/rust/system-macos.txt"
+      ;;
+    Linux)
+      if [[ -r /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        . /etc/os-release
+      else
+        echo "unsupported linux: missing /etc/os-release" >&2
+        exit 1
+      fi
+
+      case "${ID:-}" in
+        arch | manjaro)
+          run_step "pacman install Rust system packages" \
+            xargs "${sudo_cmd[@]}" pacman -S --needed <"${ROOT_DIR}/packages/rust/system-arch.txt"
+          ;;
+        ubuntu)
+          run_step "apt update" "${sudo_cmd[@]}" apt update
+          run_step "apt install Rust system packages" \
+            xargs "${sudo_cmd[@]}" apt install -y --no-install-recommends <"${ROOT_DIR}/packages/rust/system-ubuntu.txt"
+          ;;
+        debian)
+          run_step "apt update" "${sudo_cmd[@]}" apt update
+          run_step "apt install Rust system packages" \
+            xargs "${sudo_cmd[@]}" apt install -y --no-install-recommends <"${ROOT_DIR}/packages/rust/system-debian.txt"
+          ;;
+        *)
+          echo "unsupported linux distribution: ${ID:-unknown}" >&2
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      echo "unsupported os: $(uname -s)" >&2
+      exit 1
+      ;;
+  esac
+}
+
+install_rust_toolchain() {
+  local active_toolchain
+  local toolchain
+
+  if [[ -n ${DOTFILES_RUST_TOOLCHAIN:-} ]]; then
+    toolchain="${DOTFILES_RUST_TOOLCHAIN}"
+  elif [[ -n ${1:-} ]]; then
+    toolchain="$1"
+  elif command -v rustup >/dev/null 2>&1 && active_toolchain="$(rustup show active-toolchain 2>/dev/null)"; then
+    toolchain="${active_toolchain%% *}"
+  else
+    toolchain="stable"
+  fi
+
+  configure_rustup_mirror
+  install_rust_system
+
+  if ! command -v rustup >/dev/null 2>&1; then
+    case "$(uname -s)" in
+      Darwin)
+        run_step "rustup-init ${toolchain}" \
+          rustup-init -y --default-toolchain "${toolchain}" --no-modify-path
+        ;;
+      Linux)
+        if command -v pacman >/dev/null 2>&1; then
+          run_step "pacman install rustup" sudo pacman -S --needed rustup cargo-binstall
+        else
+          run_step "rustup-init ${toolchain}" install_rustup_from_script "${toolchain}"
+        fi
+        ;;
+      *)
+        echo "unsupported os: $(uname -s)" >&2
+        exit 1
+        ;;
+    esac
+  fi
+
+  run_step "rustup toolchain install ${toolchain}" rustup toolchain install "${toolchain}"
+  run_step "rustup component add ${toolchain}" \
+    rustup component add clippy rust-analyzer rust-src rustfmt llvm-tools --toolchain "${toolchain}"
+  run_step "rustup default ${toolchain}" rustup default "${toolchain}"
+  rustup run "${toolchain}" rustc --print sysroot
+}
+
+install_rust_tools_from_file() {
+  local package_file=$1
+  local binstall_args=(
+    --no-confirm
+    --skip-signatures
+    --disable-telemetry
+    --maximum-resolution-timeout "${DOTFILES_CARGO_BINSTALL_TIMEOUT:-8}"
+  )
+  local cargo_binstall_args=("${binstall_args[@]}")
+  local failed=()
+  local package start
+
+  ensure_cargo_binstall
+
+  if [[ -n ${DOTFILES_CARGO_BINSTALL_EXTRA_ARGS:-} ]]; then
+    local extra_args=()
+    read -r -a extra_args <<<"${DOTFILES_CARGO_BINSTALL_EXTRA_ARGS}"
+    cargo_binstall_args+=("${extra_args[@]}")
+  fi
+
+  while IFS= read -r package; do
+    [[ -z "${package}" || "${package}" == \#* ]] && continue
+
+    start=${SECONDS}
+    log "start: cargo binstall ${package}"
+    if cargo binstall "${cargo_binstall_args[@]}" "${package}"; then
+      log "done: cargo binstall ${package} ($((SECONDS - start))s)"
+    else
+      log "warn: cargo binstall failed: ${package} ($((SECONDS - start))s)"
+      failed+=("${package}")
+    fi
+  done <"${package_file}"
+
+  if [[ ${#failed[@]} -gt 0 ]]; then
+    printf '[dotfiles] rust tools failed:\n' >&2
+    printf '  - %s\n' "${failed[@]}" >&2
+    return 1
+  fi
+}
+
+install_rust_tools() {
+  install_rust_tools_from_file "${ROOT_DIR}/packages/rust/tools.txt"
+}
+
+install_rust_tools_extra() {
+  install_rust_tools_from_file "${ROOT_DIR}/packages/rust/tools-extra.txt"
+}
+
+install_go_tools() {
+  export GO111MODULE=on
+  while IFS= read -r package; do
+    [[ -z "${package}" || "${package}" == \#* ]] && continue
+    run_step "go install ${package}" go install "${package}"
+  done <"${ROOT_DIR}/packages/go/tools.txt"
+}
+
+install_host_devtools() {
+  local tool
+
+  while IFS= read -r tool; do
+    case "${tool}" in
+      rust-system)
+        run_step "devtool rust-system" install_rust_system
+        ;;
+      rust-toolchain)
+        run_step "devtool rust-toolchain" install_rust_toolchain
+        ;;
+      rust-tools)
+        run_step "devtool rust-tools" install_rust_tools
+        ;;
+      rust-tools-extra)
+        run_step "devtool rust-tools-extra" install_rust_tools_extra
+        ;;
+      go-tools)
+        run_step "devtool go-tools" install_go_tools
+        ;;
+      "")
+        ;;
+      *)
+        echo "unknown devtool: ${tool}" >&2
+        exit 1
+        ;;
+    esac
+  done < <(dotfiles_devtools)
+}
+
+case "${1:-}" in
+  rust-system)
+    run_step "devtool rust-system" install_rust_system
+    ;;
+  rust-toolchain)
+    shift
+    run_step "devtool rust-toolchain" install_rust_toolchain "$@"
+    ;;
+  rust-tools)
+    run_step "devtool rust-tools" install_rust_tools
+    ;;
+  rust-tools-extra)
+    run_step "devtool rust-tools-extra" install_rust_tools_extra
+    ;;
+  go-tools)
+    run_step "devtool go-tools" install_go_tools
+    ;;
+  host)
+    run_step "devtools for active host" install_host_devtools
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

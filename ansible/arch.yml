@@ -1,4 +1,0 @@
-
-- hosts: local_pc
-  roles:
-    - role: arch

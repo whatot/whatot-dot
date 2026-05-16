@@ -1,0 +1,5 @@
+pkgconf
+mold
+ccache
+sccache
+rustup

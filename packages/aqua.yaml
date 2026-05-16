@@ -1,0 +1,6 @@
+# Use aqua only when a CLI must be pinned more precisely than
+# brew/pacman/mise can comfortably express.
+registries:
+  - type: standard
+    ref: v4.419.0
+packages: []

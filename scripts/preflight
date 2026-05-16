@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+dotfiles_load_private_env
+
+missing=0
+
+require_env() {
+  local name=$1
+
+  if [[ -z ${!name:-} ]]; then
+    printf "miss %s\n" "${name}" >&2
+    missing=1
+  fi
+}
+
+require_env DOTFILES_HOST
+require_env DOTFILES_GIT_NAME
+require_env DOTFILES_GIT_EMAIL
+
+if [[ ${missing} -ne 0 ]]; then
+  cat >&2 <<'EOF'
+
+Required private settings are missing.
+Create ~/.env_private or ~/.config/dotfiles/env from docs/env_private.example and fill:
+
+  DOTFILES_HOST
+  DOTFILES_GIT_NAME
+  DOTFILES_GIT_EMAIL
+EOF
+  exit 1
+fi
+
+dotfiles_host_file >/dev/null

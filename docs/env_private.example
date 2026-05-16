@@ -1,0 +1,28 @@
+# Copy this file to ~/.env_private outside chezmoi if you need local secrets.
+DOTFILES_HOST=macos-arm64
+DOTFILES_GIT_NAME=Your Name
+DOTFILES_GIT_EMAIL=you@example.com
+# USE_PROXY=false
+# PROXY_URL=http://127.0.0.1:8899
+# DOTFILES_RETRY_ATTEMPTS=3
+# DOTFILES_RETRY_DELAY=5
+# DOTFILES_MISE_CURL_RETRIES=2
+# DOTFILES_MISE_INSTALL_URL=https://mise.run
+# DOTFILES_RUSTUP_CURL_RETRIES=2
+# DOTFILES_BREW_BUNDLE_VERBOSE=true
+
+# Optional overrides for mirrors and language-specific local settings.
+# Homebrew defaults to USTC bottles and metadata API in .zshenv and scripts.
+# HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+# HOMEBREW_API_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/api
+# Rustup defaults to rsproxy in .zshenv and scripts/devtools; override only when needed.
+# RUSTUP_DIST_SERVER=https://rsproxy.cn
+# RUSTUP_UPDATE_ROOT=https://rsproxy.cn/rustup
+# DOTFILES_CARGO_BINSTALL_TIMEOUT=8
+# DOTFILES_CARGO_BINSTALL_EXTRA_ARGS=--disable-strategies quick-install
+# PUB_HOSTED_URL=https://pub.flutter-io.cn
+# FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
+# Optional Android SDK setup.
+# ANDROID_HOME=$HOME/Library/Android/sdk
+# PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools

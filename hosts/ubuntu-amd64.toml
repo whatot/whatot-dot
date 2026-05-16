@@ -1,0 +1,9 @@
+name = "ubuntu-amd64"
+os = "ubuntu"
+arch = "amd64"
+
+packages = ["base"]
+devtools = []
+
+[vim]
+profile = "minimal"

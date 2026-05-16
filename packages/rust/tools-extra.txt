@@ -1,0 +1,5 @@
+bindgen-cli
+cargo-geiger
+flamegraph
+cargo-ndk
+cargo-tarpaulin

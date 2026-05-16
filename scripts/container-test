@@ -1,0 +1,233 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+dotfiles_load_private_env
+
+usage() {
+  cat <<'EOF'
+usage: scripts/container-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [bootstrap|packages]
+
+Run the Linux bootstrap smoke test in Docker containers.
+EOF
+}
+
+log() {
+  printf "==> %s\n" "$*"
+}
+
+require_docker() {
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "docker is required. OrbStack Docker or Docker Desktop both work." >&2
+    exit 1
+  fi
+}
+
+docker_proxy_url() {
+  local url=$1
+
+  url="${url//:\/\/127.0.0.1:/:\/\/host.docker.internal:}"
+  url="${url//:\/\/localhost:/:\/\/host.docker.internal:}"
+  printf '%s\n' "${url}"
+}
+
+add_env_if_set() {
+  local name=$1
+
+  if [[ -n "${!name:-}" ]]; then
+    env_args+=(--env "${name}=${!name}")
+  fi
+}
+
+add_proxy_url_env_if_set() {
+  local name=$1
+  local value=${!name:-}
+
+  if [[ -n "${value}" ]]; then
+    env_args+=(--env "${name}=$(docker_proxy_url "${value}")")
+  fi
+}
+
+add_proxy_envs() {
+  local proxy_url
+
+  for name in HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy; do
+    add_proxy_url_env_if_set "${name}"
+  done
+  for name in NO_PROXY no_proxy; do
+    add_env_if_set "${name}"
+  done
+
+  if [[ ${USE_PROXY:-true} != "true" || -z ${PROXY_URL:-} ]]; then
+    return
+  fi
+
+  proxy_url="$(docker_proxy_url "${PROXY_URL}")"
+  env_args+=(--env "PROXY_URL=${proxy_url}")
+  [[ -n ${HTTP_PROXY:-} ]] || env_args+=(--env "HTTP_PROXY=${proxy_url}")
+  [[ -n ${HTTPS_PROXY:-} ]] || env_args+=(--env "HTTPS_PROXY=${proxy_url}")
+  [[ -n ${ALL_PROXY:-} ]] || env_args+=(--env "ALL_PROXY=${proxy_url}")
+  [[ -n ${http_proxy:-} ]] || env_args+=(--env "http_proxy=${proxy_url}")
+  [[ -n ${https_proxy:-} ]] || env_args+=(--env "https_proxy=${proxy_url}")
+  [[ -n ${all_proxy:-} ]] || env_args+=(--env "all_proxy=${proxy_url}")
+  env_args+=(--env "NO_PROXY=${NO_PROXY:-localhost,127.0.0.1,::1}")
+  env_args+=(--env "no_proxy=${no_proxy:-localhost,127.0.0.1,::1}")
+}
+
+image_for_target() {
+  case "$1" in
+    ubuntu-amd64 | ubuntu-arm64) printf "ubuntu:26.04" ;;
+    debian-amd64) printf "debian:trixie" ;;
+    arch-amd64) printf "archlinux:latest" ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+platform_for_target() {
+  case "$1" in
+    ubuntu-amd64 | debian-amd64 | arch-amd64) printf "linux/amd64" ;;
+    ubuntu-arm64) printf "linux/arm64" ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+command_for_target() {
+  local target=$1
+  local stage=$2
+
+  case "$1" in
+    ubuntu-amd64 | ubuntu-arm64 | debian-amd64)
+      cat <<'EOF'
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
+cd /workspace
+./scripts/bootstrap
+export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+mise trust
+./scripts/doctor
+chezmoi managed --source .
+EOF
+      if [[ "${stage}" == "packages" ]]; then
+        cat <<'EOF'
+./scripts/packages
+EOF
+      fi
+      ;;
+    arch-amd64)
+      cat <<'EOF'
+set -euo pipefail
+sed -i '/^DownloadUser[[:space:]]*=/d' /etc/pacman.conf
+cd /workspace
+./scripts/bootstrap
+export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+mise trust
+./scripts/doctor
+chezmoi managed --source .
+EOF
+      if [[ "${stage}" == "packages" ]]; then
+        cat <<'EOF'
+./scripts/packages
+EOF
+      fi
+      ;;
+    *)
+      echo "unsupported target: $1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+run_target() {
+  local target=$1
+  local stage=$2
+  local image platform command
+  local docker_args=()
+  local env_args=()
+  local name
+
+  require_docker
+  image=$(image_for_target "${target}")
+  platform=$(platform_for_target "${target}")
+  command=$(command_for_target "${target}" "${stage}")
+
+  if [[ "${target}" == "arch-amd64" ]]; then
+    docker_args+=(--security-opt seccomp=unconfined)
+  fi
+
+  for name in \
+    DOTFILES_UBUNTU_MIRROR \
+    DOTFILES_DEBIAN_MIRROR \
+    DOTFILES_DEBIAN_SECURITY_MIRROR \
+    DOTFILES_ARCH_MIRRORS \
+    DOTFILES_ARCH_MIRROR \
+    DOTFILES_ARCHLINUXCN_MIRRORS \
+    DOTFILES_ARCHLINUXCN_MIRROR \
+    DOTFILES_ENABLE_ARCHLINUXCN \
+    DOTFILES_RETRY_ATTEMPTS \
+    DOTFILES_RETRY_DELAY \
+    DOTFILES_MISE_CURL_RETRIES \
+    DOTFILES_MISE_INSTALL_URL; do
+    if [[ -n "${!name:-}" ]]; then
+      env_args+=(--env "${name}=${!name}")
+    fi
+  done
+  add_proxy_envs
+
+  log "run ${target} ${stage} in ${image} (${platform})"
+  docker run --rm \
+    --platform "${platform}" \
+    "${docker_args[@]}" \
+    --env "DOTFILES_HOST=${target}" \
+    --env "DOTFILES_GIT_NAME=Dotfiles Test" \
+    --env "DOTFILES_GIT_EMAIL=dotfiles-test@example.invalid" \
+    "${env_args[@]}" \
+    --volume "${ROOT_DIR}:/workspace:ro" \
+    --workdir /workspace \
+    "${image}" \
+    bash -lc "${command}"
+}
+
+target=${1:-}
+stage=${2:-bootstrap}
+
+if [[ -z "${target}" ]]; then
+  usage
+  exit 1
+fi
+
+case "${stage}" in
+  bootstrap | packages) ;;
+  *)
+    echo "unsupported stage: ${stage}" >&2
+    usage
+    exit 1
+    ;;
+esac
+
+case "${target}" in
+  all)
+    run_target ubuntu-amd64 "${stage}"
+    run_target debian-amd64 "${stage}"
+    run_target arch-amd64 "${stage}"
+    run_target ubuntu-arm64 "${stage}"
+    ;;
+  ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
+    run_target "${target}" "${stage}"
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    echo "unsupported target: ${target}" >&2
+    usage
+    exit 1
+    ;;
+esac

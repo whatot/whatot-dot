@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+dotfiles_host() {
+  if [[ -z ${DOTFILES_HOST:-} ]]; then
+    echo "missing DOTFILES_HOST" >&2
+    echo "set DOTFILES_HOST in your private env file" >&2
+    return 1
+  fi
+  printf '%s\n' "${DOTFILES_HOST}"
+}
+
+dotfiles_host_file() {
+  local host
+  host="$(dotfiles_host)"
+
+  if [[ -r "${ROOT_DIR}/hosts/${host}.toml" ]]; then
+    printf '%s\n' "${ROOT_DIR}/hosts/${host}.toml"
+  else
+    echo "unknown host: ${host}" >&2
+    echo "set DOTFILES_HOST or create hosts/${host}.toml" >&2
+    return 1
+  fi
+}
+
+dotfiles_array_from_file() {
+  local file=$1
+  local key=$2
+
+  awk -v key="${key}" '
+    $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
+      line = $0
+      sub(/^[^=]*=/, "", line)
+      gsub(/[\[\]\"]/, "", line)
+      gsub(/'\''/, "", line)
+      gsub(/[[:space:]]+/, "", line)
+      n = split(line, values, ",")
+      for (i = 1; i <= n; i++) {
+        if (values[i] != "") print values[i]
+      }
+    }
+  ' "${file}"
+}
+
+dotfiles_host_array() {
+  local key=$1
+  local file
+  file="$(dotfiles_host_file)"
+  dotfiles_array_from_file "${file}" "${key}" | awk '!seen[$0]++'
+}
+
+dotfiles_split_override() {
+  printf '%s\n' "$1" | tr ',[:space:]' '\n' | awk 'NF && !seen[$0]++'
+}
+
+dotfiles_package_sets() {
+  if [[ -n ${DOTFILES_PACKAGES:-} ]]; then
+    dotfiles_split_override "${DOTFILES_PACKAGES}"
+  else
+    dotfiles_host_array packages
+  fi
+}
+
+dotfiles_devtools() {
+  if [[ -n ${DOTFILES_DEVTOOLS:-} ]]; then
+    dotfiles_split_override "${DOTFILES_DEVTOOLS}"
+  else
+    dotfiles_host_array devtools
+  fi
+}

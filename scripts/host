@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+dotfiles_load_private_env
+
+usage() {
+  cat <<'EOF'
+usage: scripts/host <list|show> [host]
+
+Environment:
+  DOTFILES_HOST=ubuntu-amd64
+EOF
+}
+
+show_host() {
+  local host
+  host="$(dotfiles_host)"
+
+  echo "host: ${host}"
+
+  echo "package sets:"
+  dotfiles_package_sets | sed 's/^/  - /'
+
+  echo "devtools:"
+  dotfiles_devtools | sed 's/^/  - /'
+}
+
+case "${1:-}" in
+  list)
+    find "${ROOT_DIR}/hosts" -maxdepth 1 -type f -name '*.toml' -print |
+      sed 's#^.*/##; s#\.toml$##' |
+      sort
+    ;;
+  show)
+    shift
+    if [[ $# -gt 0 ]]; then
+      DOTFILES_HOST="$1"
+      export DOTFILES_HOST
+    fi
+    show_host
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

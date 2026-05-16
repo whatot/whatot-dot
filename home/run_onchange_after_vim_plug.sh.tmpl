@@ -1,0 +1,32 @@
+{{ $vim := get . "vim" | default (dict) -}}
+{{ $profile := get $vim "profile" | default "minimal" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# chezmoi reruns this when tiny.vim changes.
+# tiny.vim sha256: {{ include "dot_vim/tiny.vim" | sha256sum }}
+
+vim_profile="{{ $profile }}"
+if [[ "${vim_profile}" != "tiny" ]]; then
+  exit 0
+fi
+
+if ! command -v vim >/dev/null 2>&1; then
+  echo "vim is required to initialize the tiny Vim profile" >&2
+  exit 1
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+  echo "curl is required to install vim-plug" >&2
+  exit 1
+fi
+
+mkdir -p "${HOME}/.vim"/{plugged,sessions,undodir,autoload}
+
+plug_vim="${HOME}/.vim/autoload/plug.vim"
+if [[ ! -s "${plug_vim}" ]]; then
+  curl -fLo "${plug_vim}" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+vim -Nu "${HOME}/.vimrc" -n +'PlugInstall --sync' +qall

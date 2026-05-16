@@ -1,0 +1,210 @@
+[tools]
+bottom = "latest"
+direnv = "latest"
+dprint = "latest"
+fd = "latest"
+fzf = "latest"
+go = "latest"
+hurl = "latest"
+java = "zulu-21"
+jj = "latest"
+jq = "latest"
+kubectl = "latest"
+maven = "latest"
+node = "lts"
+pnpm = "latest"
+pre-commit = "latest"
+python = "latest"
+ripgrep = "latest"
+ruff = "latest"
+shellcheck = "latest"
+shfmt = "latest"
+terraform = "latest"
+tree-sitter = "latest"
+typst = "latest"
+tokei = "latest"
+usage = "latest"
+uv = "latest"
+wrangler = "latest"
+yq = "latest"
+zoxide = "latest"
+
+[tasks.bootstrap]
+description = "Install minimum host dependencies and apply the workstation config"
+hide = true
+run = "scripts/bootstrap"
+
+[tasks.setup]
+description = "Set up the current host"
+run = [
+  { task = "preflight" },
+  "mise install",
+  { task = "packages" },
+  { task = "devtools:host" },
+  { task = "chezmoi:apply" },
+  { task = "doctor" },
+]
+
+[tasks.refresh]
+description = "Refresh dotfiles and mise-managed tools"
+run = [
+  { task = "preflight" },
+  "mise install",
+  { task = "chezmoi:apply" },
+  { task = "doctor" },
+]
+
+[tasks.check]
+description = "Run local checks before committing"
+run = [
+  { task = "preflight" },
+  "scripts/check",
+  { task = "chezmoi:diff" },
+  { task = "hooks:run" },
+  { task = "doctor" },
+]
+
+[tasks.status]
+description = "Show active host and pending dotfile changes"
+run = [
+  { task = "preflight" },
+  { task = "host" },
+  { task = "chezmoi:diff" },
+]
+
+[tasks.test]
+description = "Run fast Linux smoke tests"
+run = [{ task = "test:container" }]
+
+[tasks."test:vm"]
+description = "Run OrbStack Linux smoke tests"
+run = [{ task = "test:orbstack" }]
+
+[tasks."chezmoi:apply"]
+description = "Apply chezmoi-managed dotfiles"
+run = "scripts/chezmoi apply"
+
+[tasks.preflight]
+description = "Check required private settings"
+hide = true
+run = "scripts/preflight"
+
+[tasks."chezmoi:diff"]
+description = "Preview chezmoi-managed dotfile changes"
+run = "scripts/chezmoi diff"
+
+[tasks.doctor]
+description = "Check required workstation tools"
+run = "scripts/doctor"
+
+[tasks."hooks:install"]
+description = "Install git pre-commit hooks"
+run = "pre-commit install"
+
+[tasks."hooks:run"]
+description = "Run pre-commit hooks on all files"
+hide = true
+run = "pre-commit run --all-files"
+
+[tasks.host]
+description = "Show active dotfiles host and resolved actions"
+run = "scripts/host show"
+
+[tasks."test:container"]
+description = "Smoke-test Linux bootstrap in Docker containers"
+hide = true
+run = "scripts/container-test all"
+
+[tasks."test:container:packages"]
+description = "Smoke-test container-safe Linux package sets"
+hide = true
+run = "scripts/container-test all packages"
+
+[tasks."test:container:arch"]
+description = "Smoke-test Arch amd64 bootstrap in a Docker container"
+hide = true
+run = "scripts/container-test arch-amd64"
+
+[tasks."test:container:debian"]
+description = "Smoke-test Debian 13 amd64 bootstrap in a Docker container"
+hide = true
+run = "scripts/container-test debian-amd64"
+
+[tasks."test:container:ubuntu"]
+description = "Smoke-test Ubuntu LTS amd64 bootstrap in a Docker container"
+hide = true
+run = "scripts/container-test ubuntu-amd64"
+
+[tasks."test:container:ubuntu-arm64"]
+description = "Smoke-test Ubuntu LTS arm64 bootstrap in a Docker container"
+hide = true
+run = "scripts/container-test ubuntu-arm64"
+
+[tasks."test:orbstack"]
+description = "Smoke-test Linux bootstrap in OrbStack machines"
+hide = true
+run = "scripts/orbstack-test all"
+
+[tasks."test:orbstack:arch"]
+description = "Smoke-test Arch amd64 bootstrap in an OrbStack machine"
+hide = true
+run = "scripts/orbstack-test arch-amd64"
+
+[tasks."test:orbstack:debian"]
+description = "Smoke-test Debian 13 amd64 bootstrap in an OrbStack machine"
+hide = true
+run = "scripts/orbstack-test debian-amd64"
+
+[tasks."test:orbstack:ubuntu"]
+description = "Smoke-test Ubuntu LTS amd64 bootstrap in an OrbStack machine"
+hide = true
+run = "scripts/orbstack-test ubuntu-amd64"
+
+[tasks."test:orbstack:ubuntu-arm64"]
+description = "Smoke-test Ubuntu LTS arm64 bootstrap in an OrbStack machine"
+hide = true
+run = "scripts/orbstack-test ubuntu-arm64"
+
+[tasks.packages]
+description = "Install packages for the current operating system"
+run = "scripts/packages"
+
+[tasks.update]
+description = "Update packages, mise tools, and chezmoi state"
+run = "scripts/update"
+
+[tasks."devtools:rust-system"]
+description = "Install system packages commonly needed by Rust builds"
+run = "scripts/devtools rust-system"
+
+[tasks."devtools:rust-toolchain"]
+description = "Ensure the default Rust toolchain is installed"
+run = "scripts/devtools rust-toolchain"
+
+[tasks."devtools:rust-tools"]
+description = "Install Rust CLI development tools"
+run = "scripts/devtools rust-tools"
+
+[tasks."devtools:rust-tools-extra"]
+description = "Install heavier Rust CLI development tools"
+run = "scripts/devtools rust-tools-extra"
+
+[tasks."devtools:go-tools"]
+description = "Install Go CLI development tools"
+run = "scripts/devtools go-tools"
+
+[tasks."devtools:host"]
+description = "Install development tools enabled by the active host"
+run = "scripts/devtools host"
+
+[tasks."tools:create-iso"]
+description = "Convert a macOS Disk Utility dmg into iso and checksum"
+run = "scripts/create-iso"
+
+[tasks."tools:mvn-cleanup"]
+description = "Run offline mvn clean for child Maven projects"
+run = "scripts/mvn-cleanup"
+
+[tasks."tools:git-upgrade"]
+description = "Update child git or hg repositories"
+run = "scripts/git-upgrade"

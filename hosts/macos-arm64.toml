@@ -1,0 +1,12 @@
+name = "macos-arm64"
+os = "macos"
+arch = "arm64"
+
+packages = ["base", "desktop", "dev"]
+devtools = ["rust-toolchain", "rust-tools", "go-tools"]
+
+[vim]
+profile = "tiny"
+
+[ghostty]
+font_size = 14

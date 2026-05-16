@@ -1,0 +1,23 @@
+repos:
+  - repo: local
+    hooks:
+      - id: shellcheck
+        name: shellcheck
+        entry: mise exec -- shellcheck -x
+        language: system
+        types: [shell]
+      - id: shfmt
+        name: shfmt
+        entry: mise exec -- shfmt -w -i 2 -ci
+        language: system
+        types: [shell]
+      - id: shfmt-zshenv
+        name: shfmt zshenv
+        entry: mise exec -- shfmt -w -i 2 -ci
+        language: system
+        files: ^home/dot_zshenv\.tmpl$
+      - id: dprint
+        name: dprint
+        entry: mise exec -- dprint fmt
+        language: system
+        types_or: [json, yaml, markdown, toml]

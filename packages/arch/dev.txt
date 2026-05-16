@@ -1,0 +1,9 @@
+bridge-utils
+discount
+dnsmasq
+gnuplot
+nushell
+plantuml
+podman-compose
+podman-docker
+postgresql

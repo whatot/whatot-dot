@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+dotfiles_load_private_env() {
+  local file key value
+  local files=()
+
+  if [[ -n ${DOTFILES_ENV_FILE:-} ]]; then
+    files+=("${DOTFILES_ENV_FILE}")
+  else
+    files+=("${HOME}/.config/dotfiles/env" "${HOME}/.dotfiles.env" "${HOME}/.env_private")
+  fi
+
+  for file in "${files[@]}"; do
+    [[ -r "${file}" ]] || continue
+    while IFS='=' read -r key value; do
+      [[ -z "${key}" || "${key}" == \#* ]] && continue
+      key="${key#"${key%%[![:space:]]*}"}"
+      key="${key%"${key##*[![:space:]]}"}"
+      value="${value#"${value%%[![:space:]]*}"}"
+      value="${value%"${value##*[![:space:]]}"}"
+      value="${value%\"}"
+      value="${value#\"}"
+      value="${value%\'}"
+      value="${value#\'}"
+      [[ "${key}" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+      if [[ ${!key+x} == x ]]; then
+        continue
+      fi
+      export "${key}=${value}"
+    done <"${file}"
+  done
+}

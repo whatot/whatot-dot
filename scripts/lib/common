@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+log() {
+  printf '[%s] %s\n' "${DOTFILES_LOG_PREFIX:-dotfiles}" "$*"
+}
+
+run_step() {
+  local title=$1
+  shift
+  local start=${SECONDS}
+
+  log "start: ${title}"
+  "$@"
+  log "done: ${title} ($((SECONDS - start))s)"
+}
+
+run_step_retry() {
+  local title=$1
+  shift
+  local attempts=${DOTFILES_RETRY_ATTEMPTS:-3}
+  local delay=${DOTFILES_RETRY_DELAY:-5}
+  local attempt start
+
+  for ((attempt = 1; attempt <= attempts; attempt++)); do
+    start=${SECONDS}
+    log "start: ${title} (attempt ${attempt}/${attempts})"
+    if "$@"; then
+      log "done: ${title} ($((SECONDS - start))s)"
+      return 0
+    fi
+    log "warn: ${title} failed ($((SECONDS - start))s)"
+    if ((attempt < attempts)); then
+      log "retry: ${title} in ${delay}s"
+      sleep "${delay}"
+    fi
+  done
+
+  log "error: ${title} failed after ${attempts} attempts"
+  return 1
+}
+
+run_step_allow_fail() {
+  local title=$1
+  shift
+  local start=${SECONDS}
+
+  log "start: ${title}"
+  if "$@"; then
+    log "done: ${title} ($((SECONDS - start))s)"
+  else
+    log "warn: ${title} failed ($((SECONDS - start))s)"
+  fi
+}
+
+init_sudo_cmd() {
+  sudo_cmd=(sudo)
+  if [[ ${EUID} -eq 0 ]]; then
+    sudo_cmd=()
+  fi
+}
+
+backup_file() {
+  local file_path=$1
+
+  if [[ -f "${file_path}" && ! -f "${file_path}.bak" ]]; then
+    "${sudo_cmd[@]}" cp "${file_path}" "${file_path}.bak"
+  fi
+}
+
+write_sources_list() {
+  local file_path=$1
+  shift
+
+  backup_file "${file_path}"
+  printf "%s\n" "$@" | "${sudo_cmd[@]}" tee "${file_path}" >/dev/null
+}
+
+install_mise_from_installer() {
+  local attempt
+  local attempts=${DOTFILES_RETRY_ATTEMPTS:-3}
+  local curl_retries=${DOTFILES_MISE_CURL_RETRIES:-2}
+  local delay=${DOTFILES_RETRY_DELAY:-5}
+  local installer_url=${DOTFILES_MISE_INSTALL_URL:-https://mise.run}
+  local start
+
+  if command -v mise >/dev/null 2>&1; then
+    log "found mise: $(command -v mise)"
+    return
+  fi
+
+  for ((attempt = 1; attempt <= attempts; attempt++)); do
+    start=${SECONDS}
+    log "start: mise installer ${installer_url} (attempt ${attempt}/${attempts})"
+    if curl --http1.1 \
+      --retry "${curl_retries}" \
+      --retry-all-errors \
+      --retry-delay "${delay}" \
+      -fsSL "${installer_url}" | sh; then
+      log "done: mise installer ($((SECONDS - start))s)"
+      return
+    fi
+    if [[ -x "${HOME}/.local/bin/mise" ]]; then
+      log "done: mise installer left usable binary at ${HOME}/.local/bin/mise"
+      return
+    fi
+    log "warn: mise installer failed ($((SECONDS - start))s)"
+    if ((attempt < attempts)); then
+      log "retry: mise installer in ${delay}s"
+      sleep "${delay}"
+    fi
+  done
+
+  echo "mise installer failed" >&2
+  exit 1
+}

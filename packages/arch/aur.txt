@@ -1,0 +1,4 @@
+bruno-bin
+nautilus-nutstore
+wechat-bin
+qqmusic-bin

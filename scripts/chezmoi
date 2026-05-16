@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/common
+source "${ROOT_DIR}/scripts/lib/common"
+dotfiles_load_private_env
+
+usage() {
+  cat <<'EOF'
+usage: scripts/chezmoi <command> [args...]
+
+commands:
+  apply  apply chezmoi-managed dotfiles
+  diff   preview chezmoi-managed dotfile changes
+EOF
+}
+
+apply_dotfiles() {
+  local host_data_file
+
+  log "check required private settings"
+  "${ROOT_DIR}/scripts/preflight"
+  host_data_file="$(dotfiles_host_file)"
+
+  log "apply chezmoi source: ${ROOT_DIR}"
+  chezmoi apply --source "${ROOT_DIR}" --override-data-file "${host_data_file}" "$@"
+}
+
+diff_dotfiles() {
+  local host_data_file
+
+  "${ROOT_DIR}/scripts/preflight" >/dev/null
+  host_data_file="$(dotfiles_host_file)"
+  chezmoi diff --source "${ROOT_DIR}" --override-data-file "${host_data_file}" "$@"
+}
+
+case "${1:-}" in
+  apply)
+    shift
+    apply_dotfiles "$@"
+    ;;
+  diff)
+    shift
+    diff_dotfiles "$@"
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/common
+source "${ROOT_DIR}/scripts/lib/common"
+dotfiles_load_private_env
+
+export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
+export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
+export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
+brew_bundle_args=()
+
+if [[ ${DOTFILES_BREW_BUNDLE_VERBOSE:-true} == "true" ]]; then
+  brew_bundle_args+=(--verbose)
+fi
+
+init_sudo_cmd
+
+read_package_set_files() {
+  local package_dir=$1
+  local package_set package_file
+
+  while IFS= read -r package_set; do
+    [[ -n "${package_set}" ]] || continue
+    package_file="${package_dir}/${package_set}.txt"
+    if [[ -f "${package_file}" ]]; then
+      cat "${package_file}"
+    else
+      echo "unknown package set: ${package_set}" >&2
+      exit 1
+    fi
+  done < <(dotfiles_package_sets) | awk 'NF && $1 !~ /^#/ { print }' | sort -u
+}
+
+install_linux_packages() {
+  local installer=("$@")
+  local packages
+  local count
+
+  packages="$(read_package_set_files "${package_dir}")"
+  [[ -n "${packages}" ]] || return
+  count=$(printf '%s\n' "${packages}" | wc -l | tr -d ' ')
+  log "install ${count} packages from ${package_dir}"
+  printf '%s\n' "${packages}" | xargs "${installer[@]}"
+}
+
+install_brew_package_sets() {
+  local package_set package_file
+
+  while IFS= read -r package_set; do
+    [[ -n "${package_set}" ]] || continue
+    package_file="${ROOT_DIR}/packages/macos/${package_set}.Brewfile"
+    if [[ -f "${package_file}" ]]; then
+      run_step_retry "brew bundle packages/macos/${package_set}.Brewfile" \
+        brew bundle "${brew_bundle_args[@]}" --file "${package_file}"
+    else
+      echo "unknown package set: ${package_set}" >&2
+      exit 1
+    fi
+  done < <(dotfiles_package_sets)
+}
+
+case "$(uname -s)" in
+  Darwin)
+    install_brew_package_sets
+    ;;
+  Linux)
+    if [[ -r /etc/os-release ]]; then
+      # shellcheck disable=SC1091
+      . /etc/os-release
+    else
+      echo "unsupported linux: missing /etc/os-release" >&2
+      exit 1
+    fi
+
+    case "${ID:-}" in
+      arch | manjaro)
+        package_dir="${ROOT_DIR}/packages/arch"
+        install_linux_packages "${sudo_cmd[@]}" pacman -S --needed --noconfirm
+        if [[ ${DOTFILES_ENABLE_ARCHLINUXCN:-true} == "true" ]]; then
+          xargs "${sudo_cmd[@]}" pacman -S --needed --noconfirm <"${ROOT_DIR}/packages/arch/archlinuxcn.txt"
+        fi
+        if command -v paru >/dev/null 2>&1; then
+          xargs paru -S --needed <"${ROOT_DIR}/packages/arch/aur.txt"
+        elif command -v yay >/dev/null 2>&1; then
+          xargs yay -S --needed <"${ROOT_DIR}/packages/arch/aur.txt"
+        else
+          echo "skip AUR packages: install paru or yay first" >&2
+        fi
+        ;;
+      ubuntu)
+        package_dir="${ROOT_DIR}/packages/ubuntu"
+        install_linux_packages "${sudo_cmd[@]}" apt install -y
+        ;;
+      debian)
+        package_dir="${ROOT_DIR}/packages/debian"
+        install_linux_packages "${sudo_cmd[@]}" apt install -y
+        ;;
+      *)
+        echo "unsupported linux distribution: ${ID:-unknown}" >&2
+        exit 1
+        ;;
+    esac
+    ;;
+  *)
+    echo "unsupported os: $(uname -s)" >&2
+    exit 1
+    ;;
+esac

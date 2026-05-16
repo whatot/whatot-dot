@@ -1,0 +1,10 @@
+" managed by chezmoi
+
+{{ $vim := get . "vim" | default (dict) -}}
+let g:dotfiles_vim_profile = '{{ get $vim "profile" | default "minimal" }}'
+
+if g:dotfiles_vim_profile ==# 'tiny'
+  source ~/.vim/tiny.vim
+else
+  source ~/.vim/minimal.vim
+endif

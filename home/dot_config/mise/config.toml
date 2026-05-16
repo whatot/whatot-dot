@@ -1,0 +1,12 @@
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
+
+# Tool-specific mirrors.
+node.mirror_url = "https://npmmirror.com/mirrors/node"
+go.download_mirror = "https://golang.google.cn/dl"
+
+# Generic download URL rewrites. Keep this conservative: broad GitHub
+# replacements can break checksums, API calls, or authenticated downloads.
+[settings.url_replacements]
+"https://nodejs.org/dist" = "https://npmmirror.com/mirrors/node"
+"https://dl.google.com/go" = "https://golang.google.cn/dl"

@@ -1,0 +1,11 @@
+sccache
+cargo-outdated
+cargo-bloat
+cargo-generate
+cargo-edit
+cargo-audit
+cargo-deny
+tealdeer
+toml2json
+bacon
+cargo-llvm-cov
