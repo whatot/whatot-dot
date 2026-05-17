@@ -79,7 +79,7 @@ setup_completion() {
 
 setup_tool_hooks() {
   if is_command mise; then
-    eval "$(mise activate zsh --quiet)"
+    eval "$(mise activate zsh --quiet --shims)"
     if is_command usage; then
       source_if_exists <(mise completion zsh)
     fi

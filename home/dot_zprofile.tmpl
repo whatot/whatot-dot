@@ -1,0 +1,30 @@
+# Re-apply our preferred PATH order after macOS path_helper runs in /etc/zprofile.
+if [[ -r "${HOME}/.zshenv" ]]; then
+  source "${HOME}/.zshenv"
+fi
+
+path_append_if_dir() {
+  local entry=$1
+
+  [[ -d "${entry}" ]] || return
+  case ":${PATH:-}:" in
+    *":${entry}:"*) ;;
+    *) export PATH="${PATH:+${PATH}:}${entry}" ;;
+  esac
+}
+
+fpath_append_if_dir() {
+  local entry=$1
+
+  [[ -d "${entry}" ]] || return
+  fpath=("${(@)fpath:#${entry}}" "${entry}")
+}
+
+path_append_if_dir "${HOME}/.orbstack/bin"
+
+if [[ -o interactive ]]; then
+  fpath_append_if_dir "/Applications/OrbStack.app/Contents/Resources/completions/zsh"
+fi
+
+unset -f path_append_if_dir
+unset -f fpath_append_if_dir

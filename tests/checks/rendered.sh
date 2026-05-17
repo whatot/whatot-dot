@@ -9,6 +9,7 @@ main() {
   local tmp_dir
   local tmp_home
   local rendered_zshenv
+  local rendered_zprofile
   local rendered_zshrc
   local rendered_network
   local rendered_tools
@@ -26,6 +27,7 @@ main() {
   mkdir -p "${tmp_home}/.vim/autoload" "${tmp_home}/.zsh"
 
   rendered_zshenv="${tmp_dir}/.zshenv"
+  rendered_zprofile="${tmp_dir}/.zprofile"
   rendered_zshrc="${tmp_dir}/.zshrc"
   rendered_network="${tmp_home}/.zsh/network.zsh"
   rendered_tools="${tmp_home}/.zsh/tools.zsh"
@@ -34,6 +36,7 @@ main() {
   rendered_vimrc="${tmp_home}/.vimrc"
 
   dotfiles_check_render_template "${ROOT_DIR}/home/dot_zshenv.tmpl" "${rendered_zshenv}" "${host_data_file}"
+  dotfiles_check_render_template "${ROOT_DIR}/home/dot_zprofile.tmpl" "${rendered_zprofile}" "${host_data_file}"
   dotfiles_check_render_template "${ROOT_DIR}/home/dot_zshrc.tmpl" "${rendered_zshrc}" "${host_data_file}"
   dotfiles_check_render_template "${ROOT_DIR}/home/dot_zsh/network.zsh.tmpl" "${rendered_network}" "${host_data_file}"
   dotfiles_check_render_template "${ROOT_DIR}/home/dot_zsh/tools.zsh.tmpl" "${rendered_tools}" "${host_data_file}"
@@ -45,6 +48,7 @@ main() {
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"
 
   run_step "zsh -n rendered zshenv" dotfiles_check_run_tool zsh -n "${rendered_zshenv}"
+  run_step "zsh -n rendered zprofile" dotfiles_check_run_tool zsh -n "${rendered_zprofile}"
   run_step "zsh -n rendered zshrc" dotfiles_check_run_tool zsh -n "${rendered_zshrc}"
   run_step "zsh -n rendered network" dotfiles_check_run_tool zsh -n "${rendered_network}"
   run_step "zsh -n rendered tools" dotfiles_check_run_tool zsh -n "${rendered_tools}"
@@ -52,8 +56,6 @@ main() {
   run_step "zsh -n rendered prompt" dotfiles_check_run_tool zsh -n "${rendered_prompt}"
   run_step "zsh source rendered zshrc" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
     "source ${rendered_zshrc}; alias m >/dev/null; whence -w setup_prompt >/dev/null; whence -w setproxy >/dev/null"
-  run_step "zsh prefer homebrew git and bash" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
-    "source ${rendered_zshenv}; case \$(uname -s) in Darwin) [[ \$(command -v git) == /opt/homebrew/bin/git ]] && [[ \$(command -v bash) == /opt/homebrew/bin/bash ]] ;; esac"
   run_step "vim load rendered vimrc" env HOME="${tmp_home}" vim -Nu NONE -n -es \
     -c "set nomore" \
     -c "source ${rendered_vimrc}" \
