@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+
+dotfiles_test_targets() {
+  printf '%s\n' \
+    ubuntu-amd64 \
+    debian-amd64 \
+    arch-amd64 \
+    ubuntu-arm64
+}
+
+dotfiles_test_forwarded_env_names() {
+  printf '%s\n' \
+    DOTFILES_UBUNTU_MIRROR \
+    DOTFILES_DEBIAN_MIRROR \
+    DOTFILES_DEBIAN_SECURITY_MIRROR \
+    DOTFILES_ARCH_MIRRORS \
+    DOTFILES_ARCH_MIRROR \
+    DOTFILES_ARCHLINUXCN_MIRRORS \
+    DOTFILES_ARCHLINUXCN_MIRROR \
+    DOTFILES_ENABLE_ARCHLINUXCN \
+    DOTFILES_RETRY_ATTEMPTS \
+    DOTFILES_RETRY_DELAY \
+    DOTFILES_MISE_CURL_RETRIES \
+    DOTFILES_MISE_INSTALL_URL
+}
+
+dotfiles_test_image_for_target() {
+  case "$1" in
+    ubuntu-amd64 | ubuntu-arm64)
+      printf 'ubuntu:26.04\n'
+      ;;
+    debian-amd64)
+      printf 'debian:trixie\n'
+      ;;
+    arch-amd64)
+      printf 'archlinux:latest\n'
+      ;;
+    *)
+      echo "unsupported target: $1" >&2
+      return 1
+      ;;
+  esac
+}
+
+dotfiles_test_platform_for_target() {
+  case "$1" in
+    ubuntu-amd64 | debian-amd64 | arch-amd64)
+      printf 'linux/amd64\n'
+      ;;
+    ubuntu-arm64)
+      printf 'linux/arm64\n'
+      ;;
+    *)
+      echo "unsupported target: $1" >&2
+      return 1
+      ;;
+  esac
+}
+
+dotfiles_test_machine_for_target() {
+  printf 'dotfiles-%s\n' "$1"
+}
+
+dotfiles_test_distro_for_target() {
+  case "$1" in
+    ubuntu-amd64 | ubuntu-arm64)
+      printf 'ubuntu:resolute\n'
+      ;;
+    debian-amd64)
+      printf 'debian:trixie\n'
+      ;;
+    arch-amd64)
+      printf 'arch\n'
+      ;;
+    *)
+      echo "unsupported target: $1" >&2
+      return 1
+      ;;
+  esac
+}
+
+dotfiles_test_arch_for_target() {
+  case "$1" in
+    ubuntu-amd64 | debian-amd64 | arch-amd64)
+      printf 'amd64\n'
+      ;;
+    ubuntu-arm64)
+      printf 'arm64\n'
+      ;;
+    *)
+      echo "unsupported target: $1" >&2
+      return 1
+      ;;
+  esac
+}
+
+dotfiles_test_smoke_script() {
+  local target=$1
+  local stage=${2:-bootstrap}
+
+  case "${target}" in
+    arch-amd64)
+      cat <<'EOF'
+set -euo pipefail
+sed -i '/^DownloadUser[[:space:]]*=/d' /etc/pacman.conf
+cd /workspace
+./scripts/bootstrap
+export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+mise trust
+./scripts/doctor
+chezmoi managed --source .
+EOF
+      ;;
+    ubuntu-amd64 | ubuntu-arm64 | debian-amd64)
+      cat <<'EOF'
+set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
+cd /workspace
+./scripts/bootstrap
+export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
+mise trust
+./scripts/doctor
+chezmoi managed --source .
+EOF
+      ;;
+    *)
+      echo "unsupported target: ${target}" >&2
+      return 1
+      ;;
+  esac
+
+  if [[ "${stage}" == "packages" ]]; then
+    printf '%s\n' './scripts/packages'
+  fi
+}

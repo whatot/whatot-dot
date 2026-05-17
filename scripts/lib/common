@@ -59,6 +59,16 @@ init_sudo_cmd() {
   fi
 }
 
+run_apt_update_once() {
+  if [[ ${DOTFILES_APT_UPDATED:-} == 1 ]]; then
+    log "skip: apt update already refreshed in this process"
+    return 0
+  fi
+
+  run_step "apt update" "${sudo_cmd[@]}" apt update
+  export DOTFILES_APT_UPDATED=1
+}
+
 backup_file() {
   local file_path=$1
 

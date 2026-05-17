@@ -5,28 +5,44 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 
 # shellcheck source=scripts/lib/env
 source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
 # shellcheck source=scripts/lib/common
 source "${ROOT_DIR}/scripts/lib/common"
 dotfiles_load_private_env
+init_sudo_cmd
 
 update_os_packages() {
-  case "$(uname -s)" in
+  local kernel_name
+  local linux_id
+
+  kernel_name="$(dotfiles_kernel_name)"
+
+  case "${kernel_name}" in
     Darwin)
       run_step "brew update" brew update
       run_step "install package sets" "${ROOT_DIR}/scripts/packages"
       run_step "brew cleanup" brew cleanup
       ;;
     Linux)
-      if command -v pacman >/dev/null 2>&1; then
-        run_step "pacman system upgrade" sudo pacman -Syu --noconfirm
-      elif command -v apt >/dev/null 2>&1; then
-        run_step "apt update" sudo apt update
-        run_step "apt upgrade" sudo apt upgrade -y
-      fi
+      linux_id="$(dotfiles_linux_release_id)"
+      case "${linux_id}" in
+        arch | manjaro)
+          run_step "pacman system upgrade" "${sudo_cmd[@]}" pacman -Syu --noconfirm
+          ;;
+        ubuntu | debian)
+          run_apt_update_once
+          run_step "apt upgrade" "${sudo_cmd[@]}" apt upgrade -y
+          ;;
+        *)
+          echo "unsupported linux distribution: ${linux_id}" >&2
+          exit 1
+          ;;
+      esac
       run_step "install package sets" "${ROOT_DIR}/scripts/packages"
       ;;
     *)
-      echo "unsupported os: $(uname -s)" >&2
+      echo "unsupported os: ${kernel_name}" >&2
       exit 1
       ;;
   esac

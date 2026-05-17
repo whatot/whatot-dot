@@ -6,6 +6,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 source "${ROOT_DIR}/scripts/lib/env"
 # shellcheck source=scripts/lib/plan
 source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
 dotfiles_load_private_env
 
 missing=0
@@ -39,17 +41,12 @@ else
   missing=1
 fi
 
-case "$(uname -s)" in
+case "$(dotfiles_kernel_name)" in
   Darwin)
     check_command brew
     ;;
   Linux)
-    if [[ -r /etc/os-release ]]; then
-      # shellcheck disable=SC1091
-      . /etc/os-release
-    fi
-
-    case "${ID:-}" in
+    case "$(dotfiles_linux_release_id)" in
       arch | manjaro)
         check_command pacman
         ;;
@@ -57,7 +54,7 @@ case "$(uname -s)" in
         check_command apt
         ;;
       *)
-        printf "warn unsupported linux distribution: %s\n" "${ID:-unknown}"
+        printf "warn unsupported linux distribution: %s\n" "$(dotfiles_linux_release_id)"
         ;;
     esac
     ;;

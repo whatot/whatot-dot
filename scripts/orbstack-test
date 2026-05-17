@@ -2,6 +2,11 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/test-targets
+source "${ROOT_DIR}/scripts/lib/test-targets"
+dotfiles_load_private_env
 
 usage() {
   cat <<'EOF'
@@ -32,42 +37,6 @@ require_orbstack() {
   fi
 }
 
-machine_for_target() {
-  case "$1" in
-    ubuntu-amd64) printf "dotfiles-ubuntu-amd64" ;;
-    debian-amd64) printf "dotfiles-debian-amd64" ;;
-    arch-amd64) printf "dotfiles-arch-amd64" ;;
-    ubuntu-arm64) printf "dotfiles-ubuntu-arm64" ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
-distro_for_target() {
-  case "$1" in
-    ubuntu-amd64 | ubuntu-arm64) printf "ubuntu:resolute" ;;
-    debian-amd64) printf "debian:trixie" ;;
-    arch-amd64) printf "arch" ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
-arch_for_target() {
-  case "$1" in
-    ubuntu-amd64 | debian-amd64 | arch-amd64) printf "amd64" ;;
-    ubuntu-arm64) printf "arm64" ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
 machine_exists() {
   local machine=$1
   orbctl info "${machine}" >/dev/null 2>&1
@@ -85,9 +54,9 @@ ensure_machine() {
   local target=$1
   local machine distro arch
 
-  machine=$(machine_for_target "${target}")
-  distro=$(distro_for_target "${target}")
-  arch=$(arch_for_target "${target}")
+  machine=$(dotfiles_test_machine_for_target "${target}")
+  distro=$(dotfiles_test_distro_for_target "${target}")
+  arch=$(dotfiles_test_arch_for_target "${target}")
 
   if machine_exists "${machine}"; then
     log "reuse ${machine}"
@@ -110,6 +79,7 @@ sync_repo() {
 run_smoke_test() {
   local machine=$1
   local target=$2
+  local script
   local name
   local env_args=(
     "DOTFILES_HOST=${target}"
@@ -117,34 +87,15 @@ run_smoke_test() {
     "DOTFILES_GIT_EMAIL=dotfiles-test@example.invalid"
   )
 
-  for name in \
-    DOTFILES_UBUNTU_MIRROR \
-    DOTFILES_DEBIAN_MIRROR \
-    DOTFILES_DEBIAN_SECURITY_MIRROR \
-    DOTFILES_ARCH_MIRRORS \
-    DOTFILES_ARCH_MIRROR \
-    DOTFILES_ARCHLINUXCN_MIRRORS \
-    DOTFILES_ARCHLINUXCN_MIRROR \
-    DOTFILES_ENABLE_ARCHLINUXCN \
-    DOTFILES_RETRY_ATTEMPTS \
-    DOTFILES_RETRY_DELAY \
-    DOTFILES_MISE_CURL_RETRIES \
-    DOTFILES_MISE_INSTALL_URL; do
+  while IFS= read -r name; do
     if [[ -n "${!name:-}" ]]; then
       env_args+=("${name}=${!name}")
     fi
-  done
+  done < <(dotfiles_test_forwarded_env_names)
+  script="$(dotfiles_test_smoke_script "${target}" bootstrap)"
 
   log "run bootstrap smoke test on ${machine}"
-  # shellcheck disable=SC2016
-  orbctl run -m "${machine}" --workdir dotfiles-test env "${env_args[@]}" bash -lc '
-    set -euo pipefail
-    ./scripts/bootstrap
-    export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-    mise trust
-    ./scripts/doctor
-    chezmoi managed --source .
-  '
+  orbctl run -m "${machine}" --workdir dotfiles-test env "${env_args[@]}" bash -lc "${script}"
 }
 
 run_target() {
@@ -153,7 +104,7 @@ run_target() {
   local machine
 
   require_orbstack
-  machine=$(machine_for_target "${target}")
+  machine=$(dotfiles_test_machine_for_target "${target}")
 
   if [[ "${reset}" == "true" ]]; then
     delete_machine "${machine}"
@@ -193,10 +144,9 @@ done
 
 case "${target}" in
   all)
-    run_target ubuntu-amd64 "${reset}"
-    run_target debian-amd64 "${reset}"
-    run_target arch-amd64 "${reset}"
-    run_target ubuntu-arm64 "${reset}"
+    while IFS= read -r resolved_target; do
+      run_target "${resolved_target}" "${reset}"
+    done < <(dotfiles_test_targets)
     ;;
   ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
     run_target "${target}" "${reset}"

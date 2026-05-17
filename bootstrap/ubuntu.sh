@@ -3,30 +3,23 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 DOTFILES_LOG_PREFIX=bootstrap:ubuntu
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
 # shellcheck source=scripts/lib/common
 source "${ROOT_DIR}/scripts/lib/common"
 init_sudo_cmd
 
 apply_apt_mirror() {
-  if [[ -r /etc/os-release ]]; then
-    # shellcheck disable=SC1091
-    . /etc/os-release
-  else
-    echo "unsupported ubuntu: missing /etc/os-release" >&2
+  local linux_id
+  local codename
+
+  linux_id="$(dotfiles_linux_release_id)"
+  if [[ "${linux_id}" != "ubuntu" ]]; then
+    echo "unsupported ubuntu bootstrap target: ${linux_id}" >&2
     exit 1
   fi
 
-  if [[ ${ID:-} != "ubuntu" ]]; then
-    echo "unsupported ubuntu bootstrap target: ${ID:-unknown}" >&2
-    exit 1
-  fi
-
-  local codename=${VERSION_CODENAME:-}
-  if [[ -z "${codename}" ]]; then
-    echo "unsupported ubuntu: missing VERSION_CODENAME" >&2
-    exit 1
-  fi
-
+  codename="$(dotfiles_linux_release_codename)"
   local mirror=${DOTFILES_UBUNTU_MIRROR:-http://mirrors.ustc.edu.cn/ubuntu}
   local components="main restricted universe multiverse"
   local suites=("${codename}" "${codename}-updates" "${codename}-backports" "${codename}-security")
@@ -51,7 +44,7 @@ apply_apt_mirror() {
 
 apply_apt_mirror
 
-run_step "apt update" "${sudo_cmd[@]}" apt update
+run_apt_update_once
 run_step "apt install init packages" "${sudo_cmd[@]}" apt install -y ca-certificates curl git gnupg zsh vim
 
 if ! command -v chezmoi >/dev/null 2>&1; then

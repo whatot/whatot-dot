@@ -106,19 +106,33 @@ unsetproxy() {
 }
 
 setproxy() {
-  local url
+  local url host_port port no_proxy_list
 
   unsetproxy
   [[ ${USE_PROXY:-true} == "true" ]] || return
 
   url=${PROXY_URL:-http://127.0.0.1:8899}
-  PROXY_HOST=$(echo "${url}" | awk -F'://|:' '{print $2}')
-  PROXY_PORT=$(echo "${url}" | awk -F'://|:' '{print $3}')
+  host_port=${url#*://}
+  host_port=${host_port%%/*}
+  PROXY_HOST=${host_port%:*}
+  port=${host_port##*:}
+  if [[ "${port}" == "${host_port}" ]]; then
+    PROXY_PORT=
+  else
+    PROXY_PORT=${port}
+  fi
+
+  no_proxy_list=${NO_PROXY_LIST:-localhost,127.0.0.1,::1,10.0.0.0/8,192.168.0.0/16}
+
   export PROXY_HOST PROXY_PORT
-  export NO_PROXY="^\\(localhost\\|10\\..*\\|192\\.168\\..*\\)"
   export ALL_PROXY="${url}"
   export HTTP_PROXY="${url}"
   export HTTPS_PROXY="${url}"
+  export all_proxy="${url}"
+  export http_proxy="${url}"
+  export https_proxy="${url}"
+  export NO_PROXY="${no_proxy_list}"
+  export no_proxy="${no_proxy_list}"
 }
 
 proxyinfo() {

@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 # shellcheck source=scripts/lib/env
 source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/test-targets
+source "${ROOT_DIR}/scripts/lib/test-targets"
 dotfiles_load_private_env
 
 usage() {
@@ -76,75 +78,6 @@ add_proxy_envs() {
   env_args+=(--env "no_proxy=${no_proxy:-localhost,127.0.0.1,::1}")
 }
 
-image_for_target() {
-  case "$1" in
-    ubuntu-amd64 | ubuntu-arm64) printf "ubuntu:26.04" ;;
-    debian-amd64) printf "debian:trixie" ;;
-    arch-amd64) printf "archlinux:latest" ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
-platform_for_target() {
-  case "$1" in
-    ubuntu-amd64 | debian-amd64 | arch-amd64) printf "linux/amd64" ;;
-    ubuntu-arm64) printf "linux/arm64" ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
-command_for_target() {
-  local target=$1
-  local stage=$2
-
-  case "$1" in
-    ubuntu-amd64 | ubuntu-arm64 | debian-amd64)
-      cat <<'EOF'
-set -euo pipefail
-export DEBIAN_FRONTEND=noninteractive
-cd /workspace
-./scripts/bootstrap
-export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-mise trust
-./scripts/doctor
-chezmoi managed --source .
-EOF
-      if [[ "${stage}" == "packages" ]]; then
-        cat <<'EOF'
-./scripts/packages
-EOF
-      fi
-      ;;
-    arch-amd64)
-      cat <<'EOF'
-set -euo pipefail
-sed -i '/^DownloadUser[[:space:]]*=/d' /etc/pacman.conf
-cd /workspace
-./scripts/bootstrap
-export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-mise trust
-./scripts/doctor
-chezmoi managed --source .
-EOF
-      if [[ "${stage}" == "packages" ]]; then
-        cat <<'EOF'
-./scripts/packages
-EOF
-      fi
-      ;;
-    *)
-      echo "unsupported target: $1" >&2
-      exit 1
-      ;;
-  esac
-}
-
 run_target() {
   local target=$1
   local stage=$2
@@ -154,31 +87,19 @@ run_target() {
   local name
 
   require_docker
-  image=$(image_for_target "${target}")
-  platform=$(platform_for_target "${target}")
-  command=$(command_for_target "${target}" "${stage}")
+  image=$(dotfiles_test_image_for_target "${target}")
+  platform=$(dotfiles_test_platform_for_target "${target}")
+  command=$(dotfiles_test_smoke_script "${target}" "${stage}")
 
   if [[ "${target}" == "arch-amd64" ]]; then
     docker_args+=(--security-opt seccomp=unconfined)
   fi
 
-  for name in \
-    DOTFILES_UBUNTU_MIRROR \
-    DOTFILES_DEBIAN_MIRROR \
-    DOTFILES_DEBIAN_SECURITY_MIRROR \
-    DOTFILES_ARCH_MIRRORS \
-    DOTFILES_ARCH_MIRROR \
-    DOTFILES_ARCHLINUXCN_MIRRORS \
-    DOTFILES_ARCHLINUXCN_MIRROR \
-    DOTFILES_ENABLE_ARCHLINUXCN \
-    DOTFILES_RETRY_ATTEMPTS \
-    DOTFILES_RETRY_DELAY \
-    DOTFILES_MISE_CURL_RETRIES \
-    DOTFILES_MISE_INSTALL_URL; do
+  while IFS= read -r name; do
     if [[ -n "${!name:-}" ]]; then
       env_args+=(--env "${name}=${!name}")
     fi
-  done
+  done < <(dotfiles_test_forwarded_env_names)
   add_proxy_envs
 
   log "run ${target} ${stage} in ${image} (${platform})"
@@ -214,10 +135,9 @@ esac
 
 case "${target}" in
   all)
-    run_target ubuntu-amd64 "${stage}"
-    run_target debian-amd64 "${stage}"
-    run_target arch-amd64 "${stage}"
-    run_target ubuntu-arm64 "${stage}"
+    while IFS= read -r resolved_target; do
+      run_target "${resolved_target}" "${stage}"
+    done < <(dotfiles_test_targets)
     ;;
   ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
     run_target "${target}" "${stage}"

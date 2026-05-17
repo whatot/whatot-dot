@@ -7,3 +7,4 @@
 *.retry
 *.elc
 .DS_Store
+.cache/

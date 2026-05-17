@@ -6,6 +6,8 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 source "${ROOT_DIR}/scripts/lib/env"
 # shellcheck source=scripts/lib/plan
 source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
 # shellcheck source=scripts/lib/common
 source "${ROOT_DIR}/scripts/lib/common"
 dotfiles_load_private_env
@@ -49,6 +51,10 @@ install_linux_packages() {
   printf '%s\n' "${packages}" | xargs "${installer[@]}"
 }
 
+refresh_apt_indices() {
+  run_apt_update_once
+}
+
 install_brew_package_sets() {
   local package_set package_file
 
@@ -65,20 +71,15 @@ install_brew_package_sets() {
   done < <(dotfiles_package_sets)
 }
 
-case "$(uname -s)" in
+kernel_name="$(dotfiles_kernel_name)"
+
+case "${kernel_name}" in
   Darwin)
     install_brew_package_sets
     ;;
   Linux)
-    if [[ -r /etc/os-release ]]; then
-      # shellcheck disable=SC1091
-      . /etc/os-release
-    else
-      echo "unsupported linux: missing /etc/os-release" >&2
-      exit 1
-    fi
-
-    case "${ID:-}" in
+    linux_id="$(dotfiles_linux_release_id)"
+    case "${linux_id}" in
       arch | manjaro)
         package_dir="${ROOT_DIR}/packages/arch"
         install_linux_packages "${sudo_cmd[@]}" pacman -S --needed --noconfirm
@@ -95,20 +96,22 @@ case "$(uname -s)" in
         ;;
       ubuntu)
         package_dir="${ROOT_DIR}/packages/ubuntu"
+        refresh_apt_indices
         install_linux_packages "${sudo_cmd[@]}" apt install -y
         ;;
       debian)
         package_dir="${ROOT_DIR}/packages/debian"
+        refresh_apt_indices
         install_linux_packages "${sudo_cmd[@]}" apt install -y
         ;;
       *)
-        echo "unsupported linux distribution: ${ID:-unknown}" >&2
+        echo "unsupported linux distribution: ${linux_id}" >&2
         exit 1
         ;;
     esac
     ;;
   *)
-    echo "unsupported os: $(uname -s)" >&2
+    echo "unsupported os: ${kernel_name}" >&2
     exit 1
     ;;
 esac

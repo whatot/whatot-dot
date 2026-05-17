@@ -1,6 +1,7 @@
 {
   "excludes": [
     "**/.git",
+    "**/.cache",
     "**/.DS_Store"
   ],
   "json": {
