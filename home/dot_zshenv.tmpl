@@ -1,32 +1,34 @@
-path_prepend() {
-  [[ -d "$1" ]] || return
-  case ":${PATH:-}:" in
-    *":$1:"*) ;;
-    *) export PATH="$1${PATH:+:${PATH}}" ;;
-  esac
+path_prefer() {
+  local entry=$1
+  [[ -d "${entry}" ]] || return
+  path=("${entry}" "${(@)path:#${entry}}")
 }
 
 case $(uname -s) in
   Darwin)
-    path_prepend "/usr/local/bin"
-    path_prepend "/usr/local/sbin"
-    path_prepend "${HOME}/go/bin"
-    path_prepend "${HOME}/.cargo/bin"
-    path_prepend "${HOME}/.local/bin"
-    path_prepend "/opt/homebrew/sbin"
-    path_prepend "/opt/homebrew/bin"
-    path_prepend "/opt/homebrew/opt/coreutils/libexec/gnubin"
+    typeset -gU path PATH
+    path=(${path:#})
+    path_prefer "/usr/local/sbin"
+    path_prefer "/usr/local/bin"
+    path_prefer "${HOME}/go/bin"
+    path_prefer "${HOME}/.cargo/bin"
+    path_prefer "${HOME}/.local/bin"
+    path_prefer "/opt/homebrew/opt/coreutils/libexec/gnubin"
+    path_prefer "/opt/homebrew/sbin"
+    path_prefer "/opt/homebrew/bin"
     ;;
   Linux)
-    path_prepend "${HOME}/go/bin"
-    path_prepend "${HOME}/.cargo/bin"
-    path_prepend "${HOME}/.local/bin"
+    typeset -gU path PATH
+    path=(${path:#})
+    path_prefer "${HOME}/go/bin"
+    path_prefer "${HOME}/.cargo/bin"
+    path_prefer "${HOME}/.local/bin"
     export TERM="${TERM:-xterm-256color}"
     ;;
   *) ;;
 esac
 
-unset -f path_prepend
+unset -f path_prefer
 
 export GOPATH="${HOME}/go/"
 

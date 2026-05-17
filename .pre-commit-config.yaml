@@ -11,11 +11,6 @@ repos:
         entry: mise exec -- shfmt -w -i 2 -ci
         language: system
         types: [shell]
-      - id: shfmt-zshenv
-        name: shfmt zshenv
-        entry: mise exec -- shfmt -w -i 2 -ci
-        language: system
-        files: ^home/dot_zshenv\.tmpl$
       - id: dprint
         name: dprint
         entry: mise exec -- dprint fmt

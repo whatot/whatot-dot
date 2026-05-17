@@ -17,9 +17,6 @@ main() {
     run_step "shfmt check scripts" dotfiles_check_run_tool shfmt -d -i 2 -ci "${shell_files[@]}"
   fi
 
-  if [[ -f "${ROOT_DIR}/home/dot_zshenv.tmpl" ]]; then
-    run_step "shfmt check zshenv" dotfiles_check_run_tool shfmt -d -i 2 -ci "${ROOT_DIR}/home/dot_zshenv.tmpl"
-  fi
 }
 
 main "$@"

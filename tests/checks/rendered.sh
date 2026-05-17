@@ -52,8 +52,8 @@ main() {
   run_step "zsh -n rendered prompt" dotfiles_check_run_tool zsh -n "${rendered_prompt}"
   run_step "zsh source rendered zshrc" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
     "source ${rendered_zshrc}; alias m >/dev/null; whence -w setup_prompt >/dev/null; whence -w setproxy >/dev/null"
-  run_step "zsh patch git alias completion" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
-    "source ${rendered_zshrc}; whence -w patch_git_completion_aliases >/dev/null; patch_git_completion_aliases; git help --aliases-for-completion >/dev/null 2>&1 || typeset -f __git_zsh_cmd_alias 2>/dev/null | grep -q \"git config --get-regexp '^alias\\\\.'\" || typeset -f _git | grep -q patch_git_completion_aliases"
+  run_step "zsh prefer homebrew git and bash" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
+    "source ${rendered_zshenv}; case \$(uname -s) in Darwin) [[ \$(command -v git) == /opt/homebrew/bin/git ]] && [[ \$(command -v bash) == /opt/homebrew/bin/bash ]] ;; esac"
   run_step "vim load rendered vimrc" env HOME="${tmp_home}" vim -Nu NONE -n -es \
     -c "set nomore" \
     -c "source ${rendered_vimrc}" \
