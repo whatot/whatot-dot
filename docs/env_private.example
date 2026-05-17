@@ -1,7 +1,21 @@
 # Copy this file to ~/.env_private outside chezmoi if you need local secrets.
 DOTFILES_HOST=macos-arm64
+
+# Git about
 DOTFILES_GIT_NAME=Your Name
 DOTFILES_GIT_EMAIL=you@example.com
+# Optional per-directory Git identities. Format:
+# DOTFILES_GIT_INCLUDE_RULES=<gitdir-root>:<include-path>,<gitdir-root>:<include-path>
+# Keep entries comma-separated without spaces.
+# DOTFILES_GIT_INCLUDE_RULES=~/work:~/.gitconfig_work,~/client:~/.gitconfig_client
+#
+# Example included file:
+#   [user]
+#     name = Work Name
+#     email = work@example.com
+#   [core]
+#     sshCommand = ssh -i ~/.ssh/id_ed25519_work -o IdentitiesOnly=yes
+
 # USE_PROXY=false
 # PROXY_URL=http://127.0.0.1:8899
 # DOTFILES_RETRY_ATTEMPTS=3

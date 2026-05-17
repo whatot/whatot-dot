@@ -58,7 +58,7 @@ run = [
 description = "Run local checks before committing"
 run = [
   { task = "preflight" },
-  "scripts/check",
+  "tests/check",
   { task = "chezmoi:diff" },
   { task = "hooks:run" },
   { task = "doctor" },

@@ -23,6 +23,7 @@ hosts/      per-machine execution plans
 scripts/    stable command entrypoints
 mise.toml   daily task registry
 docs/       runbooks and design notes
+tests/      validation entrypoints and test implementations
 ```
 
 ## Configuration Model
@@ -36,8 +37,9 @@ docs/       runbooks and design notes
    makes `chezmoi` plus `mise` usable.
 5. `packages/` provide the long-term OS-level inventory.
 6. `home/` provides dotfiles rendered by `chezmoi`.
-7. `scripts/` plus `mise.toml` expose stable entrypoints such as `setup`,
-   `refresh`, `check`, and `test`.
+7. `scripts/` plus `mise.toml` expose stable workstation entrypoints such as
+   `setup`, `refresh`, and package/devtool operations.
+8. `tests/` owns repository validation entrypoints and test implementations.
 
 Local private defaults live in:
 
@@ -100,8 +102,8 @@ tasks instead of slowing the default setup path for every machine.
 
 ## Validation
 
-Local quality gates run through `mise run check` and `pre-commit`. Environment
-validation is split by layer:
+Local quality gates run through `mise run check`, `tests/check`, and
+`pre-commit`. Environment validation is split by layer:
 
 - containers for fast Linux bootstrap and container-safe package checks
 - OrbStack machines for host-like Linux validation

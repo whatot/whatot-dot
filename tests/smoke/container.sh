@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 # shellcheck source=scripts/lib/env
 source "${ROOT_DIR}/scripts/lib/env"
 # shellcheck source=scripts/lib/test-targets
@@ -9,7 +9,7 @@ source "${ROOT_DIR}/scripts/lib/test-targets"
 dotfiles_load_private_env
 
 usage() {
-  printf 'usage: scripts/container-test <%s> [bootstrap|packages|devtools]\n\n' \
+  printf 'usage: tests/smoke/container.sh <%s> [bootstrap|packages|devtools]\n\n' \
     "$(dotfiles_test_target_selector true)"
   printf 'Run Linux bootstrap, package, and devtool smoke tests in Docker containers.\n'
 }

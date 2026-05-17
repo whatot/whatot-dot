@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+
+main() {
+  local test_script
+
+  while IFS= read -r test_script; do
+    bash "${test_script}"
+  done < <(find "${ROOT_DIR}/tests/tmpl" -maxdepth 1 -type f -name '*.sh' ! -name 'run' | sort)
+}
+
+main "$@"

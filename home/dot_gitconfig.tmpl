@@ -1,8 +1,18 @@
 [user]
 	email = {{ env "DOTFILES_GIT_EMAIL" }}
 	name = {{ env "DOTFILES_GIT_NAME" }}
-[includeIf "gitdir/i:~/work/"]
-	path = ~/.gitconfig_work
+{{- $gitIncludeRules := env "DOTFILES_GIT_INCLUDE_RULES" }}
+{{- if $gitIncludeRules }}
+{{- range $rule := splitList "," $gitIncludeRules }}
+{{- $parts := splitList ":" $rule }}
+{{- if ge (len $parts) 2 }}
+{{- $gitDir := index $parts 0 }}
+{{- $includePath := index $parts 1 }}
+[includeIf "gitdir/i:{{ $gitDir }}{{ if not (hasSuffix "/" $gitDir) }}/{{ end }}"]
+	path = {{ $includePath }}
+{{- end }}
+{{- end }}
+{{- end }}
 [credential]
 	helper = cache --timeout 3600
 [merge]

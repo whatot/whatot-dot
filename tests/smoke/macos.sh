@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 # shellcheck source=scripts/lib/common
 source "${ROOT_DIR}/scripts/lib/common"
 # shellcheck source=scripts/lib/plan
@@ -13,7 +13,7 @@ export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/h
 
 usage() {
   cat <<'EOF'
-usage: scripts/macos-test [host]
+usage: tests/smoke/macos.sh [host]
 
 Validate macOS package inventories.
 

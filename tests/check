@@ -15,7 +15,7 @@ dotfiles_load_private_env
 collect_shell_files() {
   local dir
 
-  for dir in scripts bootstrap; do
+  for dir in scripts bootstrap tests; do
     if [[ -d "${ROOT_DIR}/${dir}" ]]; then
       find "${ROOT_DIR}/${dir}" -type f
     fi
@@ -173,6 +173,7 @@ main() {
 
   validate_rendered_dotfiles
   run_step "validate helper parsers" validate_library_helpers
+  run_step "test templates" bash "${ROOT_DIR}/tests/tmpl/run"
   run_step "dprint check" run_dprint_check
 }
 
