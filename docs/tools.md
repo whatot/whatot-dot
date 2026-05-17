@@ -87,18 +87,21 @@ Use `jj st` for the current state, `jj log` for the change graph, and
 
 ## `rtk`
 
-Use `rtk` as the local Research Task Kit CLI. It is installed through `mise`.
+Use `rtk` from [`rtk-ai/rtk`](https://github.com/rtk-ai/rtk). This workstation
+installs it through `mise`, and the upstream project describes it as a CLI
+proxy that reduces LLM token consumption by filtering and compacting command
+output.
 
-Typical flow:
+Common commands:
 
 ```shell
-rtk --help
-rtk doctor
-rtk auth login
+rtk --version
+rtk gain
+rtk init -g --codex
 ```
 
-Repository-local agent guidance usually lives in `RTK.md` when a project wants
-RTK-specific instructions, similar to how some repositories keep `AGENTS.md`.
+For Codex, the upstream quick start uses `rtk init -g --codex`, then relies on
+project guidance files such as `AGENTS.md` and `RTK.md`.
 
 ## `mise`
 
