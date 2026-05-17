@@ -72,14 +72,6 @@ run = [
   { task = "chezmoi:diff" },
 ]
 
-[tasks.test]
-description = "Run fast Linux smoke tests"
-run = [{ task = "test:container" }]
-
-[tasks."test:vm"]
-description = "Run OrbStack Linux smoke tests"
-run = [{ task = "test:orbstack" }]
-
 [tasks."chezmoi:apply"]
 description = "Apply chezmoi-managed dotfiles"
 run = "scripts/chezmoi apply"
@@ -109,61 +101,6 @@ run = "pre-commit run --all-files"
 [tasks.host]
 description = "Show active dotfiles host and resolved actions"
 run = "scripts/host show"
-
-[tasks."test:container"]
-description = "Smoke-test Linux bootstrap in Docker containers"
-hide = true
-run = "scripts/container-test all"
-
-[tasks."test:container:packages"]
-description = "Smoke-test container-safe Linux package sets"
-hide = true
-run = "scripts/container-test all packages"
-
-[tasks."test:container:arch"]
-description = "Smoke-test Arch amd64 bootstrap in a Docker container"
-hide = true
-run = "scripts/container-test arch-amd64"
-
-[tasks."test:container:debian"]
-description = "Smoke-test Debian 13 amd64 bootstrap in a Docker container"
-hide = true
-run = "scripts/container-test debian-amd64"
-
-[tasks."test:container:ubuntu"]
-description = "Smoke-test Ubuntu LTS amd64 bootstrap in a Docker container"
-hide = true
-run = "scripts/container-test ubuntu-amd64"
-
-[tasks."test:container:ubuntu-arm64"]
-description = "Smoke-test Ubuntu LTS arm64 bootstrap in a Docker container"
-hide = true
-run = "scripts/container-test ubuntu-arm64"
-
-[tasks."test:orbstack"]
-description = "Smoke-test Linux bootstrap in OrbStack machines"
-hide = true
-run = "scripts/orbstack-test all"
-
-[tasks."test:orbstack:arch"]
-description = "Smoke-test Arch amd64 bootstrap in an OrbStack machine"
-hide = true
-run = "scripts/orbstack-test arch-amd64"
-
-[tasks."test:orbstack:debian"]
-description = "Smoke-test Debian 13 amd64 bootstrap in an OrbStack machine"
-hide = true
-run = "scripts/orbstack-test debian-amd64"
-
-[tasks."test:orbstack:ubuntu"]
-description = "Smoke-test Ubuntu LTS amd64 bootstrap in an OrbStack machine"
-hide = true
-run = "scripts/orbstack-test ubuntu-amd64"
-
-[tasks."test:orbstack:ubuntu-arm64"]
-description = "Smoke-test Ubuntu LTS arm64 bootstrap in an OrbStack machine"
-hide = true
-run = "scripts/orbstack-test ubuntu-arm64"
 
 [tasks.packages]
 description = "Install packages for the current operating system"

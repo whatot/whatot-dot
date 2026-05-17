@@ -10,9 +10,9 @@ dotfiles_load_private_env
 
 usage() {
   cat <<'EOF'
-usage: scripts/container-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [bootstrap|packages]
+usage: scripts/container-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [bootstrap|packages|devtools]
 
-Run the Linux bootstrap smoke test in Docker containers.
+Run Linux bootstrap, package, and devtool smoke tests in Docker containers.
 EOF
 }
 
@@ -100,6 +100,9 @@ run_target() {
       env_args+=(--env "${name}=${!name}")
     fi
   done < <(dotfiles_test_forwarded_env_names)
+  if [[ "${stage}" != "bootstrap" ]]; then
+    env_args+=(--env "DOTFILES_SKIP_MISE_INSTALL=true")
+  fi
   add_proxy_envs
 
   log "run ${target} ${stage} in ${image} (${platform})"
@@ -125,7 +128,7 @@ if [[ -z "${target}" ]]; then
 fi
 
 case "${stage}" in
-  bootstrap | packages) ;;
+  bootstrap | packages | devtools) ;;
   *)
     echo "unsupported stage: ${stage}" >&2
     usage

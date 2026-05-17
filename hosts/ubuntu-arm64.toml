@@ -2,8 +2,8 @@ name = "ubuntu-arm64"
 os = "ubuntu"
 arch = "arm64"
 
-packages = ["base"]
-devtools = []
+packages = ["base", "dev"]
+devtools = ["rust-system"]
 
 [vim]
 profile = "minimal"

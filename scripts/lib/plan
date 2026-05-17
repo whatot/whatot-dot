@@ -30,7 +30,7 @@ dotfiles_array_from_file() {
     $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
       line = $0
       sub(/^[^=]*=/, "", line)
-      gsub(/[\[\]\"]/, "", line)
+      gsub(/[\[\]"]/, "", line)
       gsub(/'\''/, "", line)
       gsub(/[[:space:]]+/, "", line)
       n = split(line, values, ",")

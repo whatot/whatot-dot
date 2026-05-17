@@ -2,8 +2,8 @@ name = "arch-amd64"
 os = "arch"
 arch = "amd64"
 
-packages = ["base"]
-devtools = []
+packages = ["base", "dev"]
+devtools = ["rust-system"]
 
 [vim]
 profile = "minimal"

@@ -106,8 +106,10 @@ sed -i '/^DownloadUser[[:space:]]*=/d' /etc/pacman.conf
 cd /workspace
 ./scripts/bootstrap
 export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-mise trust
-./scripts/doctor
+if [[ ${DOTFILES_SKIP_MISE_INSTALL:-false} != "true" ]]; then
+  mise trust
+  ./scripts/doctor
+fi
 chezmoi managed --source .
 EOF
       ;;
@@ -118,8 +120,10 @@ export DEBIAN_FRONTEND=noninteractive
 cd /workspace
 ./scripts/bootstrap
 export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-mise trust
-./scripts/doctor
+if [[ ${DOTFILES_SKIP_MISE_INSTALL:-false} != "true" ]]; then
+  mise trust
+  ./scripts/doctor
+fi
 chezmoi managed --source .
 EOF
       ;;
@@ -129,7 +133,12 @@ EOF
       ;;
   esac
 
-  if [[ "${stage}" == "packages" ]]; then
-    printf '%s\n' './scripts/packages'
-  fi
+  case "${stage}" in
+    packages)
+      printf '%s\n' './scripts/packages'
+      ;;
+    devtools)
+      printf '%s\n' './scripts/devtools host'
+      ;;
+  esac
 }

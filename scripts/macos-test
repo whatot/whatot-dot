@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/common
+source "${ROOT_DIR}/scripts/lib/common"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+
+export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
+export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
+export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
+
+usage() {
+  cat <<'EOF'
+usage: scripts/macos-test [host]
+
+Validate macOS package inventories.
+
+commands:
+  host       run brew bundle checks on the current macOS host
+EOF
+}
+
+macos_host_file() {
+  printf '%s\n' "${ROOT_DIR}/hosts/macos-arm64.toml"
+}
+
+macos_package_sets() {
+  dotfiles_array_from_file "$(macos_host_file)" packages | awk '!seen[$0]++'
+}
+
+macos_brewfile_for_set() {
+  printf '%s\n' "${ROOT_DIR}/packages/macos/$1.Brewfile"
+}
+
+require_brew() {
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "brew is required for macOS host validation" >&2
+    exit 1
+  fi
+}
+
+run_host_checks() {
+  local package_set
+  local brewfile
+
+  require_brew
+
+  while IFS= read -r package_set; do
+    [[ -n "${package_set}" ]] || continue
+    brewfile="$(macos_brewfile_for_set "${package_set}")"
+    run_step "brew bundle check packages/macos/${package_set}.Brewfile" \
+      brew bundle check --no-upgrade --file "${brewfile}"
+  done < <(macos_package_sets)
+}
+
+case "${1:-host}" in
+  host)
+    run_host_checks
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

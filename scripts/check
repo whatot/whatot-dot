@@ -102,8 +102,11 @@ validate_rendered_dotfiles() {
 
 main() {
   local shell_files=()
+  local shell_file
 
-  mapfile -t shell_files < <(collect_shell_files | sort -u)
+  while IFS= read -r shell_file; do
+    shell_files+=("${shell_file}")
+  done < <(collect_shell_files | sort -u)
 
   if [[ ${#shell_files[@]} -gt 0 ]]; then
     run_step "shellcheck scripts" run_tool shellcheck -x "${shell_files[@]}"

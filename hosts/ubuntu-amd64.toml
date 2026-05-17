@@ -2,8 +2,8 @@ name = "ubuntu-amd64"
 os = "ubuntu"
 arch = "amd64"
 
-packages = ["base"]
-devtools = []
+packages = ["base", "dev"]
+devtools = ["rust-system"]
 
 [vim]
 profile = "minimal"

@@ -102,7 +102,7 @@ install_rust_system() {
       case "${linux_id}" in
         arch | manjaro)
           run_step "pacman install Rust system packages" \
-            xargs "${sudo_cmd[@]}" pacman -S --needed <"${ROOT_DIR}/packages/rust/system-arch.txt"
+            xargs "${sudo_cmd[@]}" pacman -S --needed --noconfirm <"${ROOT_DIR}/packages/rust/system-arch.txt"
           ;;
         ubuntu)
           refresh_apt_indices
@@ -153,7 +153,7 @@ install_rust_toolchain() {
       Linux)
         case "$(dotfiles_linux_release_id)" in
           arch | manjaro)
-            run_step "pacman install rustup" "${sudo_cmd[@]}" pacman -S --needed rustup cargo-binstall
+            run_step "pacman install rustup" "${sudo_cmd[@]}" pacman -S --needed --noconfirm rustup cargo-binstall
             ;;
           ubuntu | debian)
             run_step "rustup-init ${toolchain}" install_rustup_from_script "${toolchain}"

@@ -11,16 +11,10 @@ Use the lightest layer that still exercises the change:
   workstation preflight
 - `scripts/container-test` for fast Linux bootstrap and container-safe package
   checks
+- `scripts/macos-test host` for macOS Brewfile checks on a real host
 - `scripts/orbstack-test` for host-like Linux smoke tests
 - real hosts for desktop apps, fonts, input methods, AUR, and other
   machine-bound behavior
-
-The default task shortcuts are:
-
-```shell
-mise run test
-mise run test:vm
-```
 
 ## Fixed Linux Targets
 
@@ -76,6 +70,16 @@ This runs bootstrap first, then installs the package sets declared by the fixed
 container hosts. Desktop, font, input-method, and AUR checks do not belong in
 containers.
 
+For host-enabled Linux devtools:
+
+```shell
+scripts/container-test all devtools
+```
+
+This also runs bootstrap first, then executes `scripts/devtools host` for the
+declared container hosts. The current Linux hosts keep this to the minimal
+`rust-system` layer so the validation stays container-safe.
+
 ## OrbStack Smoke Tests
 
 Use OrbStack when a Linux change needs a fuller machine-like environment:
@@ -118,10 +122,22 @@ DOTFILES_ARCHLINUXCN_MIRRORS='https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$
 DOTFILES_ENABLE_ARCHLINUXCN=false scripts/container-test arch-amd64
 ```
 
+## macOS Package Checks
+
+Use the current macOS host when the change touches Homebrew package inventories:
+
+```shell
+scripts/macos-test host
+```
+
+This runs `brew bundle check --no-upgrade` for the package sets declared by
+`hosts/macos-arm64.toml`.
+
 ## Real Host Checks
 
 Use a real machine when the change touches:
 
+- macOS Homebrew inventories, including the `plantuml` plus `openjdk` pair
 - Homebrew casks or macOS app installs
 - desktop apps, fonts, or input methods
 - AUR-only packages

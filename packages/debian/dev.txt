@@ -1,1 +1,3 @@
+default-jre-headless
+plantuml
 python3-venv

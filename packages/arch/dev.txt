@@ -1,7 +1,8 @@
-bridge-utils
 discount
+crun
 dnsmasq
 gnuplot
+jre-openjdk
 nushell
 plantuml
 podman-compose

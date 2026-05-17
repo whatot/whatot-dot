@@ -93,6 +93,11 @@ install_mise_from_installer() {
   local installer_url=${DOTFILES_MISE_INSTALL_URL:-https://mise.run}
   local start
 
+  if [[ ${DOTFILES_SKIP_MISE_INSTALL:-false} == "true" ]]; then
+    log "skip: mise installer disabled"
+    return
+  fi
+
   if command -v mise >/dev/null 2>&1; then
     log "found mise: $(command -v mise)"
     return
