@@ -67,7 +67,7 @@ setup_completion() {
   fi
 
   zmodload -i zsh/complist
-  autoload -Uz add-zsh-hook colors compinit vcs_info
+  autoload -Uz add-zsh-hook colors compinit
   compinit -d "${completion_cache_dir}/.zcompdump-${ZSH_VERSION}"
   colors
 

@@ -39,6 +39,10 @@ dotfiles_check_collect_shell_files() {
   done
 }
 
+dotfiles_check_collect_shell_format_files() {
+  dotfiles_check_collect_shell_files
+}
+
 dotfiles_check_render_template() {
   local source_path=$1
   local output_path=$2

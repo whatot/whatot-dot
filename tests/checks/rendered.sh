@@ -45,7 +45,7 @@ main() {
   tmp_dir="$(mktemp -d)"
   trap 'rm -rf "${tmp_dir:-}"' EXIT
   tmp_home="${tmp_dir}/home"
-  mkdir -p "${tmp_home}/.vim/autoload" "${tmp_home}/.zsh"
+  mkdir -p "${tmp_home}/.vim/autoload" "${tmp_home}/.zsh/vendor"
 
   rendered_zshrc="${tmp_dir}/.zshrc"
   rendered_vimrc="${tmp_home}/.vimrc"
@@ -73,11 +73,12 @@ main() {
   render_template_specs "${host_data_file}" "${render_specs[@]}"
 
   cp "${ROOT_DIR}/home/dot_vim/"*.vim "${tmp_home}/.vim/"
+  cp "${ROOT_DIR}/home/dot_zsh/vendor/git-prompt.zsh" "${tmp_home}/.zsh/vendor/"
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"
 
   check_rendered_zsh_specs "${zsh_specs[@]}"
   run_step "zsh source rendered zshrc" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
-    "source ${rendered_zshrc}; alias m >/dev/null; whence -w setup_prompt >/dev/null; whence -w setproxy >/dev/null"
+    "source ${rendered_zshrc}; alias m >/dev/null; whence -w setup_prompt >/dev/null; whence -w setproxy >/dev/null; whence -w gitprompt >/dev/null"
   run_step "vim load rendered vimrc" env HOME="${tmp_home}" vim -Nu NONE -n -es \
     -c "set nomore" \
     -c "source ${rendered_vimrc}" \
