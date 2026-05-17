@@ -6,10 +6,12 @@
 {{- range $rule := splitList "," $gitIncludeRules }}
 {{- $parts := splitList ":" $rule }}
 {{- if ge (len $parts) 2 }}
-{{- $gitDir := index $parts 0 }}
-{{- $includePath := index $parts 1 }}
+{{- $gitDir := trim (index $parts 0) }}
+{{- $includePath := trim (index $parts 1) }}
+{{- if and $gitDir $includePath }}
 [includeIf "gitdir/i:{{ $gitDir }}{{ if not (hasSuffix "/" $gitDir) }}/{{ end }}"]
 	path = {{ $includePath }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

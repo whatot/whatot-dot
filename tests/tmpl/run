@@ -9,7 +9,7 @@ main() {
   while IFS= read -r test_script; do
     printf '[tmpl] %s\n' "${test_script#"${ROOT_DIR}/"}"
     bash "${test_script}"
-  done < <(find "${ROOT_DIR}/tests/tmpl" -maxdepth 1 -type f -name '*.sh' ! -name 'run' | sort)
+  done < <(find "${ROOT_DIR}/tests/tmpl" -maxdepth 1 -type f -name '*.sh' | sort)
 }
 
 main "$@"

@@ -9,12 +9,22 @@ DOTFILES_GIT_EMAIL=you@example.com
 # Keep entries comma-separated without spaces.
 # DOTFILES_GIT_INCLUDE_RULES=~/work:~/.gitconfig_work,~/client:~/.gitconfig_client
 #
-# Example included file:
+# Example: use one identity under ~/work and another under ~/client.
+# DOTFILES_GIT_INCLUDE_RULES=~/work:~/.gitconfig_work,~/client:~/.gitconfig_client
+#
+# Example include file for ~/work:
 #   [user]
 #     name = Work Name
 #     email = work@example.com
 #   [core]
 #     sshCommand = ssh -i ~/.ssh/id_ed25519_work -o IdentitiesOnly=yes
+#
+# Example include file for ~/client:
+#   [user]
+#     name = Client Name
+#     email = client@example.com
+#   [core]
+#     sshCommand = ssh -i ~/.ssh/id_ed25519_client -o IdentitiesOnly=yes
 
 # USE_PROXY=false
 # PROXY_URL=http://127.0.0.1:8899

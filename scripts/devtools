@@ -176,6 +176,9 @@ install_rust_toolchain() {
     rustup component add clippy rust-analyzer rust-src rustfmt llvm-tools --toolchain "${toolchain}"
   run_step "rustup default ${toolchain}" rustup default "${toolchain}"
   rustup run "${toolchain}" rustc --print sysroot
+  run_step "rustup toolchain list" rustup toolchain list
+  log "cleanup hint: rustup toolchain uninstall <toolchain>"
+  log "cleanup hint: rustup self uninstall"
 }
 
 install_rust_tools_from_file() {

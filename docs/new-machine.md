@@ -101,4 +101,6 @@ mise run devtools:go-tools
 
 Rust keeps an existing rustup default when one is already active. Fresh
 machines default to `stable`. Prefer project `rust-toolchain.toml` files for
-project-specific versions.
+project-specific versions. After `devtools:rust-toolchain`, the script also
+prints `rustup toolchain list` plus cleanup hints such as
+`rustup toolchain uninstall <toolchain>`.

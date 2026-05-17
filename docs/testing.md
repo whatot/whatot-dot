@@ -35,6 +35,22 @@ Practical rule:
 - if a file is intended as a standalone shell script, keep it compatible with
   `shellcheck` and `shfmt`
 
+## Template Validation
+
+Template behavior belongs under `tests/tmpl/`, with `tests/tmpl/run` as the
+single entrypoint used by `tests/check`.
+
+Use template tests for cases such as:
+
+- rendering with and without required environment variables
+- normalization rules such as trailing-slash handling
+- malformed optional input that should be ignored instead of producing broken
+  config
+
+Private env parsing is validated through `tests/checks/helpers.sh`. Invalid
+lines in `~/.env_private` or `~/.dotfiles.env` should fail fast with a file and
+line number instead of being ignored silently.
+
 ## Fixed Linux Targets
 
 Container and OrbStack validation use the same four host targets:

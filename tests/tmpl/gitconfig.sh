@@ -51,11 +51,27 @@ case_include_rule_normalizes_trailing_slash() {
   dotfiles_tmpl_assert_contains "${output}" $'[includeIf "gitdir/i:~/workspace/"]\n\tpath = ~/.gitconfig_workspace'
 }
 
+case_ignores_incomplete_include_rules() {
+  local output
+
+  output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" \
+    DOTFILES_GIT_NAME="Test User" \
+    DOTFILES_GIT_EMAIL="test@example.com" \
+    DOTFILES_GIT_INCLUDE_RULES="~/work:~/.gitconfig_work,~/broken-only, :~/.gitconfig_empty,~/missing-path:")"
+
+  dotfiles_tmpl_assert_contains "${output}" $'[includeIf "gitdir/i:~/work/"]\n\tpath = ~/.gitconfig_work'
+  dotfiles_tmpl_assert_not_contains "${output}" '[includeIf "gitdir/i:~/broken-only/"]'
+  dotfiles_tmpl_assert_not_contains "${output}" '[includeIf "gitdir/i:/"]'
+  dotfiles_tmpl_assert_not_contains "${output}" 'path = ~/.gitconfig_empty'
+  dotfiles_tmpl_assert_not_contains "${output}" '[includeIf "gitdir/i:~/missing-path/"]'
+}
+
 main() {
   case_no_include_rules
   case_single_include_rule
   case_multiple_include_rules
   case_include_rule_normalizes_trailing_slash
+  case_ignores_incomplete_include_rules
 }
 
 main "$@"
