@@ -16,6 +16,25 @@ Use the lightest layer that still exercises the change:
 - real hosts for desktop apps, fonts, input methods, AUR, and other
   machine-bound behavior
 
+## Zsh Validation
+
+Zsh files use zsh-specific syntax such as `path` arrays and `${(@)...}`
+expansions, so this repository does not force them through `shfmt`.
+
+Use the current checks instead:
+
+- `zsh -n` on rendered `zshenv`, `zprofile`, `zshrc`, and each rendered module
+- rendered-shell smoke via `tests/checks/rendered.sh`
+- `shellcheck` and `shfmt` only for the bash/sh-oriented scripts under
+  `scripts/`, `bootstrap/`, and `tests/`
+
+Practical rule:
+
+- if a file is intended for zsh runtime config, prefer `zsh -n` plus rendered
+  execution checks
+- if a file is intended as a standalone shell script, keep it compatible with
+  `shellcheck` and `shfmt`
+
 ## Fixed Linux Targets
 
 Container and OrbStack validation use the same four host targets:

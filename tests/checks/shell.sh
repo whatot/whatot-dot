@@ -16,7 +16,6 @@ main() {
     run_step "shellcheck scripts" dotfiles_check_run_tool shellcheck -x "${shell_files[@]}"
     run_step "shfmt check scripts" dotfiles_check_run_tool shfmt -d -i 2 -ci "${shell_files[@]}"
   fi
-
 }
 
 main "$@"
