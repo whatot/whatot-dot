@@ -1,0 +1,44 @@
+unsetproxy() {
+  unset PROXY_HOST PROXY_PORT
+  unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY
+  unset no_proxy all_proxy http_proxy https_proxy
+}
+
+setproxy() {
+  local url host_port port no_proxy_list
+
+  unsetproxy
+  [[ ${USE_PROXY:-true} == "true" ]] || return
+
+  url=${PROXY_URL:-http://127.0.0.1:8899}
+  host_port=${url#*://}
+  host_port=${host_port%%/*}
+  PROXY_HOST=${host_port%:*}
+  port=${host_port##*:}
+  if [[ "${port}" == "${host_port}" ]]; then
+    PROXY_PORT=
+  else
+    PROXY_PORT=${port}
+  fi
+
+  no_proxy_list=${NO_PROXY_LIST:-localhost,127.0.0.1,::1,10.0.0.0/8,192.168.0.0/16}
+
+  export PROXY_HOST PROXY_PORT
+  export ALL_PROXY="${url}"
+  export HTTP_PROXY="${url}"
+  export HTTPS_PROXY="${url}"
+  export all_proxy="${url}"
+  export http_proxy="${url}"
+  export https_proxy="${url}"
+  export NO_PROXY="${no_proxy_list}"
+  export no_proxy="${no_proxy_list}"
+}
+
+proxyinfo() {
+  echo "PROXY_HOST = ${PROXY_HOST}"
+  echo "PROXY_PORT = ${PROXY_PORT}"
+  echo "NO_PROXY = ${NO_PROXY}"
+  echo "ALL_PROXY = ${ALL_PROXY}"
+  echo "HTTP_PROXY = ${HTTP_PROXY}"
+  echo "HTTPS_PROXY = ${HTTPS_PROXY}"
+}

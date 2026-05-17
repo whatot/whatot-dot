@@ -1,12 +1,29 @@
 #!/usr/bin/env bash
 
+dotfiles_normalize_host() {
+  local host=$1
+
+  host="${host##*/}"
+  host="${host%.toml}"
+  printf '%s\n' "${host}"
+}
+
 dotfiles_host() {
+  local host
+
   if [[ -z ${DOTFILES_HOST:-} ]]; then
     echo "missing DOTFILES_HOST" >&2
     echo "set DOTFILES_HOST in your private env file" >&2
     return 1
   fi
-  printf '%s\n' "${DOTFILES_HOST}"
+
+  host="$(dotfiles_normalize_host "${DOTFILES_HOST}")"
+  if [[ -z "${host}" ]]; then
+    echo "invalid DOTFILES_HOST: ${DOTFILES_HOST}" >&2
+    return 1
+  fi
+
+  printf '%s\n' "${host}"
 }
 
 dotfiles_host_file() {

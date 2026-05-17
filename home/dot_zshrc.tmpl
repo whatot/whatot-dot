@@ -16,8 +16,15 @@ HISTFILE="${HOME}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 
-# Shared helpers.
+# Base environment.
+export EDITOR="vim"
+export LC_MESSAGES="en_US.UTF-8"
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# Shared shell state.
 DOTFILES_SHELL_OS="$(uname -s)"
+DOTFILES_ENV_FILES=("${HOME}/.dotfiles.env" "${HOME}/.env_private")
+DOTFILES_ZSH_MODULES=(network tools aliases prompt)
 
 load_env_files() {
   local file_path key value current
@@ -51,237 +58,33 @@ is_command() {
   (( ${+commands[$1]} ))
 }
 
-fpath_prepend() {
-  [[ -d "$1" ]] || return
-  fpath=("$1" "${(@)fpath:#$1}")
+# Module loading.
+source_zsh_module() {
+  local module_name=$1
+  source_if_exists "${HOME}/.zsh/${module_name}.zsh"
 }
 
-register_completion() {
-  local command_name=$1
-  local function_name=$2
-  local service=${3:-}
+load_zsh_modules() {
+  local module_name
 
-  (( ${+functions[${function_name}]} )) || return
-  if [[ -n "${service}" ]]; then
-    compdef "${function_name}" "${command_name}=${service}"
-  else
-    compdef "${function_name}" "${command_name}"
-  fi
+  for module_name in "${DOTFILES_ZSH_MODULES[@]}"; do
+    source_zsh_module "${module_name}"
+  done
 }
 
-_mise_run_completion() {
-  local -a original_words
-  local original_current
-
-  (( ${+functions[_mise]} )) || return 1
-
-  original_words=("${words[@]}")
-  original_current=$CURRENT
-
-  local -a words=("mise" "run" "${original_words[@]:1}")
-  integer CURRENT=$(( original_current + 1 ))
-
-  _mise
+# Startup.
+initialize_shell() {
+  load_env_files "${DOTFILES_ENV_FILES[@]}"
+  setproxy
+  setup_completion
+  setup_tool_hooks
+  load_optional_plugins
+  setup_aliases
+  setup_vcs_info
+  setup_prompt
 }
 
-load_zsh_plugin() {
-  local plugin=$1
-
-  case "${DOTFILES_SHELL_OS}" in
-  Darwin)
-    source_if_exists "/opt/homebrew/share/${plugin}/${plugin}.zsh"
-    source_if_exists "/usr/local/share/${plugin}/${plugin}.zsh"
-    ;;
-  Linux)
-    source_if_exists "/usr/share/zsh/plugins/${plugin}/${plugin}.zsh"
-    source_if_exists "/usr/share/${plugin}/${plugin}.zsh"
-    ;;
-  esac
-}
-
-unsetproxy() {
-  unset PROXY_HOST PROXY_PORT
-  unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY
-  unset no_proxy all_proxy http_proxy https_proxy
-}
-
-setproxy() {
-  local url host_port port no_proxy_list
-
-  unsetproxy
-  [[ ${USE_PROXY:-true} == "true" ]] || return
-
-  url=${PROXY_URL:-http://127.0.0.1:8899}
-  host_port=${url#*://}
-  host_port=${host_port%%/*}
-  PROXY_HOST=${host_port%:*}
-  port=${host_port##*:}
-  if [[ "${port}" == "${host_port}" ]]; then
-    PROXY_PORT=
-  else
-    PROXY_PORT=${port}
-  fi
-
-  no_proxy_list=${NO_PROXY_LIST:-localhost,127.0.0.1,::1,10.0.0.0/8,192.168.0.0/16}
-
-  export PROXY_HOST PROXY_PORT
-  export ALL_PROXY="${url}"
-  export HTTP_PROXY="${url}"
-  export HTTPS_PROXY="${url}"
-  export all_proxy="${url}"
-  export http_proxy="${url}"
-  export https_proxy="${url}"
-  export NO_PROXY="${no_proxy_list}"
-  export no_proxy="${no_proxy_list}"
-}
-
-proxyinfo() {
-  echo "PROXY_HOST = ${PROXY_HOST}"
-  echo "PROXY_PORT = ${PROXY_PORT}"
-  echo "NO_PROXY = ${NO_PROXY}"
-  echo "ALL_PROXY = ${ALL_PROXY}"
-  echo "HTTP_PROXY = ${HTTP_PROXY}"
-  echo "HTTPS_PROXY = ${HTTPS_PROXY}"
-}
-
-# Completion.
-setup_completion() {
-  local completion_cache_dir
-
-  case "${DOTFILES_SHELL_OS}" in
-  Darwin)
-    fpath_prepend "/opt/homebrew/share/zsh/site-functions"
-    fpath_prepend "/usr/local/share/zsh/site-functions"
-    ;;
-  Linux)
-    fpath_prepend "/usr/local/share/zsh/site-functions"
-    fpath_prepend "/usr/share/zsh/site-functions"
-    fpath_prepend "/usr/share/zsh/vendor-completions"
-    ;;
-  esac
-
-  completion_cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
-  if ! mkdir -p "${completion_cache_dir}" 2>/dev/null; then
-    completion_cache_dir="${TMPDIR:-/tmp}"
-  fi
-
-  zmodload -i zsh/complist
-  autoload -Uz add-zsh-hook colors compinit vcs_info
-  compinit -d "${completion_cache_dir}/.zcompdump-${ZSH_VERSION}"
-  colors
-
-  zstyle ':completion:*' menu select
-  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-  zstyle ':completion:*' rehash true
-}
-
-setup_vcs_info() {
-  zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:git:*' check-for-changes true
-  zstyle ':vcs_info:git:*' stagedstr '+'
-  zstyle ':vcs_info:git:*' unstagedstr '*'
-  zstyle ':vcs_info:git:*' formats ' %F{244}|%f %F{magenta}%b%f%F{yellow} %c%u%f'
-  zstyle ':vcs_info:git:*' actionformats ' %F{244}|%f %F{magenta}%b%f %F{yellow}%a%c%u%f'
-}
-
-# Tool hooks and plugins.
-setup_tool_hooks() {
-  if is_command mise; then
-    eval "$(mise activate zsh --quiet)"
-    if is_command usage; then
-      source_if_exists <(mise completion zsh)
-    fi
-  fi
-
-  if is_command zoxide; then
-    eval "$(zoxide init zsh)"
-  fi
-
-  if is_command direnv; then
-    eval "$(direnv hook zsh)"
-  fi
-
-  if [[ -t 0 && -t 1 ]] && is_command fzf; then
-    source_if_exists <(fzf --zsh)
-  fi
-
-  if is_command pnpm; then
-    source_if_exists <(pnpm completion zsh)
-  fi
-}
-
-load_optional_plugins() {
-  load_zsh_plugin zsh-autosuggestions
-  load_zsh_plugin zsh-syntax-highlighting
-}
-
-# Aliases and alias completions.
-setup_aliases() {
-  if is_command bat; then
-    alias cat="bat"
-  fi
-
-  case "${DOTFILES_SHELL_OS}" in
-  Darwin)
-    alias ll="ls -alFG"
-    ;;
-  Linux)
-    alias ll="ls -alF --color=auto"
-    ;;
-  *)
-    alias ll="ls -alF"
-    ;;
-  esac
-
-  alias ..="cd .."
-  alias ...="cd ../.."
-  alias bubu="brew update && brew outdated && brew upgrade && brew cleanup"
-  alias m="mise run"
-  alias pn="pnpm"
-  alias gf="git pull"
-  alias myip="curl myip.ipip.net"
-
-  register_completion bubu _brew brew
-  register_completion m _mise_run_completion
-  register_completion mise _mise
-  register_completion pnpm _pnpm_completion
-  register_completion pn _pnpm_completion
-  register_completion gf _git git-pull
-  register_completion myip _curl
-}
-
-# Prompt.
-prompt_context() {
-  if [[ -n "${SSH_CONNECTION:-}" ]]; then
-    printf '%%F{yellow}%%m%%f '
-  fi
-}
-
-update_prompt() {
-  vcs_info
-  PROMPT="$(prompt_context)%F{cyan}%~%f${vcs_info_msg_0_}
-%(?.%F{green}.%F{red})%#%f "
-  RPROMPT='%F{blue}%*%f'
-}
-
-setup_prompt() {
-  add-zsh-hook precmd update_prompt
-  update_prompt
-}
-
-# Main.
-load_env_files "${HOME}/.dotfiles.env" "${HOME}/.env_private"
-setproxy
-setup_completion
-setup_vcs_info
-setup_tool_hooks
-load_optional_plugins
-setup_aliases
-setup_prompt
-
-export EDITOR="vim"
-export LC_MESSAGES="en_US.UTF-8"
-export HOMEBREW_NO_AUTO_UPDATE=1
+load_zsh_modules
+initialize_shell
 
 ## vim:ft=zsh

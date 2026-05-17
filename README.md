@@ -40,9 +40,9 @@ mise run chezmoi:apply
 mise run refresh
 mise run check
 mise run update
-mise run test
-mise run test:vm
 ```
+
+Validation commands live in [docs/testing.md](docs/testing.md).
 
 ## Repository Layout
 

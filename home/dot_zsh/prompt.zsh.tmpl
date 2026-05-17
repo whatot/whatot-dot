@@ -1,0 +1,72 @@
+setup_vcs_info() {
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr '+'
+  zstyle ':vcs_info:git:*' unstagedstr '*'
+  zstyle ':vcs_info:git:*' formats ' %F{244}|%f %F{magenta}%b%f%F{yellow} %c%u%f'
+  zstyle ':vcs_info:git:*' actionformats ' %F{244}|%f %F{magenta}%b%f %F{yellow}%a%c%u%f'
+}
+
+PROMPT_LAST_COMMAND_START=
+PROMPT_LAST_COMMAND_ACTIVE=0
+
+format_prompt_duration() {
+  local total_seconds=$1
+
+  if (( total_seconds >= 3600 )); then
+    printf '%dh%dm%ds' \
+      $(( total_seconds / 3600 )) \
+      $(( (total_seconds % 3600) / 60 )) \
+      $(( total_seconds % 60 ))
+  elif (( total_seconds >= 60 )); then
+    printf '%dm%ds' \
+      $(( total_seconds / 60 )) \
+      $(( total_seconds % 60 ))
+  else
+    printf '%ds' "${total_seconds}"
+  fi
+}
+
+prompt_context() {
+  if [[ -n "${SSH_CONNECTION:-}" ]]; then
+    printf '%%F{yellow}%%m%%f '
+  fi
+}
+
+prompt_duration_segment() {
+  local total_seconds=$1
+
+  if (( total_seconds < 1 )); then
+    return
+  fi
+
+  printf ' %%F{244}·%%f %%F{yellow}%s%%f' "$(format_prompt_duration "${total_seconds}")"
+}
+
+record_command_start() {
+  PROMPT_LAST_COMMAND_START=${SECONDS}
+  PROMPT_LAST_COMMAND_ACTIVE=1
+}
+
+update_prompt() {
+  local duration_segment=
+  local elapsed_seconds
+
+  vcs_info
+
+  if [[ ${PROMPT_LAST_COMMAND_ACTIVE:-0} -eq 1 ]]; then
+    elapsed_seconds=$(( SECONDS - PROMPT_LAST_COMMAND_START ))
+    duration_segment="$(prompt_duration_segment "${elapsed_seconds}")"
+    PROMPT_LAST_COMMAND_ACTIVE=0
+  fi
+
+  PROMPT="$(prompt_context)%F{cyan}%~%f${vcs_info_msg_0_}${duration_segment}
+%(?.%F{green}.%F{red})%#%f "
+  RPROMPT='%F{blue}%*%f'
+}
+
+setup_prompt() {
+  add-zsh-hook preexec record_command_start
+  add-zsh-hook precmd update_prompt
+  update_prompt
+}
