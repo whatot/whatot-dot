@@ -2,13 +2,11 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
-# shellcheck source=tests/lib/check-common.sh
-source "${ROOT_DIR}/tests/lib/check-common.sh"
 
 main() {
   "${ROOT_DIR}/tests/checks/shell.sh"
   "${ROOT_DIR}/tests/checks/rendered.sh"
-  run_step "validate helper parsers" "${ROOT_DIR}/tests/checks/helpers.sh"
+  "${ROOT_DIR}/tests/checks/helpers.sh"
   "${ROOT_DIR}/tests/checks/templates.sh"
   "${ROOT_DIR}/tests/checks/format.sh"
 }

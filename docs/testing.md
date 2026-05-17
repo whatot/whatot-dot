@@ -115,6 +115,11 @@ environment when they are set locally. That includes mirror variables, retry
 settings, `DOTFILES_MISE_INSTALL_URL`, `DOTFILES_MISE_CURL_RETRIES`, and proxy
 variables.
 
+For localhost-style proxies, `tests/smoke/container.sh` rewrites
+`127.0.0.1` and `localhost` to `host.docker.internal` for Docker reachability.
+`tests/smoke/orbstack.sh` forwards proxy values as-is, so they should already be
+reachable from the VM.
+
 For example:
 
 ```shell

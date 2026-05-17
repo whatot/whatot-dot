@@ -22,6 +22,36 @@ log() {
   printf "==> %s\n" "$*"
 }
 
+add_env_if_set() {
+  local name=$1
+
+  if [[ -n "${!name:-}" ]]; then
+    env_args+=("${name}=${!name}")
+  fi
+}
+
+add_proxy_envs() {
+  local proxy_url=${PROXY_URL:-}
+  local name
+
+  for name in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy PROXY_URL; do
+    add_env_if_set "${name}"
+  done
+
+  if [[ ${USE_PROXY:-true} != "true" || -z "${proxy_url}" ]]; then
+    return
+  fi
+
+  [[ -n ${HTTP_PROXY:-} ]] || env_args+=("HTTP_PROXY=${proxy_url}")
+  [[ -n ${HTTPS_PROXY:-} ]] || env_args+=("HTTPS_PROXY=${proxy_url}")
+  [[ -n ${ALL_PROXY:-} ]] || env_args+=("ALL_PROXY=${proxy_url}")
+  [[ -n ${http_proxy:-} ]] || env_args+=("http_proxy=${proxy_url}")
+  [[ -n ${https_proxy:-} ]] || env_args+=("https_proxy=${proxy_url}")
+  [[ -n ${all_proxy:-} ]] || env_args+=("all_proxy=${proxy_url}")
+  [[ -n ${NO_PROXY:-} ]] || env_args+=("NO_PROXY=localhost,127.0.0.1,::1")
+  [[ -n ${no_proxy:-} ]] || env_args+=("no_proxy=localhost,127.0.0.1,::1")
+}
+
 require_orbstack() {
   if ! command -v orbctl >/dev/null 2>&1; then
     echo "orbctl is required. Install OrbStack first." >&2
@@ -84,6 +114,7 @@ run_smoke_test() {
       env_args+=("${name}=${!name}")
     fi
   done < <(dotfiles_test_forwarded_env_names)
+  add_proxy_envs
   script="$(dotfiles_test_smoke_script "${target}" bootstrap)"
 
   log "run bootstrap smoke test on ${machine}"

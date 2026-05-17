@@ -4,7 +4,7 @@ set -euo pipefail
 # shellcheck source=tests/lib/check-common.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/check-common.sh"
 
-main() {
+dotfiles_check_validate_library_helpers() {
   local tmp_dir
   local host_file
   local packages_csv
@@ -35,6 +35,10 @@ EOF
   if dotfiles_test_is_supported_target macos-arm64; then
     return 1
   fi
+}
+
+main() {
+  run_step "validate helper parsers" dotfiles_check_validate_library_helpers
 }
 
 main "$@"
