@@ -44,15 +44,31 @@ dotfiles_array_from_file() {
   local key=$2
 
   awk -v key="${key}" '
-    $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
+    function emit_values(text, value) {
+      while (match(text, /"([^"\\]|\\.)*"/)) {
+        value = substr(text, RSTART + 1, RLENGTH - 2)
+        gsub(/\\"/, "\"", value)
+        gsub(/\\\\/, "\\", value)
+        print value
+        text = substr(text, RSTART + RLENGTH)
+      }
+    }
+
+    !capturing && $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
+      capturing = 1
       line = $0
       sub(/^[^=]*=/, "", line)
-      gsub(/[\[\]"]/, "", line)
-      gsub(/'\''/, "", line)
-      gsub(/[[:space:]]+/, "", line)
-      n = split(line, values, ",")
-      for (i = 1; i <= n; i++) {
-        if (values[i] != "") print values[i]
+      emit_values(line)
+      if (line ~ /\]/) {
+        capturing = 0
+      }
+      next
+    }
+
+    capturing {
+      emit_values($0)
+      if ($0 ~ /\]/) {
+        capturing = 0
       }
     }
   ' "${file}"

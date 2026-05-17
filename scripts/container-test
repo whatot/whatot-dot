@@ -9,11 +9,9 @@ source "${ROOT_DIR}/scripts/lib/test-targets"
 dotfiles_load_private_env
 
 usage() {
-  cat <<'EOF'
-usage: scripts/container-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [bootstrap|packages|devtools]
-
-Run Linux bootstrap, package, and devtool smoke tests in Docker containers.
-EOF
+  printf 'usage: scripts/container-test <%s> [bootstrap|packages|devtools]\n\n' \
+    "$(dotfiles_test_target_selector true)"
+  printf 'Run Linux bootstrap, package, and devtool smoke tests in Docker containers.\n'
 }
 
 log() {
@@ -142,15 +140,16 @@ case "${target}" in
       run_target "${resolved_target}" "${stage}"
     done < <(dotfiles_test_targets)
     ;;
-  ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
-    run_target "${target}" "${stage}"
-    ;;
   -h | --help)
     usage
     ;;
   *)
-    echo "unsupported target: ${target}" >&2
-    usage
-    exit 1
+    if dotfiles_test_is_supported_target "${target}"; then
+      run_target "${target}" "${stage}"
+    else
+      echo "unsupported target: ${target}" >&2
+      usage
+      exit 1
+    fi
     ;;
 esac

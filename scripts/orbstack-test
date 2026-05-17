@@ -9,21 +9,13 @@ source "${ROOT_DIR}/scripts/lib/test-targets"
 dotfiles_load_private_env
 
 usage() {
-  cat <<'EOF'
-usage: scripts/orbstack-test <ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all> [--reset]
-
-Create or reuse fixed OrbStack Linux test machines and run the bootstrap smoke
-test.
-
-Machines:
-  dotfiles-ubuntu-amd64
-  dotfiles-debian-amd64
-  dotfiles-arch-amd64
-  dotfiles-ubuntu-arm64
-
-Options:
-  --reset  delete the target machine before creating it again
-EOF
+  printf 'usage: scripts/orbstack-test <%s> [--reset]\n\n' "$(dotfiles_test_target_selector true)"
+  printf 'Create or reuse fixed OrbStack Linux test machines and run the bootstrap smoke\n'
+  printf 'test.\n\n'
+  printf 'Machines:\n'
+  dotfiles_test_machine_lines
+  printf '\nOptions:\n'
+  printf '  --reset  delete the target machine before creating it again\n'
 }
 
 log() {
@@ -148,15 +140,16 @@ case "${target}" in
       run_target "${resolved_target}" "${reset}"
     done < <(dotfiles_test_targets)
     ;;
-  ubuntu-amd64 | debian-amd64 | arch-amd64 | ubuntu-arm64)
-    run_target "${target}" "${reset}"
-    ;;
   -h | --help)
     usage
     ;;
   *)
-    echo "unsupported target: ${target}" >&2
-    usage
-    exit 1
+    if dotfiles_test_is_supported_target "${target}"; then
+      run_target "${target}" "${reset}"
+    else
+      echo "unsupported target: ${target}" >&2
+      usage
+      exit 1
+    fi
     ;;
 esac

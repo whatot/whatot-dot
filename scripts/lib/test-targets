@@ -8,6 +8,44 @@ dotfiles_test_targets() {
     ubuntu-arm64
 }
 
+dotfiles_test_target_selector() {
+  local include_all=${1:-false}
+  local target
+  local separator=
+
+  while IFS= read -r target; do
+    printf '%s%s' "${separator}" "${target}"
+    separator='|'
+  done < <(dotfiles_test_targets)
+
+  if [[ "${include_all}" == "true" ]]; then
+    printf '%sall' "${separator}"
+  fi
+
+  printf '\n'
+}
+
+dotfiles_test_is_supported_target() {
+  local expected=$1
+  local target
+
+  while IFS= read -r target; do
+    if [[ "${target}" == "${expected}" ]]; then
+      return 0
+    fi
+  done < <(dotfiles_test_targets)
+
+  return 1
+}
+
+dotfiles_test_machine_lines() {
+  local target
+
+  while IFS= read -r target; do
+    printf '  %s\n' "$(dotfiles_test_machine_for_target "${target}")"
+  done < <(dotfiles_test_targets)
+}
+
 dotfiles_test_forwarded_env_names() {
   printf '%s\n' \
     DOTFILES_UBUNTU_MIRROR \
