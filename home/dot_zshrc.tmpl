@@ -181,8 +181,8 @@ setup_vcs_info() {
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr '+'
   zstyle ':vcs_info:git:*' unstagedstr '*'
-  zstyle ':vcs_info:git:*' formats 'on %F{magenta}%b%f%c%u'
-  zstyle ':vcs_info:git:*' actionformats 'on %F{magenta}%b%f %F{yellow}%a%f%c%u'
+  zstyle ':vcs_info:git:*' formats ' %F{244}|%f %F{magenta}%b%f%F{yellow} %c%u%f'
+  zstyle ':vcs_info:git:*' actionformats ' %F{244}|%f %F{magenta}%b%f %F{yellow}%a%c%u%f'
 }
 
 # Tool hooks and plugins.
@@ -260,7 +260,7 @@ prompt_context() {
 
 update_prompt() {
   vcs_info
-  PROMPT="$(prompt_context)%F{cyan}%~%f ${vcs_info_msg_0_}
+  PROMPT="$(prompt_context)%F{cyan}%~%f${vcs_info_msg_0_}
 %(?.%F{green}.%F{red})%#%f "
   RPROMPT='%F{blue}%*%f'
 }
