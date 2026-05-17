@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
-# shellcheck source=scripts/lib/env
-source "${ROOT_DIR}/scripts/lib/env"
-# shellcheck source=scripts/lib/test-targets
-source "${ROOT_DIR}/scripts/lib/test-targets"
-dotfiles_load_private_env
+# shellcheck source=tests/lib/smoke-common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/smoke-common.sh"
 
 usage() {
   printf 'usage: tests/smoke/container.sh <%s> [bootstrap|packages|devtools]\n\n' \
@@ -33,14 +29,6 @@ docker_proxy_url() {
   printf '%s\n' "${url}"
 }
 
-add_env_if_set() {
-  local name=$1
-
-  if [[ -n "${!name:-}" ]]; then
-    env_args+=(--env "${name}=${!name}")
-  fi
-}
-
 add_proxy_url_env_if_set() {
   local name=$1
   local value=${!name:-}
@@ -57,7 +45,7 @@ add_proxy_envs() {
     add_proxy_url_env_if_set "${name}"
   done
   for name in NO_PROXY no_proxy; do
-    add_env_if_set "${name}"
+    dotfiles_smoke_add_env_if_set "${name}" --env "="
   done
 
   if [[ ${USE_PROXY:-true} != "true" || -z ${PROXY_URL:-} ]]; then
@@ -66,14 +54,7 @@ add_proxy_envs() {
 
   proxy_url="$(docker_proxy_url "${PROXY_URL}")"
   env_args+=(--env "PROXY_URL=${proxy_url}")
-  [[ -n ${HTTP_PROXY:-} ]] || env_args+=(--env "HTTP_PROXY=${proxy_url}")
-  [[ -n ${HTTPS_PROXY:-} ]] || env_args+=(--env "HTTPS_PROXY=${proxy_url}")
-  [[ -n ${ALL_PROXY:-} ]] || env_args+=(--env "ALL_PROXY=${proxy_url}")
-  [[ -n ${http_proxy:-} ]] || env_args+=(--env "http_proxy=${proxy_url}")
-  [[ -n ${https_proxy:-} ]] || env_args+=(--env "https_proxy=${proxy_url}")
-  [[ -n ${all_proxy:-} ]] || env_args+=(--env "all_proxy=${proxy_url}")
-  env_args+=(--env "NO_PROXY=${NO_PROXY:-localhost,127.0.0.1,::1}")
-  env_args+=(--env "no_proxy=${no_proxy:-localhost,127.0.0.1,::1}")
+  dotfiles_smoke_add_proxy_defaults "${proxy_url}" --env "="
 }
 
 run_target() {
@@ -93,11 +74,7 @@ run_target() {
     docker_args+=(--security-opt seccomp=unconfined)
   fi
 
-  while IFS= read -r name; do
-    if [[ -n "${!name:-}" ]]; then
-      env_args+=(--env "${name}=${!name}")
-    fi
-  done < <(dotfiles_test_forwarded_env_names)
+  dotfiles_smoke_add_forwarded_envs --env "="
   if [[ "${stage}" != "bootstrap" ]]; then
     env_args+=(--env "DOTFILES_SKIP_MISE_INSTALL=true")
   fi

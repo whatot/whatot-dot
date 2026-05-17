@@ -26,8 +26,8 @@
 ## Validation Rules
 
 - Run `mise run check` for local formatting and rendered-dotfile validation.
-- Use `scripts/container-test` for Linux bootstrap and container-safe package or devtool checks.
-- Use `scripts/orbstack-test` when a Linux change needs a fuller machine-like environment.
-- Use `scripts/macos-test host` for macOS Brewfile validation.
+- Use `tests/smoke/container.sh` for Linux bootstrap and container-safe package or devtool checks.
+- Use `tests/smoke/orbstack.sh` when a Linux change needs a fuller machine-like environment.
+- Use `tests/smoke/macos.sh host` for macOS Brewfile validation.
 - Do not treat `homebrew/brew` on Linux as a real macOS environment.
 - Use a real host for desktop apps, fonts, input methods, AUR, and macOS system integration checks.

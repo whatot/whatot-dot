@@ -16,6 +16,53 @@ register_completion() {
   fi
 }
 
+patch_git_completion_aliases() {
+  if git help --aliases-for-completion >/dev/null 2>&1; then
+    return
+  fi
+
+  if (( ${+functions[__git_zsh_cmd_alias]} )); then
+    if [[ -n ${DOTFILES_GIT_ALIAS_COMPLETION_PATCHED:-} ]]; then
+      return
+    fi
+
+    export DOTFILES_GIT_ALIAS_COMPLETION_PATCHED=1
+    __git_zsh_cmd_alias() {
+      local -a list
+      local line alias_name expansion
+
+      list=()
+      while IFS= read -r line; do
+        [[ "${line}" == alias.* ]] || continue
+        alias_name=${line#alias.}
+        alias_name=${alias_name%% *}
+        expansion=${line#*=}
+        expansion=${expansion# }
+        [[ -n "${alias_name}" && -n "${expansion}" ]] || continue
+        list+=("${alias_name}:alias for '${expansion}'")
+      done < <(git config --get-regexp '^alias\.' 2>/dev/null)
+
+      [[ ${#list[@]} -eq 0 ]] && return
+      _describe -t alias-commands 'aliases' list && _ret=0
+    }
+    return
+  fi
+
+  if [[ -n ${DOTFILES_GIT_COMPLETION_WRAPPED:-} ]]; then
+    return
+  fi
+
+  if (( ${+functions[_git]} )) && [[ "${functions[_git]}" == *autoload* ]]; then
+    export DOTFILES_GIT_COMPLETION_WRAPPED=1
+    _git() {
+      unfunction _git
+      autoload -Uz +X _git
+      patch_git_completion_aliases
+      _git "$@"
+    }
+  fi
+}
+
 _mise_run_completion() {
   local -a original_words
   local original_current
@@ -100,6 +147,8 @@ setup_tool_hooks() {
   if is_command pnpm; then
     source_if_exists <(pnpm completion zsh)
   fi
+
+  patch_git_completion_aliases
 }
 
 load_optional_plugins() {

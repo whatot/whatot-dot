@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
-# shellcheck source=scripts/lib/env
-source "${ROOT_DIR}/scripts/lib/env"
-# shellcheck source=scripts/lib/test-targets
-source "${ROOT_DIR}/scripts/lib/test-targets"
-dotfiles_load_private_env
+# shellcheck source=tests/lib/smoke-common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/smoke-common.sh"
 
 usage() {
   printf 'usage: tests/smoke/orbstack.sh <%s> [--reset]\n\n' "$(dotfiles_test_target_selector true)"
@@ -22,34 +18,24 @@ log() {
   printf "==> %s\n" "$*"
 }
 
-add_env_if_set() {
-  local name=$1
-
-  if [[ -n "${!name:-}" ]]; then
-    env_args+=("${name}=${!name}")
-  fi
-}
-
 add_proxy_envs() {
   local proxy_url=${PROXY_URL:-}
-  local name
 
-  for name in HTTP_PROXY HTTPS_PROXY ALL_PROXY NO_PROXY http_proxy https_proxy all_proxy no_proxy PROXY_URL; do
-    add_env_if_set "${name}"
-  done
+  dotfiles_smoke_add_env_if_set HTTP_PROXY "" "="
+  dotfiles_smoke_add_env_if_set HTTPS_PROXY "" "="
+  dotfiles_smoke_add_env_if_set ALL_PROXY "" "="
+  dotfiles_smoke_add_env_if_set NO_PROXY "" "="
+  dotfiles_smoke_add_env_if_set http_proxy "" "="
+  dotfiles_smoke_add_env_if_set https_proxy "" "="
+  dotfiles_smoke_add_env_if_set all_proxy "" "="
+  dotfiles_smoke_add_env_if_set no_proxy "" "="
+  dotfiles_smoke_add_env_if_set PROXY_URL "" "="
 
   if [[ ${USE_PROXY:-true} != "true" || -z "${proxy_url}" ]]; then
     return
   fi
 
-  [[ -n ${HTTP_PROXY:-} ]] || env_args+=("HTTP_PROXY=${proxy_url}")
-  [[ -n ${HTTPS_PROXY:-} ]] || env_args+=("HTTPS_PROXY=${proxy_url}")
-  [[ -n ${ALL_PROXY:-} ]] || env_args+=("ALL_PROXY=${proxy_url}")
-  [[ -n ${http_proxy:-} ]] || env_args+=("http_proxy=${proxy_url}")
-  [[ -n ${https_proxy:-} ]] || env_args+=("https_proxy=${proxy_url}")
-  [[ -n ${all_proxy:-} ]] || env_args+=("all_proxy=${proxy_url}")
-  [[ -n ${NO_PROXY:-} ]] || env_args+=("NO_PROXY=localhost,127.0.0.1,::1")
-  [[ -n ${no_proxy:-} ]] || env_args+=("no_proxy=localhost,127.0.0.1,::1")
+  dotfiles_smoke_add_proxy_defaults "${proxy_url}" "" "="
 }
 
 require_orbstack() {
@@ -109,11 +95,7 @@ run_smoke_test() {
     "DOTFILES_GIT_EMAIL=dotfiles-test@example.invalid"
   )
 
-  while IFS= read -r name; do
-    if [[ -n "${!name:-}" ]]; then
-      env_args+=("${name}=${!name}")
-    fi
-  done < <(dotfiles_test_forwarded_env_names)
+  dotfiles_smoke_add_forwarded_envs "" "="
   add_proxy_envs
   script="$(dotfiles_test_smoke_script "${target}" bootstrap)"
 
