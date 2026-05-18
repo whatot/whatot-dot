@@ -29,17 +29,22 @@ tests/      validation entrypoints and test implementations
 ## Configuration Model
 
 1. Private env outside git selects the active host and Git identity.
-2. `scripts/preflight` requires `DOTFILES_HOST`, `DOTFILES_GIT_NAME`, and
-   `DOTFILES_GIT_EMAIL` before user-facing tasks run.
+2. `scripts/preflight` is the internal hard prerequisite check. It validates
+   required private settings such as `DOTFILES_HOST`, `DOTFILES_GIT_NAME`, and
+   `DOTFILES_GIT_EMAIL`, and is used directly by low-level scripts such as
+   `bootstrap` and `chezmoi`.
 3. `hosts/*.toml` decide which package groups and optional setup behavior apply
    to a machine.
 4. `bootstrap/` installs the minimum prerequisites, applies Linux mirrors, and
    makes `chezmoi` plus `mise` usable.
 5. `packages/` provide the long-term OS-level inventory.
 6. `home/` provides dotfiles rendered by `chezmoi`.
-7. `scripts/` plus `mise.toml` expose stable workstation entrypoints such as
+7. `scripts/doctor` is the user-facing readiness report. It builds on
+   `preflight`, checks command availability, and can add host-plan-aware
+   diagnostics before setup or update flows.
+8. `scripts/` plus `mise.toml` expose stable workstation entrypoints such as
    `setup`, `show`, `update`, and focused subcommands.
-8. `tests/` owns repository validation entrypoints and test implementations.
+9. `tests/` owns repository validation entrypoints and test implementations.
 
 Local private defaults live in:
 

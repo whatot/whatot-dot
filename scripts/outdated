@@ -62,21 +62,26 @@ show_outdated_mise_tools() {
   run_step "mise outdated" mise outdated
 }
 
+run_doctor() {
+  run_step "doctor" "${ROOT_DIR}/scripts/doctor"
+}
+
 run_all() {
+  run_doctor
   show_outdated_os_packages
   show_outdated_mise_tools
 }
-
-"${ROOT_DIR}/scripts/preflight" >/dev/null
 
 case "${1:-all}" in
   all)
     run_all
     ;;
   packages)
+    run_doctor
     show_outdated_os_packages
     ;;
   mise)
+    run_doctor
     show_outdated_mise_tools
     ;;
   -h | --help)

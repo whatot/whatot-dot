@@ -80,8 +80,6 @@ run_all() {
   apply_dotfiles
 }
 
-"${ROOT_DIR}/scripts/preflight" >/dev/null
-
 case "${1:-all}" in
   all)
     run_all
