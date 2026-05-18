@@ -72,6 +72,10 @@ run = "scripts/host show"
 description = "Preview chezmoi-managed dotfile changes"
 run = "scripts/chezmoi diff"
 
+[tasks."show:cheat"]
+description = "Print the shell and dotfiles cheat sheet"
+run = "scripts/cheat"
+
 [tasks."chezmoi:apply"]
 description = "Run the raw chezmoi apply command"
 run = "scripts/chezmoi apply"

@@ -1,0 +1,33 @@
+- Shell
+  - `Right Arrow`: accept gray autosuggestion
+  - `Tab`: normal completion
+  - `Ctrl-R`: `fzf` history search
+  - `Ctrl-T`: `fzf` file picker
+  - `Alt-C`: `fzf` directory picker
+- Commands
+  - `m`: `mise run`
+  - `pn`: `pnpm`
+  - `ll`: long directory listing
+  - `cat`: `bat`
+  - `..`: `cd ..`
+  - `...`: `cd ../..`
+  - `gf`: `git pull`
+  - `rg pattern`: search text
+  - `rg --files | fzf`: pick a file
+  - `fd name`: find files or directories
+  - `z name`: jump to a frequent directory
+  - `zi`: pick a directory interactively
+  - `rtk <cmd>`: run a command with RTK filtering
+  - `rtk gain`: show RTK savings
+- Dotfiles
+  - `m show`: show host, env, and pending dotfile changes
+  - `m doctor`: run readiness checks
+  - `m outdated`: refresh metadata and show updates
+  - `m update`: update packages, mise tools, and dotfiles
+  - `m chezmoi:apply`: raw `chezmoi apply`
+  - `m chezmoi:diff`: preview pending dotfile changes
+- Network
+  - `setproxy`: enable proxy env vars from `PROXY_URL`
+  - `unsetproxy`: clear proxy env vars
+  - `proxyinfo`: print current proxy-related env vars
+  - `myip`: print current public IP info

@@ -34,6 +34,7 @@ Built-in hosts:
 
 ```shell
 mise run show
+mise run show:cheat
 mise run show:host
 mise run show:dotfiles
 mise run doctor
@@ -59,6 +60,7 @@ Validation commands live in [docs/testing.md](docs/testing.md).
 ## Docs
 
 - `docs/architecture.md`: design choices, boundaries, and where new changes go
+- `docs/cheat.md`: short shell and dotfiles command cheat sheet
 - `docs/new-machine.md`: fresh-machine setup and mirror overrides
 - `docs/testing.md`: container, OrbStack, and real-host validation
 - `docs/tools.md`: short usage notes for the everyday CLI tools
