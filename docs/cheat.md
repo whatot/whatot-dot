@@ -19,6 +19,7 @@
   - `rg pattern`: search text
   - `rg --files | fzf`: pick a file
   - `fd name`: find files or directories
+  - `btm`: terminal system monitor
   - `z name`: jump to a frequent directory
   - `zi`: pick a directory interactively
   - `rtk <cmd>`: run a command with RTK filtering

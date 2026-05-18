@@ -48,6 +48,19 @@ mise run update:packages
 
 Validation commands live in [docs/testing.md](docs/testing.md).
 
+## Common Tools
+
+These workstation-global CLI tools are installed through `mise`:
+
+- `rtk`: token-aware shell proxy for AI-assisted terminal work. Source: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
+- `rg`: fast text search. Source: [BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep)
+- `fd`: friendly file and directory search. Source: [sharkdp/fd](https://github.com/sharkdp/fd)
+- `fzf`: fuzzy picker for files, history, and command output. Source: [junegunn/fzf](https://github.com/junegunn/fzf)
+- `bat`: syntax-highlighted file viewer. Source: [sharkdp/bat](https://github.com/sharkdp/bat)
+- `btm`: terminal system monitor. Source: [ClementTsang/bottom](https://github.com/ClementTsang/bottom)
+- `zoxide`: smarter directory jumping via `z` and `zi`. Source: [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide)
+- `jj`: Git-compatible change-oriented VCS. Source: [jj-vcs/jj](https://github.com/jj-vcs/jj)
+
 ## Repository Layout
 
 - `home/`: dotfiles and generated user config managed by `chezmoi`
@@ -63,5 +76,4 @@ Validation commands live in [docs/testing.md](docs/testing.md).
 - `docs/cheat.md`: short shell and dotfiles command cheat sheet
 - `docs/new-machine.md`: fresh-machine setup and mirror overrides
 - `docs/testing.md`: container, OrbStack, and real-host validation
-- `docs/tools.md`: short usage notes for the everyday CLI tools
 - `docs/vim-regex.md`: Vim regex notes
