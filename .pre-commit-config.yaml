@@ -15,6 +15,6 @@ repos:
         exclude: ^home/dot_zsh/vendor/
       - id: dprint
         name: dprint
-        entry: mise exec -- dprint fmt
+        entry: mise exec -- dprint fmt --incremental=false --allow-no-files
         language: system
         types_or: [json, yaml, markdown, toml]

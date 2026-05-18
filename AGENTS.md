@@ -19,6 +19,7 @@
 - Keep package groups coarse: `base`, `desktop`, and `dev`.
 - Keep host behavior driven by `hosts/*.toml`, not scattered conditionals across unrelated scripts.
 - Put portable CLIs and language runtimes in `mise.toml` only when they are part of the normal workstation path.
+- Do not hardcode machine-local absolute paths such as a specific home directory in tracked files or tests; derive them from template data, `$HOME`, or repo helpers instead.
 - Standardize managed app config content under XDG-style paths such as `~/.config/<tool>/...`.
 - On macOS, when a tool expects `~/Library/Application Support/<tool>/...`, keep that native path as a symlink back to the XDG-managed file instead of maintaining two copies.
 - When managing those macOS compatibility symlinks through chezmoi, avoid changing `~/Library` or `~/Library/Application Support` directory metadata; only manage the leaf app path.
