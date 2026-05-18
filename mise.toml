@@ -37,13 +37,7 @@ run = "scripts/bootstrap"
 
 [tasks.setup]
 description = "Set up the current host"
-run = [
-  { task = "doctor" },
-  "mise install",
-  "scripts/packages",
-  { task = "update:devtools" },
-  { task = "update:dotfiles" },
-]
+run = "scripts/setup"
 
 [tasks.check]
 description = "Run local checks before committing"
@@ -111,12 +105,7 @@ run = "pre-commit run --all-files"
 
 [tasks.update]
 description = "Update packages, mise tools, and chezmoi state"
-run = [
-  { task = "doctor" },
-  { task = "update:packages" },
-  { task = "update:mise" },
-  { task = "update:dotfiles" },
-]
+run = "scripts/update"
 
 [tasks."update:packages"]
 description = "Update operating system packages for the current host"
@@ -125,16 +114,6 @@ run = "scripts/update packages"
 [tasks."update:mise"]
 description = "Update mise and install declared tool versions"
 run = "scripts/update mise"
-
-[tasks."update:dotfiles"]
-description = "Apply chezmoi-managed dotfiles"
-hide = true
-run = "scripts/update dotfiles"
-
-[tasks."update:devtools"]
-description = "Install host-enabled development tools"
-hide = true
-run = "scripts/update devtools"
 
 [tasks."devtools:rust-system"]
 description = "Install system packages commonly needed by Rust builds"

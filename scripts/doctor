@@ -8,7 +8,6 @@ source "${ROOT_DIR}/scripts/lib/env"
 source "${ROOT_DIR}/scripts/lib/plan"
 # shellcheck source=scripts/lib/platform
 source "${ROOT_DIR}/scripts/lib/platform"
-dotfiles_load_private_env
 
 missing=0
 
@@ -22,6 +21,41 @@ print_command_status() {
 
   printf "miss %s\n" "${name}"
   return 1
+}
+
+print_check_details() {
+  local output=$1
+  local line
+
+  while IFS= read -r line; do
+    [[ -n "${line}" ]] || continue
+    printf "  %s\n" "${line}"
+  done <<<"${output}"
+}
+
+run_check() {
+  local name=$1
+  shift
+  local output
+
+  if output="$("$@" 2>&1)"; then
+    printf "ok   %s\n" "${name}"
+    return 0
+  fi
+
+  printf "miss %s\n" "${name}"
+  if [[ -n "${output}" ]]; then
+    print_check_details "${output}"
+  fi
+  return 1
+}
+
+# shellcheck disable=SC2329
+validate_host_plan() {
+  dotfiles_load_private_env
+  dotfiles_host_file >/dev/null
+  dotfiles_package_sets >/dev/null
+  dotfiles_devtools >/dev/null
 }
 
 check_core_commands() {
@@ -60,17 +94,14 @@ if ! check_core_commands; then
   missing=1
 fi
 
-if "${ROOT_DIR}/scripts/preflight" >/dev/null; then
-  printf "ok   private env\n"
+if run_check "private env" "${ROOT_DIR}/scripts/preflight"; then
+  if ! run_check "host plan" validate_host_plan; then
+    missing=1
+  fi
 else
-  printf "miss private env\n"
   missing=1
-fi
-
-if dotfiles_host_file >/dev/null && dotfiles_package_sets >/dev/null && dotfiles_devtools >/dev/null; then
-  printf "ok   host plan\n"
-else
   printf "miss host plan\n"
+  printf "  skipped: private env check failed\n"
   missing=1
 fi
 

@@ -87,9 +87,8 @@ DOTFILES_MISE_CURL_RETRIES=4 scripts/bootstrap
 
 ## Optional Development Tools
 
-`mise run setup` already installs host-enabled development tools through
-`update:devtools`. Use the extra tasks when you want more language-specific
-tools on demand:
+`mise run setup` already installs the host-enabled development tools. Use the
+extra tasks when you want more language-specific tools on demand:
 
 ```shell
 mise run devtools:rust-system
