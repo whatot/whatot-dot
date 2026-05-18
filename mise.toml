@@ -54,10 +54,7 @@ run = "scripts/show"
 
 [tasks.outdated]
 description = "Refresh metadata and show available package and mise updates"
-run = [
-  { task = "outdated:packages" },
-  { task = "outdated:mise" },
-]
+run = "scripts/outdated"
 
 [tasks."outdated:packages"]
 description = "Refresh metadata and show available operating system package updates"
@@ -78,7 +75,7 @@ description = "Preview chezmoi-managed dotfile changes"
 run = "scripts/chezmoi diff"
 
 [tasks."chezmoi:apply"]
-description = "Apply chezmoi-managed dotfiles"
+description = "Run the raw chezmoi apply command"
 run = "scripts/chezmoi apply"
 
 [tasks.preflight]
@@ -114,6 +111,10 @@ run = "scripts/update packages"
 [tasks."update:mise"]
 description = "Update mise and install declared tool versions"
 run = "scripts/update mise"
+
+[tasks."update:dotfiles"]
+description = "Equivalent to chezmoi:apply"
+run = "scripts/update dotfiles"
 
 [tasks."devtools:rust-system"]
 description = "Install system packages commonly needed by Rust builds"
