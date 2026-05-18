@@ -12,6 +12,19 @@ source "${ROOT_DIR}/scripts/lib/common"
 dotfiles_load_private_env
 init_sudo_cmd
 
+usage() {
+  cat <<'EOF'
+usage: scripts/update [command]
+
+commands:
+  all       update packages, mise tools, dotfiles, and doctor checks (default)
+  packages  update operating system packages and install declared package sets
+  mise      update mise and install declared tool versions
+  dotfiles  apply chezmoi-managed dotfiles
+  devtools  install host-enabled development tools
+EOF
+}
+
 update_os_packages() {
   local kernel_name
   local linux_id
@@ -48,10 +61,53 @@ update_os_packages() {
   esac
 }
 
+update_mise_tools() {
+  run_step_allow_fail "mise upgrade" mise upgrade
+  run_step "mise install" mise install
+}
+
+apply_dotfiles() {
+  run_step "apply dotfiles" "${ROOT_DIR}/scripts/chezmoi" apply
+}
+
+install_host_devtools() {
+  run_step "install host devtools" "${ROOT_DIR}/scripts/devtools" host
+}
+
+run_doctor() {
+  run_step "doctor" "${ROOT_DIR}/scripts/doctor"
+}
+
+run_all() {
+  update_os_packages
+  update_mise_tools
+  apply_dotfiles
+  run_doctor
+}
+
 "${ROOT_DIR}/scripts/preflight" >/dev/null
 
-update_os_packages
-run_step_allow_fail "mise upgrade" mise upgrade
-run_step "mise install" mise install
-run_step "apply dotfiles" "${ROOT_DIR}/scripts/chezmoi" apply
-run_step "doctor" "${ROOT_DIR}/scripts/doctor"
+case "${1:-all}" in
+  all)
+    run_all
+    ;;
+  packages)
+    update_os_packages
+    ;;
+  mise)
+    update_mise_tools
+    ;;
+  dotfiles)
+    apply_dotfiles
+    ;;
+  devtools)
+    install_host_devtools
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    usage >&2
+    exit 1
+    ;;
+esac

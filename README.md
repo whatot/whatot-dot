@@ -33,13 +33,13 @@ Built-in hosts:
 ## Daily Use
 
 ```shell
-mise run status
-mise run host
-mise run chezmoi:diff
+mise run show
+mise run show:host
+mise run show:dotfiles
 mise run chezmoi:apply
-mise run refresh
 mise run check
 mise run update
+mise run update:packages
 ```
 
 Validation commands live in [docs/testing.md](docs/testing.md).

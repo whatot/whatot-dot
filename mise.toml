@@ -40,18 +40,9 @@ description = "Set up the current host"
 run = [
   { task = "preflight" },
   "mise install",
-  { task = "packages" },
-  { task = "devtools:host" },
-  { task = "chezmoi:apply" },
-  { task = "doctor" },
-]
-
-[tasks.refresh]
-description = "Refresh dotfiles and mise-managed tools"
-run = [
-  { task = "preflight" },
-  "mise install",
-  { task = "chezmoi:apply" },
+  "scripts/packages",
+  { task = "update:devtools" },
+  { task = "update:dotfiles" },
   { task = "doctor" },
 ]
 
@@ -65,13 +56,21 @@ run = [
   { task = "doctor" },
 ]
 
-[tasks.status]
+[tasks.show]
 description = "Show active host and pending dotfile changes"
 run = [
   { task = "preflight" },
-  { task = "host" },
-  { task = "chezmoi:diff" },
+  { task = "show:host" },
+  { task = "show:dotfiles" },
 ]
+
+[tasks."show:host"]
+description = "Show active dotfiles host and resolved actions"
+run = "scripts/host show"
+
+[tasks."show:dotfiles"]
+description = "Preview chezmoi-managed dotfile changes"
+run = "scripts/chezmoi diff"
 
 [tasks."chezmoi:apply"]
 description = "Apply chezmoi-managed dotfiles"
@@ -99,17 +98,30 @@ description = "Run pre-commit hooks on all files"
 hide = true
 run = "pre-commit run --all-files"
 
-[tasks.host]
-description = "Show active dotfiles host and resolved actions"
-run = "scripts/host show"
-
-[tasks.packages]
-description = "Install packages for the current operating system"
-run = "scripts/packages"
-
 [tasks.update]
 description = "Update packages, mise tools, and chezmoi state"
-run = "scripts/update"
+run = [
+  { task = "update:packages" },
+  { task = "update:mise" },
+  { task = "update:dotfiles" },
+  { task = "doctor" },
+]
+
+[tasks."update:packages"]
+description = "Update operating system packages for the current host"
+run = "scripts/update packages"
+
+[tasks."update:mise"]
+description = "Update mise and install declared tool versions"
+run = "scripts/update mise"
+
+[tasks."update:dotfiles"]
+description = "Apply chezmoi-managed dotfiles"
+run = "scripts/update dotfiles"
+
+[tasks."update:devtools"]
+description = "Install host-enabled development tools"
+run = "scripts/update devtools"
 
 [tasks."devtools:rust-system"]
 description = "Install system packages commonly needed by Rust builds"
@@ -130,10 +142,6 @@ run = "scripts/devtools rust-tools-extra"
 [tasks."devtools:go-tools"]
 description = "Install Go CLI development tools"
 run = "scripts/devtools go-tools"
-
-[tasks."devtools:host"]
-description = "Install development tools enabled by the active host"
-run = "scripts/devtools host"
 
 [tasks."tools:create-iso"]
 description = "Convert a macOS Disk Utility dmg into iso and checksum"

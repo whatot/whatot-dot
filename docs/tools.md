@@ -110,8 +110,9 @@ Use `mise` for tool installation and task execution.
 ```shell
 mise install
 mise ls
+mise run show
 mise run check
-mise run setup
+mise run update
 ```
 
 The shell alias `m` maps to `mise run`.

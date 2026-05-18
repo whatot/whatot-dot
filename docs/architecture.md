@@ -38,7 +38,7 @@ tests/      validation entrypoints and test implementations
 5. `packages/` provide the long-term OS-level inventory.
 6. `home/` provides dotfiles rendered by `chezmoi`.
 7. `scripts/` plus `mise.toml` expose stable workstation entrypoints such as
-   `setup`, `refresh`, and package/devtool operations.
+   `setup`, `show`, `update`, and focused subcommands.
 8. `tests/` owns repository validation entrypoints and test implementations.
 
 Local private defaults live in:

@@ -55,7 +55,7 @@ mise run setup
 ## Re-run With A Different Host
 
 ```shell
-mise run host
+mise run show:host
 DOTFILES_HOST=ubuntu-amd64 mise run setup
 DOTFILES_HOST=macos-arm64 mise run setup
 ```
@@ -88,8 +88,8 @@ DOTFILES_MISE_CURL_RETRIES=4 scripts/bootstrap
 ## Optional Development Tools
 
 `mise run setup` already installs host-enabled development tools through
-`devtools:host`. Use the extra tasks when you want more language-specific tools
-on demand:
+`update:devtools`. Use the extra tasks when you want more language-specific
+tools on demand:
 
 ```shell
 mise run devtools:rust-system
