@@ -4,7 +4,7 @@
   - `Ctrl-R`: `fzf` history search
   - `Ctrl-T`: `fzf` file picker
   - `Alt-C`: `fzf` directory picker
-- Commands
+- Aliases
   - `m`: `mise run`
   - `pn`: `pnpm`
   - `ll`: long directory listing
@@ -12,6 +12,8 @@
   - `..`: `cd ..`
   - `...`: `cd ../..`
   - `gf`: `git pull`
+  - `bubu`: `brew update && brew outdated && brew upgrade && brew cleanup`
+- Commands
   - `rg pattern`: search text
   - `rg --files | fzf`: pick a file
   - `fd name`: find files or directories
