@@ -8,14 +8,55 @@ source "${ROOT_DIR}/scripts/lib/env"
 source "${ROOT_DIR}/scripts/lib/plan"
 # shellcheck source=scripts/lib/platform
 source "${ROOT_DIR}/scripts/lib/platform"
-# shellcheck source=scripts/lib/diagnostics
-source "${ROOT_DIR}/scripts/lib/diagnostics"
 dotfiles_load_private_env
 
 missing=0
 
+print_command_status() {
+  local name=$1
+
+  if command -v "${name}" >/dev/null 2>&1; then
+    printf "ok   %s\n" "${name}"
+    return 0
+  fi
+
+  printf "miss %s\n" "${name}"
+  return 1
+}
+
+check_core_commands() {
+  local failed=0
+
+  print_command_status git || failed=1
+  print_command_status chezmoi || failed=1
+  print_command_status mise || failed=1
+  print_command_status zsh || failed=1
+  print_command_status vim || failed=1
+
+  case "$(dotfiles_kernel_name)" in
+    Darwin)
+      print_command_status brew || failed=1
+      ;;
+    Linux)
+      case "$(dotfiles_linux_release_id)" in
+        arch | manjaro)
+          print_command_status pacman || failed=1
+          ;;
+        ubuntu | debian)
+          print_command_status apt || failed=1
+          ;;
+        *)
+          printf "warn unsupported linux distribution: %s\n" "$(dotfiles_linux_release_id)"
+          ;;
+      esac
+      ;;
+  esac
+
+  return "${failed}"
+}
+
 printf "checks:\n"
-if ! dotfiles_diag_check_core_commands; then
+if ! check_core_commands; then
   missing=1
 fi
 

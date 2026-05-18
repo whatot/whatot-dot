@@ -6,18 +6,102 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 source "${ROOT_DIR}/scripts/lib/env"
 # shellcheck source=scripts/lib/plan
 source "${ROOT_DIR}/scripts/lib/plan"
-# shellcheck source=scripts/lib/diagnostics
-source "${ROOT_DIR}/scripts/lib/diagnostics"
+
+print_env_value() {
+  local label=$1
+  local value=$2
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "${value}"
+  else
+    printf "%-18s %s\n" "${label}:" "(unset)"
+  fi
+}
+
+print_env_state() {
+  local label=$1
+  local value=$2
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "set"
+  else
+    printf "%-18s %s\n" "${label}:" "unset"
+  fi
+}
+
+print_env_default() {
+  local label=$1
+  local value=$2
+  local fallback=$3
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "${value}"
+  else
+    printf "%-18s %s\n" "${label}:" "${fallback}"
+  fi
+}
+
+join_lines() {
+  local separator=$1
+  shift
+  local item
+  local output=
+
+  for item in "$@"; do
+    [[ -n "${item}" ]] || continue
+    if [[ -n "${output}" ]]; then
+      output="${output}${separator}${item}"
+    else
+      output="${item}"
+    fi
+  done
+
+  printf '%s\n' "${output}"
+}
 
 show_environment() {
   local env_status="loaded"
+  local host package_sets_text devtools_text
+  local item
+  local package_sets=()
+  local devtools=()
 
   if ! dotfiles_load_private_env >/dev/null 2>&1; then
     env_status="invalid"
   fi
 
-  dotfiles_diag_show_env_report
-  dotfiles_diag_print_env_value "private env" "${env_status}"
+  host="${DOTFILES_HOST:-}"
+
+  while IFS= read -r item; do
+    [[ -n "${item}" ]] || continue
+    package_sets+=("${item}")
+  done < <(dotfiles_package_sets 2>/dev/null || true)
+
+  while IFS= read -r item; do
+    [[ -n "${item}" ]] || continue
+    devtools+=("${item}")
+  done < <(dotfiles_devtools 2>/dev/null || true)
+
+  package_sets_text="$(join_lines ", " "${package_sets[@]}")"
+  devtools_text="$(join_lines ", " "${devtools[@]}")"
+
+  print_env_value "host" "${host}"
+  print_env_default "package sets" "${package_sets_text}" "(unavailable)"
+  print_env_default "devtools" "${devtools_text}" "(unavailable)"
+  print_env_value "git name" "${DOTFILES_GIT_NAME:-}"
+  print_env_value "git email" "${DOTFILES_GIT_EMAIL:-}"
+  print_env_default "use proxy" "${USE_PROXY:-}" "(unset)"
+  print_env_default "retry attempts" "${DOTFILES_RETRY_ATTEMPTS:-}" "(default)"
+  print_env_default "retry delay" "${DOTFILES_RETRY_DELAY:-}" "(default)"
+  print_env_default "rust toolchain" "${DOTFILES_RUST_TOOLCHAIN:-}" "(default)"
+  print_env_state "git include rules" "${DOTFILES_GIT_INCLUDE_RULES:-}"
+  print_env_state "proxy url" "${PROXY_URL:-}"
+  print_env_default "mise install url" "${DOTFILES_MISE_INSTALL_URL:-}" "(default)"
+  print_env_default "mise curl retries" "${DOTFILES_MISE_CURL_RETRIES:-}" "(default)"
+  print_env_default "brew verbose" "${DOTFILES_BREW_BUNDLE_VERBOSE:-}" "(default)"
+  print_env_default "brew bottle domain" "${HOMEBREW_BOTTLE_DOMAIN:-}" "(default)"
+  print_env_default "brew api domain" "${HOMEBREW_API_DOMAIN:-}" "(default)"
+  print_env_value "private env" "${env_status}"
 }
 
 print_section() {
