@@ -11,6 +11,8 @@
   - `cat`: `bat`
   - `..`: `cd ..`
   - `...`: `cd ../..`
+  - `gst`: `git status`
+  - `gdi`: `git diff`
   - `gf`: `git pull`
   - `bubu`: `brew update && brew outdated && brew upgrade && brew cleanup`
 - Commands

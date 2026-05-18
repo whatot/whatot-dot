@@ -22,6 +22,8 @@ setup_aliases() {
   alias ...="cd ../.."
   alias m="mise run"
   alias pn="pnpm"
+  alias gst="git status"
+  alias gdi="git diff"
   alias gf="git pull"
   alias myip="curl myip.ipip.net"
 
@@ -34,6 +36,8 @@ setup_aliases() {
   register_completion mise _mise
   register_completion pnpm _pnpm_completion
   register_completion pn _pnpm_completion
+  register_completion gst _git git-status
+  register_completion gdi _git git-diff
   register_completion gf _git git-pull
   register_completion myip _curl
 }
