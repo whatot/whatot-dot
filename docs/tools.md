@@ -120,6 +120,7 @@ Use `mise` for tool installation and task execution.
 mise install
 mise ls
 mise run show
+mise run outdated
 mise run check
 mise run update
 ```

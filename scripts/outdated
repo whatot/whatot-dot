@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
+# shellcheck source=scripts/lib/common
+source "${ROOT_DIR}/scripts/lib/common"
+dotfiles_load_private_env
+init_sudo_cmd
+
+usage() {
+  cat <<'EOF'
+usage: scripts/outdated [command]
+
+commands:
+  all       refresh package and mise metadata, then list available updates (default)
+  packages  refresh package metadata, then list available operating system updates
+  mise      refresh mise metadata, then list available mise tool updates
+EOF
+}
+
+show_outdated_os_packages() {
+  local kernel_name
+  local linux_id
+
+  kernel_name="$(dotfiles_kernel_name)"
+
+  case "${kernel_name}" in
+    Darwin)
+      run_step "brew update" brew update
+      run_step "brew outdated" brew outdated
+      ;;
+    Linux)
+      linux_id="$(dotfiles_linux_release_id)"
+      case "${linux_id}" in
+        arch | manjaro)
+          run_step "pacman refresh databases" "${sudo_cmd[@]}" pacman -Sy
+          run_step_allow_fail "pacman list updates" pacman -Qu
+          ;;
+        ubuntu | debian)
+          run_apt_update_once
+          run_step_allow_fail "apt list --upgradable" apt list --upgradable
+          ;;
+        *)
+          echo "unsupported linux distribution: ${linux_id}" >&2
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      echo "unsupported os: ${kernel_name}" >&2
+      exit 1
+      ;;
+  esac
+}
+
+show_outdated_mise_tools() {
+  run_step "mise outdated" mise outdated
+}
+
+run_all() {
+  show_outdated_os_packages
+  show_outdated_mise_tools
+}
+
+"${ROOT_DIR}/scripts/preflight" >/dev/null
+
+case "${1:-all}" in
+  all)
+    run_all
+    ;;
+  packages)
+    show_outdated_os_packages
+    ;;
+  mise)
+    show_outdated_mise_tools
+    ;;
+  -h | --help)
+    usage
+    ;;
+  *)
+    usage >&2
+    exit 1
+    ;;
+esac

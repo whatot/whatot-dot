@@ -43,7 +43,7 @@ run = [
   "scripts/packages",
   { task = "update:devtools" },
   { task = "update:dotfiles" },
-  { task = "doctor" },
+  { task = "show:env" },
 ]
 
 [tasks.check]
@@ -53,20 +53,40 @@ run = [
   "tests/check",
   { task = "chezmoi:diff" },
   { task = "hooks:run" },
-  { task = "doctor" },
+  { task = "show:env" },
 ]
 
 [tasks.show]
-description = "Show active host and pending dotfile changes"
+description = "Show active host, environment readiness, and pending dotfile changes"
 run = [
   { task = "preflight" },
   { task = "show:host" },
+  { task = "show:env" },
   { task = "show:dotfiles" },
 ]
+
+[tasks.outdated]
+description = "Refresh metadata and show available package and mise updates"
+run = [
+  { task = "outdated:packages" },
+  { task = "outdated:mise" },
+]
+
+[tasks."outdated:packages"]
+description = "Refresh metadata and show available operating system package updates"
+run = "scripts/outdated packages"
+
+[tasks."outdated:mise"]
+description = "Refresh metadata and show available mise tool updates"
+run = "scripts/outdated mise"
 
 [tasks."show:host"]
 description = "Show active dotfiles host and resolved actions"
 run = "scripts/host show"
+
+[tasks."show:env"]
+description = "Show required tools and private environment readiness"
+run = "scripts/show-env"
 
 [tasks."show:dotfiles"]
 description = "Preview chezmoi-managed dotfile changes"
@@ -85,10 +105,6 @@ run = "scripts/preflight"
 description = "Preview chezmoi-managed dotfile changes"
 run = "scripts/chezmoi diff"
 
-[tasks.doctor]
-description = "Check required workstation tools"
-run = "scripts/doctor"
-
 [tasks."hooks:install"]
 description = "Install git pre-commit hooks"
 run = "pre-commit install"
@@ -104,7 +120,7 @@ run = [
   { task = "update:packages" },
   { task = "update:mise" },
   { task = "update:dotfiles" },
-  { task = "doctor" },
+  { task = "show:env" },
 ]
 
 [tasks."update:packages"]

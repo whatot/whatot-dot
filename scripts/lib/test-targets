@@ -146,7 +146,7 @@ cd /workspace
 export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 if [[ ${DOTFILES_SKIP_MISE_INSTALL:-false} != "true" ]]; then
   mise trust
-  ./scripts/doctor
+  ./scripts/show-env
 fi
 chezmoi managed --source .
 EOF
@@ -160,7 +160,7 @@ cd /workspace
 export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
 if [[ ${DOTFILES_SKIP_MISE_INSTALL:-false} != "true" ]]; then
   mise trust
-  ./scripts/doctor
+  ./scripts/show-env
 fi
 chezmoi managed --source .
 EOF

@@ -93,7 +93,7 @@ tests/smoke/container.sh all
 ```
 
 The bootstrap stage verifies mirrors, minimum dependencies, `chezmoi`,
-`mise trust`, and `scripts/doctor`.
+`mise trust`, and `scripts/show-env`.
 
 For container-safe package inventories:
 
@@ -133,7 +133,7 @@ runs:
 ```text
 scripts/bootstrap
 mise trust
-scripts/doctor
+scripts/show-env
 chezmoi managed --source .
 ```
 

@@ -17,11 +17,11 @@ usage() {
 usage: scripts/update [command]
 
 commands:
-  all       update packages, mise tools, dotfiles, and doctor checks (default)
-  packages  update operating system packages and install declared package sets
-  mise      update mise and install declared tool versions
-  dotfiles  apply chezmoi-managed dotfiles
-  devtools  install host-enabled development tools
+  all                update packages, mise tools, dotfiles, and environment checks (default)
+  packages           update operating system packages and install declared package sets
+  mise               update mise and install declared tool versions
+  dotfiles           apply chezmoi-managed dotfiles
+  devtools           install host-enabled development tools
 EOF
 }
 
@@ -74,15 +74,15 @@ install_host_devtools() {
   run_step "install host devtools" "${ROOT_DIR}/scripts/devtools" host
 }
 
-run_doctor() {
-  run_step "doctor" "${ROOT_DIR}/scripts/doctor"
+show_env_status() {
+  run_step "show env" "${ROOT_DIR}/scripts/show-env"
 }
 
 run_all() {
   update_os_packages
   update_mise_tools
   apply_dotfiles
-  run_doctor
+  show_env_status
 }
 
 "${ROOT_DIR}/scripts/preflight" >/dev/null
