@@ -103,6 +103,12 @@ rtk init -g --codex
 For Codex, the upstream quick start uses `rtk init -g --codex`, then relies on
 project guidance files such as `AGENTS.md` and `RTK.md`.
 
+This repo also manages a small RTK config under `~/.config/rtk/config.toml`.
+On macOS, the native `~/Library/Application Support/rtk/config.toml` path is
+linked back to that file so RTK still reads the managed config. The defaults
+keep tracking data under the OS cache directory, exclude `curl` and
+`playwright` from hook rewrites, and only tee raw output on failures.
+
 ## `mise`
 
 Use `mise` for tool installation and task execution.

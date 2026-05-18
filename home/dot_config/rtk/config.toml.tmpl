@@ -1,0 +1,50 @@
+[tracking]
+enabled = true
+history_days = 90
+{{- if eq .chezmoi.os "darwin" }}
+database_path = "{{ .chezmoi.homeDir }}/Library/Caches/rtk/tracking.db"
+{{- else }}
+database_path = "{{ .chezmoi.homeDir }}/.cache/rtk/tracking.db"
+{{- end }}
+
+[display]
+colors = true
+emoji = true
+max_width = 120
+
+[filters]
+ignore_dirs = [
+  ".git",
+  "node_modules",
+  "target",
+  "__pycache__",
+  ".venv",
+  "vendor",
+]
+ignore_files = [
+  "*.lock",
+  "*.min.js",
+  "*.min.css",
+]
+
+[hooks]
+# Keep raw network payload/debug flows readable and avoid rewriting browser runs.
+exclude_commands = ["curl", "playwright"]
+# Preserve common privilege escalation wrappers when RTK rewrites a command.
+transparent_prefixes = ["sudo"]
+
+[tee]
+enabled = true
+mode = "failures"
+max_files = 20
+max_file_size = 1048576
+
+[telemetry]
+enabled = false
+
+[limits]
+grep_max_results = 200
+grep_max_per_file = 25
+status_max_files = 15
+status_max_untracked = 10
+passthrough_max_chars = 2000
