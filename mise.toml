@@ -58,12 +58,10 @@ run = "scripts/outdated"
 
 [tasks."outdated:packages"]
 description = "Refresh metadata and show available operating system package updates"
-hide = true
 run = "scripts/outdated packages"
 
 [tasks."outdated:mise"]
 description = "Refresh metadata and show available mise tool updates"
-hide = true
 run = "scripts/outdated mise"
 
 [tasks."show:host"]
