@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/platform
+source "${ROOT_DIR}/scripts/lib/platform"
+# shellcheck source=scripts/lib/diagnostics
+source "${ROOT_DIR}/scripts/lib/diagnostics"
+dotfiles_load_private_env
+
+missing=0
+
+printf "checks:\n"
+if ! dotfiles_diag_check_core_commands; then
+  missing=1
+fi
+
+if "${ROOT_DIR}/scripts/preflight" >/dev/null; then
+  printf "ok   private env\n"
+else
+  printf "miss private env\n"
+  missing=1
+fi
+
+if dotfiles_host_file >/dev/null && dotfiles_package_sets >/dev/null && dotfiles_devtools >/dev/null; then
+  printf "ok   host plan\n"
+else
+  printf "miss host plan\n"
+  missing=1
+fi
+
+exit "${missing}"

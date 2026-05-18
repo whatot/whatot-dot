@@ -74,15 +74,10 @@ install_host_devtools() {
   run_step "install host devtools" "${ROOT_DIR}/scripts/devtools" host
 }
 
-show_env_status() {
-  run_step "show env" "${ROOT_DIR}/scripts/show-env"
-}
-
 run_all() {
   update_os_packages
   update_mise_tools
   apply_dotfiles
-  show_env_status
 }
 
 "${ROOT_DIR}/scripts/preflight" >/dev/null

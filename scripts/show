@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+# shellcheck source=scripts/lib/env
+source "${ROOT_DIR}/scripts/lib/env"
+# shellcheck source=scripts/lib/plan
+source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/diagnostics
+source "${ROOT_DIR}/scripts/lib/diagnostics"
+
+show_environment() {
+  local env_status="loaded"
+
+  if ! dotfiles_load_private_env >/dev/null 2>&1; then
+    env_status="invalid"
+  fi
+
+  dotfiles_diag_show_env_report
+  dotfiles_diag_print_env_value "private env" "${env_status}"
+}
+
+print_section() {
+  local title=$1
+  shift
+  local output
+
+  printf "%s:\n" "${title}"
+  if output="$("$@" 2>&1)"; then
+    if [[ -n "${output}" ]]; then
+      printf '%s\n' "${output}"
+    else
+      printf "(none)\n"
+    fi
+  else
+    printf "(unavailable)\n"
+  fi
+  printf "\n"
+}
+
+print_section "host" "${ROOT_DIR}/scripts/host" show
+print_section "environment" show_environment
+print_section "dotfiles" "${ROOT_DIR}/scripts/chezmoi" diff

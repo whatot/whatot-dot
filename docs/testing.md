@@ -8,7 +8,7 @@ Fresh-machine setup lives in `new-machine.md`.
 Use the lightest layer that still exercises the change:
 
 - `mise run check` for local formatting, shell checks, `chezmoi:diff`, and
-  workstation preflight
+  workstation diagnostics
 - `tests/smoke/container.sh` for fast Linux bootstrap and container-safe package
   checks
 - `tests/smoke/macos.sh host` for macOS Brewfile checks on a real host
@@ -93,7 +93,7 @@ tests/smoke/container.sh all
 ```
 
 The bootstrap stage verifies mirrors, minimum dependencies, `chezmoi`,
-`mise trust`, and `scripts/show-env`.
+`mise trust`, and `scripts/doctor`.
 
 For container-safe package inventories:
 
@@ -133,7 +133,7 @@ runs:
 ```text
 scripts/bootstrap
 mise trust
-scripts/show-env
+scripts/doctor
 chezmoi managed --source .
 ```
 

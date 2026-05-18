@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+
+dotfiles_diag_print_command_status() {
+  local name=$1
+
+  if command -v "${name}" >/dev/null 2>&1; then
+    printf "ok   %s\n" "${name}"
+    return 0
+  fi
+
+  printf "miss %s\n" "${name}"
+  return 1
+}
+
+dotfiles_diag_print_env_value() {
+  local label=$1
+  local value=$2
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "${value}"
+  else
+    printf "%-18s %s\n" "${label}:" "(unset)"
+  fi
+}
+
+dotfiles_diag_print_env_state() {
+  local label=$1
+  local value=$2
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "set"
+  else
+    printf "%-18s %s\n" "${label}:" "unset"
+  fi
+}
+
+dotfiles_diag_print_env_default() {
+  local label=$1
+  local value=$2
+  local fallback=$3
+
+  if [[ -n "${value}" ]]; then
+    printf "%-18s %s\n" "${label}:" "${value}"
+  else
+    printf "%-18s %s\n" "${label}:" "${fallback}"
+  fi
+}
+
+dotfiles_diag_join_lines() {
+  local separator=$1
+  shift
+  local item
+  local output=
+
+  for item in "$@"; do
+    [[ -n "${item}" ]] || continue
+    if [[ -n "${output}" ]]; then
+      output="${output}${separator}${item}"
+    else
+      output="${item}"
+    fi
+  done
+
+  printf '%s\n' "${output}"
+}
+
+dotfiles_diag_collect_array() {
+  local collector=$1
+  local item
+  local values=()
+
+  while IFS= read -r item; do
+    [[ -n "${item}" ]] || continue
+    values+=("${item}")
+  done < <("${collector}")
+
+  printf '%s\n' "${values[@]}"
+}
+
+dotfiles_diag_show_env_report() {
+  local host
+  local package_sets_text devtools_text
+  local item
+  local package_sets=()
+  local devtools=()
+
+  host="${DOTFILES_HOST:-}"
+
+  while IFS= read -r item; do
+    [[ -n "${item}" ]] || continue
+    package_sets+=("${item}")
+  done < <(dotfiles_package_sets 2>/dev/null || true)
+
+  while IFS= read -r item; do
+    [[ -n "${item}" ]] || continue
+    devtools+=("${item}")
+  done < <(dotfiles_devtools 2>/dev/null || true)
+
+  package_sets_text="$(dotfiles_diag_join_lines ", " "${package_sets[@]}")"
+  devtools_text="$(dotfiles_diag_join_lines ", " "${devtools[@]}")"
+
+  dotfiles_diag_print_env_value "host" "${host}"
+  dotfiles_diag_print_env_default "package sets" "${package_sets_text}" "(unavailable)"
+  dotfiles_diag_print_env_default "devtools" "${devtools_text}" "(unavailable)"
+  dotfiles_diag_print_env_value "git name" "${DOTFILES_GIT_NAME:-}"
+  dotfiles_diag_print_env_value "git email" "${DOTFILES_GIT_EMAIL:-}"
+  dotfiles_diag_print_env_default "use proxy" "${USE_PROXY:-}" "(unset)"
+  dotfiles_diag_print_env_default "retry attempts" "${DOTFILES_RETRY_ATTEMPTS:-}" "(default)"
+  dotfiles_diag_print_env_default "retry delay" "${DOTFILES_RETRY_DELAY:-}" "(default)"
+  dotfiles_diag_print_env_default "rust toolchain" "${DOTFILES_RUST_TOOLCHAIN:-}" "(default)"
+  dotfiles_diag_print_env_state "git include rules" "${DOTFILES_GIT_INCLUDE_RULES:-}"
+  dotfiles_diag_print_env_state "proxy url" "${PROXY_URL:-}"
+  dotfiles_diag_print_env_default "mise install url" "${DOTFILES_MISE_INSTALL_URL:-}" "(default)"
+  dotfiles_diag_print_env_default "mise curl retries" "${DOTFILES_MISE_CURL_RETRIES:-}" "(default)"
+  dotfiles_diag_print_env_default "brew verbose" "${DOTFILES_BREW_BUNDLE_VERBOSE:-}" "(default)"
+  dotfiles_diag_print_env_default "brew bottle domain" "${HOMEBREW_BOTTLE_DOMAIN:-}" "(default)"
+  dotfiles_diag_print_env_default "brew api domain" "${HOMEBREW_API_DOMAIN:-}" "(default)"
+}
+
+dotfiles_diag_check_core_commands() {
+  local missing=0
+
+  dotfiles_diag_print_command_status git || missing=1
+  dotfiles_diag_print_command_status chezmoi || missing=1
+  dotfiles_diag_print_command_status mise || missing=1
+  dotfiles_diag_print_command_status zsh || missing=1
+  dotfiles_diag_print_command_status vim || missing=1
+
+  case "$(dotfiles_kernel_name)" in
+    Darwin)
+      dotfiles_diag_print_command_status brew || missing=1
+      ;;
+    Linux)
+      case "$(dotfiles_linux_release_id)" in
+        arch | manjaro)
+          dotfiles_diag_print_command_status pacman || missing=1
+          ;;
+        ubuntu | debian)
+          dotfiles_diag_print_command_status apt || missing=1
+          ;;
+        *)
+          printf "warn unsupported linux distribution: %s\n" "$(dotfiles_linux_release_id)"
+          ;;
+      esac
+      ;;
+  esac
+
+  return "${missing}"
+}

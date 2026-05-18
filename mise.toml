@@ -38,32 +38,25 @@ run = "scripts/bootstrap"
 [tasks.setup]
 description = "Set up the current host"
 run = [
-  { task = "preflight" },
+  { task = "doctor" },
   "mise install",
   "scripts/packages",
   { task = "update:devtools" },
   { task = "update:dotfiles" },
-  { task = "show:env" },
 ]
 
 [tasks.check]
 description = "Run local checks before committing"
 run = [
-  { task = "preflight" },
   "tests/check",
   { task = "chezmoi:diff" },
   { task = "hooks:run" },
-  { task = "show:env" },
+  { task = "doctor" },
 ]
 
 [tasks.show]
 description = "Show active host, environment readiness, and pending dotfile changes"
-run = [
-  { task = "preflight" },
-  { task = "show:host" },
-  { task = "show:env" },
-  { task = "show:dotfiles" },
-]
+run = "scripts/show"
 
 [tasks.outdated]
 description = "Refresh metadata and show available package and mise updates"
@@ -74,19 +67,17 @@ run = [
 
 [tasks."outdated:packages"]
 description = "Refresh metadata and show available operating system package updates"
+hide = true
 run = "scripts/outdated packages"
 
 [tasks."outdated:mise"]
 description = "Refresh metadata and show available mise tool updates"
+hide = true
 run = "scripts/outdated mise"
 
 [tasks."show:host"]
 description = "Show active dotfiles host and resolved actions"
 run = "scripts/host show"
-
-[tasks."show:env"]
-description = "Show required tools and private environment readiness"
-run = "scripts/show-env"
 
 [tasks."show:dotfiles"]
 description = "Preview chezmoi-managed dotfile changes"
@@ -100,6 +91,10 @@ run = "scripts/chezmoi apply"
 description = "Check required private settings"
 hide = true
 run = "scripts/preflight"
+
+[tasks.doctor]
+description = "Diagnose environment readiness before setup or updates"
+run = "scripts/doctor"
 
 [tasks."chezmoi:diff"]
 description = "Preview chezmoi-managed dotfile changes"
@@ -117,10 +112,10 @@ run = "pre-commit run --all-files"
 [tasks.update]
 description = "Update packages, mise tools, and chezmoi state"
 run = [
+  { task = "doctor" },
   { task = "update:packages" },
   { task = "update:mise" },
   { task = "update:dotfiles" },
-  { task = "show:env" },
 ]
 
 [tasks."update:packages"]
@@ -133,10 +128,12 @@ run = "scripts/update mise"
 
 [tasks."update:dotfiles"]
 description = "Apply chezmoi-managed dotfiles"
+hide = true
 run = "scripts/update dotfiles"
 
 [tasks."update:devtools"]
 description = "Install host-enabled development tools"
+hide = true
 run = "scripts/update devtools"
 
 [tasks."devtools:rust-system"]

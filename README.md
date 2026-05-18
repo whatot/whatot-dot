@@ -35,8 +35,8 @@ Built-in hosts:
 ```shell
 mise run show
 mise run show:host
-mise run show:env
 mise run show:dotfiles
+mise run doctor
 mise run outdated
 mise run outdated:mise
 mise run chezmoi:apply
