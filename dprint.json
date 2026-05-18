@@ -7,7 +7,8 @@
     "home/private_Library/private_Application Support/rtk/symlink_filters.toml"
   ],
   "json": {
-    "indentWidth": 2
+    "indentWidth": 2,
+    "trailingCommas": "never"
   },
   "markdown": {
     "lineWidth": 80
