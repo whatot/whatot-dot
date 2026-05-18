@@ -2,11 +2,12 @@
   "base_keymap": "VSCode",
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 14,
+  "disable_ai": true,
   "theme": {
     "mode": "system",
     "light": "One Light",
     "dark": "One Dark"
   },
   "ui_font_size": 14,
-  "vim_mode": false
+  "vim_mode": true
 }
