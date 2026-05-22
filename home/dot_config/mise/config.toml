@@ -2,7 +2,7 @@
 idiomatic_version_file_enable_tools = ["node", "python", "ruby"]
 
 # Tool-specific mirrors.
-node.mirror_url = "https://npmmirror.com/mirrors/node"
+node.mirror_url = "https://npmmirror.com/mirrors/node/"
 go.download_mirror = "https://golang.google.cn/dl"
 
 # Generic download URL rewrites. Keep this conservative: broad GitHub
