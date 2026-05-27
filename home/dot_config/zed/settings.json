@@ -13,6 +13,9 @@
   "buffer_font_size": 13,
   "disable_ai": true,
   "format_on_save": "on",
+  "project_panel": {
+    "dock": "left"
+  },
   "languages": {
     "JSON": {
       "formatter": {
