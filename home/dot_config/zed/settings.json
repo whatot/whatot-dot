@@ -6,8 +6,8 @@
     }
   },
   "auto_install_extensions": {
-    "catppuccin": true,
-    "catppuccin-icons": true
+    "github-theme": true,
+    "material-icon-theme": true
   },
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 13,
@@ -57,13 +57,13 @@
   },
   "theme": {
     "mode": "dark",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Macchiato"
+    "light": "GitHub Light",
+    "dark": "GitHub Dark"
   },
   "icon_theme": {
     "mode": "dark",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Macchiato"
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
   },
   "ui_font_size": 14,
   "vim_mode": true
