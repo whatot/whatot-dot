@@ -1,0 +1,7 @@
+# managed by chezmoi
+
+# Re-apply the shared PATH order after macOS path_helper runs in /etc/zprofile.
+if [[ -r "${HOME}/.config/dotfiles/profile.sh" ]]; then
+  emulate -L sh
+  source "${HOME}/.config/dotfiles/profile.sh"
+fi

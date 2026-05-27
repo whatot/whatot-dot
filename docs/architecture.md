@@ -103,24 +103,23 @@ tasks instead of slowing the default setup path for every machine.
 - Ghostty is the default terminal.
 - Zed is the default GUI editor.
 - Vim is the default terminal editor, with `minimal` and `tiny` profiles.
-- Zsh is configured directly by `chezmoi`, without a shell framework.
+- Fish is the primary interactive shell.
+- Zsh stays as a small fallback shell for systems and tools that still launch
+  it.
 
 ## Zsh Startup
 
-The zsh startup files have distinct responsibilities and should stay that way:
+The zsh startup files share one POSIX profile and keep interactive fallback
+behavior narrow:
 
-- `home/dot_zshenv.tmpl` owns base environment variables and the preferred PATH
-  order.
-- `home/dot_zprofile.tmpl` handles login-shell follow-up needed after macOS
-  `/etc/zprofile` runs `path_helper`, and only keeps narrow login-time
-  integration such as OrbStack path and completions.
-- `home/dot_zshrc.tmpl` owns interactive shell behavior only: options,
-  completion, aliases, hooks, and prompt setup.
-- `home/dot_zsh/*.zsh.tmpl` hold focused interactive modules loaded by
-  `dot_zshrc`.
-
-`mise` runs in `--shims` mode from `dot_zsh/tools.zsh.tmpl` so the shell PATH
-stays short and stable instead of expanding every tool install directory.
+- `home/dot_config/dotfiles/profile.sh` owns base environment variables, private
+  env loading, and the preferred PATH order.
+- `home/dot_profile` is the POSIX login-shell wrapper for bash/sh-style shells.
+- `home/dot_zshenv` sources the shared profile for zsh-launched tools.
+- `home/dot_zprofile` handles login-shell follow-up needed after macOS
+  `/etc/zprofile` runs `path_helper`.
+- `home/dot_zshrc` owns only the small interactive fallback: history,
+  proxy helpers, `mise --shims`, and a few aliases.
 
 ## Validation
 

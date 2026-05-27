@@ -1,3 +1,30 @@
+# shellcheck shell=bash disable=SC1090,SC1091,SC2034
+
+# Zsh is now a fallback shell. Keep interactive setup small.
+setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt INC_APPEND_HISTORY
+
+bindkey -e
+WORDCHARS=${WORDCHARS//[\/]}
+
+HISTFILE="${HOME}/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=50000
+
+is_command() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+alias_ll_command() {
+  case "$(uname -s)" in
+  Darwin) printf '%s' 'ls -alFG' ;;
+  Linux) printf '%s' 'ls -alF --color=auto' ;;
+  *) printf '%s' 'ls -alF' ;;
+  esac
+}
+
 unsetproxy() {
   unset PROXY_HOST PROXY_PORT
   unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY
@@ -42,3 +69,29 @@ proxyinfo() {
   echo "HTTP_PROXY = ${HTTP_PROXY}"
   echo "HTTPS_PROXY = ${HTTPS_PROXY}"
 }
+
+setproxy
+
+if is_command mise; then
+  eval "$(mise activate zsh --quiet --shims)"
+fi
+
+if [[ -o interactive ]]; then
+  if is_command bat; then
+    alias cat="bat"
+  fi
+
+  alias ll="$(alias_ll_command)"
+  alias ..="cd .."
+  alias ...="cd ../.."
+  alias m="mise run"
+  alias pn="pnpm"
+  alias gst="git status"
+  alias gdi="git diff"
+  alias gf="git pull"
+  alias myip="curl myip.ipip.net"
+
+  if is_command brew; then
+    alias bubu="brew update && brew outdated && brew upgrade && brew cleanup"
+  fi
+fi

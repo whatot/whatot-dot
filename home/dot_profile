@@ -1,0 +1,3 @@
+# managed by chezmoi
+
+[ -r "$HOME/.config/dotfiles/profile.sh" ] && . "$HOME/.config/dotfiles/profile.sh"

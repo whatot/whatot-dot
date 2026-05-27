@@ -1,0 +1,6 @@
+# managed by chezmoi
+
+if [[ -r "${HOME}/.config/dotfiles/profile.sh" ]]; then
+  emulate -L sh
+  source "${HOME}/.config/dotfiles/profile.sh"
+fi
