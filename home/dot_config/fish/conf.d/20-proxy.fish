@@ -48,4 +48,6 @@ function proxyinfo
     echo "HTTPS_PROXY = $HTTPS_PROXY"
 end
 
-setproxy
+if set -q USE_PROXY; and test "$USE_PROXY" = true
+    setproxy
+end

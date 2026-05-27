@@ -62,3 +62,5 @@ end
 
 __dotfiles_load_env
 __dotfiles_setup_env
+
+functions -e __dotfiles_load_env __dotfiles_load_env_file __dotfiles_setup_env __dotfiles_strip_quotes

@@ -1,7 +1,7 @@
 # managed by chezmoi
 
 if command -q mise
-    mise activate fish --shims | source
+    mise activate fish --quiet --shims | source
 end
 
 if status is-interactive
