@@ -1,5 +1,6 @@
 ca-certificates
 curl
+fish
 git
 gnupg
 rsync

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# chezmoi reruns this when the managed Fisher plugin list changes.
+# fish_plugins sha256: {{ include "dot_config/fish/fish_plugins" | sha256sum }}
+# tide.fish sha256: {{ include "dot_config/fish/conf.d/tide.fish" | sha256sum }}
+
+if ! command -v fish >/dev/null 2>&1; then
+  echo "skip: fish is not installed; Fisher plugins will sync after package setup" >&2
+  exit 0
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+  echo "curl is required to install Fisher" >&2
+  exit 1
+fi
+
+# shellcheck disable=SC2016
+fish -c '
+    if not functions -q fisher
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+        fisher install jorgebucaran/fisher
+    end
+
+    fisher update
+'

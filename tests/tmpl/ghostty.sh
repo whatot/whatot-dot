@@ -24,6 +24,13 @@ case_host_data_overrides_font_size() {
   dotfiles_tmpl_assert_contains "${output}" 'font-size = 13'
 }
 
+case_host_data_can_set_command() {
+  local output
+
+  output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" "${ROOT_DIR}/hosts/macos-arm64.toml")"
+  dotfiles_tmpl_assert_contains "${output}" 'command = /opt/homebrew/bin/fish --login'
+}
+
 case_platform_specific_settings_follow_rendering_os() {
   local output
 
@@ -49,6 +56,7 @@ case_macos_host_keeps_platform_specific_settings() {
 main() {
   case_default_font_size_without_host_data
   case_host_data_overrides_font_size
+  case_host_data_can_set_command
   case_platform_specific_settings_follow_rendering_os
   case_macos_host_keeps_platform_specific_settings
 }

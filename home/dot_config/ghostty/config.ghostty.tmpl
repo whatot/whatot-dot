@@ -4,6 +4,9 @@
 theme = GitHub Dark Default
 font-family = JetBrainsMono Nerd Font
 font-size = {{ get $ghostty "font_size" | default "14" }}
+{{- with get $ghostty "command" }}
+command = {{ . }}
+{{- end }}
 window-padding-x = 8
 window-padding-y = 6
 confirm-close-surface = false

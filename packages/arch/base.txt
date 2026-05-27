@@ -1,5 +1,7 @@
 chezmoi
 git
+fish
+fisher
 htop
 iftop
 mise

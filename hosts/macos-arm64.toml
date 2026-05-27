@@ -10,3 +10,4 @@ profile = "tiny"
 
 [ghostty]
 font_size = 13
+command = "/opt/homebrew/bin/fish --login"
