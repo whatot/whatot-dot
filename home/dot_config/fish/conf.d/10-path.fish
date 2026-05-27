@@ -6,6 +6,7 @@ switch (uname -s)
         fish_add_path --global --move --path "/usr/local/bin"
         fish_add_path --global --move --path "$HOME/go/bin"
         fish_add_path --global --move --path "$HOME/.cargo/bin"
+        fish_add_path --global --move --path "/opt/homebrew/opt/rustup/bin"
         fish_add_path --global --move --path "$HOME/.local/bin"
         fish_add_path --global --move --path "/opt/homebrew/opt/coreutils/libexec/gnubin"
         fish_add_path --global --move --path "/opt/homebrew/sbin"
