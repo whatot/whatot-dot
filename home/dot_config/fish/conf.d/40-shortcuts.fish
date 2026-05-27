@@ -3,33 +3,63 @@
 status is-interactive; or return
 
 if command -q bat
-    alias cat='bat'
+    function cat --wraps=bat --description 'Use bat as cat'
+        bat $argv
+    end
 end
 
-switch "$DOTFILES_SHELL_OS"
+switch (uname -s)
     case Darwin
-        alias ll='ls -alFG'
+        function ll --wraps='ls -alFG' --description 'List files'
+            ls -alFG $argv
+        end
     case Linux
-        alias ll='ls -alF --color=auto'
+        function ll --wraps='ls -alF --color=auto' --description 'List files'
+            ls -alF --color=auto $argv
+        end
     case '*'
-        alias ll='ls -alF'
+        function ll --wraps='ls -alF' --description 'List files'
+            ls -alF $argv
+        end
 end
 
-function ..
+function .. --description 'Go up one directory'
     cd ..
 end
 
-function ...
+function ... --description 'Go up two directories'
     cd ../..
 end
 
-alias m='mise run'
-alias pn='pnpm'
-alias gst='git status'
-alias gdi='git diff'
-alias gf='git pull'
-alias myip='curl myip.ipip.net'
+function m --wraps='mise run' --description 'Run mise task'
+    mise run $argv
+end
+
+function pn --wraps=pnpm --description 'Run pnpm'
+    pnpm $argv
+end
+
+function gst --wraps='git status' --description 'Show git status'
+    git status $argv
+end
+
+function gdi --wraps='git diff' --description 'Show git diff'
+    git diff $argv
+end
+
+function gf --wraps='git pull' --description 'Pull git changes'
+    git pull $argv
+end
+
+function myip --wraps=curl --description 'Show public IP'
+    curl myip.ipip.net $argv
+end
 
 if command -q brew
-    alias bubu='brew update && brew outdated && brew upgrade && brew cleanup'
+    function bubu --description 'Update Homebrew packages'
+        brew update
+        and brew outdated
+        and brew upgrade
+        and brew cleanup
+    end
 end

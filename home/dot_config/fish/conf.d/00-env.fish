@@ -4,7 +4,6 @@ set -gx EDITOR vim
 set -gx LC_MESSAGES en_US.UTF-8
 set -gx HOMEBREW_NO_AUTO_UPDATE 1
 set -g fish_greeting
-set -g DOTFILES_SHELL_OS (uname -s)
 
 function __dotfiles_setup_env
     set -gx GOPATH "$HOME/go/"

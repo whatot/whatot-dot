@@ -1,6 +1,6 @@
 # managed by chezmoi
 
-switch "$DOTFILES_SHELL_OS"
+switch (uname -s)
     case Darwin
         fish_add_path --global --move --path "/usr/local/sbin"
         fish_add_path --global --move --path "/usr/local/bin"

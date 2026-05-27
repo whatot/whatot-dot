@@ -29,14 +29,26 @@ check_rendered_zsh_specs() {
   done
 }
 
+check_fish_specs() {
+  local output_path
+  local label
+
+  for output_path in "$@"; do
+    label=${output_path#"${ROOT_DIR}/home/dot_config/fish/"}
+    run_step "fish -n ${label}" dotfiles_check_run_tool fish -n "${output_path}"
+  done
+}
+
 main() {
   local host_data_file
   local tmp_dir
   local tmp_home
   local rendered_zshrc
   local rendered_vimrc
+  local fish_file
   local -a render_specs=()
   local -a zsh_specs=()
+  local -a fish_specs=()
 
   dotfiles_check_load_env
   run_step "preflight rendered dotfiles" "${ROOT_DIR}/scripts/preflight"
@@ -61,6 +73,9 @@ main() {
     "zprofile:${tmp_dir}/.zprofile"
     "zshrc:${rendered_zshrc}"
   )
+  while IFS= read -r fish_file; do
+    fish_specs+=("${fish_file}")
+  done < <(find "${ROOT_DIR}/home/dot_config/fish" -type f -name '*.fish' | sort)
 
   render_template_specs "${host_data_file}" "${render_specs[@]}"
 
@@ -68,6 +83,7 @@ main() {
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"
 
   check_rendered_zsh_specs "${zsh_specs[@]}"
+  check_fish_specs "${fish_specs[@]}"
   run_step "zsh source rendered zshrc" env HOME="${tmp_home}" PATH="/usr/bin:/bin:/usr/sbin:/sbin" zsh -fc \
     "source ${rendered_zshrc}; whence -w setproxy >/dev/null; whence -w unsetproxy >/dev/null"
   run_step "vim load rendered vimrc" env HOME="${tmp_home}" vim -Nu NONE -n -es \
