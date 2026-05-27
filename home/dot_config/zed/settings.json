@@ -52,9 +52,9 @@
     }
   },
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "Ayu Dark"
   },
   "ui_font_size": 14,
   "vim_mode": true

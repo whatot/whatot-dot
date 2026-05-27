@@ -1,6 +1,11 @@
 [
   {
-    "context": "Workspace",
-    "bindings": {}
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-0": null,
+      "cmd--": "pane::GoBack",
+      "cmd-+": null,
+      "cmd-=": "pane::GoForward"
+    }
   }
 ]
