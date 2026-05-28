@@ -8,19 +8,33 @@ if command -q bat
     end
 end
 
-switch (uname -s)
-    case Darwin
-        function ll --wraps='ls -alFG' --description 'List files'
-            ls -alFG $argv
-        end
-    case Linux
-        function ll --wraps='ls -alF --color=auto' --description 'List files'
-            ls -alF --color=auto $argv
-        end
-    case '*'
-        function ll --wraps='ls -alF' --description 'List files'
-            ls -alF $argv
-        end
+if command -q eza
+    function ls --wraps=eza --description 'List files'
+        eza --icons=auto $argv
+    end
+
+    function la --wraps=eza --description 'List all files'
+        eza --icons=auto --all $argv
+    end
+
+    function ll --wraps=eza --description 'List files long'
+        eza --icons=auto --long --all --git $argv
+    end
+else
+    switch (uname -s)
+        case Darwin
+            function ll --wraps='ls -alFG' --description 'List files'
+                ls -alFG $argv
+            end
+        case Linux
+            function ll --wraps='ls -alF --color=auto' --description 'List files'
+                ls -alF --color=auto $argv
+            end
+        case '*'
+            function ll --wraps='ls -alF' --description 'List files'
+                ls -alF $argv
+            end
+    end
 end
 
 function .. --description 'Go up one directory'

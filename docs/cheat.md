@@ -7,6 +7,8 @@
 - Aliases
   - `m`: `mise run`
   - `pn`: `pnpm`
+  - `ls`: directory listing via `eza`
+  - `la`: all-file directory listing via `eza`
   - `ll`: long directory listing
   - `cat`: `bat`
   - `..`: `cd ..`

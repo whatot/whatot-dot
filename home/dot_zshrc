@@ -81,7 +81,14 @@ if [[ -o interactive ]]; then
     alias cat="bat"
   fi
 
-  alias ll="$(alias_ll_command)"
+  if is_command eza; then
+    alias ls="eza --icons=auto"
+    alias la="eza --icons=auto --all"
+    alias ll="eza --icons=auto --long --all --git"
+  else
+    alias ll="$(alias_ll_command)"
+  fi
+
   alias ..="cd .."
   alias ...="cd ../.."
   alias m="mise run"
