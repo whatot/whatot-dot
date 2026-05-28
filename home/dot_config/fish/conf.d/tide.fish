@@ -1,7 +1,7 @@
 # managed by chezmoi
 
-set -g tide_left_prompt_items pwd git newline character
-set -g tide_right_prompt_items status cmd_duration jobs direnv time
+set -g tide_left_prompt_items pwd git cmd_duration newline character
+set -g tide_right_prompt_items status jobs direnv time
 set -g tide_git_icon ''
 set -g tide_left_prompt_separator_same_color ' '
 set -g tide_left_prompt_separator_diff_color ' '
