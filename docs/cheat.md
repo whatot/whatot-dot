@@ -15,6 +15,7 @@
   - `...`: `cd ../..`
   - `gst`: `git status`
   - `gdi`: `git diff`
+  - `git dt`: syntax-aware diff via `difftastic`
   - `gf`: `git pull`
   - `bubu`: `brew update && brew outdated && brew upgrade && brew cleanup`
 - Commands

@@ -14,7 +14,10 @@ go.download_mirror = "https://golang.google.cn/dl"
 # Workstation-global tools. Keep always-available CLIs here, including tools
 # used across other repositories that should be preinstalled on the machine.
 [tools]
+bat = "latest"
 bottom = "latest"
+delta = "latest"
+difftastic = "latest"
 direnv = "latest"
 dprint = "latest"
 eza = "latest"
