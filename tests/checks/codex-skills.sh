@@ -187,6 +187,7 @@ validate_skill() {
 
 validate_skills() {
   local skill_dir
+  local skill_file
   local tmp_dir
   local names_file
   local count=0
@@ -202,10 +203,11 @@ validate_skills() {
   names_file="${tmp_dir}/names"
   : >"${names_file}"
 
-  while IFS= read -r skill_dir; do
+  while IFS= read -r skill_file; do
+    skill_dir="$(dirname "${skill_file}")"
     count=$((count + 1))
     validate_skill "${skill_dir}" "${names_file}" || failed=1
-  done < <(find "${SKILLS_DIR}" -mindepth 1 -maxdepth 1 -type d | sort)
+  done < <(rg --files -g SKILL.md "${SKILLS_DIR}" | sort)
 
   if [[ "${count}" -eq 0 ]]; then
     printf 'ERROR: no Codex skills found in %s\n' "${SKILLS_DIR}" >&2

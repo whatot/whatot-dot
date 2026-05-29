@@ -24,6 +24,7 @@ local workflow instead of symlinking or auto-updating the external source.
 - `task-guardrails`: scope, source-of-truth, and verification discipline.
 - `disk-cleaner`: read-only disk scans and explicit cleanup approval.
 - `optimize-network`: read-only network diagnosis with proxy/VPN protection.
+- `codebase-overview`: project orientation, architecture map, and balanced limitations.
 - `codebase-audit`: evidence-backed codebase audit and repair planning.
 
 ## Validation

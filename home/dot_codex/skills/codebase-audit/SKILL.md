@@ -1,12 +1,16 @@
 ---
 name: codebase-audit
-description: Use when auditing or analyzing a codebase for hidden bugs, architecture risk, technical debt, or Chinese requests like 代码库审计, 全面检查, 有哪些问题, 架构风险.
+description: Use only for explicit codebase audits, hidden-bug searches, architecture-risk reviews, technical-debt reviews, or Chinese requests like 代码库审计, 全面检查问题, 有哪些风险.
 ---
 
 # Codebase Audit
 
-Use this skill when the user asks for a broad codebase audit, architecture
-review, hidden-bug search, or project health check.
+Use this skill when the user asks for a codebase audit, architecture risk
+review, hidden-bug search, or technical-debt review.
+
+Do not use this skill for general project orientation such as "analyze this
+project", "understand this repo", or "整体了解". Use a project overview skill
+for those tasks.
 
 ## Core Rule
 
@@ -19,6 +23,8 @@ then give the repair path.
    - Identify languages, frameworks, package managers, test entrypoints, and
      runtime boundaries.
    - Prefer repo files and live commands over README claims.
+   - Use `rg --files` to inventory files. Avoid `find` unless `rg` is missing
+     or a filesystem-specific predicate is required.
 
 2. Pick audit dimensions that fit the repo.
    - Full stack: frontend-backend contracts, data flow, rendering, API schema,
