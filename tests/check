@@ -8,6 +8,7 @@ main() {
   "${ROOT_DIR}/tests/checks/rendered.sh"
   "${ROOT_DIR}/tests/checks/helpers.sh"
   "${ROOT_DIR}/tests/checks/commands.sh"
+  "${ROOT_DIR}/tests/checks/codex-skills.sh"
   "${ROOT_DIR}/tests/checks/templates.sh"
   "${ROOT_DIR}/tests/checks/format.sh"
 }
