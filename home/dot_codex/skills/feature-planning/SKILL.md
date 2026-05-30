@@ -54,6 +54,9 @@ Rules:
 - Maintain `$HOME/specs/index.json` as the lightweight lookup index.
 - Do not write planning artifacts into the target repo unless the user asks.
 - Do not hardcode machine-local absolute paths in reusable instructions.
+- In real `$HOME/specs` artifacts, record the resolved target repo path so index
+  matching is reliable; tracked examples use `$HOME` placeholders to stay
+  portable.
 - Load [references/index.md](references/index.md) before creating, repairing, or
   updating `index.json`.
 - Use files under `examples/` as the concrete artifact format examples instead

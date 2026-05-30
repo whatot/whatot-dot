@@ -18,7 +18,7 @@ Valid statuses:
 ## Merge Rules
 
 - Treat `context.md` as authoritative when it disagrees with the index.
-- Match project entries by repo path first, then repo name as fallback.
+- Match project entries by resolved repo path first, then repo name as fallback.
 - Match specs entries by `path`.
 - Update only the matched project/specs entry; preserve unknown fields and other
   projects.

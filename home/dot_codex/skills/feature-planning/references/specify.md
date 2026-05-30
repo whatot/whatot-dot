@@ -22,6 +22,10 @@ Use this stage to create or refresh `context.md` and `spec.md`.
 - Related Files
 - Useful Commands
 
+For real artifacts, write the resolved target repo path in `Repo`. The tracked
+example uses a `$HOME` placeholder only to avoid machine-local paths in this
+dotfiles repo.
+
 Use `examples/context.md` from the skill root as the concrete format example.
 
 Also create or update `$HOME/specs/index.json` using
