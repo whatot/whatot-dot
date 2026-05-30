@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "repo": "$HOME/git/example",
+      "repo_name": "example",
+      "active": "$HOME/specs/example/20260530-1200-demo",
+      "specs": [
+        {
+          "path": "$HOME/specs/example/20260530-1200-demo",
+          "goal": "Demo tracked change",
+          "status": "active",
+          "branch": "main",
+          "base_commit": "abc1234",
+          "current_task": null,
+          "last_error": null,
+          "created": "2026-05-30T12:00:00",
+          "updated": "2026-05-30T12:00:00"
+        }
+      ]
+    }
+  ]
+}

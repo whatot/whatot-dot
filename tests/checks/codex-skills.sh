@@ -107,6 +107,77 @@ validate_safety_boundaries() {
   return "${failed}"
 }
 
+validate_reference_files() {
+  local skill_dir=$1
+  local ref_file
+  local line_count
+  local failed=0
+
+  if [[ ! -d "${skill_dir}/references" ]]; then
+    return 0
+  fi
+
+  while IFS= read -r ref_file; do
+    if ! grep -Eq '^# ' "${ref_file}"; then
+      printf 'ERROR: %s missing H1 heading\n' "${ref_file}" >&2
+      failed=1
+    fi
+
+    line_count="$(wc -l <"${ref_file}" | tr -d ' ')"
+    if [[ "${line_count}" -gt 200 ]]; then
+      printf 'ERROR: %s is too long (%s > 200 lines)\n' "${ref_file}" "${line_count}" >&2
+      failed=1
+    fi
+
+    validate_safety_boundaries "${ref_file}" || failed=1
+  done < <(rg --files -g '*.md' "${skill_dir}/references" | sort)
+
+  return "${failed}"
+}
+
+validate_feature_planning_references() {
+  local skill_dir=$1
+  local required
+  local example
+  local specs_dir
+  local active
+  local failed=0
+
+  if [[ "$(basename "${skill_dir}")" != "feature-planning" ]]; then
+    return 0
+  fi
+
+  for required in specify plan tasks execute index; do
+    if [[ ! -f "${skill_dir}/references/${required}.md" ]]; then
+      printf 'ERROR: feature-planning missing references/%s.md\n' "${required}" >&2
+      failed=1
+    fi
+  done
+
+  for example in index.json context.md spec.md checklists.md plan.md tasks.md; do
+    if [[ ! -f "${skill_dir}/examples/${example}" ]]; then
+      printf 'ERROR: feature-planning missing examples/%s\n' "${example}" >&2
+      failed=1
+    fi
+  done
+
+  if [[ -f "${skill_dir}/examples/index.json" ]]; then
+    if ! jq empty "${skill_dir}/examples/index.json" >/dev/null; then
+      printf 'ERROR: feature-planning examples/index.json is not valid JSON\n' >&2
+      failed=1
+    else
+      specs_dir="$(sed -n 's/^- Specs Dir:[[:space:]]*//p' "${skill_dir}/examples/context.md" | head -n 1)"
+      active="$(jq -r '.projects[0].active // ""' "${skill_dir}/examples/index.json")"
+      if [[ -n "${specs_dir}" && -n "${active}" && "${specs_dir}" != "${active}" ]]; then
+        printf 'ERROR: feature-planning example context Specs Dir does not match index active\n' >&2
+        failed=1
+      fi
+    fi
+  fi
+
+  return "${failed}"
+}
+
 validate_skill() {
   local skill_dir=$1
   local names_file=$2
@@ -181,6 +252,8 @@ validate_skill() {
 
   validate_local_links "${skill_file}" "${skill_dir}" || failed=1
   validate_safety_boundaries "${skill_file}" || failed=1
+  validate_reference_files "${skill_dir}" || failed=1
+  validate_feature_planning_references "${skill_dir}" || failed=1
 
   return "${failed}"
 }

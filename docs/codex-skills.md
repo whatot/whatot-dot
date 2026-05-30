@@ -6,12 +6,14 @@ The source of truth lives under:
 
 ```text
 home/dot_codex/skills/<skill>/SKILL.md
+home/dot_codex/skills/<skill>/references/*.md
 ```
 
 Chezmoi renders these files to:
 
 ```text
 ~/.codex/skills/<skill>/SKILL.md
+~/.codex/skills/<skill>/references/*.md
 ```
 
 Keep the first set small and personal. Do not mirror large external skill
@@ -26,6 +28,7 @@ local workflow instead of symlinking or auto-updating the external source.
 - `optimize-network`: read-only network diagnosis with proxy/VPN protection.
 - `codebase-overview`: project orientation, architecture map, and balanced limitations.
 - `codebase-audit`: evidence-backed codebase audit and repair planning.
+- `feature-planning`: single-entrypoint staged planning and execution under `$HOME/specs`.
 
 ## Validation
 
@@ -49,6 +52,8 @@ The validator checks:
 - local Markdown links point to existing files.
 - hardcoded `/Users/...` paths are rejected.
 - dangerous commands require an explicit approval boundary.
+- reference Markdown files under `references/` have an H1 heading, stay compact,
+  and pass the same safety-boundary checks.
 
 The validator checks:
 
@@ -63,3 +68,7 @@ The validator checks:
 - Hardcoded `/Users/...` paths are rejected.
 - Dangerous commands such as `rm -rf`, `sudo`, and network mutation commands
   require an explicit approval boundary in the skill text.
+- Reference Markdown files under `references/` have an H1 heading, stay compact,
+  and pass safety-boundary checks.
+- `feature-planning` keeps required stage references and a minimal example
+  so future edits do not silently drop the staged workflow contract.
