@@ -143,7 +143,7 @@ validate_reference_files() {
   return "${failed}"
 }
 
-validate_blueprint_references() {
+validate_charter_run_references() {
   local skill_dir=$1
   local required
   local example
@@ -151,33 +151,33 @@ validate_blueprint_references() {
   local active
   local failed=0
 
-  if [[ "$(basename "${skill_dir}")" != "blueprint" ]]; then
+  if [[ "$(basename "${skill_dir}")" != "charter-run" ]]; then
     return 0
   fi
 
   for required in specify plan tasks execute index; do
     if [[ ! -f "${skill_dir}/references/${required}.md" ]]; then
-      printf 'ERROR: blueprint missing references/%s.md\n' "${required}" >&2
+      printf 'ERROR: charter-run missing references/%s.md\n' "${required}" >&2
       failed=1
     fi
   done
 
   for example in index.json context.md spec.md checklists.md plan.md tasks.md; do
     if [[ ! -f "${skill_dir}/examples/${example}" ]]; then
-      printf 'ERROR: blueprint missing examples/%s\n' "${example}" >&2
+      printf 'ERROR: charter-run missing examples/%s\n' "${example}" >&2
       failed=1
     fi
   done
 
   if [[ -f "${skill_dir}/examples/index.json" ]]; then
     if ! jq empty "${skill_dir}/examples/index.json" >/dev/null; then
-      printf 'ERROR: blueprint examples/index.json is not valid JSON\n' >&2
+      printf 'ERROR: charter-run examples/index.json is not valid JSON\n' >&2
       failed=1
     else
       specs_dir="$(sed -n 's/^- Specs Dir:[[:space:]]*//p' "${skill_dir}/examples/context.md" | head -n 1)"
       active="$(jq -r '.projects[0].active // ""' "${skill_dir}/examples/index.json")"
       if [[ -n "${specs_dir}" && -n "${active}" && "${specs_dir}" != "${active}" ]]; then
-        printf 'ERROR: blueprint example context Specs Dir does not match index active\n' >&2
+        printf 'ERROR: charter-run example context Specs Dir does not match index active\n' >&2
         failed=1
       fi
     fi
@@ -261,7 +261,7 @@ validate_skill() {
   validate_local_links "${skill_file}" "${skill_dir}" || failed=1
   validate_safety_boundaries "${skill_file}" || failed=1
   validate_reference_files "${skill_dir}" || failed=1
-  validate_blueprint_references "${skill_dir}" || failed=1
+  validate_charter_run_references "${skill_dir}" || failed=1
 
   return "${failed}"
 }

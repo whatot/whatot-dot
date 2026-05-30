@@ -1,9 +1,9 @@
 ---
-name: blueprint
+name: charter-run
 description: "用于需要跟踪规划与执行的非小型仓库任务，例如功能、重构、平台或架构设计；匹配先规划一下、先规划、拆任务、按计划执行、继续执行；在 $HOME/specs 下创建或恢复规划工件。"
 ---
 
-# Blueprint
+# Charter Run
 
 Use this skill as the single entrypoint for tracked planning and execution. It
 owns the specs directory, phase order, gates, and resume behavior. Stage details
