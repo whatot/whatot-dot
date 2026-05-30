@@ -47,8 +47,8 @@ Before execution, ensure:
 - Every task traces back to `spec.md` or `plan.md`.
 - Non-functional requirements have verification or an explicit reason they
   cannot be verified locally.
-- `checklists.md` records coverage and deferred items.
-- `checklists.md` marks `tasks.md` current after regeneration.
+- Refresh `checklists.md` after generating tasks so it records requirement to
+  task coverage, deferred items, and `tasks.md` freshness.
 
 ## Regeneration
 

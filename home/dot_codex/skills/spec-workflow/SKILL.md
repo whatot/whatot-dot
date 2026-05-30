@@ -1,6 +1,6 @@
 ---
 name: spec-workflow
-description: Use as the single entrypoint for staged feature/refactor work: specify, plan, checklist, tasks, execute, and resume tracked artifacts under $HOME/specs; supports Chinese requests like 先规划, 拆任务, 按计划执行, 继续执行.
+description: "Use as the single entrypoint for staged feature/refactor work: specify, plan, checklist, tasks, execute, and resume tracked artifacts under $HOME/specs; supports Chinese requests like 先规划, 拆任务, 按计划执行, 继续执行."
 ---
 
 # Spec Workflow
@@ -88,9 +88,11 @@ For a new tracked plan:
 1. Load [references/specify.md](references/specify.md) and create or update
    `context.md` and `spec.md`.
 2. Load [references/plan.md](references/plan.md) and create or update
-   `checklists.md` and `plan.md`.
+   `checklists.md` and `plan.md`; at this point `checklists.md` may mark
+   `tasks.md` as pending.
 3. Load [references/tasks.md](references/tasks.md) and create or update
-   `tasks.md`.
+   `tasks.md`, then refresh `checklists.md` so task coverage and artifact
+   freshness match the generated tasks.
 4. Stop before code edits unless the user also asked to execute. Report the
    specs directory, open questions, and task summary.
 

@@ -37,6 +37,7 @@ validate_frontmatter_keys() {
   local end_line=$2
   local line
   local key
+  local value
   local failed=0
 
   while IFS= read -r line; do
@@ -44,8 +45,15 @@ validate_frontmatter_keys() {
 
     if [[ "${line}" =~ ^([A-Za-z0-9_-]+): ]]; then
       key="${BASH_REMATCH[1]}"
+      value="${line#*:}"
+      value="${value#"${value%%[![:space:]]*}"}"
       if ! is_allowed_frontmatter_key "${key}"; then
         printf 'ERROR: %s has unsupported frontmatter key: %s\n' "${skill_file}" "${key}" >&2
+        failed=1
+      fi
+
+      if [[ "${value}" == *": "* && ! "${value}" =~ ^(\"|\047|\||\>|\[|\{) ]]; then
+        printf 'ERROR: %s frontmatter key "%s" has an unquoted colon-space value\n' "${skill_file}" "${key}" >&2
         failed=1
       fi
     elif [[ "${line}" =~ ^[[:space:]] ]]; then

@@ -30,6 +30,8 @@ records:
 - Deferred Issues: anything intentionally postponed with rationale
 
 Use `examples/checklists.md` from the skill root as the concrete format example.
+When `tasks.md` has not been generated yet, mark task freshness and task
+coverage as pending, then refresh those entries during the tasks stage.
 
 ## Plan
 

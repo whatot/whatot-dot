@@ -1,6 +1,6 @@
 ---
 name: codebase-overview
-description: Use when building an overall understanding of a repository: features, architecture, runtime flow, important modules, strengths, limits, and Chinese requests like 分析项目, 了解项目, 整体了解, 全貌分析.
+description: "Use when building an overall understanding of a repository: features, architecture, runtime flow, important modules, strengths, limits, and Chinese requests like 分析项目, 了解项目, 整体了解, 全貌分析."
 ---
 
 # Codebase Overview
