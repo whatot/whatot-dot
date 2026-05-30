@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: Use when debugging errors, regressions, flaky commands, repeated failed fixes, or Chinese requests like 排查问题, 查原因, 为什么失败. Focuses on evidence before changes.
+description: "用于排查错误、回归、失败命令、重复失败修复或不稳定问题；匹配排查问题、查原因、为什么失败；先拿证据再改动。"
 ---
 
 # Systematic Debugging

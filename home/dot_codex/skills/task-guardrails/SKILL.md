@@ -1,6 +1,6 @@
 ---
 name: task-guardrails
-description: Use when starting broad, risky, ambiguous, or review-like work, including Chinese requests like 先分析, 边界, 风险, 方案. Keeps scope and verification explicit.
+description: "用于启动范围较大、风险较高、边界模糊或需要先评审的工作；匹配先分析、边界、风险、方案；先明确目标、边界、验证和停机点。"
 ---
 
 # Task Guardrails

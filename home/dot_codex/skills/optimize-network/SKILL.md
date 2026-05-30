@@ -1,6 +1,6 @@
 ---
 name: optimize-network
-description: Use when diagnosing slow network, DNS delay, packet loss, proxy routing, AI tool connectivity, Wi-Fi issues, or Chinese requests like 网络慢, 代理线路, DNS 慢.
+description: "用于诊断网络慢、DNS 延迟、丢包、代理路由、AI 工具连接、Wi-Fi 等问题；匹配网络慢、代理线路、DNS 慢；先收集证据再调整。"
 ---
 
 # Optimize Network

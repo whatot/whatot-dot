@@ -1,6 +1,6 @@
 ---
 name: disk-cleaner
-description: Use when investigating disk usage, caches, build outputs, dependency folders, downloads, or Chinese requests like 磁盘清理, 空间占用, 缓存太大.
+description: "用于排查磁盘空间、缓存、构建产物、依赖目录、下载文件等占用；匹配磁盘清理、空间占用、缓存太大；先确认来源再建议删除。"
 ---
 
 # Disk Cleaner

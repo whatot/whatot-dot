@@ -1,6 +1,6 @@
 ---
 name: codebase-audit
-description: Use only for explicit codebase audits, hidden-bug searches, architecture-risk reviews, technical-debt reviews, or Chinese requests like 代码库审计, 全面检查问题, 有哪些风险.
+description: "用于明确要求代码审计、隐藏 bug 搜索、架构风险或技术债审查的任务；匹配代码库审计、全面检查问题、有哪些风险；优先输出问题、证据、影响和修复建议。"
 ---
 
 # Codebase Audit
