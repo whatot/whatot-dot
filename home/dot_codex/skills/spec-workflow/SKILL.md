@@ -1,9 +1,9 @@
 ---
-name: feature-planning
-description: Use when turning a feature, refactor, or larger change into tracked spec, checklist, plan, task, and execution artifacts; supports Chinese requests like 先规划, 拆任务, 做方案, 按计划执行, 继续执行, 追踪执行.
+name: spec-workflow
+description: Use as the single entrypoint for staged feature/refactor work: specify, plan, checklist, tasks, execute, and resume tracked artifacts under $HOME/specs; supports Chinese requests like 先规划, 拆任务, 按计划执行, 继续执行.
 ---
 
-# Feature Planning
+# Spec Workflow
 
 Use this skill as the single entrypoint for tracked planning and execution. It
 owns the specs directory, phase order, gates, and resume behavior. Stage details
@@ -14,11 +14,7 @@ live in references and should be loaded only when needed.
 - Keep one user-facing skill entrypoint; do not require the user to pick a
   separate specify, plan, task, or execute skill.
 - Put planning artifacts outside target repos under `$HOME/specs` by default.
-- `spec.md` answers what and why.
-- `checklists.md` records requirement quality, coverage, and execution
-  readiness gates.
-- `plan.md` answers how.
-- `tasks.md` is the execution queue.
+- Route work through specify, plan, tasks, index, and execute references.
 - Resolve material uncertainty before bulk execution. Ask at most three
   blocking questions at a time; document low-risk assumptions and continue.
 - Prefer evidence from the target repo over generic methodology.
@@ -115,34 +111,6 @@ For partial or missing artifacts:
 - If `spec.md` changes, treat `checklists.md`, `plan.md`, and `tasks.md` as
   stale until refreshed.
 - If `plan.md` changes, treat `tasks.md` as stale until refreshed.
-
-## Required Gates
-
-Specification gate:
-
-- Goal, non-goals, requirements, acceptance criteria, assumptions, and open
-  questions are explicit.
-- Critical ambiguity is resolved or limited to at most three blocking questions.
-
-Planning gate:
-
-- `plan.md` names current state, approach, files/modules, alternatives, risks,
-  compatibility notes, and verification.
-- `checklists.md` records requirement quality, artifact freshness, coverage, and
-  execution readiness.
-
-Task gate:
-
-- `tasks.md` has stable `T###` IDs, dependency ordering, file paths where useful,
-  and verification work.
-- Each requirement is covered by task IDs or intentionally deferred with
-  rationale.
-
-Execution gate:
-
-- No open question can materially change implementation direction.
-- Verification commands are known or the plan explains how to discover them.
-- Risks, edge cases, and better local patterns have been considered.
 
 ## Resume Rules
 

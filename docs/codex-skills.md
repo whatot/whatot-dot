@@ -28,7 +28,7 @@ local workflow instead of symlinking or auto-updating the external source.
 - `optimize-network`: read-only network diagnosis with proxy/VPN protection.
 - `codebase-overview`: project orientation, architecture map, and balanced limitations.
 - `codebase-audit`: evidence-backed codebase audit and repair planning.
-- `feature-planning`: single-entrypoint staged planning and execution under `$HOME/specs`.
+- `spec-workflow`: single-entrypoint staged planning and execution under `$HOME/specs`.
 
 ## Validation
 
@@ -70,5 +70,5 @@ The validator checks:
   require an explicit approval boundary in the skill text.
 - Reference Markdown files under `references/` have an H1 heading, stay compact,
   and pass safety-boundary checks.
-- `feature-planning` keeps required stage references and a minimal example
+- `spec-workflow` keeps required stage references and a minimal example
   so future edits do not silently drop the staged workflow contract.
