@@ -6,13 +6,13 @@ repos:
         entry: mise exec -- shellcheck -x
         language: system
         types: [shell]
-        exclude: ^home/dot_zsh/vendor/
+        exclude: \.tmpl$
       - id: shfmt
         name: shfmt
         entry: mise exec -- shfmt -w -i 2 -ci
         language: system
         types: [shell]
-        exclude: ^home/dot_zsh/vendor/
+        exclude: \.tmpl$
       - id: dprint
         name: dprint
         entry: mise exec -- dprint fmt --incremental=false --allow-no-files

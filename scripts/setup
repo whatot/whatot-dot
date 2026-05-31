@@ -2,8 +2,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
-# shellcheck source=scripts/lib/common
-source "${ROOT_DIR}/scripts/lib/common"
+# shellcheck source=scripts/lib/common.sh
+source "${ROOT_DIR}/scripts/lib/common.sh"
 
 run_step "doctor" "${ROOT_DIR}/scripts/doctor"
 run_step "mise install" mise install

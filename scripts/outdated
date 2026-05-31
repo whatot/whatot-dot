@@ -3,12 +3,12 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 
-# shellcheck source=scripts/lib/env
-source "${ROOT_DIR}/scripts/lib/env"
-# shellcheck source=scripts/lib/platform
-source "${ROOT_DIR}/scripts/lib/platform"
-# shellcheck source=scripts/lib/common
-source "${ROOT_DIR}/scripts/lib/common"
+# shellcheck source=scripts/lib/env.sh
+source "${ROOT_DIR}/scripts/lib/env.sh"
+# shellcheck source=scripts/lib/platform.sh
+source "${ROOT_DIR}/scripts/lib/platform.sh"
+# shellcheck source=scripts/lib/common.sh
+source "${ROOT_DIR}/scripts/lib/common.sh"
 dotfiles_load_private_env
 init_sudo_cmd
 

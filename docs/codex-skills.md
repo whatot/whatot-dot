@@ -82,7 +82,7 @@ chezmoi 渲染后的位置：
 mise run check
 ```
 
-Codex skill 校验脚本位于 `tests/checks/codex-skills.sh`。
+Codex skill 校验脚本位于 `tests/cases/codex-skills.sh`。
 
 当前校验内容：
 

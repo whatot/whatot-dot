@@ -7,7 +7,7 @@ Fresh-machine setup lives in `new-machine.md`.
 
 Use the lightest layer that still exercises the change:
 
-- `mise run check` for local formatting, shell checks, `chezmoi:diff`, and
+- `mise run check` for local hooks, rendered config tests, `chezmoi:diff`, and
   workstation diagnostics
 - `tests/smoke/container.sh` for fast Linux bootstrap and container-safe package
   checks
@@ -24,9 +24,11 @@ expansions, so this repository does not force them through `shfmt`.
 Use the current checks instead:
 
 - `zsh -n` on rendered `zshenv`, `zprofile`, `zshrc`, and each rendered module
-- rendered-shell smoke via `tests/checks/rendered.sh`
-- `shellcheck` and `shfmt` only for the bash/sh-oriented scripts under
-  `scripts/`, `bootstrap/`, and `tests/`
+- rendered-shell smoke via `tests/cases/rendered.sh`
+- `prek` runs file-level `shellcheck`, `shfmt`, and `dprint` through
+  `.pre-commit-config.yaml`
+- `tests/check.sh` keeps repo-specific rendered config, helper, command, skill,
+  and template checks
 
 Practical rule:
 
@@ -37,8 +39,8 @@ Practical rule:
 
 ## Template Validation
 
-Template behavior belongs under `tests/tmpl/`, with `tests/tmpl/run` as the
-single entrypoint used by `tests/check`.
+Template behavior belongs under `tests/cases/templates/`, and `tests/check.sh`
+runs those cases with the other local checks.
 
 Use template tests for cases such as:
 
@@ -47,7 +49,7 @@ Use template tests for cases such as:
 - malformed optional input that should be ignored instead of producing broken
   config
 
-Private env parsing is validated through `tests/checks/helpers.sh`. Invalid
+Private env parsing is validated through `tests/cases/helpers.sh`. Invalid
 lines in `~/.env_private` or `~/.dotfiles.env` should fail fast with a file and
 line number instead of being ignored silently.
 

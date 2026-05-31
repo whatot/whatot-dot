@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# shellcheck source=tests/lib/smoke-common.sh
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/smoke-common.sh"
+# shellcheck source=tests/smoke/_common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
 usage() {
   printf 'usage: tests/smoke/container.sh <%s> [bootstrap|packages|devtools]\n\n' \

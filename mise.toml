@@ -19,7 +19,7 @@ run = "scripts/setup"
 [tasks.check]
 description = "Run local checks before committing"
 run = [
-  "tests/check",
+  "tests/check.sh",
   { task = "chezmoi:diff" },
   { task = "hooks:run" },
   { task = "doctor" },
@@ -115,15 +115,3 @@ run = "scripts/devtools rust-tools-extra"
 [tasks."devtools:go-tools"]
 description = "Install Go CLI development tools"
 run = "scripts/devtools go-tools"
-
-[tasks."tools:create-iso"]
-description = "Convert a macOS Disk Utility dmg into iso and checksum"
-run = "scripts/create-iso"
-
-[tasks."tools:mvn-cleanup"]
-description = "Run offline mvn clean for child Maven projects"
-run = "scripts/mvn-cleanup"
-
-[tasks."tools:git-upgrade"]
-description = "Update child git or hg repositories"
-run = "scripts/git-upgrade"

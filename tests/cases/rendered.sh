@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# shellcheck source=tests/lib/check-common.sh
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/check-common.sh"
+# shellcheck source=tests/cases/_common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
 render_template_specs() {
   local host_data_file=$1

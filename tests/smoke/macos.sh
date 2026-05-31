@@ -2,10 +2,10 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
-# shellcheck source=scripts/lib/common
-source "${ROOT_DIR}/scripts/lib/common"
-# shellcheck source=scripts/lib/plan
-source "${ROOT_DIR}/scripts/lib/plan"
+# shellcheck source=scripts/lib/common.sh
+source "${ROOT_DIR}/scripts/lib/common.sh"
+# shellcheck source=scripts/lib/plan.sh
+source "${ROOT_DIR}/scripts/lib/plan.sh"
 
 export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
 export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"

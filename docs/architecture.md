@@ -132,7 +132,7 @@ behavior narrow:
 
 ## Validation
 
-Local quality gates run through `mise run check`, `tests/check`, and `prek`
+Local quality gates run through `mise run check`, `tests/check.sh`, and `prek`
 using the repo's pre-commit-compatible hook config. Environment validation is
 split by layer:
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
 
-# shellcheck source=tests/lib/check-common.sh
-source "${ROOT_DIR}/tests/lib/check-common.sh"
+# shellcheck source=tests/cases/_common.sh
+source "${ROOT_DIR}/tests/cases/_common.sh"
 
 dotfiles_tmpl_render() {
   local template_path=$1
@@ -62,4 +62,14 @@ dotfiles_tmpl_assert_not_contains() {
     printf 'unexpected snippet present:\n%s\n' "${needle}" >&2
     return 1
   fi
+}
+
+dotfiles_tmpl_assert_bash_syntax() {
+  local content=$1
+  local tmp_file
+
+  tmp_file="$(mktemp)"
+  printf '%s\n' "${content}" >"${tmp_file}"
+  bash -n "${tmp_file}"
+  rm -f "${tmp_file}"
 }

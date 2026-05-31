@@ -2,10 +2,10 @@
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 
-# shellcheck source=scripts/lib/env
-source "${ROOT_DIR}/scripts/lib/env"
-# shellcheck source=scripts/lib/test-targets
-source "${ROOT_DIR}/scripts/lib/test-targets"
+# shellcheck source=scripts/lib/env.sh
+source "${ROOT_DIR}/scripts/lib/env.sh"
+# shellcheck source=scripts/lib/test-targets.sh
+source "${ROOT_DIR}/scripts/lib/test-targets.sh"
 
 dotfiles_load_private_env
 

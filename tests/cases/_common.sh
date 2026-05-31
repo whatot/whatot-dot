@@ -2,14 +2,14 @@
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 
-# shellcheck source=scripts/lib/env
-source "${ROOT_DIR}/scripts/lib/env"
-# shellcheck source=scripts/lib/plan
-source "${ROOT_DIR}/scripts/lib/plan"
-# shellcheck source=scripts/lib/test-targets
-source "${ROOT_DIR}/scripts/lib/test-targets"
-# shellcheck source=scripts/lib/common
-source "${ROOT_DIR}/scripts/lib/common"
+# shellcheck source=scripts/lib/env.sh
+source "${ROOT_DIR}/scripts/lib/env.sh"
+# shellcheck source=scripts/lib/plan.sh
+source "${ROOT_DIR}/scripts/lib/plan.sh"
+# shellcheck source=scripts/lib/test-targets.sh
+source "${ROOT_DIR}/scripts/lib/test-targets.sh"
+# shellcheck source=scripts/lib/common.sh
+source "${ROOT_DIR}/scripts/lib/common.sh"
 
 dotfiles_check_load_env() {
   dotfiles_load_private_env
@@ -27,20 +27,6 @@ dotfiles_check_run_tool() {
     echo "${tool} is required. Run mise install first." >&2
     return 1
   fi
-}
-
-dotfiles_check_collect_shell_files() {
-  local dir
-
-  for dir in scripts bootstrap tests; do
-    if [[ -d "${ROOT_DIR}/${dir}" ]]; then
-      find "${ROOT_DIR}/${dir}" -type f
-    fi
-  done
-}
-
-dotfiles_check_collect_shell_format_files() {
-  dotfiles_check_collect_shell_files
 }
 
 dotfiles_check_render_template() {
@@ -68,8 +54,4 @@ endfunction
 function! plug#end() abort
 endfunction
 EOF
-}
-
-dotfiles_check_run_dprint() {
-  dotfiles_check_run_tool dprint check --incremental=false --excludes ".cache"
 }

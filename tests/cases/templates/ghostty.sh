@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# shellcheck source=tests/lib/tmpl-common.sh
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/tmpl-common.sh"
+# shellcheck source=tests/cases/templates/_common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
 TEMPLATE_PATH="${ROOT_DIR}/home/dot_config/ghostty/config.ghostty.tmpl"
 

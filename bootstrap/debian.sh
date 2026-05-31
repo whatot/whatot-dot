@@ -3,10 +3,10 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 DOTFILES_LOG_PREFIX=bootstrap:debian
-# shellcheck source=scripts/lib/platform
-source "${ROOT_DIR}/scripts/lib/platform"
-# shellcheck source=scripts/lib/common
-source "${ROOT_DIR}/scripts/lib/common"
+# shellcheck source=scripts/lib/platform.sh
+source "${ROOT_DIR}/scripts/lib/platform.sh"
+# shellcheck source=scripts/lib/common.sh
+source "${ROOT_DIR}/scripts/lib/common.sh"
 init_sudo_cmd
 
 apply_apt_mirror() {

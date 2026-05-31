@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# shellcheck source=tests/lib/check-common.sh
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)/lib/check-common.sh"
+# shellcheck source=tests/cases/_common.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
 dotfiles_check_validate_library_helpers() {
   local tmp_dir
@@ -46,7 +46,7 @@ DOTFILES_SAMPLE_THREE='quoted value'
 EOF
 
   output="$(DOTFILES_ENV_FILE="${env_file}" bash -lc '
-    source "'"${ROOT_DIR}"'/scripts/lib/env"
+    source "'"${ROOT_DIR}"'/scripts/lib/env.sh"
     dotfiles_load_private_env
     printf "%s|%s|%s\n" "${DOTFILES_SAMPLE_ONE}" "${DOTFILES_SAMPLE_TWO}" "${DOTFILES_SAMPLE_THREE}"
   ')"
@@ -58,7 +58,7 @@ BROKEN LINE
 EOF
 
   if output="$(DOTFILES_ENV_FILE="${env_file}" bash -lc '
-    source "'"${ROOT_DIR}"'/scripts/lib/env"
+    source "'"${ROOT_DIR}"'/scripts/lib/env.sh"
     dotfiles_load_private_env
   ' 2>&1)"; then
     printf 'expected invalid env file to fail\n' >&2
