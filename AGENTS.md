@@ -1,37 +1,43 @@
 # AGENTS
 
-## Read First
+本文件是仓库地图，不是完整手册。细节放在 `docs/`、稳定入口放在
+`scripts/`，可复用任务行为放在 Codex skills。保持短小，避免把一次性经验堆进这里。
 
-- `docs/architecture.md`: repository shape, placement rules, and the default workstation path
-- `docs/new-machine.md`: bootstrap and setup flow for real machines
-- `docs/testing.md`: validation matrix and concrete test commands
+## 地图
 
-## Core Rules
+- `docs/architecture.md`：仓库形状、放置规则和默认 workstation 路径
+- `docs/new-machine.md`：真实机器 bootstrap 和 setup 流程
+- `docs/testing.md`：验证矩阵和具体测试命令
+- `docs/codex-skills.md`：Codex skill 管理索引、参考来源和校验说明
+- `docs/cheat.md`：常用命令速查
 
-- Keep the main path small. This repo manages one workstation at a time through `chezmoi`, `mise`, `hosts/*.toml`, `bootstrap/`, and `packages/`.
-- Do not reintroduce heavier default stacks such as Ansible, Nix, Home Manager, nix-darwin, WezTerm, Doom Emacs, or Nvim unless the user explicitly asks.
-- Prefer stable script entrypoints in `scripts/` over ad hoc one-off command flows.
-- Put OS package inventory in `packages/`, machine-specific combinations in `hosts/`, first-run system preparation in `bootstrap/`, and rendered user config in `home/`.
-- Keep secrets and machine-local values out of git. Use `~/.env_private` or `~/.dotfiles.env`.
+## 工作范围
 
-## Change Rules
+- 保持主路径小而清晰。这个仓库通过 `chezmoi`、`mise`、`hosts/*.toml`、`bootstrap/` 和 `packages/` 管理单台 workstation。
+- 除非用户明确要求，不要重新引入 Ansible、Nix、Home Manager、nix-darwin、WezTerm、Doom Emacs 或 Nvim 这类更重的默认栈。
+- 优先使用 `scripts/` 中稳定的脚本入口，不要把一次性命令流扩散到文档或配置里。
+- OS 包清单放在 `packages/`，机器组合放在 `hosts/`，首次系统准备放在 `bootstrap/`，渲染后的用户配置放在 `home/`。
+- 不要把 secret 和机器本地值提交到 git；使用 `~/.env_private` 或 `~/.dotfiles.env`。
 
-- Keep package groups coarse: `base`, `desktop`, and `dev`.
-- Keep host behavior driven by `hosts/*.toml`, not scattered conditionals across unrelated scripts.
-- Put portable CLIs and language runtimes in `mise.toml` only when they are part of the normal workstation path.
-- Do not hardcode machine-local absolute paths such as a specific home directory in tracked files or tests; derive them from template data, `$HOME`, or repo helpers instead.
-- Standardize managed app config content under XDG-style paths such as `~/.config/<tool>/...`.
-- On macOS, when a tool expects `~/Library/Application Support/<tool>/...`, keep that native path as a symlink back to the XDG-managed file instead of maintaining two copies.
-- When managing those macOS compatibility symlinks through chezmoi, avoid changing `~/Library` or `~/Library/Application Support` directory metadata; only manage the leaf app path.
-- Do not grow `mise.toml` with low-value test shortcuts. Prefer documenting validation commands in `docs/testing.md`.
-- Keep validation scripts non-interactive and compatible with the older Bash version that ships with macOS.
-- On macOS, `plantuml` must stay paired with an explicit Java formula such as `openjdk`.
+## 变更规则
 
-## Validation Rules
+- 包分组保持粗粒度：`base`、`desktop`、`dev`。
+- host 行为由 `hosts/*.toml` 驱动，不要把条件判断散落到无关脚本里。
+- 只有属于正常 workstation 路径的 portable CLI 和语言运行时才放进 `mise.toml`。
+- 不要在受管理文件或测试中硬编码机器本地绝对路径，例如特定 home 目录；从模板数据、`$HOME` 或仓库 helper 推导。
+- 受管理的 app 配置优先放在 XDG 风格路径，例如 `~/.config/<tool>/...`。
+- 在 macOS 上，如果工具要求 `~/Library/Application Support/<tool>/...`，用 symlink 指回 XDG 管理文件，不维护两份配置。
+- 通过 chezmoi 管理这些 macOS 兼容 symlink 时，不要修改 `~/Library` 或 `~/Library/Application Support` 目录元数据，只管理叶子 app 路径。
+- Codex skill 源文件只放在 `home/dot_codex/skills/`；外部仓库只作为参考来源，吸收前先按本地工作流重写。
+- 不要用低价值测试快捷方式膨胀 `mise.toml`；验证命令优先记录在 `docs/testing.md`。
+- 验证脚本保持非交互，并兼容 macOS 自带的旧 Bash。
+- 在 macOS 上，`plantuml` 必须和明确的 Java formula 搭配，例如 `openjdk`。
 
-- Run `mise run check` for local formatting and rendered-dotfile validation.
-- Use `tests/smoke/container.sh` for Linux bootstrap and container-safe package or devtool checks.
-- Use `tests/smoke/orbstack.sh` when a Linux change needs a fuller machine-like environment.
-- Use `tests/smoke/macos.sh host` for macOS Brewfile validation.
-- Do not treat `homebrew/brew` on Linux as a real macOS environment.
-- Use a real host for desktop apps, fonts, input methods, AUR, and macOS system integration checks.
+## 验证规则
+
+- 运行 `mise run check` 做本地格式化和 rendered dotfile 校验。
+- Linux bootstrap、container-safe package 或 devtool 检查使用 `tests/smoke/container.sh`。
+- 当 Linux 变更需要更接近真实机器的环境时，使用 `tests/smoke/orbstack.sh`。
+- macOS Brewfile 校验使用 `tests/smoke/macos.sh host`。
+- 不要把 Linux 上的 `homebrew/brew` 当成真实 macOS 环境。
+- desktop app、字体、输入法、AUR 和 macOS 系统集成检查需要使用真实 host。
