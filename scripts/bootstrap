@@ -17,8 +17,8 @@ case "${kernel_name}" in
       arch | manjaro)
         "${ROOT_DIR}/bootstrap/arch.sh"
         ;;
-      ubuntu | debian)
-        "${ROOT_DIR}/bootstrap/${linux_id}.sh"
+      debian)
+        "${ROOT_DIR}/bootstrap/debian.sh"
         ;;
       *)
         echo "unsupported linux distribution: ${linux_id}" >&2

@@ -23,16 +23,14 @@ apply_apt_mirror() {
   local mirror=${DOTFILES_DEBIAN_MIRROR:-http://mirrors.ustc.edu.cn/debian}
   local security_mirror=${DOTFILES_DEBIAN_SECURITY_MIRROR:-http://mirrors.ustc.edu.cn/debian-security}
   local components="main contrib non-free non-free-firmware"
-  local source_file
+  local source_file=/etc/apt/sources.list.d/debian.sources
 
-  for source_file in /etc/apt/sources.list.d/debian.sources /etc/apt/sources.list.d/ubuntu.sources; do
-    if [[ -f "${source_file}" && ! -f "${source_file}.bak" ]]; then
-      "${sudo_cmd[@]}" cp "${source_file}" "${source_file}.bak"
-    fi
-    if [[ -f "${source_file}" ]]; then
-      "${sudo_cmd[@]}" rm -f "${source_file}"
-    fi
-  done
+  if [[ -f "${source_file}" && ! -f "${source_file}.bak" ]]; then
+    "${sudo_cmd[@]}" cp "${source_file}" "${source_file}.bak"
+  fi
+  if [[ -f "${source_file}" ]]; then
+    "${sudo_cmd[@]}" rm -f "${source_file}"
+  fi
 
   write_sources_list /etc/apt/sources.list \
     "deb ${mirror} ${codename} ${components}" \

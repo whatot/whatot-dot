@@ -13,7 +13,7 @@ usage() {
 usage: scripts/host <list|show> [host]
 
 Environment:
-  DOTFILES_HOST=ubuntu-amd64
+  DOTFILES_HOST=debian-amd64
 EOF
 }
 

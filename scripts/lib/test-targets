@@ -2,10 +2,8 @@
 
 dotfiles_test_targets() {
   printf '%s\n' \
-    ubuntu-amd64 \
     debian-amd64 \
-    arch-amd64 \
-    ubuntu-arm64
+    arch-amd64
 }
 
 dotfiles_test_target_selector() {
@@ -48,7 +46,6 @@ dotfiles_test_machine_lines() {
 
 dotfiles_test_forwarded_env_names() {
   printf '%s\n' \
-    DOTFILES_UBUNTU_MIRROR \
     DOTFILES_DEBIAN_MIRROR \
     DOTFILES_DEBIAN_SECURITY_MIRROR \
     DOTFILES_ARCH_MIRRORS \
@@ -64,9 +61,6 @@ dotfiles_test_forwarded_env_names() {
 
 dotfiles_test_image_for_target() {
   case "$1" in
-    ubuntu-amd64 | ubuntu-arm64)
-      printf 'ubuntu:26.04\n'
-      ;;
     debian-amd64)
       printf 'debian:trixie\n'
       ;;
@@ -82,11 +76,8 @@ dotfiles_test_image_for_target() {
 
 dotfiles_test_platform_for_target() {
   case "$1" in
-    ubuntu-amd64 | debian-amd64 | arch-amd64)
+    debian-amd64 | arch-amd64)
       printf 'linux/amd64\n'
-      ;;
-    ubuntu-arm64)
-      printf 'linux/arm64\n'
       ;;
     *)
       echo "unsupported target: $1" >&2
@@ -101,9 +92,6 @@ dotfiles_test_machine_for_target() {
 
 dotfiles_test_distro_for_target() {
   case "$1" in
-    ubuntu-amd64 | ubuntu-arm64)
-      printf 'ubuntu:resolute\n'
-      ;;
     debian-amd64)
       printf 'debian:trixie\n'
       ;;
@@ -119,11 +107,8 @@ dotfiles_test_distro_for_target() {
 
 dotfiles_test_arch_for_target() {
   case "$1" in
-    ubuntu-amd64 | debian-amd64 | arch-amd64)
+    debian-amd64 | arch-amd64)
       printf 'amd64\n'
-      ;;
-    ubuntu-arm64)
-      printf 'arm64\n'
       ;;
     *)
       echo "unsupported target: $1" >&2
@@ -151,7 +136,7 @@ fi
 chezmoi managed --source .
 EOF
       ;;
-    ubuntu-amd64 | ubuntu-arm64 | debian-amd64)
+    debian-amd64)
       cat <<'EOF'
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive

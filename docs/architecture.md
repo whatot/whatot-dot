@@ -56,10 +56,10 @@ Local private defaults live in:
 ## Placement Rules
 
 - Put first-run prerequisites and distro mirror changes in `bootstrap/`.
-- Put OS packages, GUI apps, fonts, compilers, native build dependencies, and
-  shell plugins in `packages/`.
-- Put portable developer CLIs and language runtimes in `mise.toml` when they
-  work well cross-platform.
+- Put OS packages, GUI apps, fonts, compilers, native build dependencies,
+  common daily CLIs, and shell plugins in `packages/`.
+- Put language runtimes and developer tools that need consistent cross-repo
+  versions in `mise.toml`.
 - Put machine-specific combinations in `hosts/`, not ad hoc conditionals across
   unrelated scripts.
 - Put user config and templated dotfiles in `home/`.
@@ -88,8 +88,17 @@ from the default path:
 
 ## Development Tools
 
-Language runtimes and portable CLIs should default to `mise`. OS-level build
-dependencies stay in `packages/`.
+macOS and Arch are the primary daily hosts. Common CLI tools that are readily
+available from Homebrew or pacman should default to OS packages on those hosts
+so shell completions and PATH behavior stay simple.
+
+Debian stays the minimal non-desktop apt target for containers, servers, smoke
+tests, and temporary development environments. Do not mirror the full daily
+desktop toolset there unless it becomes a primary daily machine.
+
+Language runtimes should default to `mise`. Developer tools that need consistent
+cross-repo versions can also stay in `mise`; OS-level build dependencies and
+common CLIs stay in `packages/`.
 
 Rust versions should normally come from each project's `rust-toolchain.toml`.
 This repository only ensures `rustup` exists, has a usable default toolchain,

@@ -94,11 +94,6 @@ case "${kernel_name}" in
           echo "skip AUR packages: install paru or yay first" >&2
         fi
         ;;
-      ubuntu)
-        package_dir="${ROOT_DIR}/packages/ubuntu"
-        refresh_apt_indices
-        install_linux_packages "${sudo_cmd[@]}" apt install -y
-        ;;
       debian)
         package_dir="${ROOT_DIR}/packages/debian"
         refresh_apt_indices

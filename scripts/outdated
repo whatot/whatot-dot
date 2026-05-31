@@ -41,7 +41,7 @@ show_outdated_os_packages() {
           run_step "pacman refresh databases" "${sudo_cmd[@]}" pacman -Sy
           run_step_allow_fail "pacman list updates" pacman -Qu
           ;;
-        ubuntu | debian)
+        debian)
           run_apt_update_once
           run_step_allow_fail "apt list --upgradable" apt list --upgradable
           ;;

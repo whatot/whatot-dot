@@ -25,10 +25,8 @@ DOTFILES_GIT_EMAIL=you@example.com
 Built-in hosts:
 
 - `macos-arm64`
-- `ubuntu-amd64`
 - `debian-amd64`
 - `arch-amd64`
-- `ubuntu-arm64`
 
 ## Daily Use
 
@@ -50,16 +48,11 @@ Validation commands live in [docs/testing.md](docs/testing.md).
 
 ## Common Tools
 
-These workstation-global CLI tools are installed through `mise`:
+Common daily CLI tools are installed through OS package inventories on the
+primary macOS and Arch hosts. `mise` keeps language runtimes and tools that need
+consistent cross-repo versions:
 
 - `rtk`: token-aware shell proxy for AI-assisted terminal work. Source: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
-- `rg`: fast text search. Source: [BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep)
-- `fd`: friendly file and directory search. Source: [sharkdp/fd](https://github.com/sharkdp/fd)
-- `fzf`: fuzzy picker for files, history, and command output. Source: [junegunn/fzf](https://github.com/junegunn/fzf)
-- `bat`: syntax-highlighted file viewer. Source: [sharkdp/bat](https://github.com/sharkdp/bat)
-- `btm`: terminal system monitor. Source: [ClementTsang/bottom](https://github.com/ClementTsang/bottom)
-- `zoxide`: smarter directory jumping via `z` and `zi`. Source: [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide)
-- `jj`: Git-compatible change-oriented VCS. Source: [jj-vcs/jj](https://github.com/jj-vcs/jj)
 
 ## Repository Layout
 

@@ -2,7 +2,7 @@ name = "arch-amd64"
 os = "arch"
 arch = "amd64"
 
-packages = ["base", "dev"]
+packages = ["base", "desktop", "dev"]
 devtools = ["rust-system"]
 
 [vim]

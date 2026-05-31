@@ -23,7 +23,7 @@
 
 - 包分组保持粗粒度：`base`、`desktop`、`dev`。
 - host 行为由 `hosts/*.toml` 驱动，不要把条件判断散落到无关脚本里。
-- 只有属于正常 workstation 路径的 portable CLI 和语言运行时才放进 `mise.toml`。
+- 常用 CLI 优先放进 macOS/Arch 的 OS package 清单；语言运行时和需要跨仓库一致版本的工具才放进 `mise.toml`。
 - 不要在受管理文件或测试中硬编码机器本地绝对路径，例如特定 home 目录；从模板数据、`$HOME` 或仓库 helper 推导。
 - 受管理的 app 配置优先放在 XDG 风格路径，例如 `~/.config/<tool>/...`。
 - 在 macOS 上，如果工具要求 `~/Library/Application Support/<tool>/...`，用 symlink 指回 XDG 管理文件，不维护两份配置。

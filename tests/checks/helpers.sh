@@ -33,8 +33,8 @@ EOF
 
   [[ "${packages_csv}" == "base,dev,desktop" ]]
   [[ "${devtools_csv}" == "rust-system,go-tools" ]]
-  [[ "${target_selector}" == "ubuntu-amd64|debian-amd64|arch-amd64|ubuntu-arm64|all" ]]
-  dotfiles_test_is_supported_target ubuntu-amd64
+  [[ "${target_selector}" == "debian-amd64|arch-amd64|all" ]]
+  dotfiles_test_is_supported_target debian-amd64
   if dotfiles_test_is_supported_target macos-arm64; then
     return 1
   fi

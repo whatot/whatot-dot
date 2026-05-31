@@ -1,4 +1,6 @@
 bruno-bin
+cc-switch-bin
 nautilus-nutstore
-wechat-bin
+openai-codex-desktop
 qqmusic-bin
+wechat-bin

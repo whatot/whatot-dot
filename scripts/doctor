@@ -76,7 +76,7 @@ check_core_commands() {
         arch | manjaro)
           print_command_status pacman || failed=1
           ;;
-        ubuntu | debian)
+        debian)
           print_command_status apt || failed=1
           ;;
         *)

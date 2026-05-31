@@ -39,10 +39,9 @@ mise run setup
 
 Install `paru` or `yay` before `mise run setup` when AUR packages are needed.
 
-## Ubuntu Or Debian
+## Debian
 
-Ubuntu and Debian use separate bootstrap scripts, but the entry flow is the
-same:
+Debian uses the Linux bootstrap path:
 
 ```shell
 git clone <repo> ~/git/dotfiles
@@ -56,7 +55,7 @@ mise run setup
 
 ```shell
 mise run show:host
-DOTFILES_HOST=ubuntu-amd64 mise run setup
+DOTFILES_HOST=debian-amd64 mise run setup
 DOTFILES_HOST=macos-arm64 mise run setup
 ```
 
@@ -66,7 +65,6 @@ Default Linux mirrors use USTC. Override them when a machine needs a different
 source:
 
 ```shell
-DOTFILES_UBUNTU_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/ubuntu scripts/bootstrap
 DOTFILES_DEBIAN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/debian scripts/bootstrap
 DOTFILES_DEBIAN_SECURITY_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/debian-security scripts/bootstrap
 DOTFILES_ARCH_MIRRORS='https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch,https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' scripts/bootstrap

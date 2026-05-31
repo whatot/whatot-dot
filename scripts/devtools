@@ -104,11 +104,6 @@ install_rust_system() {
           run_step "pacman install Rust system packages" \
             xargs "${sudo_cmd[@]}" pacman -S --needed --noconfirm <"${ROOT_DIR}/packages/rust/system-arch.txt"
           ;;
-        ubuntu)
-          refresh_apt_indices
-          run_step "apt install Rust system packages" \
-            xargs "${sudo_cmd[@]}" apt install -y --no-install-recommends <"${ROOT_DIR}/packages/rust/system-ubuntu.txt"
-          ;;
         debian)
           refresh_apt_indices
           run_step "apt install Rust system packages" \
@@ -155,7 +150,7 @@ install_rust_toolchain() {
           arch | manjaro)
             run_step "pacman install rustup" "${sudo_cmd[@]}" pacman -S --needed --noconfirm rustup cargo-binstall
             ;;
-          ubuntu | debian)
+          debian)
             run_step "rustup-init ${toolchain}" install_rustup_from_script "${toolchain}"
             ;;
           *)

@@ -53,31 +53,25 @@ line number instead of being ignored silently.
 
 ## Fixed Linux Targets
 
-Container and OrbStack validation use the same four host targets:
+Container and OrbStack validation use the same Linux host targets:
 
 ```text
-ubuntu-amd64
 debian-amd64
 arch-amd64
-ubuntu-arm64
 ```
 
 Container images:
 
 ```text
-ubuntu-amd64   ubuntu:26.04      linux/amd64
 debian-amd64   debian:trixie     linux/amd64
 arch-amd64     archlinux:latest  linux/amd64
-ubuntu-arm64   ubuntu:26.04      linux/arm64
 ```
 
 OrbStack machines:
 
 ```text
-dotfiles-ubuntu-amd64   Ubuntu 26.04 LTS amd64
 dotfiles-debian-amd64   Debian 13 amd64
 dotfiles-arch-amd64     Arch amd64
-dotfiles-ubuntu-arm64   Ubuntu 26.04 LTS arm64
 ```
 
 ## Container Smoke Tests
@@ -85,10 +79,8 @@ dotfiles-ubuntu-arm64   Ubuntu 26.04 LTS arm64
 Use containers as the fast default for Linux validation:
 
 ```shell
-tests/smoke/container.sh ubuntu-amd64
 tests/smoke/container.sh debian-amd64
 tests/smoke/container.sh arch-amd64
-tests/smoke/container.sh ubuntu-arm64
 tests/smoke/container.sh all
 ```
 
@@ -120,10 +112,8 @@ declared container hosts. The current Linux hosts keep this to the minimal
 Use OrbStack when a Linux change needs a fuller machine-like environment:
 
 ```shell
-tests/smoke/orbstack.sh ubuntu-amd64
 tests/smoke/orbstack.sh debian-amd64
 tests/smoke/orbstack.sh arch-amd64
-tests/smoke/orbstack.sh ubuntu-arm64
 tests/smoke/orbstack.sh all
 ```
 

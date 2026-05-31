@@ -34,7 +34,7 @@ case_host_data_can_set_command() {
 case_platform_specific_settings_follow_rendering_os() {
   local output
 
-  output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" "${ROOT_DIR}/hosts/ubuntu-amd64.toml")"
+  output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" "${ROOT_DIR}/hosts/debian-amd64.toml")"
 
   if [[ "$(current_kernel)" == "Darwin" ]]; then
     dotfiles_tmpl_assert_contains "${output}" 'macos-titlebar-style = transparent'
