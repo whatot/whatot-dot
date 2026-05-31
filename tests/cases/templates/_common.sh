@@ -66,10 +66,13 @@ dotfiles_tmpl_assert_not_contains() {
 
 dotfiles_tmpl_assert_bash_syntax() {
   local content=$1
+  local tmp_dir
   local tmp_file
 
-  tmp_file="$(mktemp)"
+  tmp_dir="$(mktemp -d)"
+  tmp_file="${tmp_dir}/rendered.sh"
   printf '%s\n' "${content}" >"${tmp_file}"
   bash -n "${tmp_file}"
-  rm -f "${tmp_file}"
+  dotfiles_check_run_tool shellcheck "${tmp_file}"
+  rm -rf "${tmp_dir}"
 }
