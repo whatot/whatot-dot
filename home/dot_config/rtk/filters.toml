@@ -14,8 +14,8 @@ strip_lines_matching = [
 max_lines = 120
 
 [filters.pre-commit]
-description = "Hide all-green pre-commit hook lines while keeping failures visible."
-match_command = "^pre-commit\\s+run\\b"
+description = "Hide all-green pre-commit or prek hook lines while keeping failures visible."
+match_command = "^(pre-commit|prek)\\s+run\\b"
 strip_ansi = true
 strip_lines_matching = [
   "^.+\\.{5,}Passed$",

@@ -132,8 +132,9 @@ behavior narrow:
 
 ## Validation
 
-Local quality gates run through `mise run check`, `tests/check`, and
-`pre-commit`. Environment validation is split by layer:
+Local quality gates run through `mise run check`, `tests/check`, and `prek`
+using the repo's pre-commit-compatible hook config. Environment validation is
+split by layer:
 
 - containers for fast Linux bootstrap and container-safe package checks
 - OrbStack machines for host-like Linux validation

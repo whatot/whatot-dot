@@ -2,7 +2,8 @@
 # this repo's own checks and task entrypoints in addition to global defaults.
 [tools]
 dprint = "latest"
-pre-commit = "latest"
+# prek runs this repo's pre-commit-compatible hooks faster than pre-commit.
+prek = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 
@@ -70,13 +71,14 @@ description = "Preview chezmoi-managed dotfile changes"
 run = "scripts/chezmoi diff"
 
 [tasks."hooks:install"]
-description = "Install git pre-commit hooks"
-run = "pre-commit install"
+description = "Install git hooks with prek"
+# Keep PREK_HOME in the repo cache so sandboxed checks do not write ~/.cache.
+run = 'mkdir -p .cache/prek && PREK_HOME="$PWD/.cache/prek" prek install'
 
 [tasks."hooks:run"]
-description = "Run pre-commit hooks on all files"
+description = "Run prek hooks on all files"
 hide = true
-run = "pre-commit run --all-files"
+run = 'mkdir -p .cache/prek && PREK_HOME="$PWD/.cache/prek" prek run --all-files'
 
 [tasks.update]
 description = "Update packages, mise tools, and chezmoi state"

@@ -28,4 +28,5 @@ tree-sitter-cli
 typst
 uv
 watchexec
+wrangler
 zed
