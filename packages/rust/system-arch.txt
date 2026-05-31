@@ -1,6 +1,5 @@
 pkg-config
 mold
 ccache
-sccache
 gcc
 make

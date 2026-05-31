@@ -1,11 +1,10 @@
-sccache
-cargo-outdated
-cargo-bloat
-cargo-generate
-cargo-edit
+bacon
 cargo-audit
+cargo-bloat
 cargo-deny
+cargo-edit
+cargo-generate
+cargo-llvm-cov
+cargo-outdated
 tealdeer
 toml2json
-bacon
-cargo-llvm-cov
