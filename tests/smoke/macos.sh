@@ -6,10 +6,10 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)"
 source "${ROOT_DIR}/scripts/lib/common.sh"
 # shellcheck source=scripts/lib/plan.sh
 source "${ROOT_DIR}/scripts/lib/plan.sh"
+# shellcheck source=scripts/lib/homebrew.sh
+source "${ROOT_DIR}/scripts/lib/homebrew.sh"
 
-export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
-export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
-export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
+dotfiles_init_homebrew_env
 
 usage() {
   cat <<'EOF'

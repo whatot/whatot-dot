@@ -9,7 +9,7 @@ source "${ROOT_DIR}/scripts/lib/platform.sh"
 source "${ROOT_DIR}/scripts/lib/common.sh"
 init_sudo_cmd
 
-apply_apt_mirror() {
+configure_apt_sources() {
   local linux_id
   local codename
 
@@ -25,9 +25,7 @@ apply_apt_mirror() {
   local components="main contrib non-free non-free-firmware"
   local source_file=/etc/apt/sources.list.d/debian.sources
 
-  if [[ -f "${source_file}" && ! -f "${source_file}.bak" ]]; then
-    "${sudo_cmd[@]}" cp "${source_file}" "${source_file}.bak"
-  fi
+  backup_file "${source_file}"
   if [[ -f "${source_file}" ]]; then
     "${sudo_cmd[@]}" rm -f "${source_file}"
   fi
@@ -39,18 +37,33 @@ apply_apt_mirror() {
     "deb ${security_mirror} ${codename}-security ${components}"
 }
 
-apply_apt_mirror
+install_debian_bootstrap_tools() {
+  run_apt_update_once
+  run_step "apt install init packages" \
+    install_packages_from_file "${ROOT_DIR}/packages/debian/init.txt" \
+    "${sudo_cmd[@]}" apt install -y
 
-run_apt_update_once
-run_step "apt install init packages" "${sudo_cmd[@]}" apt install -y ca-certificates curl git gnupg zsh vim
+  if ! command -v chezmoi >/dev/null 2>&1; then
+    log "start: chezmoi installer"
+    sh -c "$(
+      curl --http1.1 \
+        --retry 2 \
+        --retry-all-errors \
+        --retry-delay "${DOTFILES_RETRY_DELAY:-5}" \
+        -fsLS get.chezmoi.io
+    )" -- -b "${HOME}/.local/bin"
+    log "done: chezmoi installer"
+  else
+    log "found chezmoi: $(command -v chezmoi)"
+  fi
 
-if ! command -v chezmoi >/dev/null 2>&1; then
-  log "start: chezmoi installer"
-  sh -c "$(curl --http1.1 --retry 2 --retry-all-errors --retry-delay "${DOTFILES_RETRY_DELAY:-5}" -fsLS get.chezmoi.io)" -- -b "${HOME}/.local/bin"
-  log "done: chezmoi installer"
-else
-  log "found chezmoi: $(command -v chezmoi)"
-fi
+  export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
+  install_mise_from_installer
+}
 
-export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
-install_mise_from_installer
+main() {
+  configure_apt_sources
+  install_debian_bootstrap_tools
+}
+
+main "$@"

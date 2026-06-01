@@ -39,6 +39,29 @@ check_fish_specs() {
   done
 }
 
+check_platform_ignored_paths() {
+  local darwin_managed
+  local linux_managed
+
+  linux_managed="$(dotfiles_check_run_tool chezmoi managed \
+    --source "${ROOT_DIR}" \
+    --override-data '{"chezmoi":{"os":"linux"}}' \
+    --path-style relative)"
+  if printf '%s\n' "${linux_managed}" | grep -E '^Library(/|$)' >/dev/null; then
+    echo "Library paths must not be managed on non-Darwin targets" >&2
+    return 1
+  fi
+
+  darwin_managed="$(dotfiles_check_run_tool chezmoi managed \
+    --source "${ROOT_DIR}" \
+    --override-data '{"chezmoi":{"os":"darwin"}}' \
+    --path-style relative)"
+  if ! printf '%s\n' "${darwin_managed}" | grep -F 'Library/Application Support/rtk/config.toml' >/dev/null; then
+    echo "macOS rtk Library symlink must stay managed on Darwin targets" >&2
+    return 1
+  fi
+}
+
 main() {
   local host_data_file
   local tmp_dir
@@ -78,6 +101,7 @@ main() {
   done < <(find "${ROOT_DIR}/home/dot_config/fish" -type f -name '*.fish' | sort)
 
   render_template_specs "${host_data_file}" "${render_specs[@]}"
+  run_step "chezmoiignore platform paths" check_platform_ignored_paths
 
   cp "${ROOT_DIR}/home/dot_vim/"*.vim "${tmp_home}/.vim/"
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"

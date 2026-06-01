@@ -97,7 +97,9 @@ tests/smoke/container.sh all packages
 
 This runs bootstrap first, then installs the package sets declared by the fixed
 container hosts. Desktop, font, input-method, and AUR checks do not belong in
-containers.
+containers. Arch package and devtool container stages set `DOTFILES_SKIP_AUR`
+so a bootstrap-installed AUR helper does not pull AUR packages into container
+validation.
 
 For host-enabled Linux devtools:
 
@@ -151,7 +153,6 @@ For example:
 
 ```shell
 DOTFILES_ARCHLINUXCN_MIRRORS='https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch,https://mirrors.ustc.edu.cn/archlinuxcn/$arch' tests/smoke/orbstack.sh arch-amd64
-DOTFILES_ENABLE_ARCHLINUXCN=false tests/smoke/container.sh arch-amd64
 ```
 
 ## macOS Package Checks

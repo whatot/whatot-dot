@@ -37,7 +37,8 @@ mise trust
 mise run setup
 ```
 
-Install `paru` or `yay` before `mise run setup` when AUR packages are needed.
+Arch bootstrap enables `archlinuxcn` and installs `paru` before
+`mise run setup`.
 
 ## Debian
 
@@ -71,9 +72,8 @@ DOTFILES_ARCH_MIRRORS='https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$
 DOTFILES_ARCHLINUXCN_MIRRORS='https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch,https://mirrors.ustc.edu.cn/archlinuxcn/$arch' scripts/bootstrap
 ```
 
-`archlinuxcn` is enabled by default on Arch. Set
-`DOTFILES_ENABLE_ARCHLINUXCN=false` when a machine should stay on official Arch
-repositories only.
+Arch bootstrap uses `archlinuxcn` for the keyring and `paru`; override
+`DOTFILES_ARCHLINUXCN_MIRRORS` when a machine needs a different mirror.
 
 If the `mise.run` installer is slow or unstable on a network, override the
 bootstrap fetch settings:

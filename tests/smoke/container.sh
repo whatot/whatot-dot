@@ -78,6 +78,9 @@ run_target() {
   if [[ "${stage}" != "bootstrap" ]]; then
     env_args+=(--env "DOTFILES_SKIP_MISE_INSTALL=true")
   fi
+  if [[ "${target}" == "arch-amd64" && "${stage}" != "bootstrap" ]]; then
+    env_args+=(--env "DOTFILES_SKIP_AUR=true")
+  fi
   add_proxy_envs
 
   log "run ${target} ${stage} in ${image} (${platform})"

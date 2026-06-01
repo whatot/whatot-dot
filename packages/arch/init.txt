@@ -1,0 +1,5 @@
+git
+chezmoi
+mise
+zsh
+vim

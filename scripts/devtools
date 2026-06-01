@@ -102,12 +102,14 @@ install_rust_system() {
       case "${linux_id}" in
         arch | manjaro)
           run_step "pacman install Rust system packages" \
-            xargs "${sudo_cmd[@]}" pacman -S --needed --noconfirm <"${ROOT_DIR}/packages/rust/system-arch.txt"
+            install_packages_from_file "${ROOT_DIR}/packages/rust/system-arch.txt" \
+            "${sudo_cmd[@]}" pacman -S --needed --noconfirm
           ;;
         debian)
           refresh_apt_indices
           run_step "apt install Rust system packages" \
-            xargs "${sudo_cmd[@]}" apt install -y --no-install-recommends <"${ROOT_DIR}/packages/rust/system-debian.txt"
+            install_packages_from_file "${ROOT_DIR}/packages/rust/system-debian.txt" \
+            "${sudo_cmd[@]}" apt install -y --no-install-recommends
           ;;
         *)
           echo "unsupported linux distribution: ${linux_id}" >&2

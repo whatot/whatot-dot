@@ -85,6 +85,22 @@ write_sources_list() {
   printf "%s\n" "$@" | "${sudo_cmd[@]}" tee "${file_path}" >/dev/null
 }
 
+read_package_file() {
+  local file_path=$1
+
+  awk 'NF && $1 !~ /^#/ { print }' "${file_path}"
+}
+
+install_packages_from_file() {
+  local file_path=$1
+  local packages
+  shift
+
+  packages="$(read_package_file "${file_path}")"
+  [[ -n "${packages}" ]] || return 0
+  printf '%s\n' "${packages}" | xargs "$@"
+}
+
 install_mise_from_installer() {
   local attempt
   local attempts=${DOTFILES_RETRY_ATTEMPTS:-3}

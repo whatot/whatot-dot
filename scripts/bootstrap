@@ -5,34 +5,49 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 # shellcheck source=scripts/lib/platform.sh
 source "${ROOT_DIR}/scripts/lib/platform.sh"
 
-kernel_name="$(dotfiles_kernel_name)"
+run_platform_bootstrap() {
+  local kernel_name
+  local linux_id
 
-case "${kernel_name}" in
-  Darwin)
-    "${ROOT_DIR}/bootstrap/macos.sh"
-    ;;
-  Linux)
-    linux_id="$(dotfiles_linux_release_id)"
-    case "${linux_id}" in
-      arch | manjaro)
-        "${ROOT_DIR}/bootstrap/arch.sh"
-        ;;
-      debian)
-        "${ROOT_DIR}/bootstrap/debian.sh"
-        ;;
-      *)
-        echo "unsupported linux distribution: ${linux_id}" >&2
-        exit 1
-        ;;
-    esac
-    ;;
-  *)
-    echo "unsupported os: ${kernel_name}" >&2
-    exit 1
-    ;;
-esac
+  kernel_name="$(dotfiles_kernel_name)"
 
-export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:${PATH}"
-"${ROOT_DIR}/scripts/preflight"
-chezmoi init --source "${ROOT_DIR}"
-"${ROOT_DIR}/scripts/chezmoi" apply
+  case "${kernel_name}" in
+    Darwin)
+      "${ROOT_DIR}/bootstrap/macos.sh"
+      export PATH="/opt/homebrew/bin:/usr/local/bin:${PATH}"
+      ;;
+    Linux)
+      linux_id="$(dotfiles_linux_release_id)"
+      case "${linux_id}" in
+        arch | manjaro)
+          "${ROOT_DIR}/bootstrap/arch.sh"
+          ;;
+        debian)
+          "${ROOT_DIR}/bootstrap/debian.sh"
+          ;;
+        *)
+          echo "unsupported linux distribution: ${linux_id}" >&2
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      echo "unsupported os: ${kernel_name}" >&2
+      exit 1
+      ;;
+  esac
+}
+
+apply_repository_dotfiles() {
+  export PATH="${HOME}/.local/bin:${HOME}/.cargo/bin:${PATH}"
+  "${ROOT_DIR}/scripts/preflight"
+  chezmoi init --source "${ROOT_DIR}"
+  "${ROOT_DIR}/scripts/chezmoi" apply
+}
+
+main() {
+  run_platform_bootstrap
+  apply_repository_dotfiles
+}
+
+main "$@"

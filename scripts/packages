@@ -12,15 +12,6 @@ source "${ROOT_DIR}/scripts/lib/platform.sh"
 source "${ROOT_DIR}/scripts/lib/common.sh"
 dotfiles_load_private_env
 
-export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
-export HOMEBREW_BOTTLE_DOMAIN="${HOMEBREW_BOTTLE_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles}"
-export HOMEBREW_API_DOMAIN="${HOMEBREW_API_DOMAIN:-https://mirrors.ustc.edu.cn/homebrew-bottles/api}"
-brew_bundle_args=()
-
-if [[ ${DOTFILES_BREW_BUNDLE_VERBOSE:-true} == "true" ]]; then
-  brew_bundle_args+=(--verbose)
-fi
-
 init_sudo_cmd
 
 read_package_set_files() {
@@ -58,6 +49,9 @@ refresh_apt_indices() {
 install_brew_package_sets() {
   local package_set package_file
 
+  dotfiles_init_homebrew_env
+  dotfiles_init_brew_bundle_args
+
   while IFS= read -r package_set; do
     [[ -n "${package_set}" ]] || continue
     package_file="${ROOT_DIR}/packages/macos/${package_set}.Brewfile"
@@ -75,6 +69,8 @@ kernel_name="$(dotfiles_kernel_name)"
 
 case "${kernel_name}" in
   Darwin)
+    # shellcheck source=scripts/lib/homebrew.sh
+    source "${ROOT_DIR}/scripts/lib/homebrew.sh"
     install_brew_package_sets
     ;;
   Linux)
@@ -83,13 +79,14 @@ case "${kernel_name}" in
       arch | manjaro)
         package_dir="${ROOT_DIR}/packages/arch"
         install_linux_packages "${sudo_cmd[@]}" pacman -S --needed --noconfirm
-        if [[ ${DOTFILES_ENABLE_ARCHLINUXCN:-true} == "true" ]]; then
-          xargs "${sudo_cmd[@]}" pacman -S --needed --noconfirm <"${ROOT_DIR}/packages/arch/archlinuxcn.txt"
-        fi
-        if command -v paru >/dev/null 2>&1; then
-          xargs paru -S --needed <"${ROOT_DIR}/packages/arch/aur.txt"
+        install_packages_from_file "${ROOT_DIR}/packages/arch/archlinuxcn.txt" \
+          "${sudo_cmd[@]}" pacman -S --needed --noconfirm
+        if [[ ${DOTFILES_SKIP_AUR:-false} == "true" ]]; then
+          echo "skip AUR packages: disabled by DOTFILES_SKIP_AUR" >&2
+        elif command -v paru >/dev/null 2>&1; then
+          install_packages_from_file "${ROOT_DIR}/packages/arch/aur.txt" paru -S --needed
         elif command -v yay >/dev/null 2>&1; then
-          xargs yay -S --needed <"${ROOT_DIR}/packages/arch/aur.txt"
+          install_packages_from_file "${ROOT_DIR}/packages/arch/aur.txt" yay -S --needed
         else
           echo "skip AUR packages: install paru or yay first" >&2
         fi

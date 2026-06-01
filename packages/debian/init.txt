@@ -1,0 +1,6 @@
+ca-certificates
+curl
+git
+gnupg
+zsh
+vim
