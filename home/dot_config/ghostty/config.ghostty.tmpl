@@ -2,6 +2,7 @@
 
 {{ $ghostty := get . "ghostty" | default (dict) -}}
 theme = GitHub Dark Default
+term = xterm-256color
 font-family = JetBrainsMono Nerd Font
 font-size = {{ get $ghostty "font_size" | default "14" }}
 {{- with get $ghostty "command" }}
