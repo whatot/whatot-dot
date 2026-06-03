@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Managed macOS defaults — run once, re-run when this file changes.
+# sha256: {{ include "./run_once_after_macos-defaults.sh.tmpl" | sha256sum }}
+
+[ "$(uname -s)" = "Darwin" ] || exit 0
+
+apply_default() {
+  local domain="$1" key="$2" want="$3"
+  local current
+  current="$(defaults -currentHost read "$domain" "$key" 2>/dev/null)" || true
+  if [ "$current" != "$want" ]; then
+    defaults -currentHost write "$domain" "$key" -int "$want"
+  fi
+}
+
+# --- menu bar tray icon spacing: tighter packing to fit more icons ---
+apply_default -globalDomain NSStatusItemSpacing 4
+apply_default -globalDomain NSStatusItemSelectionPadding 4
