@@ -40,6 +40,8 @@ chezmoi 渲染后的位置：
 | `codebase-overview`    | 产出项目全貌：功能、架构、运行流程、关键模块、优点和局限。      | 分析项目, 了解项目, 整体了解, 全貌分析           | 和 audit 保持边界，不要变成缺陷审计。 |
 | `codebase-audit`       | 审查代码库中的隐藏 bug、架构风险、技术债和修复方向。            | 代码库审计, 全面检查问题, 有哪些风险             | 问题优先，避免泛泛总结。              |
 | `systematic-debugging` | 在修复前先收集证据，用于排查失败、回归和不稳定问题。            | 排查问题, 查原因, 为什么失败                     | 避免连续猜测式修复。                  |
+| `prototype`            | 在正式实现前创建可丢弃原型，验证状态机、数据模型、交互或 UI。   | 原型, prototype, 试几个方案, 让我玩一下          | 明确问题，结束后删除或吸收。          |
+| `tdd`                  | 按测试驱动开发实现功能或修复缺陷，强调一测一改和行为测试。      | TDD, 测试先行, red-green-refactor, 先写测试      | 避免实现细节测试和横向批量测试。      |
 | `task-guardrails`      | 在执行前约束范围大、风险高、边界模糊或需要先评审的任务。        | 先分析, 边界, 风险, 方案                         | 保持轻量，只做范围和风险护栏。        |
 | `disk-cleaner`         | 排查磁盘占用、缓存、构建产物和可清理候选项。                    | 磁盘清理, 空间占用, 缓存太大                     | 真正删除前需要明确批准。              |
 | `optimize-network`     | 诊断网络慢、DNS、代理路由和 AI 工具连接问题。                   | 网络慢, 代理线路, DNS 慢                         | 先收集只读证据，再考虑调整。          |
@@ -60,6 +62,10 @@ chezmoi 渲染后的位置：
 - [`github.com/majiayu000/claude-arsenal`](https://github.com/majiayu000/claude-arsenal)
   可吸收点：精选 agent/skill 模式，以及值得选择性吸收的 prompt 表达。
   不直接导入：需要改写成 Codex、中文触发词和本仓库规则。
+- [`github.com/mattpocock/skills`](https://github.com/mattpocock/skills)
+  可吸收点：反馈环优先的 diagnose、一测一改的 TDD、throwaway prototype、
+  vertical slice 拆分，以及 glossary/ADR 约束下的规划讨论。
+  不直接导入：slash command、Claude hooks、issue tracker setup 和个人工作流绑定较重。
 
 当某个参考来源变得有用时，把具体想法沉淀到 active 或 incubating skill。
 不要只把知识留在聊天记录里。

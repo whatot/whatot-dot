@@ -13,6 +13,9 @@ behavior, or when a previous fix attempt did not work.
 Do not guess-fix. Establish the failure shape first, then make the smallest
 root-cause fix that the evidence supports.
 
+Spend disproportionate effort on the feedback loop. A fast deterministic
+pass/fail signal is usually the shortest path to the cause.
+
 ## Workflow
 
 1. Capture the exact failure.
@@ -27,23 +30,42 @@ root-cause fix that the evidence supports.
    - If reproduction is expensive or risky, explain the boundary and use
      read-only evidence first.
    - Note whether the problem is deterministic, environment-specific, or flaky.
+   - For flaky issues, raise the reproduction rate with loops, stress, fixed
+     seeds, pinned time, or narrower triggers before changing production code.
 
 3. Compare against working patterns.
    - Search the repo for nearby implementations before inventing a new shape.
    - Check recent changes when available.
    - Trace data or control flow across the boundary where the symptom appears.
 
-4. Form one specific hypothesis.
-   - State the likely cause in falsifiable terms.
+4. Form falsifiable hypotheses.
+   - For simple failures, one strong hypothesis is enough.
+   - For hard bugs, list 3-5 ranked hypotheses before testing the first one.
+   - State each hypothesis in falsifiable terms.
    - Test one variable at a time.
    - If the hypothesis fails, update the model instead of stacking patches.
 
-5. Fix narrowly.
+5. Instrument only where it distinguishes hypotheses.
+   - Prefer debugger, REPL, targeted traces, profiler output, query plans, or
+     boundary logs over broad logging.
+   - Tag temporary logs with a unique prefix such as `[DEBUG-1234]` so cleanup
+     is easy.
+   - For performance regressions, measure a baseline before fixing.
+
+6. Fix narrowly.
    - Change only the files needed for the confirmed cause.
    - Add or update focused tests when the behavior is important or likely to
      regress.
    - Run the smallest useful verification first, then broader checks if risk
      warrants it.
+   - Re-run the original reproduction after the fix, not only the minimized
+     test.
+
+7. Clean up.
+   - Remove temporary instrumentation, throwaway harnesses, and debug output.
+   - Keep regression tests only when they exercise the real bug pattern through
+     an honest seam.
+   - If no honest seam exists, report that as an architecture follow-up.
 
 ## Stop Rule
 

@@ -39,6 +39,10 @@ Within each increment, put verification before or alongside implementation when
 that is natural for the repo. Avoid creating low-value test tasks when the repo
 has no useful test surface for the change.
 
+Prefer tracer-bullet vertical slices over horizontal layer batches. A good slice
+is narrow but complete across the real path, demoable or verifiable on its own,
+and can be implemented without carrying a large batch of imagined future work.
+
 ## Coverage
 
 Before execution, ensure:
