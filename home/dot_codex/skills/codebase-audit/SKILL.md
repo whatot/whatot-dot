@@ -48,6 +48,9 @@ then give the repair path.
    - Critical: data loss, security exposure, complete feature breakage.
    - High: silent wrong behavior, broken deploy/runtime path, serious drift.
    - Medium: maintainability or test gaps with real future cost.
+   - Tag confidence as direct evidence, supported inference, or low-confidence
+     observation; do not let low-confidence observations compete with confirmed
+     defects.
 
 5. Report with file evidence.
    - Start with findings ordered by severity.

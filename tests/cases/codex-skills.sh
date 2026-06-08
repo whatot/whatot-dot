@@ -193,6 +193,8 @@ validate_skill() {
   local dir_name
   local name
   local description
+  local description_without_backticks
+  local bare_tag_pattern='<[A-Za-z][A-Za-z0-9_-]*>'
   local end_line
   local line_count
   local failed=0
@@ -244,6 +246,12 @@ validate_skill() {
     failed=1
   elif [[ ${#description} -gt 300 ]]; then
     printf 'ERROR: %s description is too long (%s > 300)\n' "${skill_file}" "${#description}" >&2
+    failed=1
+  fi
+  # shellcheck disable=SC2016
+  description_without_backticks="$(printf '%s\n' "${description}" | sed 's/`[^`]*`//g')"
+  if [[ "${description_without_backticks}" =~ ${bare_tag_pattern} ]]; then
+    printf 'ERROR: %s description contains an unwrapped HTML-like token\n' "${skill_file}" >&2
     failed=1
   fi
 

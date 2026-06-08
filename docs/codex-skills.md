@@ -39,6 +39,7 @@ chezmoi 渲染后的位置：
 | `charter-run`          | 在 `$HOME/specs` 下跟踪非小型任务的规划、拆分、执行和恢复状态。 | 先规划一下, 先规划, 拆任务, 按计划执行, 继续执行 | 保持阶段产物和索引规则一致。          |
 | `codebase-overview`    | 产出项目全貌：功能、架构、运行流程、关键模块、优点和局限。      | 分析项目, 了解项目, 整体了解, 全貌分析           | 和 audit 保持边界，不要变成缺陷审计。 |
 | `codebase-audit`       | 审查代码库中的隐藏 bug、架构风险、技术债和修复方向。            | 代码库审计, 全面检查问题, 有哪些风险             | 问题优先，避免泛泛总结。              |
+| `document-review`      | 评审工程文档、设计文档、plan、runbook、blueprint 或 PRD。       | 评审文档, 审 plan, review design doc, doc review | 关注一致性、边界、可执行性和风险。    |
 | `systematic-debugging` | 在修复前先收集证据，用于排查失败、回归和不稳定问题。            | 排查问题, 查原因, 为什么失败                     | 避免连续猜测式修复。                  |
 | `prototype`            | 在正式实现前创建可丢弃原型，验证状态机、数据模型、交互或 UI。   | 原型, prototype, 试几个方案, 让我玩一下          | 明确问题，结束后删除或吸收。          |
 | `tdd`                  | 按测试驱动开发实现功能或修复缺陷，强调一测一改和行为测试。      | TDD, 测试先行, red-green-refactor, 先写测试      | 避免实现细节测试和横向批量测试。      |
@@ -72,6 +73,16 @@ chezmoi 渲染后的位置：
 当某个参考来源变得有用时，把具体想法沉淀到 active 或 incubating skill。
 不要只把知识留在聊天记录里。
 
+## 编写规则
+
+- Load-bearing 规则放在 `SKILL.md` 对应阶段附近，不能只放在
+  `references/` 里；references 只承载按需细节。
+- 不要在 `SKILL.md` 里复述大段 reference 内容。需要加载 reference 时，
+  用一两句话说明触发条件和目标文件。
+- Skill 运行中的阶段记录、下一步菜单和临时判断留在对话里；写入文件的
+  artifact 只保留对读者有价值的 durable 内容。
+- 外部 workflow 只能按本地工作流改写后吸收，不要直接复制完整 skill。
+
 ## 审查清单
 
 修改 Codex 行为，或者某个 skill 误触发时，检查已启用 skill：
@@ -100,6 +111,7 @@ Codex skill 校验脚本位于 `tests/cases/codex-skills.sh`。
 - frontmatter key 只允许 Codex skill 支持的元数据。
 - `name` 存在、唯一、使用 kebab-case，并且和目录名一致。
 - `description` 存在，并保持在合适长度内。
+- `description` 不包含裸 `<placeholder>` 这类 HTML-like token。
 - 正文包含 H1 标题。
 - 拒绝过大的 skill，把共享细节移动到 references。
 - 本地 Markdown 链接必须指向存在的文件。

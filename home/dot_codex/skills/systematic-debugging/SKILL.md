@@ -42,6 +42,10 @@ pass/fail signal is usually the shortest path to the cause.
    - For simple failures, one strong hypothesis is enough.
    - For hard bugs, list 3-5 ranked hypotheses before testing the first one.
    - State each hypothesis in falsifiable terms.
+   - For complex bugs, explain the causal chain from trigger to symptom and
+     mark key links as verified or assumed.
+   - For uncertain links, state a prediction that should be true elsewhere if
+     the hypothesis is correct.
    - Test one variable at a time.
    - If the hypothesis fails, update the model instead of stacking patches.
 
@@ -78,6 +82,7 @@ step is needed.
 When handing off, include:
 
 - Root cause, or the strongest remaining hypothesis if not fully confirmed.
+- Causal chain and any important assumptions that remain unverified.
 - Files or runtime sources inspected.
 - Fix applied.
 - Verification run and result.
