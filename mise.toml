@@ -89,7 +89,7 @@ description = "Update operating system packages for the current host"
 run = "scripts/update packages"
 
 [tasks."update:mise"]
-description = "Update mise and install declared tool versions"
+description = "Apply managed config, then update mise and install declared tool versions"
 run = "scripts/update mise"
 
 [tasks."update:dotfiles"]

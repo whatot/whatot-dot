@@ -7,6 +7,7 @@ discount
 dnsmasq
 dprint
 editorconfig-core-c
+go
 gnuplot
 hurl
 jre-openjdk

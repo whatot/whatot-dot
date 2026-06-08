@@ -17,9 +17,9 @@ usage() {
 usage: scripts/update [command]
 
 commands:
-  all                run doctor, then update packages, mise tools, and dotfiles (default)
+  all                run doctor, update packages, apply dotfiles, then update mise tools (default)
   packages           update operating system packages and install declared package sets
-  mise               update mise and install declared tool versions
+  mise               apply dotfiles, then update mise and install declared tool versions
   dotfiles           apply chezmoi-managed dotfiles
 EOF
 }
@@ -62,6 +62,7 @@ update_os_packages() {
 }
 
 update_mise_tools() {
+  apply_dotfiles
   run_step_allow_fail "mise upgrade" mise upgrade
   run_step "mise install" mise install
 }
@@ -78,7 +79,6 @@ run_all() {
   run_doctor
   update_os_packages
   update_mise_tools
-  apply_dotfiles
 }
 
 case "${1:-all}" in

@@ -49,8 +49,8 @@ Validation commands live in [docs/testing.md](docs/testing.md).
 ## Common Tools
 
 Common daily CLI tools are installed through OS package inventories on the
-primary macOS and Arch hosts. `mise` keeps language runtimes and tools that need
-consistent cross-repo versions:
+primary macOS and Arch hosts. `mise` keeps selected language runtimes and tools
+that need consistent cross-repo versions:
 
 - `rtk`: token-aware shell proxy for AI-assisted terminal work. Source: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
 

@@ -8,7 +8,7 @@ general-purpose configuration management.
 The default path stays intentionally small:
 
 - `chezmoi` manages dotfiles and rendered templates from `home/`
-- `mise` manages daily tasks, portable CLIs, and language runtimes
+- `mise` manages daily tasks, portable CLIs, and selected language runtimes
 - `hosts/*.toml` select which package groups and setup steps apply to a machine
 - `bootstrap/` installs only enough software to make the repository usable
 - `packages/` define the long-term OS package inventory
@@ -59,7 +59,8 @@ Local private defaults live in:
 - Put OS packages, GUI apps, fonts, compilers, native build dependencies,
   common daily CLIs, and shell plugins in `packages/`.
 - Put language runtimes and developer tools that need consistent cross-repo
-  versions in `mise.toml`.
+  versions in `mise.toml`. Stable runtimes with reliable OS-package update
+  paths, such as Go, can stay in `packages/`.
 - Put machine-specific combinations in `hosts/`, not ad hoc conditionals across
   unrelated scripts.
 - Put user config and templated dotfiles in `home/`.
@@ -96,9 +97,9 @@ Debian stays the minimal non-desktop apt target for containers, servers, smoke
 tests, and temporary development environments. Do not mirror the full daily
 desktop toolset there unless it becomes a primary daily machine.
 
-Language runtimes should default to `mise`. Developer tools that need consistent
-cross-repo versions can also stay in `mise`; OS-level build dependencies and
-common CLIs stay in `packages/`.
+Language runtimes should default to `mise` when cross-repo version pinning
+matters. Stable runtimes with reliable OS package mirrors, such as Go, should
+stay in `packages/`; OS-level build dependencies and common CLIs stay there too.
 
 Rust versions should normally come from each project's `rust-toolchain.toml`.
 This repository only ensures `rustup` exists, has a usable default toolchain,
