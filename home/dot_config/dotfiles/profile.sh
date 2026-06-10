@@ -69,6 +69,7 @@ case "$(uname -s)" in
     dotfiles_path_prefer "$HOME/go/bin"
     dotfiles_path_prefer "$HOME/.cargo/bin"
     dotfiles_path_prefer "/opt/homebrew/opt/rustup/bin"
+    dotfiles_path_prefer "/opt/homebrew/opt/libpq/bin"
     dotfiles_path_prefer "$HOME/.local/bin"
     dotfiles_path_prefer "/opt/homebrew/opt/coreutils/libexec/gnubin"
     dotfiles_path_prefer "/opt/homebrew/sbin"
