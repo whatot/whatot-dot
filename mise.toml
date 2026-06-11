@@ -1,11 +1,11 @@
 # Repository workflow tools only. Keep this focused on the tools required by
 # this repo's own checks and task entrypoints in addition to global defaults.
 [tools]
-dprint = "latest"
+dprint = "0.54.0"
 # prek runs this repo's pre-commit-compatible hooks faster than pre-commit.
-prek = "latest"
-shellcheck = "latest"
-shfmt = "latest"
+prek = "0.4.4"
+shellcheck = "0.11.0"
+shfmt = "3.13.1"
 
 [tasks.bootstrap]
 description = "Install minimum host dependencies and apply the workstation config"
@@ -81,7 +81,7 @@ hide = true
 run = 'mkdir -p .cache/prek && PREK_HOME="$PWD/.cache/prek" prek run --all-files'
 
 [tasks.update]
-description = "Update packages, mise tools, and chezmoi state"
+description = "Update packages, install pinned mise tools, and apply dotfiles"
 run = "scripts/update"
 
 [tasks."update:packages"]
@@ -89,8 +89,12 @@ description = "Update operating system packages for the current host"
 run = "scripts/update packages"
 
 [tasks."update:mise"]
-description = "Apply managed config, then update mise and install declared tool versions"
+description = "Apply managed config, then install pinned mise tool versions"
 run = "scripts/update mise"
+
+[tasks."update:mise-bump"]
+description = "Apply managed config, then bump and install pinned mise tool versions"
+run = "scripts/update mise-bump"
 
 [tasks."update:dotfiles"]
 description = "Equivalent to chezmoi:apply"

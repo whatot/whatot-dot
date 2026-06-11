@@ -19,7 +19,7 @@ usage: scripts/outdated [command]
 commands:
   all       refresh package and mise metadata, then list available updates (default)
   packages  refresh package metadata, then list available operating system updates
-  mise      refresh mise metadata, then list available mise tool updates
+  mise      refresh mise metadata, then compare pinned mise tools with latest
 EOF
 }
 
@@ -59,7 +59,7 @@ show_outdated_os_packages() {
 }
 
 show_outdated_mise_tools() {
-  run_step "mise outdated" mise outdated
+  run_step "mise outdated --bump" mise outdated --bump
 }
 
 run_doctor() {

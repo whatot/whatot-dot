@@ -31,7 +31,8 @@
   - `m show`: show host, env, and pending dotfile changes
   - `m doctor`: run readiness checks
   - `m outdated`: refresh metadata and show updates
-  - `m update`: update packages, mise tools, and dotfiles
+  - `m update`: update packages, apply dotfiles, and install pinned mise tools
+  - `m update:mise-bump`: bump pinned mise tool versions
   - `m chezmoi:apply`: raw `chezmoi apply`
   - `m chezmoi:diff`: preview pending dotfile changes
 - Network

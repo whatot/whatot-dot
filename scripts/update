@@ -17,9 +17,10 @@ usage() {
 usage: scripts/update [command]
 
 commands:
-  all                run doctor, update packages, apply dotfiles, then update mise tools (default)
+  all                run doctor, update packages, apply dotfiles, then install pinned mise tools (default)
   packages           update operating system packages and install declared package sets
-  mise               apply dotfiles, then update mise and install declared tool versions
+  mise               apply dotfiles, then install declared mise tool versions
+  mise-bump          apply dotfiles, bump pinned mise tool versions, then install them
   dotfiles           apply chezmoi-managed dotfiles
 EOF
 }
@@ -61,9 +62,19 @@ update_os_packages() {
   esac
 }
 
-update_mise_tools() {
+install_mise_tools() {
   apply_dotfiles
-  run_step_allow_fail "mise upgrade" mise upgrade
+  run_step "mise install" mise install
+}
+
+bump_mise_tools() {
+  local mise_config_path
+
+  apply_dotfiles
+  run_step "mise upgrade --bump" mise upgrade --bump
+
+  mise_config_path="${XDG_CONFIG_HOME:-${HOME}/.config}/mise/config.toml"
+  run_step "capture mise config" chezmoi add --source "${ROOT_DIR}" "${mise_config_path}"
   run_step "mise install" mise install
 }
 
@@ -78,7 +89,7 @@ run_doctor() {
 run_all() {
   run_doctor
   update_os_packages
-  update_mise_tools
+  install_mise_tools
 }
 
 case "${1:-all}" in
@@ -91,7 +102,11 @@ case "${1:-all}" in
     ;;
   mise)
     run_doctor
-    update_mise_tools
+    install_mise_tools
+    ;;
+  mise-bump)
+    run_doctor
+    bump_mise_tools
     ;;
   dotfiles)
     run_doctor

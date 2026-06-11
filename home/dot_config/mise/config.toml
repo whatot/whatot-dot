@@ -13,10 +13,10 @@ node.mirror_url = "https://npmmirror.com/mirrors/node/"
 # primary macOS and Arch hosts; keep language runtimes and tools that need
 # consistent cross-repo versions here.
 [tools]
-java = "zulu-21"
-maven = "latest"
-node = "lts"
-pnpm = "latest"
-python = "latest"
-rtk = "latest"
-usage = "latest"
+java = "zulu-21.50.19.0"
+maven = "3.9.16"
+node = "24.16.0"
+pnpm = "11.5.3"
+python = "3.14.6"
+rtk = "0.42.3"
+usage = "3.4.0"

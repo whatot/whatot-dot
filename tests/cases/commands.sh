@@ -43,6 +43,7 @@ dotfiles_check_task_wiring() {
   [[ "${output}" == *"outdated                   Refresh metadata and show available package and mise updates"* ]]
   [[ "${output}" == *"outdated:packages          Refresh metadata and show available operating system package updates"* ]]
   [[ "${output}" == *"outdated:mise              Refresh metadata and show available mise tool updates"* ]]
+  [[ "${output}" == *"update:mise-bump           Apply managed config, then bump and install pinned mise tool versions"* ]]
   [[ "${outdated_run}" == 'run = "scripts/outdated"' ]]
 }
 
