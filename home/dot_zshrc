@@ -99,6 +99,6 @@ if [[ -o interactive ]]; then
   alias myip="curl myip.ipip.net"
 
   if is_command brew; then
-    alias bubu="brew update && brew outdated && brew upgrade && brew cleanup"
+    alias bubu="brew update && brew outdated && brew upgrade --no-ask && brew cleanup"
   fi
 fi

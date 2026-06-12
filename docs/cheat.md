@@ -17,7 +17,7 @@
   - `gdi`: `git diff`
   - `git dt`: syntax-aware diff via `difftastic`
   - `gf`: `git pull`
-  - `bubu`: `brew update && brew outdated && brew upgrade && brew cleanup`
+  - `bubu`: `brew update && brew outdated && brew upgrade --no-ask && brew cleanup`
 - Commands
   - `rg pattern`: search text
   - `rg --files | fzf`: pick a file

@@ -34,7 +34,7 @@ update_os_packages() {
   case "${kernel_name}" in
     Darwin)
       run_step "brew update" brew update
-      run_step "brew upgrade" brew upgrade
+      run_step "brew upgrade" brew upgrade --no-ask
       run_step "install package sets" "${ROOT_DIR}/scripts/packages"
       run_step "brew cleanup" brew cleanup
       ;;

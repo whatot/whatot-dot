@@ -73,7 +73,7 @@ if command -q brew
     function bubu --description 'Update Homebrew packages'
         brew update
         and brew outdated
-        and brew upgrade
+        and brew upgrade --no-ask
         and brew cleanup
     end
 end
