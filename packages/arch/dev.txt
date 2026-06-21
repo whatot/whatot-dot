@@ -2,6 +2,7 @@ aliyun-cli
 aws-cli
 cmake
 crun
+d2
 difftastic
 discount
 dnsmasq
