@@ -42,10 +42,7 @@ chezmoi 渲染后的位置：
 | `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 code-as-graph 图。          | 画图, 架构图, 流程图, sequence, state, graph as code | 优先可编辑源码和证据映射，不直接生成 PNG。 |
 | `document-review`      | 评审工程文档、设计文档、plan、runbook、blueprint 或 PRD。       | 评审文档, 审 plan, review design doc, doc review     | 关注一致性、边界、可执行性和风险。         |
 | `systematic-debugging` | 在修复前先收集证据，用于排查失败、回归和不稳定问题。            | 排查问题, 查原因, 为什么失败                         | 避免连续猜测式修复。                       |
-| `prototype`            | 在正式实现前创建可丢弃原型，验证状态机、数据模型、交互或 UI。   | 原型, prototype, 试几个方案, 让我玩一下              | 明确问题，结束后删除或吸收。               |
-| `tdd`                  | 按测试驱动开发实现功能或修复缺陷，强调一测一改和行为测试。      | TDD, 测试先行, red-green-refactor, 先写测试          | 避免实现细节测试和横向批量测试。           |
-| `disk-cleaner`         | 排查磁盘占用、缓存、构建产物和可清理候选项。                    | 磁盘清理, 空间占用, 缓存太大                         | 真正删除前需要明确批准。                   |
-| `paper-overview`       | 分析单篇论文、arXiv、PDF 或 HTML 论文的贡献、方法和证据。       | 分析论文, 阅读论文, arxiv, paper review              | 区分作者声称、证据和自己的判断。           |
+| `task-guardrails`      | 启动范围较大、风险较高、边界模糊或需要先评审的工作。            | 先分析, 边界, 风险, 方案                             | 先明确目标、边界、验证和停机点。           |
 
 ## 试用中 Skill
 
