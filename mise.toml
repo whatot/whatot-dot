@@ -3,7 +3,7 @@
 [tools]
 dprint = "0.55.1"
 # prek runs this repo's pre-commit-compatible hooks faster than pre-commit.
-prek = "0.4.6"
+prek = "0.4.8"
 shellcheck = "0.11.0"
 shfmt = "3.13.1"
 
