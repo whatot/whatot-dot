@@ -1,25 +1,19 @@
 ---
 name: charter-run
-description: "用于需要跟踪规划与执行的非小型仓库任务，例如功能、重构、平台或架构设计；匹配先规划一下、先规划、拆任务、按计划执行、继续执行；在 $HOME/specs 下创建或恢复规划工件。"
+description: "仅在用户显式调用 `$charter-run`，或明确要求在 `$HOME/specs` 创建或恢复持久化规划工件时使用；不要因普通的规划、拆任务或继续执行请求自动触发。"
 ---
 
 # Charter Run
 
-Use this skill as the single entrypoint for tracked planning and execution. It
-owns the specs directory, phase order, gates, and resume behavior. Stage details
-live in references and should be loaded only when needed.
+Use this skill only for the repository-independent planning system stored under
+`$HOME/specs`. Ordinary planning and long-running work should use Codex plan or
+goal behavior without loading this skill. Stage details live in references and
+should be loaded only when needed.
 
 ## Core Contract
 
-- Keep one user-facing skill entrypoint; do not require the user to pick a
-  separate specify, plan, task, or execute skill.
 - Put planning artifacts outside target repos under `$HOME/specs` by default.
 - Route work through specify, plan, tasks, index, and execute references.
-- Resolve material uncertainty before bulk execution. Ask at most three
-  blocking questions at a time; document low-risk assumptions and continue.
-- Prefer evidence from the target repo over generic methodology.
-- Use `rg --files` for repo discovery; avoid `find` unless `rg` is unavailable
-  or a filesystem-specific predicate is required.
 - Do not add spec-kit constitution, hooks, extensions, command installation, or
   multi-file checklist directories unless the user explicitly asks.
 
@@ -75,8 +69,8 @@ When the user does not provide a specs path:
 7. If the index is missing or stale, rebuild it from
    `$HOME/specs/<repo-name>/*/context.md` and continue.
 
-The user should be able to say `继续执行`, `按计划执行`, or `继续 T003` from
-inside a target repo without pasting the specs path.
+After the skill has been explicitly selected, the user should be able to say
+`继续 T003` without pasting the specs path again.
 
 Treat `context.md` as authoritative. Treat `index.json` as a convenience cache
 and current-plan pointer.
