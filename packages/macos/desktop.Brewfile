@@ -9,6 +9,7 @@ cask "omnidisksweeper"
 cask "telegram"
 cask "sequel-ace"
 cask "input-source-pro"
+cask "mole"
 
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"

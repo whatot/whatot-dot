@@ -1,4 +1,3 @@
-bruno-bin
 cc-switch-bin
 nautilus-nutstore
 openai-codex-desktop
