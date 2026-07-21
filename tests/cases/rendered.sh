@@ -40,7 +40,6 @@ check_fish_specs() {
 }
 
 check_platform_ignored_paths() {
-  local darwin_managed
   local linux_managed
 
   linux_managed="$(dotfiles_check_run_tool chezmoi managed \
@@ -49,15 +48,6 @@ check_platform_ignored_paths() {
     --path-style relative)"
   if printf '%s\n' "${linux_managed}" | grep -E '^Library(/|$)' >/dev/null; then
     echo "Library paths must not be managed on non-Darwin targets" >&2
-    return 1
-  fi
-
-  darwin_managed="$(dotfiles_check_run_tool chezmoi managed \
-    --source "${ROOT_DIR}" \
-    --override-data '{"chezmoi":{"os":"darwin"}}' \
-    --path-style relative)"
-  if ! printf '%s\n' "${darwin_managed}" | grep -F 'Library/Application Support/rtk/config.toml' >/dev/null; then
-    echo "macOS rtk Library symlink must stay managed on Darwin targets" >&2
     return 1
   fi
 }

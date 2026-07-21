@@ -94,13 +94,6 @@ export RUSTUP_UPDATE_ROOT="${RUSTUP_UPDATE_ROOT:-https://rsproxy.cn/rustup}"
 export PUB_HOSTED_URL="${PUB_HOSTED_URL:-https://pub.flutter-io.cn}"
 export FLUTTER_STORAGE_BASE_URL="${FLUTTER_STORAGE_BASE_URL:-https://storage.flutter-io.cn}"
 
-rtk() {
-  case "${1:-}" in
-    aws | helm) command "$@" ;;
-    *) command rtk "$@" ;;
-  esac
-}
-
 if [ -z "${RUSTC_WRAPPER+x}" ] && command -v sccache >/dev/null 2>&1; then
   export RUSTC_WRAPPER=sccache
 fi

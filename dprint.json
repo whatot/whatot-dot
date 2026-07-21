@@ -2,9 +2,7 @@
   "excludes": [
     "**/.git",
     "**/.cache",
-    "**/.DS_Store",
-    "home/private_Library/private_Application Support/rtk/symlink_config.toml",
-    "home/private_Library/private_Application Support/rtk/symlink_filters.toml"
+    "**/.DS_Store"
   ],
   "json": {
     "indentWidth": 2,

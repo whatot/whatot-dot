@@ -25,8 +25,6 @@
   - `btm`: terminal system monitor
   - `z name`: jump to a frequent directory
   - `zi`: pick a directory interactively
-  - `rtk <cmd>`: run a command with RTK filtering
-  - `rtk gain`: show RTK savings
 - Dotfiles
   - `m show`: show host, env, and pending dotfile changes
   - `m doctor`: run readiness checks
