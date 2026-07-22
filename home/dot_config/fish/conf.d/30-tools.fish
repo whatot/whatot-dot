@@ -4,7 +4,9 @@ if command -q mise
     mise activate fish --quiet --shims | source
 end
 
-if not set -q RUSTC_WRAPPER; and command -q sccache
+if set -q CODEX_SANDBOX; and set -q RUSTC_WRAPPER; and test "$RUSTC_WRAPPER" = sccache
+    set -e RUSTC_WRAPPER
+else if not set -q CODEX_SANDBOX; and not set -q RUSTC_WRAPPER; and command -q sccache
     set -gx RUSTC_WRAPPER sccache
 end
 

@@ -105,6 +105,10 @@ Rust versions should normally come from each project's `rust-toolchain.toml`.
 This repository only ensures `rustup` exists, has a usable default toolchain,
 and can install the workstation CLI set.
 
+Interactive workstation shells use `sccache` as Cargo's default rustc wrapper.
+Codex sandbox shells leave it disabled because its daemon and cache live outside
+the workspace sandbox; an explicitly configured non-`sccache` wrapper is kept.
+
 Heavier or less portable cargo tools should stay in separate inventories or
 tasks instead of slowing the default setup path for every machine.
 

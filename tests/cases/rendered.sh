@@ -52,6 +52,65 @@ check_platform_ignored_paths() {
   fi
 }
 
+check_rustc_wrapper_environment() {
+  local test_home=$1
+  local profile_path="${ROOT_DIR}/home/dot_config/dotfiles/profile.sh"
+  local fish_path="${ROOT_DIR}/home/dot_config/fish/conf.d/30-tools.fish"
+  local output
+
+  # The nested shell expands these variables.
+  # shellcheck disable=SC2016
+  output="$(env -u CODEX_SANDBOX -u RUSTC_WRAPPER HOME="${test_home}" bash -c '
+    sccache() { :; }
+    source "$1"
+    printf "%s" "${RUSTC_WRAPPER-unset}"
+  ' _ "${profile_path}")"
+  [[ "${output}" == "sccache" ]]
+
+  output="$(HOME="${test_home}" CODEX_SANDBOX=seatbelt RUSTC_WRAPPER=sccache bash -c '
+    source "$1"
+    printf "%s" "${RUSTC_WRAPPER-unset}"
+  ' _ "${profile_path}")"
+  [[ "${output}" == "unset" ]]
+
+  output="$(HOME="${test_home}" CODEX_SANDBOX=seatbelt RUSTC_WRAPPER=custom-wrapper bash -c '
+    source "$1"
+    printf "%s" "${RUSTC_WRAPPER-unset}"
+  ' _ "${profile_path}")"
+  [[ "${output}" == "custom-wrapper" ]]
+
+  # Fish expands these variables.
+  # shellcheck disable=SC2016
+  output="$(dotfiles_check_run_tool fish -c '
+    set -e CODEX_SANDBOX
+    set -e RUSTC_WRAPPER
+    function sccache; end
+    source $argv[1]
+    printf "%s" "$RUSTC_WRAPPER"
+  ' "${fish_path}")"
+  [[ "${output}" == "sccache" ]]
+
+  # Fish expands these variables.
+  # shellcheck disable=SC2016
+  output="$(dotfiles_check_run_tool fish -c '
+    set -gx CODEX_SANDBOX seatbelt
+    set -gx RUSTC_WRAPPER sccache
+    source $argv[1]
+    set -q RUSTC_WRAPPER; or printf unset
+  ' "${fish_path}")"
+  [[ "${output}" == "unset" ]]
+
+  # Fish expands these variables.
+  # shellcheck disable=SC2016
+  output="$(dotfiles_check_run_tool fish -c '
+    set -gx CODEX_SANDBOX seatbelt
+    set -gx RUSTC_WRAPPER custom-wrapper
+    source $argv[1]
+    printf "%s" "$RUSTC_WRAPPER"
+  ' "${fish_path}")"
+  [[ "${output}" == "custom-wrapper" ]]
+}
+
 main() {
   local host_data_file
   local tmp_dir
@@ -92,6 +151,7 @@ main() {
 
   render_template_specs "${host_data_file}" "${render_specs[@]}"
   run_step "chezmoiignore platform paths" check_platform_ignored_paths
+  run_step "rustc wrapper environment" check_rustc_wrapper_environment "${tmp_home}"
 
   cp "${ROOT_DIR}/home/dot_vim/"*.vim "${tmp_home}/.vim/"
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"
