@@ -41,10 +41,12 @@ dotfiles_check_task_wiring() {
   ' "${ROOT_DIR}/mise.toml")"
 
   [[ "${output}" == *"outdated                   Refresh metadata and show available package and mise updates"* ]]
+  [[ "${output}" == *"reshim                     Rebuild mise shims from installed tools"* ]]
   [[ "${output}" == *"outdated:packages          Refresh metadata and show available operating system package updates"* ]]
   [[ "${output}" == *"outdated:mise              Refresh metadata and show available mise tool updates"* ]]
   [[ "${output}" == *"update:mise-bump           Apply managed config, then bump and install pinned mise tool versions"* ]]
   [[ "${outdated_run}" == 'run = "scripts/outdated"' ]]
+  grep -Fx 'run = "mise reshim --force --verbose"' "${ROOT_DIR}/mise.toml" >/dev/null
 }
 
 main() {

@@ -28,6 +28,7 @@
 - Dotfiles
   - `m show`: show host, env, and pending dotfile changes
   - `m doctor`: run readiness checks
+  - `m reshim`: rebuild mise shims from installed tools
   - `m outdated`: refresh metadata and show updates
   - `m update`: update packages, apply dotfiles, and install pinned mise tools
   - `m update:mise-bump`: bump pinned mise tool versions

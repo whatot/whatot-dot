@@ -29,6 +29,10 @@ run = [
 description = "Show active host, environment readiness, and pending dotfile changes"
 run = "scripts/show"
 
+[tasks.reshim]
+description = "Rebuild mise shims from installed tools"
+run = "mise reshim --force --verbose"
+
 [tasks.outdated]
 description = "Refresh metadata and show available package and mise updates"
 run = "scripts/outdated"
