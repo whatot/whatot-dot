@@ -9,7 +9,6 @@ cask "keepingyouawake"
 cask "readest"
 cask "omnidisksweeper"
 cask "telegram"
-cask "sequel-ace"
 cask "input-source-pro"
 
 cask "font-hack-nerd-font"
