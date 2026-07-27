@@ -1,7 +1,7 @@
 brew "mole"
 
 cask "macvim-app"
-cask "ghostty"
+cask "kitty"
 cask "iina"
 cask "notunes"
 cask "jordanbaird-ice"

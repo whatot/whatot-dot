@@ -1,0 +1,74 @@
+# managed by chezmoi
+
+{{ $kitty := get . "kitty" | default (dict) -}}
+font_family JetBrainsMono Nerd Font
+font_size {{ get $kitty "font_size" | default "14" }}
+term xterm-256color
+window_padding_width 4 6
+confirm_os_window_close 0
+copy_on_select no
+remember_window_size yes
+remember_window_position yes
+tab_bar_edge top
+tab_bar_style separator
+tab_bar_min_tabs 2
+tab_bar_margin_width 4
+tab_bar_margin_height 0 0
+tab_bar_background #0d1117
+tab_bar_margin_color #0d1117
+active_tab_foreground #ffffff
+active_tab_background #21262d
+active_tab_font_style normal
+inactive_tab_foreground #8b949e
+inactive_tab_background #0d1117
+inactive_tab_font_style normal
+tab_separator "  "
+tab_title_max_length 28
+tab_title_template " {index}: {title} "
+active_tab_title_template " {index}: {title} "
+
+{{- with get $kitty "shell" }}
+shell {{ . }}
+{{- end }}
+
+# Switch tabs with the macOS convention.
+map cmd+1 goto_tab 1
+map cmd+2 goto_tab 2
+map cmd+3 goto_tab 3
+map cmd+4 goto_tab 4
+map cmd+5 goto_tab 5
+map cmd+6 goto_tab 6
+map cmd+7 goto_tab 7
+map cmd+8 goto_tab 8
+map cmd+9 goto_tab 9
+
+# GitHub Dark
+foreground #c9d1d9
+background #0d1117
+selection_foreground #0d1117
+selection_background #58a6ff
+cursor #58a6ff
+url_color #58a6ff
+
+color0 #484f58
+color1 #ff7b72
+color2 #3fb950
+color3 #d29922
+color4 #58a6ff
+color5 #bc8cff
+color6 #39c5cf
+color7 #b1bac4
+color8 #6e7681
+color9 #ffa198
+color10 #56d364
+color11 #e3b341
+color12 #79c0ff
+color13 #d2a8ff
+color14 #56d4dd
+color15 #ffffff
+
+{{- if eq .chezmoi.os "darwin" }}
+macos_titlebar_color background
+macos_option_as_alt both
+macos_quit_when_last_window_closed no
+{{- end }}

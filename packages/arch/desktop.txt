@@ -10,7 +10,7 @@ fcitx5-rime
 firefox
 firefox-i18n-zh-cn
 foliate
-ghostty
+kitty
 ifuse
 meld
 mpv

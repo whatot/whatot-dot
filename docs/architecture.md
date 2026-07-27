@@ -114,7 +114,7 @@ tasks instead of slowing the default setup path for every machine.
 
 ## Defaults
 
-- Ghostty is the default terminal.
+- Kitty is the default terminal.
 - Zed is the default GUI editor.
 - Vim is the default terminal editor, with `minimal` and `tiny` profiles.
 - Fish is the primary interactive shell.
