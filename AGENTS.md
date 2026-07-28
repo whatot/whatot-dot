@@ -9,6 +9,7 @@
 - `docs/new-machine.md`：真实机器 bootstrap 和 setup 流程
 - `docs/testing.md`：验证矩阵和具体测试命令
 - `docs/codex-skills.md`：Codex skill 管理索引、参考来源和校验说明
+- `docs/lark-cli.md`：Lark CLI、精选 Codex skills、初始化和使用说明
 - `docs/cheat.md`：常用命令速查
 
 ## 工作范围

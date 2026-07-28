@@ -34,6 +34,12 @@
   - `m update:mise-bump`: bump pinned mise tool versions
   - `m chezmoi:apply`: raw `chezmoi apply`
   - `m chezmoi:diff`: preview pending dotfile changes
+- Lark CLI
+  - `lark-cli auth status --json --verify`: verify login and token
+  - `lark-cli calendar +agenda --as user`: show today's agenda
+  - `lark-cli docs +fetch --doc "<URL-or-token>"`: read a document
+  - `lark-cli skills read <name>`: read version-matched skill guidance
+  - `docs/lark-cli.md`: installation, initialization, permissions, and usage
 - Network
   - `setproxy`: enable proxy env vars from `PROXY_URL`
   - `unsetproxy`: clear proxy env vars

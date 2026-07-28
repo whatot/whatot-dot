@@ -32,6 +32,21 @@ chezmoi 渲染后的位置：
 清理规则：当一个 active skill 触发不准确、和其他 skill 明显重叠，或者近期没有实际用途时，
 应该降级、合并或删除。
 
+## 外部运行时 Skill
+
+少数 skill 是某个 CLI 的配套操作说明，并需要跟随该 CLI 更新。它们可以作为
+用户级外部 skill 安装，但不复制到 `home/dot_codex/skills/`：
+
+| Skill           | 上游            | 安装位置                         | 管理方式                    |
+| --------------- | --------------- | -------------------------------- | --------------------------- |
+| `lark-shared`   | `larksuite/cli` | `~/.agents/skills/lark-shared`   | `npx skills` + CLI 内嵌说明 |
+| `lark-calendar` | `larksuite/cli` | `~/.agents/skills/lark-calendar` | `npx skills` + CLI 内嵌说明 |
+| `lark-doc`      | `larksuite/cli` | `~/.agents/skills/lark-doc`      | `npx skills` + CLI 内嵌说明 |
+
+只安装实际需要的 skill，不安装整个上游集合。安装、初始化、最小授权、使用和
+更新流程见 [`lark-cli.md`](lark-cli.md)。实际操作时通过
+`lark-cli skills read <name>` 读取与当前 CLI 版本匹配的内嵌说明。
+
 ## 已启用 Skill
 
 | Skill          | 用途                                                | 触发词                                           | 审查重点                               |

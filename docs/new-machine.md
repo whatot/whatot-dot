@@ -101,3 +101,14 @@ machines default to `stable`. Prefer project `rust-toolchain.toml` files for
 project-specific versions. After `devtools:rust-toolchain`, the script also
 prints `rustup toolchain list` plus cleanup hints such as
 `rustup toolchain uninstall <toolchain>`.
+
+## Lark CLI
+
+`mise run setup` installs the pinned `lark-cli` binary. Installing the selected
+Codex skills and completing Feishu/Lark app initialization are intentional
+per-user steps because they create files under `~/.agents` and credentials in
+the local credential store.
+
+Follow [`lark-cli.md`](lark-cli.md) to install only `lark-shared`,
+`lark-calendar`, and `lark-doc`, then initialize the app and grant the minimum
+calendar and document permissions.
