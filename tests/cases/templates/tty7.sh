@@ -54,7 +54,7 @@ case_preserves_tty7_owned_data() {
   jq -e '
     .font_family == "JetBrainsMono Nerd Font"
     and .font_size == 13
-    and .theme_preset == "one_dark_pro"
+    and .theme_preset == "dark"
     and .keybindings == {"NewTab":"ctrl-t"}
     and .ssh_profiles == [{"id":"profile-1","name":"dev"}]
     and .ssh_profile_frecency == {"profile-1":{"count":3,"last_used":42}}

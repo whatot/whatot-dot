@@ -27,7 +27,7 @@ jq \
     .font_family = $font_family
     | .font_fallbacks = ["Maple Mono NF CN", "Sarasa Mono SC"]
     | .font_size = $font_size
-    | .theme_preset = "one_dark_pro"
+    | .theme_preset = "dark"
     | .shell = (if $shell == "" then null else {
         "program": $shell,
         "args": ["--login"]
