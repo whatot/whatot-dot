@@ -11,3 +11,7 @@ profile = "tiny"
 [kitty]
 font_size = 13
 shell = "/opt/homebrew/bin/fish --login"
+
+[tty7]
+font_size = 13.0
+shell = "/opt/homebrew/bin/fish"

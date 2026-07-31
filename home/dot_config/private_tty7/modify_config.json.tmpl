@@ -1,0 +1,49 @@
+{{- $tty7 := get . "tty7" | default (dict) -}}
+{{- $fontSize := get $tty7 "font_size" | default 14.0 -}}
+{{- $shell := get $tty7 "shell" | default "" -}}
+#!/bin/sh
+set -eu
+
+modifier_tmp_dir="$(mktemp -d)"
+trap 'rm -rf "${modifier_tmp_dir}"' EXIT HUP INT TERM
+input_file="${modifier_tmp_dir}/config.json"
+cat >"${input_file}"
+
+if [ ! -s "${input_file}" ]; then
+  printf '{}\n' >"${input_file}"
+fi
+
+if ! jq -e 'type == "object"' "${input_file}" >/dev/null; then
+  printf 'tty7 config must be a JSON object\n' >&2
+  exit 1
+fi
+
+jq \
+  --arg font_family 'JetBrainsMono Nerd Font' \
+  --argjson font_size '{{ printf "%.1f" $fontSize }}' \
+  --arg shell '{{ $shell }}' \
+  --argjson macos_option_as_alt '{{ eq .chezmoi.os "darwin" }}' \
+  '
+    .font_family = $font_family
+    | .font_fallbacks = ["Maple Mono NF CN", "Sarasa Mono SC"]
+    | .font_size = $font_size
+    | .theme_preset = "one_dark_pro"
+    | .shell = (if $shell == "" then null else {
+        "program": $shell,
+        "args": ["--login"]
+      } end)
+    | .tab_bar_position = "left"
+    | .sidebar_grouping = "repo"
+    | .startup_mode = "maximized"
+    | .macos_option_as_alt = $macos_option_as_alt
+    | .history_search = false
+    | .tab_completion = true
+    | .restore_session = true
+    | .restore_agent_sessions = true
+    | .notify_on_command_finish = "unfocused"
+    | .notify_threshold_secs = 10
+    | .confirm_window_close = false
+    | .show_tray_icon = true
+    | .check_for_updates = true
+  ' \
+  "${input_file}"

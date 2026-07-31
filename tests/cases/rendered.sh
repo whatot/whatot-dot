@@ -41,6 +41,7 @@ check_fish_specs() {
 
 check_platform_ignored_paths() {
   local linux_managed
+  local macos_managed
 
   linux_managed="$(dotfiles_check_run_tool chezmoi managed \
     --source "${ROOT_DIR}" \
@@ -48,6 +49,19 @@ check_platform_ignored_paths() {
     --path-style relative)"
   if printf '%s\n' "${linux_managed}" | grep -E '^Library(/|$)' >/dev/null; then
     echo "Library paths must not be managed on non-Darwin targets" >&2
+    return 1
+  fi
+  if printf '%s\n' "${linux_managed}" | grep -E '^\.config/tty7(/|$)' >/dev/null; then
+    echo "tty7 paths must not be managed without host configuration" >&2
+    return 1
+  fi
+
+  macos_managed="$(dotfiles_check_run_tool chezmoi managed \
+    --source "${ROOT_DIR}" \
+    --override-data-file "${ROOT_DIR}/hosts/macos-arm64.toml" \
+    --path-style relative)"
+  if ! printf '%s\n' "${macos_managed}" | grep -Fx '.config/tty7/config.json' >/dev/null; then
+    echo "macOS host must manage tty7 config" >&2
     return 1
   fi
 }

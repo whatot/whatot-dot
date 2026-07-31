@@ -1,3 +1,6 @@
 {{- if ne .chezmoi.os "darwin" }}
 Library/
 {{- end }}
+{{- if not (hasKey . "tty7") }}
+.config/tty7/
+{{- end }}
