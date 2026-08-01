@@ -1,7 +1,10 @@
+{{ $gitIncludeRules := env "DOTFILES_GIT_INCLUDE_RULES" -}}
 [user]
+	useConfigOnly = true
+{{- if not $gitIncludeRules }}
 	email = {{ env "DOTFILES_GIT_EMAIL" }}
 	name = {{ env "DOTFILES_GIT_NAME" }}
-{{- $gitIncludeRules := env "DOTFILES_GIT_INCLUDE_RULES" }}
+{{- end }}
 {{- if $gitIncludeRules }}
 {{- range $rule := splitList "," $gitIncludeRules }}
 {{- $parts := splitList ":" $rule }}

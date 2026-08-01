@@ -8,6 +8,9 @@ DOTFILES_GIT_EMAIL=you@example.com
 # DOTFILES_GIT_INCLUDE_RULES=<gitdir-root>:<include-path>,<gitdir-root>:<include-path>
 # Keep entries comma-separated without spaces.
 # DOTFILES_GIT_INCLUDE_RULES=~/work:~/.gitconfig_work,~/client:~/.gitconfig_client
+# When include rules are set, the generated global config intentionally omits
+# name/email. Repositories outside the configured roots then fail closed at
+# commit time, and every include file must define its own [user] identity.
 #
 # Example: use one identity under ~/work and another under ~/client.
 # DOTFILES_GIT_INCLUDE_RULES=~/work:~/.gitconfig_work,~/client:~/.gitconfig_client

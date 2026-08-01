@@ -6,14 +6,14 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
 TEMPLATE_PATH="${ROOT_DIR}/home/dot_gitconfig.tmpl"
 
-case_no_include_rules() {
+case_no_include_rules_keeps_single_identity() {
   local output
 
   output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" \
     DOTFILES_GIT_NAME="Test User" \
     DOTFILES_GIT_EMAIL="test@example.com")"
 
-  dotfiles_tmpl_assert_contains "${output}" $'[user]\n\temail = test@example.com\n\tname = Test User'
+  dotfiles_tmpl_assert_contains "${output}" $'[user]\n\tuseConfigOnly = true\n\temail = test@example.com\n\tname = Test User'
   dotfiles_tmpl_assert_not_contains "${output}" '[includeIf "gitdir/i:'
 }
 
@@ -26,6 +26,9 @@ case_single_include_rule() {
     DOTFILES_GIT_INCLUDE_RULES="~/work:~/.gitconfig_work")"
 
   dotfiles_tmpl_assert_contains "${output}" $'[includeIf "gitdir/i:~/work/"]\n\tpath = ~/.gitconfig_work'
+  dotfiles_tmpl_assert_contains "${output}" $'[user]\n\tuseConfigOnly = true'
+  dotfiles_tmpl_assert_not_contains "${output}" 'email = test@example.com'
+  dotfiles_tmpl_assert_not_contains "${output}" 'name = Test User'
 }
 
 case_multiple_include_rules() {
@@ -67,7 +70,7 @@ case_ignores_incomplete_include_rules() {
 }
 
 main() {
-  case_no_include_rules
+  case_no_include_rules_keeps_single_identity
   case_single_include_rule
   case_multiple_include_rules
   case_include_rule_normalizes_trailing_slash
