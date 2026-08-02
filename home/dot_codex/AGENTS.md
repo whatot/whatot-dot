@@ -7,3 +7,6 @@
 - For broad, risky, or ambiguous tasks, clarify goal, scope, non-goals, and the
   smallest useful verification before editing.
 - Prefer small, evidence-backed guidance updates over broad rewrites.
+- For GitLab commit/push/MR closeout, use push options `merge_request.create`
+  and `merge_request.target=<base>`, not `glab` or a browser; never use an empty
+  commit, and report success only with the MR URL.
