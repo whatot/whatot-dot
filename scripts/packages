@@ -75,8 +75,8 @@ case "${kernel_name}" in
     ;;
   Linux)
     linux_id="$(dotfiles_linux_release_id)"
-    case "${linux_id}" in
-      arch | manjaro)
+    case "$(dotfiles_linux_family)" in
+      arch)
         package_dir="${ROOT_DIR}/packages/arch"
         install_linux_packages "${sudo_cmd[@]}" pacman -S --needed --noconfirm
         install_packages_from_file "${ROOT_DIR}/packages/arch/archlinuxcn.txt" \

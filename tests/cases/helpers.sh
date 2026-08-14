@@ -12,6 +12,7 @@ dotfiles_check_validate_library_helpers() {
   local devtools_csv
   local target_selector
   local output
+  local linux_family
 
   tmp_dir="$(mktemp -d)"
   trap 'rm -rf "${tmp_dir:-}"' EXIT
@@ -38,6 +39,12 @@ EOF
   if dotfiles_test_is_supported_target macos-arm64; then
     return 1
   fi
+
+  linux_family="$(DOTFILES_OS_RELEASE_LOADED=1 DOTFILES_OS_RELEASE_ID=endeavouros bash -c '
+    source "'"${ROOT_DIR}"'/scripts/lib/platform.sh"
+    dotfiles_linux_family
+  ')"
+  [[ "${linux_family}" == "arch" ]]
 
   cat >"${env_file}" <<'EOF'
 DOTFILES_SAMPLE_ONE=value

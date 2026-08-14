@@ -31,6 +31,23 @@ dotfiles_linux_release_id() {
   printf '%s\n' "${DOTFILES_OS_RELEASE_ID}"
 }
 
+dotfiles_linux_family() {
+  local linux_id
+
+  linux_id="$(dotfiles_linux_release_id)" || return 1
+  case "${linux_id}" in
+    arch | manjaro | endeavouros)
+      printf 'arch\n'
+      ;;
+    debian)
+      printf 'debian\n'
+      ;;
+    *)
+      printf '%s\n' "${linux_id}"
+      ;;
+  esac
+}
+
 dotfiles_linux_release_codename() {
   dotfiles_load_os_release || return 1
   if [[ -z ${DOTFILES_OS_RELEASE_CODENAME:-} ]]; then

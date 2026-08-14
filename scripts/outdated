@@ -36,8 +36,8 @@ show_outdated_os_packages() {
       ;;
     Linux)
       linux_id="$(dotfiles_linux_release_id)"
-      case "${linux_id}" in
-        arch | manjaro)
+      case "$(dotfiles_linux_family)" in
+        arch)
           run_step "pacman refresh databases" "${sudo_cmd[@]}" pacman -Sy
           run_step_allow_fail "pacman list updates" pacman -Qu
           ;;

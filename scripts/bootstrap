@@ -18,8 +18,8 @@ run_platform_bootstrap() {
       ;;
     Linux)
       linux_id="$(dotfiles_linux_release_id)"
-      case "${linux_id}" in
-        arch | manjaro)
+      case "$(dotfiles_linux_family)" in
+        arch)
           "${ROOT_DIR}/bootstrap/arch.sh"
           ;;
         debian)

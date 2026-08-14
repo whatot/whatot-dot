@@ -99,8 +99,8 @@ install_rust_system() {
       ;;
     Linux)
       linux_id="$(dotfiles_linux_release_id)"
-      case "${linux_id}" in
-        arch | manjaro)
+      case "$(dotfiles_linux_family)" in
+        arch)
           run_step "pacman install Rust system packages" \
             install_packages_from_file "${ROOT_DIR}/packages/rust/system-arch.txt" \
             "${sudo_cmd[@]}" pacman -S --needed --noconfirm
@@ -148,8 +148,8 @@ install_rust_toolchain() {
           rustup-init -y --default-toolchain "${toolchain}" --no-modify-path
         ;;
       Linux)
-        case "$(dotfiles_linux_release_id)" in
-          arch | manjaro)
+        case "$(dotfiles_linux_family)" in
+          arch)
             run_step "pacman install rustup" "${sudo_cmd[@]}" pacman -S --needed --noconfirm rustup cargo-binstall
             ;;
           debian)

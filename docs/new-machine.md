@@ -27,7 +27,7 @@ mise trust
 mise run setup
 ```
 
-## Arch Or Manjaro
+## Arch, Manjaro, Or EndeavourOS
 
 ```shell
 git clone <repo> ~/git/dotfiles
@@ -39,6 +39,9 @@ mise run setup
 
 Arch bootstrap enables `archlinuxcn` and installs `paru` before
 `mise run setup`.
+
+EndeavourOS uses the same Arch bootstrap path and the existing `arch-amd64`
+host plan; set `DOTFILES_HOST=arch-amd64` in `~/.env_private`.
 
 ## Debian
 

@@ -89,7 +89,7 @@ from the default path:
 
 ## Development Tools
 
-macOS and Arch are the primary daily hosts. Common CLI tools that are readily
+macOS and Arch-family systems are the primary daily hosts. Common CLI tools that are readily
 available from Homebrew or pacman should default to OS packages on those hosts
 so shell completions and PATH behavior stay simple.
 

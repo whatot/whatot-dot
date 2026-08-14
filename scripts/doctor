@@ -72,8 +72,8 @@ check_core_commands() {
       print_command_status brew || failed=1
       ;;
     Linux)
-      case "$(dotfiles_linux_release_id)" in
-        arch | manjaro)
+      case "$(dotfiles_linux_family)" in
+        arch)
           print_command_status pacman || failed=1
           ;;
         debian)
