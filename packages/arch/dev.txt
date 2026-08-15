@@ -1,5 +1,6 @@
 aliyun-cli
 aws-cli
+cc-switch
 cmake
 crun
 d2
