@@ -8,6 +8,7 @@ discount
 dnsmasq
 dprint
 editorconfig-core-c
+glab
 go
 gnuplot
 hurl
