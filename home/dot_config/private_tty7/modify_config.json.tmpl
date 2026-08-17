@@ -37,13 +37,14 @@ jq \
     | .startup_mode = "maximized"
     | .macos_option_as_alt = $macos_option_as_alt
     | .history_search = false
+    | .per_pane_history = true
     | .tab_completion = true
     | .restore_session = true
     | .restore_agent_sessions = true
     | .notify_on_command_finish = "unfocused"
     | .notify_threshold_secs = 10
     | .confirm_window_close = false
-    | .show_tray_icon = true
+    | .show_tray_icon = false
     | .check_for_updates = true
   ' \
   "${input_file}"

@@ -31,7 +31,9 @@ case_empty_input_creates_valid_config() {
     and .font_size == 13
     and .shell == {"program":"/opt/homebrew/bin/fish","args":["--login"]}
     and .history_search == false
+    and .per_pane_history == true
     and .restore_agent_sessions == true
+    and .show_tray_icon == false
   ' >/dev/null <<<"${output}"
 }
 
