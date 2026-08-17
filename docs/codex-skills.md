@@ -8,6 +8,7 @@ Codex skills 是一组小而可管理的个人工具集，不是外部 marketpla
 ```text
 home/dot_codex/skills/<skill>/SKILL.md
 home/dot_codex/skills/<skill>/references/*.md
+home/dot_codex/skills/<skill>/agents/openai.yaml
 ```
 
 chezmoi 渲染后的位置：
@@ -15,6 +16,7 @@ chezmoi 渲染后的位置：
 ```text
 ~/.codex/skills/<skill>/SKILL.md
 ~/.codex/skills/<skill>/references/*.md
+~/.codex/skills/<skill>/agents/openai.yaml
 ```
 
 ## 生命周期
@@ -26,7 +28,7 @@ chezmoi 渲染后的位置：
 | `reference`  | 值得回看但不直接安装的外部或本地来源。 | 本文档                   |
 | `archived`   | 不再推荐使用，只在历史中保留。         | git history              |
 
-晋升规则：只有当一个想法已经按本地工作流重写后，才移动到 `active`。
+晋升规则：只有当一个想法已经按本地工作流审查，并完成必要的本地适配后，才移动到 `active`。
 不要 symlink 或自动同步大型外部 skill 集合。
 
 清理规则：当一个 active skill 触发不准确、和其他 skill 明显重叠，或者近期没有实际用途时，
@@ -49,10 +51,11 @@ chezmoi 渲染后的位置：
 
 ## 已启用 Skill
 
-| Skill          | 用途                                                | 触发词                                           | 审查重点                               |
-| -------------- | --------------------------------------------------- | ------------------------------------------------ | -------------------------------------- |
-| `charter-run`  | 在 `$HOME/specs` 下创建或恢复持久化规划工件。       | 显式 `$charter-run` 或明确要求使用 `$HOME/specs` | 不替代普通 `/plan` 与 `/goal`。        |
-| `diagram-code` | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state            | 保持可编辑、可追溯并运行最小语法校验。 |
+| Skill                  | 用途                                                | 触发词                                           | 审查重点                               |
+| ---------------------- | --------------------------------------------------- | ------------------------------------------------ | -------------------------------------- |
+| `charter-run`          | 在 `$HOME/specs` 下创建或恢复持久化规划工件。       | 显式 `$charter-run` 或明确要求使用 `$HOME/specs` | 不替代普通 `/plan` 与 `/goal`。        |
+| `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state            | 保持可编辑、可追溯并运行最小语法校验。 |
+| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。          | 代码化简、熵回收、删代码、清理冗余、收敛抽象     | 不把静态扫描结果直接当作删除证明。     |
 
 ## 试用中 Skill
 
@@ -81,6 +84,9 @@ chezmoi 渲染后的位置：
   可吸收点：先选 diagram mode、以 JSON IR 表达图、schema 校验、renderer
   错误驱动布局修正，以及 Mermaid 只作为输入方言的思路。
   不直接导入：HTML/export/PNG 流水线和完整 renderer 对个人全局 skill 过重。
+- [`github.com/Yevanchen/reclaim-code-entropy`](https://github.com/Yevanchen/reclaim-code-entropy)
+  已启用：小型 instruction-only skill；用真实消费者、动态入口、兼容义务、历史和
+  生命周期所有权证明安全删减。当前保留上游正文与 UI 元数据，仅由本仓库管理安装。
 
 当某个参考来源变得有用，而且确实需要重复流程、专用资源或稳定产物格式时，
 再把具体想法沉淀到 active 或 incubating skill。不要用 skill 重复模型已经具备的
@@ -94,7 +100,8 @@ chezmoi 渲染后的位置：
   用一两句话说明触发条件和目标文件。
 - Skill 运行中的阶段记录、下一步菜单和临时判断留在对话里；写入文件的
   artifact 只保留对读者有价值的 durable 内容。
-- 外部 workflow 只能按本地工作流改写后吸收，不要直接复制完整 skill。
+- 外部 workflow 默认按本地工作流改写后吸收，不镜像或自动同步。用户明确要求时，
+  可以在完成内容、安全、触发和校验审查后原样纳入小型独立 skill。
 
 ## 审查清单
 

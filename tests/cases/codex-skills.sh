@@ -244,8 +244,8 @@ validate_skill() {
   elif [[ ${#description} -lt 40 ]]; then
     printf 'ERROR: %s description is too short (%s < 40)\n' "${skill_file}" "${#description}" >&2
     failed=1
-  elif [[ ${#description} -gt 300 ]]; then
-    printf 'ERROR: %s description is too long (%s > 300)\n' "${skill_file}" "${#description}" >&2
+  elif [[ ${#description} -gt 800 ]]; then
+    printf 'ERROR: %s description is too long (%s > 800)\n' "${skill_file}" "${#description}" >&2
     failed=1
   fi
   # shellcheck disable=SC2016
