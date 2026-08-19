@@ -51,6 +51,10 @@ check_platform_ignored_paths() {
     echo "Library paths must not be managed on non-Darwin targets" >&2
     return 1
   fi
+  if printf '%s\n' "${linux_managed}" | grep -E '^\.config/clash-verge(/|$)' >/dev/null; then
+    echo "Clash Verge paths must not be managed on non-Darwin targets" >&2
+    return 1
+  fi
   if printf '%s\n' "${linux_managed}" | grep -E '^\.config/tty7(/|$)' >/dev/null; then
     echo "tty7 paths must not be managed without host configuration" >&2
     return 1
@@ -62,6 +66,10 @@ check_platform_ignored_paths() {
     --path-style relative)"
   if ! printf '%s\n' "${macos_managed}" | grep -Fx '.config/tty7/config.json' >/dev/null; then
     echo "macOS host must manage tty7 config" >&2
+    return 1
+  fi
+  if ! printf '%s\n' "${macos_managed}" | grep -Fx '.config/clash-verge/direct-rules.js' >/dev/null; then
+    echo "macOS host must manage Clash Verge direct rules" >&2
     return 1
   fi
 }
