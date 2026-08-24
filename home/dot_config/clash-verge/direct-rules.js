@@ -1,6 +1,6 @@
-// macOS-only Clash Verge Rev global extension script.
+// Clash Verge Rev global extension script for macOS and Arch-family Linux.
 // Keep direct-routing rules in this list so they can be reviewed and extended
-// without editing the generated subscription profile.
+// without editing a generated subscription profile.
 var directRules = [
   // Exact host only. Add DOMAIN-SUFFIX when all subdomains should be direct.
   "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT"

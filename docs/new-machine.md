@@ -43,6 +43,14 @@ Arch bootstrap enables `archlinuxcn` and installs `paru` before
 EndeavourOS uses the same Arch bootstrap path and the existing `arch-amd64`
 host plan; set `DOTFILES_HOST=arch-amd64` in `~/.env_private`.
 
+For Clash Verge Rev on Arch-family hosts, the host plan manages the global
+extension script through its native Linux profile path:
+`~/.local/share/io.github.clash-verge-rev.clash-verge-rev/profiles/Script.js`.
+It links to `~/.config/clash-verge/direct-rules.js`, so after applying the
+dotfiles, refresh or reactivate the active profile in Clash Verge Rev. This
+applies to Clash Verge Rev; a standalone `mihomo`/Clash process does not run
+JavaScript extension scripts.
+
 ## Debian
 
 Debian uses the Linux bootstrap path:

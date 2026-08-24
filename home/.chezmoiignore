@@ -1,6 +1,12 @@
 {{- if ne .chezmoi.os "darwin" }}
 Library/
+{{- if not (and (hasKey . "os") (eq .os "arch")) }}
 .config/clash-verge/
+{{- end }}
+{{- end }}
+{{- if not (and (eq .chezmoi.os "linux") (hasKey . "os") (eq .os "arch")) }}
+# Clash Verge Rev stores its Linux global script under the XDG data root.
+.local/
 {{- end }}
 {{- if ne .chezmoi.os "linux" }}
 .config/containers/

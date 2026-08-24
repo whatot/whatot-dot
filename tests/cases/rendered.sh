@@ -41,6 +41,8 @@ check_fish_specs() {
 
 check_platform_ignored_paths() {
   local linux_managed
+  local arch_linux_managed
+  local debian_linux_managed
   local macos_managed
 
   linux_managed="$(dotfiles_check_run_tool chezmoi managed \
@@ -52,11 +54,43 @@ check_platform_ignored_paths() {
     return 1
   fi
   if printf '%s\n' "${linux_managed}" | grep -E '^\.config/clash-verge(/|$)' >/dev/null; then
-    echo "Clash Verge paths must not be managed on non-Darwin targets" >&2
+    echo "Generic Linux target must not manage Clash Verge paths" >&2
+    return 1
+  fi
+  if printf '%s\n' "${linux_managed}" | grep -E '^\.local/share/io\.github\.clash-verge-rev\.clash-verge-rev(/|$)' >/dev/null; then
+    echo "Arch Clash Verge profile path must not be managed without an Arch host plan" >&2
     return 1
   fi
   if printf '%s\n' "${linux_managed}" | grep -E '^\.config/tty7(/|$)' >/dev/null; then
     echo "tty7 paths must not be managed without host configuration" >&2
+    return 1
+  fi
+
+  arch_linux_managed="$(dotfiles_check_run_tool chezmoi managed \
+    --source "${ROOT_DIR}" \
+    --override-data '{"chezmoi":{"os":"linux"}}' \
+    --override-data-file "${ROOT_DIR}/hosts/arch-amd64.toml" \
+    --path-style relative)"
+  if ! printf '%s\n' "${arch_linux_managed}" | grep -Fx '.config/clash-verge/direct-rules.js' >/dev/null; then
+    echo "Arch host must manage Clash Verge direct rules" >&2
+    return 1
+  fi
+  if ! printf '%s\n' "${arch_linux_managed}" | grep -Fx '.local/share/io.github.clash-verge-rev.clash-verge-rev/profiles/Script.js' >/dev/null; then
+    echo "Arch host must manage Clash Verge global script link" >&2
+    return 1
+  fi
+  if printf '%s\n' "${arch_linux_managed}" | grep -E '^Library(/|$)' >/dev/null; then
+    echo "Arch host must not manage macOS Library paths" >&2
+    return 1
+  fi
+
+  debian_linux_managed="$(dotfiles_check_run_tool chezmoi managed \
+    --source "${ROOT_DIR}" \
+    --override-data '{"chezmoi":{"os":"linux"}}' \
+    --override-data-file "${ROOT_DIR}/hosts/debian-amd64.toml" \
+    --path-style relative)"
+  if printf '%s\n' "${debian_linux_managed}" | grep -E '^\.config/clash-verge(/|$)|^\.local/share/io\.github\.clash-verge-rev\.clash-verge-rev(/|$)' >/dev/null; then
+    echo "Debian host must not manage Clash Verge paths" >&2
     return 1
   fi
 
@@ -70,6 +104,10 @@ check_platform_ignored_paths() {
   fi
   if ! printf '%s\n' "${macos_managed}" | grep -Fx '.config/clash-verge/direct-rules.js' >/dev/null; then
     echo "macOS host must manage Clash Verge direct rules" >&2
+    return 1
+  fi
+  if printf '%s\n' "${macos_managed}" | grep -E '^\.local/share/io\.github\.clash-verge-rev\.clash-verge-rev(/|$)' >/dev/null; then
+    echo "macOS host must not manage the Linux Clash Verge profile path" >&2
     return 1
   fi
 }
