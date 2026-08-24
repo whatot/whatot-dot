@@ -6,7 +6,7 @@ Library/
 {{- end }}
 {{- if not (and (eq .chezmoi.os "linux") (hasKey . "os") (eq .os "arch")) }}
 # Clash Verge Rev stores its Linux global script under the XDG data root.
-.local/
+.local/share/io.github.clash-verge-rev.clash-verge-rev/
 {{- end }}
 {{- if ne .chezmoi.os "linux" }}
 .config/containers/
