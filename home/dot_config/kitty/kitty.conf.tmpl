@@ -11,9 +11,9 @@ remember_window_size yes
 remember_window_position yes
 watcher auto_session.py
 startup_session ${HOME}/.config/kitty/last-session.kitty-session
-tab_bar_edge top
+tab_bar_edge left
 tab_bar_style separator
-tab_bar_min_tabs 2
+tab_bar_min_tabs 1
 tab_bar_margin_width 4
 tab_bar_margin_height 0 0
 tab_bar_background #0d1117
@@ -29,9 +29,29 @@ tab_title_max_length 28
 tab_title_template " {index}: {title} "
 active_tab_title_template " {index}: {title} "
 
+# Keep the host-selected font size stable. Kitty's built-in font controls are
+# regular mappings, so unmap every default font-size shortcut.
+map ctrl+shift+equal
+map ctrl+shift+plus
+map ctrl+shift+kp_add
+map cmd+plus
+map cmd+equal
+map shift+cmd+equal
+map ctrl+shift+minus
+map ctrl+shift+kp_subtract
+map cmd+minus
+map shift+cmd+minus
+map ctrl+shift+backspace
+map cmd+0
+# The command palette exposes unmapped actions, including font resizing.
+map ctrl+shift+f3
+
 {{- with get $kitty "shell" }}
 shell {{ . }}
 {{- end }}
+
+# Open a new tab in the active window's current working directory.
+map --allow-fallback=shifted,ascii cmd+t new_tab_with_cwd
 
 # Switch tabs with the macOS convention.
 map cmd+1 goto_tab 1

@@ -11,6 +11,3 @@ Library/
 {{- if ne .chezmoi.os "linux" }}
 .config/containers/
 {{- end }}
-{{- if not (hasKey . "tty7") }}
-.config/tty7/
-{{- end }}

@@ -63,12 +63,12 @@ case_macos_gui_starts_maximized() {
   dotfiles_tmpl_assert_contains "${output}" '--start-as=maximized'
 }
 
-case_uses_laptop_tab_layout() {
+case_uses_sidebar_tab_layout() {
   local output
 
   output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" "${ROOT_DIR}/hosts/macos-arm64.toml")"
-  dotfiles_tmpl_assert_contains "${output}" 'tab_bar_edge top'
-  dotfiles_tmpl_assert_contains "${output}" 'tab_bar_min_tabs 2'
+  dotfiles_tmpl_assert_contains "${output}" 'tab_bar_edge left'
+  dotfiles_tmpl_assert_contains "${output}" 'tab_bar_min_tabs 1'
   dotfiles_tmpl_assert_contains "${output}" 'window_padding_width 4 6'
   dotfiles_tmpl_assert_contains "${output}" 'active_tab_foreground #ffffff'
   dotfiles_tmpl_assert_contains "${output}" 'active_tab_background #21262d'
@@ -76,8 +76,23 @@ case_uses_laptop_tab_layout() {
   dotfiles_tmpl_assert_contains "${output}" 'inactive_tab_foreground #8b949e'
   dotfiles_tmpl_assert_contains "${output}" 'tab_title_max_length 28'
   dotfiles_tmpl_assert_contains "${output}" 'tab_title_template " {index}: {title} "'
+  dotfiles_tmpl_assert_contains \
+    "${output}" \
+    'map --allow-fallback=shifted,ascii cmd+t new_tab_with_cwd'
   dotfiles_tmpl_assert_contains "${output}" 'map cmd+1 goto_tab 1'
   dotfiles_tmpl_assert_contains "${output}" 'map cmd+9 goto_tab 9'
+}
+
+case_font_size_shortcuts_are_unmapped() {
+  local output
+
+  output="$(dotfiles_tmpl_render "${TEMPLATE_PATH}" "${ROOT_DIR}/hosts/macos-arm64.toml")"
+  dotfiles_tmpl_assert_contains "${output}" 'map cmd+plus'
+  dotfiles_tmpl_assert_contains "${output}" 'map cmd+minus'
+  dotfiles_tmpl_assert_contains "${output}" 'map cmd+0'
+  dotfiles_tmpl_assert_contains "${output}" 'map ctrl+shift+equal'
+  dotfiles_tmpl_assert_contains "${output}" 'map ctrl+shift+backspace'
+  dotfiles_tmpl_assert_contains "${output}" 'map ctrl+shift+f3'
 }
 
 case_restores_last_session_on_startup() {
@@ -110,7 +125,8 @@ main() {
   case_platform_specific_settings_follow_rendering_os
   case_macos_host_keeps_platform_specific_settings
   case_macos_gui_starts_maximized
-  case_uses_laptop_tab_layout
+  case_uses_sidebar_tab_layout
+  case_font_size_shortcuts_are_unmapped
   case_restores_last_session_on_startup
 }
 
