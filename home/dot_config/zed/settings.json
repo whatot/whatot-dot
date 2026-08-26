@@ -13,9 +13,39 @@
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_size": 13,
   "disable_ai": true,
+  "enable_language_server": false,
+  "show_completions_on_input": false,
+  "show_completion_documentation": false,
+  "show_edit_predictions": false,
+  "completions": {
+    "lsp": false,
+    "words": "disabled"
+  },
+  "semantic_tokens": "off",
+  "inlay_hints": {
+    "enabled": false
+  },
+  "use_on_type_format": false,
+  "diagnostics_max_severity": "off",
+  "diagnostics": {
+    "button": false,
+    "lsp_pull_diagnostics": {
+      "enabled": false
+    },
+    "inline": {
+      "enabled": false
+    }
+  },
+  "scrollbar": {
+    "diagnostics": "none"
+  },
+  "tabs": {
+    "show_diagnostics": "off"
+  },
   "format_on_save": "on",
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
+    "show_diagnostics": "off"
   },
   "languages": {
     "JSON": {
