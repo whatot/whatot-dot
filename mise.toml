@@ -1,7 +1,7 @@
 # Repository workflow tools only. Keep this focused on the tools required by
 # this repo's own checks and task entrypoints in addition to global defaults.
 [tools]
-dprint = "0.57.0"
+dprint = "0.57.1"
 # prek runs this repo's pre-commit-compatible hooks faster than pre-commit.
 prek = "0.5.2"
 shellcheck = "0.11.0"
