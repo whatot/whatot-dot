@@ -2,6 +2,8 @@
 // Keep direct-routing rules in this list so they can be reviewed and extended
 // without editing a generated subscription profile.
 var directRules = [
+  "DOMAIN-SUFFIX,amazonaws.cn,DIRECT",
+  "DOMAIN-SUFFIX,amazonaws.com.cn,DIRECT",
   "DOMAIN-SUFFIX,cn,DIRECT",
   // Exact host only. Add DOMAIN-SUFFIX when all subdomains should be direct.
   "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT"
