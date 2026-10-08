@@ -4,9 +4,10 @@
 var directRules = [
   "DOMAIN-SUFFIX,amazonaws.cn,DIRECT",
   "DOMAIN-SUFFIX,amazonaws.com.cn,DIRECT",
+  "DOMAIN-SUFFIX,amazonwebservices.com.cn,DIRECT",
   "DOMAIN-SUFFIX,cn,DIRECT",
   // Exact host only. Add DOMAIN-SUFFIX when all subdomains should be direct.
-  "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT"
+  "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT",
 ];
 
 function main(config) {
