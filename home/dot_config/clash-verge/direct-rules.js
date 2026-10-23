@@ -8,7 +8,7 @@ var directRules = [
   "DOMAIN-SUFFIX,cn,DIRECT",
   "DOMAIN-SUFFIX,einsia.com,DIRECT",
   // Exact host only. Add DOMAIN-SUFFIX when all subdomains should be direct.
-  "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT",
+  // "DOMAIN,sbtunnel.xiaoaojianghu.fun,DIRECT",
 ];
 
 function main(config) {
