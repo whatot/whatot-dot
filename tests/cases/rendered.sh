@@ -103,7 +103,7 @@ check_platform_ignored_paths() {
   fi
 }
 
-check_rustc_wrapper_environment() {
+check_cargo_cache_environment() {
   local test_home=$1
   local profile_path="${ROOT_DIR}/home/dot_config/dotfiles/profile.sh"
   local fish_path="${ROOT_DIR}/home/dot_config/fish/conf.d/30-tools.fish"
@@ -111,55 +111,58 @@ check_rustc_wrapper_environment() {
 
   # The nested shell expands these variables.
   # shellcheck disable=SC2016
-  output="$(env -u CODEX_SANDBOX -u RUSTC_WRAPPER HOME="${test_home}" bash -c '
-    sccache() { :; }
+  output="$(env -u CODEX_SANDBOX -u MBX_DISABLE HOME="${test_home}" RUSTC_WRAPPER=sccache bash -c '
     source "$1"
-    printf "%s" "${RUSTC_WRAPPER-unset}"
+    printf "%s/%s" "${RUSTC_WRAPPER-unset}" "${MBX_DISABLE-unset}"
   ' _ "${profile_path}")"
-  [[ "${output}" == "sccache" ]]
+  [[ "${output}" == "unset/unset" ]]
 
-  output="$(HOME="${test_home}" CODEX_SANDBOX=seatbelt RUSTC_WRAPPER=sccache bash -c '
+  # shellcheck disable=SC2016
+  output="$(env -u MBX_DISABLE HOME="${test_home}" CODEX_SANDBOX=seatbelt RUSTC_WRAPPER=custom-wrapper bash -c '
     source "$1"
-    printf "%s" "${RUSTC_WRAPPER-unset}"
+    printf "%s/%s" "${RUSTC_WRAPPER-unset}" "${MBX_DISABLE-unset}"
   ' _ "${profile_path}")"
-  [[ "${output}" == "unset" ]]
+  [[ "${output}" == "custom-wrapper/1" ]]
 
-  output="$(HOME="${test_home}" CODEX_SANDBOX=seatbelt RUSTC_WRAPPER=custom-wrapper bash -c '
+  # shellcheck disable=SC2016
+  output="$(HOME="${test_home}" CODEX_SANDBOX=seatbelt MBX_DISABLE=0 bash -c '
     source "$1"
-    printf "%s" "${RUSTC_WRAPPER-unset}"
+    printf "%s" "${MBX_DISABLE-unset}"
   ' _ "${profile_path}")"
-  [[ "${output}" == "custom-wrapper" ]]
+  [[ "${output}" == "0" ]]
 
   # Fish expands these variables.
   # shellcheck disable=SC2016
   output="$(dotfiles_check_run_tool fish -c '
     set -e CODEX_SANDBOX
-    set -e RUSTC_WRAPPER
-    function sccache; end
-    source $argv[1]
-    printf "%s" "$RUSTC_WRAPPER"
-  ' "${fish_path}")"
-  [[ "${output}" == "sccache" ]]
-
-  # Fish expands these variables.
-  # shellcheck disable=SC2016
-  output="$(dotfiles_check_run_tool fish -c '
-    set -gx CODEX_SANDBOX seatbelt
+    set -e MBX_DISABLE
     set -gx RUSTC_WRAPPER sccache
     source $argv[1]
     set -q RUSTC_WRAPPER; or printf unset
+    set -q MBX_DISABLE; or printf /unset
   ' "${fish_path}")"
-  [[ "${output}" == "unset" ]]
+  [[ "${output}" == "unset/unset" ]]
 
   # Fish expands these variables.
   # shellcheck disable=SC2016
   output="$(dotfiles_check_run_tool fish -c '
     set -gx CODEX_SANDBOX seatbelt
+    set -e MBX_DISABLE
     set -gx RUSTC_WRAPPER custom-wrapper
     source $argv[1]
-    printf "%s" "$RUSTC_WRAPPER"
+    printf "%s/%s" "$RUSTC_WRAPPER" "$MBX_DISABLE"
   ' "${fish_path}")"
-  [[ "${output}" == "custom-wrapper" ]]
+  [[ "${output}" == "custom-wrapper/1" ]]
+
+  # Fish expands these variables.
+  # shellcheck disable=SC2016
+  output="$(dotfiles_check_run_tool fish -c '
+    set -gx CODEX_SANDBOX seatbelt
+    set -gx MBX_DISABLE 0
+    source $argv[1]
+    printf "%s" "$MBX_DISABLE"
+  ' "${fish_path}")"
+  [[ "${output}" == "0" ]]
 }
 
 main() {
@@ -202,7 +205,7 @@ main() {
 
   render_template_specs "${host_data_file}" "${render_specs[@]}"
   run_step "chezmoiignore platform paths" check_platform_ignored_paths
-  run_step "rustc wrapper environment" check_rustc_wrapper_environment "${tmp_home}"
+  run_step "cargo cache environment" check_cargo_cache_environment "${tmp_home}"
 
   cp "${ROOT_DIR}/home/dot_vim/"*.vim "${tmp_home}/.vim/"
   dotfiles_check_write_vim_plug_stub "${tmp_home}/.vim/autoload/plug.vim"

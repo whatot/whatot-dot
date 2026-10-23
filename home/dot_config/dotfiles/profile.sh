@@ -94,10 +94,12 @@ export RUSTUP_UPDATE_ROOT="${RUSTUP_UPDATE_ROOT:-https://rsproxy.cn/rustup}"
 export PUB_HOSTED_URL="${PUB_HOSTED_URL:-https://pub.flutter-io.cn}"
 export FLUTTER_STORAGE_BASE_URL="${FLUTTER_STORAGE_BASE_URL:-https://storage.flutter-io.cn}"
 
-if [ -n "${CODEX_SANDBOX:-}" ] && [ "${RUSTC_WRAPPER:-}" = sccache ]; then
+# mbx defers to an inherited RUSTC_WRAPPER, so drop the old sccache default.
+if [ "${RUSTC_WRAPPER:-}" = sccache ]; then
   unset RUSTC_WRAPPER
-elif [ -z "${CODEX_SANDBOX:-}" ] && [ -z "${RUSTC_WRAPPER+x}" ] && command -v sccache >/dev/null 2>&1; then
-  export RUSTC_WRAPPER=sccache
+fi
+if [ -n "${CODEX_SANDBOX:-}" ] && [ -z "${MBX_DISABLE+x}" ]; then
+  export MBX_DISABLE=1
 fi
 
 unset -f dotfiles_path_prefer

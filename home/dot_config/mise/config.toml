@@ -16,7 +16,15 @@ node.mirror_url = "https://npmmirror.com/mirrors/node/"
 "github:larksuite/cli" = "1.0.96"
 java = "zulu-21.52.203.0"
 maven = "3.9.16"
+mr-boxington = "1.27.0"
 node = "26.10.0"
 pnpm = "12.5.1"
 python = "3.14.7"
 usage = "6.11.0"
+
+# Route Cargo through mbx (mr-boxington) for the shared build cache and managed
+# target directories. mise drops its shim directories before running mbx, so it
+# still finds the rustup Cargo.
+[wrappers.cargo]
+command = "mbx"
+env = { MBX_CARGO_SHIM_MODE = "1" }

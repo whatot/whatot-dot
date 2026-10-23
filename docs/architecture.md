@@ -105,9 +105,13 @@ Rust versions should normally come from each project's `rust-toolchain.toml`.
 This repository only ensures `rustup` exists, has a usable default toolchain,
 and can install the workstation CLI set.
 
-Interactive workstation shells use `sccache` as Cargo's default rustc wrapper.
-Codex sandbox shells leave it disabled because its daemon and cache live outside
-the workspace sandbox; an explicitly configured non-`sccache` wrapper is kept.
+Cargo runs through `mbx` (mr-boxington) via the global mise `[wrappers.cargo]`
+entry. It shares compiler outputs across worktrees, places targets under its
+cache directory, and collects them under disk budgets set in
+`~/.config/mbx/config.toml`. Shells drop an inherited `RUSTC_WRAPPER=sccache`
+because mbx defers to any existing wrapper. Codex sandbox shells set
+`MBX_DISABLE=1` because the mbx cache lives outside the workspace sandbox; an
+explicit `MBX_DISABLE` value is kept.
 
 Heavier or less portable cargo tools should stay in separate inventories or
 tasks instead of slowing the default setup path for every machine.

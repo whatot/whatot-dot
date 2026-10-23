@@ -4,10 +4,12 @@ if command -q mise
     mise activate fish --quiet --shims | source
 end
 
-if set -q CODEX_SANDBOX; and set -q RUSTC_WRAPPER; and test "$RUSTC_WRAPPER" = sccache
+# mbx defers to an inherited RUSTC_WRAPPER, so drop the old sccache default.
+if set -q RUSTC_WRAPPER; and test "$RUSTC_WRAPPER" = sccache
     set -e RUSTC_WRAPPER
-else if not set -q CODEX_SANDBOX; and not set -q RUSTC_WRAPPER; and command -q sccache
-    set -gx RUSTC_WRAPPER sccache
+end
+if set -q CODEX_SANDBOX; and not set -q MBX_DISABLE
+    set -gx MBX_DISABLE 1
 end
 
 if status is-interactive

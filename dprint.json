@@ -2,7 +2,8 @@
   "excludes": [
     "**/.git",
     "**/.cache",
-    "**/.DS_Store"
+    "**/.DS_Store",
+    "**/symlink_*"
   ],
   "json": {
     "indentWidth": 2,

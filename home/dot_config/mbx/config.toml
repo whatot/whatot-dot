@@ -1,0 +1,10 @@
+# mbx (mr-boxington) global settings. macOS reads this through a symlink at
+# ~/Library/Application Support/mbx/config.toml.
+
+[gc]
+# One budget for the shared store, managed targets, and incremental state.
+max_total_size = "60GiB"
+
+[target]
+# Agent and scratch worktrees go first when targets exceed the budget.
+evict_first = [".claude/worktrees", ".cache/worktrees", "/private/tmp"]
