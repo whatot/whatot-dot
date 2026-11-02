@@ -39,23 +39,27 @@ chezmoi 渲染后的位置：
 少数 skill 是某个 CLI 的配套操作说明，并需要跟随该 CLI 更新。它们可以作为
 用户级外部 skill 安装，但不复制到 `home/dot_codex/skills/`：
 
-| Skill           | 上游            | 安装位置                         | 管理方式                    |
-| --------------- | --------------- | -------------------------------- | --------------------------- |
-| `lark-shared`   | `larksuite/cli` | `~/.agents/skills/lark-shared`   | `npx skills` + CLI 内嵌说明 |
-| `lark-calendar` | `larksuite/cli` | `~/.agents/skills/lark-calendar` | `npx skills` + CLI 内嵌说明 |
-| `lark-doc`      | `larksuite/cli` | `~/.agents/skills/lark-doc`      | `npx skills` + CLI 内嵌说明 |
+| Skill           | 上游                  | 安装位置                         | 管理方式                                    |
+| --------------- | --------------------- | -------------------------------- | ------------------------------------------- |
+| `lark-shared`   | `larksuite/cli`       | `~/.agents/skills/lark-shared`   | `npx skills` + CLI 内嵌说明                 |
+| `lark-calendar` | `larksuite/cli`       | `~/.agents/skills/lark-calendar` | `npx skills` + CLI 内嵌说明                 |
+| `lark-doc`      | `larksuite/cli`       | `~/.agents/skills/lark-doc`      | `npx skills` + CLI 内嵌说明                 |
+| `openspec-*`    | `Fission-AI/OpenSpec` | `~/.agents/skills/openspec-*`    | `scripts/openspec-skills`，匹配 CLI release |
 
 只安装实际需要的 skill，不安装整个上游集合。安装、初始化、最小授权、使用和
 更新流程见 [`lark-cli.md`](lark-cli.md)。实际操作时通过
 `lark-cli skills read <name>` 读取与当前 CLI 版本匹配的内嵌说明。
 
+OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，各项目只保存
+`openspec/` 规划文件，不重复安装 skill。安装、升级和旧规划迁移见
+[`openspec.md`](openspec.md)。
+
 ## 已启用 Skill
 
-| Skill                  | 用途                                                | 触发词                                           | 审查重点                               |
-| ---------------------- | --------------------------------------------------- | ------------------------------------------------ | -------------------------------------- |
-| `charter-run`          | 在 `$HOME/specs` 下创建或恢复持久化规划工件。       | 显式 `$charter-run` 或明确要求使用 `$HOME/specs` | 不替代普通 `/plan` 与 `/goal`。        |
-| `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state            | 保持可编辑、可追溯并运行最小语法校验。 |
-| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。          | 代码化简、熵回收、删代码、清理冗余、收敛抽象     | 不把静态扫描结果直接当作删除证明。     |
+| Skill                  | 用途                                                | 触发词                                       | 审查重点                               |
+| ---------------------- | --------------------------------------------------- | -------------------------------------------- | -------------------------------------- |
+| `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state        | 保持可编辑、可追溯并运行最小语法校验。 |
+| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。          | 代码化简、熵回收、删代码、清理冗余、收敛抽象 | 不把静态扫描结果直接当作删除证明。     |
 
 ## 试用中 Skill
 
@@ -138,4 +142,3 @@ Codex skill 校验脚本位于 `tests/cases/codex-skills.sh`。
 - 拒绝硬编码 `/Users/...` 路径。
 - `rm -rf`、`sudo` 和网络变更类危险命令，需要在 skill 文本中有明确批准边界。
 - `references/` 下的 Markdown 文件需要 H1 标题、保持紧凑，并通过安全边界检查。
-- `charter-run` 保留必要的阶段引用和最小 example，避免后续修改悄悄破坏分阶段工作流契约。

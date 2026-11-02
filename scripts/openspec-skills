@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf 'usage: scripts/openspec-skills\n\nInstall or update global Codex skills matching the installed OpenSpec CLI.\n'
+}
+
+if [[ $# -gt 0 ]]; then
+  usage
+  [[ $# -eq 1 && ("$1" == "--help" || "$1" == "-h") ]] && exit 0
+  exit 2
+fi
+
+if ! command -v openspec >/dev/null 2>&1; then
+  printf 'OpenSpec CLI is missing. Install the host dev packages first; see docs/openspec.md.\n' >&2
+  exit 1
+fi
+
+version="$(openspec --version)"
+if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  printf 'Unsupported OpenSpec version: %s\n' "${version}" >&2
+  exit 1
+fi
+
+# The release tag keeps skills paired with the CLI, including on reinstallation.
+exec npx --yes skills@1.5.20 add \
+  "https://github.com/Fission-AI/OpenSpec/tree/v${version}/skills" \
+  --skill openspec-explore \
+  --skill openspec-propose \
+  --skill openspec-apply-change \
+  --skill openspec-update-change \
+  --skill openspec-sync-specs \
+  --skill openspec-archive-change \
+  --skill openspec-verify-change \
+  --agent codex \
+  --global \
+  --copy \
+  --yes

@@ -40,6 +40,13 @@
   - `lark-cli docs +fetch --doc "<URL-or-token>"`: read a document
   - `lark-cli skills read <name>`: read version-matched skill guidance
   - `docs/lark-cli.md`: installation, initialization, permissions, and usage
+- OpenSpec
+  - `scripts/openspec-skills`: install/update global skills matching the CLI
+  - `openspec init --tools none --language Chinese`: opt a project in
+  - `$openspec-propose`: plan a change in Codex
+  - `$openspec-apply-change`: implement or resume a change
+  - `$openspec-verify-change`: review implementation against its artifacts
+  - `docs/openspec.md`: installation, workflow, updates, and migration
 - Network
   - `setproxy`: enable proxy env vars from `PROXY_URL`
   - `unsetproxy`: clear proxy env vars

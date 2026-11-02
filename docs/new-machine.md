@@ -123,3 +123,11 @@ the local credential store.
 Follow [`lark-cli.md`](lark-cli.md) to install only `lark-shared`,
 `lark-calendar`, and `lark-doc`, then initialize the app and grant the minimum
 calendar and document permissions.
+
+## OpenSpec
+
+The macOS dev Brewfile and Arch AUR inventory install `openspec`. Install its
+seven global Codex skills once per user with `scripts/openspec-skills`.
+Projects opt in with `openspec init --tools none --language Chinese`; their
+skills remain global. See [`openspec.md`](openspec.md) for usage and updates.
+The minimal Debian host does not install OpenSpec by default.

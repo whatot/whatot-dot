@@ -10,6 +10,7 @@
 - `docs/testing.md`：验证矩阵和具体测试命令
 - `docs/codex-skills.md`：Codex skill 管理索引、参考来源和校验说明
 - `docs/lark-cli.md`：Lark CLI、精选 Codex skills、初始化和使用说明
+- `docs/openspec.md`：OpenSpec CLI、全局 skills、项目启用和规划迁移
 - `docs/cheat.md`：常用命令速查
 
 ## 工作范围
@@ -29,7 +30,7 @@
 - 受管理的 app 配置优先放在 XDG 风格路径，例如 `~/.config/<tool>/...`。
 - 在 macOS 上，如果工具要求 `~/Library/Application Support/<tool>/...`，用 symlink 指回 XDG 管理文件，不维护两份配置。
 - 通过 chezmoi 管理这些 macOS 兼容 symlink 时，不要修改 `~/Library` 或 `~/Library/Application Support` 目录元数据，只管理叶子 app 路径。
-- Codex skill 源文件只放在 `home/dot_codex/skills/`；外部仓库只作为参考来源，吸收前先按本地工作流重写。
+- 本地维护的 Codex skill 源文件只放在 `home/dot_codex/skills/`；CLI 配套外部 skill 按 `docs/codex-skills.md` 管理。
 - 不要用低价值测试快捷方式膨胀 `mise.toml`；验证命令优先记录在 `docs/testing.md`。
 - 验证脚本保持非交互，并兼容 macOS 自带的旧 Bash。
 - 在 macOS 上，`plantuml` 必须和明确的 Java formula 搭配，例如 `openjdk`。

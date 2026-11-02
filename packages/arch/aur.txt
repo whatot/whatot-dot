@@ -1,3 +1,4 @@
 nautilus-nutstore
+openspec
 qqmusic-bin
 wechat-bin
