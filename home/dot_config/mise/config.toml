@@ -18,7 +18,7 @@ java = "zulu-25.38.109.0"
 maven = "3.10.0"
 mr-boxington = "1.30.0"
 node = "26.13.1"
-pnpm = "12.18.0"
+pnpm = "12.21.0"
 python = "3.15.2"
 usage = "7.3.0"
 
