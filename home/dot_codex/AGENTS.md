@@ -9,6 +9,9 @@
 - Prefer small, evidence-backed guidance updates over broad rewrites.
 - Keep goals, architecture, design, and implementation simple. Improve user,
   developer, and agent experience together while preserving supported behavior.
+- Before writing, changing, or reviewing Rust code, read
+  `~/.codex/skills/rust-code/SKILL.md` and the project's Rust guidance.
+  Use the project's validation commands.
 - Before adding, changing, or reviewing tests, or deciding whether a bug fix needs
   a regression test, read `~/.codex/skills/test-behavior/SKILL.md` and the project's
   testing guidance. Add tests only for a real, uncovered behavior.

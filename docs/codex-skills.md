@@ -56,12 +56,13 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 
 ## 已启用 Skill
 
-| Skill                  | 用途                                                | 触发词                                       | 审查重点                               |
-| ---------------------- | --------------------------------------------------- | -------------------------------------------- | -------------------------------------- |
-| `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state        | 保持可编辑、可追溯并运行最小语法校验。 |
-| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。          | 代码化简、熵回收、删代码、清理冗余、收敛抽象 | 不把静态扫描结果直接当作删除证明。     |
-| `test-behavior`        | 选择独有行为验证，落实真实 E2E、隔离和工件。        | 写测试、回归测试、E2E、Mock、测试膨胀        | 不为没有行为盲区的修改增加测试。       |
-| `design-ui`            | 简化产品 UI、状态与实现，并验收运行中的界面。       | 界面、UI/UX、页面布局、视觉打磨、交互重构    | 保护原有能力，取得当前视觉和交互证据。 |
+| Skill                  | 用途                                                | 触发词                                       | 审查重点                                 |
+| ---------------------- | --------------------------------------------------- | -------------------------------------------- | ---------------------------------------- |
+| `diagram-code`         | 生成和维护 Mermaid、D2、PlantUML 等 graph-as-code。 | 画图, 架构图, 流程图, sequence, state        | 保持可编辑、可追溯并运行最小语法校验。   |
+| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。          | 代码化简、熵回收、删代码、清理冗余、收敛抽象 | 不把静态扫描结果直接当作删除证明。       |
+| `test-behavior`        | 选择独有行为验证，落实真实 E2E、隔离和工件。        | 写测试、回归测试、E2E、Mock、测试膨胀        | 不为没有行为盲区的修改增加测试。         |
+| `design-ui`            | 简化产品 UI、状态与实现，并验收运行中的界面。       | 界面、UI/UX、页面布局、视觉打磨、交互重构    | 保护原有能力，取得当前视觉和交互证据。   |
+| `rust-code`            | 统一 Rust 实现、审查、移植与 Clippy 接入判断。      | Rust、crate、所有权、异步、Rust 审查、Clippy | 遵循项目框架与执行入口，不制造多余抽象。 |
 
 ## 试用中 Skill
 
@@ -93,9 +94,19 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 - [`github.com/Yevanchen/reclaim-code-entropy`](https://github.com/Yevanchen/reclaim-code-entropy)
   已启用：小型 instruction-only skill；用真实消费者、动态入口、兼容义务、历史和
   生命周期所有权证明安全删减。当前保留上游正文与 UI 元数据，仅由本仓库管理安装。
+- [`github.com/morganlinton/BeautifulRust`](https://github.com/morganlinton/BeautifulRust/tree/b9718436d77ee7bcf17cdcb6aa27628feb95d97a)
+  已适配为 `rust-code`：吸收 API/错误/trait 契约、所有权和并发生命周期、可定位的审查发现与行为移植。
+  审查版本为 commit `b9718436d77ee7bcf17cdcb6aa27628feb95d97a`（plugin manifest `1.6.0`），
+  来源为 `skills/rust-best-practices`、`skills/rust-review`、`skills/rust-port` 和 `lints/`；
+  上游 MIT 版权声明随本地 skill 的 `LICENSE` 保留。
+  不采用其测试优先/无条件回归、Mock/test-util、测试逐条移植及固定 Cargo 命令；
+  不采用全面禁止 bool、过早 builder/trait、统一 Send、跨 crate 全面 non_exhaustive 等机械规则。
+  Clippy 基线改为 `all + pedantic` 与有理由的具体例外，`restriction` / `nursery` 不全开，
+  细节见 skill 的 `references/clippy.md`。不安装上游三套重叠 skill、plugin 或远程 MCP。
+  更新时手动比较上述路径与固定 commit，只吸收能改善实际决策的差异，不自动同步。
 
-测试与 UI 的共性参考随各自 skill 维护，包含采用范围和原始来源；不镜像外部手册。
-项目具体测试命令、框架 API、组件与视觉参数继续留在项目中。
+测试、UI 与 Rust 的共性参考随各自 skill 维护，包含采用范围和原始来源；不镜像外部手册。
+项目具体测试命令、Cargo lint 配置、框架 API、组件与视觉参数继续留在项目中。
 
 当某个参考来源变得有用，而且确实需要重复流程、专用资源或稳定产物格式时，
 再把具体想法沉淀到 active 或 incubating skill。不要用 skill 重复模型已经具备的
@@ -115,13 +126,18 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 ## 质量约束的使用与维护
 
 全局 `AGENTS.md` 只保留共性方向和读取入口：测试相关决策读取 `test-behavior`，
-产品界面任务读取 `design-ui`。两个 skill 的正文持有约束与执行流程，
-`references/principles.md` 持有定义、反例、验收细节与参考来源。
-项目 `AGENTS.md` 只需指向自己的测试规范、执行命令、设计系统和组件入口，不复制全局规则。
+产品界面任务读取 `design-ui`，Rust 实现/修改/审查读取 `rust-code`。
+skill 正文持有约束与执行流程，reference 持有按需判断、例子、验收细节与来源。
+项目 `AGENTS.md` 只需指向自己的代码/测试规范、执行命令、设计系统和组件入口，不复制全局规则。
 
-也可显式调用 `$test-behavior` 或 `$design-ui`。涉及 UI 测试时组合使用，
-不建立另一套规划流程；OpenSpec change 按需记录行为盲区和界面验收要求。
+也可显式调用 `$test-behavior`、`$design-ui` 或 `$rust-code`。Rust UI/测试按任务组合使用，
+测试策略只由 `test-behavior` 持有，框架特性留给项目标准；OpenSpec 继续持有规划，
+change 按需记录行为盲区、兼容和界面验收要求。
 skill 与 OpenSpec 都是 agent 的操作指导，不能代替真实执行或 CI gate。
+
+Rust 的 Clippy 接入遵循“全局准备判断，项目启用配置”：新项目默认用 `all + pedantic`，
+存量项目审阅诊断、明确例外和债务后再收紧 gate。不要向全局 `RUSTFLAGS` 或 Cargo 配置注入 lint，
+也不自动改写现有项目。新规则应改善错误发现或维护成本，不能为消除警告破坏业务语义。
 
 维护以实际失败为输入：
 
@@ -133,15 +149,17 @@ skill 与 OpenSpec 都是 agent 的操作指导，不能代替真实执行或 CI
 4. 运行 `mise run check`，审阅完整 diff 后按正常 git 流程维护。
    参考链接只在实际需要或修改相关规则时核对，不自动同步上游内容。
 
-当前边界样例见两个 skill 的 reference。新案例只在能澄清真实歧义时补充，
+当前边界样例见各 skill 的 reference。新案例只在能澄清真实歧义时补充，
 不维护每条测试的登记表，也不为每次 UI 修改复制完整状态矩阵。
-首次应用时重点观察实际测试膨胀、错误修复和页面变更；本地语法校验不代表行为效果已经验证。
+首次应用时重点观察实际测试膨胀、错误修复、页面变更与 Rust 抽象/lint 噪声；
+本地语法校验不代表行为效果已经验证。
 
 只应用本次质量规则时，使用稳定入口并限定目标：
 
 ```bash
-scripts/chezmoi apply "$HOME/.codex/AGENTS.md" \
-  "$HOME/.codex/skills/test-behavior" "$HOME/.codex/skills/design-ui"
+scripts/chezmoi apply --recursive --error-on-conflict --no-tty \
+  "$HOME/.codex/AGENTS.md" "$HOME/.codex/skills/test-behavior" \
+  "$HOME/.codex/skills/design-ui" "$HOME/.codex/skills/rust-code"
 ```
 
 安装后新建 Codex 任务以重新发现 skills。既有项目规则的迁移由各项目单独评审，
