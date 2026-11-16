@@ -17,8 +17,8 @@ usage() {
 usage: scripts/update [command]
 
 commands:
-  all                run doctor, update packages, apply dotfiles, then install pinned mise tools (default)
-  packages           update operating system packages and install declared package sets
+  all                run doctor, update packages, apply dotfiles, install mise tools, then sync OpenSpec skills (default)
+  packages           update operating system packages, install declared package sets, then sync OpenSpec skills
   mise               apply dotfiles, then install declared mise tool versions
   mise-bump          apply dotfiles, bump pinned mise tool versions, then install them
   dotfiles           apply chezmoi-managed dotfiles
@@ -86,10 +86,20 @@ run_doctor() {
   run_step "doctor" "${ROOT_DIR}/scripts/doctor"
 }
 
+sync_openspec_skills() {
+  if ! command -v openspec >/dev/null 2>&1; then
+    log "skip: OpenSpec skills (OpenSpec CLI is not installed)"
+    return
+  fi
+
+  run_step "sync OpenSpec skills (scripts/openspec-skills)" "${ROOT_DIR}/scripts/openspec-skills"
+}
+
 run_all() {
   run_doctor
   update_os_packages
   install_mise_tools
+  sync_openspec_skills
 }
 
 case "${1:-all}" in
@@ -99,6 +109,7 @@ case "${1:-all}" in
   packages)
     run_doctor
     update_os_packages
+    sync_openspec_skills
     ;;
   mise)
     run_doctor

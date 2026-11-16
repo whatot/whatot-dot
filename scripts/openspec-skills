@@ -23,7 +23,7 @@ if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 fi
 
 # The release tag keeps skills paired with the CLI, including on reinstallation.
-exec npx --yes skills@1.5.20 add \
+exec npx --yes skills@latest add \
   "https://github.com/Fission-AI/OpenSpec/tree/v${version}/skills" \
   --skill openspec-explore \
   --skill openspec-propose \

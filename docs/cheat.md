@@ -30,7 +30,8 @@
   - `m doctor`: run readiness checks
   - `m reshim`: rebuild mise shims from installed tools
   - `m outdated`: refresh metadata and show updates
-  - `m update`: update packages, apply dotfiles, and install pinned mise tools
+  - `m update`: update packages, apply dotfiles, install pinned mise tools, and sync OpenSpec skills
+  - `m update:packages`: update OS packages and sync OpenSpec skills
   - `m update:mise-bump`: bump pinned mise tool versions
   - `m chezmoi:apply`: raw `chezmoi apply`
   - `m chezmoi:diff`: preview pending dotfile changes

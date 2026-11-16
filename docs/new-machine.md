@@ -128,6 +128,8 @@ calendar and document permissions.
 
 The macOS dev Brewfile and Arch AUR inventory install `openspec`. Install its
 seven global Codex skills once per user with `scripts/openspec-skills`.
+Subsequent `mise run update` and `mise run update:packages` runs install or
+refresh these skills to match the installed CLI; hosts without OpenSpec skip this.
 Projects opt in with `openspec init --tools none --language Chinese`; their
 skills remain global. See [`openspec.md`](openspec.md) for usage and updates.
 The minimal Debian host does not install OpenSpec by default.

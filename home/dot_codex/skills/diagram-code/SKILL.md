@@ -1,6 +1,6 @@
 ---
 name: diagram-code
-description: "用于生成或维护 Mermaid、D2、PlantUML 等 code-as-graph 架构图、流程图、时序图、状态图和数据流图；匹配画图、架构图、流程图、sequence、state、graph as code；强调可编辑、可追溯。"
+description: "生成、修改或审查 Mermaid、D2、PlantUML、Graphviz/DOT 等可编辑图表源代码。用于仓库文档中的架构图、流程图、时序图、状态图和数据流图，或用户明确要求图表源码、graph-as-code、指定图表语言的任务；不因泛泛的画图请求触发，不用于插画、图片生成或临时交互演示。"
 ---
 
 # Diagram Code
@@ -8,10 +8,19 @@ description: "用于生成或维护 Mermaid、D2、PlantUML 等 code-as-graph �
 Create or update reviewable graph source code. This skill exists for repository
 artifacts where format choice, traceability, and parser validation matter.
 
+## Scope
+
+Use this skill for repository documentation diagrams or an explicit request for
+editable diagram source or a named graph language. A generic request to draw or
+explain something is not enough to select this workflow. Route generated bitmap
+artwork to `imagegen`, and in-conversation interactive explanations to `visualize`
+when available; neither needs a repository diagram artifact by default.
+
 ## Core Contract
 
-- Produce Mermaid, D2, PlantUML, DOT, or the repository's existing graph format;
-  do not substitute a raster image unless the user asks for one.
+- Maintain Mermaid, D2, PlantUML, DOT, or the repository's existing graph format
+  as the editable source. When an image export is requested, render it from that
+  source and retain both; export format alone does not make this an image-generation task.
 - Reuse the repository's existing diagram language and style when present.
 - Map non-obvious nodes and edges to source files, config, documentation,
   runtime output, or user-provided facts.

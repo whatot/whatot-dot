@@ -22,7 +22,7 @@ lark-cli --version
 只为 Codex 安装所需的三个 skill：
 
 ```bash
-npx --yes skills@1.5.20 add larksuite/cli \
+npx --yes skills@latest add larksuite/cli \
   --skill lark-shared \
   --skill lark-calendar \
   --skill lark-doc \
@@ -31,14 +31,14 @@ npx --yes skills@1.5.20 add larksuite/cli \
   --yes
 ```
 
-这里的 `npx` 只把 `skills@1.5.20` 下载到 npm cache 中执行，不会全局安装
+这里的 `npx` 只把 `skills@latest` 下载到 npm cache 中执行，不会全局安装
 这个 npm package。`--global` 指 skill 的用户级作用域，因此它们可用于所有
 Codex 项目。
 
 检查安装结果：
 
 ```bash
-npx --yes skills@1.5.20 list --global --agent codex
+npx --yes skills@latest list --global --agent codex
 ```
 
 安装完成后新建一个 Codex 任务，让 Codex 重新发现 skill。当前安装采用
@@ -199,7 +199,7 @@ Lark skill 集合。
 
 ```bash
 mise install
-npx --yes skills@1.5.20 update \
+npx --yes skills@latest update \
   lark-shared \
   lark-calendar \
   lark-doc \
@@ -212,5 +212,5 @@ npx --yes skills@1.5.20 update \
 ```bash
 lark-cli --version
 lark-cli auth status --json --verify
-npx --yes skills@1.5.20 list --global --agent codex
+npx --yes skills@latest list --global --agent codex
 ```

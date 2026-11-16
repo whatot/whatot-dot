@@ -85,11 +85,11 @@ hide = true
 run = 'mkdir -p .cache/prek && PREK_HOME="$PWD/.cache/prek" prek run --all-files'
 
 [tasks.update]
-description = "Update packages, install pinned mise tools, and apply dotfiles"
+description = "Update packages, apply dotfiles, install pinned mise tools, and sync OpenSpec skills"
 run = "scripts/update"
 
 [tasks."update:packages"]
-description = "Update operating system packages for the current host"
+description = "Update operating system packages and sync OpenSpec skills"
 run = "scripts/update packages"
 
 [tasks."update:mise"]

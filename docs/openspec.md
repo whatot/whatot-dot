@@ -19,13 +19,16 @@ Arch 使用 `packages/arch/aur.txt` 中的 `openspec`；正常 host setup 会安
 ```bash
 scripts/openspec-skills
 openspec --version
-npx --yes skills@1.5.20 list --global --agent codex
+npx --yes skills@latest list --global --agent codex
 ```
 
 脚本读取当前 `openspec --version`，从官方仓库对应的 `v<version>` release tag
 安装 core 六项加 verify，不跟随上游 main。安装位置是
 `~/.agents/skills/openspec-*`，通过 Skills CLI 管理，不复制到
 `home/dot_codex/skills/`，也不由 chezmoi 管理。
+
+Skills 安装器通过 `skills@latest` 获取当前版本；skill 内容由本机 CLI 的版本决定，
+脚本不固定某一个 OpenSpec 版本。
 
 安装后新建 Codex 任务，让它重新发现全局 skills。
 
@@ -98,14 +101,26 @@ operations:
 
 ## 更新
 
-macOS 更新 CLI 后，重装对应 release 的全局 skills：
+日常更新直接运行：
+
+```bash
+mise run update
+# 或仅更新系统包和 OpenSpec skills
+mise run update:packages
+```
+
+两个入口都会在系统包更新后同步全局 skills；默认更新还会先安装 mise 工具，确保
+Node/npx 可用。未安装 OpenSpec CLI 的机器跳过同步。同步失败会让更新流程失败，
+修复网络或依赖问题后可单独运行 `scripts/openspec-skills` 重试。
+
+如果绕过上述入口，在 macOS 上单独更新 CLI，也需要同步 skills：
 
 ```bash
 brew upgrade openspec
 scripts/openspec-skills
 ```
 
-Arch 同样在更新 `openspec` 包后运行该脚本。CLI 升级会影响所有使用它的项目，
+Arch 手动更新 `openspec` 包后也运行该脚本。CLI 升级会影响所有使用它的项目，
 应一并更新 skills。不要用 `npx skills update` 把这七项单独推进到 main，
 也不要用项目内的 `openspec update` 管理这份全局安装。
 
@@ -123,6 +138,6 @@ OpenSpec 的外置 store 目前是 Beta，默认采用项目内 `openspec/`。
 
 ## 官方来源
 
-- [Installation](https://github.com/Fission-AI/OpenSpec/blob/v1.16.0/docs/installation.md)
-- [独立 skills 分发](https://github.com/Fission-AI/OpenSpec/blob/v1.16.0/skills/README.md)
-- [CLI 与初始化选项](https://github.com/Fission-AI/OpenSpec/blob/v1.16.0/docs/cli.md)
+- [Installation](https://github.com/Fission-AI/OpenSpec/blob/v2.0.0/docs/installation.md)
+- [独立 skills 分发](https://github.com/Fission-AI/OpenSpec/blob/v2.0.0/skills/README.md)
+- [CLI 与初始化选项](https://github.com/Fission-AI/OpenSpec/blob/v2.0.0/docs/cli.md)
