@@ -3,7 +3,7 @@
 
 [gc]
 # One budget for the shared store, managed targets, and incremental state.
-max_total_size = "60GiB"
+max_total_size = "100GiB"
 
 [target]
 # Agent and scratch worktrees go first when targets exceed the budget.
