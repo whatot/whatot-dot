@@ -3,61 +3,53 @@ name: diagram-code
 description: "生成、修改或审查 Mermaid、D2、PlantUML、Graphviz/DOT 等可编辑图表源代码。用于仓库文档中的架构图、流程图、时序图、状态图和数据流图，或用户明确要求图表源码、graph-as-code、指定图表语言的任务；不因泛泛的画图请求触发，不用于插画、图片生成或临时交互演示。"
 ---
 
-# Diagram Code
+# 可编辑的图表源码
 
-Create or update reviewable graph source code. This skill exists for repository
-artifacts where format choice, traceability, and parser validation matter.
+创建或更新可审阅的图表源代码。本 skill 用于需要明确格式选择、事实追溯和解析器验证的仓库工件。
 
-## Scope
+## 适用范围
 
-Use this skill for repository documentation diagrams or an explicit request for
-editable diagram source or a named graph language. A generic request to draw or
-explain something is not enough to select this workflow. Route generated bitmap
-artwork to `imagegen`, and in-conversation interactive explanations to `visualize`
-when available; neither needs a repository diagram artifact by default.
+用于仓库文档图表，或明确要求可编辑图表源码、指定图表语言的任务。
+泛泛的画图或解释请求不足以触发本流程。位图创作交给 `imagegen`，对话中的交互解释在可用时
+交给 `visualize`；这两类任务默认都不需要在仓库中生成图表工件。
 
-## Core Contract
+## 核心契约
 
-- Maintain Mermaid, D2, PlantUML, DOT, or the repository's existing graph format
-  as the editable source. When an image export is requested, render it from that
-  source and retain both; export format alone does not make this an image-generation task.
-- Reuse the repository's existing diagram language and style when present.
-- Map non-obvious nodes and edges to source files, config, documentation,
-  runtime output, or user-provided facts.
-- Keep each diagram focused on one operational question and split crowded views.
+- 以 Mermaid、D2、PlantUML、DOT 或仓库现有图表格式维护可编辑源码。
+  用户要求导出图片时，从源码渲染并同时保留两者；不能仅因导出格式是图片，就转为图片生成任务。
+- 仓库已有图表语言和样式时，沿用现有选择。
+- 将含义不明显的节点和边对应到源文件、配置、文档、运行输出或用户提供的事实。
+- 每张图聚焦一个实际问题；拥挤视图应拆分。
 
-## Diagram Type Gate
+## 选择图表类型
 
-Choose the diagram from the question it must answer:
+根据要回答的问题选择图表：
 
-| Question                                       | Diagram                     | Default format               |
-| ---------------------------------------------- | --------------------------- | ---------------------------- |
-| Who uses the system and why?                   | Use case or context         | PlantUML usecase / Mermaid   |
-| What parts exist and where are the boundaries? | Architecture / C4           | D2                           |
-| What steps happen in order?                    | Workflow / flowchart        | Mermaid flowchart            |
-| Who calls whom during one request?             | Sequence                    | Mermaid or PlantUML sequence |
-| What states can an object enter?               | State / lifecycle           | Mermaid or PlantUML state    |
-| Where does data move and transform?            | Data flow / lineage         | D2                           |
-| What runs where?                               | Deployment / infrastructure | D2                           |
+| 问题                         | 图表                | 默认格式                   |
+| ---------------------------- | ------------------- | -------------------------- |
+| 谁使用系统，为什么使用？     | 用例图或上下文图    | PlantUML 用例图 / Mermaid  |
+| 有哪些组成部分，边界在哪里？ | 架构图 / C4         | D2                         |
+| 步骤按什么顺序发生？         | 工作流图 / 流程图   | Mermaid 流程图             |
+| 一次请求中，谁调用谁？       | 时序图              | Mermaid 或 PlantUML 时序图 |
+| 对象可能进入哪些状态？       | 状态图 / 生命周期图 | Mermaid 或 PlantUML 状态图 |
+| 数据在哪里流动、转换？       | 数据流图 / 血缘图   | D2                         |
+| 什么运行在什么位置？         | 部署图 / 基础设施图 | D2                         |
 
-Prefer Mermaid for Markdown workflows and sequences, D2 for architecture and
-deployment boundaries, and PlantUML when the repository already uses it.
+Markdown 中的流程和时序图优先使用 Mermaid；架构和部署边界优先使用 D2；
+仓库已采用 PlantUML 时沿用它。
 
-## Workflow
+## 工作流程
 
-1. Read the relevant source paths, existing diagrams, runtime evidence, or
-   user-provided description.
-2. Select the smallest view and graph language that answer the question.
-3. Use stable semantic node IDs, short labels, meaningful containers, and edge
-   labels only where protocol, data, event, or condition matters.
-4. Put source paths or runtime commands in comments or adjacent traceability
-   notes. Mark assumptions instead of drawing them as confirmed facts.
-5. Run the smallest available parser or renderer check, such as `d2 fmt`,
-   `d2 --check`, `mmdc`, `plantuml -checkonly`, or the repository check command.
-   If none is available, report that syntax was reviewed without rendering.
+1. 阅读相关源码路径、现有图表、运行证据或用户提供的说明。
+2. 选择足以回答问题的最小视图和图表语言。
+3. 使用稳定且有语义的节点 ID、简短标签和有意义的分组容器。
+   只有协议、数据、事件或条件与问题相关时才添加边标签。
+4. 在注释或相邻的追溯说明中记录源码路径或运行命令。标明假设，不把它们画成已确认事实。
+5. 执行最小可用的解析器或渲染器检查，例如 `d2 fmt`、`d2 --check`、`mmdc`、
+   `plantuml -checkonly` 或仓库检查命令。没有可用工具时，说明只审阅了语法，未实际渲染。
 
-## Maintenance Rules
+## 维护规则
 
-- Patch existing graphs unless their abstraction is wrong.
-- Avoid random IDs, timestamps, unnecessary styling, and layout churn.
-- Revise crossing-heavy, ambiguous, or overly dense diagrams before delivery.
+- 除非现有抽象有误，否则在原图上修改。
+- 避免随机 ID、时间戳、不必要的样式和布局变动。
+- 交付前修正交叉连线过多、含义模糊或过密的图表。

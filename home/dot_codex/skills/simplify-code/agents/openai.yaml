@@ -1,0 +1,4 @@
+interface:
+  display_name: "安全化简代码"
+  short_description: "依据真实消费者、兼容义务和生命周期证据，发现并安全移除冗余复杂度"
+  default_prompt: "使用 $simplify-code 审计此仓库，找出有证据支持的化简机会，并按安全程度排列删减候选项。"

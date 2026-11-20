@@ -57,13 +57,13 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 
 ## 已启用 Skill
 
-| Skill                  | 用途                                             | 触发词                                       | 审查重点                                     |
-| ---------------------- | ------------------------------------------------ | -------------------------------------------- | -------------------------------------------- |
-| `diagram-code`         | 生成、维护和审查可编辑的图表源代码与仓库文档图。 | Mermaid、D2、PlantUML、DOT、图表源码、文档图 | 保持可编辑、可追溯；区分图片生成与交互演示。 |
-| `reclaim-code-entropy` | 以消费者、所有权和验证证据安全化简代码库。       | 代码化简、熵回收、删代码、清理冗余、收敛抽象 | 不把静态扫描结果直接当作删除证明。           |
-| `test-behavior`        | 选择独有行为验证，落实真实 E2E、隔离和工件。     | 写测试、回归测试、E2E、Mock、测试膨胀        | 不为没有行为盲区的修改增加测试。             |
-| `design-ui`            | 简化产品 UI、状态与实现，并验收运行中的界面。    | 界面、UI/UX、页面布局、视觉打磨、交互重构    | 保护原有能力，取得当前视觉和交互证据。       |
-| `rust-code`            | 统一 Rust 实现、审查、移植与 Clippy 接入判断。   | Rust、crate、所有权、异步、Rust 审查、Clippy | 遵循项目框架与执行入口，不制造多余抽象。     |
+| Skill           | 用途                                             | 触发词                                       | 审查重点                                     |
+| --------------- | ------------------------------------------------ | -------------------------------------------- | -------------------------------------------- |
+| `diagram-code`  | 生成、维护和审查可编辑的图表源代码与仓库文档图。 | Mermaid、D2、PlantUML、DOT、图表源码、文档图 | 保持可编辑、可追溯；区分图片生成与交互演示。 |
+| `simplify-code` | 以消费者、所有权和验证证据安全化简代码库。       | 代码化简、熵回收、删代码、清理冗余、收敛抽象 | 不把静态扫描结果直接当作删除证明。           |
+| `test-behavior` | 选择独有行为验证，落实真实 E2E、隔离和工件。     | 写测试、回归测试、E2E、Mock、测试膨胀        | 不为没有行为盲区的修改增加测试。             |
+| `design-ui`     | 简化产品 UI、状态与实现，并验收运行中的界面。    | 界面、UI/UX、页面布局、视觉打磨、交互重构    | 保护原有能力，取得当前视觉和交互证据。       |
+| `rust-code`     | 统一 Rust 实现、审查、移植与 Clippy 接入判断。   | Rust、crate、所有权、异步、Rust 审查、Clippy | 遵循项目框架与执行入口，不制造多余抽象。     |
 
 ## 试用中 Skill
 
@@ -93,8 +93,13 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
   错误驱动布局修正，以及 Mermaid 只作为输入方言的思路。
   不直接导入：HTML/export/PNG 流水线和完整 renderer 对个人全局 skill 过重。
 - [`github.com/Yevanchen/reclaim-code-entropy`](https://github.com/Yevanchen/reclaim-code-entropy)
-  已启用：小型 instruction-only skill；用真实消费者、动态入口、兼容义务、历史和
-  生命周期所有权证明安全删减。当前保留上游正文与 UI 元数据，仅由本仓库管理安装。
+  已适配为 `simplify-code`：用真实消费者、动态入口、兼容义务、历史和生命周期所有权证明安全删减。
+  本地正文补充配置默认值归属、防御分支判断与专项 skill 路由，UI 元数据同步使用本地名称。
+- [`sgl-project/sglang-omni coding-style`](https://github.com/sgl-project/sglang-omni/blob/main/.claude/skills/code-review/coding-style.md)
+  已选择性吸收：`simplify-code` 补充重复配置默认值、掩盖失败的 fallback 和过期调试防御；
+  `test-behavior` 细化“什么真实错误改动会让测试失败”的判断。
+  保留真实兼容、降级和独立入口契约；不采用强制 `else: pass`、按调用数或行数机械拆分、
+  禁用泛型/Callable/局部 import 等项目偏好，也不引入上游更宽松的 Mock 政策。
 - [`github.com/morganlinton/BeautifulRust`](https://github.com/morganlinton/BeautifulRust/tree/b9718436d77ee7bcf17cdcb6aa27628feb95d97a)
   已适配为 `rust-code`：吸收 API/错误/trait 契约、所有权和并发生命周期、可定位的审查发现与行为移植。
   审查版本为 commit `b9718436d77ee7bcf17cdcb6aa27628feb95d97a`（plugin manifest `1.6.0`），
@@ -115,6 +120,8 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 
 ## 编写规则
 
+- 本地 skill 的说明、标题、规则、示例说明和 UI 文案统一使用中文；保留 skill 标识符、
+  路径、命令、代码、配置键和专有名词，版权及许可证保留原文。翻译不改变规则强度、适用范围或例外。
 - Load-bearing 规则放在 `SKILL.md` 对应阶段附近，不能只放在
   `references/` 里；references 只承载按需细节。
 - 不要在 `SKILL.md` 里复述大段 reference 内容。需要加载 reference 时，
@@ -128,10 +135,12 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 
 全局 `AGENTS.md` 只保留共性方向和读取入口：测试相关决策读取 `test-behavior`，
 产品界面任务读取 `design-ui`，Rust 实现/修改/审查读取 `rust-code`。
+指令冲突处理也由全局 `AGENTS.md` 持有，不用“更严格”代替优先级与适用范围判断。
 skill 正文持有约束与执行流程，reference 持有按需判断、例子、验收细节与来源。
 项目 `AGENTS.md` 只需指向自己的代码/测试规范、执行命令、设计系统和组件入口，不复制全局规则。
 
-也可显式调用 `$test-behavior`、`$design-ui` 或 `$rust-code`。Rust UI/测试按任务组合使用，
+也可显式调用 `$simplify-code`、`$test-behavior`、`$design-ui` 或 `$rust-code`。
+`simplify-code` 持有安全化简的证据流程，涉及 Rust、测试或 UI 时调用对应 skill；
 测试策略只由 `test-behavior` 持有，框架特性留给项目标准；OpenSpec 继续持有规划，
 change 按需记录行为盲区、兼容和界面验收要求。
 skill 与 OpenSpec 都是 agent 的操作指导，不能代替真实执行或 CI gate。
@@ -165,6 +174,9 @@ scripts/chezmoi apply --recursive --error-on-conflict --no-tty \
 
 安装后新建 Codex 任务以重新发现 skills。既有项目规则的迁移由各项目单独评审，
 全局安装不自动改写项目文件。
+
+`simplify-code` 原名为 `reclaim-code-entropy`。完整 chezmoi apply 时由 `.chezmoiremove`
+移除旧安装目录，避免两个名称同时被发现；项目中显式引用的旧名称或路径需同步更新。
 
 ## 审查清单
 

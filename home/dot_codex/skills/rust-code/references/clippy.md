@@ -5,14 +5,14 @@
 
 ## 默认选择
 
-| 范围          | 默认方式                                          | 判断依据                                                  |
-| ------------- | ------------------------------------------------- | --------------------------------------------------------- |
-| `all`         | 启用整个组，保留 `correctness` 的 deny 级别。     | 覆盖成熟的正确性、可疑代码、复杂度、性能和风格规则。      |
-| `pedantic`    | 新项目整体启用；存量项目先审阅诊断，再建立 gate。 | 覆盖更广，接受针对实际误报与不适用规则的例外。            |
-| `restriction` | 按项目策略选择单项。                              | 限制语言/表达方式，有些规则互相冲突；官方明确不建议全开。 |
-| `nursery`     | 不作为默认 gate，单项成熟后再评估。               | 官方说明仍可能有 bug 或需要完善，不建议全开。             |
-| `cargo`       | 发布 crate 时按需要选择。                         | 包元数据与依赖建议不都适合内部应用。                      |
-| rustc lint    | 保留已有级别，补实际安全与兼容要求。              | 不与 Clippy 分组混为同一套开关。                          |
+| 范围          | 默认方式                                             | 判断依据                                                  |
+| ------------- | ---------------------------------------------------- | --------------------------------------------------------- |
+| `all`         | 启用整个组，保留 `correctness` 的 deny 级别。        | 覆盖成熟的正确性、可疑代码、复杂度、性能和风格规则。      |
+| `pedantic`    | 新项目整体启用；存量项目先审阅诊断，再建立检查关卡。 | 覆盖更广，接受针对实际误报与不适用规则的例外。            |
+| `restriction` | 按项目策略选择单项。                                 | 限制语言/表达方式，有些规则互相冲突；官方明确不建议全开。 |
+| `nursery`     | 不作为默认检查关卡，单项成熟后再评估。               | 官方说明仍可能有缺陷或需要完善，不建议全开。              |
+| `cargo`       | 发布 crate 时按需要选择。                            | 包元数据与依赖建议不都适合内部应用。                      |
+| rustc lint    | 保留已有级别，补实际安全与兼容要求。                 | 不与 Clippy 分组混为同一套开关。                          |
 
 `pedantic` 的广覆盖会带来维护成本：官方允许其有意产生部分误报。
 不为清零把普通数据改成验证框架、给内部 API 补冗余文档或增加无消费者的抽象。
@@ -20,7 +20,7 @@
 
 ## 新 workspace 的起点
 
-没有既定 lint 规范时，可以从以下 manifest 配置开始；已有项目先合并现有策略，不替换整张表。
+没有既定 lint 规范时，可以从以下清单配置开始；已有项目先合并现有策略，不替换整张表。
 
 ```toml
 [workspace.lints.rust]
@@ -32,15 +32,15 @@ pedantic = { level = "warn", priority = -1 }
 correctness = "deny"
 ```
 
-每个 member，包括根目录的 package，都需要在自身 manifest 显式继承：
+每个成员，包括根目录的包，都需要在自身清单显式继承：
 
 ```toml
 [lints]
 workspace = true
 ```
 
-单 package 使用 `[lints.rust]` / `[lints.clippy]`，不加 workspace 层。
-组的低 priority 让单项覆盖生效；不要降低已有 `deny` / `forbid`，也不要为了本模板升级 MSRV。
+单包使用 `[lints.rust]` / `[lints.clippy]`，不加 workspace 层。
+规则组的较低优先级让单项覆盖生效；不要降低已有 `deny` / `forbid`，也不要为了本模板升级 MSRV。
 固定项目工具链，避免编译器更新在无关变更中突然引入新的 CI 失败。
 
 ## BeautifulRust 配置怎样取舍
@@ -62,19 +62,19 @@ workspace = true
 
 ## 存量接入、CI 与维护
 
-先查看 manifest、member 继承、`clippy.toml`、源码属性、CLI flags 和 CI 实际入口，
-检查优先级与覆盖；不能只看根 manifest 就宣称已启用全 workspace。
-在项目允许的目标和 feature 组合上审阅新增组的完整诊断；沿用现有 wrapper，
+先查看清单、成员继承、`clippy.toml`、源码属性、CLI 标志和 CI 实际入口，
+检查优先级与覆盖；不能只看根清单就宣称已启用全 workspace。
+在项目允许的目标和 feature 组合上审阅新增组的完整诊断；沿用现有封装入口，
 不要自动使用 `--all-features` 或运行跨平台不可构建目标。
 
 新诊断区分真实问题、不适用规则与存量债务。修复有实际收益的问题，对不适用项设置具体理由的例外；
 大范围修复单独安排，不混入普通功能变更，也不全局关闭整个组掩盖债务。
-CI 原来严格时保持严格；新增基线尚未收敛时明确它只是非阻断审阅，不能宣称已受 gate 保护。
+CI 原来严格时保持严格；新增基线尚未收敛时明确它只是非阻断审阅，不能宣称已受检查关卡保护。
 诊断收敛后，在项目检查命令中用 `-D warnings` 阻断，不在源码写 `#![deny(warnings)]`。
 
 单处例外优先用带 `reason` 的 `#[expect(clippy::具体规则, reason = "具体原因")]`，
 使过期例外能被发现；只在当前工具链支持且该 lint 确实触发时使用。
-规则对整个项目/某类 crate 不适用时，在对应 manifest 集中设置具体 lint 的 allow 并说明理由。
+规则对整个项目/某类 crate 不适用时，在对应清单集中设置具体 lint 的 allow 并说明理由。
 条件编译或 MSRV 不适合 `expect` 时使用有理由的最窄 `allow`。不使用无理由的大范围放行。
 
 工具链升级时审阅新增/改名 lint、过期抑制和 CI 覆盖；不自动拉取上游配置。
@@ -82,8 +82,8 @@ Clippy 负责静态诊断，测试策略仍由 `test-behavior` 持有，不因�
 
 ## 依据
 
-- [Clippy Usage](https://doc.rust-lang.org/clippy/usage.html)：分组与级别、局部覆盖及工作区调用。
-- [Clippy Lints](https://doc.rust-lang.org/clippy/lints.html)：各组定位、`pedantic` 误报，以及
+- [Clippy 使用指南](https://doc.rust-lang.org/clippy/usage.html)：分组与级别、局部覆盖及工作区调用。
+- [Clippy 检查规则](https://doc.rust-lang.org/clippy/lints.html)：各组定位、`pedantic` 误报，以及
   `restriction` / `nursery` 不应整体启用的边界。
-- [BeautifulRust lints](https://github.com/morganlinton/BeautifulRust/blob/b9718436d77ee7bcf17cdcb6aa27628feb95d97a/lints/lints.toml)：
+- [BeautifulRust 检查配置](https://github.com/morganlinton/BeautifulRust/blob/b9718436d77ee7bcf17cdcb6aa27628feb95d97a/lints/lints.toml)：
   取舍对象；不是本地模板的直接同步来源。

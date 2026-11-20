@@ -10,20 +10,19 @@ description: 编写、修改、重构、移植或审查 Rust 代码时，约束 
 
 ## 先读项目约束
 
-查项目 `AGENTS.md`、Rust 规范、相关调用者、Cargo manifest 和工具入口，确认 edition、MSRV、
+查项目 `AGENTS.md`、Rust 规范、相关调用者、Cargo 清单和工具入口，确认 edition、MSRV、
 目标平台、feature 组合、框架及已有 lint。区分应用内部 API、共同演进的 workspace crate 和
 独立发布的库；有 `lib.rs` 或跨 crate 调用不自动意味着需要公开库的全部兼容设计。
 
-使用项目约定的格式化、Clippy、构建和测试命令，包括 `mise` 等 wrapper 与 Nextest。
+使用项目约定的格式化、Clippy、构建和测试命令，包括 `mise` 等封装入口与 Nextest。
 不换成固定的 `cargo test`，不假定 `--all-features` 是有效配置，不擅自扩大检查矩阵。
-发现规则冲突时指出具体条款和影响，保留更严格的项目约束，不静默覆盖。
 
 ## 实现时的核心判断
 
-- **状态有唯一 owner。** 按真实共享和生命周期选择借用、所有权、`Rc` 或 `Arc`。
+- **状态有唯一负责方。** 按真实共享和生命周期选择借用、所有权、`Rc` 或 `Arc`。
   不为绕过借用检查堆叠 clone、锁和内部可变性；也不为消灭一次合理 clone 引入复杂生命周期。
 - **类型保护真实不变量。** 对会混淆的身份、单位和互斥状态使用类型；普通数据保持直接。
-  bool 表达自然开关时可以保留，含糊的模式选择再换 enum 或命名操作；不批量增加 wrapper、builder、
+  bool 表达自然开关时可以保留，含糊的模式选择再换 enum 或命名操作；不批量增加封装、builder、
   getter 或 trait。框架的普通数据组件、公开字段和本地执行器服从其契约。
 - **错误留给能处理的边界。** 预期失败返回 `Result`，保留原因、必要上下文和可恢复数据；
   不吞错、不用默认值伪装成功，不把 `unwrap` 机械换成 `expect`。panic、锁中毒和恢复策略遵守项目
@@ -43,7 +42,7 @@ description: 编写、修改、重构、移植或审查 Rust 代码时，约束 
 新项目默认采用 `all + pedantic` 分组基线；存量项目先审阅诊断再收紧 CI，保留已有更严格规则。
 不全开 `restriction` 或 `nursery`，不照搬 BeautifulRust 的整份配置。
 新增、修改或评估 lint 时读取 [Clippy 基线与例外](references/clippy.md)，
-将可执行配置留在项目 manifest 与 CI，不在全局注入 Cargo 配置。
+将可执行配置留在项目清单与 CI，不在全局注入 Cargo 配置。
 
 ## 审查与交付
 

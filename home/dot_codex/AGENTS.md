@@ -4,6 +4,9 @@
 - Put repository-specific rules in each repo's `AGENTS.md`.
 - Put reusable task behavior in `~/.codex/skills`.
 - Use local Codex skills when a task matches their description.
+- Resolve conflicts by instruction priority and scope, not by which rule sounds
+  stricter. State the concrete conflict and affected behavior; ask only when the
+  applicable instructions leave a decision unresolved.
 - For broad, risky, or ambiguous tasks, clarify goal, scope, non-goals, and the
   smallest useful verification before editing.
 - Prefer small, evidence-backed guidance updates over broad rewrites.
