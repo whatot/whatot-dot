@@ -3,30 +3,35 @@
 Codex skills 是一组小而可管理的个人工具集，不是外部 marketplace 的镜像。
 默认启用的 skill 需要保持少量、可审查，并且容易被中文请求准确触发。
 
+用户维护和主动安装的 skills 统一放在 `~/.agents/skills/`，当前 Codex 可直接发现。
+本地 skill 由 chezmoi 管理，外部 skill 由对应安装器管理，避免两套工具写同一个目录。
+Codex 内置的 `~/.codex/skills/.system/` 和插件自带 skills 保留原位置，由宿主管理。
+其他 agent 是否发现共享目录，按各自支持情况确认，不自动创建副本或兼容 symlink。
+
 源文件位置：
 
 ```text
-home/dot_codex/skills/<skill>/SKILL.md
-home/dot_codex/skills/<skill>/references/*.md
-home/dot_codex/skills/<skill>/agents/openai.yaml
+home/dot_agents/skills/<skill>/SKILL.md
+home/dot_agents/skills/<skill>/references/*.md
+home/dot_agents/skills/<skill>/agents/openai.yaml
 ```
 
 chezmoi 渲染后的位置：
 
 ```text
-~/.codex/skills/<skill>/SKILL.md
-~/.codex/skills/<skill>/references/*.md
-~/.codex/skills/<skill>/agents/openai.yaml
+~/.agents/skills/<skill>/SKILL.md
+~/.agents/skills/<skill>/references/*.md
+~/.agents/skills/<skill>/agents/openai.yaml
 ```
 
 ## 生命周期
 
-| 状态         | 含义                                   | 位置                     |
-| ------------ | -------------------------------------- | ------------------------ |
-| `active`     | 由 chezmoi 安装，默认对 Codex 可见。   | `home/dot_codex/skills/` |
-| `incubating` | 进入默认集合前，仍在试用和打磨。       | 本文档                   |
-| `reference`  | 值得回看但不直接安装的外部或本地来源。 | 本文档                   |
-| `archived`   | 不再推荐使用，只在历史中保留。         | git history              |
+| 状态         | 含义                                   | 位置                      |
+| ------------ | -------------------------------------- | ------------------------- |
+| `active`     | 由 chezmoi 安装，默认对 Codex 可见。   | `home/dot_agents/skills/` |
+| `incubating` | 进入默认集合前，仍在试用和打磨。       | 本文档                    |
+| `reference`  | 值得回看但不直接安装的外部或本地来源。 | 本文档                    |
+| `archived`   | 不再推荐使用，只在历史中保留。         | git history               |
 
 晋升规则：只有当一个想法已经按本地工作流审查，并完成必要的本地适配后，才移动到 `active`。
 不要 symlink 或自动同步大型外部 skill 集合。
@@ -37,7 +42,7 @@ chezmoi 渲染后的位置：
 ## 外部运行时 Skill
 
 少数 skill 是某个 CLI 或框架的配套操作说明，并需要跟随对应版本维护。它们可以作为
-用户级外部 skill 安装，但不复制到 `home/dot_codex/skills/`：
+用户级外部 skill 安装，但不复制到 `home/dot_agents/skills/`：
 
 | Skill               | 上游                  | 安装位置                             | 管理方式                                             |
 | ------------------- | --------------------- | ------------------------------------ | ---------------------------------------------------- |
@@ -210,12 +215,18 @@ Rust 的 Clippy 接入遵循“全局准备判断，项目启用配置”：新�
 
 ```bash
 scripts/chezmoi apply --recursive --error-on-conflict --no-tty \
-  "$HOME/.codex/AGENTS.md" "$HOME/.codex/skills/test-behavior" \
-  "$HOME/.codex/skills/design-ui" "$HOME/.codex/skills/rust-code"
+  "$HOME/.codex/AGENTS.md" "$HOME/.agents/skills/test-behavior" \
+  "$HOME/.agents/skills/design-ui" "$HOME/.agents/skills/rust-code"
 ```
 
 安装后新建 Codex 任务以重新发现 skills。既有项目规则的迁移由各项目单独评审，
 全局安装不自动改写项目文件。
+
+从旧目录迁移时，先应用 `~/.agents/skills/` 和 `~/.codex/AGENTS.md`，确认文件完整，
+再应用 `.chezmoiremove` 中逐项列出的五个旧 skill 路径：`design-ui`、`diagram-code`、
+`rust-code`、`simplify-code`、`test-behavior`。完整 chezmoi apply 也会执行这些删除。
+只移除这些 `~/.codex/skills/` 下的旧副本，不移除整个目录或 `.system`。
+项目若显式引用旧路径，需在该项目中更新为 `~/.agents/skills/`。
 
 `simplify-code` 原名为 `reclaim-code-entropy`。完整 chezmoi apply 时由 `.chezmoiremove`
 移除旧安装目录，避免两个名称同时被发现；项目中显式引用的旧名称或路径需同步更新。

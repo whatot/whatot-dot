@@ -4,7 +4,7 @@ set -euo pipefail
 # shellcheck source=tests/cases/_common.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/_common.sh"
 
-SKILLS_DIR="${ROOT_DIR}/home/dot_codex/skills"
+SKILLS_DIR="${ROOT_DIR}/home/dot_agents/skills"
 ALLOWED_FRONTMATTER_KEYS="name description allowed-tools metadata compatibility"
 
 skill_name_from_file() {

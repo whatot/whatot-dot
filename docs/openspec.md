@@ -25,7 +25,7 @@ npx --yes skills@latest list --global --agent codex
 脚本读取当前 `openspec --version`，从官方仓库对应的 `v<version>` release tag
 安装 core 六项加 verify，不跟随上游 main。安装位置是
 `~/.agents/skills/openspec-*`，通过 Skills CLI 管理，不复制到
-`home/dot_codex/skills/`，也不由 chezmoi 管理。
+`home/dot_agents/skills/`，也不由 chezmoi 管理。
 
 Skills 安装器通过 `skills@latest` 获取当前版本；skill 内容由本机 CLI 的版本决定，
 脚本不固定某一个 OpenSpec 版本。

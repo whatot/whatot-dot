@@ -2,7 +2,7 @@
 
 - Keep global rules small and durable.
 - Put repository-specific rules in each repo's `AGENTS.md`.
-- Put reusable task behavior in `~/.codex/skills`.
+- Put reusable task behavior in `~/.agents/skills`.
 - Use local Codex skills when a task matches their description.
 - Resolve conflicts by instruction priority and scope, not by which rule sounds
   stricter. State the concrete conflict and affected behavior; ask only when the
@@ -13,13 +13,13 @@
 - Keep goals, architecture, design, and implementation simple. Improve user,
   developer, and agent experience together while preserving supported behavior.
 - Before writing, changing, or reviewing Rust code, read
-  `~/.codex/skills/rust-code/SKILL.md` and the project's Rust guidance.
+  `~/.agents/skills/rust-code/SKILL.md` and the project's Rust guidance.
   Use the project's validation commands.
 - Before adding, changing, or reviewing tests, or deciding whether a bug fix needs
-  a regression test, read `~/.codex/skills/test-behavior/SKILL.md` and the project's
+  a regression test, read `~/.agents/skills/test-behavior/SKILL.md` and the project's
   testing guidance. Add tests only for a real, uncovered behavior.
 - Before designing, implementing, changing, or reviewing product UI, read
-  `~/.codex/skills/design-ui/SKILL.md` and the project's design system. Verify
+  `~/.agents/skills/design-ui/SKILL.md` and the project's design system. Verify
   visual changes in the running interface.
 - For GitLab closeout, create the MR with push options `merge_request.create`
   and `merge_request.target=<base>`—never `glab`, a browser, or an empty

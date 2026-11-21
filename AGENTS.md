@@ -30,7 +30,7 @@
 - 受管理的 app 配置优先放在 XDG 风格路径，例如 `~/.config/<tool>/...`。
 - 在 macOS 上，如果工具要求 `~/Library/Application Support/<tool>/...`，用 symlink 指回 XDG 管理文件，不维护两份配置。
 - 通过 chezmoi 管理这些 macOS 兼容 symlink 时，不要修改 `~/Library` 或 `~/Library/Application Support` 目录元数据，只管理叶子 app 路径。
-- 本地维护的 Codex skill 源文件只放在 `home/dot_codex/skills/`；CLI 配套外部 skill 按 `docs/codex-skills.md` 管理。
+- 本地维护的 Codex skill 源文件只放在 `home/dot_agents/skills/`；CLI 配套外部 skill 按 `docs/codex-skills.md` 管理。
 - 不要用低价值测试快捷方式膨胀 `mise.toml`；验证命令优先记录在 `docs/testing.md`。
 - 验证脚本保持非交互，并兼容 macOS 自带的旧 Bash。
 - 在 macOS 上，`plantuml` 必须和明确的 Java formula 搭配，例如 `openjdk`。
