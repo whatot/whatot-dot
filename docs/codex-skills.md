@@ -36,15 +36,17 @@ chezmoi 渲染后的位置：
 
 ## 外部运行时 Skill
 
-少数 skill 是某个 CLI 的配套操作说明，并需要跟随该 CLI 更新。它们可以作为
+少数 skill 是某个 CLI 或框架的配套操作说明，并需要跟随对应版本维护。它们可以作为
 用户级外部 skill 安装，但不复制到 `home/dot_codex/skills/`：
 
-| Skill           | 上游                  | 安装位置                         | 管理方式                                    |
-| --------------- | --------------------- | -------------------------------- | ------------------------------------------- |
-| `lark-shared`   | `larksuite/cli`       | `~/.agents/skills/lark-shared`   | `npx skills` + CLI 内嵌说明                 |
-| `lark-calendar` | `larksuite/cli`       | `~/.agents/skills/lark-calendar` | `npx skills` + CLI 内嵌说明                 |
-| `lark-doc`      | `larksuite/cli`       | `~/.agents/skills/lark-doc`      | `npx skills` + CLI 内嵌说明                 |
-| `openspec-*`    | `Fission-AI/OpenSpec` | `~/.agents/skills/openspec-*`    | `scripts/openspec-skills`，匹配 CLI release |
+| Skill               | 上游                  | 安装位置                             | 管理方式                                             |
+| ------------------- | --------------------- | ------------------------------------ | ---------------------------------------------------- |
+| `lark-shared`       | `larksuite/cli`       | `~/.agents/skills/lark-shared`       | `npx skills` + CLI 内嵌说明                          |
+| `lark-calendar`     | `larksuite/cli`       | `~/.agents/skills/lark-calendar`     | `npx skills` + CLI 内嵌说明                          |
+| `lark-doc`          | `larksuite/cli`       | `~/.agents/skills/lark-doc`          | `npx skills` + CLI 内嵌说明                          |
+| `openspec-*`        | `Fission-AI/OpenSpec` | `~/.agents/skills/openspec-*`        | `scripts/openspec-skills`，匹配 CLI release          |
+| `nsh`               | `longbridge/nsh`      | `~/.agents/skills/nsh`               | Codex skill-installer，固定上游 commit，手动审阅更新 |
+| `nsh-design-guides` | `longbridge/nsh`      | `~/.agents/skills/nsh-design-guides` | 与 `nsh` 成对安装和更新                              |
 
 只安装实际需要的 skill，不安装整个上游集合。安装、初始化、最小授权、使用和
 更新流程见 [`lark-cli.md`](lark-cli.md)。实际操作时通过
@@ -54,6 +56,46 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 `openspec/` 规划文件，不重复安装 skill。`mise run update` 和 `update:packages`
 会同步到本机 CLI 对应的 release。安装、升级和旧规划迁移见
 [`openspec.md`](openspec.md)。
+
+### NSH Skills
+
+这两个 skill 保留上游原文及完整 `references/`，不复制进 chezmoi 的本地 skill
+源码，也不安装 NSH CLI。`nsh` 覆盖 Rust、TSX 和混合模式；`nsh-design-guides`
+提供 NSH 应用的设计指南。可显式调用 `$nsh` 和 `$nsh-design-guides`。
+
+当前安装基线（2026-11-22）：
+[`longbridge/nsh@eaa3917345e61c41fed0cd516cafc9310412cafc`](https://github.com/longbridge/nsh/tree/eaa3917345e61c41fed0cd516cafc9310412cafc/skills)。
+用 Codex 自带的 skill-installer 重现首次安装：
+
+```bash
+python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
+  --repo longbridge/nsh \
+  --ref eaa3917345e61c41fed0cd516cafc9310412cafc \
+  --path skills/nsh skills/nsh-design-guides \
+  --dest "$HOME/.agents/skills"
+```
+
+安装器遇到已有目录会拒绝覆盖。它不登记 `npx skills` 的 lock，因此这两个 skill
+由上述安装器和本文的 commit 记录维护，不依赖 `npx skills update`。
+
+更新时：
+
+1. 在项目升级 NSH 或指南需要修正时，选择与项目版本相符的 tag/commit，解析为
+   完整 commit SHA；两个 skill 使用同一 SHA，不自动追踪 `main`。
+2. 用上述安装器指定新 `--ref` 和临时 `--dest`，先下载候选版本。
+   对比当前安装的两个目录，审阅入口、触发范围和 references 的变化，确认 API
+   与项目依赖一致；不要只替换 `SKILL.md`。
+3. 把原有两个目录移到同一个可恢复备份目录，再把审阅后的两个完整目录移入
+   `~/.agents/skills/`。检查名称、frontmatter、入口引用和文件完整性；失败时恢复原目录。
+4. 更新本文的基线日期和 SHA，运行 `mise run check`，并在下一轮确认 skill 可见。
+   在真实 NSH 项目中验证采用的指南；dotfiles 检查不证明框架 API 或 UI 行为正确。
+
+`mise run update` 不更新这两个 skill。卸载时只移走上述两个安装目录，并移除本文
+登记。无需修改项目或清理其他工具配置。
+
+NSH skills 只补充框架知识，不替代全局 `rust-code`、`test-behavior`、`design-ui`
+和项目自己的规范。上游的 `cargo test` 示例不能覆盖项目明确的 nextest/mise
+入口；设计指南也不授权扩大用户要求的界面变更范围。
 
 ## 已启用 Skill
 
