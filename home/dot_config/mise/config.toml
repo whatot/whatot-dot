@@ -15,10 +15,10 @@ node.mirror_url = "https://npmmirror.com/mirrors/node/"
 [tools]
 "github:larksuite/cli" = "1.0.100"
 java = "zulu-25.38.201.0"
-maven = "3.10.1"
+maven = "3.10.2"
 mr-boxington = "1.30.0"
 node = "26.13.1"
-pnpm = "12.21.0"
+pnpm = "12.23.0"
 python = "3.15.2"
 usage = "7.4.0"
 
