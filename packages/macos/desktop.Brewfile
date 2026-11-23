@@ -9,6 +9,7 @@ cask "readest"
 cask "omnidisksweeper"
 cask "telegram"
 cask "input-source-pro"
+cask "txchen/tap/govault"
 
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
