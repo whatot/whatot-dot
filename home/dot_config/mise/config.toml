@@ -16,11 +16,11 @@ node.mirror_url = "https://npmmirror.com/mirrors/node/"
 "github:larksuite/cli" = "1.0.100"
 java = "zulu-25.38.201.0"
 maven = "3.10.2"
-mr-boxington = "1.30.0"
+mr-boxington = "1.31.0"
 node = "26.13.1"
 pnpm = "12.23.0"
 python = "3.15.2"
-usage = "7.4.0"
+usage = "7.4.1"
 
 # Route Cargo through mbx (mr-boxington) for the shared build cache and managed
 # target directories. mise drops its shim directories before running mbx, so it
