@@ -1,4 +1,5 @@
 brew "mole"
+brew "longbridge/tap/nsh"
 
 cask "macvim-app"
 cask "kitty"
@@ -10,7 +11,6 @@ cask "omnidisksweeper"
 cask "telegram"
 cask "input-source-pro"
 cask "txchen/tap/govault"
-cask "longbridge/tap/nsh"
 
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"

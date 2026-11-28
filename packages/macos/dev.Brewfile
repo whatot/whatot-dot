@@ -1,6 +1,6 @@
 brew "aliyun-cli"
 brew "awscli"
-brew "cloudflare-wrangler"
+brew "wrangler"
 brew "cmake"
 brew "d2"
 brew "difftastic"
