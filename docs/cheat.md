@@ -30,8 +30,9 @@
   - `m doctor`: run readiness checks
   - `m reshim`: rebuild mise shims from installed tools
   - `m outdated`: refresh metadata and show updates
-  - `m update`: update packages, apply dotfiles, install pinned mise tools, and sync OpenSpec skills
-  - `m update:packages`: update OS packages and sync OpenSpec skills
+  - `m update`: update packages, apply dotfiles, install pinned mise tools, and sync external skills
+  - `m update:packages`: update OS packages and sync external skills
+  - `m update:nsh-skills`: sync NSH skills to the installed NSH CLI release
   - `m update:mise-bump`: bump pinned mise tool versions
   - `m chezmoi:apply`: raw `chezmoi apply`
   - `m chezmoi:diff`: preview pending dotfile changes
@@ -48,6 +49,8 @@
   - `$openspec-apply-change`: implement or resume a change
   - `$openspec-verify-change`: review implementation against its artifacts
   - `docs/openspec.md`: installation, workflow, updates, and migration
+- NSH
+  - `scripts/nsh-skills`: install or check skills matching `nsh --version`
 - Network
   - `setproxy`: enable proxy env vars from `PROXY_URL`
   - `unsetproxy`: clear proxy env vars

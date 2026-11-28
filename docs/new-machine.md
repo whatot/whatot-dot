@@ -133,3 +133,7 @@ refresh these skills to match the installed CLI; hosts without OpenSpec skip thi
 Projects opt in with `openspec init --tools none --language Chinese`; their
 skills remain global. See [`openspec.md`](openspec.md) for usage and updates.
 The minimal Debian host does not install OpenSpec by default.
+
+The NSH CLI and its two global Codex skills are paired by `scripts/nsh-skills`.
+After installing or upgrading NSH, run `mise run update:nsh-skills`. The regular
+update commands also sync them when `nsh` is installed.

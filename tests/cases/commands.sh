@@ -45,8 +45,11 @@ dotfiles_check_task_wiring() {
   [[ "${output}" == *"outdated:packages          Refresh metadata and show available operating system package updates"* ]]
   [[ "${output}" == *"outdated:mise              Refresh metadata and show available mise tool updates"* ]]
   [[ "${output}" == *"update:mise-bump           Apply managed config, then bump and install pinned mise tool versions"* ]]
+  [[ "${output}" == *"update:nsh-skills"* ]]
+  [[ "${output}" == *"Sync NSH skills to the installed NSH CLI release"* ]]
   [[ "${outdated_run}" == 'run = "scripts/outdated"' ]]
   grep -Fx 'run = "mise reshim --force --verbose"' "${ROOT_DIR}/mise.toml" >/dev/null
+  [[ -x "${ROOT_DIR}/scripts/nsh-skills" ]]
 }
 
 main() {

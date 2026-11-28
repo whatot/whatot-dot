@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+usage: scripts/nsh-skills [--check]
+
+Install or verify the Codex skills matching the installed NSH CLI release.
+EOF
+}
+
+if [[ $# -gt 1 ]]; then
+  usage >&2
+  exit 2
+fi
+case "${1:-}" in
+  "" | --check)
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    usage >&2
+    exit 2
+    ;;
+esac
+
+if ! command -v nsh >/dev/null 2>&1; then
+  printf 'NSH CLI is missing. Install it before syncing NSH skills.\n' >&2
+  exit 1
+fi
+
+version="$(nsh --version | awk 'NR == 1 { print $2; exit }')"
+if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  printf 'Unsupported NSH version: %s\n' "${version:-<empty>}" >&2
+  exit 1
+fi
+
+installer="${CODEX_HOME:-${HOME}/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py"
+if [[ ! -f "${installer}" ]]; then
+  printf 'Codex skill installer is missing: %s\n' "${installer}" >&2
+  exit 1
+fi
+
+dest_dir="${NSH_SKILLS_DIR:-${HOME}/.agents/skills}"
+tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/nsh-skills.XXXXXX")"
+backup_dir="${tmp_dir}/backup"
+trap 'rm -rf "${tmp_dir:-}"' EXIT
+
+mkdir -p "${dest_dir}" "${backup_dir}"
+python3 "${installer}" \
+  --repo longbridge/nsh \
+  --ref "v${version}" \
+  --path skills/nsh skills/nsh-design-guides \
+  --dest "${tmp_dir}/skills"
+
+for skill in nsh nsh-design-guides; do
+  if [[ ! -f "${tmp_dir}/skills/${skill}/SKILL.md" ]]; then
+    printf 'Downloaded skill is incomplete: %s\n' "${skill}" >&2
+    exit 1
+  fi
+done
+
+if [[ "${1:-}" == "--check" ]]; then
+  failed=0
+  for skill in nsh nsh-design-guides; do
+    if [[ ! -d "${dest_dir}/${skill}" ]] || ! diff -ru "${dest_dir}/${skill}" "${tmp_dir}/skills/${skill}" >/dev/null; then
+      printf 'out of date: %s (expected nsh v%s)\n' "${skill}" "${version}"
+      failed=1
+    else
+      printf 'ok: %s (nsh v%s)\n' "${skill}" "${version}"
+    fi
+  done
+  exit "${failed}"
+fi
+
+for skill in nsh nsh-design-guides; do
+  if [[ -e "${dest_dir}/${skill}" || -L "${dest_dir}/${skill}" ]]; then
+    mv "${dest_dir}/${skill}" "${backup_dir}/${skill}"
+  fi
+done
+
+restore() {
+  local skill
+  for skill in nsh nsh-design-guides; do
+    rm -rf "${dest_dir:?}/${skill}"
+    if [[ -e "${backup_dir}/${skill}" || -L "${backup_dir}/${skill}" ]]; then
+      mv "${backup_dir}/${skill}" "${dest_dir}/${skill}"
+    fi
+  done
+}
+
+if ! cp -R "${tmp_dir}/skills/nsh" "${dest_dir}/nsh" || ! cp -R "${tmp_dir}/skills/nsh-design-guides" "${dest_dir}/nsh-design-guides"; then
+  restore
+  printf 'Failed to install NSH skills. Existing skills were restored.\n' >&2
+  exit 1
+fi
+
+printf 'synced NSH skills for v%s\n' "${version}"

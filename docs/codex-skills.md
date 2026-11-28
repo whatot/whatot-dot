@@ -68,34 +68,28 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 源码，也不安装 NSH CLI。`nsh` 覆盖 Rust、TSX 和混合模式；`nsh-design-guides`
 提供 NSH 应用的设计指南。可显式调用 `$nsh` 和 `$nsh-design-guides`。
 
-当前安装基线（2026-11-22）：
-[`longbridge/nsh@eaa3917345e61c41fed0cd516cafc9310412cafc`](https://github.com/longbridge/nsh/tree/eaa3917345e61c41fed0cd516cafc9310412cafc/skills)。
-用 Codex 自带的 skill-installer 重现首次安装：
+同步目标由本机 `nsh --version` 决定。脚本把 `nsh 0.7.2` 映射到
+`longbridge/nsh` 的 `v0.7.2` release tag，两个 skill 始终使用同一个 tag，
+不跟随上游 `main`。首次安装或手动重试使用：
 
 ```bash
-python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
-  --repo longbridge/nsh \
-  --ref eaa3917345e61c41fed0cd516cafc9310412cafc \
-  --path skills/nsh skills/nsh-design-guides \
-  --dest "$HOME/.agents/skills"
+scripts/nsh-skills
 ```
 
-安装器遇到已有目录会拒绝覆盖。它不登记 `npx skills` 的 lock，因此这两个 skill
-由上述安装器和本文的 commit 记录维护，不依赖 `npx skills update`。
+脚本先下载到临时目录并检查两个 `SKILL.md`，再替换用户级安装目录。
+`scripts/nsh-skills --check` 只检查当前安装是否匹配本机 CLI 对应的 release。
+脚本不需要 `npx skills`，也不登记一个会脱离 NSH CLI 的独立版本。
 
 更新时：
 
-1. 在项目升级 NSH 或指南需要修正时，选择与项目版本相符的 tag/commit，解析为
-   完整 commit SHA；两个 skill 使用同一 SHA，不自动追踪 `main`。
-2. 用上述安装器指定新 `--ref` 和临时 `--dest`，先下载候选版本。
-   对比当前安装的两个目录，审阅入口、触发范围和 references 的变化，确认 API
-   与项目依赖一致；不要只替换 `SKILL.md`。
-3. 把原有两个目录移到同一个可恢复备份目录，再把审阅后的两个完整目录移入
-   `~/.agents/skills/`。检查名称、frontmatter、入口引用和文件完整性；失败时恢复原目录。
-4. 更新本文的基线日期和 SHA，运行 `mise run check`，并在下一轮确认 skill 可见。
-   在真实 NSH 项目中验证采用的指南；dotfiles 检查不证明框架 API 或 UI 行为正确。
+1. 更新 NSH CLI，再运行 `scripts/nsh-skills`。脚本按 CLI 版本选择 release tag。
+2. `mise run update` 和 `mise run update:packages` 会在检测到 `nsh` 后自动同步。
+   也可以单独运行 `mise run update:nsh-skills`。
+3. 脚本下载两个完整目录并在替换失败时恢复原目录。它不会只替换 `SKILL.md`。
+4. 项目若锁定不同的 NSH 版本，以项目版本为准，在该项目中使用匹配的 skill 版本。
+   dotfiles 检查只验证同步脚本和本地结构，不证明框架 API 或 UI 行为正确。
 
-`mise run update` 不更新这两个 skill。卸载时只移走上述两个安装目录，并移除本文
+卸载时只移走上述两个安装目录，并移除本文
 登记。无需修改项目或清理其他工具配置。
 
 NSH skills 只补充框架知识，不替代全局 `rust-code`、`test-behavior`、`design-ui`

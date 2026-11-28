@@ -17,8 +17,8 @@ usage() {
 usage: scripts/update [command]
 
 commands:
-  all                run doctor, update packages, apply dotfiles, install mise tools, then sync OpenSpec skills (default)
-  packages           update operating system packages, install declared package sets, then sync OpenSpec skills
+  all                run doctor, update packages, apply dotfiles, install mise tools, then sync external skills (default)
+  packages           update operating system packages, install declared package sets, then sync external skills
   mise               apply dotfiles, then install declared mise tool versions
   mise-bump          apply dotfiles, bump pinned mise tool versions, then install them
   dotfiles           apply chezmoi-managed dotfiles
@@ -95,11 +95,21 @@ sync_openspec_skills() {
   run_step "sync OpenSpec skills (scripts/openspec-skills)" "${ROOT_DIR}/scripts/openspec-skills"
 }
 
+sync_nsh_skills() {
+  if ! command -v nsh >/dev/null 2>&1; then
+    log "skip: NSH skills (NSH CLI is not installed)"
+    return
+  fi
+
+  run_step "sync NSH skills (scripts/nsh-skills)" "${ROOT_DIR}/scripts/nsh-skills"
+}
+
 run_all() {
   run_doctor
   update_os_packages
   install_mise_tools
   sync_openspec_skills
+  sync_nsh_skills
 }
 
 case "${1:-all}" in
@@ -110,6 +120,7 @@ case "${1:-all}" in
     run_doctor
     update_os_packages
     sync_openspec_skills
+    sync_nsh_skills
     ;;
   mise)
     run_doctor
