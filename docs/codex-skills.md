@@ -68,24 +68,29 @@ OpenSpec 全局安装 core 的六个 skill，再加 `openspec-verify-change`，�
 源码，也不安装 NSH CLI。`nsh` 覆盖 Rust、TSX 和混合模式；`nsh-design-guides`
 提供 NSH 应用的设计指南。可显式调用 `$nsh` 和 `$nsh-design-guides`。
 
-同步目标由本机 `nsh --version` 决定。脚本把 `nsh 0.7.2` 映射到
-`longbridge/nsh` 的 `v0.7.2` release tag，两个 skill 始终使用同一个 tag，
-不跟随上游 `main`。首次安装或手动重试使用：
+同步源优先使用 `~/git/nsh`。执行同步时先对这个 checkout 运行
+`git pull --ff-only`，再从它的 `skills/` 直接安装两个 skill。`--check` 只读取当前
+checkout，不执行 pull。两个 skill 使用同一个本地提交，不会和本地 NSH 源码脱节。
+
+本地 checkout 不存在时，脚本把 `nsh --version` 映射到对应的
+`longbridge/nsh` release tag。首次安装或手动重试使用：
 
 ```bash
 scripts/nsh-skills
 ```
 
-脚本先下载到临时目录并检查两个 `SKILL.md`，再替换用户级安装目录。
-`scripts/nsh-skills --check` 只检查当前安装是否匹配本机 CLI 对应的 release。
+没有本地 checkout 时才使用 `${XDG_CACHE_HOME:-$HOME/.cache}/whatot-dot/nsh-skills/v<version>`
+缓存。缓存缺失时下载一次完整 skill，之后直接复用。可以用 `NSH_REPO_DIR` 指定
+NSH checkout，用 `NSH_SKILLS_CACHE_DIR` 指定 release 回退缓存。
 脚本不需要 `npx skills`，也不登记一个会脱离 NSH CLI 的独立版本。
 
 更新时：
 
-1. 更新 NSH CLI，再运行 `scripts/nsh-skills`。脚本按 CLI 版本选择 release tag。
+1. 更新 `~/git/nsh` 或 NSH CLI，再运行 `scripts/nsh-skills`。有本地 checkout 时脚本会先
+   `git pull --ff-only`，然后使用最新提交里的 skill。
 2. `mise run update` 和 `mise run update:packages` 会在检测到 `nsh` 后自动同步。
    也可以单独运行 `mise run update:nsh-skills`。
-3. 脚本下载两个完整目录并在替换失败时恢复原目录。它不会只替换 `SKILL.md`。
+3. 本地 checkout 模式不下载仓库。替换失败时恢复原目录，不会只替换 `SKILL.md`。
 4. 项目若锁定不同的 NSH 版本，以项目版本为准，在该项目中使用匹配的 skill 版本。
    dotfiles 检查只验证同步脚本和本地结构，不证明框架 API 或 UI 行为正确。
 

@@ -5,7 +5,8 @@ usage() {
   cat <<'EOF'
 usage: scripts/nsh-skills [--check]
 
-Install or verify the Codex skills matching the installed NSH CLI release.
+Install or verify the Codex skills from the local NSH checkout.
+During a sync, the checkout is updated with git pull --ff-only.
 EOF
 }
 
@@ -31,48 +32,99 @@ if ! command -v nsh >/dev/null 2>&1; then
   exit 1
 fi
 
-version="$(nsh --version | awk 'NR == 1 { print $2; exit }')"
-if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  printf 'Unsupported NSH version: %s\n' "${version:-<empty>}" >&2
-  exit 1
-fi
-
-installer="${CODEX_HOME:-${HOME}/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py"
-if [[ ! -f "${installer}" ]]; then
-  printf 'Codex skill installer is missing: %s\n' "${installer}" >&2
+cli_version="$(nsh --version | awk 'NR == 1 { print $2; exit }')"
+if [[ ! "${cli_version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  printf 'Unsupported NSH version: %s\n' "${cli_version:-<empty>}" >&2
   exit 1
 fi
 
 dest_dir="${NSH_SKILLS_DIR:-${HOME}/.agents/skills}"
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/nsh-skills.XXXXXX")"
 backup_dir="${tmp_dir}/backup"
+cache_root="${NSH_SKILLS_CACHE_DIR:-${XDG_CACHE_HOME:-${HOME}/.cache}/whatot-dot/nsh-skills}"
 trap 'rm -rf "${tmp_dir:-}"' EXIT
 
 mkdir -p "${dest_dir}" "${backup_dir}"
-python3 "${installer}" \
-  --repo longbridge/nsh \
-  --ref "v${version}" \
-  --path skills/nsh skills/nsh-design-guides \
-  --dest "${tmp_dir}/skills"
 
-for skill in nsh nsh-design-guides; do
-  if [[ ! -f "${tmp_dir}/skills/${skill}/SKILL.md" ]]; then
-    printf 'Downloaded skill is incomplete: %s\n' "${skill}" >&2
-    exit 1
+repo_dir="${NSH_REPO_DIR:-${HOME}/git/nsh}"
+repo_root="$(git -C "${repo_dir}" rev-parse --show-toplevel 2>/dev/null || true)"
+source_dir=""
+source_label=""
+
+if [[ -n "${repo_root}" ]]; then
+  if [[ "${1:-}" != "--check" ]]; then
+    if [[ -n "$(git -C "${repo_root}" status --porcelain)" ]]; then
+      printf 'NSH checkout has local changes. Commit or stash them before syncing: %s\n' "${repo_root}" >&2
+      exit 1
+    fi
+    git -C "${repo_root}" pull --ff-only
   fi
-done
+
+  source_dir="${repo_root}/skills"
+  source_label="local NSH $(git -C "${repo_root}" rev-parse --short HEAD)"
+  for skill in nsh nsh-design-guides; do
+    if [[ ! -f "${source_dir}/${skill}/SKILL.md" ]]; then
+      printf 'Local NSH checkout is missing skill: %s\n' "${source_dir}/${skill}" >&2
+      exit 1
+    fi
+  done
+else
+  cache_dir="${cache_root}/v${cli_version}"
+  if [[ -f "${cache_dir}/.complete" ]]; then
+    source_dir="${cache_dir}/skills"
+    for skill in nsh nsh-design-guides; do
+      if [[ ! -f "${source_dir}/${skill}/SKILL.md" ]]; then
+        source_dir=""
+        break
+      fi
+    done
+  fi
+
+  if [[ -z "${source_dir}" ]]; then
+    installer="${CODEX_HOME:-${HOME}/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py"
+    if [[ ! -f "${installer}" ]]; then
+      printf 'Codex skill installer is missing: %s\n' "${installer}" >&2
+      exit 1
+    fi
+
+    python3 "${installer}" \
+      --repo longbridge/nsh \
+      --ref "v${cli_version}" \
+      --path skills/nsh skills/nsh-design-guides \
+      --dest "${tmp_dir}/download"
+
+    mkdir -p "${cache_root}"
+    cache_stage="${cache_root}/.v${cli_version}.tmp.$$"
+    rm -rf "${cache_stage}"
+    mkdir -p "${cache_stage}"
+    cp -R "${tmp_dir}/download/skills" "${cache_stage}/skills"
+    printf 'v%s\n' "${cli_version}" >"${cache_stage}/.complete"
+    rm -rf "${cache_dir}"
+    mv "${cache_stage}" "${cache_dir}"
+    source_dir="${cache_dir}/skills"
+    printf 'cached NSH skills for v%s\n' "${cli_version}"
+  fi
+  source_label="NSH v${cli_version} release cache"
+fi
 
 if [[ "${1:-}" == "--check" ]]; then
   failed=0
   for skill in nsh nsh-design-guides; do
-    if [[ ! -d "${dest_dir}/${skill}" ]] || ! diff -ru "${dest_dir}/${skill}" "${tmp_dir}/skills/${skill}" >/dev/null; then
-      printf 'out of date: %s (expected nsh v%s)\n' "${skill}" "${version}"
+    if [[ ! -d "${dest_dir}/${skill}" ]] || ! diff -ru "${dest_dir}/${skill}" "${source_dir}/${skill}" >/dev/null; then
+      printf 'out of date: %s (%s)\n' "${skill}" "${source_label}"
       failed=1
     else
-      printf 'ok: %s (nsh v%s)\n' "${skill}" "${version}"
+      printf 'ok: %s (%s)\n' "${skill}" "${source_label}"
     fi
   done
   exit "${failed}"
+fi
+
+if [[ -d "${dest_dir}/nsh" && -d "${dest_dir}/nsh-design-guides" ]] &&
+  diff -ru "${dest_dir}/nsh" "${source_dir}/nsh" >/dev/null &&
+  diff -ru "${dest_dir}/nsh-design-guides" "${source_dir}/nsh-design-guides" >/dev/null; then
+  printf 'NSH skills already match %s\n' "${source_label}"
+  exit 0
 fi
 
 for skill in nsh nsh-design-guides; do
@@ -91,10 +143,10 @@ restore() {
   done
 }
 
-if ! cp -R "${tmp_dir}/skills/nsh" "${dest_dir}/nsh" || ! cp -R "${tmp_dir}/skills/nsh-design-guides" "${dest_dir}/nsh-design-guides"; then
+if ! cp -R "${source_dir}/nsh" "${dest_dir}/nsh" || ! cp -R "${source_dir}/nsh-design-guides" "${dest_dir}/nsh-design-guides"; then
   restore
   printf 'Failed to install NSH skills. Existing skills were restored.\n' >&2
   exit 1
 fi
 
-printf 'synced NSH skills for v%s\n' "${version}"
+printf 'synced NSH skills from %s\n' "${source_label}"
